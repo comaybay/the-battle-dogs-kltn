@@ -1,24 +1,90 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhxq0uml372xh"]
+[gd_scene load_steps=3 format=3 uid="uid://bhxq0uml372xh"]
 
-[ext_resource type="Theme" uid="uid://c576k4sta3fba" path="res://theme.tres" id="1_7wgri"]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_o7540"]
 
-[node name="Button" type="Button"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -178.0
-offset_top = 6.0
-offset_right = 74.0
-offset_bottom = 58.0
+[sub_resource type="LabelSettings" id="LabelSettings_oarnu"]
+font_size = 50
+
+[node name="Main" type="Control"]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+script = ExtResource("1_o7540")
+
+[node name="Khung" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PhanDau" type="VBoxContainer" parent="Khung"]
+layout_direction = 1
+layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("1_7wgri")
-toggle_mode = true
-button_pressed = true
-keep_pressed_outside = true
-text = "BRUH MOMENT
+size_flags_stretch_ratio = 0.0
+localize_numeral_system = false
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanDau"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanDau"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Khung/PhanDau/TieuDe"]
+layout_mode = 2
+theme_override_constants/outline_size = 100
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 100
+text = "The battle dogs"
+label_settings = SubResource("LabelSettings_oarnu")
+uppercase = true
+text_direction = 3
+
+[node name="PhanCuoi" type="VBoxContainer" parent="Khung"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanCuoi"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="NutBatDau" type="Button" parent="Khung/PhanCuoi"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Bắt đầu"
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanCuoi"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="NutCaiDat" type="Button" parent="Khung/PhanCuoi"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Cài đặt
 "
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="Khung/PhanCuoi"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="NutThoat" type="Button" parent="Khung/PhanCuoi"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Thoát"
+
+[connection signal="pressed" from="Khung/PhanCuoi/NutBatDau" to="." method="_on_nut_bat_dau_pressed"]
