@@ -21,7 +21,7 @@ window/stretch/mode="canvas_items"
 
 [gui]
 
-theme/custom="res://theme.tres"
+theme/custom="res://resources/theme.tres"
 common/drop_mouse_on_gui_input_disabled=true
 
 [internationalization]
