@@ -62,7 +62,7 @@ size_flags_vertical = 2
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Bắt đầu"
+text = "Bắt đầu "
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanCuoi"]
 custom_minimum_size = Vector2(0, 10)
@@ -73,7 +73,8 @@ size_flags_vertical = 2
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Cài đặt"
+text = "Cài đặt "
+language = "vi"
 
 [node name="NinePatchRect3" type="NinePatchRect" parent="Khung/PhanCuoi"]
 custom_minimum_size = Vector2(0, 10)

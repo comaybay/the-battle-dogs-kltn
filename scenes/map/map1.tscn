@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://cur1nkvdb4sss"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cfmvt"]
+font_size = 20
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_448ow"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Khung" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TieuDe" type="HBoxContainer" parent="Khung"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 2
+alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Khung/TieuDe"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Khung/TieuDe"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Hành tinh Doggo"
+label_settings = SubResource("LabelSettings_cfmvt")
+
+[node name="Node2D" type="Control" parent="Khung"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="NutTanCong" type="Button" parent="Khung/Node2D"]
+custom_minimum_size = Vector2(150, 50)
+offset_left = 896.0
+offset_top = 460.0
+offset_right = 1046.0
+offset_bottom = 510.0
+size_flags_horizontal = 4
+text = "Tấn công !
+"
+icon = SubResource("ViewportTexture_448ow")
