@@ -5,7 +5,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_ftrk6"]
 font_size = 20
 
-[node name="DogBase" type="Control"]
+[node name="Map2" type="Control"]
 layout_direction = 1
 layout_mode = 3
 anchors_preset = 15
@@ -38,7 +38,7 @@ alignment = 1
 [node name="Label" type="Label" parent="Khung/PhanDau/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 2
-text = "Căn cứ chó - Hành tinh Doggo"
+text = "Thiết lập đội hình"
 label_settings = SubResource("LabelSettings_ftrk6")
 
 [node name="Xuong" type="HBoxContainer" parent="Khung/PhanDau/TieuDe"]
@@ -60,41 +60,45 @@ label_settings = SubResource("LabelSettings_ftrk6")
 layout_mode = 2
 patch_margin_left = 30
 
-[node name="PhanGiua" type="HBoxContainer" parent="Khung"]
+[node name="PhanGiua" type="VBoxContainer" parent="Khung"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="BenTrai" type="VBoxContainer" parent="Khung/PhanGiua"]
+[node name="PhanTren" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
+size_flags_vertical = 3
 
-[node name="NutVienChinh" type="Button" parent="Khung/PhanGiua/BenTrai"]
-custom_minimum_size = Vector2(150, 50)
+[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Khung/PhanGiua/PhanTren/TieuDe"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "DIAMON DOG"
+label_settings = SubResource("LabelSettings_ftrk6")
+
+[node name="Giua" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren/TieuDe"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 20.0
+
+[node name="Label" type="Label" parent="Khung/PhanGiua/PhanTren/TieuDe/Giua"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "Viễn chinh !!!"
+text = "Xương: 15000"
+label_settings = SubResource("LabelSettings_ftrk6")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanGiua/BenTrai"]
-custom_minimum_size = Vector2(0, 10)
+[node name="Label2" type="Label" parent="Khung/PhanGiua/PhanTren/TieuDe"]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_horizontal = 2
+text = "DIAMON DOG"
+label_settings = SubResource("LabelSettings_ftrk6")
+lines_skipped = 1
 
-[node name="NutNangCap" type="Button" parent="Khung/PhanGiua/BenTrai"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "Nâng cấp
-"
-
-[node name="BenPhai" type="VBoxContainer" parent="Khung/PhanGiua"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ColorRect" type="ColorRect" parent="Khung/PhanGiua/BenPhai"]
+[node name="Phan duoi" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -134,6 +138,3 @@ label_settings = SubResource("LabelSettings_ftrk6")
 [node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanCuoi/TieuDe/ThucAnChoCho"]
 layout_mode = 2
 patch_margin_left = 30
-
-[connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutVienChinh" to="." method="_on_nut_vien_chinh_pressed" flags=18]
-[connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutNangCap" to="." method="_on_nut_nang_cap_pressed" flags=18]
