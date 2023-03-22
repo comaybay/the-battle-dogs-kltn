@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cur1nkvdb4sss"]
+[gd_scene load_steps=8 format=3 uid="uid://cur1nkvdb4sss"]
 
 [ext_resource type="Script" path="res://scenes/map/map1.gd" id="1_0xrv4"]
+[ext_resource type="StyleBox" uid="uid://b815nfij8x16n" path="res://resources/theme/button_round.tres" id="2_in8sd"]
+[ext_resource type="Script" path="res://scenes/map/levelButton.gd" id="2_l8nfl"]
+[ext_resource type="Theme" uid="uid://bb4uny0684isq" path="res://resources/theme_button_round.tres" id="4_3p476"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cfmvt"]
 font_size = 20
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_448ow"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_xndhi"]
 font_size = 20
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_448ow"]
 
 [node name="Map1" type="Control"]
 layout_mode = 3
@@ -33,6 +36,11 @@ layout_mode = 2
 size_flags_vertical = 2
 alignment = 1
 
+[node name="QuayLai" type="Button" parent="Khung/TieuDe"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "< Quay lại"
+
 [node name="NinePatchRect" type="NinePatchRect" parent="Khung/TieuDe"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
@@ -42,33 +50,6 @@ layout_mode = 2
 size_flags_horizontal = 2
 text = "Hành tinh Doggo"
 label_settings = SubResource("LabelSettings_cfmvt")
-
-[node name="Node2D" type="Control" parent="Khung"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 20.0
-
-[node name="NutTanCong" type="Button" parent="Khung/Node2D"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 0
-offset_left = 917.0
-offset_top = 446.0
-offset_right = 1067.0
-offset_bottom = 496.0
-size_flags_horizontal = 4
-text = "Tấn công !
-"
-icon = SubResource("ViewportTexture_448ow")
-
-[node name="DoiDoiHinh" type="Button" parent="Khung/Node2D"]
-layout_mode = 0
-offset_left = 894.0
-offset_top = 514.0
-offset_right = 1094.0
-offset_bottom = 544.0
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 16
-text = "Đội hình: diamon dogs"
 
 [node name="PhanCuoi" type="VBoxContainer" parent="Khung"]
 layout_direction = 1
@@ -107,5 +88,85 @@ label_settings = SubResource("LabelSettings_xndhi")
 layout_mode = 2
 patch_margin_left = 30
 
-[connection signal="pressed" from="Khung/Node2D/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
-[connection signal="pressed" from="Khung/Node2D/DoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]
+[node name="map" type="NinePatchRect" parent="."]
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="NutTanCong" type="Button" parent="map"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 0
+offset_left = 917.0
+offset_top = 446.0
+offset_right = 1067.0
+offset_bottom = 496.0
+size_flags_horizontal = 4
+text = "Tấn công !
+"
+icon = SubResource("ViewportTexture_448ow")
+
+[node name="DoiDoiHinh" type="Button" parent="map"]
+layout_mode = 0
+offset_left = 894.0
+offset_top = 514.0
+offset_right = 1094.0
+offset_bottom = 544.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Đội hình: diamon dogs"
+
+[node name="LevelBtn" type="Button" parent="map"]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 235.0
+offset_right = 497.0
+offset_bottom = 265.0
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("2_in8sd")
+theme_override_styles/hover = ExtResource("2_in8sd")
+text = "1"
+script = ExtResource("2_l8nfl")
+
+[node name="map" type="NinePatchRect" parent="map"]
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="NutTanCong" type="Button" parent="map/map"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 0
+offset_left = 917.0
+offset_top = 446.0
+offset_right = 1067.0
+offset_bottom = 496.0
+size_flags_horizontal = 4
+text = "Tấn công !
+"
+icon = SubResource("ViewportTexture_448ow")
+
+[node name="DoiDoiHinh" type="Button" parent="map/map"]
+layout_mode = 0
+offset_left = 894.0
+offset_top = 514.0
+offset_right = 1094.0
+offset_bottom = 544.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Đội hình: diamon dogs"
+
+[node name="LevelBtn" type="Button" parent="map/map"]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 235.0
+offset_right = 497.0
+offset_bottom = 265.0
+theme = ExtResource("4_3p476")
+theme_override_font_sizes/font_size = 14
+text = "1"
+script = ExtResource("2_l8nfl")
+
+[connection signal="pressed" from="Khung/TieuDe/QuayLai" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="map/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
+[connection signal="pressed" from="map/DoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]
+[connection signal="pressed" from="map/LevelBtn" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="map/map/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
+[connection signal="pressed" from="map/map/DoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]
+[connection signal="pressed" from="map/map/LevelBtn" to="." method="_on_button_pressed"]

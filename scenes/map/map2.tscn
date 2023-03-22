@@ -35,6 +35,15 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 alignment = 1
 
+[node name="QuayLai" type="Button" parent="Khung/PhanDau/TieuDe"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "< Quay lại"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanDau/TieuDe"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
 [node name="Label" type="Label" parent="Khung/PhanDau/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 2
@@ -98,9 +107,32 @@ text = "DIAMON DOG"
 label_settings = SubResource("LabelSettings_ftrk6")
 lines_skipped = 1
 
+[node name="Linh" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="Phan duoi" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanGiua/Phan duoi"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Thiết lập đội hình"
+label_settings = SubResource("LabelSettings_ftrk6")
+
+[node name="Luu" type="Button" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+theme_override_font_sizes/font_size = 24
+text = "Lưu"
 
 [node name="PhanCuoi" type="VBoxContainer" parent="Khung"]
 layout_direction = 1
@@ -138,3 +170,6 @@ label_settings = SubResource("LabelSettings_ftrk6")
 [node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanCuoi/TieuDe/ThucAnChoCho"]
 layout_mode = 2
 patch_margin_left = 30
+
+[connection signal="pressed" from="Khung/PhanDau/TieuDe/QuayLai" to="." method="_on_quay_lai_pressed"]
+[connection signal="pressed" from="Khung/PhanGiua/Phan duoi/TieuDe/Luu" to="." method="_on_luu_pressed"]

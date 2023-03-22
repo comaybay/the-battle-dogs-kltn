@@ -15,3 +15,7 @@ func _process(delta):
 
 func _on_nut_vien_chinh_pressed():
 	get_tree().change_scene_to_file("res://scenes/map/map1.tscn")
+
+
+func _on_quay_lai_pressed():
+	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
