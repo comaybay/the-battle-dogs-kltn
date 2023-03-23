@@ -101,7 +101,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lmw8"]
 size = Vector2(175, 221)
 
-[node name="Dog" type="CharacterBody2D"]
+[node name="Dog" type="CharacterBody2D" groups=["dogs"]]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_fui5u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -119,3 +121,7 @@ region_rect = Rect2(4, 4, 178, 185)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10, 15)
 shape = SubResource("RectangleShape2D_5lmw8")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4

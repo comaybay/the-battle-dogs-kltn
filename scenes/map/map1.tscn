@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cur1nkvdb4sss"]
+[gd_scene load_steps=3 format=3 uid="uid://cey172ipg0elo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cfmvt"]
 font_size = 20
@@ -44,6 +44,7 @@ size_flags_stretch_ratio = 20.0
 
 [node name="NutTanCong" type="Button" parent="Khung/Node2D"]
 custom_minimum_size = Vector2(150, 50)
+layout_mode = 0
 offset_left = 896.0
 offset_top = 460.0
 offset_right = 1046.0
