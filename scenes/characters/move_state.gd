@@ -1,12 +1,9 @@
 @tool
 extends FSMState
 
-@onready var cat: Cat = owner
-
 # called when the state is activated
 func enter(data: Dictionary) -> void:
-	cat.get_node("AnimationPlayer").play("walk")
-	cat.n_RayCast2D.target_position = Vector2(-cat.attack_range, 0)
+	character.get_node("AnimationPlayer").play("move")
 
 # called when the state is deactivated
 func exit() -> void:
@@ -14,26 +11,26 @@ func exit() -> void:
 		
 # called every frame when the state is active
 func update(delta: float) -> void:
-	if not cat.is_on_floor():
-		cat.velocity.y += cat.gravity * delta
+	if not character.is_on_floor():
+		character.velocity.y += character.gravity * delta
 
-	var collider: CharacterBody2D = cat.n_RayCast2D.get_collider()
+	var collider: CharacterBody2D = character.n_RayCast2D.get_collider()
 	if collider == null:
-		cat.velocity.x = -cat.speed
+		character.velocity.x = character.speed * character.move_direction
 		
 	else:
-		if cat.n_AnimationPlayer.current_animation != "attack":
-			cat.velocity = Vector2.ZERO
+		if character.n_AnimationPlayer.current_animation != "attack":
+			character.velocity = Vector2.ZERO
 			var dog_shape: CollisionShape2D = collider.get_node("CollisionShape2D")
 			var dog_rect = dog_shape.shape.get_rect() 
-#			cat.position.x = collider.position.x + (dog_rect.size.x / 2) + cat.attack_range
+#			character.position.x = collider.position.x + (dog_rect.size.x / 2) + character.attack_range
 			
-			if cat.n_AttackCooldownTimer.is_stopped():
+			if character.n_AttackCooldownTimer.is_stopped():
 				transition.emit("AttackState", { "target": collider })
 			else:
 				transition.emit("IdleState")
 		
-	cat.move_and_slide() 
+	character.move_and_slide() 
 
 # this method is the equivalent of _input but only called when the state is active
 func input(event: InputEvent) -> void:

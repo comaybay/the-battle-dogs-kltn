@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://5joq03mk4kv3"]
+
+[ext_resource type="PackedScene" uid="uid://ddpbe6gmcmuxp" path="res://scenes/characters/character.tscn" id="1_t516l"]
+
+[node name="BaseDog" instance=ExtResource("1_t516l")]
+collision_layer = 2
+collision_mask = 1
+attack_area_range = -1
+
+[node name="RayCast2D" parent="." index="4"]
+collision_mask = 4

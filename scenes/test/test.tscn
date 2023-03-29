@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c556dm41rdt5i"]
+[gd_scene load_steps=4 format=3 uid="uid://b25kjfpqgqbyy"]
 
-[ext_resource type="PackedScene" uid="uid://83is4g71kvkh" path="res://scenes/enemies/cat/cat.tscn" id="1_sorff"]
-[ext_resource type="PackedScene" uid="uid://dhit6457y0brs" path="res://scenes/dogs/dog/dog.tscn" id="2_5e3xs"]
+[ext_resource type="PackedScene" uid="uid://cue3f8l417jkn" path="res://scenes/characters/cats/cat/cat.tscn" id="1_sorff"]
+[ext_resource type="PackedScene" uid="uid://dhit6457y0brs" path="res://scenes/characters/dogs/dog/dog.tscn" id="2_5e3xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avlfn"]
 size = Vector2(1799, 40)
@@ -10,6 +10,7 @@ size = Vector2(1799, 40)
 
 [node name="Node2D" parent="." instance=ExtResource("1_sorff")]
 position = Vector2(1100, 211)
+collision_mask = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -18,7 +19,9 @@ position = Vector2(801.5, 531)
 shape = SubResource("RectangleShape2D_avlfn")
 
 [node name="Node2D2" parent="." instance=ExtResource("1_sorff")]
-position = Vector2(1116, -34)
+position = Vector2(1641, 39)
+collision_mask = 3
 
 [node name="Dog" parent="." instance=ExtResource("2_5e3xs")]
-position = Vector2(324, 235)
+position = Vector2(726, 328)
+collision_mask = 5

@@ -10,21 +10,27 @@ class_name FSM extends Node
 var state: FSMState
 
 func _ready():
-	owner.connect("ready", on_owner_ready)
+	if Engine.is_editor_hint():
+		return
+		
+	owner.connect("ready", _on_owner_ready)
 	
-func on_owner_ready():
+func _on_owner_ready():
 	state = get_node(initial_state)
 	
 	for node in get_children():
 		if node.is_FSM_state == true:
-			node.connect("transition", on_state_transition)
+			node.connect("transition", _on_state_transition)
 			
 	state.enter({})
 
-func on_state_transition(next_state_name: String, data: Dictionary = {}):
+func change_state(next_state_name: String, data: Dictionary = {}):
 	state.exit()
 	state = get_node(next_state_name)
 	state.enter(data)
+	
+func _on_state_transition(next_state_name: String, data: Dictionary = {}):
+	change_state(next_state_name, data)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):	

@@ -3,10 +3,15 @@ class_name FSMState extends Node
 
 signal transition (state_path: String, data: Dictionary)
 
+@onready var character: Character = owner
+
 # this is used to check if this node is a FSM state
 var is_FSM_state = true
 
 func _init() -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	assert(get_script().is_tool(), "Please make your script a tool script (by adding '@tool' at the begining of the file).")
 
 func _get_configuration_warnings() -> PackedStringArray:
