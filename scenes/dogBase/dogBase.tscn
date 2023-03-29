@@ -35,6 +35,15 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 alignment = 1
 
+[node name="QuayLai" type="Button" parent="Khung/PhanDau/TieuDe"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "< Quay lại"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanDau/TieuDe"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
 [node name="Label" type="Label" parent="Khung/PhanDau/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 2
@@ -135,5 +144,6 @@ label_settings = SubResource("LabelSettings_ftrk6")
 layout_mode = 2
 patch_margin_left = 30
 
+[connection signal="pressed" from="Khung/PhanDau/TieuDe/QuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutVienChinh" to="." method="_on_nut_vien_chinh_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutNangCap" to="." method="_on_nut_nang_cap_pressed"]

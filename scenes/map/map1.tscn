@@ -1,17 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cey172ipg0elo"]
+[gd_scene load_steps=7 format=3 uid="uid://cur1nkvdb4sss"]
+
+[ext_resource type="Script" path="res://scenes/map/map1.gd" id="1_0xrv4"]
+[ext_resource type="Script" path="res://scenes/map/levelButton.gd" id="2_l8nfl"]
+[ext_resource type="Theme" uid="uid://bb4uny0684isq" path="res://resources/theme_button_round.tres" id="4_3p476"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cfmvt"]
 font_size = 20
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_448ow"]
 
-[node name="Control" type="Control"]
+[sub_resource type="LabelSettings" id="LabelSettings_xndhi"]
+font_size = 20
+
+[node name="Map1" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0xrv4")
 
 [node name="Khung" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -27,6 +35,11 @@ layout_mode = 2
 size_flags_vertical = 2
 alignment = 1
 
+[node name="QuayLai" type="Button" parent="Khung/TieuDe"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "< Quay lại"
+
 [node name="NinePatchRect" type="NinePatchRect" parent="Khung/TieuDe"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
@@ -37,19 +50,82 @@ size_flags_horizontal = 2
 text = "Hành tinh Doggo"
 label_settings = SubResource("LabelSettings_cfmvt")
 
-[node name="Node2D" type="Control" parent="Khung"]
+[node name="map" type="NinePatchRect" parent="Khung"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="NutTanCong" type="Button" parent="Khung/Node2D"]
+[node name="NutTanCong" type="Button" parent="Khung/map"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 0
-offset_left = 896.0
-offset_top = 460.0
-offset_right = 1046.0
-offset_bottom = 510.0
+offset_left = 917.0
+offset_top = 446.0
+offset_right = 1067.0
+offset_bottom = 496.0
 size_flags_horizontal = 4
 text = "Tấn công !
 "
 icon = SubResource("ViewportTexture_448ow")
+
+[node name="DoiDoiHinh" type="Button" parent="Khung/map"]
+layout_mode = 0
+offset_left = 894.0
+offset_top = 514.0
+offset_right = 1094.0
+offset_bottom = 544.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Đội hình: diamon dogs"
+
+[node name="LevelBtn" type="Button" parent="Khung/map"]
+layout_mode = 0
+offset_left = 591.0
+offset_top = 294.0
+offset_right = 631.0
+offset_bottom = 334.0
+theme = ExtResource("4_3p476")
+theme_override_font_sizes/font_size = 18
+text = "1"
+script = ExtResource("2_l8nfl")
+
+[node name="PhanCuoi" type="VBoxContainer" parent="Khung"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+localize_numeral_system = false
+
+[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanCuoi"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Khung/PhanCuoi/TieuDe"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Căn cứ chó - Hành tinh Doggo"
+label_settings = SubResource("LabelSettings_xndhi")
+
+[node name="ThucAnChoCho" type="HBoxContainer" parent="Khung/PhanCuoi/TieuDe"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanCuoi/TieuDe/ThucAnChoCho"]
+layout_mode = 2
+patch_margin_left = 50
+
+[node name="Label" type="Label" parent="Khung/PhanCuoi/TieuDe/ThucAnChoCho"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Thức ăn cho chó : 100"
+label_settings = SubResource("LabelSettings_xndhi")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanCuoi/TieuDe/ThucAnChoCho"]
+layout_mode = 2
+patch_margin_left = 30
+
+[connection signal="pressed" from="Khung/TieuDe/QuayLai" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Khung/map/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
+[connection signal="pressed" from="Khung/map/DoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]
+[connection signal="pressed" from="Khung/map/LevelBtn" to="." method="_on_button_pressed"]
