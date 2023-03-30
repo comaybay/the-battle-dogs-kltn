@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cue3f8l417jkn"]
+
+[ext_resource type="PackedScene" uid="uid://dvorgedardkvp" path="res://scenes/characters/base_cat.tscn" id="1_2c8s7"]
+[ext_resource type="Texture2D" uid="uid://dk2qbrhlr0fcu" path="res://scenes/characters/cats/cat/cat.png" id="1_lqadi"]
+
+[node name="Cat" instance=ExtResource("1_2c8s7")]
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("1_lqadi")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="." index="3"]
+position = Vector2(0, 22)
+metadata/_edit_lock_ = true
+
+[node name="RayCast2D" parent="." index="4"]
+metadata/_edit_lock_ = true
+
+[node name="FiniteStateMachine" parent="." index="5"]
+metadata/_edit_lock_ = true
