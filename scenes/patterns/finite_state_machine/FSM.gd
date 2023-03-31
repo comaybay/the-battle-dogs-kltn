@@ -21,26 +21,35 @@ func _on_owner_ready():
 	for node in get_children():
 		if node.is_FSM_state == true:
 			node.connect("transition", _on_state_transition)
-			
+	
+	update_FSM_process()
 	state.enter({})
 
 func change_state(next_state_name: String, data: Dictionary = {}):
 	state.exit()
 	state = get_node(next_state_name)
 	state.enter(data)
-	
+	update_FSM_process()
+
+func update_FSM_process():
+	set_physics_process(state.has_method("physics_update"))
+	set_process_input(state.has_method("input"))
+
 func _on_state_transition(next_state_name: String, data: Dictionary = {}):
 	change_state(next_state_name, data)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):	
-	if Engine.is_editor_hint():
-		return
-			
-	state.update(delta)
+func _process(delta: float) -> void:	
+	if not Engine.is_editor_hint():
+		state.update(delta)
+	
+func _physics_process(delta: float) -> void:
+	if not Engine.is_editor_hint():
+		state.physics_update(delta)
 	
 func _input(event: InputEvent) -> void:
-	state.input(event)
+	if not Engine.is_editor_hint():
+		state.input(event)
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: Array[String] = []
