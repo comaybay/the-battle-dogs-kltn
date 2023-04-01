@@ -30,3 +30,7 @@ func _on_doi_doi_hinh_pressed():
 func _on_quay_lai_pressed():
 	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
 
+
+
+func _on_level_pressed():
+	pass # Replace with function body.
