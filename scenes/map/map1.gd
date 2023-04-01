@@ -1,11 +1,13 @@
 extends Control 
-# Called when the node enters the scene tree for the first time.
+
+
+@export var level_now = 3
 func _ready():
 	pass
 
 func _draw():
 	var allMap = $Khung/map/AllLevel.get_children()	
-	for level in allMap.size()-1:
+	for level in level_now-1:
 		print(level)
 		var line = Line2D.new()
 		line.default_color = Color(1, 1, 1)
