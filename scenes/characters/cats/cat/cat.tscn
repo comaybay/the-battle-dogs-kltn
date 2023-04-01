@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dk2qbrhlr0fcu" path="res://scenes/characters/cats/cat/cat.png" id="1_lqadi"]
 
 [node name="Cat" instance=ExtResource("1_2c8s7")]
+damage = 20
 
 [node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("1_lqadi")
@@ -14,6 +15,7 @@ position = Vector2(0, 22)
 metadata/_edit_lock_ = true
 
 [node name="RayCast2D" parent="." index="4"]
+target_position = Vector2(-40, 0)
 metadata/_edit_lock_ = true
 
 [node name="FiniteStateMachine" parent="." index="5"]

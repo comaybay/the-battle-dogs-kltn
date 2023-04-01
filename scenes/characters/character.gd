@@ -7,7 +7,7 @@ enum Type { DOG, ENEMY }
 ## 0 for dog, 1 for enemy
 @export var character_type: int = Type.DOG
 @export var speed: int = 100
-@export var attack_range: int = 140:
+@export var attack_range: int = 40:
 	set(val):
 		attack_range = val
 		notify_property_list_changed()  
@@ -50,13 +50,18 @@ func _ready() -> void:
 	n_AttackCooldownTimer.wait_time = attack_cooldown
 	n_RayCast2D.target_position.x = attack_range * move_direction
 	
+	var collision_rect: Rect2 = $CollisionShape2D.shape.get_rect()
+	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
+	if character_type == Type.DOG:
+		n_RayCast2D.position.x += collision_rect.size.x
+	
 	if Engine.is_editor_hint():
 		property_list_changed.connect(queue_redraw)
 
 func _draw() -> void:
-	if Engine.is_editor_hint():
-		var attack_point = n_RayCast2D.target_position
-		draw_dashed_line(Vector2.ZERO, attack_point, Color.YELLOW, 5, 10)	
+	if Engine.is_editor_hint() or true:
+		var attack_point = n_RayCast2D.position + n_RayCast2D.target_position
+		draw_dashed_line(n_RayCast2D.position, attack_point, Color.YELLOW, 5, 10)	
 		
 		var is_single_target := attack_area_range <= 0
 		var half_attack_range_vec := Vector2(3, 0) if is_single_target else Vector2(attack_area_range / 2, 0) 
@@ -70,6 +75,11 @@ func _draw() -> void:
 		var character_size := n_Sprite2D.get_rect().size
 		draw_string(default_font, Vector2(0, -character_size.y / 2), attack_type_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
 
+	## debug mode
+	if true:
+		var rect: Rect2 = $CollisionShape2D.shape.get_rect()
+		rect.position += $CollisionShape2D.position
+		draw_rect(rect, Color.RED, false)
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: Array[String] = []
@@ -91,7 +101,6 @@ func take_damage(ammount: int) -> void:
 		next_knockback_health -= max_health / knockbacks
 		knockback_count += 1
 		$FiniteStateMachine.change_state("KnockbackState")
-		print("KNOCKBACK")
 		
 	if health <= 0:
 		# TODO: die

@@ -24,7 +24,7 @@ func update(delta: float) -> void:
 			var dog_shape: CollisionShape2D = collider.get_node("CollisionShape2D")
 			var dog_rect = dog_shape.shape.get_rect() 
 #			character.position.x = collider.position.x + (dog_rect.size.x / 2) + character.attack_range
-			
+
 			if character.n_AttackCooldownTimer.is_stopped():
 				transition.emit("AttackState", { "target": collider })
 			else:

@@ -26,7 +26,4 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if not has_method("update"):
 		warnings.append("Please define method 'update', this method is called every frame when the state is active.")
 			
-	if not has_method("input"):
-		warnings.append("Please define method 'input', this method is the equivalent of _input but only called when the state is active.")
-	
 	return warnings
