@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cur1nkvdb4sss"]
+[gd_scene load_steps=7 format=3 uid="uid://bdjhwfsbmclch"]
 
 [ext_resource type="Script" path="res://scenes/map/map1.gd" id="1_0xrv4"]
-[ext_resource type="Script" path="res://scenes/map/levelButton.gd" id="2_l8nfl"]
+[ext_resource type="Script" path="res://scenes/map/AllButtonLevel.gd" id="3_fsjlp"]
 [ext_resource type="Theme" uid="uid://bb4uny0684isq" path="res://resources/theme_button_round.tres" id="4_3p476"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cfmvt"]
@@ -77,8 +77,9 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "Đội hình: diamon dogs"
 
-[node name="LevelBtn" type="Button" parent="Khung/map"]
-layout_mode = 0
+[node name="AllLevel" type="Node" parent="Khung/map"]
+
+[node name="Level1" type="Button" parent="Khung/map/AllLevel"]
 offset_left = 591.0
 offset_top = 294.0
 offset_right = 631.0
@@ -86,7 +87,47 @@ offset_bottom = 334.0
 theme = ExtResource("4_3p476")
 theme_override_font_sizes/font_size = 18
 text = "1"
-script = ExtResource("2_l8nfl")
+script = ExtResource("3_fsjlp")
+
+[node name="Level2" type="Button" parent="Khung/map/AllLevel"]
+offset_left = 591.0
+offset_top = 426.0
+offset_right = 631.0
+offset_bottom = 466.0
+theme = ExtResource("4_3p476")
+theme_override_font_sizes/font_size = 18
+text = "2"
+script = ExtResource("3_fsjlp")
+
+[node name="Level3" type="Button" parent="Khung/map/AllLevel"]
+offset_left = 519.0
+offset_top = 116.0
+offset_right = 559.0
+offset_bottom = 156.0
+theme = ExtResource("4_3p476")
+theme_override_font_sizes/font_size = 18
+text = "3"
+script = ExtResource("3_fsjlp")
+
+[node name="Level4" type="Button" parent="Khung/map/AllLevel"]
+offset_left = 895.0
+offset_top = 196.0
+offset_right = 935.0
+offset_bottom = 236.0
+theme = ExtResource("4_3p476")
+theme_override_font_sizes/font_size = 18
+text = "4"
+script = ExtResource("3_fsjlp")
+
+[node name="Level5" type="Button" parent="Khung/map/AllLevel"]
+offset_left = 295.0
+offset_top = 351.0
+offset_right = 335.0
+offset_bottom = 391.0
+theme = ExtResource("4_3p476")
+theme_override_font_sizes/font_size = 18
+text = "5"
+script = ExtResource("3_fsjlp")
 
 [node name="PhanCuoi" type="VBoxContainer" parent="Khung"]
 layout_direction = 1
@@ -125,7 +166,11 @@ label_settings = SubResource("LabelSettings_xndhi")
 layout_mode = 2
 patch_margin_left = 30
 
-[connection signal="pressed" from="Khung/TieuDe/QuayLai" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Khung/TieuDe/QuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/map/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
 [connection signal="pressed" from="Khung/map/DoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]
-[connection signal="pressed" from="Khung/map/LevelBtn" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Khung/map/AllLevel/Level1" to="Khung/map/AllLevel/Level1" method="_on_level_pressed"]
+[connection signal="pressed" from="Khung/map/AllLevel/Level2" to="Khung/map/AllLevel/Level2" method="_on_level_pressed"]
+[connection signal="pressed" from="Khung/map/AllLevel/Level3" to="Khung/map/AllLevel/Level3" method="_on_level_pressed"]
+[connection signal="pressed" from="Khung/map/AllLevel/Level4" to="Khung/map/AllLevel/Level4" method="_on_level_pressed"]
+[connection signal="pressed" from="Khung/map/AllLevel/Level5" to="Khung/map/AllLevel/Level5" method="_on_level_pressed"]

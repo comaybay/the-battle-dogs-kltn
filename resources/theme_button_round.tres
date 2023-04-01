@@ -1,16 +1,22 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bb4uny0684isq"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bb4uny0684isq"]
 
 [ext_resource type="StyleBox" uid="uid://b815nfij8x16n" path="res://resources/theme/button_round.tres" id="1_tpxfq"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18jfc"]
-draw_center = false
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghcap"]
+bg_color = Color(0.0666667, 0.298039, 0.345098, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 0)
+border_blend = true
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4yjj7"]
-bg_color = Color(1, 0, 0, 1)
+bg_color = Color(1, 0, 0, 0.423529)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -22,25 +28,6 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af1xu"]
-bg_color = Color(0.929412, 1, 0.984314, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.890196, 0.415686, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-expand_margin_left = 10.0
-expand_margin_top = 5.0
-expand_margin_right = 10.0
-expand_margin_bottom = 5.0
-shadow_color = Color(0.164706, 0.133333, 0.278431, 0.305882)
-shadow_size = 5
-shadow_offset = Vector2(0, 5)
 
 [resource]
 Button/colors/font_color = Color(0, 0.431373, 0.470588, 1)
@@ -60,12 +47,12 @@ Button/constants/h_separation = 2
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 24
 Button/fonts/font = null
-Button/styles/disabled = ExtResource("1_tpxfq")
-Button/styles/focus = SubResource("StyleBoxFlat_18jfc")
+Button/styles/disabled = null
+Button/styles/focus = SubResource("StyleBoxFlat_ghcap")
 Button/styles/hover = SubResource("StyleBoxFlat_4yjj7")
 Button/styles/normal = ExtResource("1_tpxfq")
 Button/styles/pressed = SubResource("StyleBoxFlat_mgbj7")
 ButtonToggle/base_type = &"Button"
 ButtonToggle/colors/font_pressed_color = Color(0.890196, 0.415686, 0, 1)
-ButtonToggle/styles/pressed = SubResource("StyleBoxFlat_af1xu")
+ButtonToggle/styles/pressed = null
 CheckButton/styles/focus = null
