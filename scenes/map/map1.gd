@@ -1,21 +1,17 @@
 extends Control 
 
-
 @export var level_now = 3
 func _ready():
 	pass
+		
+
 
 func _draw():
 	var allMap = $Khung/map/AllLevel.get_children()	
-	for level in level_now-1:
-		print(level)
-		var line = Line2D.new()
-		line.default_color = Color(1, 1, 1)
-		line.width = 5
+	for level in level_now-1:		
 		var vitri1 = allMap[level].position + Vector2(20,20)
 		var vitri2 = allMap[level+1].position+ Vector2(20,20)
-		line.set_points([vitri1, vitri2])
-		add_child(line)
+		draw_dashed_line(vitri1,vitri2, Color(1, 1, 1, 1), 4, 10, false)
 
 func _process(delta):	
 	pass
