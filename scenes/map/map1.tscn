@@ -90,10 +90,10 @@ text = "1"
 script = ExtResource("3_fsjlp")
 
 [node name="Level2" type="Button" parent="Khung/map/AllLevel"]
-offset_left = 591.0
-offset_top = 426.0
-offset_right = 631.0
-offset_bottom = 466.0
+offset_left = 554.0
+offset_top = 452.0
+offset_right = 594.0
+offset_bottom = 492.0
 theme = ExtResource("4_3p476")
 theme_override_font_sizes/font_size = 18
 text = "2"
