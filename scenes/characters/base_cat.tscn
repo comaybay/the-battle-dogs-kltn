@@ -11,4 +11,4 @@ damage = 100
 
 [node name="RayCast2D" parent="." index="4"]
 position = Vector2(-96, 0)
-target_position = Vector2(-140, 0)
+target_position = Vector2(-40, 0)

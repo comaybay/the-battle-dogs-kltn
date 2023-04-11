@@ -15,7 +15,6 @@ position = Vector2(0, 22)
 metadata/_edit_lock_ = true
 
 [node name="RayCast2D" parent="." index="4"]
-target_position = Vector2(-40, 0)
 metadata/_edit_lock_ = true
 
 [node name="FiniteStateMachine" parent="." index="5"]

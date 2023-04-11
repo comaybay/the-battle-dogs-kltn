@@ -17,4 +17,3 @@ position = Vector2(17, 36)
 
 [node name="RayCast2D" parent="." index="4"]
 position = Vector2(113, 0)
-target_position = Vector2(40, 0)
