@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://5joq03mk4kv3"]
 
-[ext_resource type="PackedScene" uid="uid://ddpbe6gmcmuxp" path="res://scenes/characters/character.tscn" id="1_t516l"]
+[ext_resource type="PackedScene" uid="uid://brx02julmawu5" path="res://scenes/characters/character.tscn" id="1_t516l"]
 
 [node name="BaseDog" instance=ExtResource("1_t516l")]
 collision_layer = 2

@@ -39,7 +39,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var move_direction: int
 var max_health: int
 var next_knockback_health: int
-var knockback_count: int = 0
 
 func _ready() -> void:
 	# config 
@@ -96,13 +95,6 @@ func _get_configuration_warnings() -> PackedStringArray:
 func take_damage(ammount: int) -> void:
 	health -= ammount
 	
-	# knockbacks - 1 because last knockback is when health reaches 0
-	if knockback_count < (knockbacks - 1) and health <= next_knockback_health:
-		next_knockback_health -= max_health / knockbacks
-		knockback_count += 1
-		$FiniteStateMachine.change_state("KnockbackState")
-		
-	if health <= 0:
-		# TODO: die
-		queue_free()
-	
+	if health <= next_knockback_health:
+		next_knockback_health = max(0, next_knockback_health - max_health / knockbacks) 
+		$FiniteStateMachine.change_state("KnockbackState")	

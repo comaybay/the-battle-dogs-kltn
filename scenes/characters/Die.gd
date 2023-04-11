@@ -3,7 +3,8 @@ extends FSMState
 
 # called when the state is activated
 func enter(data: Dictionary) -> void:
-	queue_free() 
+	character.queue_free() 
+	print("BRUH")
 
 # called when the state is deactivated
 func exit() -> void:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dvorgedardkvp"]
 
-[ext_resource type="PackedScene" uid="uid://ddpbe6gmcmuxp" path="res://scenes/characters/character.tscn" id="1_xhikh"]
+[ext_resource type="PackedScene" uid="uid://brx02julmawu5" path="res://scenes/characters/character.tscn" id="1_xhikh"]
 
 [node name="BaseCat" instance=ExtResource("1_xhikh")]
 collision_layer = 4
