@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://br5kmoooe20ns"]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Script" path="res://scenes/map/map2.gd" id="1_qdgrc"]
+[ext_resource type="Script" path="res://scenes/map/selectCharacter.gd" id="1_qdgrc"]
 [ext_resource type="StyleBox" uid="uid://bsrrel7fgsej8" path="res://resources/theme/button_base.tres" id="3_2rpul"]
 [ext_resource type="Script" path="res://scenes/map/Box.gd" id="3_ynu37"]
 
