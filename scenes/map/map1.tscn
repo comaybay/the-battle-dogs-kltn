@@ -35,7 +35,7 @@ layout_mode = 2
 size_flags_vertical = 2
 alignment = 1
 
-[node name="QuayLai" type="Button" parent="Khung/TieuDe"]
+[node name="NutQuayLai" type="Button" parent="Khung/TieuDe"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "< Quay lại"
@@ -67,7 +67,7 @@ text = "Tấn công !
 "
 icon = SubResource("ViewportTexture_448ow")
 
-[node name="DoiDoiHinh" type="Button" parent="Khung/map"]
+[node name="NutDoiDoiHinh" type="Button" parent="Khung/map"]
 layout_mode = 0
 offset_left = 894.0
 offset_top = 514.0
@@ -166,9 +166,9 @@ label_settings = SubResource("LabelSettings_xndhi")
 layout_mode = 2
 patch_margin_left = 30
 
-[connection signal="pressed" from="Khung/TieuDe/QuayLai" to="." method="_on_quay_lai_pressed"]
+[connection signal="pressed" from="Khung/TieuDe/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/map/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
-[connection signal="pressed" from="Khung/map/DoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]
+[connection signal="pressed" from="Khung/map/NutDoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]
 [connection signal="pressed" from="Khung/map/AllLevel/Level1" to="Khung/map/AllLevel/Level1" method="_on_level_pressed"]
 [connection signal="pressed" from="Khung/map/AllLevel/Level2" to="Khung/map/AllLevel/Level2" method="_on_level_pressed"]
 [connection signal="pressed" from="Khung/map/AllLevel/Level3" to="Khung/map/AllLevel/Level3" method="_on_level_pressed"]

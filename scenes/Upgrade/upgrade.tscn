@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdl1gwm14qlqi"]
+[gd_scene load_steps=3 format=3 uid="uid://bpnumwoocgr3v"]
 
-[ext_resource type="Script" path="res://scenes/dogBase/dogBase.gd" id="1_18sea"]
+[ext_resource type="Script" path="res://scenes/Upgrade/upgrade.gd" id="1_080ab"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ftrk6"]
-font_size = 20
+font_size = 23
 
-[node name="DogBase" type="Control"]
+[node name="Upgrade" type="Control"]
 layout_direction = 1
 layout_mode = 3
 anchors_preset = 15
@@ -13,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_18sea")
+script = ExtResource("1_080ab")
 
 [node name="Khung" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -35,7 +35,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="QuayLai" type="Button" parent="Khung/PhanDau/TieuDe"]
+[node name="NutQuayLai" type="Button" parent="Khung/PhanDau/TieuDe"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "< Quay lại"
@@ -47,7 +47,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Khung/PhanDau/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 2
-text = "Căn cứ chó - Hành tinh Doggo"
+text = "Nâng cấp"
 label_settings = SubResource("LabelSettings_ftrk6")
 
 [node name="Xuong" type="HBoxContainer" parent="Khung/PhanDau/TieuDe"]
@@ -69,55 +69,57 @@ label_settings = SubResource("LabelSettings_ftrk6")
 layout_mode = 2
 patch_margin_left = 30
 
-[node name="PhanGiua" type="HBoxContainer" parent="Khung"]
+[node name="PhanGiua" type="VBoxContainer" parent="Khung"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="BenTrai" type="VBoxContainer" parent="Khung/PhanGiua"]
+[node name="PhanTren" type="VBoxContainer" parent="Khung/PhanGiua"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Items" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Phan duoi" type="VBoxContainer" parent="Khung/PhanGiua"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanGiua/Phan duoi"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Thông tin"
+label_settings = SubResource("LabelSettings_ftrk6")
+
+[node name="NutNangCap" type="Button" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="NutVienChinh" type="Button" parent="Khung/PhanGiua/BenTrai"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "Viễn chinh !!!"
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanGiua/BenTrai"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="NutNangCap" type="Button" parent="Khung/PhanGiua/BenTrai"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_stretch_ratio = 0.15
+theme_override_font_sizes/font_size = 24
 text = "Nâng cấp
 "
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanGiua/BenTrai"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="NutCuaHang" type="Button" parent="Khung/PhanGiua/BenTrai"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "Cửa hàng"
-
-[node name="BenPhai" type="VBoxContainer" parent="Khung/PhanGiua"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ColorRect" type="ColorRect" parent="Khung/PhanGiua/BenPhai"]
+[node name="NhanVat" type="HBoxContainer" parent="Khung/PhanGiua/Phan duoi"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Khung/PhanGiua/Phan duoi/NhanVat"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "Thông tin vật phẩm
+Giá"
+label_settings = SubResource("LabelSettings_ftrk6")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PhanCuoi" type="VBoxContainer" parent="Khung"]
 layout_direction = 1
@@ -156,7 +158,4 @@ label_settings = SubResource("LabelSettings_ftrk6")
 layout_mode = 2
 patch_margin_left = 30
 
-[connection signal="pressed" from="Khung/PhanDau/TieuDe/QuayLai" to="." method="_on_quay_lai_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutVienChinh" to="." method="_on_nut_vien_chinh_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutNangCap" to="." method="_on_nut_nang_cap_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutCuaHang" to="." method="_on_nut_cua_hang_pressed"]
+[connection signal="pressed" from="Khung/PhanDau/TieuDe/NutQuayLai" to="." method="_on_nut_quay_lai_pressed"]

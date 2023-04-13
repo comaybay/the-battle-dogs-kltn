@@ -22,4 +22,8 @@ func _on_quay_lai_pressed():
 
 
 func _on_nut_nang_cap_pressed():
-	pass
+	get_tree().change_scene_to_file("res://scenes/Upgrade/upgrade.tscn")
+
+
+func _on_nut_cua_hang_pressed():
+	get_tree().change_scene_to_file("res://scenes/store/store.tscn")

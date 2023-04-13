@@ -181,7 +181,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="QuayLai" type="Button" parent="Khung/PhanDau/TieuDe"]
+[node name="NutQuayLai" type="Button" parent="Khung/PhanDau/TieuDe"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "< Quay lại"
@@ -413,7 +413,7 @@ theme_override_font_sizes/font_size = 50
 text = "    Nhân vật"
 label_settings = SubResource("LabelSettings_ftrk6")
 
-[node name="Luu" type="Button" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
+[node name="NutLuu" type="Button" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
@@ -463,7 +463,7 @@ label_settings = SubResource("LabelSettings_ftrk6")
 layout_mode = 2
 patch_margin_left = 30
 
-[connection signal="pressed" from="Khung/PhanDau/TieuDe/QuayLai" to="." method="_on_quay_lai_pressed"]
+[connection signal="pressed" from="Khung/PhanDau/TieuDe/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer/Box1" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer/Box1" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer/Box2" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer/Box2" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer/Box3" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer/Box3" method="_on_pressed"]
@@ -474,4 +474,4 @@ patch_margin_left = 30
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer2/Box8" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer2/Box8" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer2/Box9" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer2/Box9" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer2/Box10" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/HBoxContainer2/Box10" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/Phan duoi/TieuDe/Luu" to="." method="_on_luu_pressed"]
+[connection signal="pressed" from="Khung/PhanGiua/Phan duoi/TieuDe/NutLuu" to="." method="_on_luu_pressed"]
