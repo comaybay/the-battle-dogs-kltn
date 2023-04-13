@@ -99,6 +99,18 @@ size_flags_vertical = 6
 text = "Nâng cấp
 "
 
+[node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanGiua/BenTrai"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="NutCuaHang" type="Button" parent="Khung/PhanGiua/BenTrai"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Cửa hàng"
+
 [node name="BenPhai" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -147,3 +159,4 @@ patch_margin_left = 30
 [connection signal="pressed" from="Khung/PhanDau/TieuDe/QuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutVienChinh" to="." method="_on_nut_vien_chinh_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutNangCap" to="." method="_on_nut_nang_cap_pressed"]
+[connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutCuaHang" to="." method="_on_nut_cua_hang_pressed"]
