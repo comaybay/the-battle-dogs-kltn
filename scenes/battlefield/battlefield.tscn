@@ -1,3 +1,32 @@
-[gd_scene format=3 uid="uid://dkj0u8y4egjl5"]
+[gd_scene load_steps=6 format=3 uid="uid://dkj0u8y4egjl5"]
+
+[ext_resource type="PackedScene" uid="uid://cue3f8l417jkn" path="res://scenes/characters/cats/cat/cat.tscn" id="1_qo73h"]
+[ext_resource type="PackedScene" uid="uid://cm7111lji7ipa" path="res://scenes/battlefield/cat_tower.tscn" id="2_d2fcp"]
+[ext_resource type="PackedScene" uid="uid://dhit6457y0brs" path="res://scenes/characters/dogs/dog/dog.tscn" id="3_c2a2t"]
+[ext_resource type="Script" path="res://scenes/battlefield/Camera2D.gd" id="4_67qqf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n32ji"]
+size = Vector2(1799, 40)
 
 [node name="battlefield" type="Node2D"]
+
+[node name="Cat" parent="." instance=ExtResource("1_qo73h")]
+position = Vector2(738, 30)
+
+[node name="cat_tower" parent="." instance=ExtResource("2_d2fcp")]
+position = Vector2(560, 289)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-26, 312)
+shape = SubResource("RectangleShape2D_n32ji")
+
+[node name="Dog" parent="." instance=ExtResource("3_c2a2t")]
+position = Vector2(37, 125)
+attack_area_range = 20
+health = 400
+damage = 100
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_67qqf")

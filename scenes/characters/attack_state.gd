@@ -37,9 +37,9 @@ func physics_update(delta: float) -> void:
 		shape_query.transform = Transform2D(0, attack_midpoint) 
 		
 		var results := space_state.intersect_shape(shape_query, 1000)
-		print(results)
+		
 		for result in results:
-			(result.collider as Character).take_damage(character.damage)
+			result.collider.take_damage(character.damage)
 		
 	start_attack = false
 			
