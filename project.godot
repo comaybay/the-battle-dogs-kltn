@@ -17,7 +17,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-global_Level="*res://scenes/map/AllLevel.gd"
+Data="*res://data.gd"
 
 [display]
 

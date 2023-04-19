@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7gck5kfd82pk"]
+[gd_scene load_steps=8 format=3 uid="uid://conf6djcsh6cg"]
 
 [ext_resource type="Script" path="res://scenes/map/map.gd" id="1_0p7qx"]
-[ext_resource type="Script" path="res://scenes/map/ScreenMap1.gd" id="2_be1k2"]
+[ext_resource type="Script" path="res://scenes/map/ScreenMap.gd" id="2_0udil"]
 [ext_resource type="Theme" uid="uid://bb4uny0684isq" path="res://resources/theme_button_round.tres" id="3_5tfwt"]
 [ext_resource type="Script" path="res://scenes/map/AllLevel.gd" id="4_ep8j2"]
 
@@ -80,25 +80,25 @@ text = "Đội hình: diamon dogs"
 
 [node name="AllLevel" type="Node2D" parent="Khung/map"]
 process_mode = 1
-script = ExtResource("2_be1k2")
+script = ExtResource("2_0udil")
 
 [node name="Node" type="Node2D" parent="Khung/map/AllLevel"]
 
 [node name="Level1" type="Button" parent="Khung/map/AllLevel/Node"]
-offset_left = 591.0
-offset_top = 294.0
-offset_right = 631.0
-offset_bottom = 334.0
+offset_left = 659.0
+offset_top = 392.0
+offset_right = 699.0
+offset_bottom = 432.0
 theme = ExtResource("3_5tfwt")
 theme_override_font_sizes/font_size = 18
 text = "1"
 script = ExtResource("4_ep8j2")
 
 [node name="Level2" type="Button" parent="Khung/map/AllLevel/Node"]
-offset_left = 554.0
-offset_top = 452.0
-offset_right = 594.0
-offset_bottom = 492.0
+offset_left = 529.0
+offset_top = 312.0
+offset_right = 569.0
+offset_bottom = 352.0
 theme = ExtResource("3_5tfwt")
 theme_override_font_sizes/font_size = 18
 text = "2"

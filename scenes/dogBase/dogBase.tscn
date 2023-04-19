@@ -31,9 +31,7 @@ size_flags_stretch_ratio = 0.0
 localize_numeral_system = false
 
 [node name="TieuDe" type="HBoxContainer" parent="Khung/PhanDau"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-alignment = 1
 
 [node name="QuayLai" type="Button" parent="Khung/PhanDau/TieuDe"]
 layout_mode = 2
@@ -59,7 +57,7 @@ size_flags_vertical = 4
 layout_mode = 2
 patch_margin_left = 50
 
-[node name="Label" type="Label" parent="Khung/PhanDau/TieuDe/Xuong"]
+[node name="Money" type="Label" parent="Khung/PhanDau/TieuDe/Xuong"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Xương: 15000"
@@ -72,7 +70,6 @@ patch_margin_left = 30
 [node name="PhanGiua" type="HBoxContainer" parent="Khung"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 20.0
 
 [node name="BenTrai" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
@@ -129,6 +126,7 @@ localize_numeral_system = false
 [node name="TieuDe" type="HBoxContainer" parent="Khung/PhanCuoi"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_vertical = 8
 alignment = 1
 
 [node name="Label" type="Label" parent="Khung/PhanCuoi/TieuDe"]

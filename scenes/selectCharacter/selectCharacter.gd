@@ -11,8 +11,9 @@ func _process(delta):
 
 
 func _on_quay_lai_pressed():
-	get_tree().change_scene_to_file("res://scenes/map/map1.tscn")
+	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
 
 func _on_luu_pressed():
-	get_tree().change_scene_to_file("res://scenes/map/map1.tscn")
+	print(Data.money)
+	#get_tree().change_scene_to_file("res://scenes/map/map.tscn")

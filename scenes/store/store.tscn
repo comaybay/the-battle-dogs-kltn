@@ -59,7 +59,7 @@ size_flags_vertical = 4
 layout_mode = 2
 patch_margin_left = 50
 
-[node name="Label" type="Label" parent="Khung/PhanDau/TieuDe/Xuong"]
+[node name="Money" type="Label" parent="Khung/PhanDau/TieuDe/Xuong"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Xương: 15000"

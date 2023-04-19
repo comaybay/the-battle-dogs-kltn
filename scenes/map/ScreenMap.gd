@@ -10,7 +10,7 @@ func _ready():
 
 func _draw() -> void:
 	var allMap = $Node.get_children()	
-	for level in global_Level.level_pass-1:
+	for level in Data.level_pass-1:
 		var vitri1 = allMap[level].position + Vector2(20,20)
 		var vitri2 = allMap[level+1].position+ Vector2(20,20)
 		draw_dashed_line(vitri1,vitri2, Color(1, 1, 1, 1), 4, 10, false)

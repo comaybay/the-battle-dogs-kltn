@@ -3,7 +3,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-
+	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.money)
 	pass # Replace with function body.
 
 
@@ -14,7 +14,7 @@ func _process(delta):
 
 
 func _on_nut_vien_chinh_pressed():
-	get_tree().change_scene_to_file("res://scenes/map/map1.tscn")
+	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
 
 func _on_quay_lai_pressed():
