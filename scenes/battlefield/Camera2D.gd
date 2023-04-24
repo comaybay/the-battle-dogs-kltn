@@ -8,6 +8,7 @@ const MAX_ZOOM = Vector2.ONE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	zoom = Vector2(0.5, 0.5)
 	limit_left = -800 
 	limit_right = 2000 
 	position.x = (limit_left + limit_right) / 2
@@ -17,7 +18,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var direction = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	position.x = clamp(position.x + MOVE_SPEED * direction * delta, limit_left + half_viewport_size.x, limit_right - half_viewport_size.x)  	
-	print(position.x, limit_left)
 	
 	if Input.is_action_pressed("ui_zoomin"):
 		zoom = zoom.lerp(MIN_ZOOM, ZOOM_SPEED * delta)
