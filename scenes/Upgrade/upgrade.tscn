@@ -1,12 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpnumwoocgr3v"]
+[gd_scene load_steps=3 format=3 uid="uid://bpnumwoocgr3v"]
 
 [ext_resource type="Script" path="res://scenes/Upgrade/upgrade.gd" id="1_080ab"]
-[ext_resource type="Texture2D" uid="uid://dik4p3w46kjxt" path="res://resources/images/planet9_Wallpaper_5000x2813.jpg" id="2_5mwoe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ftrk6"]
 font_size = 23
-
-[sub_resource type="LabelSettings" id="LabelSettings_6y4ny"]
 
 [node name="Upgrade" type="Control"]
 layout_direction = 1
@@ -110,54 +107,6 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 50
 
-[node name="Box1" type="Button" parent="Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer/Box1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_5mwoe")
-expand_mode = 1
-
-[node name="Number" type="Label" parent="Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer/Box1"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "1
-"
-label_settings = SubResource("LabelSettings_6y4ny")
-
-[node name="Box2" type="Button" parent="Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer/Box2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_5mwoe")
-expand_mode = 1
-
-[node name="Number" type="Label" parent="Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer/Box2"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "1
-"
-label_settings = SubResource("LabelSettings_6y4ny")
-
 [node name="PhanDuoi" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -235,5 +184,3 @@ layout_mode = 2
 patch_margin_left = 30
 
 [connection signal="pressed" from="Khung/PhanDau/TieuDe/NutQuayLai" to="." method="_on_nut_quay_lai_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer/Box1" to="." method="_on_box_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer/Box2" to="." method="_on_box_pressed"]

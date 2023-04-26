@@ -4,5 +4,10 @@
  "detail":[
 	{"name": 1, "path":"res://resources/images/planet9_Wallpaper_5000x2813.jpg"},
 	{"name": 2, "path":"res://resources/images/Screenshot (5).png"},
+	{"name": 3, "path":"res://resources/images/Screenshot (5).png"},
+	{"name": 4, "path":"res://resources/images/Screenshot (5).png"},
+	{"name": 5, "path":"res://resources/images/Screenshot (5).png"},
+	{"name": 6, "path":"res://resources/images/Screenshot (5).png"},
+	{"name": 7, "path":"res://resources/images/Screenshot (5).png"},
   ]
 }

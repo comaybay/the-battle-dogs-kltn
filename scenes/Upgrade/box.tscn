@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfovxi38toh53"]
+
+[ext_resource type="Texture2D" uid="uid://dik4p3w46kjxt" path="res://resources/images/planet9_Wallpaper_5000x2813.jpg" id="2_1qsff"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_14fa2"]
+
+[node name="Box" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1qsff")
+expand_mode = 1
+
+[node name="Number" type="Label" parent="Button"]
+offset_right = 40.0
+offset_bottom = 26.0
+text = "1
+"
+label_settings = SubResource("LabelSettings_14fa2")
