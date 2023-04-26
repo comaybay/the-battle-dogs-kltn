@@ -1,12 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://bpptcrw7gwqcn"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/land/land.gd" id="1_d7wn3"]
+[ext_resource type="Texture2D" uid="uid://n5y4clehg70w" path="res://scenes/battlefield/land/land.png" id="2_qisx2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dg48x"]
 size = Vector2(1352, 20)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xdgu2"]
-load_path = "res://.godot/imported/grass.png-dad798a8dd0cd9242e45a68f125f6b68.ctex"
 
 [node name="Land" type="StaticBody2D"]
 script = ExtResource("1_d7wn3")
@@ -15,6 +13,11 @@ script = ExtResource("1_d7wn3")
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_dg48x")
 
-[node name="Grass" type="Sprite2D" parent="."]
-position = Vector2(-6, 108)
-texture = SubResource("CompressedTexture2D_xdgu2")
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = -169.0
+offset_right = 989.0
+offset_bottom = 283.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("2_qisx2")
+stretch_mode = 1

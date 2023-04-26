@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cecwl18lrgxig" path="res://scenes/battlefield/cat_tower/cat_tower.png" id="2_mx6xr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
-font_size = 32
+font_size = 48
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghq1y"]
 size = Vector2(408, 907.25)
@@ -66,16 +66,16 @@ _data = {
 "shake": SubResource("Animation_1vn7f")
 }
 
-[node name="cat_tower" type="StaticBody2D"]
+[node name="CatTower" type="StaticBody2D"]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_52k0t")
 
 [node name="HealthLabel" type="Label" parent="."]
-offset_left = -411.0
-offset_top = -940.0
-offset_right = -107.0
-offset_bottom = -867.0
+offset_left = -290.0
+offset_top = -1052.0
+offset_right = 14.0
+offset_bottom = -979.0
 size_flags_horizontal = 4
 text = "healh/health"
 label_settings = SubResource("LabelSettings_8inmh")
