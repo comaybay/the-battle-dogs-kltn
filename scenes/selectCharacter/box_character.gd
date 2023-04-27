@@ -1,5 +1,6 @@
 extends Button
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -11,6 +12,4 @@ func _process(delta):
 
 
 func _on_pressed():
-	print($TextureRect.texture)
-	owner.Box.sendInfo(1)
 	pass # Replace with function body.

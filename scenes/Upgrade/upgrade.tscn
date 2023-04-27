@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpnumwoocgr3v"]
+[gd_scene load_steps=4 format=3 uid="uid://bpnumwoocgr3v"]
 
 [ext_resource type="Script" path="res://scenes/Upgrade/upgrade.gd" id="1_080ab"]
+[ext_resource type="PackedScene" uid="uid://cfovxi38toh53" path="res://scenes/Upgrade/box.tscn" id="2_15w13"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ftrk6"]
 font_size = 23
@@ -106,6 +107,9 @@ size_flags_vertical = 6
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 50
+
+[node name="Box" parent="Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer" instance=ExtResource("2_15w13")]
+layout_mode = 2
 
 [node name="PhanDuoi" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
