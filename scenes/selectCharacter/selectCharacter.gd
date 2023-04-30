@@ -5,6 +5,9 @@ var store_data
 var game_data
 var index = 0 
 
+var Box : Node
+var Box_character : Node
+
 func _ready():
 	var file1 = FileAccess.open("res://resources/game_data/data.json", FileAccess.READ)
 	game_data = JSON.parse_string(file1.get_as_text())
@@ -17,6 +20,8 @@ func _ready():
 		#print(upgrade_data["detail"][i]['path'])
 		addItem(store_data["detail"][i])
 		
+	Box = $Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box1
+	Box_character = $Khung/PhanGiua/PhanDuoi/NhanVat/ScrollContainer/GridContainer/Box
 
 func addItem(value):	
 	var item = ListItem.instantiate()
@@ -26,8 +31,8 @@ func addItem(value):
 	$Khung/PhanGiua/PhanDuoi/NhanVat/ScrollContainer/GridContainer.add_child(item)
 	#get_tree().call_group("items", "update_items", [])
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func sendInfo(value):
+	print(2)
 func _process(delta):
 	pass
 

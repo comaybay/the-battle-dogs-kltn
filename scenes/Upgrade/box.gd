@@ -9,8 +9,8 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func _on_pressed():
-	print($TextureRect.texture)
-	owner.Box.sendInfo(1)
+	#print($TextureRect.texture)
+	get_tree().current_scene.sendInfo($Code.text,$Detail.text, $Number.text)
 	pass # Replace with function body.
+

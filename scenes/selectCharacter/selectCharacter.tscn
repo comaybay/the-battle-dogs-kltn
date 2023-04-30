@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4m3nc1gvykei"]
+[gd_scene load_steps=15 format=3 uid="uid://b4m3nc1gvykei"]
 
 [ext_resource type="Script" path="res://scenes/selectCharacter/selectCharacter.gd" id="1_qdgrc"]
 [ext_resource type="StyleBox" uid="uid://bsrrel7fgsej8" path="res://resources/theme/button_base.tres" id="3_2rpul"]
 [ext_resource type="Script" path="res://scenes/selectCharacter/Box.gd" id="3_ynu37"]
+[ext_resource type="Texture2D" uid="uid://dik4p3w46kjxt" path="res://resources/images/planet9_Wallpaper_5000x2813.jpg" id="4_fhby6"]
+[ext_resource type="PackedScene" uid="uid://pa11dyf3seu6" path="res://scenes/selectCharacter/box_character.tscn" id="4_s5ubo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ftrk6"]
 font_size = 23
@@ -289,104 +291,15 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
 script = ExtResource("3_ynu37")
 
-[node name="Box2" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_7yqps")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qypoe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
-script = ExtResource("3_ynu37")
-
-[node name="Box3" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_7yqps")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qypoe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
-script = ExtResource("3_ynu37")
-
-[node name="Box4" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_7yqps")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qypoe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
-script = ExtResource("3_ynu37")
-
-[node name="Box5" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_7yqps")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qypoe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
-script = ExtResource("3_ynu37")
-
-[node name="Box6" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_7yqps")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qypoe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
-script = ExtResource("3_ynu37")
-
-[node name="Box7" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_7yqps")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qypoe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
-script = ExtResource("3_ynu37")
-
-[node name="Box8" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_7yqps")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qypoe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
-script = ExtResource("3_ynu37")
-
-[node name="Box9" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_7yqps")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qypoe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
-script = ExtResource("3_ynu37")
-
-[node name="Box10" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_7yqps")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qypoe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a0guf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_edajb")
-script = ExtResource("3_ynu37")
+[node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_fhby6")
+expand_mode = 1
 
 [node name="NinePatchRect3" type="NinePatchRect" parent="Khung/PhanGiua/PhanTren/DoiHinh"]
 layout_mode = 2
@@ -432,6 +345,10 @@ layout_mode = 2
 theme_override_constants/h_separation = 20
 columns = 50
 
+[node name="Box" parent="Khung/PhanGiua/PhanDuoi/NhanVat/ScrollContainer/GridContainer" instance=ExtResource("4_s5ubo")]
+visible = false
+layout_mode = 2
+
 [node name="PhanCuoi" type="VBoxContainer" parent="Khung"]
 layout_direction = 1
 layout_mode = 2
@@ -471,13 +388,4 @@ patch_margin_left = 30
 
 [connection signal="pressed" from="Khung/PhanDau/TieuDe/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box1" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box1" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box2" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box2" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box3" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box3" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box4" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box4" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box5" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box5" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box6" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box6" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box7" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box7" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box8" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box8" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box9" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box9" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box10" to="Khung/PhanGiua/PhanTren/DoiHinh/VBoxContainer/DoiHinh/Box10" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanDuoi/TieuDe/NutLuu" to="." method="_on_luu_pressed"]
