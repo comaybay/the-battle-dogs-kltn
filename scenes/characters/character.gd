@@ -43,7 +43,7 @@ var next_knockback_health: int
 func _ready() -> void:
 	# config 
 	max_health = health
-	next_knockback_health = max_health - max_health / knockbacks
+	next_knockback_health = (max_health - max_health) / knockbacks
 	move_direction = (1 if character_type == Type.DOG else -1)
 	
 	n_AttackCooldownTimer.wait_time = attack_cooldown
@@ -63,7 +63,7 @@ func _draw() -> void:
 		draw_dashed_line(n_RayCast2D.position, attack_point, Color.YELLOW, 5, 10)	
 		
 		var is_single_target := attack_area_range <= 0
-		var half_attack_range_vec := Vector2(3, 0) if is_single_target else Vector2(attack_area_range / 2, 0) 
+		var half_attack_range_vec := Vector2(3, 0) if is_single_target else Vector2(attack_area_range / 2.0, 0) 
 		var down_vec = Vector2(0, 10)
 		var attack_area_color := Color.DEEP_SKY_BLUE if is_single_target else Color.LAWN_GREEN
 		draw_line(attack_point - half_attack_range_vec + down_vec, attack_point + half_attack_range_vec + down_vec, attack_area_color, 5)		
@@ -96,5 +96,5 @@ func take_damage(ammount: int) -> void:
 	health -= ammount
 	
 	if health <= next_knockback_health:
-		next_knockback_health = max(0, next_knockback_health - max_health / knockbacks) 
+		next_knockback_health = max(0, (next_knockback_health - max_health) / knockbacks)
 		$FiniteStateMachine.change_state("KnockbackState")	

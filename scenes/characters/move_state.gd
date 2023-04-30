@@ -2,7 +2,7 @@
 extends FSMState
 
 # called when the state is activated
-func enter(data: Dictionary) -> void:
+func enter(_data: Dictionary) -> void:
 	character.get_node("AnimationPlayer").play("move")
 
 # called when the state is deactivated
@@ -29,7 +29,4 @@ func update(delta: float) -> void:
 		
 	character.move_and_slide() 
 
-# this method is the equivalent of _input but only called when the state is active
-func input(event: InputEvent) -> void:
-	pass 
-	
+

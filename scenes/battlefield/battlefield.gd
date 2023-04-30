@@ -14,8 +14,12 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	var half_viewport_size = get_viewport().size / 2
+	
 	$CatTower.position.x = stage_width - 500;
 	$CatTower.position.y = -50
-	$Land.position.x = stage_width / 2
+	$DogTower.position.x = 500
+	$DogTower.position.y = -50
+	
+	$Land.position.x = stage_width / 2.0
 	
 	$Camera2D.position = Vector2(stage_width/2, -half_viewport_size.y)

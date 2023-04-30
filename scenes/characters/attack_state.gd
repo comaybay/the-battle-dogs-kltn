@@ -4,7 +4,7 @@ extends FSMState
 var start_attack := false
 
 # called when the state is activated
-func enter(data: Dictionary) -> void:
+func enter(_data: Dictionary) -> void:
 	character.n_Sprite2D.frame_changed.connect(on_frame_changed)
 	character.n_AnimationPlayer.animation_finished.connect(on_animation_finished)
 	character.n_AnimationPlayer.play("attack")
@@ -13,13 +13,14 @@ func on_frame_changed() -> void:
 	if character.n_Sprite2D.frame == character.attack_frame:
 		start_attack = true
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if start_attack == false:
 		return
 	
 	# single target
 	if character.attack_area_range <= 0:
-		var target := character.n_RayCast2D.get_collider() as Character
+		# target can be a dog or a dog tower
+		var target := character.n_RayCast2D.get_collider()
 		if target != null:
 			target.take_damage(character.damage)
 
@@ -38,12 +39,13 @@ func physics_update(delta: float) -> void:
 		
 		var results := space_state.intersect_shape(shape_query, 1000)
 		
+		# target can be a dog or a dog tower
 		for result in results:
 			result.collider.take_damage(character.damage)
 		
 	start_attack = false
 			
-func on_animation_finished(name):
+func on_animation_finished(_name):
 	character.n_AttackCooldownTimer.start()
 	transition.emit("IdleState")
 		
@@ -51,12 +53,5 @@ func on_animation_finished(name):
 func exit() -> void:
 	character.n_Sprite2D.frame_changed.disconnect(on_frame_changed) 
 	character.n_AnimationPlayer.animation_finished.disconnect(on_animation_finished)
-		
-# called every frame when the state is active
-func update(delta: float) -> void:
-	pass
-# this method is the equivalent of _input but only called when the state is active
-func input(event: InputEvent) -> void:
-	pass 
-	
+
 

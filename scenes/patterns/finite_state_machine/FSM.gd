@@ -26,14 +26,18 @@ func _on_owner_ready():
 	state.enter({})
 
 func change_state(next_state_name: String, data: Dictionary = {}):
-	state.exit()
+	if state.has_method("exit"):
+		state.exit()
+	
 	state = get_node(next_state_name)
 	state.enter(data)
+	
 	update_FSM_process()
 
 func update_FSM_process():
 	set_physics_process(state.has_method("physics_update"))
 	set_process_input(state.has_method("input"))
+	set_process(state.has_method("update"))
 
 func _on_state_transition(next_state_name: String, data: Dictionary = {}):
 	change_state(next_state_name, data)
