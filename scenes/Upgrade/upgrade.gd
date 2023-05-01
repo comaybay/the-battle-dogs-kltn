@@ -7,7 +7,7 @@ var game_data
 var index = 0 
 var select_index = 0
 var detail_index = ""
-var number_index = 0
+var level_index = 0
 
 func _ready():	
 	var file1 = FileAccess.open("res://resources/game_data/data.json", FileAccess.READ)
@@ -23,11 +23,11 @@ func _ready():
 		addItem(upgrade_data["detail"][i])
 		
 
-func sendInfo(code,detail, number):
+func sendInfo(code,detail, level):
 	select_index = code
 	detail_index = detail
-	number_index = number
-	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả :" + " " +detail +"\n" + "Số lượng :" + " " + number 
+	level_index = level
+	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả : " +detail +"\n" + "Cấp độ : "  + level 
 	
 func addItem(value):
 	var item = ListItem.instantiate()
@@ -35,7 +35,7 @@ func addItem(value):
 	item.get_node("Code").text = str(value['#'])
 	item.get_node("TextureRect").texture = load(value['path'])
 	item.get_node("Detail").text = str(value['detail'])
-	item.get_node("Number").text = str(value['number'])
+	item.get_node("Level").text = str(value['level'])
 	$Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer.add_child(item)
 
 func _on_nut_quay_lai_pressed():
@@ -58,15 +58,15 @@ func reset():
 	upgrade_data = JSON.parse_string(file2.get_as_text())
 	file2.close()	
 	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.money)
-	number_index = str(int(number_index) + 1)
-	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả : " + str(detail_index) + "\n" + "Số lượng : " + number_index
+	level_index = str(int(level_index) + 1)
+	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả : " + str(detail_index) + "\n" + "Cấp độ : " + level_index
 	for i in upgrade_data["detail"].size() :
 		addItem(upgrade_data["detail"][i])
 
 func _on_nut_nang_cap_pressed():
 	for i in upgrade_data["detail"].size():
 		if upgrade_data["detail"][i]["#"] == int(select_index):
-			upgrade_data["detail"][i]["number"] +=1	
+			upgrade_data["detail"][i]["level"] +=1	
 	
 	var file = FileAccess.open("res://resources/game_data/upgrade.json", FileAccess.WRITE)
 	var json_data = JSON.stringify(upgrade_data)

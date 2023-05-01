@@ -1,13 +1,1 @@
-{
-  "title":
-	{"amount": 5 , "lastName":"Nguyễn"},
- "detail":[
-	{"name": 1, "path":"res://resources/images/planet9_Wallpaper_5000x2813.jpg"},
-	{"name": 2, "path":"res://resources/images/Screenshot (5).png"},
-	{"name": 3, "path":"res://resources/images/Screenshot (5).png"},
-	{"name": 4, "path":"res://resources/images/Screenshot (5).png"},
-	{"name": 5, "path":"res://resources/images/Screenshot (5).png"},
-	{"name": 6, "path":"res://resources/images/Screenshot (5).png"},
-	{"name": 7, "path":"res://resources/images/Screenshot (5).png"},
-  ]
-}
+{"detail":[{"#":0,"detail":"dddf","number":1,"path":"res://resources/images/Screenshot (5).png"},{"#":1,"detail":"asd","number":1,"path":"res://resources/images/planet9_Wallpaper_5000x2813.jpg"},{"#":2,"detail":"asd","number":3,"path":"res://resources/images/Screenshot (5).png"},{"#":3,"detail":"asa","number":1,"path":"res://resources/images/Screenshot (5).png"},{"#":4,"detail":"aa","number":3,"path":"res://resources/images/Screenshot (5).png"},{"#":5,"detail":"aa","number":1,"path":"res://resources/images/Screenshot (5).png"},{"#":6,"detail":"aa","number":1,"path":"res://resources/images/Screenshot (5).png"}],"title":{"#":7,"lastName":"Nguyễn"}}

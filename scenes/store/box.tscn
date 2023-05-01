@@ -1,14 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://nffjofok2mxc"]
+[gd_scene load_steps=4 format=3 uid="uid://bnd7syoshr20n"]
 
-[ext_resource type="Script" path="res://scenes/Upgrade/box.gd" id="1_ykf7b"]
-[ext_resource type="Texture2D" uid="uid://dik4p3w46kjxt" path="res://resources/images/planet9_Wallpaper_5000x2813.jpg" id="2_1qsff"]
+[ext_resource type="Script" path="res://scenes/store/box.gd" id="1_ocjdr"]
+[ext_resource type="Texture2D" uid="uid://dik4p3w46kjxt" path="res://resources/images/planet9_Wallpaper_5000x2813.jpg" id="2_u0i26"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_14fa2"]
 
 [node name="Box" type="Button"]
 clip_contents = true
 custom_minimum_size = Vector2(200, 200)
-script = ExtResource("1_ykf7b")
+script = ExtResource("1_ocjdr")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -17,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_1qsff")
+texture = ExtResource("2_u0i26")
 expand_mode = 1
 
 [node name="Code" type="Label" parent="."]
@@ -37,7 +37,7 @@ text = "1
 "
 label_settings = SubResource("LabelSettings_14fa2")
 
-[node name="Level" type="Label" parent="."]
+[node name="Number" type="Label" parent="."]
 visible = false
 layout_mode = 0
 offset_right = 40.0

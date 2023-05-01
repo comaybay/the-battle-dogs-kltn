@@ -112,23 +112,35 @@ lines_skipped = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Phan duoi" type="VBoxContainer" parent="Khung/PhanGiua"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Khung/PhanGiua/PhanTren/Items"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="Khung/PhanGiua/PhanTren/Items/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 50
+
+[node name="PhanDuoi" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanGiua/Phan duoi"]
+[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanGiua/PhanDuoi"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
+[node name="Label" type="Label" parent="Khung/PhanGiua/PhanDuoi/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 50
 text = "Thông tin"
 label_settings = SubResource("LabelSettings_ftrk6")
 
-[node name="NutMua" type="Button" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
+[node name="NutMua" type="Button" parent="Khung/PhanGiua/PhanDuoi/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
@@ -136,11 +148,11 @@ theme_override_font_sizes/font_size = 24
 text = "Mua
 "
 
-[node name="NhanVat" type="HBoxContainer" parent="Khung/PhanGiua/Phan duoi"]
+[node name="ThongTin" type="HBoxContainer" parent="Khung/PhanGiua/PhanDuoi"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Khung/PhanGiua/Phan duoi/NhanVat"]
+[node name="Label_Item" type="Label" parent="Khung/PhanGiua/PhanDuoi/ThongTin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -189,4 +201,4 @@ layout_mode = 2
 patch_margin_left = 30
 
 [connection signal="pressed" from="Khung/PhanDau/TieuDe/NutQuayLai" to="." method="_on_quay_lai_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/Phan duoi/TieuDe/NutMua" to="." method="_on_mua_pressed"]
+[connection signal="pressed" from="Khung/PhanGiua/PhanDuoi/TieuDe/NutMua" to="." method="_on_mua_pressed"]
