@@ -79,27 +79,45 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.29
 
-[node name="Items" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren"]
+[node name="Items" type="Control" parent="Khung/PhanGiua/PhanTren"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Phan duoi" type="VBoxContainer" parent="Khung/PhanGiua"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Khung/PhanGiua/PhanTren/Items"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="GridContainer" type="GridContainer" parent="Khung/PhanGiua/PhanTren/Items/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 50
+
+[node name="PhanDuoi" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanGiua/Phan duoi"]
+[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanGiua/PhanDuoi"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
+[node name="Label" type="Label" parent="Khung/PhanGiua/PhanDuoi/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 50
 text = "Thông tin"
 label_settings = SubResource("LabelSettings_ftrk6")
 
-[node name="NutNangCap" type="Button" parent="Khung/PhanGiua/Phan duoi/TieuDe"]
+[node name="NutNangCap" type="Button" parent="Khung/PhanGiua/PhanDuoi/TieuDe"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
@@ -107,11 +125,11 @@ theme_override_font_sizes/font_size = 24
 text = "Nâng cấp
 "
 
-[node name="NhanVat" type="HBoxContainer" parent="Khung/PhanGiua/Phan duoi"]
+[node name="ThongTin" type="HBoxContainer" parent="Khung/PhanGiua/PhanDuoi"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Khung/PhanGiua/Phan duoi/NhanVat"]
+[node name="Label_Item" type="Label" parent="Khung/PhanGiua/PhanDuoi/ThongTin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -160,3 +178,4 @@ layout_mode = 2
 patch_margin_left = 30
 
 [connection signal="pressed" from="Khung/PhanDau/TieuDe/NutQuayLai" to="." method="_on_nut_quay_lai_pressed"]
+[connection signal="pressed" from="Khung/PhanGiua/PhanDuoi/TieuDe/NutNangCap" to="." method="_on_nut_nang_cap_pressed"]
