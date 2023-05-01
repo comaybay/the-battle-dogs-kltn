@@ -22,4 +22,4 @@ func _ready() -> void:
 	
 	$Land.position.x = stage_width / 2.0
 	
-	$Camera2D.position = Vector2(stage_width/2, -half_viewport_size.y)
+	$Camera2D.position = Vector2(0, -half_viewport_size.y)

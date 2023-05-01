@@ -39,17 +39,18 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var move_direction: int
 var max_health: int
 var next_knockback_health: int
+var collision_rect: Rect2
 
 func _ready() -> void:
 	# config 
 	max_health = health
-	next_knockback_health = (max_health - max_health) / knockbacks
+	next_knockback_health = max_health - (max_health / knockbacks)
 	move_direction = (1 if character_type == Type.DOG else -1)
 	
 	n_AttackCooldownTimer.wait_time = attack_cooldown
 	n_RayCast2D.target_position.x = attack_range * move_direction
 	
-	var collision_rect: Rect2 = $CollisionShape2D.shape.get_rect()
+	collision_rect = $CollisionShape2D.shape.get_rect()
 	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
 	if character_type == Type.DOG:
 		n_RayCast2D.position.x += collision_rect.size.x
@@ -96,5 +97,5 @@ func take_damage(ammount: int) -> void:
 	health -= ammount
 	
 	if health <= next_knockback_health:
-		next_knockback_health = max(0, (next_knockback_health - max_health) / knockbacks)
+		next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
 		$FiniteStateMachine.change_state("KnockbackState")	
