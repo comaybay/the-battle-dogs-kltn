@@ -33,6 +33,7 @@ enum Type { DOG, ENEMY }
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
 @onready var n_Sprite2D := $Sprite2D as Sprite2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
+@onready var Debug = get_node("/root/Debug");
 
 ## Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -59,7 +60,7 @@ func _ready() -> void:
 		property_list_changed.connect(queue_redraw)
 
 func _draw() -> void:
-	if Engine.is_editor_hint() or true:
+	if Engine.is_editor_hint() or Debug.is_debug_mode():
 		var attack_point = n_RayCast2D.position + n_RayCast2D.target_position
 		draw_dashed_line(n_RayCast2D.position, attack_point, Color.YELLOW, 5, 10)	
 		
@@ -70,13 +71,12 @@ func _draw() -> void:
 		draw_line(attack_point - half_attack_range_vec + down_vec, attack_point + half_attack_range_vec + down_vec, attack_area_color, 5)		
 		
 		var default_font := ThemeDB.fallback_font
-		var default_font_size := ThemeDB.fallback_font_size
-		var attack_type_string := "Attack type: %s" % ("single target" if is_single_target else "area attack")
+		var default_font_size := 42
+		var debug_string := "Attack type: %s" % ("single target" if is_single_target else "area attack") + "\n%s/%s" % [health, max_health] 
 		var character_size := n_Sprite2D.get_rect().size
-		draw_string(default_font, Vector2(0, -character_size.y / 2), attack_type_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
+		draw_multiline_string(default_font, Vector2(0, -character_size.y / 2 - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
 
-	## debug mode
-	if true:
+	if Debug.is_debug_mode():
 		var rect: Rect2 = $CollisionShape2D.shape.get_rect()
 		rect.position += $CollisionShape2D.position
 		draw_rect(rect, Color.RED, false)
@@ -92,9 +92,12 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("Sprite2D node requires a sprite sheet, this is used to display the character.")
 	
 	return warnings
-
+	
 func take_damage(ammount: int) -> void:
 	health -= ammount
+	
+	if Debug.is_debug_mode():
+		queue_redraw()
 	
 	if health <= next_knockback_health:
 		next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))

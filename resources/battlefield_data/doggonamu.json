@@ -1,4 +1,16 @@
 {
-  "stage_width": 5000,
-  "cat_tower_health": 1000
+  "stage_width": 3000,
+  "cat_tower_health": 1000,
+  "spawn_patterns": [
+    {
+      "name": "cat",
+      "duration": 10,
+      "delay": 0
+    },
+    {
+      "name": "long_cat",
+      "duration": 10,
+      "delay": 7
+    }
+  ]
 }

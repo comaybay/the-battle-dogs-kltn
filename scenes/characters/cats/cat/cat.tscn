@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dk2qbrhlr0fcu" path="res://scenes/characters/cats/cat/cat.png" id="1_lqadi"]
 
 [node name="Cat" instance=ExtResource("1_2c8s7")]
+speed = 100
 damage = 20
 
 [node name="Sprite2D" parent="." index="2"]

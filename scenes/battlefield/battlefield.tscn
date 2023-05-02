@@ -24,7 +24,7 @@ position = Vector2(-303, 0)
 
 [node name="Dog" parent="." instance=ExtResource("3_c2a2t")]
 position = Vector2(48, -169)
-attack_area_range = 20
+speed = 100
 health = 400
 damage = 100
 

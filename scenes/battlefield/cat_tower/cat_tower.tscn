@@ -92,3 +92,7 @@ shape = SubResource("RectangleShape2D_ghq1y")
 libraries = {
 "": SubResource("AnimationLibrary_qra5t")
 }
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-262, -225)
+gizmo_extents = 54.5
