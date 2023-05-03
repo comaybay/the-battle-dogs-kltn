@@ -54,6 +54,8 @@ func load_cats(spawn_patterns: Variant) -> Dictionary:
 
 func _ready() -> void:
 	var half_viewport_size = get_viewport().size / 2
+	$Sky.position = Vector2(0, -$Sky.size.y)
+	$Sky.size.x = stage_width
 	
 	$CatTower.position.x = stage_width - 500;
 	$CatTower.position.y = -50
