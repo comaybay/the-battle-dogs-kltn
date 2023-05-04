@@ -8,6 +8,7 @@ var index = 0
 var select_index = 0
 var detail_index = ""
 var number_index = 0
+var money_index = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,17 +24,18 @@ func _ready():
 		addItem(store_data["detail"][i])
 
 
-func sendInfo(code,detail, number):
-	select_index = code
+func sendInfo(ID,detail, number, money):
+	select_index = ID
 	detail_index = detail
 	number_index = number
-	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả : " +detail +"\n" + "Số lượng : " + number 
+	money_index = money
+	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả : " +detail +"\n" + "Giá tiền : " + money  + "Số lượng : " + number 
 	
 
 func addItem(value):
 	var item = ListItem.instantiate()
 	index += 1
-	item.get_node("Code").text = str(value['#'])
+	item.get_node("ID").text = str(value['ID'])
 	item.get_node("TextureRect").texture = load(value['path'])
 	item.get_node("Detail").text = str(value['detail'])
 	item.get_node("Number").text = str(value['number'])
@@ -57,13 +59,13 @@ func reset():
 	file2.close()	
 	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.money)
 	number_index = str(int(number_index) + 1)
-	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả : " + str(detail_index) + "\n" + "Số lượng : " + number_index
+	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả : " + str(detail_index) + "\n" +  "Giá tiền : " + money_index +"Số lượng : " + number_index
 	for i in store_data["detail"].size() :
 		addItem(store_data["detail"][i])
 
 func _on_mua_pressed():
 	for i in store_data["detail"].size():
-		if store_data["detail"][i]["#"] == int(select_index):
+		if store_data["detail"][i]["ID"] == int(select_index):
 			store_data["detail"][i]["number"] +=1	
 	
 	var file = FileAccess.open("res://resources/game_data/store.json", FileAccess.WRITE)

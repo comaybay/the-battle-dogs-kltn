@@ -13,7 +13,7 @@ func _ready():
 	var file1 = FileAccess.open("res://resources/game_data/data.json", FileAccess.READ)
 	game_data = JSON.parse_string(file1.get_as_text())
 	file1.close()
-	var file2 = FileAccess.open("res://resources/game_data/upgrade.json", FileAccess.READ)
+	var file2 = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	upgrade_data = JSON.parse_string(file2.get_as_text())
 	file2.close()	
 	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.money)
@@ -23,8 +23,8 @@ func _ready():
 		addItem(upgrade_data["detail"][i])
 		
 
-func sendInfo(code,detail, level):
-	select_index = code
+func sendInfo(ID,detail, level):
+	select_index = ID
 	detail_index = detail
 	level_index = level
 	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả : " +detail +"\n" + "Cấp độ : "  + level 
@@ -32,7 +32,7 @@ func sendInfo(code,detail, level):
 func addItem(value):
 	var item = ListItem.instantiate()
 	index += 1
-	item.get_node("Code").text = str(value['#'])
+	item.get_node("ID").text = str(value['ID'])
 	item.get_node("TextureRect").texture = load(value['path'])
 	item.get_node("Detail").text = str(value['detail'])
 	item.get_node("Level").text = str(value['level'])
@@ -54,7 +54,7 @@ func reset():
 	var file1 = FileAccess.open("res://resources/game_data/data.json", FileAccess.READ)
 	game_data = JSON.parse_string(file1.get_as_text())
 	file1.close()
-	var file2 = FileAccess.open("res://resources/game_data/upgrade.json", FileAccess.READ)
+	var file2 = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	upgrade_data = JSON.parse_string(file2.get_as_text())
 	file2.close()	
 	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.money)
@@ -65,10 +65,10 @@ func reset():
 
 func _on_nut_nang_cap_pressed():
 	for i in upgrade_data["detail"].size():
-		if upgrade_data["detail"][i]["#"] == int(select_index):
+		if upgrade_data["detail"][i]["ID"] == int(select_index):
 			upgrade_data["detail"][i]["level"] +=1	
 	
-	var file = FileAccess.open("res://resources/game_data/upgrade.json", FileAccess.WRITE)
+	var file = FileAccess.open("res://resources/game_data/character.json", FileAccess.WRITE)
 	var json_data = JSON.stringify(upgrade_data)
 	file.store_string(json_data)
 	file.close()
