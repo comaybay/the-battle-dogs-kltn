@@ -20,7 +20,7 @@ grow_vertical = 2
 texture = ExtResource("2_1qsff")
 expand_mode = 1
 
-[node name="Code" type="Label" parent="."]
+[node name="ID" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0

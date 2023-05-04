@@ -10,8 +10,6 @@ func _ready():
 func _process(delta):
 	pass
 
-func sendInfo(value):
-	print(1)
-
 func _on_pressed():
-	pass # Replace with function body.
+	self.visible = false
+	get_tree().current_scene.sendInfo($ID.text,$Detail.text, $TextureRect.texture)

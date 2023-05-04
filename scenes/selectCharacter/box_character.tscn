@@ -20,7 +20,16 @@ grow_vertical = 2
 texture = ExtResource("2_qlclc")
 expand_mode = 1
 
-[node name="Number" type="Label" parent="."]
+[node name="ID" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 26.0
+text = "1
+"
+label_settings = SubResource("LabelSettings_14fa2")
+
+[node name="Detail" type="Label" parent="."]
 visible = false
 layout_mode = 0
 offset_right = 40.0

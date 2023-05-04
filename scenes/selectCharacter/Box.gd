@@ -1,6 +1,5 @@
 extends Button
 
-var existing_texture = get_theme_stylebox("normal")
 
 func _ready():
 	pass
@@ -12,4 +11,5 @@ func _process(delta):
 
 
 func _on_pressed():
+	get_tree().current_scene.sendInfo($ID.text,$Detail.text)
 	owner.Box.sendInfo(1)
