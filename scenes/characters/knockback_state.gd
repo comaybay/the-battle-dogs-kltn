@@ -5,7 +5,7 @@ var knockback_countdown: int
 var knockback_vel: Vector2
 
 # called when the state is activated
-func enter(data: Dictionary) -> void:
+func enter(_data: Dictionary) -> void:
 	knockback_countdown = 2
 	knockback_vel = Vector2(200, -250)
 	character.n_AnimationPlayer.play("knockback")
@@ -33,9 +33,5 @@ func update(delta: float) -> void:
 		
 	character.move_and_slide() 
 
-# this method is the equivalent of _input but only called when the state is active
-func input(event: InputEvent) -> void:
-	pass 
-	
 	
 

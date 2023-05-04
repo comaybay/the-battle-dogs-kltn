@@ -5,11 +5,11 @@ extends FSMState
 func enter(data: Dictionary) -> void:
 	pass 
 
-# called when the state is deactivated
+# (optional) called when the state is deactivated
 func exit() -> void:
 	pass 
 		
-# equivalent to _process but only called when the state is active
+# (optional) equivalent to _process but only called when the state is active
 func update(delta: float) -> void:
 	pass 
 	

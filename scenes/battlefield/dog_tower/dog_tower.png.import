@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6yham7q442tg"
-path="res://.godot/imported/grass.png-79cf597cc1adecdff9d12adae9606f9b.ctex"
+uid="uid://bggfc25qoy2lu"
+path="res://.godot/imported/dog_tower.png-95910fbd52c5afc04bfb8d78a94443d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://grass.png"
-dest_files=["res://.godot/imported/grass.png-79cf597cc1adecdff9d12adae9606f9b.ctex"]
+source_file="res://scenes/battlefield/dog_tower/dog_tower.png"
+dest_files=["res://.godot/imported/dog_tower.png-95910fbd52c5afc04bfb8d78a94443d3.ctex"]
 
 [params]
 

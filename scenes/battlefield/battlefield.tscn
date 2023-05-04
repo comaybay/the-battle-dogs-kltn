@@ -1,28 +1,42 @@
-[gd_scene load_steps=7 format=3 uid="uid://3tfqhxm52ewk"]
+[gd_scene load_steps=9 format=3 uid="uid://3tfqhxm52ewk"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/battlefield.gd" id="1_qm8p7"]
 [ext_resource type="PackedScene" uid="uid://cue3f8l417jkn" path="res://scenes/characters/cats/cat/cat.tscn" id="1_qo73h"]
 [ext_resource type="PackedScene" uid="uid://cw54sftw6yk1m" path="res://scenes/battlefield/cat_tower/cat_tower.tscn" id="2_d2fcp"]
 [ext_resource type="PackedScene" uid="uid://bpptcrw7gwqcn" path="res://scenes/battlefield/land/land.tscn" id="2_wj8bi"]
+[ext_resource type="Texture2D" uid="uid://c8sa6uo4d7wdb" path="res://scenes/battlefield/sky.png" id="2_yol5a"]
 [ext_resource type="PackedScene" uid="uid://dhit6457y0brs" path="res://scenes/characters/dogs/dog/dog.tscn" id="3_c2a2t"]
 [ext_resource type="Script" path="res://scenes/battlefield/Camera2D.gd" id="4_67qqf"]
+[ext_resource type="PackedScene" uid="uid://bq2b21c7cenm0" path="res://scenes/battlefield/dog_tower/dog_tower.tscn" id="7_j5y50"]
 
 [node name="Battlefield" type="Node2D"]
 script = ExtResource("1_qm8p7")
+
+[node name="Sky" type="TextureRect" parent="."]
+offset_left = -760.0
+offset_top = -1064.0
+offset_right = 1244.0
+offset_bottom = -40.0
+size_flags_horizontal = 4
+texture = ExtResource("2_yol5a")
+stretch_mode = 1
 
 [node name="Land" parent="." instance=ExtResource("2_wj8bi")]
 
 [node name="CatTower" parent="." instance=ExtResource("2_d2fcp")]
 position = Vector2(553, 0)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_67qqf")
+
+[node name="DogTower" parent="." instance=ExtResource("7_j5y50")]
+position = Vector2(-303, 0)
+
 [node name="Dog" parent="." instance=ExtResource("3_c2a2t")]
 position = Vector2(48, -169)
-attack_area_range = 20
+speed = 100
 health = 400
 damage = 100
 
 [node name="Cat" parent="." instance=ExtResource("1_qo73h")]
-position = Vector2(670, -254)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-script = ExtResource("4_67qqf")
+position = Vector2(936, -251)

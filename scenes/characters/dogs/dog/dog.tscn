@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="2_y8xhq"]
 
 [node name="Dog" instance=ExtResource("1_wscv2")]
-attack_area_range = 29
+attack_area_range = 20
 health = 90
 
 [node name="Sprite2D" parent="." index="2"]
