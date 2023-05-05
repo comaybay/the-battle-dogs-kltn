@@ -43,6 +43,8 @@ var next_knockback_health: int
 var collision_rect: Rect2
 
 func _ready() -> void:
+	$AnimationPlayer.play("move")
+	
 	# config 
 	max_health = health
 	next_knockback_health = max_health - (max_health / knockbacks)
