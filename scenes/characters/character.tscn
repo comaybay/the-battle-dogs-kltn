@@ -91,7 +91,8 @@ _data = {
 "move": SubResource("Animation_t17j0")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_puswq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40amy"]
+resource_local_to_scene = true
 size = Vector2(192, 178)
 
 [node name="Character" type="CharacterBody2D" groups=["character"]]
@@ -116,7 +117,7 @@ frame = 6
 region_rect = Rect2(4, 4, 178, 185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_puswq")
+shape = SubResource("RectangleShape2D_40amy")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(96, 0)

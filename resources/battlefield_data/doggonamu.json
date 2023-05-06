@@ -9,8 +9,8 @@
     },
     {
       "name": "long_cat",
-      "duration": 10,
-      "delay": 7
+      "duration": 2,
+      "delay": 0
     }
   ]
 }

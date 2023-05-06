@@ -33,7 +33,7 @@ script = ExtResource("4_67qqf")
 position = Vector2(-303, 0)
 
 [node name="Dog" parent="." instance=ExtResource("3_c2a2t")]
-position = Vector2(48, -169)
+position = Vector2(1657, -477)
 speed = 100
 health = 400
 damage = 100

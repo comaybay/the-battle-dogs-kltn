@@ -48,7 +48,6 @@ func load_cats(spawn_patterns: Variant) -> Dictionary:
 		var cat_name = pattern['name']
 		if not cats.has(cat_name):
 			cats[cat_name] = load("res://scenes/characters/cats/%s/%s.tscn" % [cat_name, cat_name])
-			print(cats[cat_name])
 			
 	return cats
 
