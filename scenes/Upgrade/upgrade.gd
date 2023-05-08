@@ -10,7 +10,7 @@ var detail_index = ""
 var level_index = 0
 
 func _ready():	
-	var file1 = FileAccess.open("res://resources/game_data/data.json", FileAccess.READ)
+	var file1 = FileAccess.open("res://resources/save.json", FileAccess.READ)
 	game_data = JSON.parse_string(file1.get_as_text())
 	file1.close()
 	var file2 = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
@@ -18,9 +18,9 @@ func _ready():
 	file2.close()	
 	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.money)
 	#var group = $Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer.get_children()
-	for i in upgrade_data["detail"].size() :
-		#print(upgrade_data["detail"][i]['path'])
-		addItem(upgrade_data["detail"][i])
+	for i in upgrade_data.size() :
+		#print(upgrade_data[i]['path'])
+		addItem(upgrade_data[i])
 		
 
 func sendInfo(ID,detail, level):
@@ -35,7 +35,6 @@ func addItem(value):
 	item.get_node("ID").text = str(value['ID'])
 	item.get_node("TextureRect").texture = load(value['path'])
 	item.get_node("Detail").text = str(value['detail'])
-	item.get_node("Level").text = str(value['level'])
 	$Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer.add_child(item)
 
 func _on_nut_quay_lai_pressed():
@@ -60,13 +59,13 @@ func reset():
 	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.money)
 	level_index = str(int(level_index) + 1)
 	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Mô tả : " + str(detail_index) + "\n" + "Cấp độ : " + level_index
-	for i in upgrade_data["detail"].size() :
-		addItem(upgrade_data["detail"][i])
+	for i in upgrade_data.size() :
+		addItem(upgrade_data[i])
 
 func _on_nut_nang_cap_pressed():
-	for i in upgrade_data["detail"].size():
-		if upgrade_data["detail"][i]["ID"] == int(select_index):
-			upgrade_data["detail"][i]["level"] +=1	
+	for i in upgrade_data.size():
+		if upgrade_data[i]["ID"] == int(select_index):
+			upgrade_data[i]["level"] +=1	
 	
 	var file = FileAccess.open("res://resources/game_data/character.json", FileAccess.WRITE)
 	var json_data = JSON.stringify(upgrade_data)

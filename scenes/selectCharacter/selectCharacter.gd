@@ -21,9 +21,9 @@ func _ready():
 		i.get_node("TextureRect").texture = base_img
 		i.get_node("ID").text = "-1"
 	# Thiết lập nhân vật
-	for i in character_data["detail"].size() :
+	for i in character_data.size() :
 		#print(upgrade_data["detail"][i]['path'])
-		addItem(character_data["detail"][i])
+		addItem(character_data[i])
 	
 
 func reset() :
