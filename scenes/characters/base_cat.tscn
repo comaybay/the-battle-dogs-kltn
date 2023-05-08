@@ -13,6 +13,9 @@ character_type = 1
 attack_area_range = -1
 damage = 100
 
+[node name="Sprite2D" parent="." index="2"]
+frame = 8
+
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource("RectangleShape2D_72ktc")
 

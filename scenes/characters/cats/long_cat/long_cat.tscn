@@ -91,8 +91,8 @@ size = Vector2(192, 584)
 
 [node name="LongCat" instance=ExtResource("1_6d4wd")]
 speed = 200
-attack_range = 200
-attack_area_range = 1
+attack_range = 1000
+attack_area_range = 20
 attack_cooldown = 5
 health = 1000
 
@@ -109,14 +109,14 @@ position = Vector2(-119, -267)
 texture = ExtResource("2_svhir")
 hframes = 3
 vframes = 5
-frame = 8
+frame = 6
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -235)
 shape = SubResource("RectangleShape2D_b8yx7")
 
 [node name="RayCast2D" parent="." index="4"]
-target_position = Vector2(-200, 0)
+target_position = Vector2(-1000, 0)
 metadata/_edit_lock_ = true
 
 [node name="FiniteStateMachine" parent="." index="5"]
