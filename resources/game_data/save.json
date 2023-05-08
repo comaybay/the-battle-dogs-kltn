@@ -1,0 +1,26 @@
+{
+  "dogs": [
+    {
+      "ID": 0,
+      "level": 13
+    }
+  ],
+  "items": [
+    {
+      "ID": 0,
+      "amount": 1
+    }
+  ],
+  "teams": [
+    {
+      "dog_ids": [0, 1, 2, 3]
+    },
+    {
+      "dog_ids": [2, 1, 0, 3]
+    }
+  ],
+  "bone": 5000,
+  "dog_food": 1000,
+  "level_pass": 3,
+  "level_select": 0
+}
