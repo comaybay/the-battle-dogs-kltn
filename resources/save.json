@@ -13,14 +13,15 @@
   ],
   "teams": [
     {
-      "dog_ids": [0, 1, 2, 3]
+      "dog_name_ids": ["dog"]
     },
     {
-      "dog_ids": [2, 1, 0, 3]
+      "dog_name_ids": [2, 1, 0, 3]
     }
   ],
   "bone": 5000,
   "dog_food": 1000,
-  "level_pass": 3,
-  "level_select": 0
+  "passed_level": 3,
+  "selected_level": 0,
+  "selected_team": 0
 }
