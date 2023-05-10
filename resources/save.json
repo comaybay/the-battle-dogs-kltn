@@ -1,5 +1,5 @@
 {
-  "bone": 240,
+  "bone": 4100,
   "dog_food": 1000,
   "dogs": [
     {
@@ -32,12 +32,15 @@
     { "ID": 0, "amount": 3 },
     { "ID": 1, "amount": 1 },
     { "ID": 2, "amount": 5 },
-    { "ID": 3, "amount": 4 },
+    { "ID": 3, "amount": 0 },
     { "ID": 4, "amount": 2 },
     { "ID": 5, "amount": 1 },
     { "ID": 6, "amount": 1 }
   ],
   "level_pass": 3,
   "level_select": 0,
+  "passed_level": 3,
+  "selected_level": 0,
+  "selected_team": 0,
   "teams": [{ "dog_ids": [2, 3, 1] }, { "dog_ids": [2, 1, 0, 3] }]
 }
