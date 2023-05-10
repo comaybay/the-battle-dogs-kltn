@@ -11,6 +11,6 @@ func _process(delta):
 
 func _on_pressed():
 	#print($TextureRect.texture)
-	get_tree().current_scene.sendInfo($ID.text,$Detail.text, $Number.text, $Money.text)
+	get_tree().current_scene.sendInfo($ID.text,$Name.text,$Detail.text, $Amount.text, $Price.text,$Max.text)
 
 

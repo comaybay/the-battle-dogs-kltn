@@ -18,8 +18,7 @@ func _ready():
 	file1.close()
 	var file2 = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	character_data = JSON.parse_string(file2.get_as_text())
-	file2.close()	
-	print(game_data["bone"])
+	file2.close()
 	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(game_data["bone"])
 	
 	for i in character_data :			
@@ -55,6 +54,7 @@ func addItem(value):
 			item.get_node("Level").text = str(obj["level"])
 			break
 	
+	# tinh toan so tien dua tren level
 	if (item.get_node("Level").text == "0"):
 		bone = value["price"]
 	else :

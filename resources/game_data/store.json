@@ -1,56 +1,65 @@
 [
   {
     "ID": 0,
+   
     "detail": "dddf",
     "max": 3,
-    "path": "res://resources/images/Screenshot (5).png"
+    "name": "Chó thường",
+    "path": "res://resources/images/Screenshot (5).png",
+    "price": 100
   },
   {
     "ID": 1,
-    "amount": 1,
+  
     "detail": "asd",
-    "price": 100,
     "max": 1,
-    "path": "res://resources/images/planet9_Wallpaper_5000x2813.jpg"
+    "name": "Chó thường",
+    "path": "res://resources/images/planet9_Wallpaper_5000x2813.jpg",
+    "price": 100
   },
   {
     "ID": 2,
-    "amount": 1,
+   
     "detail": "asd",
-    "price": 100,
     "max": 5,
-    "path": "res://resources/images/Screenshot (5).png"
+    "name": "cầu lửa",
+    "path": "res://resources/images/Screenshot (5).png",
+    "price": 100
   },
   {
     "ID": 3,
-    "amount": 1,
+    "amount": 2,
     "detail": "asa",
-    "price": 100,
     "max": 4,
-    "path": "res://resources/images/Screenshot (5).png"
+    "name": "Chó thường",
+    "path": "res://resources/images/Screenshot (5).png",
+    "price": 100
   },
   {
     "ID": 4,
-    "amount": 1,
+
     "detail": "aa",
-    "price": 100,
     "max": 3,
-    "path": "res://resources/images/Screenshot (5).png"
+    "name": "Chó thường",
+    "path": "res://resources/images/Screenshot (5).png",
+    "price": 100
   },
   {
     "ID": 5,
-    "amount": 1,
+
     "detail": "aa",
-    "price": 100,
     "max": 1,
-    "path": "res://resources/images/Screenshot (5).png"
+    "name": "Chó thường",
+    "path": "res://resources/images/Screenshot (5).png",
+    "price": 100
   },
   {
     "ID": 6,
-    "amount": 1,
+
     "detail": "aa",
-    "price": 100,
     "max": 1,
-    "path": "res://resources/images/Screenshot (5).png"
+    "name": "Chó thường",
+    "path": "res://resources/images/Screenshot (5).png",
+    "price": 100
   }
 ]
