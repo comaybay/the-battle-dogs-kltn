@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp800jne408k6"]
+
+[ext_resource type="PackedScene" uid="uid://ilcy6ie87fmp" path="res://scenes/battlefield/gui/character_button/character_button.tscn" id="1_h0p7p"]
+[ext_resource type="Script" path="res://scenes/battlefield/gui/gui.gd" id="1_vfsgx"]
+
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_vfsgx")
+
+[node name="HFlowContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 88.0
+
+[node name="CharacterButton" parent="HFlowContainer" instance=ExtResource("1_h0p7p")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharacterButton2" parent="HFlowContainer" instance=ExtResource("1_h0p7p")]
+layout_mode = 2
