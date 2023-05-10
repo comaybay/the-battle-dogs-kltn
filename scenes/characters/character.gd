@@ -33,7 +33,6 @@ enum Type { DOG, ENEMY }
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
 @onready var n_Sprite2D := $Sprite2D as Sprite2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
-@onready var Debug = get_node("/root/Debug");
 
 ## Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -63,7 +62,7 @@ func _ready() -> void:
 
 func _draw() -> void:
 	if Engine.is_editor_hint() or Debug.is_debug_mode():
-		var attack_point = n_RayCast2D.position + n_RayCast2D.target_position
+		var attack_point = n_RayCast2D.position + Vector2(attack_range * move_direction, 0)
 		draw_dashed_line(n_RayCast2D.position, attack_point, Color.YELLOW, 5, 10)	
 		
 		var is_single_target := attack_area_range <= 0
@@ -78,7 +77,7 @@ func _draw() -> void:
 		var character_size := n_Sprite2D.get_rect().size
 		draw_multiline_string(default_font, Vector2(0, -character_size.y / 2 - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
 
-	if Debug.is_debug_mode():
+	if not Engine.is_editor_hint() and Debug.is_debug_mode():
 		var rect: Rect2 = $CollisionShape2D.shape.get_rect()
 		rect.position += $CollisionShape2D.position
 		draw_rect(rect, Color.RED, false)

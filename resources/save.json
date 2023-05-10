@@ -13,7 +13,7 @@
   ],
   "teams": [
     {
-      "dog_name_ids": ["dog"]
+      "dog_name_ids": ["dog", "dog", "dog", "dog", "dog", "dog", "dog"]
     },
     {
       "dog_name_ids": [2, 1, 0, 3]

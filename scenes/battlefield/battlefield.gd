@@ -25,9 +25,7 @@ func _enter_tree() -> void:
 		
 		var on_spawn_cat = func():
 			var cat_scene: PackedScene = cats[pattern['name']]
-			var cat = cat_scene.instantiate()
-			cat.global_position = $CatTower.global_position - Vector2(100, 0)
-			add_child(cat)
+			$CatTower.spawn(cat_scene)
 				
 		if delay_duration <= 0:
 			timer.start(spawn_duration)
@@ -40,7 +38,6 @@ func _enter_tree() -> void:
 				timer.timeout.connect(on_spawn_cat)
 			
 			timer.timeout.connect(on_timeout_delay, CONNECT_ONE_SHOT)
-			
 
 func load_cats(spawn_patterns: Variant) -> Dictionary:
 	var cats := {}
@@ -52,6 +49,8 @@ func load_cats(spawn_patterns: Variant) -> Dictionary:
 	return cats
 
 func _ready() -> void:
+	InBattle.reset()
+	
 	var half_viewport_size = get_viewport().size / 2
 	$Sky.position = Vector2(0, -$Sky.size.y)
 	$Sky.size.x = stage_width
@@ -64,3 +63,6 @@ func _ready() -> void:
 	$Land.position.x = stage_width / 2.0
 	
 	$Camera2D.position = Vector2(0, -half_viewport_size.y)
+
+func _process(delta: float) -> void:
+	InBattle.update(delta)
