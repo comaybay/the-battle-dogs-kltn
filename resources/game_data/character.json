@@ -3,37 +3,56 @@
 	"ID": 0,
 	"name_id": "dog",
 	"name": "Chó thường",
+	"price": 100,
 	"detail": "dddf",
 	"path": "res://resources/images/Screenshot (5).png"
   },
   {
 	"ID": 1,
+	"name_id": "dog",
+	"name": "Chó thường 2",
+	"price": 200,
 	"detail": "asd",
 	"path": "res://resources/images/planet9_Wallpaper_5000x2813.jpg"
   },
   {
 	"ID": 2,
+	"price": 100,
+	"name_id": "dog",
+	"name": "Chó thường 3",
 	"detail": "asd",
 	"path": "res://resources/images/Screenshot (5).png"
   },
   {
 	"ID": 3,
+	"price": 100,
+	"name_id": "dog",
 	"detail": "asa",
+	"name": "Chó thường 4",
 	"path": "res://resources/images/Screenshot (5).png"
   },
   {
 	"ID": 4,
+	"price": 100,
+	"name_id": "dog",
 	"detail": "aa",
+	"name": "Chó thường 5",
 	"path": "res://resources/images/Screenshot (5).png"
   },
   {
 	"ID": 5,
+	"price": 100,
+	"name_id": "dog",
 	"detail": "aa",
+	"name": "Chó thường 6",
 	"path": "res://resources/images/Screenshot (5).png"
   },
   {
 	"ID": 6,
+	"price": 100,
+	"name_id": "dog",
 	"detail": "aa",
+	"name": "Chó thường 7",
 	"path": "res://resources/images/Screenshot (5).png"
   }
 ]

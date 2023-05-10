@@ -11,6 +11,6 @@ func _process(delta):
 
 func _on_pressed():
 	#print($TextureRect.texture)
-	get_tree().current_scene.sendInfo($ID.text,$Detail.text, $Level.text)
-	pass # Replace with function body.
+	get_tree().current_scene.sendInfo($ID.text,$Detail.text ,$Name.text, $Level.text, $Name_id.text, $Price.text)
+
 

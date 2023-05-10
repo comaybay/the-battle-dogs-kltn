@@ -9,7 +9,7 @@ var teams # node đội hình
 var base_img = load("res://resources/images/base.png")
 
 func _ready():
-	var file1 = FileAccess.open("res://resources/game_data/data.json", FileAccess.READ)
+	var file1 = FileAccess.open("res://resources/save.json", FileAccess.READ)
 	game_data = JSON.parse_string(file1.get_as_text())
 	file1.close()
 	var file2 = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)

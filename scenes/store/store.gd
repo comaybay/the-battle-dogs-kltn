@@ -12,7 +12,7 @@ var money_index = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var file1 = FileAccess.open("res://resources/game_data/data.json", FileAccess.READ)
+	var file1 = FileAccess.open("res://resources/save.json", FileAccess.READ)
 	game_data = JSON.parse_string(file1.get_as_text())
 	file1.close()
 	var file2 = FileAccess.open("res://resources/game_data/store.json", FileAccess.READ)
@@ -20,8 +20,8 @@ func _ready():
 	file2.close()	
 	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.money)
 	#var group = $Khung/PhanGiua/PhanTren/Items/ScrollContainer/GridContainer.get_children()
-	for i in store_data["detail"].size() :
-		addItem(store_data["detail"][i])
+	for i in store_data.size() :
+		addItem(store_data[i])
 
 
 func sendInfo(ID,detail, number, money):

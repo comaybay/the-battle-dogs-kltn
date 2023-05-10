@@ -1,62 +1,56 @@
-{
-  "detail": [
-    {
-      "ID": 0,
-      "detail": "dddf",
-      "max": 3,
-      "path": "res://resources/images/Screenshot (5).png"
-    },
-    {
-      "ID": 1,
-      "amount": 1,
-      "detail": "asd",
-      "price": 100,
-      "max": 1,
-      "path": "res://resources/images/planet9_Wallpaper_5000x2813.jpg"
-    },
-    {
-      "ID": 2,
-      "amount": 1,
-      "detail": "asd",
-      "price": 100,
-      "max": 5,
-      "path": "res://resources/images/Screenshot (5).png"
-    },
-    {
-      "ID": 3,
-      "amount": 1,
-      "detail": "asa",
-      "price": 100,
-      "max": 4,
-      "path": "res://resources/images/Screenshot (5).png"
-    },
-    {
-      "ID": 4,
-      "amount": 1,
-      "detail": "aa",
-      "price": 100,
-      "max": 3,
-      "path": "res://resources/images/Screenshot (5).png"
-    },
-    {
-      "ID": 5,
-      "amount": 1,
-      "detail": "aa",
-      "price": 100,
-      "max": 1,
-      "path": "res://resources/images/Screenshot (5).png"
-    },
-    {
-      "ID": 6,
-      "amount": 1,
-      "detail": "aa",
-      "price": 100,
-      "max": 1,
-      "path": "res://resources/images/Screenshot (5).png"
-    }
-  ],
-  "title": {
-    "ID": 7,
-    "lastName": "Nguyễn"
+[
+  {
+    "ID": 0,
+    "detail": "dddf",
+    "max": 3,
+    "path": "res://resources/images/Screenshot (5).png"
+  },
+  {
+    "ID": 1,
+    "amount": 1,
+    "detail": "asd",
+    "price": 100,
+    "max": 1,
+    "path": "res://resources/images/planet9_Wallpaper_5000x2813.jpg"
+  },
+  {
+    "ID": 2,
+    "amount": 1,
+    "detail": "asd",
+    "price": 100,
+    "max": 5,
+    "path": "res://resources/images/Screenshot (5).png"
+  },
+  {
+    "ID": 3,
+    "amount": 1,
+    "detail": "asa",
+    "price": 100,
+    "max": 4,
+    "path": "res://resources/images/Screenshot (5).png"
+  },
+  {
+    "ID": 4,
+    "amount": 1,
+    "detail": "aa",
+    "price": 100,
+    "max": 3,
+    "path": "res://resources/images/Screenshot (5).png"
+  },
+  {
+    "ID": 5,
+    "amount": 1,
+    "detail": "aa",
+    "price": 100,
+    "max": 1,
+    "path": "res://resources/images/Screenshot (5).png"
+  },
+  {
+    "ID": 6,
+    "amount": 1,
+    "detail": "aa",
+    "price": 100,
+    "max": 1,
+    "path": "res://resources/images/Screenshot (5).png"
   }
-}
+]
