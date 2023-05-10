@@ -10,6 +10,7 @@ var detail_index = ""
 var level_index = 0
 var name_index = ""
 var nameId_index = ""
+var path_index = ""
 
 func _ready():	
 	var file1 = FileAccess.open("res://resources/save.json", FileAccess.READ)
@@ -105,7 +106,7 @@ func _on_nut_nang_cap_pressed():
 					
 		else : #Mua character
 			$Khung/PhanGiua/PhanDuoi/TieuDe/NutNangCap.text = "Nâng cấp"
-			var item ={"ID": ID_index,"level": 1}
+			var item ={"ID": ID_index,"level": 1, "path" : ""}
 			game_data["bone"] -=  int(price_index)
 			game_data["dogs"].push_back(item)
 		var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)

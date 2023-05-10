@@ -4,39 +4,32 @@
   "dogs": [
     {
       "ID": 0,
-      "level": 1
+      "level": 1,
+      "path": "res://resources/images/Screenshot (5).png"
     },
     {
       "ID": 1,
-      "level": 1
+      "level": 1,
+      "path": "res://resources/images/Screenshot (5).png"
     },
     {
       "ID": 2,
-      "level": 2
+      "level": 2,
+      "path": "res://resources/images/Screenshot (5).png"
     },
     {
       "ID": "3",
-      "level": 4
+      "level": 4,
+      "path": "res://resources/images/Screenshot (5).png"
     },
     {
       "ID": "4",
-      "level": 3
+      "level": 3,
+      "path": "res://resources/images/Screenshot (5).png"
     }
   ],
-  "items": [
-    {
-      "ID": 0,
-      "amount": 1
-    }
-  ],
+  "items": [{ "ID": 0, "amount": 1 }],
   "level_pass": 3,
   "level_select": 0,
-  "teams": [
-    {
-      "dog_ids": [0, 1, 2, 3]
-    },
-    {
-      "dog_ids": [2, 1, 0, 3]
-    }
-  ]
+  "teams": [{ "dog_ids": [2, 3, 1] }, { "dog_ids": [2, 1, 0, 3] }]
 }
