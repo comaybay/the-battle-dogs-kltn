@@ -3,7 +3,7 @@ extends Button
 var game_data
 
 func _ready():
-	var file = FileAccess.open("res://resources/game_data/data.json", FileAccess.READ)
+	var file = FileAccess.open("res://resources/save.json", FileAccess.READ)
 	game_data = JSON.parse_string(file.get_as_text())
 	file.close()
 
