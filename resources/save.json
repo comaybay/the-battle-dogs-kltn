@@ -42,5 +42,5 @@
   "passed_level": 3,
   "selected_level": 0,
   "selected_team": 0,
-  "teams": [{ "dog_ids": [2, 3, 1] }, { "dog_ids": [2, 1, 0, 3] }]
+  "teams": [{ "dog_ids": [1,2, 4] }, { "dog_ids": [2, 1, 0, 3] }]
 }
