@@ -1,27 +1,46 @@
 {
+  "bone": 4100,
+  "dog_food": 1000,
   "dogs": [
     {
       "ID": 0,
-      "level": 13
+      "level": 1,
+      "path": "res://resources/images/Screenshot (5).png"
+    },
+    {
+      "ID": 1,
+      "level": 1,
+      "path": "res://resources/images/Screenshot (5).png"
+    },
+    {
+      "ID": 2,
+      "level": 3,
+      "path": "res://resources/images/Screenshot (5).png"
+    },
+    {
+      "ID": "3",
+      "level": 4,
+      "path": "res://resources/images/Screenshot (5).png"
+    },
+    {
+      "ID": "4",
+      "level": 3,
+      "path": "res://resources/images/Screenshot (5).png"
     }
   ],
   "items": [
-    {
-      "ID": 0,
-      "amount": 1
-    }
+    { "ID": 0, "amount": 3 },
+    { "ID": 1, "amount": 1 },
+    { "ID": 2, "amount": 5 },
+    { "ID": 3, "amount": 0 },
+    { "ID": 4, "amount": 2 },
+    { "ID": 5, "amount": 1 },
+    { "ID": 6, "amount": 1 }
   ],
-  "teams": [
-    {
-      "dog_name_ids": ["dog"]
-    },
-    {
-      "dog_name_ids": [2, 1, 0, 3]
-    }
-  ],
-  "bone": 5000,
-  "dog_food": 1000,
+  "level_pass": 3,
+  "level_select": 0,
   "passed_level": 3,
   "selected_level": 0,
-  "selected_team": 0
+  "selected_team": 0,
+  "teams": [{ "dog_ids": [2, 3, 1] }, { "dog_ids": [2, 1, 0, 3] }]
 }
