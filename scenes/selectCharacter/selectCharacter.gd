@@ -24,23 +24,23 @@ func _ready():
 	for i in character_data.size() :
 		for obj in game_data["dogs"]:
 			if (str(obj["ID"]) == str(character_data[i]["ID"])):
-				#print(str(obj["ID"]))
+				
 				addItem(character_data[i])
 				
-		#print(upgrade_data["detail"][i]['path'])
+		
 	loadTeam(Data.save_data['selected_team'])
 	
 
 func loadTeam(i) :
 	for obj in game_data["teams"][i]["dog_ids"]:
-		#print(obj)
+		
 		for ob in character_data :
 			if (str(obj) == str(ob["ID"]) ):
 				var list = $Khung/PhanGiua/PhanDuoi/NhanVat/ScrollContainer/GridContainer.get_children()
 				var item = [obj, load(ob["path"]), ob["name_id"]]
+				#print(ob["name_id"])
 				list[int(item[0])].visible = false
 				list_team.push_back(item)
-				print(list_team)
 				team_number += 1
 	reset()
 
@@ -49,9 +49,11 @@ func reset() :
 		if i < team_number:
 			teams[i].get_node("ID").text = str(list_team[i][0])	
 			teams[i].get_node("TextureRect").texture = list_team[i][1]
+			teams[i].get_node("Name_id").text = list_team[i][2]
 		else :
 			teams[i].get_node("TextureRect").texture = base_img
 			teams[i].get_node("ID").text = "-1"
+			teams[i].get_node("Name_id").text = "ooo"
 
 
 # thêm vào danh sách nhân vật
@@ -59,23 +61,28 @@ func addItem(value):
 	var item = ListCharacter.instantiate()
 	item.get_node("ID").text = str(value['ID'])
 	item.get_node("TextureRect").texture = load(value['path'])
+	item.get_node("Name_id").text = str(value['name_id'])
 	$Khung/PhanGiua/PhanDuoi/NhanVat/ScrollContainer/GridContainer.add_child(item)
 
 # thêm vào đội hình
-func sendInfo(ID, detail, path):
+func sendInfo(ID, detail, path, nameID):
 	if (team_number < 10) and (int(ID) >= 0):
-		var item = [ID, path]
+		var item = [ID, path, nameID]
 		teams[team_number].get_node("TextureRect").texture = path
 		teams[team_number].get_node("ID").text = ID
+		teams[team_number].get_node("Name_id").text = nameID
+		print(nameID)
 		list_team.push_back(item)
+		
 		team_number += 1
 	else :
 		teams[9].get_node("TextureRect").texture = path
 	
 # Xóa khỏi đội hình
-func deleteInfo(ID, path, index):
+func deleteInfo(ID, path, index, nameID):
 	if (int(ID) >= 0) :
 		var list = $Khung/PhanGiua/PhanDuoi/NhanVat/ScrollContainer/GridContainer.get_children()
+		
 		list_team.remove_at(int(index)-1)
 		team_number -= 1
 		list[int(ID)].visible = true
@@ -94,11 +101,15 @@ func _on_quay_lai_pressed():
 func _on_luu_pressed():
 	#print(list_team)
 	var items = []
+	var item_name = []
 	#list_team.push_back(item)
 	for obj in list_team :
 		items.push_back(int(obj[0]))
+		item_name.push_back(str(obj[2]))
+		
 	
 	game_data["teams"][Data.save_data['selected_team']]["dog_ids"] = items
+	game_data["teams"][Data.save_data['selected_team']]["dog_name_ids"] = item_name
 	
 	var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)
 	var json_data = JSON.stringify(game_data)
