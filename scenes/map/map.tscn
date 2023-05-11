@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://conf6djcsh6cg"]
+[gd_scene load_steps=7 format=3 uid="uid://boa6m8ugpxsd1"]
 
 [ext_resource type="Script" path="res://scenes/map/map.gd" id="1_0p7qx"]
 [ext_resource type="Script" path="res://scenes/map/ScreenMap.gd" id="2_0udil"]
@@ -7,8 +7,6 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_cfmvt"]
 font_size = 20
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_448ow"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xndhi"]
 font_size = 20
@@ -66,7 +64,6 @@ offset_bottom = 496.0
 size_flags_horizontal = 4
 text = "Tấn công !
 "
-icon = SubResource("ViewportTexture_448ow")
 
 [node name="NutDoiDoiHinh" type="Button" parent="Khung/map"]
 layout_mode = 0

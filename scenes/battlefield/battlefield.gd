@@ -4,7 +4,7 @@ var stage_width: int
 var cat_tower_max_health: int
 
 func _enter_tree() -> void:
-	var file = FileAccess.open("res://resources/battlefield_data/doggonamu.json", FileAccess.READ)
+	var file = FileAccess.open("res://resources/battlefield_data/%s.json" % Data.selected_level_name_id, FileAccess.READ)
 	var battlefield_data = JSON.parse_string(file.get_as_text())
 	file.close()
 

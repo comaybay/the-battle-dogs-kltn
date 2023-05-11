@@ -2,12 +2,13 @@ extends Node
 
 var bone
 var dog_food
-var level_pass
-var level_select
+var passed_level: int
+var selected_level:int
 var selected_team: Dictionary
 var teams: Array
 var save_data: Dictionary
 var dog_info := Dictionary()
+var selected_battlefield_id: String
 
 func _init() -> void:
 	var file = FileAccess.open("res://resources/save.json", FileAccess.READ)
@@ -16,10 +17,11 @@ func _init() -> void:
 	
 	bone = save_data['bone']
 	dog_food = save_data['dog_food']
-	level_pass = save_data['passed_level']
-	level_select = save_data['selected_level']
+	passed_level = save_data['passed_level']
+	selected_level = save_data['selected_level']
 	teams = save_data['teams']
 	selected_team = teams[save_data['selected_team']]
+	selected_battlefield_id = save_data['selected_battlefield_id']
 	
 	file = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	

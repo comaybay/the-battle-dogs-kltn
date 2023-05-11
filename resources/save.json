@@ -49,5 +49,6 @@
   "dog_food": 1000,
   "passed_level": 3,
   "selected_level": 0,
-  "selected_team": 0
+  "selected_team": 0,
+  "selected_battlefield_id": "doggonamu"
 }
