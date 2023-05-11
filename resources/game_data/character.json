@@ -11,7 +11,7 @@
   },
   {
     "ID": 1,
-    "name_id": "2",
+    "name_id": "dog2",
     "name": "Chó thường 2",
     "price": 200,
     "detail": "asd",
@@ -19,7 +19,7 @@
   },
   {
     "ID": 2,
-    "name_id": "3",
+    "name_id": "dog3",
     "name": "Chó thường 2",
     "price": 200,
     "detail": "asd",
@@ -27,7 +27,7 @@
   },
   {
     "ID": 3,
-    "name_id": "4",
+    "name_id": "dog4",
     "name": "Chó thường 2",
     "price": 200,
     "detail": "asa",
@@ -35,7 +35,7 @@
   },
   {
     "ID": 4,
-    "name_id": "5",
+    "name_id": "dog5",
     "name": "Chó thường 2",
     "price": 200,
     "detail": "aa",
@@ -43,7 +43,7 @@
   },
   {
     "ID": 5,
-    "name_id": "6",
+    "name_id": "dog6",
     "name": "Chó thường 2",
     "price": 200,
     "detail": "aa",
@@ -51,7 +51,7 @@
   },
   {
     "ID": 6,
-    "name_id": "7",
+    "name_id": "dog7",
     "name": "Chó thường 2",
     "price": 200,
     "detail": "aa",
