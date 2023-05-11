@@ -37,8 +37,8 @@
   ],
   "teams": [
     {
-      "dog_ids": [2, 0, 1],
-      "dog_name_ids": ["dog", "dog", "dog"]
+      "dog_ids": [2, -1, 1, 0, 0, 0, 0, 0, 0, -1],
+      "dog_name_ids": ["dog", null, "dog", "dog", "dog", "dog", "dog", "dog", "dog", null]
     },
     {
       "dog_ids": [2, 1, 0, 3],
@@ -49,5 +49,5 @@
   "dog_food": 1000,
   "passed_level": 3,
   "selected_level": 0,
-  "selected_team": 0  
+  "selected_team": 0
 }
