@@ -30,7 +30,7 @@ func _ready():
 				addItem(character_data[i])
 				
 		#print(upgrade_data["detail"][i]['path'])
-	loadTeam(0)
+	loadTeam(Data.save_data['selected_team'])
 	
 
 func loadTeam(i) :

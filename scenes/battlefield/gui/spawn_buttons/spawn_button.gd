@@ -1,6 +1,6 @@
 extends Button
 
-var dog_tower: DogTower
+var dog_tower
 var dog_scene: PackedScene
 var is_active: bool
 
