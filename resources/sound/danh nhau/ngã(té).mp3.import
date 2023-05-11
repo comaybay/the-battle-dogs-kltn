@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://iq8v80rnta0u"
+path="res://.godot/imported/ngã(té).mp3-de5e7f31710730253f1094055f3ba4b3.mp3str"
+
+[deps]
+
+source_file="res://resources/sound/danh nhau/ngã(té).mp3"
+dest_files=["res://.godot/imported/ngã(té).mp3-de5e7f31710730253f1094055f3ba4b3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

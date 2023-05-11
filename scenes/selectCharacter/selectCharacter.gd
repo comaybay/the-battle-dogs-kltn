@@ -9,9 +9,7 @@ var teams # node đội hình
 var base_img = load("res://resources/images/base.png")
 
 func _ready():
-	var file1 = FileAccess.open("res://resources/save.json", FileAccess.READ)
-	game_data = JSON.parse_string(file1.get_as_text())
-	file1.close()
+	game_data = Data.save_data
 	var file2 = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	character_data = JSON.parse_string(file2.get_as_text())
 	file2.close()
@@ -39,9 +37,10 @@ func loadTeam(i) :
 		for ob in character_data :
 			if (str(obj) == str(ob["ID"]) ):
 				var list = $Khung/PhanGiua/PhanDuoi/NhanVat/ScrollContainer/GridContainer.get_children()
-				var item = [obj, load(ob["path"])]
+				var item = [obj, load(ob["path"]), ob["name_id"]]
 				list[int(item[0])].visible = false
 				list_team.push_back(item)
+				print(list_team)
 				team_number += 1
 	reset()
 
@@ -99,7 +98,7 @@ func _on_luu_pressed():
 	for obj in list_team :
 		items.push_back(int(obj[0]))
 	
-	game_data["teams"][0]["dog_ids"] = items
+	game_data["teams"][Data.save_data['selected_team']]["dog_ids"] = items
 	
 	var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)
 	var json_data = JSON.stringify(game_data)
