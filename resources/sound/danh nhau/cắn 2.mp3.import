@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://xjxbmdtq1q00"
+path="res://.godot/imported/cắn 2.mp3-253a838c633c90fbd1525f83122999a5.mp3str"
+
+[deps]
+
+source_file="res://resources/sound/danh nhau/cắn 2.mp3"
+dest_files=["res://.godot/imported/cắn 2.mp3-253a838c633c90fbd1525f83122999a5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
