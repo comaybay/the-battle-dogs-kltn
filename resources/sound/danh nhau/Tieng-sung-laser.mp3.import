@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c1ahvyj64nh2d"
+path="res://.godot/imported/Tieng-sung-laser.mp3-c2c8acad5d4bfc5219bf48bd15ed28be.mp3str"
+
+[deps]
+
+source_file="res://resources/sound/danh nhau/Tieng-sung-laser.mp3"
+dest_files=["res://.godot/imported/Tieng-sung-laser.mp3-c2c8acad5d4bfc5219bf48bd15ed28be.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
