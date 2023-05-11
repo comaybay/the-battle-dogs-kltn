@@ -7,15 +7,15 @@ var last_mouse_pos = Vector2.ZERO
 var game_data
 
 func _ready():
-	var file = FileAccess.open("res://resources/save.json", FileAccess.READ)
-	game_data = JSON.parse_string(file.get_as_text())
+	game_data = Data.save_data
 	mouse_pressed = false
-	file.close()
 	
-	var levels := $Node.get_children() as Array[Level]
-	for level in levels:
+	# focus on selected level
+	for node in $Node.get_children():
+		var level: Level = node
 		if level.battlefield_id == Data.selected_battlefield_id:
-			level.button_pressed = true
+			level.grab_focus()
+			break
 		
 
 

@@ -1,11 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://5joq03mk4kv3"]
+[gd_scene load_steps=3 format=3 uid="uid://5joq03mk4kv3"]
 
 [ext_resource type="PackedScene" uid="uid://brx02julmawu5" path="res://scenes/characters/character.tscn" id="1_t516l"]
 
-[node name="BaseDog" instance=ExtResource("1_t516l")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6m5t"]
+resource_local_to_scene = true
+size = Vector2(192, 178)
+
+[node name="BaseDog" groups=["dogs"] instance=ExtResource("1_t516l")]
 collision_layer = 2
 collision_mask = 21
 attack_area_range = -1
+
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource("RectangleShape2D_i6m5t")
 
 [node name="RayCast2D" parent="." index="4"]
 collision_mask = 20

@@ -97,7 +97,7 @@ attack_cooldown = 8
 health = 1000
 
 [node name="AttackCooldownTimer" parent="." index="0"]
-wait_time = 5.0
+wait_time = 8.0
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
@@ -109,7 +109,7 @@ position = Vector2(-119, -267)
 texture = ExtResource("2_lg6d2")
 hframes = 3
 vframes = 5
-frame = 6
+frame = 7
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -235)

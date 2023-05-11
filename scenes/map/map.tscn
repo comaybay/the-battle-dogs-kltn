@@ -90,6 +90,7 @@ theme = ExtResource("3_5tfwt")
 theme_override_font_sizes/font_size = 18
 text = "1"
 script = ExtResource("4_ep8j2")
+battlefield_id = "doggonamu"
 
 [node name="Level2" type="Button" parent="Khung/map/AllLevel/Node"]
 offset_left = 529.0
@@ -100,6 +101,7 @@ theme = ExtResource("3_5tfwt")
 theme_override_font_sizes/font_size = 18
 text = "2"
 script = ExtResource("4_ep8j2")
+battlefield_id = "caupuchia"
 
 [node name="Level3" type="Button" parent="Khung/map/AllLevel/Node"]
 offset_left = 519.0
@@ -110,6 +112,7 @@ theme = ExtResource("3_5tfwt")
 theme_override_font_sizes/font_size = 18
 text = "3"
 script = ExtResource("4_ep8j2")
+battlefield_id = "xichcau"
 
 [node name="Level4" type="Button" parent="Khung/map/AllLevel/Node"]
 offset_left = 895.0
@@ -120,6 +123,7 @@ theme = ExtResource("3_5tfwt")
 theme_override_font_sizes/font_size = 18
 text = "4"
 script = ExtResource("4_ep8j2")
+battlefield_id = "xichcau"
 
 [node name="Level5" type="Button" parent="Khung/map/AllLevel/Node"]
 offset_left = 295.0
