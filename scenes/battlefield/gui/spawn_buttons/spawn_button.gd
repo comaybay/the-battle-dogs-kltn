@@ -5,11 +5,24 @@ var dog_scene: PackedScene
 var is_active: bool
 
 var spawn_price: int
+var spawn_input_action: String
 
-func setup(name_id: String, is_active: bool) -> void:
+func is_spawn_ready() -> bool:
+	return $SpawnTimer.is_stopped()
+
+func can_afford_dog():
+	return InBattle.money >= spawn_price
+
+func can_spawn():
+	return can_afford_dog() and is_spawn_ready() and is_active
+
+func setup(name_id: String, input_action: String, is_active: bool) -> void:
 	set_active(is_active)
+	spawn_input_action = input_action
+		
 	$Icon.texture = load("res://resources/icons/%s_icon.png" % name_id)
 	dog_scene = load("res://scenes/characters/dogs/%s/%s.tscn" % [name_id, name_id])
+	
 	$SpawnTimer.wait_time = Data.dog_info[name_id]['spawn_time']
 	$SpawnTimer.timeout.connect(_on_spawn_ready)
 	
@@ -18,8 +31,10 @@ func setup(name_id: String, is_active: bool) -> void:
 	pressed.connect(_on_pressed)
 	$AnimationPlayer.play("ready")
 	set_process(true)
+	set_process_input(true)
 	
 func set_active(active: bool) -> void:
+	is_active = active
 	$MoneyLabel.visible = active
 	self.disabled = !active
 	
@@ -31,13 +46,28 @@ func _ready() -> void:
 	$AnimationPlayer.play("empty")
 	dog_tower = get_tree().current_scene.get_node("DogTower")
 	set_process(false)
+	set_process_input(false)
+
+func _on_spawn_ready() -> void:
+	$ProgressBar.visible = false
 	
+func _process(delta: float) -> void:
+	self.disabled = !can_spawn()
+	$Background.frame = 0 if can_afford_dog() and is_spawn_ready() else 1	
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(spawn_input_action) and can_spawn():
+		spawn_dog()
+			
 func _on_pressed() -> void:
-	self.disabled = true
+	spawn_dog()
 	
+func spawn_dog():
+	self.disabled = true
+
 	InBattle.money -= spawn_price
 	dog_tower.spawn(dog_scene)
-	
+
 	$ProgressBar.visible = true
 	$Background.frame = 1
 	var tween := create_tween()
@@ -46,15 +76,3 @@ func _on_pressed() -> void:
 
 func _tween_progress(value: float) -> void:
 	$ProgressBar.value = value
-
-func _on_spawn_ready() -> void:
-	$ProgressBar.visible = false
-	$Background.frame = 0 if can_afford_dog() else 1
-	self.disabled = not can_afford_dog() 
-	
-func _process(delta: float) -> void:
-	self.disabled = not can_afford_dog() 
-	$Background.frame = 0 if can_afford_dog() and $SpawnTimer.is_stopped() else 1	
-
-func can_afford_dog():
-	return InBattle.money >= spawn_price

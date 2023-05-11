@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnmajsgx5dltn"]
+
+[ext_resource type="PackedScene" uid="uid://dvorgedardkvp" path="res://scenes/characters/base_cat.tscn" id="1_ybxjt"]
+[ext_resource type="Texture2D" uid="uid://dk2qbrhlr0fcu" path="res://scenes/characters/cats/cat/cat.png" id="2_qbffd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_puswq"]
+size = Vector2(192, 178)
+
+[node name="SniperCat" instance=ExtResource("1_ybxjt")]
+speed = 100
+attack_range = 1500
+attack_cooldown = 20
+damage = 1000
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_qbffd")
+frame = 6
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="." index="3"]
+position = Vector2(0, 22)
+shape = SubResource("RectangleShape2D_puswq")
+metadata/_edit_lock_ = true
+
+[node name="RayCast2D" parent="." index="4"]
+metadata/_edit_lock_ = true
+
+[node name="FiniteStateMachine" parent="." index="5"]
+metadata/_edit_lock_ = true

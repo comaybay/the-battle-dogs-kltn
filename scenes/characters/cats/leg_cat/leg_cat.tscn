@@ -93,11 +93,11 @@ size = Vector2(192, 584)
 speed = 200
 attack_range = 300
 attack_area_range = 30
-attack_cooldown = 5
+attack_cooldown = 8
 health = 1000
 
 [node name="AttackCooldownTimer" parent="." index="0"]
-wait_time = 5.0
+wait_time = 8.0
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
@@ -109,14 +109,14 @@ position = Vector2(-119, -267)
 texture = ExtResource("2_lg6d2")
 hframes = 3
 vframes = 5
-frame = 9
+frame = 7
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -235)
 shape = SubResource("RectangleShape2D_b8yx7")
 
 [node name="RayCast2D" parent="." index="4"]
-target_position = Vector2(-350, 0)
+target_position = Vector2(-300, 0)
 metadata/_edit_lock_ = true
 
 [node name="FiniteStateMachine" parent="." index="5"]

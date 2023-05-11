@@ -13,9 +13,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -573.0
-offset_top = -124.0
+offset_top = -622.0
 offset_right = 2718.0
-offset_bottom = 165.0
+offset_bottom = -333.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.35, 0.35)
@@ -26,8 +26,8 @@ layout_mode = 2
 
 [node name="MoneyLabel" type="Label" parent="."]
 offset_left = 260.0
-offset_top = 469.0
-offset_right = 362.0
-offset_bottom = 517.0
+offset_top = 124.0
+offset_right = 370.0
+offset_bottom = 172.0
 theme_type_variation = &"LabelLarge"
 text = "0/100 ₵"

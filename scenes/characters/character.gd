@@ -103,3 +103,7 @@ func take_damage(ammount: int) -> void:
 	if health <= next_knockback_health:
 		next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
 		$FiniteStateMachine.change_state("KnockbackState")	
+		
+func kill():
+	$FiniteStateMachine.change_state("DieState")	
+

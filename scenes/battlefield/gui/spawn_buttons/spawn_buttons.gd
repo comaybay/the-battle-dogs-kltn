@@ -5,20 +5,24 @@ var done_tweening := true
 func _ready() -> void:
 	var name_ids: Array = Data.selected_team['dog_name_ids']
 	var id_index := 0
+	var action_number = 1
 		
 	for button in $FirstRow.get_children():
-		if id_index >= name_ids.size():
-			break
-			
-		button.setup(name_ids[id_index], true)
-		id_index += 1	
+		var name_id = name_ids[id_index]
+		if name_id != null:
+			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, true)
 		
+		id_index += 1	
+		action_number += 1
+
+	action_number = 1		
 	for button in $SecondRow.get_children():
-		if id_index >= name_ids.size():
-			break
+		var name_id = name_ids[id_index]
+		if name_id != null:
+			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, false)
 		
-		button.setup(name_ids[id_index], false)
 		id_index += 1	
+		action_number += 1
 		
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_switch_row") and done_tweening:

@@ -4,13 +4,13 @@
   "spawn_patterns": [
     {
       "name": "cat",
-      "duration": 10,
+      "duration": 5,
       "delay": 0
     },
     {
       "name": "leg_cat",
-      "duration": 4,
-      "delay": 0
+      "duration": 20,
+      "delay": 10
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "stage_width": 8000,
+  "cat_tower_health": 1000,
+  "spawn_patterns": [
+    {
+      "name": "cat",
+      "duration": 5,
+      "delay": 10
+    },
+    {
+      "name": "leg_cat",
+      "duration": 20,
+      "delay": 20
+    },
+    {
+      "name": "sniper_cat",
+      "duration": 60,
+      "delay": 40
+    }
+  ]
+}
