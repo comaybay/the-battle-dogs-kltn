@@ -4,6 +4,7 @@
     "name_id": "dog",
     "name": "Chó thường",
     "detail": "dddf",
+    "price": 200,
     "path": "res://resources/images/Screenshot (5).png",
     "spawn_time": 2,
     "spawn_price": 50
@@ -11,36 +12,48 @@
   {
     "ID": 1,
     "name_id": "2",
+    "name": "Chó thường 2",
+    "price": 200,
     "detail": "asd",
     "path": "res://resources/images/planet9_Wallpaper_5000x2813.jpg"
   },
   {
     "ID": 2,
     "name_id": "3",
+    "name": "Chó thường 2",
+    "price": 200,
     "detail": "asd",
     "path": "res://resources/images/Screenshot (5).png"
   },
   {
     "ID": 3,
     "name_id": "4",
+    "name": "Chó thường 2",
+    "price": 200,
     "detail": "asa",
     "path": "res://resources/images/Screenshot (5).png"
   },
   {
     "ID": 4,
     "name_id": "5",
+    "name": "Chó thường 2",
+    "price": 200,
     "detail": "aa",
     "path": "res://resources/images/Screenshot (5).png"
   },
   {
     "ID": 5,
     "name_id": "6",
+    "name": "Chó thường 2",
+    "price": 200,
     "detail": "aa",
     "path": "res://resources/images/Screenshot (5).png"
   },
   {
     "ID": 6,
     "name_id": "7",
+    "name": "Chó thường 2",
+    "price": 200,
     "detail": "aa",
     "path": "res://resources/images/Screenshot (5).png"
   }

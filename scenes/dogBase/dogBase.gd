@@ -3,7 +3,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.money)
+	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(Data.save_data["bone"])
 	pass # Replace with function body.
 
 
