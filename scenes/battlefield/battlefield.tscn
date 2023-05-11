@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3tfqhxm52ewk"]
+[gd_scene load_steps=10 format=3 uid="uid://3tfqhxm52ewk"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/battlefield.gd" id="1_qm8p7"]
 [ext_resource type="PackedScene" uid="uid://cue3f8l417jkn" path="res://scenes/characters/cats/cat/cat.tscn" id="1_qo73h"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dhit6457y0brs" path="res://scenes/characters/dogs/dog/dog.tscn" id="3_c2a2t"]
 [ext_resource type="Script" path="res://scenes/battlefield/Camera2D.gd" id="4_67qqf"]
 [ext_resource type="PackedScene" uid="uid://bq2b21c7cenm0" path="res://scenes/battlefield/dog_tower/dog_tower.tscn" id="7_j5y50"]
+[ext_resource type="PackedScene" uid="uid://dmhx2wpadmcol" path="res://scenes/battlefield/gui/gui.tscn" id="9_kl1me"]
 
 [node name="Battlefield" type="Node2D"]
 script = ExtResource("1_qm8p7")
@@ -39,4 +40,6 @@ health = 400
 damage = 100
 
 [node name="Cat" parent="." instance=ExtResource("1_qo73h")]
-position = Vector2(936, -251)
+position = Vector2(3477, -547)
+
+[node name="Gui" parent="." instance=ExtResource("9_kl1me")]

@@ -7,6 +7,7 @@ var level_select
 var selected_team: Dictionary
 var teams: Array
 var save_data: Dictionary
+var dog_info := Dictionary()
 
 func _init() -> void:
 	var file = FileAccess.open("res://resources/save.json", FileAccess.READ)
@@ -19,6 +20,16 @@ func _init() -> void:
 	level_select = save_data['selected_level']
 	teams = save_data['teams']
 	selected_team = teams[save_data['selected_team']]
+	
+	file = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
+	
+	
+	var dog_info_arr = JSON.parse_string(file.get_as_text())
+	for info in dog_info_arr:
+		dog_info[info['name_id']] = info
+	
+	file.close()
+	
 	
 func save():
 	var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)

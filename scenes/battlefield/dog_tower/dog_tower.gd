@@ -1,4 +1,4 @@
-extends StaticBody2D
+class_name DogTower extends StaticBody2D
 
 var health: int
 var max_health: int
@@ -16,3 +16,8 @@ func take_damage(damage: int) -> void:
 	health -= damage
 	update_health_label()
 	$AnimationPlayer.play("shake")
+
+func spawn(dog_scene: PackedScene) -> void:
+	var dog = dog_scene.instantiate()
+	dog.global_position = global_position + Vector2(100, 0)
+	get_tree().current_scene.add_child(dog)

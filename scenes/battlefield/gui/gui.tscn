@@ -1,21 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://dp800jne408k6"]
+[gd_scene load_steps=3 format=3 uid="uid://dmhx2wpadmcol"]
 
-[ext_resource type="PackedScene" uid="uid://ilcy6ie87fmp" path="res://scenes/battlefield/gui/character_button/character_button.tscn" id="1_h0p7p"]
-[ext_resource type="Script" path="res://scenes/battlefield/gui/gui.gd" id="1_vfsgx"]
+[ext_resource type="PackedScene" uid="uid://e7fcshjccrpt" path="res://scenes/battlefield/gui/spawn_buttons/spawn_buttons.tscn" id="1_2pq88"]
+[ext_resource type="Script" path="res://scenes/battlefield/gui/gui.gd" id="1_e3bvc"]
 
-[node name="GUI" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_vfsgx")
+[node name="Gui" type="CanvasLayer"]
+script = ExtResource("1_e3bvc")
 
-[node name="HFlowContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 1153.0
-offset_bottom = 88.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -573.0
+offset_top = -124.0
+offset_right = 2718.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.35, 0.35)
+alignment = 1
 
-[node name="CharacterButton" parent="HFlowContainer" instance=ExtResource("1_h0p7p")]
+[node name="SpawnButtons" parent="HBoxContainer" instance=ExtResource("1_2pq88")]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="CharacterButton2" parent="HFlowContainer" instance=ExtResource("1_h0p7p")]
-layout_mode = 2
+[node name="MoneyLabel" type="Label" parent="."]
+offset_left = 260.0
+offset_top = 469.0
+offset_right = 362.0
+offset_bottom = 517.0
+theme_type_variation = &"LabelLarge"
+text = "0/100 ₵"

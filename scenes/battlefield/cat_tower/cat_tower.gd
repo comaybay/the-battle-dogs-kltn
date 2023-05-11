@@ -16,3 +16,9 @@ func take_damage(damage: int) -> void:
 	health -= damage
 	update_health_label()
 	$AnimationPlayer.play("shake")
+
+func spawn(cat_scene: PackedScene) -> void:
+	var cat = cat_scene.instantiate()
+	cat.global_position = global_position - Vector2(100, 0)
+	get_tree().current_scene.add_child(cat)
+			

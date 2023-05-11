@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://e7fcshjccrpt"]
+
+[ext_resource type="Script" path="res://scenes/battlefield/gui/spawn_buttons/spawn_buttons.gd" id="1_rsd52"]
+[ext_resource type="PackedScene" uid="uid://cc4bqrpdv8f6n" path="res://scenes/battlefield/gui/spawn_buttons/spawn_button.tscn" id="2_23hyj"]
+
+[node name="SpawnButtons" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rsd52")
+
+[node name="SecondRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = -882.0
+offset_top = 27.0
+offset_right = 938.0
+offset_bottom = 273.0
+theme_override_constants/separation = 50
+
+[node name="CharacterButton" parent="SecondRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2
+
+[node name="CharacterButton2" parent="SecondRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2
+
+[node name="CharacterButton3" parent="SecondRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2
+
+[node name="CharacterButton4" parent="SecondRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2
+
+[node name="CharacterButton5" parent="SecondRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2
+
+[node name="FirstRow" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -910.0
+offset_right = 910.0
+offset_bottom = 246.0
+theme_override_constants/separation = 50
+
+[node name="CharacterButton" parent="FirstRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2
+
+[node name="CharacterButton2" parent="FirstRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2
+
+[node name="CharacterButton3" parent="FirstRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2
+
+[node name="CharacterButton4" parent="FirstRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2
+
+[node name="CharacterButton5" parent="FirstRow" instance=ExtResource("2_23hyj")]
+layout_mode = 2

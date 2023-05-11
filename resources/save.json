@@ -37,8 +37,16 @@
     { "ID": 5, "amount": 1 },
     { "ID": 6, "amount": 1 }
   ],
-  "level_pass": 3,
-  "level_select": 0,
+  "teams": [
+    {
+      "dog_name_ids": ["dog", "dog", "dog", "dog", "dog", "dog", "dog"]
+    },
+    {
+      "dog_name_ids": [2, 1, 0, 3]
+    }
+  ],
+  "bone": 5000,
+  "dog_food": 1000,
   "passed_level": 3,
   "selected_level": 0,
   "selected_team": 0,
