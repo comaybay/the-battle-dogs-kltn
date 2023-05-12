@@ -11,4 +11,4 @@ func _ready():
 func _on_level_pressed():
 	Data.selected_level = int(text)
 	Data.selected_battlefield_id = battlefield_id
-	
+

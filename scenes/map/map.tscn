@@ -4,12 +4,8 @@
 [ext_resource type="Script" path="res://scenes/map/ScreenMap.gd" id="2_0udil"]
 [ext_resource type="Theme" uid="uid://bb4uny0684isq" path="res://resources/theme_button_round.tres" id="3_5tfwt"]
 [ext_resource type="Script" path="res://scenes/map/AllLevel.gd" id="4_ep8j2"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_cfmvt"]
-font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_xndhi"]
-font_size = 20
+[ext_resource type="Texture2D" uid="uid://ycmeqryvywsc" path="res://scenes/map/map.png" id="5_weho0"]
+[ext_resource type="Script" path="res://scenes/map/Tracker.gd" id="6_3mlh5"]
 
 [node name="Map1" type="Control"]
 layout_mode = 3
@@ -28,64 +24,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TieuDe" type="HBoxContainer" parent="Khung"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_vertical = 2
-alignment = 1
-
-[node name="NutQuayLai" type="Button" parent="Khung/TieuDe"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "< Quay lại"
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Khung/TieuDe"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Khung/TieuDe"]
-layout_mode = 2
-size_flags_horizontal = 2
-text = "Hành tinh Doggo"
-label_settings = SubResource("LabelSettings_cfmvt")
-
 [node name="map" type="NinePatchRect" parent="Khung"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="NutTanCong" type="Button" parent="Khung/map"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 0
-offset_left = 917.0
-offset_top = 446.0
-offset_right = 1067.0
-offset_bottom = 496.0
-size_flags_horizontal = 4
-text = "Tấn công !
-"
-
-[node name="NutDoiDoiHinh" type="Button" parent="Khung/map"]
-layout_mode = 0
-offset_left = 894.0
-offset_top = 514.0
-offset_right = 1094.0
-offset_bottom = 544.0
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 16
-text = "Đội hình: diamon dogs"
-
 [node name="AllLevel" type="Node2D" parent="Khung/map"]
 process_mode = 1
 script = ExtResource("2_0udil")
 
+[node name="MapSprite" type="Sprite2D" parent="Khung/map/AllLevel"]
+position = Vector2(1248, 702)
+texture = ExtResource("5_weho0")
+
 [node name="Node" type="Node2D" parent="Khung/map/AllLevel"]
 
 [node name="Level1" type="Button" parent="Khung/map/AllLevel/Node"]
-offset_left = 659.0
-offset_top = 392.0
-offset_right = 699.0
-offset_bottom = 432.0
+offset_left = 810.0
+offset_top = 749.0
+offset_right = 850.0
+offset_bottom = 789.0
 theme = ExtResource("3_5tfwt")
 theme_override_font_sizes/font_size = 18
 text = "1"
@@ -93,10 +51,10 @@ script = ExtResource("4_ep8j2")
 battlefield_id = "doggonamu"
 
 [node name="Level2" type="Button" parent="Khung/map/AllLevel/Node"]
-offset_left = 529.0
-offset_top = 312.0
-offset_right = 569.0
-offset_bottom = 352.0
+offset_left = 1581.0
+offset_top = 391.0
+offset_right = 1621.0
+offset_bottom = 431.0
 theme = ExtResource("3_5tfwt")
 theme_override_font_sizes/font_size = 18
 text = "2"
@@ -145,49 +103,56 @@ theme_override_font_sizes/font_size = 18
 text = "6"
 script = ExtResource("4_ep8j2")
 
-[node name="PhanCuoi" type="VBoxContainer" parent="Khung"]
-layout_direction = 1
-layout_mode = 2
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.0
-localize_numeral_system = false
+[node name="Tracker" type="Node2D" parent="Khung/map/AllLevel"]
+script = ExtResource("6_3mlh5")
 
-[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanCuoi"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-alignment = 1
+[node name="Camera2D" type="Camera2D" parent="Khung/map/AllLevel/Tracker"]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
 
-[node name="Label" type="Label" parent="Khung/PhanCuoi/TieuDe"]
-layout_mode = 2
+[node name="CanvasLayer" type="CanvasLayer" parent="Khung"]
+
+[node name="Label" type="Label" parent="Khung/CanvasLayer"]
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 174.0
+offset_bottom = 43.0
 size_flags_horizontal = 2
-text = "Căn cứ chó - Hành tinh Doggo"
-label_settings = SubResource("LabelSettings_xndhi")
+theme_type_variation = &"LabelLarge"
+text = "Hành tinh Doggo"
 
-[node name="ThucAnChoCho" type="HBoxContainer" parent="Khung/PhanCuoi/TieuDe"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
+[node name="NutQuayLai" type="Button" parent="Khung/CanvasLayer"]
+offset_top = 587.0
+offset_right = 90.0
+offset_bottom = 618.0
+theme_override_font_sizes/font_size = 18
+text = "< Quay lại"
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanCuoi/TieuDe/ThucAnChoCho"]
-layout_mode = 2
-patch_margin_left = 50
+[node name="NutTanCong" type="Button" parent="Khung/CanvasLayer"]
+custom_minimum_size = Vector2(150, 50)
+offset_left = 935.0
+offset_top = 516.0
+offset_right = 1085.0
+offset_bottom = 566.0
+size_flags_horizontal = 4
+text = "Tấn công !
+"
 
-[node name="Label" type="Label" parent="Khung/PhanCuoi/TieuDe/ThucAnChoCho"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "Thức ăn cho chó : 100"
-label_settings = SubResource("LabelSettings_xndhi")
+[node name="NutDoiDoiHinh" type="Button" parent="Khung/CanvasLayer"]
+offset_left = 917.0
+offset_top = 587.0
+offset_right = 1095.0
+offset_bottom = 614.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Đội hình: diamon dogs"
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanCuoi/TieuDe/ThucAnChoCho"]
-layout_mode = 2
-patch_margin_left = 30
-
-[connection signal="pressed" from="Khung/TieuDe/NutQuayLai" to="." method="_on_quay_lai_pressed"]
-[connection signal="pressed" from="Khung/map/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
-[connection signal="pressed" from="Khung/map/NutDoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]
 [connection signal="pressed" from="Khung/map/AllLevel/Node/Level1" to="Khung/map/AllLevel/Node/Level1" method="_on_level_pressed"]
 [connection signal="pressed" from="Khung/map/AllLevel/Node/Level2" to="Khung/map/AllLevel/Node/Level2" method="_on_level_pressed"]
 [connection signal="pressed" from="Khung/map/AllLevel/Node/Level3" to="Khung/map/AllLevel/Node/Level3" method="_on_level_pressed"]
 [connection signal="pressed" from="Khung/map/AllLevel/Node/Level4" to="Khung/map/AllLevel/Node/Level4" method="_on_level_pressed"]
 [connection signal="pressed" from="Khung/map/AllLevel/Node/Level5" to="Khung/map/AllLevel/Node/Level5" method="_on_level_pressed"]
 [connection signal="pressed" from="Khung/map/AllLevel/Node/Level6" to="Khung/map/AllLevel/Node/Level6" method="_on_level_pressed"]
+[connection signal="pressed" from="Khung/CanvasLayer/NutQuayLai" to="." method="_on_quay_lai_pressed"]
+[connection signal="pressed" from="Khung/CanvasLayer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
+[connection signal="pressed" from="Khung/CanvasLayer/NutDoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]

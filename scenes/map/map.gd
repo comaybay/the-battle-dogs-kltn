@@ -2,7 +2,7 @@ extends Control
 
 var game_data
 func _ready():
-	game_data = Data.save_data
+	game_data = Data.save_data	
 
 func _on_nut_tan_cong_pressed():
 	get_tree().change_scene_to_file("res://scenes/battlefield/battlefield.tscn")
