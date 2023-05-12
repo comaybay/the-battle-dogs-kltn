@@ -187,6 +187,7 @@ expand_mode = 1
 
 [node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box2"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0
 text = "0
@@ -220,6 +221,7 @@ expand_mode = 1
 
 [node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box3"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0
 text = "0
@@ -253,6 +255,7 @@ expand_mode = 1
 
 [node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box4"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0
 text = "0
@@ -286,6 +289,7 @@ expand_mode = 1
 
 [node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box5"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0
 text = "0
@@ -319,6 +323,7 @@ expand_mode = 1
 
 [node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box6"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0
 text = "0
@@ -352,6 +357,7 @@ expand_mode = 1
 
 [node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box7"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0
 text = "0
@@ -385,6 +391,7 @@ expand_mode = 1
 
 [node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box8"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0
 text = "0
@@ -418,6 +425,7 @@ expand_mode = 1
 
 [node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box9"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0
 text = "0
@@ -451,6 +459,7 @@ expand_mode = 1
 
 [node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box10"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 26.0
 text = "0
