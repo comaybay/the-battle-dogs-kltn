@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/mua đồ.mp3-1dafacee540475e7c82f24e3a9379df
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
