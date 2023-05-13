@@ -66,6 +66,7 @@ func addItem(value):
 
 # thêm vào đội hình
 func sendInfo(ID, detail, path, nameID):
+	$Khung/PhanGiua/PhanTren/DoiHinh/click.play()
 	if (team_number < 10) and (int(ID) >= 0):
 		var item = [ID, path, nameID]
 		teams[team_number].get_node("TextureRect").texture = path
@@ -80,6 +81,7 @@ func sendInfo(ID, detail, path, nameID):
 	
 # Xóa khỏi đội hình
 func deleteInfo(ID, path, index, nameID):
+	$Khung/PhanGiua/PhanTren/DoiHinh/click.play()
 	if (int(ID) >= 0) :
 		var list = $Khung/PhanGiua/PhanDuoi/NhanVat/ScrollContainer/GridContainer.get_children()
 		
@@ -95,11 +97,14 @@ func _process(delta):
 
 
 func _on_quay_lai_pressed():
+	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
+	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
 
 func _on_luu_pressed():
 	#print(list_team)
+	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
 	var items = []
 	var item_name = []
 	#list_team.push_back(item)
@@ -115,6 +120,7 @@ func _on_luu_pressed():
 	var json_data = JSON.stringify(game_data)
 	file.store_string(json_data)
 	file.close()
-	#get_tree().change_scene_to_file("res://scenes/map/map.tscn")
-
+	
+	await get_tree().create_timer(1.0).timeout
+	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
