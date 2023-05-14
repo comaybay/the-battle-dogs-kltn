@@ -1,12 +1,49 @@
-[gd_scene load_steps=8 format=3 uid="uid://boa6m8ugpxsd1"]
+[gd_scene load_steps=14 format=3 uid="uid://dbyjisaeqjkey"]
 
 [ext_resource type="Script" path="res://scenes/map/map.gd" id="1_0p7qx"]
 [ext_resource type="Script" path="res://scenes/map/ScreenMap.gd" id="2_0udil"]
-[ext_resource type="Theme" uid="uid://bb4uny0684isq" path="res://resources/theme_button_round.tres" id="3_5tfwt"]
-[ext_resource type="Script" path="res://scenes/map/AllLevel.gd" id="4_ep8j2"]
+[ext_resource type="PackedScene" uid="uid://i3waaqjv5m7" path="res://scenes/map/tracker.tscn" id="4_un5ok"]
 [ext_resource type="Script" path="res://scenes/map/Levels.gd" id="5_ta18k"]
 [ext_resource type="Texture2D" uid="uid://ycmeqryvywsc" path="res://scenes/map/map.png" id="5_weho0"]
-[ext_resource type="Script" path="res://scenes/map/Tracker.gd" id="6_3mlh5"]
+[ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="7_eb484"]
+[ext_resource type="PackedScene" uid="uid://cw20xduyq7fwq" path="res://scenes/map/level/level.tscn" id="8_uximv"]
+[ext_resource type="Script" path="res://scenes/map/dog.gd" id="8_vsoej"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de1st"]
+atlas = ExtResource("7_eb484")
+region = Rect2(1548, 0, 258, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stdsv"]
+atlas = ExtResource("7_eb484")
+region = Rect2(0, 263, 258, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rrow"]
+atlas = ExtResource("7_eb484")
+region = Rect2(258, 263, 258, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjuxa"]
+atlas = ExtResource("7_eb484")
+region = Rect2(516, 263, 258, 263)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e4la2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_de1st")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stdsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rrow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjuxa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [node name="Map1" type="Control"]
 layout_mode = 3
@@ -38,79 +75,108 @@ script = ExtResource("2_0udil")
 position = Vector2(1248, 702)
 texture = ExtResource("5_weho0")
 
-[node name="Tracker" type="Node2D" parent="Khung/map/AllLevel"]
-script = ExtResource("6_3mlh5")
-
-[node name="Camera2D" type="Camera2D" parent="Khung/map/AllLevel/Tracker"]
-position_smoothing_enabled = true
-position_smoothing_speed = 6.0
-
 [node name="Node" type="Node2D" parent="Khung/map/AllLevel"]
 script = ExtResource("5_ta18k")
 
-[node name="Level1" type="Button" parent="Khung/map/AllLevel/Node"]
-offset_left = 810.0
-offset_top = 749.0
-offset_right = 850.0
-offset_bottom = 789.0
-theme = ExtResource("3_5tfwt")
-theme_override_font_sizes/font_size = 18
-text = "1"
-script = ExtResource("4_ep8j2")
+[node name="Level" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 812.0
+offset_top = 769.0
+offset_right = 839.0
+offset_bottom = 796.0
 battlefield_id = "doggonamu"
 
-[node name="Level2" type="Button" parent="Khung/map/AllLevel/Node"]
-offset_left = 797.0
-offset_top = 330.0
-offset_right = 837.0
-offset_bottom = 370.0
-theme = ExtResource("3_5tfwt")
-theme_override_font_sizes/font_size = 18
-text = "2"
-script = ExtResource("4_ep8j2")
+[node name="Level2" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 1018.0
+offset_top = 1024.0
+offset_right = 1045.0
+offset_bottom = 1051.0
 battlefield_id = "caupuchia"
 
-[node name="Level3" type="Button" parent="Khung/map/AllLevel/Node"]
-offset_left = 519.0
-offset_top = 116.0
-offset_right = 559.0
-offset_bottom = 156.0
-theme = ExtResource("3_5tfwt")
-theme_override_font_sizes/font_size = 18
-text = "3"
-script = ExtResource("4_ep8j2")
+[node name="Level3" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 1231.0
+offset_top = 769.0
+offset_right = 1258.0
+offset_bottom = 796.0
 battlefield_id = "xichcau"
 
-[node name="Level4" type="Button" parent="Khung/map/AllLevel/Node"]
-offset_left = 895.0
-offset_top = 196.0
-offset_right = 935.0
-offset_bottom = 236.0
-theme = ExtResource("3_5tfwt")
-theme_override_font_sizes/font_size = 18
-text = "4"
-script = ExtResource("4_ep8j2")
-battlefield_id = "xichcau"
+[node name="Level4" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 1612.0
+offset_top = 808.0
+offset_right = 1639.0
+offset_bottom = 835.0
+battlefield_id = "doggonamu"
 
-[node name="Level5" type="Button" parent="Khung/map/AllLevel/Node"]
-offset_left = 295.0
-offset_top = 351.0
-offset_right = 335.0
-offset_bottom = 391.0
-theme = ExtResource("3_5tfwt")
-theme_override_font_sizes/font_size = 18
-text = "5"
-script = ExtResource("4_ep8j2")
+[node name="Level5" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 1559.0
+offset_top = 409.0
+offset_right = 1586.0
+offset_bottom = 436.0
+battlefield_id = "doggonamu"
 
-[node name="Level6" type="Button" parent="Khung/map/AllLevel/Node"]
+[node name="Level6" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1270.0
-offset_top = 286.0
-offset_right = 1310.0
-offset_bottom = 326.0
-theme = ExtResource("3_5tfwt")
-theme_override_font_sizes/font_size = 18
-text = "6"
-script = ExtResource("4_ep8j2")
+offset_top = 285.0
+offset_right = 1297.0
+offset_bottom = 312.0
+battlefield_id = "doggonamu"
+
+[node name="Level7" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 773.0
+offset_top = 324.0
+offset_right = 800.0
+offset_bottom = 351.0
+battlefield_id = "doggonamu"
+
+[node name="Level8" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 194.0
+offset_top = 162.0
+offset_right = 221.0
+offset_bottom = 189.0
+battlefield_id = "doggonamu"
+
+[node name="Level9" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 338.0
+offset_top = 988.0
+offset_right = 365.0
+offset_bottom = 1015.0
+battlefield_id = "doggonamu"
+
+[node name="Level10" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 517.0
+offset_top = 1241.0
+offset_right = 544.0
+offset_bottom = 1268.0
+battlefield_id = "doggonamu"
+
+[node name="Level11" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 1518.0
+offset_top = 1241.0
+offset_right = 1545.0
+offset_bottom = 1268.0
+battlefield_id = "doggonamu"
+
+[node name="Level12" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 2250.0
+offset_top = 988.0
+offset_right = 2277.0
+offset_bottom = 1015.0
+battlefield_id = "doggonamu"
+
+[node name="Level13" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+offset_left = 2199.0
+offset_top = 256.0
+offset_right = 2226.0
+offset_bottom = 283.0
+battlefield_id = "doggonamu"
+
+[node name="Tracker" parent="Khung/map/AllLevel" instance=ExtResource("4_un5ok")]
+
+[node name="Dog" type="AnimatedSprite2D" parent="Khung/map/AllLevel"]
+position = Vector2(706, 587)
+scale = Vector2(0.269345, 0.269345)
+sprite_frames = SubResource("SpriteFrames_e4la2")
+offset = Vector2(-17.6188, -132.407)
+script = ExtResource("8_vsoej")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Khung"]
 
@@ -149,12 +215,6 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "Đội hình: diamon dogs"
 
-[connection signal="pressed" from="Khung/map/AllLevel/Node/Level1" to="Khung/map/AllLevel/Node/Level1" method="_on_level_pressed"]
-[connection signal="pressed" from="Khung/map/AllLevel/Node/Level2" to="Khung/map/AllLevel/Node/Level2" method="_on_level_pressed"]
-[connection signal="pressed" from="Khung/map/AllLevel/Node/Level3" to="Khung/map/AllLevel/Node/Level3" method="_on_level_pressed"]
-[connection signal="pressed" from="Khung/map/AllLevel/Node/Level4" to="Khung/map/AllLevel/Node/Level4" method="_on_level_pressed"]
-[connection signal="pressed" from="Khung/map/AllLevel/Node/Level5" to="Khung/map/AllLevel/Node/Level5" method="_on_level_pressed"]
-[connection signal="pressed" from="Khung/map/AllLevel/Node/Level6" to="Khung/map/AllLevel/Node/Level6" method="_on_level_pressed"]
 [connection signal="pressed" from="Khung/CanvasLayer/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/CanvasLayer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
 [connection signal="pressed" from="Khung/CanvasLayer/NutDoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]

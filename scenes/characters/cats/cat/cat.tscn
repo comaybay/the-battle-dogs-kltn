@@ -3,24 +3,26 @@
 [ext_resource type="PackedScene" uid="uid://dvorgedardkvp" path="res://scenes/characters/base_cat.tscn" id="1_2c8s7"]
 [ext_resource type="Texture2D" uid="uid://dk2qbrhlr0fcu" path="res://scenes/characters/cats/cat/cat.png" id="1_lqadi"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_puswq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eryft"]
 size = Vector2(192, 178)
 
 [node name="Cat" instance=ExtResource("1_2c8s7")]
+z_index = 21
 speed = 100
+health = 80
 damage = 20
 
 [node name="Sprite2D" parent="." index="2"]
+position = Vector2(3, -25)
 texture = ExtResource("1_lqadi")
-frame = 6
-metadata/_edit_lock_ = true
+frame = 7
 
 [node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(0, 22)
-shape = SubResource("RectangleShape2D_puswq")
-metadata/_edit_lock_ = true
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_eryft")
 
 [node name="RayCast2D" parent="." index="4"]
+position = Vector2(-87, 0)
 metadata/_edit_lock_ = true
 
 [node name="FiniteStateMachine" parent="." index="5"]

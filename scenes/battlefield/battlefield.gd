@@ -3,7 +3,7 @@ class_name Battlefield extends Node2D
 var stage_width: int
 
 func _enter_tree() -> void:
-	var battlefield_data = InBattle.load_battlefield_data(Data.selected_battlefield_id)
+	var battlefield_data = InBattle.load_battlefield_data()
 	stage_width = battlefield_data['stage_width']
 	
 func _ready() -> void:

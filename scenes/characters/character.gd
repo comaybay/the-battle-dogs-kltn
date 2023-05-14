@@ -56,6 +56,13 @@ func _ready() -> void:
 	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
 	if character_type == Type.DOG:
 		n_RayCast2D.position.x += collision_rect.size.x
+		
+	if not Engine.is_editor_hint():
+		## add random sprite offset for better visibility when characters are stacked on eachother
+		var rand_y: int = randi_range(-20, 20)
+		$Sprite2D.position += Vector2(randi_range(-20, 20), rand_y)
+		## render stuff correctly
+		z_index = rand_y + 20
 	
 	if Engine.is_editor_hint():
 		property_list_changed.connect(queue_redraw)

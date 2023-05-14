@@ -7,6 +7,7 @@ resource_local_to_scene = true
 size = Vector2(192, 178)
 
 [node name="BaseCat" groups=["cats"] instance=ExtResource("1_xhikh")]
+z_index = 18
 collision_layer = 4
 collision_mask = 35
 character_type = 1
@@ -14,7 +15,8 @@ attack_area_range = -1
 damage = 100
 
 [node name="Sprite2D" parent="." index="2"]
-frame = 7
+position = Vector2(6, -2)
+frame = 6
 
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource("RectangleShape2D_72ktc")

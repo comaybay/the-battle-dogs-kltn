@@ -1,5 +1,8 @@
 extends Node
 
+## use to load battlefield_data
+var battlefield_id: String = "doggonamu"
+
 var battlefield_data: Dictionary
 var _fmoney: float = 0 
 var money: int:
@@ -20,7 +23,7 @@ func reset():
 func update(delta: float):
 	_fmoney = min(_fmoney + (money_rate * delta), max_money)
 
-func load_battlefield_data(battlefield_id: String) -> Dictionary:
+func load_battlefield_data() -> Dictionary:
 	var file = FileAccess.open("res://resources/battlefield_data/%s.json" % battlefield_id, FileAccess.READ)
 	battlefield_data = JSON.parse_string(file.get_as_text())
 	battlefield_data['stage_width'] += STAGE_WIDTH_MARGIN * 2

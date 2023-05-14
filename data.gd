@@ -47,5 +47,5 @@ func _init() -> void:
 	
 func save():
 	var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)
-	file.write(JSON.stringify(save_data))
+	file.store_line(JSON.stringify(save_data))
 	file.close()

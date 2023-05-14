@@ -8,18 +8,13 @@ func _ready():
 	game_data = Data.save_data
 	
 	var levels := $Node.get_children()
+
+	for index in levels.size():
+		var level: Level = levels[index]
+		var prev_level: Level = levels[index - 1] if index > 0 else null
+		var next_level: Level = levels[index + 1] if index < levels.size() - 2 else null 
+		level.setup(index, prev_level, next_level)
+		
 	$Tracker.setup(levels, $MapSprite)
+	$Dog.setup(levels[Data.selected_level], $Tracker)
 	
-	for node in levels:
-		var level: Level = node
-		if level.battlefield_id == Data.selected_battlefield_id:
-			level.grab_focus()
-			break
-
-func _draw() -> void:
-	var allMap = $Node.get_children()	
-	for level in game_data['passed_level']:
-		var vitri1 = allMap[level].position + Vector2(20,20)
-		var vitri2 = allMap[level+1].position+ Vector2(20,20)
-		draw_dashed_line(vitri1,vitri2, Color(1, 1, 1, 1), 4, 10, false)
-

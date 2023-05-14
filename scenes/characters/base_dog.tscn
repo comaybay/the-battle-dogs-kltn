@@ -11,6 +11,9 @@ collision_layer = 2
 collision_mask = 21
 attack_area_range = -1
 
+[node name="Sprite2D" parent="." index="2"]
+frame = 6
+
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource("RectangleShape2D_i6m5t")
 

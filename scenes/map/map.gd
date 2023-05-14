@@ -15,3 +15,6 @@ func _on_quay_lai_pressed():
 
 func _on_level_pressed():
 	pass # Replace with function body.
+
+func _exit_tree() -> void:
+	Data.save()
