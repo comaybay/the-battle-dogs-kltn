@@ -18,10 +18,11 @@ position = Vector2(-21, -34.5)
 texture = ExtResource("2_y8xhq")
 hframes = 7
 vframes = 2
+frame = 8
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(-1, -2.5)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(112, 0)
+position = Vector2(95, 0)

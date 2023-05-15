@@ -8,9 +8,8 @@ size = Vector2(192, 178)
 
 [node name="Cat" instance=ExtResource("1_2c8s7")]
 z_index = 21
-speed = 100
+reward_money = 10
 health = 80
-damage = 20
 
 [node name="Sprite2D" parent="." index="2"]
 position = Vector2(3, -25)
@@ -22,7 +21,7 @@ position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_eryft")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(-87, 0)
+position = Vector2(-95, 0)
 metadata/_edit_lock_ = true
 
 [node name="FiniteStateMachine" parent="." index="5"]
