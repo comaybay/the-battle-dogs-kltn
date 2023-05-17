@@ -15,9 +15,10 @@ func on_frame_changed() -> void:
 		start_attack = true
 
 func physics_update(_delta: float) -> void:
+	
 	if start_attack == false:
 		return
-	
+	$Danh.play()
 	# single target
 	if character.attack_area_range <= 0:
 		# target can be a dog or a dog tower
@@ -50,7 +51,7 @@ func physics_update(_delta: float) -> void:
 	
 	start_attack = false
 
-func create_attack_fx(global_position: Vector2):
+func create_attack_fx(global_position: Vector2):	
 	var hit_fx: HitFx = HitFx.instantiate()
 	get_tree().current_scene.add_child(hit_fx)
 	hit_fx.global_position = global_position

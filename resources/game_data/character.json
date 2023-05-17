@@ -7,7 +7,10 @@
     "price": 200,
     "path": "res://resources/images/Screenshot (5).png",
     "spawn_time": 2,
-    "spawn_price": 50
+    "spawn_price": 50,
+    "sound" : { "danh" : 0, }
+     
+    
   },
   {
     "ID": 1,

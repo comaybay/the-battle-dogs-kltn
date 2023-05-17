@@ -20,6 +20,7 @@ func update(delta: float) -> void:
 		character.velocity.y += character.gravity * delta
 	else:
 		if knockback_countdown > 0:
+			$Nga.play()
 			character.velocity.x = knockback_vel.x * -character.move_direction
 			character.velocity.y = knockback_vel.y
 			

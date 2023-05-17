@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdl1gwm14qlqi"]
+[gd_scene load_steps=4 format=3 uid="uid://bdl1gwm14qlqi"]
 
 [ext_resource type="Script" path="res://scenes/dogBase/dogBase.gd" id="1_18sea"]
+[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="2_fheb0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ftrk6"]
 font_size = 20
@@ -153,6 +154,11 @@ label_settings = SubResource("LabelSettings_ftrk6")
 [node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanCuoi/TieuDe/ThucAnChoCho"]
 layout_mode = 2
 patch_margin_left = 30
+
+[node name="NhanNut" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -326)
+stream = ExtResource("2_fheb0")
+volume_db = 14.998
 
 [connection signal="pressed" from="Khung/PhanDau/TieuDe/QuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/BenTrai/NutVienChinh" to="." method="_on_nut_vien_chinh_pressed"]

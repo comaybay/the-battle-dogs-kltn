@@ -14,6 +14,7 @@ func setup(selected_level: Level, tracker: Tracker):
 	tracker.move_level.connect(_on_move_level)
 	
 func _on_move_level(target_level: Level):
+	$DiChuyen.play()
 	if target_level == current_level:
 		level_queue = []
 		return
