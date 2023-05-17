@@ -7,6 +7,8 @@ func _ready():
 func _on_nut_tan_cong_pressed():
 	$Click.play()
 	await get_tree().create_timer(0.5).timeout
+
+	InBattle.battlefield_id = Data.selected_battlefield_id
 	get_tree().change_scene_to_file("res://scenes/battlefield/battlefield.tscn")
 	
 func _on_doi_doi_hinh_pressed():
