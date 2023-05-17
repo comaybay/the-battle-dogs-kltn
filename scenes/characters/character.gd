@@ -41,8 +41,6 @@ var next_knockback_health: int
 var collision_rect: Rect2
 
 func _ready() -> void:
-	$AnimationPlayer.play("move")
-	
 	# config 
 	max_health = health
 	next_knockback_health = max_health - (max_health / knockbacks)
@@ -57,6 +55,8 @@ func _ready() -> void:
 		n_RayCast2D.position.x += collision_rect.size.x
 		
 	if not Engine.is_editor_hint():
+		$AnimationPlayer.play("move")
+		
 		## add random sprite offset for better visibility when characters are stacked on eachother
 		var rand_y: int = randi_range(-20, 20)
 		$Sprite2D.position += Vector2(randi_range(-20, 20), rand_y)
@@ -68,8 +68,11 @@ func _ready() -> void:
 
 func _draw() -> void:
 	if Engine.is_editor_hint() or Debug.is_debug_mode():
-		var attack_point = n_RayCast2D.position + Vector2(attack_range * move_direction, 0)
-		draw_dashed_line(n_RayCast2D.position, attack_point, Color.YELLOW, 5, 10)	
+		# draw attack range at the feet of the character
+		var c_shape_bottom = ($CollisionShape2D.shape.get_rect().size.y / 2) + $CollisionShape2D.position.y
+		var start_point = Vector2(n_RayCast2D.position.x, c_shape_bottom)
+		var attack_point = Vector2(n_RayCast2D.position.x + attack_range * move_direction, c_shape_bottom)
+		draw_dashed_line(start_point, attack_point, Color.YELLOW, 5, 10)	
 		
 		var is_single_target := attack_area_range <= 0
 		var half_attack_range_vec := Vector2(3, 0) if is_single_target else Vector2(attack_area_range / 2.0, 0) 
@@ -81,7 +84,7 @@ func _draw() -> void:
 		var default_font_size := 42
 		var debug_string := "Attack type: %s" % ("single target" if is_single_target else "area attack") + "\n%s/%s" % [health, max_health] 
 		var character_size := n_Sprite2D.get_rect().size
-		draw_multiline_string(default_font, Vector2(0, -character_size.y / 2 - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
+		draw_multiline_string(default_font, Vector2(0, $Sprite2D.position.y - (character_size.y / 2) - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
 
 	if not Engine.is_editor_hint() and Debug.is_debug_mode():
 		var rect: Rect2 = $CollisionShape2D.shape.get_rect()

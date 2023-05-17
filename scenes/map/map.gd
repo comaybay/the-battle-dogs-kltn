@@ -5,6 +5,7 @@ func _ready():
 	game_data = Data.save_data	
 
 func _on_nut_tan_cong_pressed():
+	InBattle.battlefield_id = Data.selected_battlefield_id
 	$Click.play()
 	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://scenes/battlefield/battlefield.tscn")

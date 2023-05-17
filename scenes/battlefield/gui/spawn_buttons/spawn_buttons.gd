@@ -3,7 +3,7 @@ extends Control
 var done_tweening := true
 
 func _ready() -> void:
-	var name_ids: Array = Data.selected_team['dog_name_ids']
+	var name_ids: Array = Data.selected_team['dog_ids']
 	var id_index := 0
 	var action_number = 1
 		

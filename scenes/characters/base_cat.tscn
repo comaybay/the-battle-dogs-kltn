@@ -17,6 +17,7 @@ character_type = 1
 
 [node name="Sprite2D" parent="." index="2"]
 position = Vector2(6, -2)
+frame = 7
 
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource("RectangleShape2D_72ktc")
