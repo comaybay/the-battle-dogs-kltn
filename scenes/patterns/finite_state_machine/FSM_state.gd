@@ -20,10 +20,4 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if not has_method("enter"):
 		warnings.append("Please define method 'enter', this method is called when the state is activated.")
 	
-	if not has_method("exit"):
-		warnings.append("Please define method 'exit', this method is called when the state is deactivated.")
-		
-	if not has_method("update"):
-		warnings.append("Please define method 'update', this method is called every frame when the state is active.")
-			
 	return warnings

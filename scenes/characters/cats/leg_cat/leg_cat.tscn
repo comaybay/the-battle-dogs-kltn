@@ -131,5 +131,5 @@ metadata/_edit_lock_ = true
 [node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
 stream = ExtResource("3_5yetp")
 
-[node name="Die" parent="FiniteStateMachine/DieState" index="0"]
+[node name="Die" type="AudioStreamPlayer2D" parent="FiniteStateMachine/DieState" index="0"]
 stream = ExtResource("3_qlped")

@@ -7,7 +7,7 @@
 font_size = 48
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghq1y"]
-size = Vector2(408, 907.25)
+size = Vector2(408, 948)
 
 [sub_resource type="Animation" id="Animation_uenk0"]
 length = 0.001

@@ -7,7 +7,7 @@
 font_size = 48
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghq1y"]
-size = Vector2(408, 907.25)
+size = Vector2(408, 948)
 
 [sub_resource type="Animation" id="Animation_uenk0"]
 length = 0.001
@@ -85,7 +85,7 @@ position = Vector2(4, -455)
 texture = ExtResource("2_mx6xr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -451.375)
+position = Vector2(-1, -431)
 shape = SubResource("RectangleShape2D_ghq1y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
