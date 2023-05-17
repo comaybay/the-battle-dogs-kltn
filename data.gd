@@ -41,7 +41,7 @@ func _init() -> void:
 	
 	var dog_info_arr = JSON.parse_string(file.get_as_text())
 	for info in dog_info_arr:
-		dog_info[info['name_id']] = info
+		dog_info[info['ID']] = info
 	
 	file.close()
 	

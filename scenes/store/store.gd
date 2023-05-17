@@ -61,7 +61,9 @@ func reset():
 		remove_child(i)
 		i.queue_free()
 	index = 0
-	game_data = Data.save_data
+	var file1 = FileAccess.open("res://resources/save.json", FileAccess.READ)
+	game_data = JSON.parse_string(file1.get_as_text())
+	file1.close()
 	
 	select_index[3] = int(select_index[3]) + 1
 	#ID,name, detail, amount, price, max

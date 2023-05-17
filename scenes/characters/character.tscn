@@ -115,7 +115,7 @@ libraries = {
 [node name="Sprite2D" type="Sprite2D" parent="."]
 hframes = 2
 vframes = 7
-frame = 8
+frame = 6
 region_rect = Rect2(4, 4, 178, 185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
