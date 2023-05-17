@@ -6,7 +6,6 @@ enum Type { DOG, ENEMY }
 
 ## 0 for dog, 1 for enemy
 @export var character_type: int = Type.DOG
-
 @export var speed: int = 100
 @export var attack_range: int = 40:
 	set(val):

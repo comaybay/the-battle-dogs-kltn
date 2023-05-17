@@ -1,7 +1,6 @@
 [
   {
-    "ID": 0,
-    "name_id": "dog",
+    "ID": "dog1",
     "name": "Chó thường",
     "detail": "dddf",
     "price": 200,
@@ -13,49 +12,43 @@
     
   },
   {
-    "ID": 1,
-    "name_id": "dog2",
+    "ID": "dog2",
     "name": "Chó thường 2",
     "price": 200,
     "detail": "asd",
     "path": "res://resources/images/planet9_Wallpaper_5000x2813.jpg"
   },
   {
-    "ID": 2,
-    "name_id": "dog3",
-    "name": "Chó thường 2",
+    "ID": "dog3",
+    "name": "Chó thường 3",
     "price": 200,
     "detail": "asd",
     "path": "res://resources/images/Screenshot (5).png"
   },
   {
-    "ID": 3,
-    "name_id": "dog4",
-    "name": "Chó thường 2",
+    "ID": "dog4",
+    "name": "Chó thường 3",
     "price": 200,
     "detail": "asa",
     "path": "res://resources/images/Screenshot (5).png"
   },
   {
-    "ID": 4,
-    "name_id": "dog5",
-    "name": "Chó thường 2",
+    "ID": "dog5",
+    "name": "Chó thường 4",
     "price": 200,
     "detail": "aa",
     "path": "res://resources/images/Screenshot (5).png"
   },
   {
-    "ID": 5,
-    "name_id": "dog6",
-    "name": "Chó thường 2",
+    "ID": "dog6",
+    "name": "Chó thường 5",
     "price": 200,
     "detail": "aa",
     "path": "res://resources/images/Screenshot (5).png"
   },
   {
-    "ID": 6,
-    "name_id": "dog7",
-    "name": "Chó thường 2",
+    "ID": "dog7",
+    "name": "Chó thường 6",
     "price": 200,
     "detail": "aa",
     "path": "res://resources/images/Screenshot (5).png"

@@ -9,13 +9,9 @@ var ID_index = 0
 var detail_index = ""
 var level_index = 0
 var name_index = ""
-var nameId_index = ""
-var path_index = ""
 
 func _ready():	
-	var file1 = FileAccess.open("res://resources/save.json", FileAccess.READ)
-	game_data = JSON.parse_string(file1.get_as_text())
-	file1.close()
+	game_data = Data.save_data
 	var file2 = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	character_data = JSON.parse_string(file2.get_as_text())
 	file2.close()
@@ -25,13 +21,12 @@ func _ready():
 		addItem(i)
 		
 
-func sendInfo(ID,detail, nameBox, level, name_id, price):
+func sendInfo(ID,detail, nameBox, level, price):
 	ID_index = ID
 	detail_index = detail
 	level_index = level
 	name_index = nameBox
 	price_index = price
-	nameId_index = name_id
 	if (int(level) == 0) :
 		$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text ="Tên : "+ nameBox + "\n" + "Mô tả : " +detail + "\n" + "Giá xương : " + price
 		$Khung/PhanGiua/PhanDuoi/TieuDe/NutNangCap.text = "Mua"
@@ -46,7 +41,6 @@ func addItem(value):
 	item.get_node("TextureRect").texture = load(value['path'])
 	item.get_node("Detail").text = str(value['detail'])
 	item.get_node("Name").text = str(value['name'])
-	item.get_node("Name_id").text = str(value['name_id'])
 	
 	item.get_node("Level").text = "0"
 	for obj in game_data["dogs"] :
@@ -106,7 +100,7 @@ func _on_nut_nang_cap_pressed():
 					
 		else : #Mua character
 			$Khung/PhanGiua/PhanDuoi/TieuDe/NutNangCap.text = "Nâng cấp"
-			var item ={"ID": ID_index,"level": 1, "path" : ""}
+			var item ={"ID": ID_index,"level": 1}
 			game_data["bone"] -=  int(price_index)
 			game_data["dogs"].push_back(item)
 		var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)

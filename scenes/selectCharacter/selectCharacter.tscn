@@ -151,15 +151,6 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_nqipa")
 
-[node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box1"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
-
 [node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box1"]
 layout_mode = 1
 anchors_preset = 15
@@ -195,15 +186,6 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box2"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
-
 [node name="Box3" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -228,15 +210,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
-
-[node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box3"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
 
 [node name="Box4" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -263,15 +236,6 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box4"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
-
 [node name="Box5" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -296,15 +260,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
-
-[node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box5"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
 
 [node name="Box6" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -365,15 +320,6 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box7"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
-
 [node name="Box8" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -398,15 +344,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
-
-[node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box8"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
 
 [node name="Box9" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -433,15 +370,6 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box9"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
-
 [node name="Box10" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -466,15 +394,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
-
-[node name="Name_id" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/ScrollContainer/GridContainer/Box10"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
 
 [node name="PhanDuoi" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2

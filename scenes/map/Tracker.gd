@@ -25,7 +25,7 @@ func setup(levels: Array[Node], map: Sprite2D):
 func _move_to_level(level: Level):
 	current_level.set_selected(false)
 	level.set_selected(true)
-	position = level.position
+	position = level.position #Di chuyen tracker
 	move_level.emit(level)
 	current_level = level
 
