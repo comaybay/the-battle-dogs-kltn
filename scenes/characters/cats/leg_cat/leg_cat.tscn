@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqjotstixi805"]
+[gd_scene load_steps=11 format=3 uid="uid://bqjotstixi805"]
 
 [ext_resource type="PackedScene" uid="uid://dvorgedardkvp" path="res://scenes/characters/base_cat.tscn" id="1_vncuy"]
 [ext_resource type="Texture2D" uid="uid://cqfjhykmeb15v" path="res://scenes/characters/cats/leg_cat/leg_cat.png" id="2_lg6d2"]
+[ext_resource type="AudioStream" uid="uid://iq8v80rnta0u" path="res://resources/sound/danh nhau/ngã(té).mp3" id="3_qlped"]
 
 [sub_resource type="Animation" id="Animation_kw6eg"]
 length = 0.001
@@ -111,7 +112,7 @@ texture = ExtResource("2_lg6d2")
 offset = Vector2(-119, -32)
 hframes = 3
 vframes = 5
-frame = 8
+frame = 9
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -241)
@@ -123,3 +124,6 @@ metadata/_edit_lock_ = true
 
 [node name="FiniteStateMachine" parent="." index="5"]
 metadata/_edit_lock_ = true
+
+[node name="Die" type="AudioStreamPlayer2D" parent="FiniteStateMachine/DieState" index="0"]
+stream = ExtResource("3_qlped")

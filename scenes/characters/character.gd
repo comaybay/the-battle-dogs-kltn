@@ -22,13 +22,12 @@ enum Type { DOG, ENEMY }
 		
 ## in seconds
 @export var attack_cooldown: int = 2
-
 ## check what frame should an attack occurr when playing the attack animation
 @export var attack_frame: int = 12
 @export var health: int = 250
 @export var damage: int = 20
 @export var knockbacks: int = 3
-
+@export var sound_danh = "res://resources/sound/danh nhau/Tieng-bup.mp3"
 @onready var n_RayCast2D := $RayCast2D as RayCast2D
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
 @onready var n_Sprite2D := $Sprite2D as Sprite2D
@@ -103,13 +102,13 @@ func _get_configuration_warnings() -> PackedStringArray:
 	
 func take_damage(ammount: int) -> void:
 	health -= ammount
-	
 	if Debug.is_debug_mode():
 		queue_redraw()
 	
 	if health <= next_knockback_health:
 		next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
 		$FiniteStateMachine.change_state("KnockbackState")	
+		
 		
 func kill():
 	$FiniteStateMachine.change_state("DieState")	

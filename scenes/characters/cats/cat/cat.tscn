@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cue3f8l417jkn"]
+[gd_scene load_steps=5 format=3 uid="uid://cue3f8l417jkn"]
 
 [ext_resource type="PackedScene" uid="uid://dvorgedardkvp" path="res://scenes/characters/base_cat.tscn" id="1_2c8s7"]
 [ext_resource type="Texture2D" uid="uid://dk2qbrhlr0fcu" path="res://scenes/characters/cats/cat/cat.png" id="1_lqadi"]
+[ext_resource type="AudioStream" uid="uid://b2rqgp2cnm4aj" path="res://resources/sound/danh nhau/Tieng-guom-dam.mp3" id="3_e42xb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eryft"]
 size = Vector2(192, 178)
@@ -11,19 +12,22 @@ z_index = 21
 speed = 100
 health = 80
 damage = 20
+sound_danh = null
 
 [node name="Sprite2D" parent="." index="2"]
 position = Vector2(3, -25)
 texture = ExtResource("1_lqadi")
-frame = 7
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_eryft")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(-87, 0)
+position = Vector2(-95, 0)
 metadata/_edit_lock_ = true
 
 [node name="FiniteStateMachine" parent="." index="5"]
 metadata/_edit_lock_ = true
+
+[node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
+stream = ExtResource("3_e42xb")

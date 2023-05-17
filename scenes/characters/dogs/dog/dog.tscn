@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhit6457y0brs"]
+[gd_scene load_steps=5 format=3 uid="uid://dhit6457y0brs"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/base_dog.tscn" id="1_wscv2"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="2_y8xhq"]
+[ext_resource type="AudioStream" uid="uid://cg022lnv5qfyx" path="res://resources/sound/danh nhau/Tieng-sung-ban-1-phat.mp3" id="3_hh5py"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa1yv"]
 resource_local_to_scene = true
@@ -12,16 +13,21 @@ z_index = 40
 position = Vector2(2, 1)
 attack_area_range = 20
 health = 90
+sound_danh = null
 
 [node name="Sprite2D" parent="." index="2"]
 position = Vector2(-21, -34.5)
 texture = ExtResource("2_y8xhq")
 hframes = 7
 vframes = 2
+frame = 7
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(-1, -2.5)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(112, 0)
+position = Vector2(95, 0)
+
+[node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
+stream = ExtResource("3_hh5py")

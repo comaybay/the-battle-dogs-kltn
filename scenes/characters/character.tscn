@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://brx02julmawu5"]
+[gd_scene load_steps=17 format=3 uid="uid://brx02julmawu5"]
 
 [ext_resource type="Script" path="res://scenes/characters/character.gd" id="1_taq0m"]
 [ext_resource type="PackedScene" uid="uid://yg61w87455ho" path="res://scenes/patterns/finite_state_machine/FSM.tscn" id="3_dcvdl"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://scenes/characters/knockback_state.gd" id="6_y7l8e"]
 [ext_resource type="Script" path="res://scenes/characters/idle_state.gd" id="6_yu7tv"]
 [ext_resource type="Script" path="res://scenes/characters/Die.gd" id="7_10dt3"]
+[ext_resource type="AudioStream" uid="uid://iq8v80rnta0u" path="res://resources/sound/danh nhau/ngã(té).mp3" id="7_caa1e"]
+[ext_resource type="AudioStream" uid="uid://bb8w1oc2sovpx" path="res://resources/sound/danh nhau/Am-thanh-khi-than-chet-xuat-hien-www_tiengdong_com.mp3" id="11_kin5u"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -130,8 +132,12 @@ initial_state = NodePath("MoveState")
 [node name="MoveState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("4_5450c")
 
+[node name="DiChuyen" type="AudioStreamPlayer2D" parent="FiniteStateMachine/MoveState"]
+
 [node name="AttackState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("5_xi1bt")
+
+[node name="Danh" type="AudioStreamPlayer2D" parent="FiniteStateMachine/AttackState"]
 
 [node name="IdleState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("6_yu7tv")
@@ -139,5 +145,11 @@ script = ExtResource("6_yu7tv")
 [node name="KnockbackState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("6_y7l8e")
 
+[node name="Nga" type="AudioStreamPlayer2D" parent="FiniteStateMachine/KnockbackState"]
+stream = ExtResource("7_caa1e")
+
 [node name="DieState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("7_10dt3")
+
+[node name="Die" type="AudioStreamPlayer2D" parent="FiniteStateMachine/DieState"]
+stream = ExtResource("11_kin5u")

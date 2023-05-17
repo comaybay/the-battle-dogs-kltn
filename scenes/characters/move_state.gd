@@ -4,6 +4,7 @@ extends FSMState
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
 	character.get_node("AnimationPlayer").play("move")
+	$DiChuyen.play()
 
 # called when the state is deactivated
 func exit() -> void:
@@ -18,10 +19,11 @@ func update(delta: float) -> void:
 	if collider == null:
 		character.velocity.x = character.speed * character.move_direction
 		
+		
 	else:
 		if character.n_AnimationPlayer.current_animation != "attack":
 			character.velocity = Vector2.ZERO
-
+			
 			if character.n_AttackCooldownTimer.is_stopped():
 				transition.emit("AttackState", { "target": collider })
 			else:

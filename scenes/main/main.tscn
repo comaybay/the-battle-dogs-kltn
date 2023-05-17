@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://drarq1ah1qd1p"]
+[gd_scene load_steps=4 format=3 uid="uid://drarq1ah1qd1p"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_o7540"]
+[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="2_p7moq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oarnu"]
 font_size = 50
@@ -87,4 +88,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Thoát"
 
+[node name="NhanNut" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -326)
+stream = ExtResource("2_p7moq")
+volume_db = 14.998
+
 [connection signal="pressed" from="Khung/PhanCuoi/NutBatDau" to="." method="_on_nut_bat_dau_pressed"]
+[connection signal="pressed" from="Khung/PhanCuoi/NutThoat" to="." method="_on_nut_thoat_pressed"]

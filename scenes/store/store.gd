@@ -41,6 +41,7 @@ func addItem(value):
 
 
 func sendInfo(ID,nameBox, detail, amount, price, max):
+	$Khung/PhanGiua/PhanTren/Items/click.play()
 	select_index[0] = ID
 	select_index[1] = nameBox
 	select_index[2] = detail
@@ -60,12 +61,7 @@ func reset():
 		remove_child(i)
 		i.queue_free()
 	index = 0
-	var file1 = FileAccess.open("res://resources/save.json", FileAccess.READ)
-	game_data = JSON.parse_string(file1.get_as_text())
-	file1.close()
-	var file2 = FileAccess.open("res://resources/game_data/store.json", FileAccess.READ)
-	store_data = JSON.parse_string(file2.get_as_text())
-	file2.close()	
+	game_data = Data.save_data
 	
 	select_index[3] = int(select_index[3]) + 1
 	#ID,name, detail, amount, price, max
@@ -74,6 +70,7 @@ func reset():
 		addItem(i)
 
 func _on_mua_pressed():
+	$NhanNut.play()
 	if int(select_index[0]) == -1  :
 		print("Chưa chọn vật phẩm")
 	elif int(game_data["bone"]) < int(select_index[4]) :
@@ -96,4 +93,6 @@ func _on_mua_pressed():
 					reset()
 	
 func _on_quay_lai_pressed():
+	$NhanNut.play()
+	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
