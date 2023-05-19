@@ -7,6 +7,12 @@ enum Type { DOG, ENEMY }
 ## 0 for dog, 1 for enemy
 @export var character_type: int = Type.DOG
 @export var speed: int = 100
+
+## if not null, will be use for attack collision detection
+## and will ignore the "attack range" and "attack area range" properties when attacking
+## (attack range is still used for detecting when to stop moving)
+@export var custom_attack_area: Area2D = null
+
 @export var attack_range: int = 40:
 	set(val):
 		attack_range = val
@@ -28,6 +34,7 @@ enum Type { DOG, ENEMY }
 @export var damage: int = 20
 @export var knockbacks: int = 3
 @export var sound_danh = "res://resources/sound/danh nhau/Tieng-bup.mp3"
+
 @onready var n_RayCast2D := $RayCast2D as RayCast2D
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
 @onready var n_Sprite2D := $Sprite2D as Sprite2D
@@ -51,8 +58,12 @@ func _ready() -> void:
 	
 	collision_rect = $CollisionShape2D.shape.get_rect()
 	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
+	
 	if character_type == Type.DOG:
 		n_RayCast2D.position.x += collision_rect.size.x
+	
+	if custom_attack_area != null:
+		custom_attack_area.disable_mode
 		
 	if not Engine.is_editor_hint():
 		$AnimationPlayer.play("move")
@@ -66,10 +77,15 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		property_list_changed.connect(queue_redraw)
 
+## get center point of a character
+func get_center_point():
+	return $CollisionShape2D.position + (collision_rect.size / 2) 
+
+
 func _draw() -> void:
 	if Engine.is_editor_hint() or Debug.is_debug_mode():
 		# draw attack range at the feet of the character
-		var c_shape_bottom = ($CollisionShape2D.shape.get_rect().size.y / 2) + $CollisionShape2D.position.y
+		var c_shape_bottom = (collision_rect.size.y / 2) + $CollisionShape2D.position.y
 		var start_point = Vector2(n_RayCast2D.position.x, c_shape_bottom)
 		var attack_point = Vector2(n_RayCast2D.position.x + attack_range * move_direction, c_shape_bottom)
 		draw_dashed_line(start_point, attack_point, Color.YELLOW, 5, 10)	

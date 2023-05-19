@@ -1,11 +1,15 @@
 @tool
 extends FSMState
+const FlyingSoul: PackedScene = preload("res://scenes/effects/flying_soul/flying_soul.tscn")
 
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
-	$Die.play()
-	await get_tree().create_timer(4.0).timeout
 	character.queue_free() 
-
 	
-
+	var soul_fx: Node = FlyingSoul.instantiate()
+	soul_fx.position = character.position
+	soul_fx.z_index = character.z_index
+	get_tree().current_scene.add_child(soul_fx)
+	
+	if character is BaseCat:
+		InBattle.money += character.reward_money
