@@ -35,7 +35,7 @@ func loadTeam(i) :
 	for obj in game_data["teams"][i]["dog_ids"]:
 		for ob in character_data :
 			
-			if (str(obj) == str(ob["ID"])):
+			if (str(obj) == str(ob["ID"])) and (obj != null):
 				var list = $Khung/PhanGiua/PhanDuoi/NhanVat/ScrollContainer/GridContainer.get_children()
 				var item = [ob["ID"], load(ob["path"])]
 				for it in list.size() :
@@ -109,17 +109,19 @@ func _on_luu_pressed():
 	#print(list_team)
 	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
 	var items = []
-	#list_team.push_back(item)
-	
+	#list_team.push_back(item)	
 	for obj in list_team :
 		items.push_back(str(obj[0]))
+	
+	for obj in (10- list_team.size()) :
+		items.push_back(null)
 	game_data["teams"][Data.save_data['selected_team']]["dog_ids"] = items
 	
 	var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)
 	var json_data = JSON.stringify(game_data)
 	file.store_string(json_data)
 	file.close()
-	
+	Data.save_data = game_data
 	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 

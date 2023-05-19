@@ -1,1 +1,99 @@
-{"bone":103900,"dog_food":1000,"dogs":[{"ID":"dog","level":1,"path":"res://resources/images/Screenshot (5).png"},{"ID":"dog2","level":3,"path":"res://resources/images/Screenshot (5).png"},{"ID":"dog3","level":1,"path":"res://resources/images/Screenshot (5).png"},{"ID":"dog4","level":1,"path":"res://resources/images/Screenshot (5).png"},{"ID":"dog5","level":1,"path":"res://resources/images/Screenshot (5).png"},{"ID":"dog1","level":5},{"ID":"dog7","level":4},{"ID":"dog6","level":2}],"items":[{"ID":0,"amount":3},{"ID":1,"amount":1},{"ID":2,"amount":5},{"ID":3,"amount":4},{"ID":4,"amount":3},{"ID":5,"amount":1},{"ID":6,"amount":1}],"passed_level":3,"selected_battlefield_id":"caupuchia","selected_level":1,"selected_team":0,"teams":[{"dog_ids":["dog","sniper_dog","dog","dog",null,null,"dog",null,null,null]},{"dog_ids":["dog1","dog2","dog3","dog4",null,null,null,null,null,null]}]}
+{
+  "bone": 103900,
+  "dog_food": 1000,
+  "dogs": [
+    {
+      "ID": "dog",
+      "level": 1
+    },
+    {
+      "ID": "sniper_dog",
+      "level": 3,
+      "path": "res://resources/images/Screenshot (5).png"
+    },
+    {
+      "ID": "dog3",
+      "level": 1,
+      "path": "res://resources/images/Screenshot (5).png"
+    },
+    {
+      "ID": "dog4",
+      "level": 1,
+      "path": "res://resources/images/Screenshot (5).png"
+    },
+    {
+      "ID": "dog5",
+      "level": 1,
+      "path": "res://resources/images/Screenshot (5).png"
+    },
+    {
+      "ID": "dog7",
+      "level": 4
+    },
+    {
+      "ID": "dog6",
+      "level": 2
+    }
+  ],
+  "items": [
+    {
+      "ID": 0,
+      "amount": 3
+    },
+    {
+      "ID": 1,
+      "amount": 1
+    },
+    {
+      "ID": 2,
+      "amount": 5
+    },
+    {
+      "ID": 3,
+      "amount": 4
+    },
+    {
+      "ID": 4,
+      "amount": 3
+    },
+    {
+      "ID": 5,
+      "amount": 1
+    },
+    {
+      "ID": 6,
+      "amount": 1
+    }
+  ],
+  "passed_level": 3,
+  "selected_battlefield_id": "xichcau",
+  "selected_level": 2,
+  "selected_team": 0,
+  "teams": [
+    {
+      "dog_ids": [
+        "sniper_dog",
+        "dog",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "dog_ids": [
+        "dog",
+        "sniper_dog",
+        "dog",
+        "dog",
+        "dog",
+        null,
+        null
+      ]
+    }
+  ]
+}
