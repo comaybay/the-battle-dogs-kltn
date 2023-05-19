@@ -12,7 +12,7 @@ var money: int:
 var max_money: int = 100
 
 ## money per second
-var money_rate: int = 20
+var money_rate: int = 10
 
 const STAGE_WIDTH_MARGIN = 300
 
