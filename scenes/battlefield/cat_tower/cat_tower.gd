@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+signal zero_health
+
 var health: int
 var max_health: int
 var spawn_timers: Array[Timer]
@@ -62,6 +64,8 @@ func take_damage(damage: int) -> void:
 	
 		for timer in spawn_timers:
 			timer.queue_free()			
+			
+		zero_health.emit()
 
 func spawn(cat_scene: PackedScene) -> void:
 	var cat = cat_scene.instantiate()
