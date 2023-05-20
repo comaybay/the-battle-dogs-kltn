@@ -1,0 +1,20 @@
+[
+  {
+    "ID": "dog",
+    "name": "Chó thường",
+    "detail": "dddf",
+    "price": 200,
+    "path": "res://resources/images/dogs/dog1.png",
+    "spawn_time": 2,
+    "spawn_price": 50
+  },
+  {
+    "ID": "sniper_dog",
+    "name": "Chó bắn tỉa",
+    "price": 600,
+    "detail": "asd",
+    "spawn_time": 10,
+    "spawn_price": 100,
+    "path": "res://resources/images/dogs/sniper_cat1.png"
+  }
+]

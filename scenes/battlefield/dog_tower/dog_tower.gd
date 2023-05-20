@@ -1,7 +1,5 @@
 class_name DogTower extends StaticBody2D
 
-signal zero_health
-
 var health: int
 var max_health: int
 
@@ -26,8 +24,6 @@ func take_damage(damage: int) -> void:
 	if health <= 0:
 		for dog in get_tree().get_nodes_in_group("dogs"):
 			dog.kill()
-			
-		zero_health.emit()
 	
 func spawn(dog_scene: PackedScene) -> void:
 	var dog = dog_scene.instantiate()
