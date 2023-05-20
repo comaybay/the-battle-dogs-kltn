@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmhx2wpadmcol"]
+[gd_scene load_steps=3 format=3 uid="uid://dmhx2wpadmcol"]
 
 [ext_resource type="PackedScene" uid="uid://e7fcshjccrpt" path="res://scenes/battlefield/gui/spawn_buttons/spawn_buttons.tscn" id="1_2pq88"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/gui.gd" id="1_e3bvc"]
-[ext_resource type="PackedScene" uid="uid://b428rqk33viy3" path="res://scenes/battlefield/gui/skill_buttons/skill_buttons.tscn" id="3_s16rg"]
 
 [node name="Gui" type="CanvasLayer"]
 script = ExtResource("1_e3bvc")
@@ -32,22 +31,3 @@ offset_right = 370.0
 offset_bottom = 172.0
 theme_type_variation = &"LabelLarge"
 text = "0/100 ₵"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -575.0
-offset_top = -97.0001
-offset_right = 2716.0
-offset_bottom = 192.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.35, 0.35)
-size_flags_vertical = 8
-alignment = 1
-
-[node name="SkillButtons" parent="HBoxContainer2" instance=ExtResource("3_s16rg")]
-layout_mode = 2
