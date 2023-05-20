@@ -34,6 +34,3 @@ func _process(delta: float) -> void:
 	zoom.y = zoom.x
 	zoom = zoom.clamp(min_zoom, MAX_ZOOM)
 		
-
-func disable_camera_movement() -> void:
-	set_process(false)
