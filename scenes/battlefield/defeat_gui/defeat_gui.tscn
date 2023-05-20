@@ -1,20 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5yuut0ll6hp"]
+[gd_scene load_steps=5 format=3 uid="uid://hddpvm5tjlba"]
 
-[ext_resource type="Script" path="res://scenes/battlefield/victory_gui/victory_gui.gd" id="1_v802x"]
+[ext_resource type="Script" path="res://scenes/battlefield/defeat_gui/defeat_gui.gd" id="1_nysfn"]
 
 [sub_resource type="Animation" id="Animation_tv0o4"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Decoration:position")
+tracks/0/path = NodePath("Decoration2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-16, -90)]
+"values": [Vector2(-15, 227)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -31,74 +31,74 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Decoration2:position")
+tracks/2/path = NodePath("Panel/HBoxContainer:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-15, 227)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Panel/HBoxContainer:position")
+tracks/3/path = NodePath("Panel/Label:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 105)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Panel/Label:position")
+tracks/4/path = NodePath("Panel/RectBehindText:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Panel/Label:modulate")
+tracks/5/path = NodePath("Panel/Button:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Panel/RectBehindText:scale")
+tracks/6/path = NodePath("Decoration3:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(-32, 536)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Panel/Button:scale")
+tracks/7/path = NodePath("Decoration4:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(-15, 496)]
 }
 
 [sub_resource type="Animation" id="Animation_f0nnd"]
@@ -112,10 +112,10 @@ tracks/0/path = NodePath("Decoration:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.458333, 1.0008),
+"times": PackedFloat32Array(0, 0.458333, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-16, -365), Vector2(-16, -185), Vector2(-16, -140)]
+"values": [Vector2(-32, -365), Vector2(-32, -195), Vector2(-32, -140)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -124,7 +124,7 @@ tracks/1/path = NodePath("Decoration2:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2502, 0.8757),
+"times": PackedFloat32Array(0, 0.25, 0.875),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-15, -227), Vector2(-15, 23), Vector2(-15, 177)]
@@ -144,86 +144,86 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Panel/HBoxContainer:position")
+tracks/3/path = NodePath("Panel/HBoxContainer:modulate")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.541667),
-"transitions": PackedFloat32Array(1, 0.297302),
+"transitions": PackedFloat32Array(3.03144, 1),
 "update": 0,
-"values": [Vector2(0, 150), Vector2(0, 105)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Panel/Label:position")
+tracks/4/path = NodePath("Panel/Label:modulate")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.541667),
-"transitions": PackedFloat32Array(0.757857, 0.241484),
+"transitions": PackedFloat32Array(3.03143, 1),
 "update": 0,
-"values": [Vector2(0, 21), Vector2(0, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Panel/Label:modulate")
-tracks/5/interp = 2
+tracks/5/path = NodePath("Panel/RectBehindText:scale")
+tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.541667),
-"transitions": PackedFloat32Array(3.03143, 1),
+"times": PackedFloat32Array(0.8757, 1.668),
+"transitions": PackedFloat32Array(0.112657, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(1, 0), Vector2(1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Panel/RectBehindText:scale")
+tracks/6/path = NodePath("Panel/Button:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.208333, 1),
-"transitions": PackedFloat32Array(0.112657, 1),
+"times": PackedFloat32Array(0, 0.8757, 1.668),
+"transitions": PackedFloat32Array(1e+06, 0.176777, 1),
 "update": 0,
-"values": [Vector2(1, 0), Vector2(1, 1)]
+"values": [Vector2(0, 0), Vector2(0, 0.5), Vector2(1, 1)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Panel/HBoxContainer:modulate")
+tracks/7/path = NodePath("Decoration3:position")
 tracks/7/interp = 2
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.541667),
-"transitions": PackedFloat32Array(3.03143, 1),
+"times": PackedFloat32Array(0, 0.4587, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(-32, 770), Vector2(-32, 610), Vector2(-32, 578)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Panel/Button:scale")
-tracks/8/interp = 1
+tracks/8/path = NodePath("Decoration4:position")
+tracks/8/interp = 2
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0.9591, 1.7514),
-"transitions": PackedFloat32Array(0.105112, 1),
+"times": PackedFloat32Array(0, 0.25, 0.8757),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0.75), Vector2(1, 1)]
+"values": [Vector2(-15, 927), Vector2(-15, 658), Vector2(-15, 546)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Panel/RectBehindText2:scale")
-tracks/9/interp = 1
+tracks/9/path = NodePath("Decoration4:size")
+tracks/9/interp = 2
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0.9591, 1.7514),
-"transitions": PackedFloat32Array(0.112657, 1),
+"times": PackedFloat32Array(0, 0.0833333, 0.8757),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 0), Vector2(1, 1)]
+"values": [Vector2(1200, 10.0004), Vector2(1200, 20), Vector2(1200, 10.0004)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_plp8v"]
@@ -232,8 +232,8 @@ _data = {
 "default": SubResource("Animation_f0nnd")
 }
 
-[node name="VictoryUI" type="CanvasLayer"]
-script = ExtResource("1_v802x")
+[node name="DefeatUI" type="CanvasLayer"]
+script = ExtResource("1_nysfn")
 
 [node name="Control" type="Panel" parent="."]
 anchors_preset = 15
@@ -248,14 +248,14 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -414.0
-offset_right = 48.0
-offset_bottom = -114.0
+offset_left = -32.0
+offset_top = -464.0
+offset_right = 2320.0
+offset_bottom = -163.998
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 0.0471239
-color = Color(0.156863, 0.156863, 0.45098, 1)
+rotation = -0.0545671
+color = Color(0.290196, 0.101961, 0.101961, 1)
 
 [node name="Decoration2" type="ColorRect" parent="Control"]
 layout_mode = 1
@@ -264,13 +264,13 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -15.0
-offset_top = -97.0
-offset_right = 33.0
-offset_bottom = -86.9996
+offset_top = 227.0
+offset_right = 1185.0
+offset_bottom = 237.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 0.0471239
-color = Color(0.156863, 0.156863, 0.45098, 1)
+rotation = -0.0545671
+color = Color(0.290196, 0.101961, 0.101961, 1)
 
 [node name="Panel" type="Panel" parent="Control"]
 custom_minimum_size = Vector2(0, 280)
@@ -287,7 +287,8 @@ offset_bottom = 91.0003
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"LabelXLarge"
-text = "Chiến Thắng!"
+theme_override_colors/font_outline_color = Color(0.290196, 0.101961, 0.101961, 1)
+text = "Thất bại..."
 horizontal_alignment = 1
 
 [node name="RectBehindText" type="ColorRect" parent="Control/Panel"]
@@ -297,72 +298,62 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = -36.0
-offset_right = 28.0
-offset_bottom = 34.0
+offset_left = -62.0
+offset_top = -28.0
+offset_right = 61.0
+offset_bottom = 98.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 0.0471239
-pivot_offset = Vector2(576, 35)
-color = Color(0, 0.0666667, 0.231373, 0.721569)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -35.0
-offset_bottom = 35.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Label" type="Label" parent="Control/Panel/HBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"LabelLarge"
-text = "Nhận được"
-
-[node name="BoneLabel" type="Label" parent="Control/Panel/HBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"LabelBoneQuantity"
-text = "0"
-
-[node name="Label2" type="Label" parent="Control/Panel/HBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"LabelLarge"
-text = "Xương"
-
-[node name="RectBehindText2" type="ColorRect" parent="Control/Panel"]
-custom_minimum_size = Vector2(0, 70)
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = 62.0945
-offset_right = 31.0
-offset_bottom = 173.094
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.0471239
-pivot_offset = Vector2(576, 35)
-color = Color(0, 0.0666667, 0.231373, 0.721569)
+rotation = -0.0471239
+pivot_offset = Vector2(576, 63)
+color = Color(0.290196, 0.101961, 0.101961, 1)
 
 [node name="Button" type="Button" parent="Control/Panel"]
-layout_mode = 2
-offset_left = 411.0
-offset_top = 233.094
-offset_right = 741.0
-offset_bottom = 284.094
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = 6.0
+offset_right = 166.0
+offset_bottom = 57.0001
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(165, 25)
+pivot_offset = Vector2(165, 26)
 theme_type_variation = &"ButtonLarge"
 text = "Về căn cứ"
+
+[node name="Decoration3" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 536.0
+offset_right = 5776.0
+offset_bottom = 836.004
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0545671
+color = Color(0.290196, 0.101961, 0.101961, 1)
+
+[node name="Decoration4" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 496.0
+offset_right = 1185.0
+offset_bottom = 506.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0545671
+color = Color(0.290196, 0.101961, 0.101961, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Control")
