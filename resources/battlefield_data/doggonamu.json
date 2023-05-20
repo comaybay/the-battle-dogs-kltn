@@ -1,6 +1,7 @@
 {
   "stage_width": 3000,
   "cat_tower_health": 1000,
+  "reward_bone": 1000,
   "spawn_patterns": [
     {
       "name": "cat",
