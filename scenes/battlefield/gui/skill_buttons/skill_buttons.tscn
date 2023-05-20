@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://b428rqk33viy3"]
+
+[ext_resource type="Script" path="res://scenes/battlefield/gui/skill_buttons/skill_buttons.gd" id="1_ujp8v"]
+[ext_resource type="PackedScene" uid="uid://33bborh4tyop" path="res://scenes/battlefield/gui/skill_buttons/skill_button.tscn" id="2_3tx0w"]
+[ext_resource type="Script" path="res://scenes/battlefield/gui/skill_buttons/skill_button.gd" id="3_dncqq"]
+
+[node name="SkillButtons" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ujp8v")
+
+[node name="FirstRow" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -542.0
+offset_top = -123.0
+offset_right = 542.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="CharacterButton" parent="FirstRow" instance=ExtResource("2_3tx0w")]
+layout_mode = 2
+script = ExtResource("3_dncqq")
+
+[node name="CharacterButton2" parent="FirstRow" instance=ExtResource("2_3tx0w")]
+layout_mode = 2
+script = ExtResource("3_dncqq")
+
+[node name="CharacterButton3" parent="FirstRow" instance=ExtResource("2_3tx0w")]
+layout_mode = 2
+script = ExtResource("3_dncqq")

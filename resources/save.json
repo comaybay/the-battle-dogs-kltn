@@ -34,7 +34,7 @@
       "ID": "dog6",
       "level": 2
     }
-  ],
+  ],  
   "items": [
     {
       "ID": 0,
@@ -82,6 +82,11 @@
         null,
         null,
         null
+      ],
+      "skill_ids": [
+        "sniper_dog",
+        "dog",
+        "dog"
       ]
     },
     {
@@ -93,6 +98,11 @@
         "dog",
         null,
         null
+      ],
+      "skill_ids": [
+        "sniper_dog",
+        "dog",
+        "dog"
       ]
     }
   ]
