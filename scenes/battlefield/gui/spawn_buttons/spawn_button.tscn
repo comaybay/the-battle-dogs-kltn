@@ -118,6 +118,9 @@ outline_color = Color(0.156863, 0.156863, 0.45098, 1)
 [node name="CharacterButton" instance=ExtResource("1_jeths")]
 script = ExtResource("2_icp81")
 
+[node name="Border" parent="." index="2"]
+frame = 1
+
 [node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_kxout")
@@ -138,7 +141,8 @@ show_percentage = false
 layout_mode = 0
 offset_left = 19.0
 offset_top = 172.0
-offset_right = 166.0
+offset_right = 306.0
 offset_bottom = 293.0
 text = "50₵"
 label_settings = SubResource("LabelSettings_tqvmg")
+horizontal_alignment = 2
