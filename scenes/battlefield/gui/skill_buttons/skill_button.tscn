@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://33bborh4tyop"]
+[gd_scene load_steps=9 format=3 uid="uid://33bborh4tyop"]
 
 [ext_resource type="PackedScene" uid="uid://2s6swgjc0swh" path="res://scenes/character_button/character_button.tscn" id="1_tqwcl"]
-[ext_resource type="Script" path="res://scenes/battlefield/skill/skill_buttons/skill_button.gd" id="2_xvnhn"]
+[ext_resource type="Script" path="res://scenes/battlefield/gui/skill_buttons/skill_button.gd" id="2_82j5k"]
 [ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="3_w8nb8"]
 
 [sub_resource type="Animation" id="Animation_ty6py"]
@@ -110,8 +110,18 @@ _data = {
 "ready": SubResource("Animation_c6xly")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_vjj37"]
+font_size = 74
+outline_size = 24
+outline_color = Color(0.156863, 0.156863, 0.45098, 1)
+
 [node name="CharacterButton" instance=ExtResource("1_tqwcl")]
-script = ExtResource("2_xvnhn")
+script = ExtResource("2_82j5k")
+
+[node name="Icon" parent="." index="1"]
+position = Vector2(164.5, 119.5)
+scale = Vector2(0.922849, 0.957692)
+frame = 1
 
 [node name="AnimationPlayer" parent="." index="3"]
 libraries = {
@@ -128,3 +138,12 @@ offset_top = 98.0
 offset_right = 295.0
 offset_bottom = 149.0
 show_percentage = false
+
+[node name="MoneyLabel" type="Label" parent="." index="6"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 172.0
+offset_right = 166.0
+offset_bottom = 293.0
+text = "x1"
+label_settings = SubResource("LabelSettings_vjj37")
