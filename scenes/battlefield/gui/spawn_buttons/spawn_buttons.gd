@@ -6,7 +6,7 @@ func _ready() -> void:
 	var name_ids: Array = Data.selected_team['dog_ids']
 	var id_index := 0
 	var action_number = 1
-		
+	
 	for button in $FirstRow.get_children():
 		var name_id = name_ids[id_index]
 		if name_id != null:
