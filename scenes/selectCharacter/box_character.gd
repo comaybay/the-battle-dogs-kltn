@@ -12,4 +12,5 @@ func _process(delta):
 
 func _on_pressed():
 	self.visible = false
-	get_tree().current_scene.sendInfo($ID.text, $TextureRect.texture)
+	get_tree().current_scene.sendInfo($ID.text, $TextureRect.texture,$Type.text)
+	

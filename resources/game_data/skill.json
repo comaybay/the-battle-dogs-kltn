@@ -1,0 +1,38 @@
+[
+  {
+    "ID": "dog",
+    "name": "Chó thường",
+    "detail": "dddf",
+    "price": 200,
+    "path": "res://resources/images/dogs/dog1.png",
+    "spawn_time": 2,
+    "spawn_price": 50
+  },
+  {
+    "ID": "sniper_dog",
+    "name": "Chó bắn tỉa",
+    "price": 600,
+    "detail": "asd",
+    "spawn_time": 10,
+    "spawn_price": 100,
+    "path": "res://resources/images/dogs/sniper_cat1.png"
+  },
+  {
+    "ID": "dog3",
+    "name": "Chó thường 3",
+    "price": 200,
+    "detail": "asd",
+    "path": "res://resources/images/Screenshot (5).png",
+    "spawn_time": 2,
+    "spawn_price": 50
+  },
+  {
+    "ID": "dog4",
+    "name": "Chó thường 3",
+    "price": 200,
+    "detail": "asa",
+    "path": "res://resources/images/planet9_Wallpaper_5000x2813.jpg",
+    "spawn_time": 2,
+    "spawn_price": 50
+  }
+]
