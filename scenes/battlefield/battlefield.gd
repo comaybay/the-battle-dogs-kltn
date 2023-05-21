@@ -1,6 +1,7 @@
 class_name Battlefield extends Node2D
 
 var VictoryGUI: PackedScene = preload("res://scenes/battlefield/victory_gui/victory_gui.tscn")
+var DefeatGUI: PackedScene = preload("res://scenes/battlefield/defeat_gui/defeat_gui.tscn")
 
 var stage_width: int
 
@@ -25,14 +26,21 @@ func _ready() -> void:
 	$Camera2D.position = Vector2(0, -half_viewport_size.y)
 
 	$CatTower.zero_health.connect(_show_win_ui)
+	$DogTower.zero_health.connect(_show_defeat_ui)
 
 func _process(delta: float) -> void:
 	InBattle.update(delta)
 	
 func _show_win_ui():
+	clean_up()
+	add_child(VictoryGUI.instantiate())	
+	
+func _show_defeat_ui():
+	clean_up()
+	add_child(DefeatGUI.instantiate())	
+
+func clean_up():
 	# set back to 1 in case user change game speed
 	Engine.time_scale = 1
-	
 	$Camera2D.disable_camera_movement()
 	$Gui.queue_free()
-	add_child(VictoryGUI.instantiate())	
