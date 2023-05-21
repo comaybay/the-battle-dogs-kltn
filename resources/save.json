@@ -1,5 +1,5 @@
 {
-  "bone": 105900,
+  "bone": 106900,
   "dog_food": 1000,
   "dogs": [
     {
@@ -73,19 +73,19 @@
   "skills": [
     {
       "ID": "dog",
-      "level": 1
+      "amount": 1
     },
     {
       "ID": "sniper_dog",
-      "level": 3
+      "amount": 3
     },
     {
-      "ID": "dog3",
-      "level": 1
+      "ID": "fire_ball",
+      "amount": 1
     },
     {
       "ID": "dog4",
-      "level": 1
+      "amount": 1
     }
   ],
   "teams": [
@@ -94,7 +94,7 @@
         "sniper_dog",
         "dog",
         "sniper_dog",
-        "dog4",
+        "dog",
         null,
         null,
         null,
@@ -103,9 +103,9 @@
         null
       ],
       "skill_ids": [
-        "dog",
-        "sniper_dog",
-        "dog3"
+        "fire_ball",
+        "fire_ball",
+        "fire_ball"
       ]
     },
     {
