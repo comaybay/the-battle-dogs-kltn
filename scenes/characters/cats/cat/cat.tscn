@@ -12,6 +12,7 @@ size = Vector2(192, 178)
 [node name="Cat" instance=ExtResource("1_2c8s7")]
 z_index = 21
 reward_money = 10
+attack_cooldown = 2.0
 health = 80
 
 [node name="Sprite2D" parent="." index="2"]

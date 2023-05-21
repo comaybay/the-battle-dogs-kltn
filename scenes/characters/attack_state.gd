@@ -63,6 +63,7 @@ func create_attack_fx(global_position: Vector2):
 	hit_fx.global_position = global_position
 			
 func on_animation_finished(_name):	
+	print(character.n_AttackCooldownTimer.wait_time)
 	character.n_AttackCooldownTimer.start()
 	transition.emit("IdleState")
 		
