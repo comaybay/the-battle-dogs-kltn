@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://c1tp1gq3oybif"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/base_dog.tscn" id="1_qnr0p"]
-[ext_resource type="Texture2D" uid="uid://dsanqteu4fv2s" path="res://scenes/characters/dogs/sniper_dog/sniper_cat.png" id="2_wgnt7"]
+[ext_resource type="Texture2D" uid="uid://deh28ywd0ub80" path="res://resources/images/skills/fire_ball.png" id="2_pknc1"]
 [ext_resource type="Texture2D" uid="uid://dy12wxohny1x6" path="res://scenes/characters/dogs/sniper_dog/fire_fx.png" id="3_wd3t6"]
 [ext_resource type="Texture2D" uid="uid://kstfevv07gtr" path="res://scenes/characters/dogs/sniper_dog/ground_hit_fx.png" id="4_2umbi"]
 [ext_resource type="Texture2D" uid="uid://cgekoyn0cbk5t" path="res://scenes/characters/dogs/sniper_dog/laser.png" id="4_flcht"]
@@ -476,11 +476,11 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60oqg"]
-size = Vector2(1893.99, 2)
+size = Vector2(1788.65, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa1yv"]
 resource_local_to_scene = true
-size = Vector2(604, 1134)
+size = Vector2(311, 167)
 
 [node name="SniperDog" node_paths=PackedStringArray("custom_attack_area") instance=ExtResource("1_qnr0p")]
 z_index = 40
@@ -504,9 +504,10 @@ libraries = {
 
 [node name="Sprite2D" parent="." index="2"]
 position = Vector2(-21, -498.5)
-texture = ExtResource("2_wgnt7")
-hframes = 5
-vframes = 5
+rotation = 1.05941
+texture = ExtResource("2_pknc1")
+hframes = 4
+vframes = 13
 frame = 6
 metadata/_edit_lock_ = true
 
@@ -549,17 +550,16 @@ position = Vector2(1244.1, -282.553)
 rotation = 0.408407
 collision_layer = 0
 collision_mask = 20
-metadata/_edit_lock_ = true
 
 [node name="AttackCollisionShape" type="CollisionShape2D" parent="AttackArea" index="0"]
-position = Vector2(0.000488281, -0.00012207)
-rotation = -0.000669386
+position = Vector2(-52.6691, 0.0351563)
+rotation = -0.00066939
 shape = SubResource("RectangleShape2D_60oqg")
+one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D" parent="." index="8"]
-position = Vector2(-41, -480)
+position = Vector2(-17, -406)
 shape = SubResource("RectangleShape2D_oa1yv")
-metadata/_edit_lock_ = true
 
 [node name="RayCast2D" parent="." index="9"]
 position = Vector2(261, 0)

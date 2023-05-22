@@ -11,7 +11,7 @@ func _enter_tree() -> void:
 	
 func _ready() -> void:
 	InBattle.reset()
-	6
+	
 	var half_viewport_size = get_viewport().size / 2
 	$Sky.position = Vector2(0, -$Sky.size.y)
 	$Sky.size.x = stage_width
