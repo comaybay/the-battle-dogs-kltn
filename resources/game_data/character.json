@@ -18,8 +18,8 @@
     "path": "res://resources/images/dogs/sniper_cat1.png"
   },
   {
-    "ID": "dog3",
-    "name": "Chó thường 3",
+    "ID": "sword_dog",
+    "name": "Chó sát thủ",
     "price": 200,
     "detail": "asd",
     "path": "res://resources/images/dogs/dog1.png",

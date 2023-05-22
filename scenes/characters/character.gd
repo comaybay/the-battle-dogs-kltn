@@ -27,7 +27,7 @@ enum Type { DOG, ENEMY }
 		queue_redraw()
 		
 ## in seconds
-@export var attack_cooldown: int = 2
+@export var attack_cooldown: float = 2
 ## check what frame should an attack occurr when playing the attack animation
 @export var attack_frame: int = 12
 @export var health: int = 250
@@ -53,7 +53,9 @@ func _ready() -> void:
 	next_knockback_health = max_health - (max_health / knockbacks)
 	move_direction = (1 if character_type == Type.DOG else -1)
 	
-	n_AttackCooldownTimer.wait_time = attack_cooldown
+	# for some reason timer do not take in 0 correctly
+	n_AttackCooldownTimer.wait_time = max(attack_cooldown, 0.01)
+	
 	n_RayCast2D.target_position.x = attack_range * move_direction
 	
 	collision_rect = $CollisionShape2D.shape.get_rect()
