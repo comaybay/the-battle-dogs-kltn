@@ -1,9 +1,9 @@
 [
   {
     "ID": "fire_ball",
-    "name": "Chó thường",
+    "name": "cầu lửa",
     "detail": "dddf",
-    "price": 200,
+    "price": 2000,
     "path": "res://resources/images/dogs/dog1.png",
     "spawn_time": 2,
     "spawn_price": 50
@@ -12,7 +12,7 @@
     "ID": "dog",
     "name": "Chó thường",
     "detail": "dddf",
-    "price": 200,
+    "price": 1000,
     "path": "res://resources/images/dogs/dog1.png",
     "spawn_time": 2,
     "spawn_price": 50
@@ -20,7 +20,7 @@
   {
     "ID": "sniper_dog",
     "name": "Chó bắn tỉa",
-    "price": 600,
+    "price": 3000,
     "detail": "asd",
     "spawn_time": 10,
     "spawn_price": 100,

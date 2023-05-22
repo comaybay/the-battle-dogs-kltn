@@ -19,7 +19,7 @@ func setup(name_id: String, input_action: String, is_active: bool) -> void:
 	spawn_input_action = input_action
 	
 	$Icon.texture = load("res://resources/icons/%s_icon.png" % name_id)
-	dog_scene = load("res://scenes/characters/skills/%s/%s.tscn" % [name_id, name_id])
+	dog_scene = load("res://scenes/skills/%s/%s.tscn" % [name_id, name_id])
 	
 	$SpawnTimer.wait_time = Data.skill_info[name_id]['spawn_time']
 	$SpawnTimer.timeout.connect(_on_spawn_ready)

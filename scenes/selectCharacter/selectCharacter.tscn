@@ -132,7 +132,7 @@ stream = SubResource("AudioStreamMP3_xqgya")
 volume_db = 14.998
 pitch_scale = 3.86
 
-[node name="DoiHinh" type="ScrollContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh"]
+[node name="DoiHinh" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -403,7 +403,7 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Skill" type="ScrollContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh"]
+[node name="Skill" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
