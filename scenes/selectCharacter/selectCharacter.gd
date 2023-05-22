@@ -201,22 +201,14 @@ func _on_luu_pressed():
 	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
-
-func _on_ky_nang_pressed():
-	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
-	if ( $Khung/PhanGiua/PhanTren/DoiHinh/Skill.visible == false):	
-		$Khung/PhanGiua/PhanDuoi/DanhSach/Skill.visible = true
-		$Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat.visible = false
-		move(0)
-	
-
 func move(set) :
-	var character_row = $Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer
+	var character_row = $Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh
 	var skill_row = $Khung/PhanGiua/PhanTren/DoiHinh/Skill
-	if (set == 0):
+	
+	if (set == 1):
 		skill_row.visible = true
 		var tween = create_tween()
-		tween.set_parallel(true).set_trans(Tween.TRANS_LINEAR)
+		tween.set_parallel(true).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(character_row, "position", skill_row.position, 0.2)
 		tween.tween_property(skill_row, "position", character_row.position, 0.2)
 		character_row.visible = false
@@ -224,19 +216,25 @@ func move(set) :
 	else :
 		character_row.visible = true
 		var tween = create_tween()
-		tween.set_parallel(true).set_trans(Tween.TRANS_LINEAR)
+		tween.set_parallel(true).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(skill_row, "position",  character_row.position, 0.2)
 		tween.tween_property(character_row, "position", skill_row.position, 0.2)
 		skill_row.visible = false
 		tween.finished.connect(func(): false)
-		
+
+func _on_ky_nang_pressed():
+	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
+	if ( $Khung/PhanGiua/PhanTren/DoiHinh/Skill.visible == false):	
+		$Khung/PhanGiua/PhanDuoi/DanhSach/Skill.visible = true
+		$Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat.visible = false
+		move(1)
 
 func _on_doi_hinh_pressed():
 	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
-	if ($Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer.visible == false):
+	if ($Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh.visible == false):
 		$Khung/PhanGiua/PhanDuoi/DanhSach/Skill.visible = false
 		$Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat.visible = true
-		move(1)
+		move(0)
 	
 
 

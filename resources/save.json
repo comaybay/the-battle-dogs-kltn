@@ -1,14 +1,14 @@
 {
-  "bone": 107900,
+  "bone": 72500,
   "dog_food": 1000,
   "dogs": [
     {
       "ID": "dog",
-      "level": 1
+      "level": 5
     },
     {
       "ID": "sniper_dog",
-      "level": 3,
+      "level": 5,
       "path": "res://resources/images/Screenshot (5).png"
     },
     {
@@ -29,10 +29,6 @@
     {
       "ID": "dog7",
       "level": 4
-    },
-    {
-      "ID": "dog6",
-      "level": 2
     }
   ],
   "items": [
@@ -81,11 +77,7 @@
     },
     {
       "ID": "fire_ball",
-      "level": 1
-    },
-    {
-      "ID": "dog4",
-      "level": 1
+      "level": 3
     }
   ],
   "teams": [
