@@ -104,7 +104,7 @@ damage = 10
 knockbacks = 5
 
 [node name="AttackCooldownTimer" parent="." index="0"]
-wait_time = 0.5
+wait_time = 0.01
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

@@ -40,6 +40,10 @@ enum Type { DOG, ENEMY }
 @onready var n_Sprite2D := $Sprite2D as Sprite2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
 
+## position where effect for a character should take place 
+var effect_global_position: Vector2:
+	get: return n_RayCast2D.global_position
+
 ## Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var move_direction: int

@@ -22,8 +22,9 @@ func physics_update(_delta: float) -> void:
 	# custom attack
 	if character.custom_attack_area != null:
 		for target in character.custom_attack_area.get_overlapping_bodies():
-			print(target)
 			target.take_damage(character.damage)
+			create_attack_fx(target.effect_global_position)
+			print(target.effect_global_position)
 	
 	# single target
 	elif character.attack_area_range <= 0:
@@ -31,6 +32,7 @@ func physics_update(_delta: float) -> void:
 		var target := character.n_RayCast2D.get_collider()
 		if target != null:
 			target.take_damage(character.damage)
+			create_attack_fx(target.effect_global_position)
 
 	# area attack
 	else:
@@ -50,11 +52,8 @@ func physics_update(_delta: float) -> void:
 		# target can be a dog or a dog tower
 		for result in results:
 			result.collider.take_damage(character.damage)
-			
-	var target := character.n_RayCast2D.get_collider()
-	if target != null:
-		create_attack_fx(character.n_RayCast2D.get_collision_point())
-	
+			create_attack_fx(result.collider.effect_global_position)
+
 	start_attack = false
 
 func create_attack_fx(global_position: Vector2):	

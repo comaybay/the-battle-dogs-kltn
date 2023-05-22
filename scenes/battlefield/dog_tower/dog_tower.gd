@@ -5,6 +5,10 @@ signal zero_health
 var health: int
 var max_health: int
 
+## position where effect for the tower should take place 
+var effect_global_position: Vector2:
+	get: return $Marker2D.global_position
+	
 func _ready() -> void:
 	#TODO: increase health through upgrade
 	max_health = 500

@@ -6,6 +6,10 @@ var health: int
 var max_health: int
 var spawn_timers: Array[Timer]
 
+## position where effect for the tower should take place 
+var effect_global_position: Vector2:
+	get: return $Marker2D.global_position
+	
 func _ready() -> void:
 	max_health = InBattle.battlefield_data['cat_tower_health']
 	health = max_health

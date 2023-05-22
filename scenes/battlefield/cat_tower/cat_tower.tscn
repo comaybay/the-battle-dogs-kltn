@@ -94,5 +94,5 @@ libraries = {
 }
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-262, -225)
+position = Vector2(-200, -186)
 gizmo_extents = 54.5
