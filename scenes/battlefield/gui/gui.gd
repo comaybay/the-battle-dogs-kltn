@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func _process(_delta: float) -> void:
-	$MoneyLabel.text = "%s/%s ₵" % [InBattle.money, InBattle.max_money]
+	$MoneyLabel.text = "%s/%s ₵" % [InBattle.money, InBattle.get_wallet_capacity()]
 	
 #TODO: remove this later when time scale button is implemented
 func _input(event: InputEvent) -> void: 

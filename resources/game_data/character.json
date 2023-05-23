@@ -13,8 +13,8 @@
     "name": "Chó bắn tỉa",
     "price": 600,
     "detail": "asd",
-    "spawn_time": 10,
-    "spawn_price": 100,
+    "spawn_time": 20,
+    "spawn_price": 500,
     "path": "res://resources/images/dogs/sniper_cat1.png"
   },
   {
@@ -23,8 +23,8 @@
     "price": 200,
     "detail": "asd",
     "path": "res://resources/images/dogs/dog1.png",
-    "spawn_time": 2,
-    "spawn_price": 50
+    "spawn_time": 4,
+    "spawn_price": 150
   },
   {
     "ID": "dog4",

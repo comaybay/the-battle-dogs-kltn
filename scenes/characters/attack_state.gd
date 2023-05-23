@@ -24,7 +24,6 @@ func physics_update(_delta: float) -> void:
 		for target in character.custom_attack_area.get_overlapping_bodies():
 			target.take_damage(character.damage)
 			create_attack_fx(target.effect_global_position)
-			print(target.effect_global_position)
 	
 	# single target
 	elif character.attack_area_range <= 0:
@@ -62,7 +61,6 @@ func create_attack_fx(global_position: Vector2):
 	hit_fx.global_position = global_position
 			
 func on_animation_finished(_name):	
-	print(character.n_AttackCooldownTimer.wait_time)
 	character.n_AttackCooldownTimer.start()
 	transition.emit("IdleState")
 		

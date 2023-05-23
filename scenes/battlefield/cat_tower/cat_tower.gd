@@ -2,6 +2,8 @@ extends StaticBody2D
 
 signal zero_health
 
+const MAX_RANDOM_DELAY: float = 2.5
+
 var health: int
 var max_health: int
 var spawn_timers: Array[Timer]
@@ -29,15 +31,16 @@ func _ready() -> void:
 		var on_spawn_cat = func():
 			var cat_scene: PackedScene = cats[pattern['name']]
 			spawn(cat_scene)
+			timer.wait_time = spawn_duration + randf() * MAX_RANDOM_DELAY
 				
 		if delay_duration <= 0:
-			timer.start(spawn_duration)
+			timer.start(spawn_duration + randf() * MAX_RANDOM_DELAY)
 			timer.timeout.connect(on_spawn_cat)
 		else:
 			timer.start(delay_duration)
 			
 			var on_timeout_delay = func():
-				timer.start(spawn_duration)
+				timer.start(spawn_duration + randf() * MAX_RANDOM_DELAY)
 				timer.timeout.connect(on_spawn_cat)
 			
 			timer.timeout.connect(on_timeout_delay, CONNECT_ONE_SHOT)
