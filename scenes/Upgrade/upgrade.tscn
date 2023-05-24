@@ -105,12 +105,15 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.29
 
-[node name="Items" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren"]
+[node name="Items" type="Control" parent="Khung/PhanGiua/PhanTren"]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="NhanVat" type="ScrollContainer" parent="Khung/PhanGiua/PhanTren/Items"]
 layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 364.0
+pivot_offset = Vector2(576, 182)
 size_flags_horizontal = 3
 
 [node name="GridContainer" type="GridContainer" parent="Khung/PhanGiua/PhanTren/Items/NhanVat"]
@@ -124,6 +127,9 @@ columns = 50
 [node name="Skill" type="ScrollContainer" parent="Khung/PhanGiua/PhanTren/Items"]
 visible = false
 layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 364.0
+pivot_offset = Vector2(576, 182)
 size_flags_horizontal = 3
 
 [node name="GridContainer" type="GridContainer" parent="Khung/PhanGiua/PhanTren/Items/Skill"]

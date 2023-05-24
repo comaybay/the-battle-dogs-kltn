@@ -10,7 +10,7 @@ var list_skill = [] #danh sách kỹ năng
 var teams # node đội hình đã chọn
 var skill_teams # node kỹ năng đã chọn
 var base_img = load("res://resources/images/base.png")
-
+var base_position
 func _ready():
 	game_data = Data.save_data
 	var file2 = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
@@ -20,7 +20,7 @@ func _ready():
 	var file3 = FileAccess.open("res://resources/game_data/skill.json", FileAccess.READ)
 	skill_data = JSON.parse_string(file3.get_as_text())
 	file2.close()
-	
+	base_position = $Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer.position 
 	$Khung/PhanDau/TieuDe/Xuong/Label.text = "Xương: "+ str( Data.bone)
 	# làm trống đội hình và kỹ năng
 	teams = $Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer.get_children()	
@@ -202,38 +202,39 @@ func _on_luu_pressed():
 	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
 func move(set) :
+	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
 	var character_row = $Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh
 	var skill_row = $Khung/PhanGiua/PhanTren/DoiHinh/Skill
-	
-	if (set == 1):
+	var tween = create_tween()
+	tween.set_parallel(false).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	if (set == 1):		
+		skill_row.scale = Vector2(1,0)
 		skill_row.visible = true
-		var tween = create_tween()
-		tween.set_parallel(true).set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(character_row, "position", skill_row.position, 0.2)
-		tween.tween_property(skill_row, "position", character_row.position, 0.2)
+		tween.tween_property(character_row, "scale", Vector2(1,0), 0.5)
+		tween.tween_property(skill_row, "scale", Vector2(1,1), 0.5) 
+		await get_tree().create_timer(1).timeout
 		character_row.visible = false
-		tween.finished.connect(func(): false)
-	else :
-		character_row.visible = true
-		var tween = create_tween()
-		tween.set_parallel(true).set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(skill_row, "position",  character_row.position, 0.2)
-		tween.tween_property(character_row, "position", skill_row.position, 0.2)
-		skill_row.visible = false
-		tween.finished.connect(func(): false)
-
-func _on_ky_nang_pressed():
-	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
-	if ( $Khung/PhanGiua/PhanTren/DoiHinh/Skill.visible == false):	
+		character_row.scale = Vector2(1,1)
+		
 		$Khung/PhanGiua/PhanDuoi/DanhSach/Skill.visible = true
 		$Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat.visible = false
+	else :
+		character_row.scale = Vector2(1,0)
+		character_row.visible = true
+		tween.tween_property(skill_row, "scale", Vector2(1,0), 0.5)
+		tween.tween_property(character_row, "scale", Vector2(1,1), 0.5) 
+		await get_tree().create_timer(1).timeout
+		skill_row.visible = false
+		skill_row.scale = Vector2(1,1)
+		$Khung/PhanGiua/PhanDuoi/DanhSach/Skill.visible = false
+		$Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat.visible = true
+
+func _on_ky_nang_pressed():
+	if ( $Khung/PhanGiua/PhanTren/DoiHinh/Skill.visible == false):		
 		move(1)
 
 func _on_doi_hinh_pressed():
-	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
-	if ($Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh.visible == false):
-		$Khung/PhanGiua/PhanDuoi/DanhSach/Skill.visible = false
-		$Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat.visible = true
+	if ($Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh.visible == false):		
 		move(0)
 	
 

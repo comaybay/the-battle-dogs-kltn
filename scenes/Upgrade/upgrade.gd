@@ -143,22 +143,33 @@ func _on_nut_nang_cap_pressed():
 
 
 func move(set) :
+	$button.play()
 	var character_row = $Khung/PhanGiua/PhanTren/Items/NhanVat
 	var skill_row = $Khung/PhanGiua/PhanTren/Items/Skill
-	if (set == 0):
+	var tween = create_tween()
+	tween.set_parallel(false).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	if (set == 1):
+		skill_row.scale = Vector2(1,0)
 		skill_row.visible = true
+		tween.tween_property(character_row, "scale", Vector2(1,0), 0.5)
+		tween.tween_property(skill_row, "scale", Vector2(1,1), 0.5) 
+		await get_tree().create_timer(1).timeout
 		character_row.visible = false
-	else :
+		character_row.scale = Vector2(1,1)
+	else:
+		character_row.scale = Vector2(1,0)
 		character_row.visible = true
+		tween.tween_property(skill_row, "scale", Vector2(1,0), 0.5)
+		tween.tween_property(character_row, "scale", Vector2(1,1), 0.5) 
+		await get_tree().create_timer(1).timeout
 		skill_row.visible = false
+		skill_row.scale = Vector2(1,1)
 
 func _on_skill_pressed():
-	$button.play()
 	if ( $Khung/PhanGiua/PhanTren/Items/Skill.visible == false):
 		character_or_skill = false
-		move(0)
+		move(1)
 func _on_doi_hinh_pressed():
-	$button.play()
 	if ($Khung/PhanGiua/PhanTren/Items/NhanVat.visible == false):
 		character_or_skill = true
-		move(1)
+		move(0)

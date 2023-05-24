@@ -1,7 +1,7 @@
 extends Button
 
-var dog_tower
-var dog_scene: PackedScene
+var skill_position
+var skill_scene: PackedScene
 var is_active: bool
 
 var spawn_price: int
@@ -19,7 +19,7 @@ func setup(name_id: String, input_action: String, is_active: bool) -> void:
 	spawn_input_action = input_action
 	
 	$Icon.texture = load("res://resources/icons/%s_icon.png" % name_id)
-	dog_scene = load("res://scenes/skills/%s/%s.tscn" % [name_id, name_id])
+	skill_scene = load("res://scenes/skills/%s/%s.tscn" % [name_id, name_id])
 	
 	$SpawnTimer.wait_time = Data.skill_info[name_id]['spawn_time']
 	$SpawnTimer.timeout.connect(_on_spawn_ready)
@@ -39,7 +39,7 @@ func _ready() -> void:
 	$Background.frame = 1
 	$ProgressBar.visible = false
 	$AnimationPlayer.play("empty")
-	dog_tower = get_tree().current_scene.get_node("DogTower")
+	skill_position = get_tree().current_scene.get_node("Land")
 	set_process(false)
 	set_process_input(false)
 
@@ -52,15 +52,15 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(spawn_input_action) and can_spawn():
-		spawn_dog()
+		spawn_skill()
 			
 func _on_pressed() -> void:
-	spawn_dog()
+	spawn_skill()
 	
-func spawn_dog():
+func spawn_skill():
 	self.disabled = true
 	
-	dog_tower.spawn(dog_scene)
+	skill_position.spawn(skill_scene, Vector2(1200, -200)) #goi linh ở vị trí dog_tower
 
 	$ProgressBar.visible = true
 	$Background.frame = 1

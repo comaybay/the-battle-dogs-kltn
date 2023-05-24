@@ -9,7 +9,6 @@ func _ready() -> void:
 	
 	for button in $FirstRow.get_children():		
 		var name_id = name_ids[id_index]
-		print(name_ids[id_index])
 		if name_id != null:
 			button.setup(name_ids[id_index], "ui_skill_%s" % action_number, true)
 		
