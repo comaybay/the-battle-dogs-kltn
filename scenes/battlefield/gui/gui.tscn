@@ -9,22 +9,18 @@
 script = ExtResource("1_e3bvc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -573.0
-offset_top = -622.0
-offset_right = 2718.0
-offset_bottom = -333.0
+offset_top = 22.0
+offset_bottom = 22.0
 grow_horizontal = 2
-grow_vertical = 0
 scale = Vector2(0.35, 0.35)
 alignment = 1
 
 [node name="SpawnButtons" parent="HBoxContainer" instance=ExtResource("1_2pq88")]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="MoneyLabel" type="Label" parent="."]
 offset_left = 260.0
@@ -40,10 +36,8 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -575.0
-offset_top = -97.0001
-offset_right = 2716.0
-offset_bottom = 192.0
+offset_top = -71.9999
+offset_bottom = -71.9999
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.35, 0.35)
