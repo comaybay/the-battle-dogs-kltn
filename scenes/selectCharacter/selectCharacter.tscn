@@ -122,7 +122,11 @@ text = "DIAMON DOG"
 label_settings = SubResource("LabelSettings_ftrk6")
 lines_skipped = 1
 
-[node name="DoiHinh" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanGiua/PhanTren"]
+layout_mode = 2
+patch_margin_left = 50
+
+[node name="DoiHinh" type="Control" parent="Khung/PhanGiua/PhanTren"]
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -132,13 +136,124 @@ stream = SubResource("AudioStreamMP3_xqgya")
 volume_db = 14.998
 pitch_scale = 3.86
 
-[node name="DoiHinh" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh"]
+[node name="Skill" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -50.0
+offset_right = 170.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(170, 49.5)
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 5
+
+[node name="Box1" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "0"
+script = ExtResource("4_dxlay")
+
+[node name="ID" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box1"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 26.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_nqipa")
+
+[node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_fhby6")
+expand_mode = 1
+
+[node name="Box2" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "1"
+script = ExtResource("4_dxlay")
+
+[node name="ID" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box2"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 26.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_nqipa")
+
+[node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_fhby6")
+expand_mode = 1
+
+[node name="Box3" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "2"
+script = ExtResource("4_dxlay")
+
+[node name="ID" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box3"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 26.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_nqipa")
+
+[node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_fhby6")
+expand_mode = 1
+
+[node name="DoiHinh" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -290.0
+offset_top = -220.0
+offset_right = 290.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(290, 120)
 size_flags_horizontal = 3
 
 [node name="GridContainer" type="GridContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
@@ -403,94 +518,6 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Skill" type="HBoxContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="GridContainer" type="GridContainer" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 5
-
-[node name="Box1" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-text = "0"
-script = ExtResource("4_dxlay")
-
-[node name="ID" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box1"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
-
-[node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_fhby6")
-expand_mode = 1
-
-[node name="Box2" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-text = "1"
-script = ExtResource("4_dxlay")
-
-[node name="ID" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box2"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
-
-[node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_fhby6")
-expand_mode = 1
-
-[node name="Box3" type="Button" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-text = "2"
-script = ExtResource("4_dxlay")
-
-[node name="ID" type="Label" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box3"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-text = "0
-"
-label_settings = SubResource("LabelSettings_nqipa")
-
-[node name="TextureRect" type="TextureRect" parent="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_fhby6")
-expand_mode = 1
-
 [node name="PhanDuoi" type="VBoxContainer" parent="Khung/PhanGiua"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -582,6 +609,9 @@ patch_margin_left = 30
 [connection signal="pressed" from="Khung/PhanDau/TieuDe/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/TieuDe/Giua/DoiHinh" to="." method="_on_doi_hinh_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/TieuDe/Giua/Skill" to="." method="_on_ky_nang_pressed"]
+[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box1" to="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box1" method="_on_pressed"]
+[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box2" to="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box2" method="_on_pressed"]
+[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box3" to="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box3" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box1" to="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box1" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box2" to="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box2" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box3" to="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box3" method="_on_pressed"]
@@ -592,7 +622,4 @@ patch_margin_left = 30
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box8" to="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box8" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box9" to="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box9" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box10" to="Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer/Box10" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box1" to="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box1" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box2" to="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box2" method="_on_pressed"]
-[connection signal="pressed" from="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box3" to="Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer/Box3" method="_on_pressed"]
 [connection signal="pressed" from="Khung/PhanGiua/PhanDuoi/TieuDe/NutLuu" to="." method="_on_luu_pressed"]

@@ -44,3 +44,9 @@ func clean_up():
 	Engine.time_scale = 1
 	$Camera2D.disable_camera_movement()
 	$Gui.queue_free()
+
+func spawn(scene: PackedScene, position ) -> void:
+	var dog = scene.instantiate()
+	dog.global_position = position 
+	get_tree().current_scene.add_child(dog)
+
