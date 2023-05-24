@@ -14,7 +14,7 @@ func exit() -> void:
 func update(delta: float) -> void:
 	if not character.is_on_floor():
 		character.velocity.y += character.gravity * delta
-
+	
 	var collider = character.n_RayCast2D.get_collider()
 	if collider == null:
 		character.velocity.x = character.speed * character.move_direction

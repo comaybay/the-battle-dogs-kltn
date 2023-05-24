@@ -6,7 +6,6 @@ func _ready() -> void:
 	$TextureRect.size.x = stage_width
 	$TextureRect.position.x = -stage_width / 2
 
-func spawn(scene: PackedScene, position ) -> void:
+func spawn(scene: PackedScene ) -> void:
 	var skill = scene.instantiate()
-	skill.global_position = position 
 	get_tree().current_scene.add_child(skill)

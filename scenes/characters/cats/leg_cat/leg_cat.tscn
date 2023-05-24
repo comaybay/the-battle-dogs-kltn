@@ -97,7 +97,7 @@ reward_money = 50
 speed = 200
 attack_range = 300
 attack_area_range = 50
-attack_cooldown = 10
+attack_cooldown = 10.0
 health = 200
 damage = 80
 
