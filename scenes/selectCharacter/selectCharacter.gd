@@ -92,7 +92,6 @@ func loadTeam(i) :
 func sendInfo(ID, path,type):
 	$Khung/PhanGiua/PhanTren/DoiHinh/click.play()
 	var item = [ID, path]
-	print("item:" + str(item))
 	if (int(type) == 0 ) :
 		if (list_team.size() < 10) :		
 			teams[list_team.size()].get_node("TextureRect").texture = path

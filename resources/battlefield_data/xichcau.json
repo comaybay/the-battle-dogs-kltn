@@ -6,7 +6,7 @@
     {
       "name": "cat",
       "duration": 5,
-      "delay": 10
+      "delay": 0
     },
     {
       "name": "leg_cat",
@@ -14,9 +14,15 @@
       "delay": 20
     },
     {
-      "name": "sniper_cat",
-      "duration": 60,
-      "delay": 40
+      "name": "cat",
+      "duration": 10,
+      "delay": 22.5
+    },
+
+    {
+      "name": "cat",
+      "duration": 10,
+      "delay": 42.5
     }
   ]
 }

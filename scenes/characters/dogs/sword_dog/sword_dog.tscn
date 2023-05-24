@@ -99,8 +99,7 @@ speed = 300
 attack_range = 90
 attack_area_range = 0
 attack_cooldown = 0.0
-health = 150
-damage = 10
+health = 180
 knockbacks = 5
 
 [node name="AttackCooldownTimer" parent="." index="0"]

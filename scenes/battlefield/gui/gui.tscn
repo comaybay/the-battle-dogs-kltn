@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmhx2wpadmcol"]
+[gd_scene load_steps=5 format=3 uid="uid://dmhx2wpadmcol"]
 
 [ext_resource type="PackedScene" uid="uid://e7fcshjccrpt" path="res://scenes/battlefield/gui/spawn_buttons/spawn_buttons.tscn" id="1_2pq88"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/gui.gd" id="1_e3bvc"]
 [ext_resource type="PackedScene" uid="uid://b428rqk33viy3" path="res://scenes/battlefield/gui/skill_buttons/skill_buttons.tscn" id="3_s16rg"]
+[ext_resource type="PackedScene" uid="uid://dmdc60cjuki5p" path="res://scenes/battlefield/gui/efficiency_up_button/efficiency_up_button.tscn" id="4_3sbug"]
 
 [node name="Gui" type="CanvasLayer"]
 script = ExtResource("1_e3bvc")
@@ -51,3 +52,10 @@ alignment = 1
 
 [node name="SkillButtons" parent="HBoxContainer2" instance=ExtResource("3_s16rg")]
 layout_mode = 2
+
+[node name="EfficiencyUpButton" parent="." instance=ExtResource("4_3sbug")]
+offset_left = -36.0
+offset_top = -40.0
+offset_right = 346.0
+offset_bottom = 337.0
+scale = Vector2(0.585068, 0.585068)

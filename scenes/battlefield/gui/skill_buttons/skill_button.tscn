@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://33bborh4tyop"]
 
-[ext_resource type="PackedScene" uid="uid://2s6swgjc0swh" path="res://scenes/character_button/character_button.tscn" id="1_tqwcl"]
+[ext_resource type="PackedScene" uid="uid://2s6swgjc0swh" path="res://scenes/buttons/character_button/character_button.tscn" id="1_tqwcl"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/skill_buttons/skill_button.gd" id="2_3smka"]
 [ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="3_w8nb8"]
 
