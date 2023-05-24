@@ -60,8 +60,8 @@ func _on_pressed() -> void:
 func spawn_skill():
 	self.disabled = true
 	
-	skill_position.spawn(skill_scene, Vector2(1200, -200)) #goi linh ở vị trí dog_tower
-
+	skill_position.spawn(skill_scene) #goi linh ở vị trí vector
+	
 	$ProgressBar.visible = true
 	$Background.frame = 1
 	var tween := create_tween()
