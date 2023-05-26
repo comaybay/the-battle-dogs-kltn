@@ -14,7 +14,7 @@
       "delay": 20
     },
     {
-      "name": "cat",
+      "name": "rolling_cat",
       "duration": 10,
       "delay": 22.5
     },

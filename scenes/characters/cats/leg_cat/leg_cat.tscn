@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqjotstixi805"]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" uid="uid://dvorgedardkvp" path="res://scenes/characters/base_cat.tscn" id="1_vncuy"]
+[ext_resource type="PackedScene" uid="uid://dvorgedardkvp" path="res://scenes/characters/cats/base_cat.tscn" id="1_vncuy"]
 [ext_resource type="Texture2D" uid="uid://cqfjhykmeb15v" path="res://scenes/characters/cats/leg_cat/leg_cat.png" id="2_lg6d2"]
 [ext_resource type="AudioStream" uid="uid://cwm0ebg26cxgu" path="res://resources/sound/danh nhau/Tieng-bup.mp3" id="3_5yetp"]
 [ext_resource type="AudioStream" uid="uid://iq8v80rnta0u" path="res://resources/sound/danh nhau/ngã(té).mp3" id="3_qlped"]

@@ -11,7 +11,7 @@ data = PackedByteArray(73, 68, 51, 4, 0, 0, 0, 0, 2, 21, 84, 88, 88, 88, 0, 0, 0
 [sub_resource type="LabelSettings" id="LabelSettings_ftrk6"]
 font_size = 23
 
-[node name="MainGUI" instance=ExtResource("1_ry8js")]
+[node name="MainGUI2" instance=ExtResource("1_ry8js")]
 
 [node name="Content" parent="Khung" index="1"]
 script = ExtResource("2_g8lbj")

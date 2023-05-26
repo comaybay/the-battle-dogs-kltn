@@ -35,6 +35,6 @@ func take_damage(damage: int) -> void:
 	
 func spawn(dog_scene: PackedScene) -> void:
 	var dog = dog_scene.instantiate()
-	dog.global_position = global_position + Vector2(100, 500)
+	dog.global_position = global_position + Vector2(100, 0)
 	get_tree().current_scene.add_child(dog)
 	

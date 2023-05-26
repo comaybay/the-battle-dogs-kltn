@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dv34bam3a2qh"]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/base_dog.tscn" id="1_ivu0g"]
+[ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_ivu0g"]
 [ext_resource type="Texture2D" uid="uid://bxv6vquc0mpo8" path="res://scenes/characters/dogs/sword_dog/sword_dog.png" id="2_8ghqg"]
 [ext_resource type="AudioStream" uid="uid://c3i4qpbh2kbnf" path="res://resources/sound/danh nhau/cắn 1.mp3" id="3_sfp40"]
 [ext_resource type="AudioStream" uid="uid://bb8w1oc2sovpx" path="res://resources/sound/danh nhau/Am-thanh-khi-than-chet-xuat-hien-www_tiengdong_com.mp3" id="4_745xp"]
