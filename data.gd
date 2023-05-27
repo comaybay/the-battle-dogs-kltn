@@ -1,10 +1,14 @@
 extends Node
 
+signal bone_changed(value: int)
+
 var save_data: Dictionary
 
 var bone: int:
 	get: return save_data['bone']		
-	set(value): save_data['bone'] = value		
+	set(value): 
+		save_data['bone'] = value
+		bone_changed.emit(value)		
 
 var dog_food: int:
 	get: return save_data['dog_food']		
@@ -32,6 +36,9 @@ var selected_battlefield_id: String:
 
 var dog_info := Dictionary()
 var skill_info := Dictionary()
+var dogs := Dictionary()
+var skills := Dictionary()
+
 func _init() -> void:
 	var file = FileAccess.open("res://resources/save.json", FileAccess.READ)
 	save_data = JSON.parse_string(file.get_as_text())
@@ -49,8 +56,17 @@ func _init() -> void:
 		skill_info[info['ID']] = info
 	file.close()
 	
+	compute_values()
+
+func compute_values():
+	for dog in save_data["dogs"]:
+		dogs[dog["ID"]] = dog
 	
+	for skill in save_data["skills"]:
+		skills[skill["ID"]] = skill
+
 func save():
 	var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)
 	file.store_line(JSON.stringify(save_data))
 	file.close()
+	compute_values()
