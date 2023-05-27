@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bpnumwoocgr3v"]
 
+[ext_resource type="Script" path="res://scenes/Upgrade/upgrade.gd" id="1_080ab"]
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_ry8js"]
-[ext_resource type="Script" path="res://scenes/Upgrade/Upgrade.gd" id="2_g8lbj"]
 [ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="2_j7yjx"]
 [ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="3_i3rdb"]
 
@@ -11,35 +11,36 @@ data = PackedByteArray(73, 68, 51, 4, 0, 0, 0, 0, 2, 21, 84, 88, 88, 88, 0, 0, 0
 [sub_resource type="LabelSettings" id="LabelSettings_ftrk6"]
 font_size = 23
 
-[node name="MainGUI2" instance=ExtResource("1_ry8js")]
+[node name="Upgrade" instance=ExtResource("1_ry8js")]
+go_back_scene_path = "res://scenes/dogBase/dogBase.tscn"
 
-[node name="Content" parent="Khung" index="1"]
-script = ExtResource("2_g8lbj")
-
-[node name="InfoPanel" type="TextureRect" parent="Khung/Content" index="0"]
+[node name="InfoPanel" type="TextureRect" parent="." index="2"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -246.0
-offset_bottom = 37.0
+offset_top = -309.0
+offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("3_i3rdb")
 
-[node name="click" type="AudioStreamPlayer2D" parent="Khung/Content" index="1"]
+[node name="Content" parent="Khung" index="1"]
+script = ExtResource("1_080ab")
+
+[node name="click" type="AudioStreamPlayer2D" parent="Khung/Content" index="0"]
 position = Vector2(286, -314)
 stream = SubResource("AudioStreamMP3_pwu7g")
 volume_db = 14.998
 pitch_scale = 3.86
 
-[node name="button" type="AudioStreamPlayer2D" parent="Khung/Content" index="2"]
+[node name="button" type="AudioStreamPlayer2D" parent="Khung/Content" index="1"]
 position = Vector2(0, -326)
 stream = ExtResource("2_j7yjx")
 volume_db = 14.998
 
-[node name="PhanGiua" type="VBoxContainer" parent="Khung/Content" index="3"]
+[node name="PhanGiua" type="VBoxContainer" parent="Khung/Content" index="2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,24 +49,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
+theme_override_constants/separation = 15
 
-[node name="PhanTren" type="VBoxContainer" parent="Khung/Content/PhanGiua" index="0"]
+[node name="TabContainer" type="TabContainer" parent="Khung/Content/PhanGiua" index="0"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.29
+tab_alignment = 1
 
-[node name="Items" type="Control" parent="Khung/Content/PhanGiua/PhanTren" index="0"]
+[node name="NhanVat" type="ScrollContainer" parent="Khung/Content/PhanGiua/TabContainer" index="1"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="NhanVat" type="ScrollContainer" parent="Khung/Content/PhanGiua/PhanTren/Items" index="0"]
-layout_mode = 2
-offset_right = 1152.0
-offset_bottom = 364.0
-pivot_offset = Vector2(576, 182)
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/PhanTren/Items/NhanVat" index="0"]
+[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/TabContainer/NhanVat" index="0"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -73,15 +69,13 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 50
 
-[node name="Skill" type="ScrollContainer" parent="Khung/Content/PhanGiua/PhanTren/Items" index="1"]
+[node name="Skill" type="ScrollContainer" parent="Khung/Content/PhanGiua/TabContainer" index="2"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
-offset_right = 1152.0
-offset_bottom = 364.0
-pivot_offset = Vector2(576, 182)
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/PhanTren/Items/Skill" index="0"]
+[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/TabContainer/Skill" index="0"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -92,21 +86,25 @@ columns = 50
 [node name="PhanDuoi" type="VBoxContainer" parent="Khung/Content/PhanGiua" index="1"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.85
+size_flags_stretch_ratio = 0.82
 
 [node name="TieuDe" type="HBoxContainer" parent="Khung/Content/PhanGiua/PhanDuoi" index="0"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Khung/Content/PhanGiua/PhanDuoi/TieuDe" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/PhanDuoi/TieuDe" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 80
+
+[node name="Label" type="Label" parent="Khung/Content/PhanGiua/PhanDuoi/TieuDe/MarginContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 50
+theme_type_variation = &"LabelWhite"
+theme_override_font_sizes/font_size = 28
 text = "Thông tin"
-label_settings = SubResource("LabelSettings_ftrk6")
 
-[node name="UpgradeButton" type="Button" parent="Khung/Content/PhanGiua/PhanDuoi/TieuDe" index="1"]
+[node name="NutNangCap" type="Button" parent="Khung/Content/PhanGiua/PhanDuoi/TieuDe" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -130,3 +128,6 @@ Giá"
 label_settings = SubResource("LabelSettings_ftrk6")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="tab_changed" from="Khung/Content/PhanGiua/TabContainer" to="Khung/Content" method="_on_tab_container_tab_changed"]
+[connection signal="pressed" from="Khung/Content/PhanGiua/PhanDuoi/TieuDe/NutNangCap" to="Khung/Content" method="_on_nut_nang_cap_pressed"]

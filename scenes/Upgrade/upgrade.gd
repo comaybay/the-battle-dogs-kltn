@@ -1,6 +1,6 @@
 extends Control
 
-const ListItem = preload("res://scenes/Upgrade/character_box.tscn")
+const ListItem = preload("res://scenes/Upgrade/item_box.tscn")
 
 var character_data 
 var skill_data 
@@ -11,40 +11,70 @@ var detail_index = ""
 var level_index = 0
 var name_index = ""
 var character_or_skill := true
+var selected_item: Node
+
 func _ready():	
 	game_data = Data.save_data
-	for i in Data.dog_info.keys() :			
-		addItem(i)
+	add_items()
+		
+func add_items():
+	for dog in Data.dog_info.values():			
+		addItemDog(dog)
+		
+	for skill in Data.skill_info.values():			
+		addItemSkill(skill)
 
-func sendInfo(ID,detail, nameBox, level, price):
+func sendInfo(item: Node, data: Dictionary):
 	$click.play()
-	ID_index = ID
-	detail_index = detail
-	level_index = level
-	name_index = nameBox
-	var gia = str(int(price) * pow(2,int(level) ))
-	price_index = price
-	if (int(level) == 0) :
-		%ItemLabel.text ="Tên : "+ nameBox + "\n" + "Mô tả : " +detail + "\n" + "Giá xương : " + gia
-		%UpgradeButton.text = "Mua"
-	else :
-		%ItemLabel.text ="Tên : "+ nameBox + "\n" + "Mô tả : " +detail  + "\n" + "Giá xương : " + gia+"\n" + "Cấp độ : "  + level 
-		%UpgradeButton.text = "Nâng cấp"
+	selected_item = item
+	ID_index = data['ID']
+	detail_index = data['detail']
 	
-func addItem(id):
+	if character_or_skill and Data.dogs.has(ID_index):
+		level_index = Data.dogs[ID_index]['level']
+	elif !character_or_skill and Data.skills.has(ID_index):
+		level_index = Data.skills[ID_index]['level']
+	else:
+		level_index = 0	
+
+	name_index = data["name"]
+	price_index = int(data['price'])
+	if (level_index == 0) :
+		%ItemLabel.text ="Tên : "+ name_index + "\n" + "Mô tả : " + detail_index + "\n" + "Giá xương : " + str(price_index * pow(2,level_index))
+		%NutNangCap.text = "Mua"
+	else :
+		%ItemLabel.text = "Tên : "+ name_index + "\n" + "Mô tả : " + detail_index  + "\n" + "Giá xương : " + str(price_index * pow(2,level_index)) + "\n" + "Cấp độ : "  + str(level_index) 
+		%NutNangCap.text = "Nâng cấp"
+		
+	%NutNangCap.disabled = price_index * pow(2,level_index) > Data.bone
+	
+func addItemDog(value: Dictionary) -> void:
 	var item = ListItem.instantiate()
 	var bone = 0
-	item.setup(id, self)
+	item.setup(value, self)
 
-	var value = Data.dog_info[id]
-	for obj in game_data["dogs"] :
+	for obj in Data.save_data["dogs"] :
 		if str(value['ID']) == str(obj["ID"]):
 			item.get_node("Level").text = str(obj["level"])
 			break
 			# tinh toan so tien dua tren level
-	bone =int(value["price"]) * pow(2,int(item.get_node("Level").text)) 
-	item.get_node("Price").text = str(value["price"])
-	$PhanGiua/PhanTren/Items/NhanVat/GridContainer.add_child(item)
+		bone =int(value["price"]) * pow(2,int(item.get_node("Level").text)) 
+		item.get_node("Price").text = str(value["price"])
+	%NhanVat/GridContainer.add_child(item)
+
+func addItemSkill(skill: Dictionary) -> void:
+	var item = ListItem.instantiate()
+	var bone = 0
+	item.setup(skill, self)
+
+	for obj in Data.save_data["skills"] :
+		if str(skill['ID']) == str(obj["ID"]):
+			item.get_node("Level").text = str(obj["level"])
+			break
+			# tinh toan so tien dua tren level
+		bone = int(skill["price"]) * pow(2,int(item.get_node("Level").text)) 
+		item.get_node("Price").text = str(skill["price"])
+	%Skill/GridContainer.add_child(item)
 
 func _on_nut_quay_lai_pressed():
 	$button.play()
@@ -57,33 +87,13 @@ func _on_box_pressed(button):
 	$PhanGiua/PhanDuoi/ThongTin/Label_Item.text = button.text
 	
 func reset():
-	pass
-	$Khung/PhanDau/TieuDe/Xuong/Money.text = "Xương : " + str(game_data["bone"]) # trừ tiền
-	for i in $Khung/PhanGiua/PhanTren/Items/NhanVat/GridContainer.get_children():
-		remove_child(i)
-		i.queue_free()
-	for i in $Khung/PhanGiua/PhanTren/Items/Skill/GridContainer.get_children():
-		remove_child(i)
-		i.queue_free()
-	var file = FileAccess.open("res://resources/save.json", FileAccess.READ)
-	game_data = JSON.parse_string(file.get_as_text())
-	file.close()
-	file = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
-	character_data = JSON.parse_string(file.get_as_text())
-	file.close()
-	file = FileAccess.open("res://resources/game_data/skill.json", FileAccess.READ)
-	skill_data = JSON.parse_string(file.get_as_text())
-	file.close()
-	
-	level_index = str(int(level_index) + 1)
+	level_index = int(level_index) + 1
 	var gia = str(int(price_index) * pow(2,int(level_index) ))
-	
-	$Khung/PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Tên : "+ name_index + "\n" + "Mô tả : " + str(detail_index) + "\n"+ "Giá xương : " + gia+"\n" + "Cấp độ : " + level_index
-	for i in character_data :
-		addItem(i)
+	$PhanGiua/PhanDuoi/ThongTin/ItemLabel.text = "Tên : "+ name_index + "\n" + "Mô tả : " + str(detail_index) + "\n"+ "Giá xương : " + gia+"\n" + "Cấp độ : " + str(level_index)
+	%NutNangCap.disabled = price_index * pow(2,level_index) > Data.bone
 
 func _on_nut_nang_cap_pressed():
-	AudioPlayer.play()
+	AudioPlayer.play_button_pressed_audio()
 	var gia = str(int(price_index) * pow(2,int(level_index) ))
 	#kiem tra tien 
 	if (game_data["bone"] < int(gia)) : # ko đủ tiền
@@ -94,29 +104,25 @@ func _on_nut_nang_cap_pressed():
 			if (character_or_skill == true):
 				for obj in game_data["dogs"].size():#Nang cap / đủ tiền
 					if (str(game_data["dogs"][obj]["ID"]) == str(ID_index)):
-						game_data["bone"] -=  int(gia)
+						Data.bone -=  int(gia)
 						game_data["dogs"][obj]["level"] += 1				
 			else :
 				for obj in game_data["skills"].size():#Nang cap / đủ tiền
 					if (str(game_data["skills"][obj]["ID"]) == str(ID_index)):
-						game_data["bone"] -=  int(gia)
+						Data.bone -=  int(gia)
 						game_data["skills"][obj]["level"] += 1		
 		else : #Mua character
 			$PhanGiua/PhanDuoi/TieuDe/NutNangCap.text = "Nâng cấp"
 			var item ={"ID": ID_index,"level": 1}
 			if (character_or_skill == true):
-				game_data["bone"] -=  int(gia)
+				Data.bone -=  int(gia)
 				game_data["dogs"].push_back(item)
 			else :
-				game_data["bone"] -=  int(gia)
+				Data.bone -=  int(gia)
 				game_data["skills"].push_back(item)
-		var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)
-		var json_data = JSON.stringify(game_data)
-		file.store_string(json_data)
-		file.close()
+		Data.save()
 		reset()
-
-
+	
 func move(set) :
 	AudioPlayer.play()
 	var character_row = $PhanGiua/PhanTren/Items/NhanVat
@@ -140,11 +146,6 @@ func move(set) :
 		skill_row.visible = false
 		skill_row.scale = Vector2(1,1)
 
-func _on_skill_pressed():
-	if ( $PhanGiua/PhanTren/Items/Skill.visible == false):
-		character_or_skill = false
-		move(1)
-func _on_doi_hinh_pressed():
-	if ($PhanGiua/PhanTren/Items/NhanVat.visible == false):
-		character_or_skill = true
-		move(0)
+
+func _on_tab_container_tab_changed(tab: int) -> void:
+	character_or_skill = true if tab == 0 else false
