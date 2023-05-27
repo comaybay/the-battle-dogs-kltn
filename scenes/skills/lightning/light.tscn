@@ -62,7 +62,7 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa1yv"]
 resource_local_to_scene = true
-size = Vector2(125.608, 440)
+size = Vector2(141, 857.801)
 
 [node name="lightning" type="CharacterBody2D"]
 position = Vector2(72.7871, -3.80142)
@@ -81,13 +81,13 @@ wait_time = 10.0
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.5, 0)
-scale = Vector2(0.244141, 0.648094)
+position = Vector2(60.1065, 218.901)
+scale = Vector2(0.476978, 1.29003)
 texture = ExtResource("2_06ls8")
 hframes = 4
 vframes = 3
 region_rect = Rect2(4, 4, 178, 185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.499992, 0)
+position = Vector2(59.7129, 208.901)
 shape = SubResource("RectangleShape2D_oa1yv")

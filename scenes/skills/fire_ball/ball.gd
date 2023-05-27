@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var veloc = Vector2(400,800)
+@export var veloc = Vector2(300,600)
 @export var dame = 50
 var count = 0
 func _ready():
@@ -13,11 +13,9 @@ func _physics_process(delta):
 		var character = collision.get_collider()
 		if character: # va cham all	
 			die()
-			if character is BaseCat : # va cham BaseCat (all cat)				
-				if count == 0 : 
-					count += 1
-					character.take_damage(dame)
-					
+			if (character is BaseCat) and (count == 0) : # va cham BaseCat (all cat)				
+				count += 1
+				character.take_damage(dame)	
 			
 		
 

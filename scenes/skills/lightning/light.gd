@@ -1,20 +1,21 @@
 extends CharacterBody2D
 
-@export var veloc = Vector2(0,1000)
-@export var dame = 10
+@export var veloc = Vector2(0,1200)
+@export var dame = 50
+var count = 0
 func _ready():
 	$AnimationPlayer.play("move")
 
 func _physics_process(delta):
 	var collision = move_and_collide(veloc * delta)
 	if collision:
-		#veloc = veloc.bounce(collision.get_normal())  # phan xa lai khi cham
 		var character = collision.get_collider()
-		if character: # va cham all
+		if character: # va cham all	
 			die()
-			if character is BaseCat : # va cham BaseCat (all cat)
-				character.take_damage(dame)
-				
+			if (character is BaseCat) and (count == 0) : # va cham BaseCat (all cat)				
+				count += 1
+				character.take_damage(dame)	
+			
 		
 
 func die() :
