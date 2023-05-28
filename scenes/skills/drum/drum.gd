@@ -12,7 +12,7 @@ func _ready() -> void:
 
 	var cats: Array[Node] = get_tree().get_nodes_in_group("cats")
 	for cat in cats:
-		cat.knockback()
+		cat.knockback()	
 		var effect_on_cat: Node2D = EnergyExpand.instantiate()
 		effect_on_cat.setup("on_cat")
 		effect_on_cat.global_position = cat.global_position

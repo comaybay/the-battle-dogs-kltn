@@ -1,21 +1,26 @@
 extends CharacterBody2D
 
 @export var veloc = Vector2(0,900)
-@export var dame = 50
-var count = 0
+@export var dame = 10
+var allCats = {}
+
 func _ready():
 	$AnimationPlayer.play("move")
 
 func _physics_process(delta):
 	var collision = move_and_collide(veloc * delta)
 	
-	if collision:	
+	if collision:
 		var character = collision.get_collider()
-		if (character is BaseCat) and (count == 0) : # va cham BaseCat (all cat)				
-				count += 1
-				character.take_damage(dame)				
-				self.set_collision_mask_value(3, false)
-		if character is Land : # va cham all			
+		var cats = $Area2D.get_overlapping_bodies()
+		for cat in cats :
+			if allCats.has(cat)  == false:
+				cat.take_damage(dame)
+				cat.effect_reduce("speed" , 0.5, 5)	
+				allCats[cat] = 1
+			
+		
+		if character is Land : # va cham dat			
 			print(character)
 			die()
 		
