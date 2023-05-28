@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8qd2ufnklca7"]
+[gd_scene load_steps=8 format=3 uid="uid://b8qd2ufnklca7"]
 
 [ext_resource type="Script" path="res://scenes/skills/lightning/light.gd" id="1_f5oi1"]
 [ext_resource type="Texture2D" uid="uid://bl0u8hg8jup8n" path="res://resources/images/skills/light-strike.png" id="2_wpkp5"]
@@ -63,10 +63,9 @@ _data = {
 resource_local_to_scene = true
 size = Vector2(128, 638.199)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjii2"]
-size = Vector2(119, 428)
-
-[node name="lightning" type="CharacterBody2D"]
+[node name="light" type="CharacterBody2D"]
+z_index = 999
+z_as_relative = false
 position = Vector2(13, -6)
 collision_layer = 64
 collision_mask = 5
@@ -92,7 +91,3 @@ region_rect = Rect2(4, 4, 178, 185)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(53, 291)
 shape = SubResource("RectangleShape2D_oa1yv")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(49.5, 204)
-shape = SubResource("RectangleShape2D_qjii2")

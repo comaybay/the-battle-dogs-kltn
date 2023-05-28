@@ -4,4 +4,5 @@
 
 [node name="lightnings" type="Node2D"]
 light_mask = 0
+z_index = 5
 script = ExtResource("1_767qo")

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var veloc = Vector2(0,500)
+@export var veloc = Vector2(0,900)
 @export var dame = 50
 var count = 0
 func _ready():
@@ -9,17 +9,15 @@ func _ready():
 func _physics_process(delta):
 	var collision = move_and_collide(veloc * delta)
 	
-	if collision:
-		
+	if collision:	
 		var character = collision.get_collider()
 		if (character is BaseCat) and (count == 0) : # va cham BaseCat (all cat)				
 				count += 1
-				character.take_damage(dame)	
+				character.take_damage(dame)				
+				self.set_collision_mask_value(3, false)
 		if character is Land : # va cham all			
 			print(character)
 			die()
-		
-		
 		
 
 func die() :

@@ -122,13 +122,6 @@ locale/translations=PackedStringArray("res://resources/translations.en.translati
 
 [layer_names]
 
-2d_render/layer_1="walls"
-2d_render/layer_2="dogs"
-2d_render/layer_3="enemies"
-2d_render/layer_4="character_ranges"
-2d_render/layer_5="cat_tower"
-2d_render/layer_6="dog_tower"
-2d_render/layer_7="skills"
 2d_physics/layer_1="walls"
 2d_physics/layer_2="dogs"
 2d_physics/layer_3="enemies"
