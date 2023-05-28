@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=12 format=3 uid="uid://p7unef4lb5hc"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_ivu0g"]
 [ext_resource type="Texture2D" uid="uid://bxv6vquc0mpo8" path="res://scenes/characters/dogs/sword_dog/sword_dog.png" id="2_8ghqg"]

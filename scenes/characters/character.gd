@@ -130,11 +130,19 @@ func take_damage(ammount: int) -> void:
 	if Debug.is_debug_mode():
 		queue_redraw()
 	
-	if health <= next_knockback_health:
-		next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
-		$FiniteStateMachine.change_state("KnockbackState")	
+	if _is_pass_knockback_health():
+		if health > 0:
+			while _is_pass_knockback_health():
+				next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
 		
-		
+		knockback()
+
+func _is_pass_knockback_health():
+	return health <= next_knockback_health
+	
+func knockback():
+	$FiniteStateMachine.change_state("KnockbackState")	
+	
 func kill():
 	$FiniteStateMachine.change_state("DieState")	
 

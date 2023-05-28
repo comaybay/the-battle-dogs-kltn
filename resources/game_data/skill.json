@@ -18,6 +18,15 @@
     "spawn_price": 50
   },
   {
+    "ID": "drum",
+    "name": "Tiếng trống",
+    "price": 3000,
+    "detail": "asd",
+    "spawn_time": 1,
+    "spawn_price": 100,
+    "path": "res://resources/images/dogs/sniper_cat1.png"
+  },
+  {
     "ID": "sniper_dog",
     "name": "Chó bắn tỉa",
     "price": 3000,
