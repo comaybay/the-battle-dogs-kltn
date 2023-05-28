@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8qd2ufnklca7"]
+[gd_scene load_steps=9 format=3 uid="uid://b8qd2ufnklca7"]
 
 [ext_resource type="Script" path="res://scenes/skills/lightning/light.gd" id="1_f5oi1"]
-[ext_resource type="Texture2D" uid="uid://cjeyw3i40mav6" path="res://resources/images/skills/lightning.png" id="2_06ls8"]
+[ext_resource type="Texture2D" uid="uid://bl0u8hg8jup8n" path="res://resources/images/skills/light-strike.png" id="2_wpkp5"]
 
 [sub_resource type="Animation" id="Animation_k3r0e"]
-length = 0.001
+length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -20,26 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_pmncx"]
 resource_name = "die"
-length = 0.75
-step = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.04, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.52, 0.56, 0.6, 0.64),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [33, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
-}
-
-[sub_resource type="Animation" id="Animation_7xwcg"]
-resource_name = "move"
-length = 0.6
-loop_mode = 1
-step = 0.05
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -47,10 +29,27 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+"values": [2, 1, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_7xwcg"]
+resource_name = "move"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fl247"]
@@ -62,11 +61,15 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa1yv"]
 resource_local_to_scene = true
-size = Vector2(141, 857.801)
+size = Vector2(128, 638.199)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjii2"]
+size = Vector2(119, 428)
 
 [node name="lightning" type="CharacterBody2D"]
-position = Vector2(72.7871, -3.80142)
-collision_layer = 0
+position = Vector2(13, -6)
+collision_layer = 64
+collision_mask = 5
 script = ExtResource("1_f5oi1")
 metadata/_edit_horizontal_guides_ = []
 
@@ -77,17 +80,19 @@ libraries = {
 }
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
-wait_time = 10.0
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(60.1065, 218.901)
-scale = Vector2(0.476978, 1.29003)
-texture = ExtResource("2_06ls8")
-hframes = 4
-vframes = 3
+position = Vector2(51.1065, 234)
+scale = Vector2(1.42284, 2.72549)
+texture = ExtResource("2_wpkp5")
+hframes = 7
 region_rect = Rect2(4, 4, 178, 185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(59.7129, 208.901)
+position = Vector2(53, 291)
 shape = SubResource("RectangleShape2D_oa1yv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(49.5, 204)
+shape = SubResource("RectangleShape2D_qjii2")
