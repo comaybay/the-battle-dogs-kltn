@@ -6,7 +6,7 @@ enum Type { DOG, ENEMY }
 
 ## 0 for dog, 1 for enemy
 @export var character_type: int = Type.DOG
-@export var speed: int = 100
+@export var speed: int = 100 # toc do di chuyen
 
 ## if not null, will be use for attack collision detection
 ## and will ignore the "attack range" and "attack area range" properties when attacking
@@ -27,11 +27,11 @@ enum Type { DOG, ENEMY }
 		queue_redraw()
 		
 ## in seconds
-@export var attack_cooldown: float = 2
+@export var attack_cooldown: float = 2 # toc do danh
 ## check what frame should an attack occurr when playing the attack animation
 @export var attack_frame: int = 12
-@export var health: int = 250
-@export var damage: int = 20
+@export var health: int = 250 # mau
+@export var damage: int = 20 # sat thuong
 @export var knockbacks: int = 3
 @export var sound_danh = "res://resources/sound/danh nhau/Tieng-bup.mp3"
 
@@ -136,6 +136,32 @@ func take_damage(ammount: int) -> void:
 				next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
 		
 		knockback()
+
+func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> void: # gay anh huong trong time
+	if effect == "speed" :
+		speed = speed * number 
+	elif effect ==  "damage" :
+		damage = damage * number
+	elif effect ==  "attack_cooldown" :
+		attack_cooldown = attack_cooldown * number
+	elif effect ==  "attack_area_range" :
+		attack_area_range = attack_area_range * number
+	elif effect ==  "health" :
+		health = health * number
+	
+	await get_tree().create_timer(time).timeout
+	
+	if effect == "speed" :
+		speed = speed / number 
+	elif effect ==  "damage" :
+		damage = damage / number
+	elif effect ==  "attack_cooldown" :
+		attack_cooldown = attack_cooldown / number
+	elif effect ==  "attack_area_range" :
+		attack_area_range = attack_area_range / number
+	elif effect ==  "health" :
+		health = health / number
+	
 
 func _is_pass_knockback_health():
 	return health <= next_knockback_health
