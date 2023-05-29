@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4jb4ii5aqdih"]
+[gd_scene load_steps=4 format=3 uid="uid://cc7dso01iv7mj"]
 
 [ext_resource type="Script" path="res://scenes/upgrade/item_box.gd" id="1_ufqi7"]
 [ext_resource type="Texture2D" uid="uid://dik4p3w46kjxt" path="res://resources/images/planet9_Wallpaper_5000x2813.jpg" id="2_cdgwf"]

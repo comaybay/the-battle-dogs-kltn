@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8akiorbq8k3i"]
+[gd_scene load_steps=7 format=3 uid="uid://d5uv8ba2w2ou"]
 
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_kc1qw"]
 [ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="2_u6a31"]
@@ -25,6 +25,9 @@ offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_u6a31")
+
+[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="0"]
+text = "Nâng cấp"
 
 [node name="Content" parent="Khung" index="1"]
 script = ExtResource("3_6lwir")
