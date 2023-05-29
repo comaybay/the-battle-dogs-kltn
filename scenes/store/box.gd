@@ -1,14 +1,10 @@
 extends Button
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var _parent: Node
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func setup( parent: Node) -> void:
+	_parent = parent	
 
 func _on_pressed():
-	get_tree().current_scene.sendInfo($ID.text,$Name.text,$Detail.text, $Amount.text, $Price.text,$Max.text)
-
-
+	_parent.sendInfo($ID.text,$Name.text,$Detail.text, $Amount.text, $Price.text,$Max.text)
+	

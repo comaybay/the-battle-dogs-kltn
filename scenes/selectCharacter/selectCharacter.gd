@@ -10,7 +10,7 @@ var list_skill = [] #danh sách kỹ năng
 var teams # node đội hình đã chọn
 var skill_teams # node kỹ năng đã chọn
 var base_img = load("res://resources/images/base.png")
-var base_position
+
 func _ready():
 	game_data = Data.save_data
 	var file2 = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
@@ -20,15 +20,16 @@ func _ready():
 	var file3 = FileAccess.open("res://resources/game_data/skill.json", FileAccess.READ)
 	skill_data = JSON.parse_string(file3.get_as_text())
 	file2.close()
-	base_position = $Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer.position 
-	$Khung/PhanDau/TieuDe/Xuong/Label.text = "Xương: "+ str( Data.bone)
+	
 	# làm trống đội hình và kỹ năng
-	teams = $Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh/GridContainer.get_children()	
-	skill_teams = $Khung/PhanGiua/PhanTren/DoiHinh/Skill/GridContainer.get_children()
+	teams = $Khung/PhanTren/TabContainer/DoiHinh/GridContainer.get_children()
+	skill_teams = $Khung/PhanTren/TabContainer/Skill/GridContainer.get_children()
 	for i in teams :
+		i.setup(self)
 		i.get_node("TextureRect").texture = base_img
 		i.get_node("ID").text = "-1"
 	for i in skill_teams :
+		i.setup(self)
 		i.get_node("TextureRect").texture = base_img
 		i.get_node("ID").text = "-1"
 	
@@ -54,19 +55,21 @@ func loadSkill() :
 
 func addItem(value,type):
 	var item = ListCharacter.instantiate()
+	print(str(value['ID']))
+	item.setup(self)
 	item.get_node("ID").text = str(value['ID'])
 	item.get_node("TextureRect").texture = load(value['path'])
 	item.get_node("Type").text = str(type)
 	if (type == 0) :
-		$Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat/GridContainer.add_child(item)
+		$Khung/PhanDuoi/DanhSach/NhanVat/GridContainer.add_child(item)
 	else :
-		$Khung/PhanGiua/PhanDuoi/DanhSach/Skill/GridContainer.add_child(item)
+		$Khung/PhanDuoi/DanhSach/Skill/GridContainer.add_child(item)
 	
 func loadTeam(i) :
 	for obj in game_data["teams"][i]["dog_ids"]:
 		for ob in character_data :
 			if (str(obj) == str(ob["ID"])) and (obj != null):
-				var list = $Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat/GridContainer.get_children()
+				var list = $Khung/PhanDuoi/DanhSach/NhanVat/GridContainer.get_children()
 				var item = [ob["ID"], load(ob["path"])]
 				for it in list.size() :
 					if (list[it].get_node("ID").text == ob["ID"] ):
@@ -78,7 +81,7 @@ func loadTeam(i) :
 	for obj in game_data["teams"][i]["skill_ids"]:
 		for ob in skill_data :
 			if (str(obj) == str(ob["ID"])) and (obj != null):
-				var listSK = $Khung/PhanGiua/PhanDuoi/DanhSach/Skill/GridContainer.get_children()
+				var listSK = $Khung/PhanDuoi/DanhSach/Skill/GridContainer.get_children()
 				var item = [ob["ID"], load(ob["path"])]
 				for it in listSK.size() :
 					if (listSK[it].get_node("ID").text == ob["ID"] ):
@@ -90,7 +93,7 @@ func loadTeam(i) :
 
 # thêm vào đội hình
 func sendInfo(ID, path,type):
-	$Khung/PhanGiua/PhanTren/DoiHinh/click.play()
+	$click.play()
 	var item = [ID, path]
 	if (int(type) == 0 ) :
 		if (list_team.size() < 10) :		
@@ -98,7 +101,7 @@ func sendInfo(ID, path,type):
 			teams[list_team.size()].get_node("ID").text = ID	
 			list_team.push_back(item)
 		elif (list_team.size() == 10) : 
-			deleteInfo(teams[9].get_node("ID").text,teams[9].get_node("TextureRect").texture,9)
+			#deleteInfo(teams[9].get_node("ID").text,teams[9].get_node("TextureRect").texture,9)
 			teams[9].get_node("TextureRect").texture = path
 			teams[9].get_node("ID").text = ID
 			list_team.push_back(item)
@@ -110,7 +113,7 @@ func sendInfo(ID, path,type):
 			list_skill.push_back(item)
 			
 		elif (list_skill.size() == 3) :
-			deleteSkillInfo(skill_teams[2].get_node("ID").text, skill_teams[2].get_node("TextureRect").texture, 2)
+			#deleteSkillInfo(skill_teams[2].get_node("ID").text, skill_teams[2].get_node("TextureRect").texture, 2)
 			skill_teams[2].get_node("TextureRect").texture = path
 			skill_teams[2].get_node("ID").text = ID			
 			list_skill.push_back(item)
@@ -118,9 +121,9 @@ func sendInfo(ID, path,type):
 
 # Xóa khỏi đội hình
 func deleteSkillInfo(ID, path, index):
-	$Khung/PhanGiua/PhanTren/DoiHinh/click.play()
+	$click.play()
 	if (str(ID) != "-1") :
-		var list = $Khung/PhanGiua/PhanDuoi/DanhSach/Skill/GridContainer.get_children()
+		var list = $Khung/PhanDuoi/DanhSach/Skill/GridContainer.get_children()
 		list_skill.remove_at(int(index))
 		for i in list :
 				if (i.get_node("ID").text == ID ):
@@ -132,15 +135,15 @@ func deleteSkillInfo(ID, path, index):
 		print("sai")
 
 func deleteInfo(ID, path, index):
-	$Khung/PhanGiua/PhanTren/DoiHinh/click.play()
+	$click.play()
 	if (str(ID) != "-1") :
-		var list = $Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat/GridContainer.get_children()		
+		var list = $Khung/PhanDuoi/DanhSach/NhanVat/GridContainer.get_children()		
 		list_team.remove_at(int(index))
 		for it in list :
 				if (it.get_node("ID").text == ID ):
 					it.visible = true					
 					break
-		#list[int(ID)].visible = true
+		
 		resetTeam()
 	else : 
 		print("sai")
@@ -166,26 +169,23 @@ func resetSkill() :
 			
 
 func _on_quay_lai_pressed():
-	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
+	$Luu.play()
 	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
 
 func _on_luu_pressed():	
-	
 	var items = []
 	for obj in list_team :
 		items.push_back(str(obj[0]))
-	
 	for obj in (10- list_team.size()) :
 		items.push_back(null)
 	game_data["teams"][Data.save_data['selected_team']]["dog_ids"] = items
 	
 	var skill_items = []
 	for obj in list_skill :
-		skill_items.push_back(str(obj[0]))
-		
-	for obj in (3- list_team.size()) :
+		skill_items.push_back(str(obj[0]))	
+	for obj in (3- list_skill.size()) :
 		skill_items.push_back(null)
 	game_data["teams"][Data.save_data['selected_team']]["skill_ids"] = skill_items
 	
@@ -195,46 +195,22 @@ func _on_luu_pressed():
 	file.close()
 	Data.save_data = game_data
 	
-	
-	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
-	await get_tree().create_timer(1.0).timeout
+	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
 func move(set) :
-	$Khung/PhanGiua/PhanDuoi/TieuDe/Luu.play()
-	var character_row = $Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh
-	var skill_row = $Khung/PhanGiua/PhanTren/DoiHinh/Skill
-	var tween = create_tween()
-	tween.set_parallel(false).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	if (set == 1):		
-		skill_row.scale = Vector2(1,0)
-		skill_row.visible = true
-		tween.tween_property(character_row, "scale", Vector2(1,0), 0.5)
-		tween.tween_property(skill_row, "scale", Vector2(1,1), 0.5) 
-		await get_tree().create_timer(1).timeout
-		character_row.visible = false
-		character_row.scale = Vector2(1,1)
+	$Luu.play()
+	if (set == 1):				
+		$Khung/PhanDuoi/DanhSach/Skill.visible = false
+		$Khung/PhanDuoi/DanhSach/NhanVat.visible = true
 		
-		$Khung/PhanGiua/PhanDuoi/DanhSach/Skill.visible = true
-		$Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat.visible = false
 	else :
-		character_row.scale = Vector2(1,0)
-		character_row.visible = true
-		tween.tween_property(skill_row, "scale", Vector2(1,0), 0.5)
-		tween.tween_property(character_row, "scale", Vector2(1,1), 0.5) 
-		await get_tree().create_timer(1).timeout
-		skill_row.visible = false
-		skill_row.scale = Vector2(1,1)
-		$Khung/PhanGiua/PhanDuoi/DanhSach/Skill.visible = false
-		$Khung/PhanGiua/PhanDuoi/DanhSach/NhanVat.visible = true
+		$Khung/PhanDuoi/DanhSach/Skill.visible = true
+		$Khung/PhanDuoi/DanhSach/NhanVat.visible = false
 
-func _on_ky_nang_pressed():
-	if ( $Khung/PhanGiua/PhanTren/DoiHinh/Skill.visible == false):		
+
+func _on_tab_container_tab_changed(tab: int) :
+	if (tab == 0) :
 		move(1)
-
-func _on_doi_hinh_pressed():
-	if ($Khung/PhanGiua/PhanTren/DoiHinh/DoiHinh.visible == false):		
+	else :
 		move(0)
-	
-
-

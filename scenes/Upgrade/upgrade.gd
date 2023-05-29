@@ -36,7 +36,7 @@ func sendInfo(item: Node, data: Dictionary):
 		level_index = Data.skills[ID_index]['level']
 	else:
 		level_index = 0	
-
+	
 	name_index = data["name"]
 	price_index = int(data['price'])
 	if (level_index == 0) :
@@ -52,7 +52,7 @@ func addItemDog(value: Dictionary) -> void:
 	var item = ListItem.instantiate()
 	var bone = 0
 	item.setup(value, self)
-
+	
 	for obj in Data.save_data["dogs"] :
 		if str(value['ID']) == str(obj["ID"]):
 			item.get_node("Level").text = str(obj["level"])
@@ -105,12 +105,14 @@ func _on_nut_nang_cap_pressed():
 				for obj in game_data["dogs"].size():#Nang cap / đủ tiền
 					if (str(game_data["dogs"][obj]["ID"]) == str(ID_index)):
 						Data.bone -=  int(gia)
-						game_data["dogs"][obj]["level"] += 1				
+						game_data["dogs"][obj]["level"] += 1
+						break
 			else :
 				for obj in game_data["skills"].size():#Nang cap / đủ tiền
 					if (str(game_data["skills"][obj]["ID"]) == str(ID_index)):
 						Data.bone -=  int(gia)
-						game_data["skills"][obj]["level"] += 1		
+						game_data["skills"][obj]["level"] += 1
+						break
 		else : #Mua character
 			$PhanGiua/PhanDuoi/TieuDe/NutNangCap.text = "Nâng cấp"
 			var item ={"ID": ID_index,"level": 1}
@@ -123,29 +125,6 @@ func _on_nut_nang_cap_pressed():
 		Data.save()
 		reset()
 	
-func move(set) :
-	AudioPlayer.play()
-	var character_row = $PhanGiua/PhanTren/Items/NhanVat
-	var skill_row = $PhanGiua/PhanTren/Items/Skill
-	var tween = create_tween()
-	tween.set_parallel(false).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	if (set == 1):
-		skill_row.scale = Vector2(1,0)
-		skill_row.visible = true
-		tween.tween_property(character_row, "scale", Vector2(1,0), 0.5)
-		tween.tween_property(skill_row, "scale", Vector2(1,1), 0.5) 
-		await get_tree().create_timer(1).timeout
-		character_row.visible = false
-		character_row.scale = Vector2(1,1)
-	else:
-		character_row.scale = Vector2(1,0)
-		character_row.visible = true
-		tween.tween_property(skill_row, "scale", Vector2(1,0), 0.5)
-		tween.tween_property(character_row, "scale", Vector2(1,1), 0.5) 
-		await get_tree().create_timer(1).timeout
-		skill_row.visible = false
-		skill_row.scale = Vector2(1,1)
-
 
 func _on_tab_container_tab_changed(tab: int) -> void:
 	character_or_skill = true if tab == 0 else false

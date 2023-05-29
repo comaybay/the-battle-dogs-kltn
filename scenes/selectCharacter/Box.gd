@@ -1,13 +1,10 @@
 extends Button
 
+var _parent: Node
 
-func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func setup( parent: Node) -> void:
+	_parent = parent	
 
 func _on_pressed():
-	get_tree().current_scene.deleteInfo($ID.text,$TextureRect.texture, text)
+	_parent.deleteInfo($ID.text,$TextureRect.texture, text)
+	

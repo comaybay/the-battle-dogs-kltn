@@ -35,9 +35,11 @@ var selected_battlefield_id: String:
 	set(value): save_data['selected_battlefield_id'] = value		
 
 var dog_info := Dictionary()
+var store_info := Dictionary()
 var skill_info := Dictionary()
 var dogs := Dictionary()
 var skills := Dictionary()
+var store := Dictionary()
 
 func _init() -> void:
 	var file = FileAccess.open("res://resources/save.json", FileAccess.READ)
@@ -56,6 +58,12 @@ func _init() -> void:
 		skill_info[info['ID']] = info
 	file.close()
 	
+	file = FileAccess.open("res://resources/game_data/store.json", FileAccess.READ)
+	var store_info_arr = JSON.parse_string(file.get_as_text())
+	for info in store_info_arr:
+		store_info[info['ID']] = info
+	file.close()
+	
 	compute_values()
 
 func compute_values():
@@ -64,6 +72,9 @@ func compute_values():
 	
 	for skill in save_data["skills"]:
 		skills[skill["ID"]] = skill
+		
+	for item in save_data["items"]:
+		store[item["ID"]] = item
 
 func save():
 	var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)
