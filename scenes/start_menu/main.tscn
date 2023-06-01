@@ -70,11 +70,11 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 2
 
-[node name="NutCaiDat" type="Button" parent="Khung/PhanCuoi"]
+[node name="NutHuongDan" type="Button" parent="Khung/PhanCuoi"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Cài đặt "
+text = "Hướng dẫn"
 language = "vi"
 
 [node name="NinePatchRect3" type="NinePatchRect" parent="Khung/PhanCuoi"]
@@ -94,4 +94,5 @@ stream = ExtResource("2_quepu")
 volume_db = 14.998
 
 [connection signal="pressed" from="Khung/PhanCuoi/NutBatDau" to="." method="_on_nut_bat_dau_pressed"]
+[connection signal="pressed" from="Khung/PhanCuoi/NutHuongDan" to="." method="_on_nut_huong_dan_pressed"]
 [connection signal="pressed" from="Khung/PhanCuoi/NutThoat" to="." method="_on_nut_thoat_pressed"]

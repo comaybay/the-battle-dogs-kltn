@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnn3ii07m2362"]
+
+[ext_resource type="Script" path="res://scenes/instruction/instruction.gd" id="1_tg54e"]
+[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="2_4fqxn"]
+[ext_resource type="Texture2D" uid="uid://ddd02ni0o7cr7" path="res://resources/images/dog_base/dogbase_background.png" id="2_38nuy"]
+[ext_resource type="Texture2D" uid="uid://bn1hmsdti1pam" path="res://scenes/instruction/map.png" id="2_cujee"]
+[ext_resource type="Texture2D" uid="uid://q4tc10n2i5hr" path="res://resources/icons/efficiency_up_icon.png" id="3_dj0jn"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_tg54e")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Screen1" type="Control" parent="Node"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1155.0
+offset_bottom = 650.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="picture" type="TextureRect" parent="Node/Screen1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cujee")
+
+[node name="Screen2" type="Control" parent="Node"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1155.0
+offset_bottom = 650.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="picture" type="TextureRect" parent="Node/Screen2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_dj0jn")
+
+[node name="Screen3" type="Control" parent="Node"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1155.0
+offset_bottom = 650.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="picture" type="TextureRect" parent="Node/Screen3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_38nuy")
+
+[node name="MoveForward" type="Button" parent="."]
+offset_left = 1066.0
+offset_top = 293.0
+offset_right = 1124.0
+offset_bottom = 344.0
+size_flags_horizontal = 3
+
+[node name="BackForward" type="Button" parent="."]
+offset_left = 29.0
+offset_top = 293.0
+offset_right = 87.0
+offset_bottom = 344.0
+size_flags_horizontal = 3
+
+[node name="NhanNut" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -326)
+stream = ExtResource("2_4fqxn")
+volume_db = 14.998
+
+[connection signal="pressed" from="MoveForward" to="." method="_on_move_forward_pressed"]
+[connection signal="pressed" from="BackForward" to="." method="_on_back_forward_pressed"]
