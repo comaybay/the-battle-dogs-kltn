@@ -11,6 +11,7 @@ func _ready() -> void:
 	var reward_bone: int = InBattle.battlefield_data['reward_bone']
 	tween.tween_method(_tween_bone_number, 0, reward_bone, 1).set_delay(1)
 	
+	Data.passed_level = max(Data.passed_level, Data.selected_level)
 	Data.bone += reward_bone
 	Data.save()
 

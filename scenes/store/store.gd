@@ -9,7 +9,7 @@ var select_index = [-1,"","",0,0,0] #ID,name, detail, amount, price, max
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$PhanGiua/PhanDuoi/TieuDe2/NutMua.disabled = true
+	$PhanGiua/MarginContainer/PhanDuoi/TieuDe2/NutMua.disabled = true
 	game_data = Data.save_data
 	var file2 = FileAccess.open("res://resources/game_data/store.json", FileAccess.READ)
 	store_data = JSON.parse_string(file2.get_as_text())
@@ -44,11 +44,11 @@ func sendInfo(ID,nameBox, detail, amount, price, max):
 	select_index[3] = amount
 	select_index[4] = price
 	select_index[5] = max
-	$PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Tên : "+ nameBox+"\n" + "Mô tả : " +detail +"\n" + "Giá tiền : " + price + "\n"+ "Số lượng : " + str(amount) + "\n"+ "Số lượng tối đa : " + max  
+	$PhanGiua/MarginContainer/PhanDuoi/ThongTin/Label_Item.text = "Tên : "+ nameBox+"\n" + "Mô tả : " +detail +"\n" + "Giá tiền : " + price + "\n"+ "Số lượng : " + str(amount) + "\n"+ "Số lượng tối đa : " + max  
 	if (Data.bone >= int(price)) :
-		$PhanGiua/PhanDuoi/TieuDe2/NutMua.disabled = false
+		$PhanGiua/MarginContainer/PhanDuoi/TieuDe2/NutMua.disabled = false
 	else :
-		$PhanGiua/PhanDuoi/TieuDe2/NutMua.disabled = true
+		$PhanGiua/MarginContainer/PhanDuoi/TieuDe2/NutMua.disabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -65,14 +65,14 @@ func reset():
 	file.close()
 	Data.save()
 	if (Data.bone >= int(select_index[4])) :
-		$PhanGiua/PhanDuoi/TieuDe2/NutMua.disabled = false
+		$PhanGiua/MarginContainer/PhanDuoi/TieuDe2/NutMua.disabled = false
 	else :
-		$PhanGiua/PhanDuoi/TieuDe2/NutMua.disabled = true
+		$PhanGiua/MarginContainer/PhanDuoi/TieuDe2/NutMua.disabled = true
 	game_data = Data.save_data
 	
 	select_index[3] = int(select_index[3]) + 1
 	#ID,name, detail, amount, price, max
-	$PhanGiua/PhanDuoi/ThongTin/Label_Item.text = "Tên : "+ str(select_index[1])+"\n" + "Mô tả : "+ str(select_index[2]) +"\n" + "Giá tiền : " + str(select_index[4]) +"\n" +"Số lượng : " + str(select_index[3]) + "\n"+ "Số lượng tối đa : " + str(select_index[5])
+	$PhanGiua/MarginContainer/PhanDuoi/ThongTin/Label_Item.text = "Tên : "+ str(select_index[1])+"\n" + "Mô tả : "+ str(select_index[2]) +"\n" + "Giá tiền : " + str(select_index[4]) +"\n" +"Số lượng : " + str(select_index[3]) + "\n"+ "Số lượng tối đa : " + str(select_index[5])
 	for i in store_data :
 		addItem(i)
 

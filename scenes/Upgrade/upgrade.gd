@@ -4,18 +4,16 @@ const ListItem = preload("res://scenes/Upgrade/item_box.tscn")
 
 var character_data 
 var skill_data 
-var game_data
-var price_index = 0
-var ID_index = 0
-var detail_index = ""
-var level_index = 0
-var name_index = ""
-var character_or_skill := true
-var selected_item: Node
+var selected_item: ItemBox
 
-func _ready():	
-	game_data = Data.save_data
+var dog_boxes: Array[ItemBox]
+var skill_boxes: Array[ItemBox]
+
+func _ready():
+	%TabContainer.set_tab_title(0, "Nhân vật")
+	%TabContainer.set_tab_title(1, "Kỹ năng")
 	add_items()
+	selected_item = dog_boxes[0]
 		
 func add_items():
 	for dog in Data.dog_info.values():			
@@ -26,55 +24,27 @@ func add_items():
 
 func sendInfo(item: Node, data: Dictionary):
 	$click.play()
+	selected_item.set_selected(false)
 	selected_item = item
-	ID_index = data['ID']
-	detail_index = data['detail']
+	selected_item.set_selected(true)
 	
-	if character_or_skill and Data.dogs.has(ID_index):
-		level_index = Data.dogs[ID_index]['level']
-	elif !character_or_skill and Data.skills.has(ID_index):
-		level_index = Data.skills[ID_index]['level']
-	else:
-		level_index = 0	
-	
-	name_index = data["name"]
-	price_index = int(data['price'])
-	if (level_index == 0) :
-		%ItemLabel.text ="Tên : "+ name_index + "\n" + "Mô tả : " + detail_index + "\n" + "Giá xương : " + str(price_index * pow(2,level_index))
-		%NutNangCap.text = "Mua"
-	else :
-		%ItemLabel.text = "Tên : "+ name_index + "\n" + "Mô tả : " + detail_index  + "\n" + "Giá xương : " + str(price_index * pow(2,level_index)) + "\n" + "Cấp độ : "  + str(level_index) 
-		%NutNangCap.text = "Nâng cấp"
-		
-	%NutNangCap.disabled = price_index * pow(2,level_index) > Data.bone
+	%ItemLabel.text = data['detail']
+	%NutNangCap.text = "Nâng cấp" if selected_item.get_level() > 0 else "Mua" 
+	%NutNangCap.disabled = selected_item.get_price() > Data.bone
 	
 func addItemDog(value: Dictionary) -> void:
 	var item = ListItem.instantiate()
 	var bone = 0
-	item.setup(value, self)
-	
-	for obj in Data.save_data["dogs"] :
-		if str(value['ID']) == str(obj["ID"]):
-			item.get_node("Level").text = str(obj["level"])
-			break
-			# tinh toan so tien dua tren level
-		bone =int(value["price"]) * pow(2,int(item.get_node("Level").text)) 
-		item.get_node("Price").text = str(value["price"])
+	item.setup(value, "character", self)
 	%NhanVat/GridContainer.add_child(item)
+	dog_boxes.append(item)
 
 func addItemSkill(skill: Dictionary) -> void:
 	var item = ListItem.instantiate()
 	var bone = 0
-	item.setup(skill, self)
-
-	for obj in Data.save_data["skills"] :
-		if str(skill['ID']) == str(obj["ID"]):
-			item.get_node("Level").text = str(obj["level"])
-			break
-			# tinh toan so tien dua tren level
-		bone = int(skill["price"]) * pow(2,int(item.get_node("Level").text)) 
-		item.get_node("Price").text = str(skill["price"])
+	item.setup(skill, "skill", self)
 	%Skill/GridContainer.add_child(item)
+	skill_boxes.append(item)
 
 func _on_nut_quay_lai_pressed():
 	$button.play()
@@ -83,48 +53,29 @@ func _on_nut_quay_lai_pressed():
 
 
 func _on_box_pressed(button):
-	print("add")
 	$PhanGiua/PhanDuoi/ThongTin/Label_Item.text = button.text
 	
 func reset():
-	level_index = int(level_index) + 1
-	var gia = str(int(price_index) * pow(2,int(level_index) ))
-	$PhanGiua/PhanDuoi/ThongTin/ItemLabel.text = "Tên : "+ name_index + "\n" + "Mô tả : " + str(detail_index) + "\n"+ "Giá xương : " + gia+"\n" + "Cấp độ : " + str(level_index)
-	%NutNangCap.disabled = price_index * pow(2,level_index) > Data.bone
+	selected_item.update_labels()
+	%NutNangCap.disabled = selected_item.get_price() > Data.bone
+	%NutNangCap.text = "Nâng cấp"
 
 func _on_nut_nang_cap_pressed():
 	AudioPlayer.play_button_pressed_audio()
-	var gia = str(int(price_index) * pow(2,int(level_index) ))
-	#kiem tra tien 
-	if (game_data["bone"] < int(gia)) : # ko đủ tiền
-			print("ko đủ tiền:")
-	else :
-		# Đủ tiền
-		if ($PhanGiua/PhanDuoi/TieuDe/NutNangCap.text == "Nâng cấp"):
-			if (character_or_skill == true):
-				for obj in game_data["dogs"].size():#Nang cap / đủ tiền
-					if (str(game_data["dogs"][obj]["ID"]) == str(ID_index)):
-						Data.bone -=  int(gia)
-						game_data["dogs"][obj]["level"] += 1
-						break
-			else :
-				for obj in game_data["skills"].size():#Nang cap / đủ tiền
-					if (str(game_data["skills"][obj]["ID"]) == str(ID_index)):
-						Data.bone -=  int(gia)
-						game_data["skills"][obj]["level"] += 1
-						break
-		else : #Mua character
-			$PhanGiua/PhanDuoi/TieuDe/NutNangCap.text = "Nâng cấp"
-			var item ={"ID": ID_index,"level": 1}
-			if (character_or_skill == true):
-				Data.bone -=  int(gia)
-				game_data["dogs"].push_back(item)
-			else :
-				Data.bone -=  int(gia)
-				game_data["skills"].push_back(item)
-		Data.save()
-		reset()
+	Data.bone -= selected_item.get_price()
 	
-
-func _on_tab_container_tab_changed(tab: int) -> void:
-	character_or_skill = true if tab == 0 else false
+	if selected_item.get_level() > 0:
+		if selected_item.get_item_type() == "skill":
+			Data.skills[selected_item.get_item_id()]['level'] += 1
+		else :
+			Data.dogs[selected_item.get_item_id()]['level'] += 1
+	else : 
+		var item = {"ID": selected_item.get_item_id(), "level": 1}
+		if selected_item.get_item_type() == "skill":
+			Data.save_data["skills"].append(item)
+		else :
+			Data.save_data["dogs"].append(item)
+			
+	Data.save()
+	reset()
+	

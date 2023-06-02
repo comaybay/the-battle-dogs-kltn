@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="2_i87ga"]
 
 [node name="MainGUI" instance=ExtResource("2_i87ga")]
+title = "Căn cứ chó"
 
 [node name="PhanGiua" type="HBoxContainer" parent="Khung/Content" index="0"]
 layout_mode = 1
