@@ -1,7 +1,6 @@
 [
   {
-    "ID": 0,
-   
+    "ID": "0",
     "detail": "dddf",
     "max": 3,
     "name": "Chó thường",
@@ -9,7 +8,7 @@
     "price": 100
   },
   {
-    "ID": 1,
+    "ID": "1",
   
     "detail": "asd",
     "max": 1,
@@ -18,7 +17,7 @@
     "price": 100
   },
   {
-    "ID": 2,
+    "ID": "2",
    
     "detail": "asd",
     "max": 5,
@@ -27,7 +26,7 @@
     "price": 100
   },
   {
-    "ID": 3,
+    "ID": "3",
     "amount": 2,
     "detail": "asa",
     "max": 4,
@@ -36,7 +35,7 @@
     "price": 100
   },
   {
-    "ID": 4,
+    "ID": "4",
 
     "detail": "aa",
     "max": 3,
@@ -45,7 +44,7 @@
     "price": 100
   },
   {
-    "ID": 5,
+    "ID": "5",
 
     "detail": "aa",
     "max": 1,
@@ -54,7 +53,7 @@
     "price": 100
   },
   {
-    "ID": 6,
+    "ID": "6",
 
     "detail": "aa",
     "max": 1,

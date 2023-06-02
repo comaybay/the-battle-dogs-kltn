@@ -119,3 +119,5 @@ vertical_alignment = 1
 position = Vector2(0, -326)
 stream = ExtResource("2_kfgjp")
 volume_db = 14.998
+
+[connection signal="pressed" from="Khung/Content/PhanGiua/MarginContainer/PhanDuoi/TieuDe2/NutMua" to="Khung/Content" method="_on_nut_mua_pressed"]

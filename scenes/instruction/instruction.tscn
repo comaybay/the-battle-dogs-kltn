@@ -1,17 +1,37 @@
 [gd_scene load_steps=6 format=3 uid="uid://dnn3ii07m2362"]
 
 [ext_resource type="Script" path="res://scenes/instruction/instruction.gd" id="1_tg54e"]
-[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="2_4fqxn"]
-[ext_resource type="Texture2D" uid="uid://ddd02ni0o7cr7" path="res://resources/images/dog_base/dogbase_background.png" id="2_38nuy"]
 [ext_resource type="Texture2D" uid="uid://bn1hmsdti1pam" path="res://scenes/instruction/map.png" id="2_cujee"]
-[ext_resource type="Texture2D" uid="uid://q4tc10n2i5hr" path="res://resources/icons/efficiency_up_icon.png" id="3_dj0jn"]
+[ext_resource type="Texture2D" uid="uid://bopc678gyy5mc" path="res://scenes/instruction/upgrade.png" id="2_t0ppu"]
+[ext_resource type="Texture2D" uid="uid://cp15yriwxirer" path="res://resources/images/dogs/dog1.png" id="2_t4k4r"]
+[ext_resource type="Texture2D" uid="uid://1dw0plh84kr4" path="res://scenes/instruction/store.png" id="4_18xo0"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tg54e")
 
-[node name="Node" type="Node" parent="."]
+[node name="Node" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Screen4" type="Control" parent="Node"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1155.0
+offset_bottom = 650.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="picture" type="TextureRect" parent="Node/Screen4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_t4k4r")
 
 [node name="Screen1" type="Control" parent="Node"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1155.0
@@ -26,7 +46,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_cujee")
+texture = ExtResource("2_t0ppu")
 
 [node name="Screen2" type="Control" parent="Node"]
 visible = false
@@ -44,7 +64,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_dj0jn")
+texture = ExtResource("2_cujee")
 
 [node name="Screen3" type="Control" parent="Node"]
 visible = false
@@ -62,7 +82,30 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_38nuy")
+texture = ExtResource("4_18xo0")
+
+[node name="Header" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 59)
+layout_direction = 1
+offset_right = 404.0
+offset_bottom = 59.0
+localize_numeral_system = false
+
+[node name="Title" type="HBoxContainer" parent="Header"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GoBackButton" type="Button" parent="Header/Title"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "< Quay lại"
+
+[node name="MarginContainer" type="MarginContainer" parent="Header/Title"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
 
 [node name="MoveForward" type="Button" parent="."]
 offset_left = 1066.0
@@ -78,10 +121,6 @@ offset_right = 87.0
 offset_bottom = 344.0
 size_flags_horizontal = 3
 
-[node name="NhanNut" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(0, -326)
-stream = ExtResource("2_4fqxn")
-volume_db = 14.998
-
+[connection signal="pressed" from="Header/Title/GoBackButton" to="." method="_on_go_back_button_pressed"]
 [connection signal="pressed" from="MoveForward" to="." method="_on_move_forward_pressed"]
 [connection signal="pressed" from="BackForward" to="." method="_on_back_forward_pressed"]
