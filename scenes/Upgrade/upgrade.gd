@@ -28,7 +28,7 @@ func sendInfo(item: Node, data: Dictionary):
 	selected_item = item
 	selected_item.set_selected(true)
 	
-	%ItemLabel.text = data['detail']
+	%ItemLabel.text = "Tên: " + data["name"] + "\n" +  data['detail']
 	%NutNangCap.text = "Nâng cấp" if selected_item.get_level() > 0 else "Mua" 
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone
 	
