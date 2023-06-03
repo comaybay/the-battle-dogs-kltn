@@ -25,5 +25,14 @@
     "spawn_time": 1,
     "spawn_price": 100,
     "path": "res://resources/images/dogs/sniper_cat1.png"
+  },
+  {
+    "ID": "healing",
+    "name": "Hồi máu",
+    "price": 3000,
+    "detail": "asd",
+    "spawn_time": 1,
+    "spawn_price": 100,
+    "path": "res://resources/images/dogs/sniper_cat1.png"
   }
 ] 
