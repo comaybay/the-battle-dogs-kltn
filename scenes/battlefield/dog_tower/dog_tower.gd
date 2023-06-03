@@ -21,7 +21,7 @@ func update_health_label():
 
 func take_damage(damage: int) -> void:
 	if health <= 0:
-		return	
+		return
 	
 	health = max(health - damage, 0) 
 	update_health_label()
@@ -32,6 +32,16 @@ func take_damage(damage: int) -> void:
 			dog.kill()
 			
 		zero_health.emit()
+	
+
+func healing(heal : int) -> void :
+	if (health < max_health) :
+		if ((health + heal) <= max_health) :
+			health += heal
+		else :
+			health = max_health
+		
+	update_health_label()
 	
 func spawn(dog_scene: PackedScene) -> void:
 	var dog = dog_scene.instantiate()

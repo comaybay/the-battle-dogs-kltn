@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3newxc0fjawe"
+path="res://.godot/imported/Tiếng trống.mp3-8c063b538ac35fdab8461521034f6153.mp3str"
+
+[deps]
+
+source_file="res://resources/sound/Skill/Tiếng trống.mp3"
+dest_files=["res://.godot/imported/Tiếng trống.mp3-8c063b538ac35fdab8461521034f6153.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
