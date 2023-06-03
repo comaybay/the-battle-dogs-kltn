@@ -9,7 +9,6 @@ func _ready():
 
 func _physics_process(delta):
 	var collision = move_and_collide(veloc * delta)
-	
 	if collision:
 		var character = collision.get_collider()
 		var cats = $Area2D.get_overlapping_bodies()

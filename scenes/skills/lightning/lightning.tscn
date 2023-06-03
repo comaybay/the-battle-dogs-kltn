@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5s0lven71a1k"]
+[gd_scene load_steps=3 format=3 uid="uid://c5s0lven71a1k"]
 
 [ext_resource type="Script" path="res://scenes/skills/lightning/lightning.gd" id="1_767qo"]
+[ext_resource type="AudioStream" uid="uid://ckt0xwxej40lw" path="res://resources/sound/Skill/sét đánh.mp3" id="2_k5882"]
 
 [node name="lightnings" type="Node2D"]
 light_mask = 0
 z_index = 5
 script = ExtResource("1_767qo")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_k5882")
