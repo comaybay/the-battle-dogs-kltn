@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1vh3cpny74dx"]
+[gd_scene load_steps=7 format=3 uid="uid://c7qgtejvhcvgx"]
 
-[ext_resource type="Texture2D" uid="uid://c7vtg2noksu8x" path="res://scenes/effects/energy_expand/drum_effect.png" id="1_g8jm6"]
-[ext_resource type="Script" path="res://scenes/effects/energy_expand/energy_expand.gd" id="2_uwfjc"]
+[ext_resource type="Texture2D" uid="uid://c7vtg2noksu8x" path="res://scenes/effects/energy_expand/drum_effect.png" id="1_a805k"]
+[ext_resource type="Script" path="res://scenes/skills/power_up/sprite.gd" id="2_m2c2p"]
 
 [sub_resource type="Animation" id="Animation_8c3yh"]
 length = 0.001
@@ -96,9 +96,9 @@ _data = {
 "on_tower": SubResource("Animation_k1auv")
 }
 
-[node name="EnergyExpand" type="Sprite2D"]
-texture = ExtResource("1_g8jm6")
-script = ExtResource("2_uwfjc")
+[node name="UpSprite" type="Sprite2D"]
+texture = ExtResource("1_a805k")
+script = ExtResource("2_m2c2p")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

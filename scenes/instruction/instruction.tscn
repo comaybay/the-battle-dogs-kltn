@@ -113,6 +113,7 @@ offset_top = 293.0
 offset_right = 1124.0
 offset_bottom = 344.0
 size_flags_horizontal = 3
+text = ">"
 
 [node name="BackForward" type="Button" parent="."]
 offset_left = 29.0
@@ -120,6 +121,7 @@ offset_top = 293.0
 offset_right = 87.0
 offset_bottom = 344.0
 size_flags_horizontal = 3
+text = "<"
 
 [connection signal="pressed" from="Header/Title/GoBackButton" to="." method="_on_go_back_button_pressed"]
 [connection signal="pressed" from="MoveForward" to="." method="_on_move_forward_pressed"]

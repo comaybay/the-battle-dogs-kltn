@@ -65,6 +65,10 @@
     {
       "ID": "healing",
       "level": 3
+    },
+    {
+      "ID": "power_up",
+      "level": 3
     }
   ],
   "teams": [
@@ -82,9 +86,9 @@
         null
       ],
       "skill_ids": [
-        "fire_ball",
-        "healing",
-        "drum"
+        "power_up",
+        "lightning",
+        "healing"
       ]
     },
     {

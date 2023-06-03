@@ -166,6 +166,28 @@ func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> v
 func _is_pass_knockback_health():
 	return health <= next_knockback_health
 	
+
+func powerUp(types , number : float, time : float) :
+	for type in types :
+		if (type == "attack_cooldown"):
+			attack_cooldown = attack_cooldown * number
+		if (type == "health"):
+			health = health * number
+		if (type == "damage") :
+			damage = damage * number
+		if (type == "speed") :
+			speed = speed * number
+	await get_tree().create_timer(time).timeout
+	for type in types :
+		if (type == "attack_cooldown"):
+			attack_cooldown = attack_cooldown / number
+		if (type == "health"):
+			health = health / number
+		if (type == "damage") :
+			damage = damage / number
+		if (type == "speed") :
+			speed = speed / number
+
 func knockback():
 	$FiniteStateMachine.change_state("KnockbackState")	
 	
