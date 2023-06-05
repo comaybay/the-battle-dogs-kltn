@@ -6,18 +6,15 @@ func _ready():
 
 
 func _on_nut_bat_dau_pressed():
-	$NhanNut.play()
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
 
 
 func _on_nut_thoat_pressed():
-	$NhanNut.play()
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().quit()
 
 
 func _on_nut_huong_dan_pressed():
-	$NhanNut.play()
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file("res://scenes/instruction/instruction.tscn")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://btd4tym33guis"]
+
+[ext_resource type="Script" path="res://scenes/map/level_chain/level_box.gd" id="1_i0a1c"]
+[ext_resource type="Texture2D" uid="uid://nvan3y1v8yvf" path="res://scenes/map/flag.png" id="2_wywqt"]
+
+[node name="level_box" type="Button"]
+custom_minimum_size = Vector2(250, 0)
+offset_right = 250.0
+offset_bottom = 84.0
+pivot_offset = Vector2(125, 42)
+focus_mode = 0
+theme_type_variation = &"ButtonLevelBox"
+text = "Unnamed"
+script = ExtResource("1_i0a1c")
+
+[node name="Flag" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(215, 59)
+scale = Vector2(0.642857, 0.642857)
+texture = ExtResource("2_wywqt")

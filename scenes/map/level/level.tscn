@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cw20xduyq7fwq"]
+[gd_scene load_steps=4 format=3 uid="uid://cd5gw7llcsine"]
 
 [ext_resource type="Theme" uid="uid://bb4uny0684isq" path="res://resources/theme_button_round.tres" id="1_1x4c3"]
 [ext_resource type="Script" path="res://scenes/map/level/level.gd" id="1_35y8i"]
+[ext_resource type="Texture2D" uid="uid://nvan3y1v8yvf" path="res://scenes/map/flag.png" id="3_2ddle"]
 
 [node name="Level" type="Button"]
 offset_left = -14.0
@@ -13,3 +14,11 @@ size_flags_horizontal = 4
 focus_mode = 1
 theme = ExtResource("1_1x4c3")
 script = ExtResource("1_35y8i")
+level_name = "Unanmed"
+battlefield_id = "doggonamu"
+
+[node name="Flag" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2, -13)
+scale = Vector2(0.765306, 0.765306)
+texture = ExtResource("3_2ddle")

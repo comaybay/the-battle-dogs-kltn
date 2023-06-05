@@ -1,5 +1,6 @@
 class_name Level extends Button
 
+@export var level_name: String 
 @export var battlefield_id: String 
 
 ## Acts as a doubly linked-list
@@ -15,7 +16,9 @@ func _ready() -> void:
 	stylebox_override.bg_color = Color.hex(0xEE0000FF)
 	
 func setup(level_index: int,  prev_level_node: Level, next_level_node: Level) -> void:
-	if (level_index > Data.passed_level + 1):
+	$Flag.visible = level_index <= Data.passed_level
+	
+	if level_index > Data.passed_level + 1:
 		disabled = true
 		return
 	

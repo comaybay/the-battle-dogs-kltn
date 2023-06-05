@@ -1,14 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://dbyjisaeqjkey"]
 
 [ext_resource type="Script" path="res://scenes/map/map.gd" id="1_0p7qx"]
-[ext_resource type="Script" path="res://scenes/map/ScreenMap.gd" id="2_0udil"]
 [ext_resource type="PackedScene" uid="uid://i3waaqjv5m7" path="res://scenes/map/tracker.tscn" id="4_un5ok"]
 [ext_resource type="Script" path="res://scenes/map/Levels.gd" id="5_ta18k"]
 [ext_resource type="Texture2D" uid="uid://ycmeqryvywsc" path="res://scenes/map/map.png" id="5_weho0"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="7_eb484"]
-[ext_resource type="PackedScene" uid="uid://cw20xduyq7fwq" path="res://scenes/map/level/level.tscn" id="8_uximv"]
+[ext_resource type="PackedScene" uid="uid://cd5gw7llcsine" path="res://scenes/map/level/level.tscn" id="8_uximv"]
 [ext_resource type="Script" path="res://scenes/map/dog.gd" id="8_vsoej"]
 [ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="9_df54t"]
+[ext_resource type="PackedScene" uid="uid://bq2rygho7wb7t" path="res://scenes/map/level_chain/level_chain.tscn" id="9_m5l3k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_de1st"]
 atlas = ExtResource("7_eb484")
@@ -71,13 +71,19 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 20.0
 
-[node name="AllLevel" type="Node2D" parent="Khung/map"]
-process_mode = 1
-script = ExtResource("2_0udil")
-
-[node name="MapSprite" type="Sprite2D" parent="Khung/map/AllLevel"]
+[node name="MapSprite" type="Sprite2D" parent="Khung/map"]
+unique_name_in_owner = true
 position = Vector2(1248, 702)
 texture = ExtResource("5_weho0")
+
+[node name="TouchArea" type="Control" parent="Khung/map"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 2496.0
+offset_bottom = 1404.0
+
+[node name="AllLevel" type="Node2D" parent="Khung/map"]
+process_mode = 1
 
 [node name="Node" type="Node2D" parent="Khung/map/AllLevel"]
 script = ExtResource("5_ta18k")
@@ -87,13 +93,14 @@ offset_left = 812.0
 offset_top = 769.0
 offset_right = 839.0
 offset_bottom = 796.0
-battlefield_id = "doggonamu"
+level_name = "Doggonamu"
 
 [node name="Level2" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1018.0
 offset_top = 1024.0
 offset_right = 1045.0
 offset_bottom = 1051.0
+level_name = "Cẩupuchia"
 battlefield_id = "caupuchia"
 
 [node name="Level3" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
@@ -101,6 +108,7 @@ offset_left = 1231.0
 offset_top = 769.0
 offset_right = 1258.0
 offset_bottom = 796.0
+level_name = "Xích Cẩu"
 battlefield_id = "xichcau"
 
 [node name="Level4" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
@@ -108,74 +116,67 @@ offset_left = 1612.0
 offset_top = 808.0
 offset_right = 1639.0
 offset_bottom = 835.0
-battlefield_id = "doggonamu"
+level_name = "Llanfairpwllgwyngyll"
 
 [node name="Level5" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1559.0
 offset_top = 409.0
 offset_right = 1586.0
 offset_bottom = 436.0
-battlefield_id = "doggonamu"
 
 [node name="Level6" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1270.0
 offset_top = 285.0
 offset_right = 1297.0
 offset_bottom = 312.0
-battlefield_id = "doggonamu"
 
 [node name="Level7" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 773.0
 offset_top = 324.0
 offset_right = 800.0
 offset_bottom = 351.0
-battlefield_id = "doggonamu"
 
 [node name="Level8" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 194.0
 offset_top = 162.0
 offset_right = 221.0
 offset_bottom = 189.0
-battlefield_id = "doggonamu"
 
 [node name="Level9" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 338.0
 offset_top = 988.0
 offset_right = 365.0
 offset_bottom = 1015.0
-battlefield_id = "doggonamu"
 
 [node name="Level10" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 517.0
 offset_top = 1241.0
 offset_right = 544.0
 offset_bottom = 1268.0
-battlefield_id = "doggonamu"
 
 [node name="Level11" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1518.0
 offset_top = 1241.0
 offset_right = 1545.0
 offset_bottom = 1268.0
-battlefield_id = "doggonamu"
 
 [node name="Level12" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 2250.0
 offset_top = 988.0
 offset_right = 2277.0
 offset_bottom = 1015.0
-battlefield_id = "doggonamu"
 
 [node name="Level13" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 2199.0
 offset_top = 256.0
 offset_right = 2226.0
 offset_bottom = 283.0
-battlefield_id = "doggonamu"
 
 [node name="Tracker" parent="Khung/map/AllLevel" instance=ExtResource("4_un5ok")]
+unique_name_in_owner = true
 
 [node name="Dog" type="AnimatedSprite2D" parent="Khung/map/AllLevel"]
+unique_name_in_owner = true
 position = Vector2(706, 587)
 scale = Vector2(0.269345, 0.269345)
 sprite_frames = SubResource("SpriteFrames_e4la2")
@@ -192,9 +193,9 @@ pitch_scale = 3.86
 
 [node name="Label" type="Label" parent="Khung/CanvasLayer"]
 offset_left = 11.0
-offset_top = 12.0
-offset_right = 174.0
-offset_bottom = 43.0
+offset_top = 10.0
+offset_right = 271.0
+offset_bottom = 58.0
 size_flags_horizontal = 2
 theme_type_variation = &"LabelLarge"
 text = "Hành tinh Doggo"
@@ -224,6 +225,11 @@ offset_bottom = 614.0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "Đội hình"
+
+[node name="LevelChain" parent="Khung/CanvasLayer" instance=ExtResource("9_m5l3k")]
+unique_name_in_owner = true
+offset_top = 48.0
+offset_bottom = 152.0
 
 [node name="Click" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, -326)
