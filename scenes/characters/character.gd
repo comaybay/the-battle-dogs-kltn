@@ -40,6 +40,8 @@ enum Type { DOG, ENEMY }
 @onready var n_Sprite2D := $Sprite2D as Sprite2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
 
+var sizeCharacter
+@export var scaleCharacter : int = 1
 ## position where effect for a character should take place 
 var effect_global_position: Vector2:
 	get: return n_RayCast2D.global_position
@@ -52,6 +54,7 @@ var next_knockback_health: int
 var collision_rect: Rect2
 
 func _ready() -> void:
+	sizeCharacter = $CollisionShape2D.get_shape().size
 	# config 
 	max_health = health
 	next_knockback_health = max_health - (max_health / knockbacks)
