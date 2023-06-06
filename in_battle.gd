@@ -1,7 +1,7 @@
 extends Node
 
 ## use to load battlefield_data
-var battlefield_id: String = "doggonamu"
+var battlefield_id: String = "level1"
 
 var battlefield_data: Dictionary
 
@@ -35,7 +35,7 @@ func reset():
 	_fmoney = 0
 	_wallet = BASE_WALLET_CAPACITY
 	_efficiency_upgrade_price = BASE_EFFICIENCY_UPGRADE_PRICE
-	_money_rate = BASE_MONEY_RATE
+	_money_rate = BASE_MONEY_RATE * (1 + Data.skills['money_efficiency']['level'] * 0.1)
 	_efficiency_level = 1
 	
 func update(delta: float):
@@ -57,3 +57,6 @@ func increase_efficiency_level() -> void:
 func can_afford_efficiency_upgrade() -> bool:
 	return money >= get_efficiency_upgrade_price()
 
+func get_cat_power_scale() -> float:
+	var scale = battlefield_data.get('power_scale')
+	return scale if scale != null else 1

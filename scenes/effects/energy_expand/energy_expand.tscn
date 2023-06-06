@@ -33,7 +33,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_8kloj"]
 resource_name = "on_cat"
 length = 0.25
-loop_mode = 1
 step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -63,7 +62,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_k1auv"]
 resource_name = "on_tower"
 length = 0.4
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

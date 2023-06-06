@@ -5,14 +5,22 @@ var knockback_countdown: int
 var knockback_vel: Vector2
 
 # called when the state is activated
-func enter(_data: Dictionary) -> void:
+func enter(data: Dictionary) -> void:
 	knockback_countdown = 2
-	knockback_vel = Vector2(200, -250)
+	knockback_vel = Vector2(200, -250) * data['scale']
 	character.n_AnimationPlayer.play("knockback")
+
+	if character.character_type == Character.Type.DOG:
+		character.set_collision_layer_value(2, false)
+	else:
+		character.set_collision_layer_value(3, false)
 
 # called when the state is deactivated
 func exit() -> void:
-	pass 
+	if character.character_type == Character.Type.DOG:
+		character.set_collision_layer_value(2, true)
+	else: 
+		character.set_collision_layer_value(3, true) 
 		
 # called every frame when the state is active
 func update(delta: float) -> void:
@@ -25,7 +33,7 @@ func update(delta: float) -> void:
 			character.velocity.y = knockback_vel.y
 			
 			knockback_countdown -= 1
-			knockback_vel = Vector2(150, -150)
+			knockback_vel = knockback_vel * 0.75
 		else:
 			if character.health <= 0:
 				transition.emit("DieState")

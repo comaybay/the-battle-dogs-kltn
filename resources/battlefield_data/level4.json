@@ -2,6 +2,7 @@
   "stage_width": 6000,
   "cat_tower_health": 2500,
   "reward_bone": 2000,
+  "power_scale": 1.5,
   "spawn_patterns": [
     {
       "name": "cat",
@@ -27,6 +28,18 @@
       "name": "leg_cat",
       "duration": 10,
       "delay": 55
+    }
+  ],
+  "bosses": [
+    {
+      "health_at": 500,
+      "name": "buff_cat",
+      "buffs": [
+        { "name": "health", "scale": 4 },
+        { "name": "damage", "scale": 2 },
+        { "name": "attack_cooldown", "scale": 0.5 },
+        { "name": "reward_money", "scale": 3 }
+      ]
     }
   ]
 }

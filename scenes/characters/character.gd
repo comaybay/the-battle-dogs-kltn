@@ -134,8 +134,10 @@ func take_damage(ammount: int) -> void:
 		if health > 0:
 			while _is_pass_knockback_health():
 				next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
+			knockback()
+		else:
+			knockback(1.25) 
 		
-		knockback()
 
 func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> void: # gay anh huong trong time
 	if effect == "speed" :
@@ -188,8 +190,8 @@ func powerUp(types , number : float, time : float) :
 		if (type == "speed") :
 			speed = speed / number
 
-func knockback():
-	$FiniteStateMachine.change_state("KnockbackState")	
+func knockback(scale: float = 1):
+	$FiniteStateMachine.change_state("KnockbackState", {"scale": scale})	
 	
 func kill():
 	$FiniteStateMachine.change_state("DieState")	
