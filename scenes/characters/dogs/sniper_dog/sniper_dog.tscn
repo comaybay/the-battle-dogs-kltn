@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=16 format=3 uid="uid://dd23rxo0lk701"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_qnr0p"]
 [ext_resource type="Texture2D" uid="uid://dsanqteu4fv2s" path="res://scenes/characters/sniper_cat.png" id="2_wgnt7"]
@@ -485,6 +485,7 @@ size = Vector2(604, 1134)
 [node name="SniperDog" node_paths=PackedStringArray("custom_attack_area") instance=ExtResource("1_qnr0p")]
 z_index = 40
 position = Vector2(2, 1)
+name_id = "sniper_dog"
 speed = 80
 custom_attack_area = NodePath("AttackArea")
 attack_range = 1760

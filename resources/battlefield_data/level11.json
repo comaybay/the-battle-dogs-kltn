@@ -9,20 +9,9 @@
       "delay": 0
     },
     {
-      "name": "leg_cat",
-      "duration": 20,
-      "delay": 10
-    },
-    {
-      "name": "rolling_cat",
-      "duration": 10,
-      "delay": 22.5
-    },
-
-    {
       "name": "cat",
       "duration": 10,
-      "delay": 42.5
+      "delay": 30.5
     }
   ]
 }

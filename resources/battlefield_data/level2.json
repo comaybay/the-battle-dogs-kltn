@@ -12,6 +12,11 @@
       "name": "leg_cat",
       "duration": 15,
       "delay": 15
+    },
+    {
+      "name": "cat",
+      "duration": 5,
+      "delay": 20.5
     }
   ]
 }

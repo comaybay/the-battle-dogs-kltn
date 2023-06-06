@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://5joq03mk4kv3"]
+[gd_scene load_steps=4 format=3 uid="uid://5joq03mk4kv3"]
 
 [ext_resource type="PackedScene" uid="uid://brx02julmawu5" path="res://scenes/characters/character.tscn" id="1_t516l"]
+[ext_resource type="Script" path="res://scenes/characters/dogs/base_dog.gd" id="2_krygw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6m5t"]
 resource_local_to_scene = true
@@ -9,7 +10,9 @@ size = Vector2(192, 178)
 [node name="BaseDog" groups=["dogs"] instance=ExtResource("1_t516l")]
 collision_layer = 2
 collision_mask = 21
-attack_area_range = -1
+script = ExtResource("2_krygw")
+name_id = ""
+speed = 100
 
 [node name="Sprite2D" parent="." index="2"]
 frame = 8

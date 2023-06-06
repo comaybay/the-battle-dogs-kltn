@@ -1,7 +1,8 @@
 {
-  "stage_width": 8000,
-  "cat_tower_health": 1000,
+  "stage_width": 6000,
+  "cat_tower_health": 4000,
   "reward_bone": 3000,
+  "power_scale": 1.5,
   "spawn_patterns": [
     {
       "name": "cat",
@@ -14,15 +15,26 @@
       "delay": 10
     },
     {
+      "name": "cat",
+      "duration": 5,
+      "delay": 62
+    },
+    {
       "name": "rolling_cat",
       "duration": 10,
-      "delay": 22.5
-    },
-
-    {
-      "name": "cat",
-      "duration": 10,
       "delay": 42.5
+    }
+  ],
+  "bosses": [
+    {
+      "health_at": 500,
+      "name": "buff_cat",
+      "buffs": [
+        { "name": "health", "scale": 4 },
+        { "name": "damage", "scale": 2 },
+        { "name": "attack_cooldown", "scale": 0.5 },
+        { "name": "reward_money", "scale": 3 }
+      ]
     }
   ]
 }

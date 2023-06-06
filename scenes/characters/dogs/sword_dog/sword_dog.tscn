@@ -95,9 +95,9 @@ size = Vector2(192, 178)
 [node name="SwordDog" instance=ExtResource("1_ivu0g")]
 z_index = 40
 position = Vector2(2, 1)
+name_id = "sword_dog"
 speed = 300
 attack_range = 90
-attack_area_range = 0
 attack_cooldown = 0.0
 health = 180
 knockbacks = 5

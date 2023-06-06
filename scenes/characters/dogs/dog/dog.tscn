@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=12 format=3 uid="uid://c5fdd8y430j88"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_wscv2"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="2_y8xhq"]
@@ -95,8 +95,8 @@ size = Vector2(192, 178)
 [node name="Dog" instance=ExtResource("1_wscv2")]
 z_index = 40
 position = Vector2(2, 1)
+name_id = "sniper_dog"
 speed = 100
-attack_area_range = 0
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

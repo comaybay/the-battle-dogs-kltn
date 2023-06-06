@@ -2,11 +2,14 @@ extends StaticBody2D
 
 signal zero_health
 
+const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
 const MAX_RANDOM_DELAY: float = 2.5
 
 var health: int
 var max_health: int
+var cats: Dictionary
 var spawn_timers: Array[Timer]
+var bosses_queue: Array
 
 ## position where effect for the tower should take place 
 var effect_global_position: Vector2:
@@ -17,8 +20,19 @@ func _ready() -> void:
 	health = max_health
 	update_health_label()
 	
-	var spawn_patterns = InBattle.battlefield_data['spawn_patterns']
-	var cats := load_cats(spawn_patterns) 
+	var spawn_patterns: Array = InBattle.battlefield_data['spawn_patterns']
+	var bosses: Array = InBattle.battlefield_data['bosses'] if InBattle.battlefield_data.has('bosses') else []
+	
+	var spawn_cat_names := spawn_patterns.map(func(s): return s['name'])
+	var boss_cat_names := bosses.map(func(s): return s['name'])
+	var cat_names := spawn_cat_names + boss_cat_names 
+	cats = load_cats(cat_names) 
+	
+	bosses.sort_custom(func(a, b):
+		return a['health_at'] >= b['health_at']
+	)
+	bosses_queue = bosses
+	
 	for pattern in spawn_patterns:
 		var timer = Timer.new()
 		spawn_timers.append(timer)
@@ -29,8 +43,7 @@ func _ready() -> void:
 		var spawn_duration = float(pattern['duration'])
 		
 		var on_spawn_cat = func():
-			var cat_scene: PackedScene = cats[pattern['name']]
-			spawn(cat_scene)
+			spawn(pattern['name'])
 			timer.wait_time = spawn_duration + randf() * MAX_RANDOM_DELAY
 				
 		if delay_duration <= 0:
@@ -44,11 +57,10 @@ func _ready() -> void:
 				timer.timeout.connect(on_spawn_cat)
 			
 			timer.timeout.connect(on_timeout_delay, CONNECT_ONE_SHOT)
-
-func load_cats(spawn_patterns: Variant) -> Dictionary:
+			
+func load_cats(cat_names: Array) -> Dictionary:
 	var cats := {}
-	for pattern in spawn_patterns:
-		var cat_name = pattern['name']
+	for cat_name in cat_names:
 		if not cats.has(cat_name):
 			cats[cat_name] = load("res://scenes/characters/cats/%s/%s.tscn" % [cat_name, cat_name])
 			
@@ -61,10 +73,20 @@ func take_damage(damage: int) -> void:
 	if health <= 0:
 		return	
 	
-	health = max(health - damage, 0) 
+	if bosses_queue.size() > 0:
+		health = max(health - damage, 1) 
+	else:
+		health = max(health - damage, 0) 
+		
 	update_health_label()
 	$AnimationPlayer.play("shake" if health > 0 else "fall")
 	
+	if bosses_queue.size() > 0:
+		var boss_info = bosses_queue.back()
+		if health <= boss_info['health_at']:
+			spawn_boss(boss_info)
+			bosses_queue.pop_back()
+		
 	if health <= 0:
 		for cat in get_tree().get_nodes_in_group("cats"):
 			cat.kill()
@@ -74,7 +96,32 @@ func take_damage(damage: int) -> void:
 			
 		zero_health.emit()
 
-func spawn(cat_scene: PackedScene) -> void:
-	var cat = cat_scene.instantiate()
+func spawn(cat_name: String) -> void:
+	var cat = cats[cat_name].instantiate()
 	cat.global_position = global_position - Vector2(100, 0)
 	get_tree().current_scene.add_child(cat)
+	
+func spawn_boss(boss_info: Dictionary) -> void:
+	var cat = cats[boss_info['name']].instantiate()
+	cat.global_position = global_position - Vector2(100, 0)
+	
+	for buff in boss_info['buffs']:
+		var prop_name = buff["name"]
+		var prop_val = cat.get(prop_name) 
+		if prop_val != null:
+			cat.set(prop_name, cat.get(prop_name) * buff["scale"])
+	
+	var tree := get_tree()
+		
+	tree.current_scene.add_child(cat)
+	var effect_space: Node2D = get_tree().current_scene.get_node("EffectSpace")
+	
+	var effect := EnergyExpand.instantiate()
+	effect.setup("on_tower")
+	effect.global_position = effect_global_position
+	tree.current_scene.get_node("EffectSpace").add_child(effect)
+	
+	for dog in tree.get_nodes_in_group("dogs"):
+		dog.knockback(2.5)
+		
+	
