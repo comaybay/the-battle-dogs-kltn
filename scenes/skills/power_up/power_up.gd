@@ -2,7 +2,7 @@ extends Node
 
 const UpSprite: PackedScene = preload("res://scenes/skills/power_up/sprite.tscn")
 
-@export var type = ["health", "speed"]
+@export var type = ["attack_cooldown", "speed", "damage"]
 @export var up = 100
 @export var time = 5
 

@@ -122,13 +122,13 @@ libraries = {
 }
 
 [node name="Sprite2D" parent="." index="2"]
-position = Vector2(-80, -274)
+position = Vector2(-80, -380)
 texture = ExtResource("2_ase53")
 hframes = 3
 frame = 13
 
 [node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(0, -193.5)
+position = Vector2(0, -302)
 shape = SubResource("RectangleShape2D_8so8p")
 
 [node name="RayCast2D" parent="." index="4"]
