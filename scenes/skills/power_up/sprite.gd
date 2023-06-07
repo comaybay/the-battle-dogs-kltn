@@ -10,7 +10,9 @@ func setup(time : float, character : Character ) -> void:
 
 func _process(delta):
 	var width = 0
+	var scale = 1
 	if (_character != null):
-		width = _character.sizeCharacter[1] - 50
-		self.global_position = _character.global_position + Vector2(0,-width)
-		self.scale = Vector2(_character.scaleCharacter,_character.scaleCharacter)
+		width = _character.size_character[1] - 50
+		scale = _character.size_character[0] /200
+		self.global_position = _character.global_position + Vector2(-5,-width)
+		self.scale = Vector2(scale,scale)

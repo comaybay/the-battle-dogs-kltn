@@ -32,10 +32,10 @@
   ],
   "bosses": [
     {
-      "health_at": 500,
+      "health_at": 2500,
       "name": "buff_cat",
       "buffs": [
-        { "name": "health", "scale": 4 },
+        { "name": "health", "scale": 4 },        
         { "name": "damage", "scale": 2 },
         { "name": "attack_cooldown", "scale": 0.5 },
         { "name": "reward_money", "scale": 3 }

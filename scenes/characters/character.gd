@@ -40,8 +40,8 @@ enum Type { DOG, ENEMY }
 @onready var n_Sprite2D := $Sprite2D as Sprite2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
 
-var sizeCharacter
-@export var scaleCharacter : int = 1
+var size_character
+@export var scale_character : int = 1
 ## position where effect for a character should take place 
 var effect_global_position: Vector2:
 	get: return n_RayCast2D.global_position
@@ -54,7 +54,7 @@ var next_knockback_health: int
 var collision_rect: Rect2
 
 func _ready() -> void:
-	sizeCharacter = $CollisionShape2D.get_shape().size
+	size_character = $CollisionShape2D.get_shape().size
 	# config 
 	max_health = health
 	next_knockback_health = max_health - (max_health / knockbacks)
@@ -148,7 +148,7 @@ func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> v
 	elif effect ==  "damage" :
 		damage = damage * number
 	elif effect ==  "attack_cooldown" :
-		attack_cooldown = attack_cooldown * number
+		attack_cooldown = attack_cooldown / number
 	elif effect ==  "attack_area_range" :
 		attack_area_range = attack_area_range * number
 	elif effect ==  "health" :
@@ -161,7 +161,7 @@ func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> v
 	elif effect ==  "damage" :
 		damage = damage / number
 	elif effect ==  "attack_cooldown" :
-		attack_cooldown = attack_cooldown / number
+		attack_cooldown = attack_cooldown * number
 	elif effect ==  "attack_area_range" :
 		attack_area_range = attack_area_range / number
 	elif effect ==  "health" :
@@ -175,7 +175,7 @@ func _is_pass_knockback_health():
 func powerUp(types , number : float, time : float) :
 	for type in types :
 		if (type == "attack_cooldown"):
-			attack_cooldown = attack_cooldown * number
+			attack_cooldown = attack_cooldown / number
 		if (type == "health"):
 			health = health * number
 		if (type == "damage") :
@@ -185,7 +185,7 @@ func powerUp(types , number : float, time : float) :
 	await get_tree().create_timer(time).timeout
 	for type in types :
 		if (type == "attack_cooldown"):
-			attack_cooldown = attack_cooldown / number
+			attack_cooldown = attack_cooldown * number
 		if (type == "health"):
 			health = health / number
 		if (type == "damage") :
