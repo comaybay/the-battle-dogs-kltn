@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cc4bqrpdv8f6n"]
+[gd_scene load_steps=8 format=3 uid="uid://cc4bqrpdv8f6n"]
 
 [ext_resource type="PackedScene" uid="uid://cto0tiylqerf7" path="res://scenes/buttons/character_button/character_button.tscn" id="1_jeths"]
 [ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="2_gen3m"]
@@ -110,11 +110,6 @@ _data = {
 "ready": SubResource("Animation_c6xly")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_tqvmg"]
-font_size = 74
-outline_size = 24
-outline_color = Color(0.156863, 0.156863, 0.45098, 1)
-
 [node name="SpawnButton" instance=ExtResource("1_jeths")]
 script = ExtResource("2_icp81")
 
@@ -143,6 +138,7 @@ offset_left = 19.0
 offset_top = 172.0
 offset_right = 306.0
 offset_bottom = 293.0
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 74
 text = "50₵"
-label_settings = SubResource("LabelSettings_tqvmg")
 horizontal_alignment = 2

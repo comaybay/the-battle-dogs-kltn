@@ -58,3 +58,4 @@ frame_progress = 0.992498
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_4fgmw")
+bus = &"SoundFX"

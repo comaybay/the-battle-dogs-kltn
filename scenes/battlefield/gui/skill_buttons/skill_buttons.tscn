@@ -8,20 +8,11 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_ujp8v")
 
-[node name="FirstRow" type="HBoxContainer" parent="."]
+[node name="FirstRow" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -542.0
-offset_top = -123.0
-offset_right = 542.0
-offset_bottom = 123.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 50
+offset_right = 324.0
+offset_bottom = 838.0
+theme_override_constants/separation = 25
 
 [node name="CharacterButton" parent="FirstRow" instance=ExtResource("2_3tx0w")]
 layout_mode = 2

@@ -14,7 +14,7 @@
     "price": 600,
     "detail": "asd",
     "spawn_time": 20,
-    "spawn_price": 10,
+    "spawn_price": 500,
     "path": "res://resources/images/dogs/sniper_cat1.png"
   },
   {

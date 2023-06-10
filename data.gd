@@ -1,6 +1,8 @@
 extends Node
 
 signal bone_changed(value: int)
+signal music_volume_changed(value: int)
+signal sound_fx_volume_changed(value: int)
 
 var save_data: Dictionary
 
@@ -32,7 +34,19 @@ var teams: Array:
 
 var selected_battlefield_id: String:
 	get: return save_data['selected_battlefield_id']		
-	set(value): save_data['selected_battlefield_id'] = value		
+	set(value): save_data['selected_battlefield_id'] = value	
+
+var sound_fx_volume: int:
+	get: return save_data['settings']['sound_fx']		
+	set(value): 
+		save_data['settings']['sound_fx'] = value	
+		sound_fx_volume_changed.emit(value)
+		
+var music_volume: int:
+	get: return save_data['settings']['music']		
+	set(value): 
+		save_data['settings']['music'] = value	
+		music_volume_changed.emit(value)
 
 var dog_info := Dictionary()
 var store_info := Dictionary()

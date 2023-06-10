@@ -9,3 +9,4 @@ script = ExtResource("2_01l4y")
 [node name="drum" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_53nbv")
 volume_db = 10.0
+bus = &"SoundFX"

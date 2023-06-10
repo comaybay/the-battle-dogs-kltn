@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://e7fcshjccrpt"]
+[gd_scene load_steps=4 format=3 uid="uid://e7fcshjccrpt"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/gui/spawn_buttons/spawn_buttons.gd" id="1_rsd52"]
 [ext_resource type="PackedScene" uid="uid://cc4bqrpdv8f6n" path="res://scenes/battlefield/gui/spawn_buttons/spawn_button.tscn" id="2_23hyj"]
+[ext_resource type="PackedScene" uid="uid://j4j2gjue6ewr" path="res://scenes/battlefield/gui/switch_row_button/switch_row_button.tscn" id="3_lpfmx"]
 
 [node name="SpawnButtons" type="Control"]
 layout_mode = 3
@@ -52,3 +53,11 @@ layout_mode = 2
 
 [node name="CharacterButton5" parent="FirstRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
+
+[node name="SwitchRowButton" parent="." instance=ExtResource("3_lpfmx")]
+layout_mode = 0
+offset_left = 958.0
+offset_top = -8.0
+offset_right = 1149.0
+offset_bottom = 185.0
+scale = Vector2(1.25, 1.25)
