@@ -1,10 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk34ua8pysw3v"]
+[gd_scene load_steps=7 format=3 uid="uid://bk34ua8pysw3v"]
 
 [ext_resource type="Script" path="res://scenes/start_menu/main.gd" id="1_gee0v"]
 [ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="2_quepu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oarnu"]
 font_size = 50
+
+[sub_resource type="Animation" id="Animation_iavmh"]
+resource_name = "fade in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8vrgj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xuivp"]
+_data = {
+"RESET": SubResource("Animation_8vrgj"),
+"fade in": SubResource("Animation_iavmh")
+}
 
 [node name="Main" type="Control"]
 layout_direction = 1
@@ -14,6 +51,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
 script = ExtResource("1_gee0v")
 
 [node name="Khung" type="VBoxContainer" parent="."]
@@ -92,6 +130,18 @@ text = "Thoát"
 position = Vector2(0, -326)
 stream = ExtResource("2_quepu")
 volume_db = 14.998
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -115.0
+offset_top = -114.0
+offset_right = 1353.0
+offset_bottom = 806.0
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xuivp")
+}
 
 [connection signal="pressed" from="Khung/PhanCuoi/NutBatDau" to="." method="_on_nut_bat_dau_pressed"]
 [connection signal="pressed" from="Khung/PhanCuoi/NutHuongDan" to="." method="_on_nut_huong_dan_pressed"]

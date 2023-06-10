@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The Battle Dogs"
-run/main_scene="res://scenes/start_menu/main.tscn"
+run/main_scene="res://scenes/start_menu/Intro.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 

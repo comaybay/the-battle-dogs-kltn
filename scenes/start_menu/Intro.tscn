@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://fwaltxldx6f8"]
+
+[ext_resource type="Script" path="res://scenes/start_menu/Intro.gd" id="1_5e7yh"]
+[ext_resource type="Texture2D" uid="uid://da0x6jh47tilh" path="res://resources/icons/fire_ball_icon.png" id="2_3bwif"]
+
+[sub_resource type="Animation" id="Animation_wb0d0"]
+resource_name = "fade in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ttwkk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_67nl6"]
+resource_name = "fade out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_debot"]
+_data = {
+"RESET": SubResource("Animation_ttwkk"),
+"fade in": SubResource("Animation_wb0d0"),
+"fade out": SubResource("Animation_67nl6")
+}
+
+[node name="Intro" type="Node"]
+script = ExtResource("1_5e7yh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(440.921, 186.28)
+texture = ExtResource("2_3bwif")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_debot")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -115.0
+offset_top = -114.0
+offset_right = 1353.0
+offset_bottom = 806.0
+color = Color(0, 0, 0, 1)

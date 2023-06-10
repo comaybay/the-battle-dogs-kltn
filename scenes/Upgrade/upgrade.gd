@@ -10,6 +10,7 @@ var dog_boxes: Array[ItemBox]
 var skill_boxes: Array[ItemBox]
 
 func _ready():
+	%NutNangCap.disabled = true
 	%TabContainer.set_tab_title(0, "Nhân vật")
 	%TabContainer.set_tab_title(1, "Kỹ năng")
 	add_items()
