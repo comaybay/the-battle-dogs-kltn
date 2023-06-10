@@ -25,6 +25,9 @@ func _ready() -> void:
 		func(value: float): 
 			AudioServer.set_bus_volume_db(music_idx, value - 100)
 	)
+	
+	add_child(button_pressed)
+	add_child(music)
 
 func play_button_pressed_audio():
 	button_pressed.play()
