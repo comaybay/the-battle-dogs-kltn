@@ -11,7 +11,7 @@
   {
     "ID": "sniper_dog",
     "name": "Chó bắn tỉa",
-    "price": 600,
+    "price": 800,
     "detail": "asd",
     "spawn_time": 20,
     "spawn_price": 500,
@@ -20,7 +20,7 @@
   {
     "ID": "sword_dog",
     "name": "Chó sát thủ",
-    "price": 200,
+    "price": 300,
     "detail": "asd",
     "path": "res://resources/images/dogs/dog1.png",
     "spawn_time": 4,
@@ -29,10 +29,19 @@
   {
     "ID": "angel_dog",
     "name": "Chó thiên thần",
-    "price": 200,
+    "price": 400,
     "detail": "asd",
     "path": "res://resources/images/dogs/dog1.png",
     "spawn_time": 4,
     "spawn_price": 200
+  },
+  {
+    "ID": "waffle_dog",
+    "name": "Chó bánh quế",
+    "price": 250,
+    "detail": "asd",
+    "path": "res://resources/images/dogs/dog1.png",
+    "spawn_time": 4,
+    "spawn_price": 100
   }
 ]

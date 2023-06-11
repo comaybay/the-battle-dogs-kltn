@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=16 format=3 uid="uid://dr1f8xux7ixm2"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_qnr0p"]
 [ext_resource type="Texture2D" uid="uid://dsanqteu4fv2s" path="res://scenes/characters/cats/sniper_cat.png" id="2_wgnt7"]
@@ -492,7 +492,7 @@ attack_range = 1760
 attack_area_range = 60
 attack_cooldown = 20.0
 attack_frame = 10
-health = 300
+health = 900
 damage = 400
 scale_character = 3
 

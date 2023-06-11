@@ -282,7 +282,7 @@ tracks/3/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m42cu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y1xwg"]
 _data = {
 "RESET": SubResource("Animation_gwlt8"),
 "attack": SubResource("Animation_8csog"),
@@ -310,10 +310,12 @@ wait_time = 4.0
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_m42cu")
+"": SubResource("AnimationLibrary_y1xwg")
 }
 
 [node name="Sprite2D" parent="." index="2"]
+position = Vector2(-42, -461)
+rotation = 0.0
 texture = ExtResource("2_8gfbr")
 hframes = 1
 frame = 0
