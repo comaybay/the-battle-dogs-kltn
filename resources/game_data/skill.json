@@ -4,7 +4,7 @@
     "name": "cầu lửa",
     "detail": "dddf",
     "price": 2000,
-    "path": "res://resources/images/dogs/dog1.png",
+    "path": "res://resources/images/skills/fire_ball_icon.png",
     "spawn_time": 2,
     "spawn_price": 50
   },
@@ -13,7 +13,7 @@
     "name": "Chó thường",
     "detail": "dddf",
     "price": 1000,
-    "path": "res://resources/images/dogs/dog1.png",
+    "path": "res://resources/images/skills/powerUp_icon.png",
     "spawn_time": 2,
     "spawn_price": 50
   },
@@ -24,7 +24,7 @@
     "detail": "asd",
     "spawn_time": 1,
     "spawn_price": 100,
-    "path": "res://resources/images/dogs/sniper_cat1.png"
+    "path": "res://resources/images/skills/drum_icon.png"
   },
   {
     "ID": "healing",
@@ -42,6 +42,6 @@
     "detail": "asd",
     "spawn_time": 1,
     "spawn_price": 100,
-    "path": "res://resources/images/dogs/sniper_cat1.png"
+    "path": "res://resources/images/skills/power_up_icon.png"
   }
 ] 
