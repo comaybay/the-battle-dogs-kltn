@@ -2,9 +2,9 @@ extends Control
 
 
 func _ready():
+	$ColorRect.visible = true
 	$AnimationPlayer.play("fade in")
-	await get_tree().create_timer(2).timeout
-	$ColorRect.visible = false
+	await $AnimationPlayer.animation_finished
 	
 func _on_nut_bat_dau_pressed():
 	AudioPlayer.play_button_pressed_audio()

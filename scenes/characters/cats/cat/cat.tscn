@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnh1yictwc6dm"]
+[gd_scene load_steps=7 format=3 uid="uid://qo11ou71urdi"]
 
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_2c8s7"]
 [ext_resource type="Texture2D" uid="uid://dk2qbrhlr0fcu" path="res://scenes/characters/cats/cat/cat.png" id="1_lqadi"]
@@ -17,7 +17,7 @@ health = 80
 [node name="Sprite2D" parent="." index="2"]
 position = Vector2(3, -25)
 texture = ExtResource("1_lqadi")
-frame = 8
+frame = 0
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(1, -1)

@@ -40,6 +40,26 @@
         { "name": "attack_cooldown", "scale": 0.5 },
         { "name": "reward_money", "scale": 3 }
       ]
+    },
+    {
+      "health_at": 500,
+      "name": "cat",
+      "buffs": [
+        { "name": "health", "scale": 4 },
+        { "name": "damage", "scale": 2 },
+        { "name": "attack_cooldown", "scale": 0.5 },
+        { "name": "reward_money", "scale": 3 }
+      ]
+    },
+    {
+      "health_at": 1,
+      "name": "leg_cat",
+      "buffs": [
+        { "name": "health", "scale": 4 },
+        { "name": "damage", "scale": 2 },
+        { "name": "attack_cooldown", "scale": 0.5 },
+        { "name": "reward_money", "scale": 3 }
+      ]
     }
   ]
 }

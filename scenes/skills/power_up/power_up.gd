@@ -14,7 +14,7 @@ func _ready() -> void:
 		dog.powerUp(type, 1.5 , time) # health  attack_cooldown damage speed
 		var effect_on_dog: Node2D = UpSprite.instantiate()
 		effect_space.add_child(effect_on_dog) 
-		effect_on_dog.setup(time,dog)
+		effect_on_dog.setup(time, dog)
 		effect_on_dog.global_position = dog.global_position 
 	
 	queue_free()

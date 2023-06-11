@@ -5,6 +5,7 @@ var _character : Character
 func setup(time : float, character : Character ) -> void:
 	_character = character
 	$AnimationPlayer.play("play")
+	_character.tree_exiting.connect(func(): queue_free())
 	await get_tree().create_timer(time).timeout
 	queue_free()
 
