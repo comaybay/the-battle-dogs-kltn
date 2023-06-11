@@ -22,7 +22,7 @@ func _ready():
 	file2.close()
 	
 	# làm trống đội hình và kỹ năng
-	teams = $Khung/PhanTren/TabContainer/DoiHinh/GridContainer.get_children()
+	teams = $"Khung/PhanTren/TabContainer/Đội hình/GridContainer".get_children()
 	skill_teams = $Khung/PhanTren/TabContainer/Skill/GridContainer.get_children()
 	for i in teams :
 		i.setup(self)
