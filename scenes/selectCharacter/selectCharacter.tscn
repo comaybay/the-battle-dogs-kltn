@@ -24,8 +24,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1bnxr")
-title = "Title - Title"
-go_back_scene_path = "res://scenes/start_menu/main.tscn"
+title = "Chọn đội hình"
+go_back_scene_path = "res://scenes/map/map.tscn"
 
 [node name="BackGroundRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -142,11 +142,11 @@ layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
 
-[node name="DoiHinh" type="HBoxContainer" parent="Khung/Content/Khung/PhanTren/TabContainer"]
+[node name="Đội hình" type="HBoxContainer" parent="Khung/Content/Khung/PhanTren/TabContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh"]
+[node name="GridContainer" type="GridContainer" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -154,13 +154,13 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 5
 
-[node name="Box1" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box1" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "0"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box1"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box1"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -169,7 +169,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box1"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -179,13 +179,13 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Box2" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box2" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "1"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box2"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box2"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -194,7 +194,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box2"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -204,13 +204,13 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Box3" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box3" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "2"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box3"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box3"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -219,7 +219,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box3"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,13 +229,13 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Box4" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box4" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "3"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box4"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box4"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -244,7 +244,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box4"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -254,13 +254,13 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Box5" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box5" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "4"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box5"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box5"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -269,7 +269,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box5"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box5"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -279,13 +279,13 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Box6" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box6" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "5"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box6"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box6"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -294,7 +294,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box6"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box6"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -304,7 +304,7 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Name_id" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box6"]
+[node name="Name_id" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box6"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -313,13 +313,13 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="Box7" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box7" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "6"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box7"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box7"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -328,7 +328,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box7"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box7"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -338,13 +338,13 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Box8" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box8" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "7"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box8"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box8"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -353,7 +353,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box8"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box8"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -363,13 +363,13 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Box9" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box9" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "8"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box9"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box9"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -378,7 +378,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box9"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box9"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -388,13 +388,13 @@ grow_vertical = 2
 texture = ExtResource("4_fhby6")
 expand_mode = 1
 
-[node name="Box10" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer"]
+[node name="Box10" type="Button" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "9"
 script = ExtResource("2_rdat8")
 
-[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box10"]
+[node name="ID" type="Label" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box10"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -403,7 +403,7 @@ text = "0
 "
 label_settings = SubResource("LabelSettings_3u1xg")
 
-[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box10"]
+[node name="TextureRect" type="TextureRect" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box10"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -597,16 +597,16 @@ text = "Thức ăn cho chó : 100"
 horizontal_alignment = 2
 
 [connection signal="tab_changed" from="Khung/Content/Khung/PhanTren/TabContainer" to="Khung/Content" method="_on_tab_container_tab_changed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box1" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box1" method="_on_pressed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box2" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box2" method="_on_pressed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box3" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box3" method="_on_pressed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box4" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box4" method="_on_pressed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box5" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box5" method="_on_pressed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box6" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box6" method="_on_pressed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box7" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box7" method="_on_pressed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box8" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box8" method="_on_pressed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box9" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box9" method="_on_pressed"]
-[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box10" to="Khung/Content/Khung/PhanTren/TabContainer/DoiHinh/GridContainer/Box10" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box1" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box1" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box2" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box2" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box3" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box3" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box4" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box4" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box5" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box5" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box6" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box6" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box7" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box7" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box8" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box8" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box9" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box9" method="_on_pressed"]
+[connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box10" to="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/GridContainer/Box10" method="_on_pressed"]
 [connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Skill/GridContainer/Box1" to="Khung/Content/Khung/PhanTren/TabContainer/Skill/GridContainer/Box1" method="_on_pressed"]
 [connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Skill/GridContainer/Box2" to="Khung/Content/Khung/PhanTren/TabContainer/Skill/GridContainer/Box2" method="_on_pressed"]
 [connection signal="pressed" from="Khung/Content/Khung/PhanTren/TabContainer/Skill/GridContainer/Box3" to="Khung/Content/Khung/PhanTren/TabContainer/Skill/GridContainer/Box3" method="_on_pressed"]
