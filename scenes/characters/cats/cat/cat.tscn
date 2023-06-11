@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://bnh1yictwc6dm"]
 
-[ext_resource type="PackedScene" uid="uid://dvorgedardkvp" path="res://scenes/characters/cats/base_cat.tscn" id="1_2c8s7"]
+[ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_2c8s7"]
 [ext_resource type="Texture2D" uid="uid://dk2qbrhlr0fcu" path="res://scenes/characters/cats/cat/cat.png" id="1_lqadi"]
 [ext_resource type="AudioStream" uid="uid://ly0tu17spiog" path="res://resources/sound/danh nhau/mèo cào.mp3" id="3_dtabb"]
 [ext_resource type="AudioStream" uid="uid://yf21fmrrxxax" path="res://resources/sound/danh nhau/mèo kêu.mp3" id="4_0vkmo"]

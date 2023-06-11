@@ -99,7 +99,7 @@ name_id = "sword_dog"
 speed = 300
 attack_range = 90
 attack_cooldown = 0.0
-health = 180
+health = 400
 knockbacks = 5
 
 [node name="AttackCooldownTimer" parent="." index="0"]

@@ -25,5 +25,14 @@
     "path": "res://resources/images/dogs/dog1.png",
     "spawn_time": 4,
     "spawn_price": 150
+  },
+  {
+    "ID": "angel_dog",
+    "name": "Chó thiên thần",
+    "price": 200,
+    "detail": "asd",
+    "path": "res://resources/images/dogs/dog1.png",
+    "spawn_time": 4,
+    "spawn_price": 200
   }
 ]

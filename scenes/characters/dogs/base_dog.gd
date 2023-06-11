@@ -1,3 +1,4 @@
+@tool
 class_name BaseDog extends Character
 
 # id used to retrive save infomation of a dog character
@@ -9,6 +10,6 @@ func _ready() -> void:
 	var dog_upgrade = Data.dogs[name_id]
 	
 	if dog_upgrade != null:
-		var scale = (1 + dog_upgrade['level'] * 0.2)
+		var scale = (1 + (dog_upgrade['level'] - 1) * 0.2)
 		damage *= scale  
 		health *= scale

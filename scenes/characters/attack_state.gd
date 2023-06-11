@@ -6,12 +6,12 @@ const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")
 
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
-	character.n_Sprite2D.frame_changed.connect(on_frame_changed)
+	character.attack_sprite.frame_changed.connect(on_frame_changed)
 	character.n_AnimationPlayer.animation_finished.connect(on_animation_finished)
 	character.n_AnimationPlayer.play("attack")
 
 func on_frame_changed() -> void:
-	if character.n_Sprite2D.frame == character.attack_frame:
+	if character.attack_sprite.frame == character.attack_frame:
 		start_attack = true
 
 func physics_update(_delta: float) -> void:
@@ -66,7 +66,7 @@ func on_animation_finished(_name):
 		
 # called when the state is deactivated
 func exit() -> void:
-	character.n_Sprite2D.frame_changed.disconnect(on_frame_changed) 
+	character.attack_sprite.frame_changed.disconnect(on_frame_changed) 
 	character.n_AnimationPlayer.animation_finished.disconnect(on_animation_finished)
 
 

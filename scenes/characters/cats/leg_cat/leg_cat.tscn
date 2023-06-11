@@ -93,7 +93,7 @@ size = Vector2(192, 584)
 
 [node name="LegCat" instance=ExtResource("1_vncuy")]
 z_index = 20
-reward_money = 50
+reward_money = 75
 speed = 200
 attack_range = 300
 attack_area_range = 50

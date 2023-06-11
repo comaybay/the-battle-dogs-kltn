@@ -96,7 +96,6 @@ size = Vector2(192, 178)
 z_index = 40
 position = Vector2(2, 1)
 name_id = "sniper_dog"
-speed = 100
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

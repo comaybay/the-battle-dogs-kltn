@@ -14,7 +14,6 @@ func _ready():
 	%Dog.setup(levels[Data.selected_level], %Tracker)
 
 func _on_nut_tan_cong_pressed():
-	InBattle.battlefield_id = Data.selected_battlefield_id
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file("res://scenes/battlefield/battlefield.tscn")
 	

@@ -163,6 +163,7 @@ resource_local_to_scene = true
 size = Vector2(192, 178)
 
 [node name="RollingCat" instance=ExtResource("1_nq2vy")]
+reward_money = 50
 speed = 160
 attack_range = 80
 attack_area_range = 20
@@ -171,6 +172,9 @@ attack_frame = 14
 health = 350
 damage = 30
 knockbacks = 5
+
+[node name="AttackCooldownTimer" parent="." index="0"]
+wait_time = 3.0
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
@@ -186,3 +190,6 @@ frame = 0
 
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource("RectangleShape2D_c3bis")
+
+[node name="RayCast2D" parent="." index="4"]
+target_position = Vector2(-80, 0)
