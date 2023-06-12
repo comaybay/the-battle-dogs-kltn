@@ -97,15 +97,11 @@ collision_mask = 35
 script = ExtResource("2_dyq8c")
 reward_money = 0
 character_type = 1
-health = 250
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
 "": SubResource("AnimationLibrary_py03n")
 }
-
-[node name="Sprite2D" parent="." index="2"]
-frame = 11
 
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource("RectangleShape2D_72ktc")

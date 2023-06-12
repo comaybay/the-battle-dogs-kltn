@@ -1,5 +1,5 @@
 {
-  "stage_width": 5000,
+  "stage_width": 4500,
   "cat_tower_health": 2000,
   "reward_bone": 1500,
   "spawn_patterns": [
@@ -15,13 +15,19 @@
     },
     {
       "name": "rolling_cat",
-      "duration": 10,
-      "delay": 20
-    },
+      "duration": 7.5,
+      "delay": 10
+    }
+  ],
+  "bosses": [
     {
-      "name": "cat",
-      "duration": 7,
-      "delay": 15
+      "health_at": 1000,
+      "name": "smol_cat",
+      "buffs": [
+        { "name": "health", "scale": 20 },
+        { "name": "damage", "scale": 20 },
+        { "name": "reward_money", "scale": 3 }
+      ]
     }
   ]
 }

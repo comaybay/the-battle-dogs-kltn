@@ -1,8 +1,7 @@
 {
-  "stage_width": 6000,
-  "cat_tower_health": 2500,
-  "reward_bone": 2000,
-  "power_scale": 1.5,
+  "stage_width": 5000,
+  "cat_tower_health": 2000,
+  "reward_bone": 1500,
   "spawn_patterns": [
     {
       "name": "cat",
@@ -20,46 +19,9 @@
       "delay": 20
     },
     {
-      "name": "cat",
-      "duration": 7,
-      "delay": 15
-    },
-    {
-      "name": "leg_cat",
-      "duration": 10,
-      "delay": 55
-    }
-  ],
-  "bosses": [
-    {
-      "health_at": 500,
-      "name": "buff_cat",
-      "buffs": [
-        { "name": "health", "scale": 4 },
-        { "name": "damage", "scale": 2 },
-        { "name": "attack_cooldown", "scale": 0.5 },
-        { "name": "reward_money", "scale": 3 }
-      ]
-    },
-    {
-      "health_at": 500,
-      "name": "cat",
-      "buffs": [
-        { "name": "health", "scale": 4 },
-        { "name": "damage", "scale": 2 },
-        { "name": "attack_cooldown", "scale": 0.5 },
-        { "name": "reward_money", "scale": 3 }
-      ]
-    },
-    {
-      "health_at": 1,
-      "name": "leg_cat",
-      "buffs": [
-        { "name": "health", "scale": 4 },
-        { "name": "damage", "scale": 2 },
-        { "name": "attack_cooldown", "scale": 0.5 },
-        { "name": "reward_money", "scale": 3 }
-      ]
+      "name": "smol_cat",
+      "duration": 5,
+      "delay": 12.5
     }
   ]
 }
