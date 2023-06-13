@@ -104,7 +104,6 @@ libraries = {
 
 [node name="Sprite2D" parent="." index="2"]
 position = Vector2(-21, -34.5)
-rotation = 0.0
 texture = ExtResource("2_y8xhq")
 hframes = 7
 vframes = 2

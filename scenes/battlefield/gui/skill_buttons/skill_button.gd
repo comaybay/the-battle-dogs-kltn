@@ -4,7 +4,6 @@ var skill_position
 var skill_scene: PackedScene
 var is_active: bool
 
-var spawn_price: int
 var spawn_input_action: String
 
 func is_spawn_ready() -> bool:
@@ -23,8 +22,6 @@ func setup(name_id: String, input_action: String, is_active: bool) -> void:
 	
 	$SpawnTimer.wait_time = Data.skill_info[name_id]['spawn_time']
 	$SpawnTimer.timeout.connect(_on_spawn_ready)
-	
-	spawn_price = Data.skill_info[name_id]['spawn_price']
 	
 	pressed.connect(_on_pressed)
 	$AnimationPlayer.play("ready")

@@ -1,1 +1,40 @@
-{"bone":454700,"dog_food":1000,"dogs":[{"ID":"dog","level":10},{"ID":"sniper_dog","level":7},{"ID":"sword_dog","level":8},{"ID":"dog4","level":3},{"ID":"waffle_dog","level":7},{"ID":"angel_dog","level":8}],"items":[{"ID":"money_rate","amount":6},{"ID":"0","amount":3},{"ID":"1","amount":1},{"ID":"2","amount":7}],"passed_level":7,"reward_bone":100,"selected_battlefield_id":"level9","selected_level":8,"selected_team":0,"settings":{"music":100,"sound_fx":100},"skills":[{"ID":"money_efficiency","level":8},{"ID":"drum","level":1},{"ID":"lightning","level":3},{"ID":"fire_ball","level":3},{"ID":"power_up","level":3}],"teams":[{"dog_ids":["dog","waffle_dog","sword_dog","angel_dog","sniper_dog",null,null,null,null,null],"skill_ids":["fire_ball","power_up",null]},{"dog_ids":["dog","sniper_dog","dog","dog","dog",null,null],"skill_ids":["sniper_dog","dog","dog"]}]}
+{
+  "bone": 24501,
+  "dog_food": 1000,
+  "dogs": [
+    { "ID": "dog", "level": 3 },
+    { "ID": "sniper_dog", "level": 4 },
+    { "ID": "sword_dog", "level": 4 },
+    { "ID": "dog4", "level": 1 },
+    { "ID": "waffle_dog", "level": 2 },
+    { "ID": "angel_dog", "level": 3 }
+  ],
+  "items": [
+    { "ID": "0", "amount": 3 },
+    { "ID": "1", "amount": 1 },
+    { "ID": "2", "amount": 7 }
+  ],
+  "passed_level": 7,
+  "reward_bone": 100,
+  "selected_battlefield_id": "level7",
+  "selected_level": 2,
+  "selected_team": 0,
+  "settings": { "music": 100, "sound_fx": 100 },
+  "skills": [
+    { "ID": "money_efficiency", "level": 1 },
+    { "ID": "drum", "level": 1 },
+    { "ID": "lightning", "level": 3 },
+    { "ID": "fire_ball", "level": 3 },
+    { "ID": "power_up", "level": 3 }
+  ],
+  "teams": [
+    {
+      "dog_ids": ["dog", "waffle_dog", "sword_dog", "angel_dog", "sniper_dog", null, null, null, null, null],
+      "skill_ids": ["fire_ball", "power_up", null]
+    },
+    {
+      "dog_ids": ["dog", "sniper_dog", "dog", "dog", "dog", null, null],
+      "skill_ids": ["sniper_dog", "dog", "dog"]
+    }
+  ]
+}

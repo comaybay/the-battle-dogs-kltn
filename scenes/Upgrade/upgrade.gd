@@ -5,6 +5,8 @@ const ListItem = preload("res://scenes/Upgrade/item_box.tscn")
 var character_data 
 var skill_data 
 var selected_item: ItemBox
+var last_selected_item_character: ItemBox
+var last_selected_item_skill: ItemBox
 
 var dog_boxes: Array[ItemBox]
 var skill_boxes: Array[ItemBox]
@@ -13,8 +15,14 @@ func _ready():
 	%NutNangCap.disabled = true
 	%TabContainer.set_tab_title(0, "Nhân vật")
 	%TabContainer.set_tab_title(1, "Kỹ năng")
+	%TabContainer.tab_changed.connect(func(tab: int):
+		update_ui(last_selected_item_character if tab == 0 else last_selected_item_skill) 
+	)
+		
 	add_items()
 	selected_item = dog_boxes[0]
+	last_selected_item_character = dog_boxes[0]
+	last_selected_item_skill = skill_boxes[0]
 	
 	# show first item
 	update_ui(selected_item)
@@ -35,9 +43,14 @@ func update_ui(item: ItemBox):
 	selected_item = item
 	selected_item.set_selected(true)
 	
+	if item.get_item_type() == "skill":
+		last_selected_item_skill = selected_item
+	else:
+		last_selected_item_character = selected_item
+	
 	var data = item.get_item_data()
 	%ItemName.text = data["name"] 
-	%ItemDescription.text = data['detail']
+	%ItemDescription.text = data['description']
 	%NutNangCap.text = "Nâng cấp" if selected_item.get_level() > 0 else "Mua" 
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone
 	

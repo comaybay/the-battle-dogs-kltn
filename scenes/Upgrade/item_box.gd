@@ -53,7 +53,7 @@ func set_selected(selected: bool):
 		$Button.remove_theme_stylebox_override("hover")
 
 func get_price() -> int:
-	return _item_data['price'] * pow(2, get_level())
+	return int(_item_data['price'] + (_item_data['price'] * get_level() * 1.5))
 
 func get_level() -> int:
 	if !Data.dogs.has(_item_id) and !Data.skills.has(_item_id):

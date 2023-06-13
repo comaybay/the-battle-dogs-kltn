@@ -1,7 +1,7 @@
 {
-  "stage_width": 4500,
-  "cat_tower_health": 2000,
-  "reward_bone": 1500,
+  "stage_width": 5000,
+  "cat_tower_health": 999,
+  "reward_bone": 9999,
   "spawn_patterns": [
     {
       "name": "cat",
@@ -10,12 +10,7 @@
     },
     {
       "name": "leg_cat",
-      "duration": 10,
-      "delay": 10
-    },
-    {
-      "name": "rolling_cat",
-      "duration": 7.5,
+      "duration": 15,
       "delay": 10
     }
   ],
@@ -24,9 +19,9 @@
       "health_at": 1000,
       "name": "smol_cat",
       "buffs": [
-        { "name": "health", "scale": 20 },
-        { "name": "damage", "scale": 20 },
-        { "name": "reward_money", "scale": 3 }
+        { "name": "health", "scale": 10 },
+        { "name": "damage", "scale": 10 },
+        { "name": "reward_money", "scale": 5 }
       ]
     }
   ]

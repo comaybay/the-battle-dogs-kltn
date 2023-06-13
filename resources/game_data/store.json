@@ -1,7 +1,7 @@
 [
   {
     "ID": "0",
-    "detail": "dddf",
+    "description": "dddf",
     "max": 3,
     "name": "Chó thường",
     "path": "res://resources/images/Screenshot (5).png",
@@ -10,7 +10,7 @@
   {
     "ID": "1",
   
-    "detail": "asd",
+    "description": "asd",
     "max": 1,
     "name": "Chó thường",
     "path": "res://resources/images/planet9_Wallpaper_5000x2813.jpg",
@@ -19,7 +19,7 @@
   {
     "ID": "2",
    
-    "detail": "asd",
+    "description": "asd",
     "max": 5,
     "name": "cầu lửa",
     "path": "res://resources/images/Screenshot (5).png",
@@ -28,7 +28,7 @@
   {
     "ID": "3",
     "amount": 2,
-    "detail": "asa",
+    "description": "asa",
     "max": 4,
     "name": "Chó thường",
     "path": "res://resources/images/Screenshot (5).png",
@@ -37,7 +37,7 @@
   {
     "ID": "4",
 
-    "detail": "aa",
+    "description": "aa",
     "max": 3,
     "name": "Chó thường",
     "path": "res://resources/images/Screenshot (5).png",
@@ -46,7 +46,7 @@
   {
     "ID": "5",
 
-    "detail": "aa",
+    "description": "aa",
     "max": 1,
     "name": "Chó thường",
     "path": "res://resources/images/Screenshot (5).png",
@@ -55,7 +55,7 @@
   {
     "ID": "6",
 
-    "detail": "aa",
+    "description": "aa",
     "max": 1,
     "name": "Chó thường",
     "path": "res://resources/images/Screenshot (5).png",

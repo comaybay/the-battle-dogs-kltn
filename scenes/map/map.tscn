@@ -99,7 +99,7 @@ offset_top = 1024.0
 offset_right = 1045.0
 offset_bottom = 1051.0
 level_name = "Cẩupuchia"
-battlefield_id = "caupuchia"
+battlefield_id = "level2"
 
 [node name="Level3" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1231.0

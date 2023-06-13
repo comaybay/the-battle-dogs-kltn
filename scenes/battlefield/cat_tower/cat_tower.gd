@@ -77,8 +77,10 @@ func take_damage(damage: int) -> void:
 	if health <= 0:
 		return	
 	
-	# only take damage if no bosses are on battle
-	if alive_boss_count > 0 or bosses_queue.size() > 0:
+	# only take full damage if no bosses are on battle
+	if alive_boss_count > 0:
+		health = max(health - 1, 1) 
+	elif bosses_queue.size() > 0:
 		health = max(health - damage, 1) 
 	else:	
 		health = max(health - damage, 0) 

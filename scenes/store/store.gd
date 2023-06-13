@@ -22,7 +22,7 @@ func sendInfo(item: Node, data: Dictionary):
 	selected_item.set_selected(false)
 	selected_item = item
 	selected_item.set_selected(true)
-	$PhanGiua/MarginContainer/PhanDuoi/ThongTin/Label_Item.text =  "Tên: " + data["name"] +"\n" + "Số lượng tối đa: "+ str(data["max"]) + "\n" +  data['detail'] 
+	$PhanGiua/MarginContainer/PhanDuoi/ThongTin/Label_Item.text =  "Tên: " + data["name"] +"\n" + "Số lượng tối đa: "+ str(data["max"]) + "\n" +  data['description'] 
 	if (selected_item.get_price() < Data.bone) and (selected_item.get_amount() < data["max"]) :
 		$PhanGiua/MarginContainer/PhanDuoi/TieuDe2/NutMua.disabled = false 
 	else :

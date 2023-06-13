@@ -1,12 +1,17 @@
 {
   "stage_width": 3000,
-  "cat_tower_health": 1000,
-  "reward_bone": 500,
+  "cat_tower_health": 500,
+  "reward_bone": 2000,
   "spawn_patterns": [
     {
       "name": "cat",
       "duration": 5,
       "delay": 0
+    },
+    {
+      "name": "cat",
+      "duration": 10,
+      "delay": 30.5
     }
   ]
 }
