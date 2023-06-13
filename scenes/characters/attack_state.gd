@@ -12,12 +12,7 @@ func enter(_data: Dictionary) -> void:
 	character.n_AnimationPlayer.play("attack")
 
 func on_frame_changed() -> void:
-	if character.name == "RamielCat":
-		print(character.attack_sprite.name)
-
 	if done_attack == false && character.attack_sprite.frame >= character.attack_frame:
-		if character.name == "RamielCat":
-			print(str(character.attack_sprite.frame) + "TRUE")
 		start_attack = true
 
 func physics_update(_delta: float) -> void:

@@ -20,7 +20,6 @@ func _physics_process(delta):
 			
 		
 		if character is Land : # va cham dat			
-			print(character)
 			die()
 		
 

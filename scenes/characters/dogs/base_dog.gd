@@ -13,5 +13,3 @@ func _ready() -> void:
 		var scale = (1 + (dog_upgrade['level'] - 1) * 0.2)
 		damage *= scale  
 		health *= scale
-		
-	print(attack_sprite.name)

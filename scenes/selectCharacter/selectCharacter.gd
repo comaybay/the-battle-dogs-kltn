@@ -55,7 +55,6 @@ func loadSkill() :
 
 func addItem(value,type):
 	var item = ListCharacter.instantiate()
-	print(str(value['ID']))
 	item.setup(self)
 	item.get_node("ID").text = str(value['ID'])
 	item.get_node("TextureRect").texture = load(value['path'])
@@ -131,8 +130,6 @@ func deleteSkillInfo(ID, path, index):
 					break
 		
 		resetSkill()
-	else : 
-		print("sai")
 
 func deleteInfo(ID, path, index):
 	$click.play()
@@ -145,8 +142,6 @@ func deleteInfo(ID, path, index):
 					break
 		
 		resetTeam()
-	else : 
-		print("sai")
 
 
 func resetTeam() :

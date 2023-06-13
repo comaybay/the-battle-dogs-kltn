@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cto0tiylqerf7" path="res://scenes/buttons/character_button/character_button.tscn" id="1_tqwcl"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/skill_buttons/skill_button.gd" id="2_3smka"]
-[ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="3_w8nb8"]
+[ext_resource type="Texture2D" uid="uid://b5cspf02b4oka" path="res://resources/images/skills/lightning_icon.png" id="3_ikb6y"]
 
 [sub_resource type="Animation" id="Animation_ty6py"]
 length = 0.001
@@ -29,18 +29,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Icon:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_w8nb8")]
 }
 
 [sub_resource type="Animation" id="Animation_yukig"]
@@ -114,7 +102,7 @@ _data = {
 script = ExtResource("2_3smka")
 
 [node name="Icon" parent="." index="1"]
-vframes = 1
+texture = ExtResource("3_ikb6y")
 
 [node name="AnimationPlayer" parent="." index="3"]
 libraries = {
@@ -125,6 +113,7 @@ libraries = {
 one_shot = true
 
 [node name="ProgressBar" type="ProgressBar" parent="." index="5"]
+visible = false
 layout_mode = 0
 offset_left = 28.0
 offset_top = 98.0

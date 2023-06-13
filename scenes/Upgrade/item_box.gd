@@ -16,6 +16,7 @@ var _parent: Node
 var stylebox_override: StyleBoxFlat
 
 func _ready():
+	$AnimationPlayer.play("ready")
 	stylebox_override = $Button.get_theme_stylebox("normal").duplicate()
 	stylebox_override.border_color = Color.hex(0xbde300FF)
 
@@ -24,7 +25,11 @@ func setup(data: Dictionary, type: String, parent: Node) -> void:
 	_parent = parent
 	_type = type
 	_item_id = data['ID']
-	$TextureRect.texture = load(data["path"])
+	if type == "skill":
+		$Icon.texture = load("res://resources/images/skills/%s_icon.png" % data["ID"])
+	else:
+		$Icon.texture = load("res://resources/icons/%s_icon.png" % data["ID"])
+		
 	update_labels()
 	$Button.pressed.connect(_on_pressed)
 	
@@ -37,8 +42,7 @@ func update_labels():
 	$Price.text = str(get_price())
 	
 func _on_pressed():
-	print($Level.text)
-	_parent.sendInfo(self, _item_data)
+	_parent.sendInfo(self)
 
 func set_selected(selected: bool):
 	if selected:

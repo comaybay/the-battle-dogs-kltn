@@ -13,7 +13,6 @@ func _ready():
 func _on_move_forward_pressed():
 	AudioPlayer.play_button_pressed_audio()
 	count += 1
-	print(screens[count])
 	screens[count-1].visible = false
 	screens[count].visible = true
 	$BackForward.disabled = false
