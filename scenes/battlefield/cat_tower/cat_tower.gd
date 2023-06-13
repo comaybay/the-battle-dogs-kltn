@@ -114,13 +114,13 @@ func spawn_boss(boss_info: Dictionary) -> void:
 	cat.global_position = global_position - Vector2(100, 0)
 	cat.ready.connect(
 		func(): 
-			var shader = boss_shader.duplicate()
-			shader.set_shader_parameter("frame_size", cat.n_Sprite2D.get_rect().size)
-			cat.n_Sprite2D.material = shader
-			cat.n_Sprite2D.frame_changed.connect(func():
-				shader.set_shader_parameter("frame_coords", cat.n_Sprite2D.frame_coords)
-			)
-	, CONNECT_ONE_SHOT) 
+			if cat.allow_boss_effect == true:
+				var shader = boss_shader.duplicate()
+				shader.set_shader_parameter("frame_size", cat.n_Sprite2D.get_rect().size)
+				cat.n_Sprite2D.material = shader
+				cat.n_Sprite2D.frame_changed.connect(func():
+					shader.set_shader_parameter("frame_coords", cat.n_Sprite2D.frame_coords)
+				), CONNECT_ONE_SHOT) 
 	
 	for buff in boss_info['buffs']:
 		var prop_name = buff["name"]

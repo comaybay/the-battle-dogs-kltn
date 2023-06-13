@@ -61,7 +61,6 @@ var next_knockback_health: int
 var collision_rect: Rect2
 
 func _ready() -> void:
-	attack_sprite = $Sprite2D
 	size_character = $CollisionShape2D.get_shape().size
 	# config 
 	max_health = health
