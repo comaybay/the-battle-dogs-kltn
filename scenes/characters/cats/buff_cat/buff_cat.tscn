@@ -125,7 +125,6 @@ libraries = {
 position = Vector2(-80, -381)
 texture = ExtResource("2_ase53")
 hframes = 3
-frame = 0
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -302)
