@@ -11,10 +11,10 @@ func _ready() -> void:
 	
 	var dogs: Array[Node] = get_tree().get_nodes_in_group("dogs")
 	for dog in dogs:
-		dog.powerUp(type, 1.5 , time) # health  attack_cooldown damage speed
+		dog.powerUp(type, 1.5 ,time) # health  attack_cooldown damage speed
 		var effect_on_dog: Node2D = UpSprite.instantiate()
 		effect_space.add_child(effect_on_dog) 
-		effect_on_dog.setup(time,dog)
+		effect_on_dog.setup(time, dog)
 		effect_on_dog.global_position = dog.global_position 
 	
 	queue_free()

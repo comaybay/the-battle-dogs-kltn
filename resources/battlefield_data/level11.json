@@ -1,7 +1,8 @@
 {
-  "stage_width": 8000,
-  "cat_tower_health": 1000,
-  "reward_bone": 3000,
+  "theme": "nightmare",
+  "stage_width": 2000,
+  "cat_tower_health": 500,
+  "reward_bone": 2000,
   "spawn_patterns": [
     {
       "name": "cat",

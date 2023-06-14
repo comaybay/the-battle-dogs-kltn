@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dd23rxo0lk701"]
+[gd_scene load_steps=16 format=3 uid="uid://dr1f8xux7ixm2"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_qnr0p"]
-[ext_resource type="Texture2D" uid="uid://dsanqteu4fv2s" path="res://scenes/characters/sniper_cat.png" id="2_wgnt7"]
+[ext_resource type="Texture2D" uid="uid://dsanqteu4fv2s" path="res://scenes/characters/cats/sniper_cat.png" id="2_wgnt7"]
 [ext_resource type="Texture2D" uid="uid://dy12wxohny1x6" path="res://scenes/characters/dogs/sniper_dog/fire_fx.png" id="3_wd3t6"]
 [ext_resource type="Texture2D" uid="uid://kstfevv07gtr" path="res://scenes/characters/dogs/sniper_dog/ground_hit_fx.png" id="4_2umbi"]
 [ext_resource type="Texture2D" uid="uid://cgekoyn0cbk5t" path="res://scenes/characters/dogs/sniper_dog/laser.png" id="4_flcht"]
@@ -490,14 +490,14 @@ speed = 80
 custom_attack_area = NodePath("AttackArea")
 attack_range = 1760
 attack_area_range = 60
-attack_cooldown = 10.0
+attack_cooldown = 20.0
 attack_frame = 10
-health = 300
-damage = 200
+health = 900
+damage = 400
 scale_character = 3
 
 [node name="AttackCooldownTimer" parent="." index="0"]
-wait_time = 10.0
+wait_time = 20.0
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

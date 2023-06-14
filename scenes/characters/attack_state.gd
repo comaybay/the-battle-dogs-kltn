@@ -2,16 +2,17 @@
 extends FSMState
 
 var start_attack := false
+var done_attack := false
 const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")
 
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
-	character.n_Sprite2D.frame_changed.connect(on_frame_changed)
+	character.attack_sprite.frame_changed.connect(on_frame_changed)
 	character.n_AnimationPlayer.animation_finished.connect(on_animation_finished)
 	character.n_AnimationPlayer.play("attack")
 
 func on_frame_changed() -> void:
-	if character.n_Sprite2D.frame == character.attack_frame:
+	if done_attack == false && character.attack_sprite.frame >= character.attack_frame:
 		start_attack = true
 
 func physics_update(_delta: float) -> void:
@@ -54,6 +55,7 @@ func physics_update(_delta: float) -> void:
 			create_attack_fx(result.collider.effect_global_position)
 
 	start_attack = false
+	done_attack = true
 
 func create_attack_fx(global_position: Vector2):	
 	var hit_fx: HitFx = HitFx.instantiate()
@@ -66,7 +68,9 @@ func on_animation_finished(_name):
 		
 # called when the state is deactivated
 func exit() -> void:
-	character.n_Sprite2D.frame_changed.disconnect(on_frame_changed) 
+	start_attack = false
+	done_attack = false
+	character.attack_sprite.frame_changed.disconnect(on_frame_changed) 
 	character.n_AnimationPlayer.animation_finished.disconnect(on_animation_finished)
 
 

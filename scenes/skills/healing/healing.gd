@@ -9,7 +9,7 @@ func _ready():
 	$AnimationPlayer.play("move")
 	dog_tower = get_tree().current_scene.get_node("DogTower")
 	self.global_position = dog_tower.global_position + Vector2(0, -500)
-	dog_tower.healing(100)
+	dog_tower.healing(1000)
 
 
 func die() :

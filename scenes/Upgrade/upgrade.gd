@@ -5,6 +5,8 @@ const ListItem = preload("res://scenes/Upgrade/item_box.tscn")
 var character_data 
 var skill_data 
 var selected_item: ItemBox
+var last_selected_item_character: ItemBox
+var last_selected_item_skill: ItemBox
 
 var dog_boxes: Array[ItemBox]
 var skill_boxes: Array[ItemBox]
@@ -13,8 +15,17 @@ func _ready():
 	%NutNangCap.disabled = true
 	%TabContainer.set_tab_title(0, "Nhân vật")
 	%TabContainer.set_tab_title(1, "Kỹ năng")
+	%TabContainer.tab_changed.connect(func(tab: int):
+		update_ui(last_selected_item_character if tab == 0 else last_selected_item_skill) 
+	)
+		
 	add_items()
 	selected_item = dog_boxes[0]
+	last_selected_item_character = dog_boxes[0]
+	last_selected_item_skill = skill_boxes[0]
+	
+	# show first item
+	update_ui(selected_item)
 		
 func add_items():
 	for dog in Data.dog_info.values():			
@@ -23,13 +34,23 @@ func add_items():
 	for skill in Data.skill_info.values():			
 		addItemSkill(skill)
 
-func sendInfo(item: Node, data: Dictionary):
+func sendInfo(item: ItemBox):
 	$click.play()
+	update_ui(item)
+
+func update_ui(item: ItemBox):
 	selected_item.set_selected(false)
 	selected_item = item
 	selected_item.set_selected(true)
 	
-	%ItemLabel.text = "Tên: " + data["name"] + "\n" +  data['detail']
+	if item.get_item_type() == "skill":
+		last_selected_item_skill = selected_item
+	else:
+		last_selected_item_character = selected_item
+	
+	var data = item.get_item_data()
+	%ItemName.text = data["name"] 
+	%ItemDescription.text = data['description']
 	%NutNangCap.text = "Nâng cấp" if selected_item.get_level() > 0 else "Mua" 
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone
 	
@@ -37,18 +58,18 @@ func addItemDog(value: Dictionary) -> void:
 	var item = ListItem.instantiate()
 	var bone = 0
 	item.setup(value, "character", self)
-	%NhanVat/GridContainer.add_child(item)
+	%NhanVat/MarginContainer/GridContainer.add_child(item)
 	dog_boxes.append(item)
 
 func addItemSkill(skill: Dictionary) -> void:
 	var item = ListItem.instantiate()
 	var bone = 0
 	item.setup(skill, "skill", self)
-	%Skill/GridContainer.add_child(item)
+	%Skill/MarginContainer/GridContainer.add_child(item)
 	skill_boxes.append(item)
 
 func _on_nut_quay_lai_pressed():
-	$button.play()
+	AudioPlayer.play_button_pressed_audio()
 	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
 

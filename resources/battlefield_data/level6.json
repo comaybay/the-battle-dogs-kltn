@@ -1,7 +1,8 @@
 {
-  "stage_width": 8000,
-  "cat_tower_health": 1000,
-  "reward_bone": 3000,
+  "theme": "fall",
+  "stage_width": 6000,
+  "cat_tower_health": 2500,
+  "reward_bone": 15000,
   "spawn_patterns": [
     {
       "name": "cat",
@@ -10,24 +11,33 @@
     },
     {
       "name": "leg_cat",
-      "duration": 20,
+      "duration": 10,
       "delay": 10
     },
     {
       "name": "rolling_cat",
       "duration": 10,
-      "delay": 22.5
+      "delay": 20
     },
-
     {
-      "name": "cat",
+      "name": "smol_cat",
+      "duration": 2.5,
+      "delay": 15
+    },
+    {
+      "name": "smol_cat",
+      "duration": 5,
+      "delay": 30
+    },
+    {
+      "name": "leg_cat",
       "duration": 10,
-      "delay": 42.5
+      "delay": 55
     },
     {
-      "name": "buff_cat",
-      "duration": 120,
-      "delay": 60
+      "name": "rolling_cat",
+      "duration": 10,
+      "delay": 60.5
     }
   ]
 }

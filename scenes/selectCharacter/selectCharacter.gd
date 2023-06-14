@@ -55,7 +55,6 @@ func loadSkill() :
 
 func addItem(value,type):
 	var item = ListCharacter.instantiate()
-	print(str(value['ID']))
 	item.setup(self)
 	item.get_node("ID").text = str(value['ID'])
 	item.get_node("TextureRect").texture = load(value['path'])
@@ -131,8 +130,6 @@ func deleteSkillInfo(ID, path, index):
 					break
 		
 		resetSkill()
-	else : 
-		print("sai")
 
 func deleteInfo(ID, path, index):
 	$click.play()
@@ -145,8 +142,6 @@ func deleteInfo(ID, path, index):
 					break
 		
 		resetTeam()
-	else : 
-		print("sai")
 
 
 func resetTeam() :
@@ -167,12 +162,6 @@ func resetSkill() :
 			skill_teams[i].get_node("TextureRect").texture = base_img
 			skill_teams[i].get_node("ID").text = "-1"
 			
-
-func _on_quay_lai_pressed():
-	$Luu.play()
-	await get_tree().create_timer(0.5).timeout
-	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
-
 
 func _on_luu_pressed():	
 	var items = []

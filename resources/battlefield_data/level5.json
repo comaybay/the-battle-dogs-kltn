@@ -1,7 +1,8 @@
 {
-  "stage_width": 8000,
+  "theme": "fall",
+  "stage_width": 5000,
   "cat_tower_health": 1000,
-  "reward_bone": 3000,
+  "reward_bone": 15000,
   "spawn_patterns": [
     {
       "name": "cat",
@@ -14,15 +15,30 @@
       "delay": 10
     },
     {
-      "name": "rolling_cat",
-      "duration": 10,
+      "name": "cat",
+      "duration": 5,
       "delay": 22.5
     },
-
     {
-      "name": "cat",
-      "duration": 10,
+      "name": "smol_cat",
+      "duration": 2.5,
       "delay": 42.5
+    },
+    {
+      "name": "smol_cat",
+      "duration": 5,
+      "delay": 60.5
+    }
+  ],
+  "bosses": [
+    {
+      "health_at": 1000,
+      "name": "rolling_cat",
+      "buffs": [
+        { "name": "health", "scale": 15 },
+        { "name": "damage", "scale": 10 },
+        { "name": "reward_money", "scale": 5 }
+      ]
     }
   ]
 }

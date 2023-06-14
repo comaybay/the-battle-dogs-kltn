@@ -96,7 +96,6 @@ size = Vector2(192, 178)
 z_index = 40
 position = Vector2(2, 1)
 name_id = "sniper_dog"
-speed = 100
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
@@ -108,7 +107,7 @@ position = Vector2(-21, -34.5)
 texture = ExtResource("2_y8xhq")
 hframes = 7
 vframes = 2
-frame = 7
+frame = 12
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(-1, -2.5)

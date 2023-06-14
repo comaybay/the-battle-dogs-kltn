@@ -6,7 +6,7 @@ enum Type { DOG, ENEMY }
 
 ## 0 for dog, 1 for enemy
 @export var character_type: int = Type.DOG
-@export var speed: int = 100 # toc do di chuyen
+@export var speed: int = 120 # toc do di chuyen
 
 ## if not null, will be use for attack collision detection
 ## and will ignore the "attack range" and "attack area range" properties when attacking
@@ -27,10 +27,17 @@ enum Type { DOG, ENEMY }
 		queue_redraw()
 		
 ## in seconds
-@export var attack_cooldown: float = 2 # toc do danh
+@export var attack_cooldown: float = 2: # toc do danh
+	set(val):
+		attack_cooldown = val
+		if n_AttackCooldownTimer:
+		# for some reason timer do not take in 0 correctly	
+			n_AttackCooldownTimer.wait_time = max(attack_cooldown, 0.01)
+		
 ## check what frame should an attack occurr when playing the attack animation
+@export var attack_sprite: Sprite2D = null
 @export var attack_frame: int = 12
-@export var health: int = 250 # mau
+@export var health: int = 160 # mau
 @export var damage: int = 20 # sat thuong
 @export var knockbacks: int = 3
 @export var sound_danh = "res://resources/sound/danh nhau/Tieng-bup.mp3"

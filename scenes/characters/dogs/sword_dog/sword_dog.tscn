@@ -7,6 +7,18 @@
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_8csog"]
 resource_name = "attack"
@@ -90,16 +102,16 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa1yv"]
 resource_local_to_scene = true
-size = Vector2(192, 178)
+size = Vector2(192, 219.5)
 
 [node name="SwordDog" instance=ExtResource("1_ivu0g")]
 z_index = 40
 position = Vector2(2, 1)
 name_id = "sword_dog"
-speed = 300
+speed = 320
 attack_range = 90
 attack_cooldown = 0.0
-health = 180
+health = 400
 knockbacks = 5
 
 [node name="AttackCooldownTimer" parent="." index="0"]
@@ -115,10 +127,10 @@ position = Vector2(64, -57)
 texture = ExtResource("2_8ghqg")
 hframes = 1
 vframes = 17
-frame = 15
+frame = 0
 
 [node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(-1, -2.5)
+position = Vector2(-1, -23.25)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]

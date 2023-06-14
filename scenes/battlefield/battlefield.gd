@@ -6,13 +6,13 @@ var DefeatGUI: PackedScene = preload("res://scenes/battlefield/defeat_gui/defeat
 var stage_width: int
 
 func _enter_tree() -> void:
+	InBattle.reset()
 	var battlefield_data = InBattle.load_battlefield_data()
 	stage_width = battlefield_data['stage_width']
 	
 func _ready() -> void:
-	InBattle.reset()
-
 	var half_viewport_size = get_viewport().size / 2
+	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % InBattle.battlefield_data['theme'])
 	$Sky.position = Vector2(0, -$Sky.size.y)
 	$Sky.size.x = stage_width
 	

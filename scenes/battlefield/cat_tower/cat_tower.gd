@@ -3,6 +3,8 @@ extends StaticBody2D
 signal zero_health
 
 const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
+const boss_shader: ShaderMaterial = preload("res://shaders/outline_glow/outline_glow.material")
+
 const MAX_RANDOM_DELAY: float = 2.5
 
 var health: int
@@ -10,12 +12,15 @@ var max_health: int
 var cats: Dictionary
 var spawn_timers: Array[Timer]
 var bosses_queue: Array
+# number of bosses currently on battle
+var alive_boss_count: int = 0
 
 ## position where effect for the tower should take place 
 var effect_global_position: Vector2:
 	get: return $Marker2D.global_position
 	
 func _ready() -> void:
+	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/cat_tower.png" % InBattle.battlefield_data['theme'])
 	max_health = InBattle.battlefield_data['cat_tower_health']
 	health = max_health
 	update_health_label()
@@ -29,7 +34,7 @@ func _ready() -> void:
 	cats = load_cats(cat_names) 
 	
 	bosses.sort_custom(func(a, b):
-		return a['health_at'] >= b['health_at']
+		return a['health_at'] <= b['health_at']
 	)
 	bosses_queue = bosses
 	
@@ -73,19 +78,25 @@ func take_damage(damage: int) -> void:
 	if health <= 0:
 		return	
 	
-	if bosses_queue.size() > 0:
+	# only take full damage if no bosses are on battle
+	if alive_boss_count > 0:
+		health = max(health - 1, 1) 
+	elif bosses_queue.size() > 0:
 		health = max(health - damage, 1) 
-	else:
+	else:	
 		health = max(health - damage, 0) 
-		
+	
 	update_health_label()
 	$AnimationPlayer.play("shake" if health > 0 else "fall")
 	
-	if bosses_queue.size() > 0:
+	while bosses_queue.size() > 0:
 		var boss_info = bosses_queue.back()
 		if health <= boss_info['health_at']:
+			health = boss_info['health_at']
 			spawn_boss(boss_info)
 			bosses_queue.pop_back()
+		else: 
+			break
 		
 	if health <= 0:
 		for cat in get_tree().get_nodes_in_group("cats"):
@@ -102,8 +113,17 @@ func spawn(cat_name: String) -> void:
 	get_tree().current_scene.add_child(cat)
 	
 func spawn_boss(boss_info: Dictionary) -> void:
-	var cat = cats[boss_info['name']].instantiate()
+	var cat: BaseCat = cats[boss_info['name']].instantiate()
 	cat.global_position = global_position - Vector2(100, 0)
+	cat.ready.connect(
+		func(): 
+			if cat.allow_boss_effect == true:
+				var shader = boss_shader.duplicate()
+				shader.set_shader_parameter("frame_size", cat.n_Sprite2D.get_rect().size)
+				cat.n_Sprite2D.material = shader
+				cat.n_Sprite2D.frame_changed.connect(func():
+					shader.set_shader_parameter("frame_coords", cat.n_Sprite2D.frame_coords)
+				), CONNECT_ONE_SHOT) 
 	
 	for buff in boss_info['buffs']:
 		var prop_name = buff["name"]
@@ -114,6 +134,9 @@ func spawn_boss(boss_info: Dictionary) -> void:
 	var tree := get_tree()
 		
 	tree.current_scene.add_child(cat)
+	alive_boss_count += 1
+	cat.tree_exited.connect(func(): alive_boss_count -= 1)
+	
 	var effect_space: Node2D = get_tree().current_scene.get_node("EffectSpace")
 	
 	var effect := EnergyExpand.instantiate()

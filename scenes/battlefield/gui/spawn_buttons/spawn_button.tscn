@@ -125,6 +125,7 @@ libraries = {
 one_shot = true
 
 [node name="ProgressBar" type="ProgressBar" parent="." index="5"]
+visible = false
 layout_mode = 0
 offset_left = 28.0
 offset_top = 98.0
