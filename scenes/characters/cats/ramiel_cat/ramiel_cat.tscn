@@ -336,14 +336,14 @@ size = Vector2(584, 1590)
 position = Vector2(0, -210)
 reward_money = 1000
 allow_boss_effect = false
-speed = 20
-attack_range = 1400
-attack_area_range = 1320
+speed = 40
+attack_range = 1450
+attack_area_range = 1980
 attack_cooldown = 60.0
 attack_sprite = NodePath("Explosion")
 attack_frame = 2
-health = 4000
-damage = 10000
+health = 20000
+damage = 100000
 knockbacks = 1
 
 [node name="AttackCooldownTimer" parent="." index="0"]
@@ -370,8 +370,8 @@ vframes = 2
 
 [node name="Explosion" type="Sprite2D" parent="." index="4"]
 visible = false
-position = Vector2(-1693, -462)
-scale = Vector2(2, 2)
+position = Vector2(-1754, -833)
+scale = Vector2(3, 3)
 texture = ExtResource("4_j44cu")
 hframes = 9
 

@@ -92,6 +92,7 @@ offset_right = 839.0
 offset_bottom = 796.0
 level_name = "Doggonamu"
 battlefield_id = "level1"
+metadata/_edit_lock_ = true
 
 [node name="Level2" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1018.0
@@ -100,6 +101,7 @@ offset_right = 1045.0
 offset_bottom = 1051.0
 level_name = "Cẩupuchia"
 battlefield_id = "level2"
+metadata/_edit_lock_ = true
 
 [node name="Level3" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1231.0
@@ -108,6 +110,7 @@ offset_right = 1258.0
 offset_bottom = 796.0
 level_name = "Xích Cẩu"
 battlefield_id = "level3"
+metadata/_edit_lock_ = true
 
 [node name="Level4" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1612.0
@@ -116,69 +119,88 @@ offset_right = 1639.0
 offset_bottom = 835.0
 level_name = "Llanfairpwllgwyngyll"
 battlefield_id = "level4"
+metadata/_edit_lock_ = true
 
 [node name="Level5" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1559.0
 offset_top = 409.0
 offset_right = 1586.0
 offset_bottom = 436.0
+level_name = "Đảo Úc "
 battlefield_id = "level5"
+metadata/_edit_lock_ = true
 
 [node name="Level6" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1270.0
 offset_top = 285.0
 offset_right = 1297.0
 offset_bottom = 312.0
+level_name = "Núi Đại Cốt"
 battlefield_id = "level6"
+metadata/_edit_lock_ = true
 
 [node name="Level7" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 773.0
 offset_top = 324.0
 offset_right = 800.0
 offset_bottom = 351.0
+level_name = "Vùng Đất Băng Chết"
 battlefield_id = "level7"
+metadata/_edit_lock_ = true
 
 [node name="Level8" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 194.0
 offset_top = 162.0
 offset_right = 221.0
 offset_bottom = 189.0
+level_name = "Đường Vô Tận"
 battlefield_id = "level8"
+metadata/_edit_lock_ = true
 
 [node name="Level9" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 338.0
 offset_top = 988.0
 offset_right = 365.0
 offset_bottom = 1015.0
+level_name = "Biên Giới Doggo"
 battlefield_id = "level9"
+metadata/_edit_lock_ = true
 
 [node name="Level10" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 517.0
 offset_top = 1241.0
 offset_right = 544.0
 offset_bottom = 1268.0
+level_name = "Vịnh Đảo D.O.G"
 battlefield_id = "level10"
+metadata/_edit_lock_ = true
 
 [node name="Level11" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 1518.0
 offset_top = 1241.0
 offset_right = 1545.0
 offset_bottom = 1268.0
+level_name = "N.E.K.O HQ"
 battlefield_id = "level11"
+metadata/_edit_lock_ = true
 
 [node name="Level12" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 2250.0
 offset_top = 988.0
 offset_right = 2277.0
 offset_bottom = 1015.0
+level_name = "Đảo Mèo"
 battlefield_id = "level12"
+metadata/_edit_lock_ = true
 
 [node name="Level13" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
 offset_left = 2199.0
 offset_top = 256.0
 offset_right = 2226.0
 offset_bottom = 283.0
+level_name = "Sào Huyệt Loài Mèo"
 battlefield_id = "level13"
+metadata/_edit_lock_ = true
 
 [node name="Tracker" parent="Khung/map/AllLevel" instance=ExtResource("4_un5ok")]
 unique_name_in_owner = true

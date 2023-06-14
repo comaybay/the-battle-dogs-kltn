@@ -1,8 +1,8 @@
 {
+  "theme": "nightmare",
   "stage_width": 8000,
-  "cat_tower_health": 10000,
-  "reward_bone": 30000,
-  "power_scale": 2,
+  "cat_tower_health": 1000,
+  "reward_bone": 3000,
   "spawn_patterns": [
     {
       "name": "cat",
@@ -16,25 +16,14 @@
     },
     {
       "name": "rolling_cat",
-      "duration": 20,
+      "duration": 10,
       "delay": 22.5
     },
+
     {
-      "name": "smol_cat",
-      "duration": 5,
-      "delay": 2.5
-    },
-    {
-      "name": "buff_cat",
-      "duration": 60,
-      "delay": 60
-    }
-  ],
-  "bosses": [
-    {
-      "health_at": 1000,
-      "name": "ramiel_cat",
-      "buffs": [{ "name": "reward_money", "scale": 3 }]
+      "name": "cat",
+      "duration": 10,
+      "delay": 42.5
     }
   ]
 }

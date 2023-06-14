@@ -20,6 +20,7 @@ var effect_global_position: Vector2:
 	get: return $Marker2D.global_position
 	
 func _ready() -> void:
+	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/cat_tower.png" % InBattle.battlefield_data['theme'])
 	max_health = InBattle.battlefield_data['cat_tower_health']
 	health = max_health
 	update_health_label()
