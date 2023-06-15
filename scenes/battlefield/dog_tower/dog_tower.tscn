@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://lyrmnwxclfgn"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/dog_tower/dog_tower.gd" id="1_ywct4"]
-[ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/green_grass/dog_tower.png" id="2_3bexg"]
+[ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/green_grass/dog_tower.png" id="2_vjxar"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
 font_size = 48
@@ -82,7 +82,7 @@ label_settings = SubResource("LabelSettings_8inmh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -455)
-texture = ExtResource("2_3bexg")
+texture = ExtResource("2_vjxar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -451.375)
