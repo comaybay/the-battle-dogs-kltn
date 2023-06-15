@@ -4,12 +4,12 @@ const ListItem = preload("res://scenes/Upgrade/item_box.tscn")
 
 var character_data 
 var skill_data 
-var selected_item: ItemBox
-var last_selected_item_character: ItemBox
-var last_selected_item_skill: ItemBox
+var selected_item: ItemUpgradeBox
+var last_selected_item_character: ItemUpgradeBox
+var last_selected_item_skill: ItemUpgradeBox
 
-var dog_boxes: Array[ItemBox]
-var skill_boxes: Array[ItemBox]
+var dog_boxes: Array[ItemUpgradeBox]
+var skill_boxes: Array[ItemUpgradeBox]
 
 func _ready():
 	%NutNangCap.disabled = true
@@ -34,11 +34,11 @@ func add_items():
 	for skill in Data.skill_info.values():			
 		addItemSkill(skill)
 
-func sendInfo(item: ItemBox):
+func sendInfo(item: ItemUpgradeBox):
 	$click.play()
 	update_ui(item)
 
-func update_ui(item: ItemBox):
+func update_ui(item: ItemUpgradeBox):
 	selected_item.set_selected(false)
 	selected_item = item
 	selected_item.set_selected(true)

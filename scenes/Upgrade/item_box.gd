@@ -1,4 +1,4 @@
-class_name ItemBox extends Control
+class_name ItemUpgradeBox extends Control
 
 var _item_data: Dictionary
 func get_item_data() -> Dictionary:
