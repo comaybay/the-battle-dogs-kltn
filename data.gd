@@ -54,9 +54,13 @@ var skill_info := Dictionary()
 var dogs := Dictionary()
 var skills := Dictionary()
 var store := Dictionary()
+var speaker_dog_dialogue: Array
 
 func _init() -> void:
-	var file = FileAccess.open("res://resources/save.json", FileAccess.READ)
+	var file = FileAccess.open("res://resources/game_data/speaker_dog_dialogue.json", FileAccess.READ)
+	speaker_dog_dialogue = JSON.parse_string(file.get_as_text())
+
+	file = FileAccess.open("res://resources/save.json", FileAccess.READ)
 	save_data = JSON.parse_string(file.get_as_text())
 	file.close()
 	

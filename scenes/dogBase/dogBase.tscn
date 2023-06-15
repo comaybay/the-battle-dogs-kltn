@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdl1gwm14qlqi"]
+[gd_scene load_steps=4 format=3 uid="uid://bdl1gwm14qlqi"]
 
 [ext_resource type="Script" path="res://scenes/dogBase/dogBase.gd" id="1_18sea"]
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="2_i87ga"]
+[ext_resource type="PackedScene" uid="uid://dysrma6bmdll0" path="res://scenes/dogBase/speaker_dog.tscn" id="2_vvswk"]
 
 [node name="MainGUI" instance=ExtResource("2_i87ga")]
 title = "Căn cứ chó"
@@ -20,9 +21,10 @@ script = ExtResource("1_18sea")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_constants/separation = 5
 
 [node name="NutVienChinh" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="0"]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -34,7 +36,7 @@ layout_mode = 2
 size_flags_vertical = 2
 
 [node name="NutNangCap" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="2"]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -47,7 +49,7 @@ layout_mode = 2
 size_flags_vertical = 2
 
 [node name="NutCuaHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="4"]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -57,9 +59,12 @@ text = "Cửa hàng"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorRect" type="ColorRect" parent="Khung/Content/PhanGiua/BenPhai" index="0"]
+[node name="SpeakerDog" parent="." index="3" instance=ExtResource("2_vvswk")]
 layout_mode = 2
-size_flags_vertical = 3
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 574.0
 
 [connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutVienChinh" to="Khung/Content/PhanGiua" method="_on_nut_vien_chinh_pressed"]
 [connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutNangCap" to="Khung/Content/PhanGiua" method="_on_nut_nang_cap_pressed"]
