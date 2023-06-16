@@ -1,4 +1,4 @@
-extends Button
+extends Control
 
 var _parent: Node
 
@@ -7,5 +7,5 @@ func setup( parent: Node) -> void:
 
 func _on_pressed():
 	self.visible = false
-	_parent.sendInfo($ID.text, $TextureRect.texture,$Type.text)
+	_parent.sendInfo($ID.text, $Icon.texture,$Type.text)
 
