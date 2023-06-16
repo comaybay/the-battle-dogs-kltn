@@ -67,7 +67,7 @@ func update_ui(item: ItemUpgradeBox):
 	var data = item.get_item_data()
 	%ItemName.text = data["name"] 
 	%ItemDescription.text = data['description']
-	%NutNangCap.text = "Nâng cấp" if selected_item.get_level() > 0 else "Mua" 
+	%NutNangCap.text = "Nâng cấp" if selected_item.get_level() > 0 else "Mở khóa" 
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone
 	
 func createItemBox(type: ItemUpgradeBox.Type, data: Dictionary, container: GridContainer) -> ItemUpgradeBox:

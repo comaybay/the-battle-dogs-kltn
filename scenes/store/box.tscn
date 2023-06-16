@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnd7syoshr20n"]
+[gd_scene load_steps=2 format=3 uid="uid://bnd7syoshr20n"]
 
 [ext_resource type="Script" path="res://scenes/store/box.gd" id="1_ocjdr"]
-[ext_resource type="Texture2D" uid="uid://dik4p3w46kjxt" path="res://resources/images/planet9_Wallpaper_5000x2813.jpg" id="2_u0i26"]
 
 [node name="Box" type="Control"]
 custom_minimum_size = Vector2(200, 200)
@@ -17,7 +16,6 @@ offset_right = 200.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_u0i26")
 expand_mode = 1
 
 [node name="Button" type="Button" parent="."]

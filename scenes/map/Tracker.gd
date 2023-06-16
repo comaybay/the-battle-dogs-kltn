@@ -18,7 +18,7 @@ func setup(levels: Array[Node], level_chain: LevelChain, map: Sprite2D, drag_are
 	
 	_level_chain = level_chain
 	current_level = levels[Data.selected_level]
-	passed_level = levels[Data.passed_level]
+	passed_level = levels[Data.passed_level] if Data.passed_level > 0 else null  
 	
 	drag_area.mouse_entered.connect(func(): is_mouse_entered = true)
 	drag_area.mouse_exited.connect(func(): is_mouse_entered = false)
@@ -46,7 +46,7 @@ func _input(event):
 	if event.is_action_pressed("ui_left") and current_level.prev_level != null:
 		_move_to_level(current_level.prev_level)
 	
-	elif event.is_action_pressed("ui_right") and current_level.next_level != null and current_level.index <= passed_level.index:
+	elif event.is_action_pressed("ui_right") and current_level.next_level != null and Data.passed_level > 0 and current_level.index <= passed_level.index:
 		_move_to_level(current_level.next_level)
 	
 	if !is_mouse_entered:

@@ -1,113 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0f457ns585l5"]
+[gd_scene load_steps=3 format=3 uid="uid://d0f457ns585l5"]
 
+[ext_resource type="PackedScene" uid="uid://cto0tiylqerf7" path="res://scenes/buttons/character_button/character_button.tscn" id="1_iqesx"]
 [ext_resource type="Script" path="res://scenes/selectCharacter/box_character.gd" id="1_p4qam"]
-[ext_resource type="Texture2D" uid="uid://cqte340ris3tl" path="res://scenes/buttons/character_button/character_button.png" id="2_vhrdk"]
-[ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="3_q1r5p"]
 
-[sub_resource type="Animation" id="Animation_ty6py"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Icon:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [2]
-}
-
-[sub_resource type="Animation" id="Animation_c6xly"]
-resource_name = "ready"
-length = 1.00003
-loop_mode = 1
-step = 0.333333
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Icon:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.666667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uwgdf"]
-_data = {
-"RESET": SubResource("Animation_ty6py"),
-"ready": SubResource("Animation_c6xly")
-}
-
-[node name="Box" type="Control"]
-custom_minimum_size = Vector2(261, 200)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 200.0
-offset_bottom = 200.0
-scale = Vector2(0.8, 0.8)
+[node name="BoxCharacter" instance=ExtResource("1_iqesx")]
+custom_minimum_size = Vector2(128, 101)
+offset_right = 128.0
+offset_bottom = 101.0
 script = ExtResource("1_p4qam")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(130.04, 116)
-scale = Vector2(0.819, 0.819)
-texture = ExtResource("2_vhrdk")
-vframes = 5
+[node name="Background" parent="." index="0"]
+position = Vector2(63.4, 52)
+scale = Vector2(0.4, 0.4)
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(130.04, 116)
-scale = Vector2(0.819, 0.819)
-texture = ExtResource("3_q1r5p")
-vframes = 3
-frame = 2
+[node name="Icon" parent="." index="1"]
+position = Vector2(63.4, 52)
+scale = Vector2(0.4, 0.4)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_uwgdf")
-}
+[node name="Border" parent="." index="2"]
+position = Vector2(63.4, 52)
+scale = Vector2(0.4, 0.4)
 
-[node name="Button" type="Button" parent="."]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-offset_top = 15.0
-offset_right = 262.0
-offset_bottom = 216.0
-theme_type_variation = &"ButtonItem"
-
-[node name="ID" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -14.0
-offset_right = -14.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_type_variation = &"LabelLarge"
-text = "1000"
-horizontal_alignment = 2
-
-[node name="Type" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -14.0
-offset_right = -14.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_type_variation = &"LabelLarge"
-text = "1000"
-horizontal_alignment = 2
-
-[connection signal="pressed" from="Button" to="." method="_on_pressed" flags=18]
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = "ready"

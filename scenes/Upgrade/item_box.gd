@@ -40,7 +40,7 @@ func setup(type: Type, data: Dictionary, parent: Node) -> void:
 		
 func update_labels():
 	var level = get_level()
-	
+	$Background.frame = 0 if level > 0 else 1	
 	$Level.visible = true if level > 0 else false
 	$Level.text = "Level. %s" % level
 	$Price.text = str(get_price())
