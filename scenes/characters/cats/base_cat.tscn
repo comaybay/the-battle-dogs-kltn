@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpgr6rk41h8du"]
+[gd_scene load_steps=11 format=3 uid="uid://dpgr6rk41h8du"]
 
-[ext_resource type="PackedScene" uid="uid://brx02julmawu5" path="res://scenes/characters/character.tscn" id="1_xhikh"]
+[ext_resource type="PackedScene" uid="uid://cvno8d4sb6h0s" path="res://scenes/characters/character.tscn" id="1_xhikh"]
 [ext_resource type="Script" path="res://scenes/characters/cats/base_cat.gd" id="2_dyq8c"]
+[ext_resource type="AudioStream" uid="uid://ci65k7ed8m328" path="res://resources/sound/battlefield/boss_knockback_cry.mp3" id="3_44ji3"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -111,3 +112,6 @@ shape = SubResource("RectangleShape2D_72ktc")
 position = Vector2(-96, 0)
 target_position = Vector2(-40, 0)
 collision_mask = 34
+
+[node name="BossKnockback" type="AudioStreamPlayer" parent="FiniteStateMachine/KnockbackState" index="1"]
+stream = ExtResource("3_44ji3")

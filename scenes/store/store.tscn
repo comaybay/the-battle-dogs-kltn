@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://i01h664nrr6m"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/store/store.gd" id="1_3iy6a"]
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_e4eei"]
-[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="2_kfgjp"]
+[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/button_pressed.mp3" id="2_kfgjp"]
 [ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="4_7488s"]
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_n521g"]

@@ -6,6 +6,12 @@ var knockback_vel: Vector2
 
 # called when the state is activated
 func enter(data: Dictionary) -> void:
+	if character.health <= 0:
+		if character is BaseCat and character.is_boss:
+			$BossKnockback.play()
+		else:
+			$Nga.play()
+
 	knockback_countdown = 2
 	knockback_vel = Vector2(200, -250) * data['scale']
 	character.n_AnimationPlayer.play("knockback")
@@ -28,7 +34,6 @@ func update(delta: float) -> void:
 		character.velocity.y += character.gravity * delta
 	else:
 		if knockback_countdown > 0:
-			$Nga.play()
 			character.velocity.x = knockback_vel.x * -character.move_direction
 			character.velocity.y = knockback_vel.y
 			

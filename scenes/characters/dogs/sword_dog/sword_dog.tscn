@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://p7unef4lb5hc"]
+[gd_scene load_steps=11 format=3 uid="uid://dxqh31o16u528"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_ivu0g"]
 [ext_resource type="Texture2D" uid="uid://bxv6vquc0mpo8" path="res://scenes/characters/dogs/sword_dog/sword_dog.png" id="2_8ghqg"]
-[ext_resource type="AudioStream" uid="uid://c3i4qpbh2kbnf" path="res://resources/sound/danh nhau/cắn 1.mp3" id="3_sfp40"]
-[ext_resource type="AudioStream" uid="uid://bb8w1oc2sovpx" path="res://resources/sound/danh nhau/Am-thanh-khi-than-chet-xuat-hien-www_tiengdong_com.mp3" id="4_745xp"]
+[ext_resource type="AudioStream" uid="uid://doyuefw62qbco" path="res://resources/sound/battlefield/sword.mp3" id="3_1qucf"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -138,7 +137,4 @@ position = Vector2(95, 0)
 target_position = Vector2(90, 0)
 
 [node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
-stream = ExtResource("3_sfp40")
-
-[node name="Die" type="AudioStreamPlayer2D" parent="FiniteStateMachine/DieState" index="0"]
-stream = ExtResource("4_745xp")
+stream = ExtResource("3_1qucf")

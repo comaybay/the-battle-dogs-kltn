@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bk34ua8pysw3v"]
+[gd_scene load_steps=10 format=3 uid="uid://7kemcovv1b36"]
 
 [ext_resource type="Script" path="res://scenes/start_menu/main.gd" id="1_gee0v"]
 [ext_resource type="Texture2D" uid="uid://ngxqvdd76tr7" path="res://scenes/start_menu/main_background_1.png" id="2_56ofs"]
-[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="2_quepu"]
 [ext_resource type="Texture2D" uid="uid://ddhk7pykh4wcb" path="res://scenes/start_menu/main_background_2.png" id="3_jin04"]
 [ext_resource type="Texture2D" uid="uid://3mgk1tr4612p" path="res://scenes/start_menu/main_background_3.png" id="4_xj58w"]
 [ext_resource type="Texture2D" uid="uid://blp51w2h0ek56" path="res://scenes/start_menu/main_background_dog.png" id="5_ox0nk"]
@@ -317,12 +316,6 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Thoát"
-
-[node name="NhanNut" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(0, -326)
-stream = ExtResource("2_quepu")
-volume_db = 14.998
-bus = &"SoundFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "ready"

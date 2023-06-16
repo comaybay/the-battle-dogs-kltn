@@ -33,7 +33,7 @@ func setup(levels: Array[Node], level_chain: LevelChain, map: Sprite2D, drag_are
 		
 func _move_to_level(level: Level, play_sound := true):
 	if play_sound:
-		AudioPlayer.play_button_pressed_audio()
+		AudioPlayer.play_level_selected_audio()
 	
 	_level_chain.focus_camera_to(level.index)
 	current_level.set_selected(false)

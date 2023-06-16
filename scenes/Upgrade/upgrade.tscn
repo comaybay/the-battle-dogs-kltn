@@ -29,10 +29,8 @@ text = "Nâng cấp"
 [node name="Content" parent="Khung" index="1"]
 script = ExtResource("3_6lwir")
 
-[node name="click" type="AudioStreamPlayer2D" parent="Khung/Content" index="0"]
-position = Vector2(286, -314)
+[node name="click" type="AudioStreamPlayer" parent="Khung/Content" index="0"]
 stream = SubResource("AudioStreamMP3_pwu7g")
-volume_db = 14.998
 pitch_scale = 3.86
 
 [node name="PhanGiua" type="VBoxContainer" parent="Khung/Content" index="1"]

@@ -13,7 +13,7 @@ func _ready() -> void:
 	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/dog_tower.png" % InBattle.battlefield_data['theme'])
 
 	max_health = 500
-	var health_upgrade = Data.passives['dog_tower_health']
+	var health_upgrade = Data.passives.get('dog_tower_health')
 	if health_upgrade != null:
 		max_health = max_health * pow(1.5, health_upgrade['level'])
 	
@@ -48,6 +48,7 @@ func healing(heal : int) -> void :
 	, health, new_health, 2)
 	
 func spawn(dog_scene: PackedScene) -> void:
+	$SpawnSound.play()
 	var dog = dog_scene.instantiate()
 	dog.global_position = global_position + Vector2(100, 0)
 	get_tree().current_scene.add_child(dog)

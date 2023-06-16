@@ -10,7 +10,7 @@ func _ready() -> void:
 	
 	var reward_bone: int = InBattle.battlefield_data['reward_bone']
 	
-	var reward_upgrade: Dictionary = Data.passives['bone_reward_up']
+	var reward_upgrade: Dictionary = Data.passives.get('bone_reward_up')
 	if reward_upgrade != null:
 		reward_bone = reward_bone + (reward_bone * 0.2 * reward_upgrade['level'])
 	

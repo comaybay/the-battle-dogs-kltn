@@ -114,6 +114,7 @@ func spawn(cat_name: String) -> void:
 	
 func spawn_boss(boss_info: Dictionary) -> void:
 	var cat: BaseCat = cats[boss_info['name']].instantiate()
+	cat.is_boss = true
 	cat.global_position = global_position - Vector2(100, 0)
 	cat.ready.connect(
 		func(): 
@@ -146,5 +147,3 @@ func spawn_boss(boss_info: Dictionary) -> void:
 	
 	for dog in tree.get_nodes_in_group("dogs"):
 		dog.knockback(2.5)
-		
-	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dbyjisaeqjkey"]
+[gd_scene load_steps=14 format=3 uid="uid://gny6lao42iqp"]
 
 [ext_resource type="Script" path="res://scenes/map/map.gd" id="1_0p7qx"]
 [ext_resource type="PackedScene" uid="uid://i3waaqjv5m7" path="res://scenes/map/tracker.tscn" id="4_un5ok"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="7_eb484"]
 [ext_resource type="PackedScene" uid="uid://cd5gw7llcsine" path="res://scenes/map/level/level.tscn" id="8_uximv"]
 [ext_resource type="Script" path="res://scenes/map/dog.gd" id="8_vsoej"]
-[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="9_df54t"]
 [ext_resource type="PackedScene" uid="uid://bq2rygho7wb7t" path="res://scenes/map/level_chain/level_chain.tscn" id="9_m5l3k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_de1st"]
@@ -241,11 +240,6 @@ text = "Đội hình"
 unique_name_in_owner = true
 offset_top = 48.0
 offset_bottom = 152.0
-
-[node name="Click" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(0, -326)
-stream = ExtResource("9_df54t")
-volume_db = 14.998
 
 [connection signal="pressed" from="Khung/CanvasLayer/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/CanvasLayer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]

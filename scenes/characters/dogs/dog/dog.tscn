@@ -1,9 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5fdd8y430j88"]
+[gd_scene load_steps=10 format=3 uid="uid://cedh84t4ewxuw"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_wscv2"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="2_y8xhq"]
-[ext_resource type="AudioStream" uid="uid://c3i4qpbh2kbnf" path="res://resources/sound/danh nhau/cắn 1.mp3" id="3_dncsk"]
-[ext_resource type="AudioStream" uid="uid://bb8w1oc2sovpx" path="res://resources/sound/danh nhau/Am-thanh-khi-than-chet-xuat-hien-www_tiengdong_com.mp3" id="4_gs108"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -95,7 +93,7 @@ size = Vector2(192, 178)
 [node name="Dog" instance=ExtResource("1_wscv2")]
 z_index = 40
 position = Vector2(2, 1)
-name_id = "sniper_dog"
+name_id = "dog"
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
@@ -115,9 +113,3 @@ shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]
 position = Vector2(95, 0)
-
-[node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
-stream = ExtResource("3_dncsk")
-
-[node name="Die" type="AudioStreamPlayer2D" parent="FiniteStateMachine/DieState" index="0"]
-stream = ExtResource("4_gs108")

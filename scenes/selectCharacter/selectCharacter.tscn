@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwntxitnuljpu"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scenes/main_gui/main_gui.gd" id="1_1bnxr"]
 [ext_resource type="Script" path="res://scenes/selectCharacter/selectCharacter.gd" id="1_qdgrc"]
 [ext_resource type="Texture2D" uid="uid://ddd02ni0o7cr7" path="res://resources/images/dog_base/dogbase_background.png" id="2_nryle"]
 [ext_resource type="Texture2D" uid="uid://4dgy5g3oucek" path="res://resources/images/dog_base/header.png" id="3_ro0ru"]
-[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="4_dgiwl"]
+[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/button_pressed.mp3" id="4_dgiwl"]
 [ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="4_stnyx"]
 [ext_resource type="Texture2D" uid="uid://b35jkv4tsll0t" path="res://resources/images/dog_base/footer.png" id="5_t4sct"]
 [ext_resource type="PackedScene" uid="uid://d0f457ns585l5" path="res://scenes/selectCharacter/box_character.tscn" id="8_85wn3"]

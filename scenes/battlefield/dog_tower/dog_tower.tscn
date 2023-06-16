@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://lyrmnwxclfgn"]
+[gd_scene load_steps=10 format=3 uid="uid://lyrmnwxclfgn"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/dog_tower/dog_tower.gd" id="1_ywct4"]
 [ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/winter/dog_tower.png" id="2_vjxar"]
+[ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="3_g44t7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
 font_size = 48
@@ -96,3 +97,6 @@ libraries = {
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(209, -160)
 gizmo_extents = 54.5
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g44t7")

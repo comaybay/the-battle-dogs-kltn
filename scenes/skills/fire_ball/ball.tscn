@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c1tp1gq3oybif"]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scenes/skills/fire_ball/ball.gd" id="1_yyqct"]
-[ext_resource type="AudioStream" uid="uid://btyq3ac7d078u" path="res://resources/sound/danh nhau/Tieng-min-no.mp3" id="2_6473n"]
+[ext_resource type="AudioStream" uid="uid://btyq3ac7d078u" path="res://resources/sound/battlefield/Tieng-min-no.mp3" id="2_6473n"]
 [ext_resource type="Texture2D" uid="uid://deh28ywd0ub80" path="res://resources/images/skills/fire_ball.png" id="2_jb27i"]
-[ext_resource type="AudioStream" uid="uid://dm3m3nmm7d1bh" path="res://resources/sound/danh nhau/Tieng-lua-chay.mp3" id="2_t5c7m"]
+[ext_resource type="AudioStream" uid="uid://dm3m3nmm7d1bh" path="res://resources/sound/battlefield/Tieng-lua-chay.mp3" id="2_t5c7m"]
 
 [sub_resource type="Animation" id="Animation_k3r0e"]
 length = 0.001
