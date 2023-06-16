@@ -1,71 +1,215 @@
-[gd_scene load_steps=7 format=3 uid="uid://bk34ua8pysw3v"]
+[gd_scene load_steps=11 format=3 uid="uid://bk34ua8pysw3v"]
 
 [ext_resource type="Script" path="res://scenes/start_menu/main.gd" id="1_gee0v"]
+[ext_resource type="Texture2D" uid="uid://ngxqvdd76tr7" path="res://scenes/start_menu/main_background_1.png" id="2_56ofs"]
 [ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/nhấn nút.mp3" id="2_quepu"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_oarnu"]
-font_size = 50
+[ext_resource type="Texture2D" uid="uid://ddhk7pykh4wcb" path="res://scenes/start_menu/main_background_2.png" id="3_jin04"]
+[ext_resource type="Texture2D" uid="uid://3mgk1tr4612p" path="res://scenes/start_menu/main_background_3.png" id="4_xj58w"]
+[ext_resource type="Texture2D" uid="uid://blp51w2h0ek56" path="res://scenes/start_menu/main_background_dog.png" id="5_ox0nk"]
+[ext_resource type="Texture2D" uid="uid://ba7uaub481uor" path="res://scenes/start_menu/game_logo.png" id="6_qfxhr"]
 
 [sub_resource type="Animation" id="Animation_8vrgj"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
+tracks/0/path = NodePath("ColorRect:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/path = NodePath("BG3:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dog:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(382.5, 226)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dog:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Logo:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Logo:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(228, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Khung:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Khung:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_iavmh"]
-resource_name = "fade in"
-length = 0.500004
-step = 0.0416667
+[sub_resource type="Animation" id="Animation_ksfim"]
+resource_name = "ready"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 2
+tracks/0/path = NodePath("BG2:modulate")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0.2, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/path = NodePath("BG3:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.554788, 1),
+"update": 0,
+"values": [Vector2(0, 409), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dog:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(0.267943, 1),
+"update": 0,
+"values": [Vector2(408, 300), Vector2(408, 211)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dog:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Logo:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Logo:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.7, 1),
+"transitions": PackedFloat32Array(0.287175, 1),
+"update": 0,
+"values": [Vector2(228, -60), Vector2(228, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Khung:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Khung:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xuivp"]
 _data = {
 "RESET": SubResource("Animation_8vrgj"),
-"fade in": SubResource("Animation_iavmh")
+"ready": SubResource("Animation_ksfim")
 }
 
 [node name="Main" type="Control"]
@@ -79,43 +223,66 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_gee0v")
 
+[node name="BG1" type="TextureRect" parent="."]
+layout_mode = 0
+texture = ExtResource("2_56ofs")
+
+[node name="BG2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+texture = ExtResource("3_jin04")
+
+[node name="BG3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("4_xj58w")
+
+[node name="Dog" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.5
+offset_top = -98.0
+offset_right = 193.5
+offset_bottom = 269.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ox0nk")
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -348.0
+offset_top = -324.0
+offset_right = 402.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_qfxhr")
+
 [node name="Khung" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_top = -43.0
+offset_bottom = 247.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PhanDau" type="VBoxContainer" parent="Khung"]
-layout_direction = 1
-layout_mode = 2
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.0
-localize_numeral_system = false
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanDau"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="TieuDe" type="HBoxContainer" parent="Khung/PhanDau"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="Khung/PhanDau/TieuDe"]
-layout_mode = 2
-theme_override_constants/outline_size = 100
-theme_override_constants/shadow_outline_size = 0
-theme_override_font_sizes/font_size = 100
-text = "The battle dogs"
-label_settings = SubResource("LabelSettings_oarnu")
-uppercase = true
-text_direction = 3
-
 [node name="PhanCuoi" type="VBoxContainer" parent="Khung"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Khung/PhanCuoi"]
 custom_minimum_size = Vector2(0, 100)
@@ -157,16 +324,8 @@ stream = ExtResource("2_quepu")
 volume_db = 14.998
 bus = &"SoundFX"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-layout_mode = 0
-offset_left = -115.0
-offset_top = -114.0
-offset_right = 1353.0
-offset_bottom = 806.0
-color = Color(0, 0, 0, 1)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "ready"
 libraries = {
 "": SubResource("AnimationLibrary_xuivp")
 }
