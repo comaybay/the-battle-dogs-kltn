@@ -9,7 +9,7 @@ var list_team = [] #danh sách đội hình
 var list_skill = [] #danh sách kỹ năng
 var teams # node đội hình đã chọn
 var skill_teams # node kỹ năng đã chọn
-var base_img = load("res://resources/images/base.png")
+var base_img = null
 
 func _ready():
 	game_data = Data.save_data
@@ -25,18 +25,18 @@ func _ready():
 	teams = $"Khung/PhanTren/TabContainer/Đội hình/GridContainer".get_children()
 	skill_teams = $Khung/PhanTren/TabContainer/Skill/GridContainer.get_children()
 	for i in teams :
-		i.setup(self)
-		i.get_node("TextureRect").texture = base_img
+		i.setup(null,self)
+		i.get_node("Icon").texture = base_img
 		i.get_node("ID").text = "-1"
 	for i in skill_teams :
-		i.setup(self)
-		i.get_node("TextureRect").texture = base_img
+		i.setup(null,self)
+		i.get_node("Icon").texture = base_img
 		i.get_node("ID").text = "-1"
 	
 	# Thiết lập nhân vật và kỹ năng
 	loadCharacter()
 	loadSkill()
-	# đưa đội hình hiện tại vào teams	
+	# đưa đội hình hiện tại vào teams	6
 	loadTeam(Data.save_data['selected_team'])
 	
 
@@ -57,11 +57,13 @@ func addItem(value,type):
 	var item = ListCharacter.instantiate()
 	item.setup(self)
 	item.get_node("ID").text = str(value['ID'])
-	item.get_node("TextureRect").texture = load(value['path'])
+	#$Icon.texture = load("res://resources/icons/%s_icon.png" % data["ID"]) load(value['path'])	
 	item.get_node("Type").text = str(type)
 	if (type == 0) :
+		item.get_node("Icon").texture = load("res://resources/icons/%s_icon.png" % value["ID"])	
 		$Khung/PhanDuoi/DanhSach/NhanVat/GridContainer.add_child(item)
 	else :
+		item.get_node("Icon").texture = load("res://resources/images/skills/%s_icon.png" % value["ID"])
 		$Khung/PhanDuoi/DanhSach/Skill/GridContainer.add_child(item)
 	
 func loadTeam(i) :
@@ -69,7 +71,7 @@ func loadTeam(i) :
 		for ob in character_data :
 			if (str(obj) == str(ob["ID"])) and (obj != null):
 				var list = $Khung/PhanDuoi/DanhSach/NhanVat/GridContainer.get_children()
-				var item = [ob["ID"], load(ob["path"])]
+				var item = [ob["ID"], load("res://resources/icons/%s_icon.png" % ob["ID"])	]
 				for it in list.size() :
 					if (list[it].get_node("ID").text == ob["ID"] ):
 						list[it].visible = false
@@ -94,26 +96,28 @@ func loadTeam(i) :
 func sendInfo(ID, path,type):
 	$click.play()
 	var item = [ID, path]
+	print(ID)
 	if (int(type) == 0 ) :
 		if (list_team.size() < 10) :		
-			teams[list_team.size()].get_node("TextureRect").texture = path
+			teams[list_team.size()].get_node("Icon").texture = path
 			teams[list_team.size()].get_node("ID").text = ID	
 			list_team.push_back(item)
 		elif (list_team.size() == 10) : 
 			#deleteInfo(teams[9].get_node("ID").text,teams[9].get_node("TextureRect").texture,9)
-			teams[9].get_node("TextureRect").texture = path
+			deleteInfo(teams[9].get_node("ID").text,teams[9].get_node("Icon").texture,9)
+			teams[9].get_node("Icon").texture = path
 			teams[9].get_node("ID").text = ID
 			list_team.push_back(item)
 			
 	if (int(type) == 1 ) : #OK
-		if (list_skill.size() <= 2) :
-			skill_teams[list_skill.size()].get_node("TextureRect").texture = path
+		if (list_skill.size() < 3) :
+			skill_teams[list_skill.size()].get_node("Icon").texture = path
 			skill_teams[list_skill.size()].get_node("ID").text = ID
 			list_skill.push_back(item)
-			
-		elif (list_skill.size() == 3) :
+		elif (list_skill.size() == 3) : 
 			#deleteSkillInfo(skill_teams[2].get_node("ID").text, skill_teams[2].get_node("TextureRect").texture, 2)
-			skill_teams[2].get_node("TextureRect").texture = path
+			deleteSkillInfo(skill_teams[2].get_node("ID").text,skill_teams[2].get_node("Icon").texture,2)			
+			skill_teams[2].get_node("Icon").texture = path
 			skill_teams[2].get_node("ID").text = ID			
 			list_skill.push_back(item)
 
@@ -148,18 +152,18 @@ func resetTeam() :
 	for i in range(0,10):
 		if i < list_team.size():
 			teams[i].get_node("ID").text = str(list_team[i][0])	
-			teams[i].get_node("TextureRect").texture = list_team[i][1]
+			teams[i].get_node("Icon").texture = list_team[i][1]
 		else :
-			teams[i].get_node("TextureRect").texture = base_img
+			teams[i].get_node("Icon").texture = base_img
 			teams[i].get_node("ID").text = "-1"
 
 func resetSkill() :	
 	for i in range(0,3):		
 		if i < (list_skill.size()):
 			skill_teams[i].get_node("ID").text = str(list_skill[i][0])
-			skill_teams[i].get_node("TextureRect").texture = list_skill[i][1]
+			skill_teams[i].get_node("Icon").texture = list_skill[i][1]
 		else :
-			skill_teams[i].get_node("TextureRect").texture = base_img
+			skill_teams[i].get_node("Icon").texture = base_img
 			skill_teams[i].get_node("ID").text = "-1"
 			
 
@@ -174,7 +178,7 @@ func _on_luu_pressed():
 	var skill_items = []
 	for obj in list_skill :
 		skill_items.push_back(str(obj[0]))	
-	for obj in (3- list_skill.size()) :
+	for obj in (2 - list_skill.size()) :
 		skill_items.push_back(null)
 	game_data["teams"][Data.save_data['selected_team']]["skill_ids"] = skill_items
 	
