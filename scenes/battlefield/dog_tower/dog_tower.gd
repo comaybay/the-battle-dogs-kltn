@@ -12,8 +12,10 @@ var effect_global_position: Vector2:
 func _ready() -> void:
 	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/dog_tower.png" % InBattle.battlefield_data['theme'])
 
-	#TODO: increase health through upgrade
 	max_health = 500
+	var health_upgrade = Data.passives['dog_tower_health']
+	if health_upgrade != null:
+		max_health = max_health * pow(1.5, health_upgrade['level'])
 	
 	health = max_health
 	update_health_label()
@@ -37,13 +39,13 @@ func take_damage(damage: int) -> void:
 	
 
 func healing(heal : int) -> void :
-	if (health < max_health) :
-		if ((health + heal) <= max_health) :
-			health += heal
-		else :
-			health = max_health
-		
-	update_health_label()
+	var new_health = min(health + heal, max_health) 
+	
+	var tween := create_tween()
+	tween.tween_method(func(value: float):
+		health = value	
+		update_health_label()
+	, health, new_health, 2)
 	
 func spawn(dog_scene: PackedScene) -> void:
 	var dog = dog_scene.instantiate()

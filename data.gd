@@ -48,13 +48,19 @@ var music_volume: int:
 		save_data['settings']['music'] = value	
 		music_volume_changed.emit(value)
 
+
+# general info
 var dog_info := Dictionary()
 var store_info := Dictionary()
 var skill_info := Dictionary()
+var passive_info := Dictionary()
+var speaker_dog_dialogue: Array
+
+# save data
 var dogs := Dictionary()
 var skills := Dictionary()
 var store := Dictionary()
-var speaker_dog_dialogue: Array
+var passives := Dictionary()
 
 func _init() -> void:
 	var file = FileAccess.open("res://resources/game_data/speaker_dog_dialogue.json", FileAccess.READ)
@@ -82,6 +88,12 @@ func _init() -> void:
 		store_info[info['ID']] = info
 	file.close()
 	
+	file = FileAccess.open("res://resources/game_data/passives.json", FileAccess.READ)
+	var passive_info_arr = JSON.parse_string(file.get_as_text())
+	for info in passive_info_arr:
+		passive_info[info['ID']] = info
+	file.close()
+	
 	compute_values()
 
 func compute_values():
@@ -93,6 +105,9 @@ func compute_values():
 		
 	for item in save_data["items"]:
 		store[item["ID"]] = item
+		
+	for passive in save_data["passives"]:
+		passives[passive["ID"]] = passive
 
 func save():
 	var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)

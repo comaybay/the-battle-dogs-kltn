@@ -1,0 +1,26 @@
+[
+  {
+    "ID": "money_efficiency",
+    "name": "Năng suất Lao động",
+    "description": "Năng suất lao động của giai cấp Chó công - nông. Thu nhập thụ động (số tiền được tạo ra mỗi giây) trong trận đấu được tăng lên",
+    "price": 1000
+  },
+  {
+    "ID": "wallet_capacity",
+    "name": "Sức chứa Kho bạc",
+    "description": "Kho bạc nhà nước. Tăng số tiền tối đa có thể chứa được trong trận đấu.",
+    "price": 1000
+  },
+  {
+    "ID": "dog_tower_health",
+    "name": "Sức chống cự Thành Chó",
+    "description": "Quyết không để thành bị sụp đổ! Tăng lượng máu ban đầu của thành Chó.",
+    "price": 500
+  },
+  {
+    "ID": "bone_reward_up",
+    "name": "Nghiên cứu và phát triển",
+    "description": "Nghiên cứu công nghệ chiếm được từ loài Mèo! Tăng số Xương nhận được sau mỗi trận đấu.",
+    "price": 500
+  }
+]

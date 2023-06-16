@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://q3xac7wpx0wx"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/cat_tower/cat_tower.gd" id="1_52k0t"]
-[ext_resource type="Texture2D" uid="uid://cecwl18lrgxig" path="res://resources/battlefield_themes/green_grass/cat_tower.png" id="2_v8585"]
+[ext_resource type="Texture2D" uid="uid://cecwl18lrgxig" path="res://resources/battlefield_themes/winter/cat_tower.png" id="2_v8585"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
 font_size = 48

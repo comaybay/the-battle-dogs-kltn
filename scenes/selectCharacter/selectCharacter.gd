@@ -83,7 +83,7 @@ func loadTeam(i) :
 		for ob in skill_data :
 			if (str(obj) == str(ob["ID"])) and (obj != null):
 				var listSK = $Khung/PhanDuoi/DanhSach/Skill/GridContainer.get_children()
-				var item = [ob["ID"], load(ob["path"])]
+				var item = [ob["ID"], load("res://resources/images/skills/%s_icon.png" % ob["ID"])]
 				for it in listSK.size() :
 					if (listSK[it].get_node("ID").text == ob["ID"] ):
 						listSK[it].visible = false
@@ -96,7 +96,6 @@ func loadTeam(i) :
 func sendInfo(ID, path,type):
 	$click.play()
 	var item = [ID, path]
-	print(ID)
 	if (int(type) == 0 ) :
 		if (list_team.size() < 10) :		
 			teams[list_team.size()].get_node("Icon").texture = path

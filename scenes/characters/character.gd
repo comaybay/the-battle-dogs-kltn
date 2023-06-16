@@ -152,6 +152,7 @@ func take_damage(ammount: int) -> void:
 func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> void: # gay anh huong trong time
 	if effect == "speed" :
 		speed = speed * number 
+		n_AnimationPlayer.speed_scale = 1 * number
 	elif effect ==  "damage" :
 		damage = damage * number
 	elif effect ==  "attack_cooldown" :
@@ -165,6 +166,7 @@ func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> v
 	
 	if effect == "speed" :
 		speed = speed / number 
+		n_AnimationPlayer.speed_scale = 1 
 	elif effect ==  "damage" :
 		damage = damage / number
 	elif effect ==  "attack_cooldown" :
