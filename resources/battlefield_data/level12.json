@@ -2,9 +2,9 @@
   "theme": "nightmare",
   "music": "battlefield_theme_nightmare",
   "special_instruction": "invert_color",
-  "stage_width": 2500,
+  "stage_width": 3500,
   "cat_tower_health": 5,
-  "reward_bone": 333333,
+  "reward_bone": 666666,
   "power_scale": 3.5,
   "spawn_patterns": [
     {

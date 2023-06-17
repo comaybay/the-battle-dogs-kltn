@@ -3,7 +3,8 @@
   "music": "battlefield_theme_rush1",
   "stage_width": 4500,
   "cat_tower_health": 1,
-  "reward_bone": 25000,
+  "power_scale": 0.75,
+  "reward_bone": 50000,
   "spawn_patterns": [
     {
       "name": "smol_cat",

@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cecwl18lrgxig" path="res://resources/battlefield_themes/winter/cat_tower.png" id="2_v8585"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
-font_size = 48
+font_size = 52
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghq1y"]
 size = Vector2(408, 948)

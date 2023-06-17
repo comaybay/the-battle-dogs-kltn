@@ -48,4 +48,4 @@ horizontal_alignment = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource("3_7gvxd")
 volume_db = -5.0
-bus = &"InBattleFX"
+bus = &"SoundFX"

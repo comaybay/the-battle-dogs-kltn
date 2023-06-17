@@ -2,9 +2,9 @@
   "theme": "heavenly",
   "music": "battlefield_theme_heavenly",
   "stage_width": 8000,
-  "cat_tower_health": 10000,
-  "reward_bone": 30000,
-  "power_scale": 2,
+  "cat_tower_health": 100000,
+  "reward_bone": 999999,
+  "power_scale": 1.5,
   "spawn_patterns": [
     {
       "name": "cat",
@@ -28,15 +28,49 @@
     },
     {
       "name": "buff_cat",
-      "duration": 60,
+      "duration": 120,
       "delay": 60
+    },
+    {
+      "name": "cat",
+      "duration": 5,
+      "delay": 60
+    },
+    {
+      "name": "leg_cat",
+      "duration": 20,
+      "delay": 70
+    },
+    {
+      "name": "rolling_cat",
+      "duration": 20,
+      "delay": 82.5
+    },
+    {
+      "name": "smol_cat",
+      "duration": 5,
+      "delay": 62.5
+    },
+    {
+      "name": "buff_cat",
+      "duration": 120,
+      "delay": 120
     }
   ],
   "bosses": [
     {
-      "health_at": 1000,
+      "health_at": 99999,
       "name": "ramiel_cat",
-      "buffs": [{ "name": "reward_money", "scale": 3 }]
+      "buffs": [
+        {
+          "name": "reward_money",
+          "scale": 3
+        },
+        {
+          "name": "health",
+          "scale": 2
+        }
+      ]
     }
   ]
 }

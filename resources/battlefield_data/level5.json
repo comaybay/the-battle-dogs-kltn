@@ -3,7 +3,7 @@
   "music": "battlefield_theme2",
   "stage_width": 6000,
   "cat_tower_health": 4000,
-  "reward_bone": 15000,
+  "reward_bone": 25000,
   "power_scale": 1.25,
   "spawn_patterns": [
     {

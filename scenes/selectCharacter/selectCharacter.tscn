@@ -123,6 +123,7 @@ script = ExtResource("1_qdgrc")
 position = Vector2(0, -63)
 stream = ExtResource("4_dgiwl")
 volume_db = 14.998
+bus = &"SoundFX"
 
 [node name="Khung" type="VBoxContainer" parent="Khung/Content"]
 layout_mode = 1
@@ -289,6 +290,7 @@ position = Vector2(286, -314)
 stream = SubResource("AudioStreamMP3_pky45")
 volume_db = 14.998
 pitch_scale = 3.86
+bus = &"SoundFX"
 
 [node name="Footer" type="VBoxContainer" parent="Khung"]
 custom_minimum_size = Vector2(0, 59)

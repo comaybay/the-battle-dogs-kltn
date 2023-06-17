@@ -8,20 +8,20 @@
     "spawn_price": 50
   },
   {
-    "ID": "waffle_dog",
-    "name": "Chó Bánh Quế",
-    "price": 2000,
-    "description": "Sản phẩm mới nhất của nhiều quá trình thí nghiệm trên chó, Chó Bánh Quế có lượng máu cao thích hợp cho vị trí đỡ đòn khi giao tranh. Đánh diện rộng nhưng sát thương rất thấp.",
-    "spawn_time": 4,
-    "spawn_price": 100
-  },
-  {
     "ID": "sword_dog",
     "name": "Chó Ngậm Kiếm",
-    "price": 3000,
+    "price": 2000,
     "description": "Sau 10 năm tu luyện võ công sử dụng Cẩu Xà Kiếm. Với tốc độ chạy và tốc độ đánh cao, chú chó này có thể cấp tốc đi đến mặt trận để hỗ trợ tấn công kẻ địch. Đánh đơn mục tiêu.",
     "spawn_time": 8,
     "spawn_price": 150
+  },
+  {
+    "ID": "waffle_dog",
+    "name": "Chó Bánh Quế",
+    "price": 3000,
+    "description": "Sản phẩm mới nhất của nhiều quá trình thí nghiệm trên chó, Chó Bánh Quế có lượng máu cao thích hợp cho vị trí đỡ đòn khi giao tranh. Đánh diện rộng nhưng sát thương rất thấp.",
+    "spawn_time": 4,
+    "spawn_price": 100
   },
   {
     "ID": "angel_dog",

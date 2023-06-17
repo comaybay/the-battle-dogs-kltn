@@ -4,7 +4,7 @@
   "special_instruction": "invert_color",
   "stage_width": 4000,
   "cat_tower_health": 10,
-  "reward_bone": 100000,
+  "reward_bone": 414314,
   "power_scale": 2.75,
   "spawn_patterns": [
     {

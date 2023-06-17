@@ -19,11 +19,11 @@
   ],
   "bosses": [
     {
-      "health_at": 1000,
+      "health_at": 998,
       "name": "smol_cat",
       "buffs": [
-        { "name": "health", "scale": 10 },
-        { "name": "damage", "scale": 10 },
+        { "name": "health", "scale": 12 },
+        { "name": "damage", "scale": 12 },
         { "name": "reward_money", "scale": 5 }
       ]
     },
@@ -31,8 +31,8 @@
       "health_at": 1,
       "name": "smol_cat",
       "buffs": [
-        { "name": "health", "scale": 10 },
-        { "name": "damage", "scale": 10 },
+        { "name": "health", "scale": 5 },
+        { "name": "damage", "scale": 5 },
         { "name": "reward_money", "scale": 5 }
       ]
     }

@@ -137,4 +137,4 @@ target_position = Vector2(90, 0)
 
 [node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
 stream = ExtResource("3_1qucf")
-volume_db = -5.0
+volume_db = -7.0

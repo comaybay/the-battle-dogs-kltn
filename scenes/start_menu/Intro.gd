@@ -2,7 +2,10 @@ extends Node
 
 func _ready() -> void:
 	$SkipButton.pressed.connect(_on_skip, CONNECT_ONE_SHOT)
-	$AnimationPlayerText.animation_finished.connect(func(anim_name): _on_finished())
+	$AnimationPlayerText.animation_finished.connect(func(anim_name): 
+		$SkipButton.pressed.disconnect(_on_skip)
+		_on_finished()
+	)
 
 func _on_skip() -> void:
 	$AnimationPlayer.pause()
