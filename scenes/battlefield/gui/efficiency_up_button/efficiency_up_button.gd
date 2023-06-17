@@ -2,6 +2,7 @@ extends TextureButton
 
 func _ready() -> void:
 	$AnimationPlayer.play("ready")
+	$UpgradePriceLabel.text = "%s₵" % InBattle.get_efficiency_upgrade_price()
 	pressed.connect(_on_upgrade)
 
 func _process(delta: float) -> void:
@@ -10,6 +11,7 @@ func _process(delta: float) -> void:
 	
 func _on_upgrade() -> void:
 	if InBattle.get_efficiency_level() < InBattle.MAX_EFFICIENCY_LEVEL:
+		$AudioStreamPlayer.play()
 		InBattle.money -= InBattle.get_efficiency_upgrade_price()
 		InBattle.increase_efficiency_level()
 		$EfficiencyLevelLabel.text = "LV.%s" % InBattle.get_efficiency_level()
@@ -18,4 +20,7 @@ func _on_upgrade() -> void:
 			$UpgradePriceLabel.text = "MAX"
 		else:
 			$UpgradePriceLabel.text = "%s₵" % InBattle.get_efficiency_upgrade_price()
-		
+
+func _input(event: InputEvent) -> void:
+	if !disabled and event.is_action_pressed("ui_upgrade_efficiency"):
+		_on_upgrade()

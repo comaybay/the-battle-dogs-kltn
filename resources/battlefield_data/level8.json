@@ -1,29 +1,50 @@
 {
   "theme": "winter",
-  "stage_width": 8000,
-  "cat_tower_health": 1000,
-  "reward_bone": 3000,
+  "music": "battlefield_theme3",
+  "stage_width": 16000,
+  "cat_tower_health": 42069,
+  "reward_bone": 69000,
+  "power_scale": 1.5,
   "spawn_patterns": [
     {
-      "name": "cat",
+      "name": "smol_cat",
+      "duration": 2.5,
+      "delay": 0
+    },
+    {
+      "name": "rolling_cat",
       "duration": 5,
       "delay": 0
     },
     {
+      "name": "cat",
+      "duration": 10,
+      "delay": 5
+    },
+    {
       "name": "leg_cat",
-      "duration": 20,
+      "duration": 15,
       "delay": 10
     },
     {
-      "name": "rolling_cat",
-      "duration": 10,
-      "delay": 22.5
+      "name": "smol_cat",
+      "duration": 7,
+      "delay": 15
     },
-
+    {
+      "name": "smol_cat",
+      "duration": 2.5,
+      "delay": 30
+    },
     {
       "name": "cat",
       "duration": 10,
-      "delay": 42.5
+      "delay": 40.5
+    },
+    {
+      "name": "leg_cat",
+      "duration": 15,
+      "delay": 55
     }
   ]
 }

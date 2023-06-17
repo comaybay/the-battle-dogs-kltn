@@ -315,10 +315,8 @@ libraries = {
 
 [node name="Sprite2D" parent="." index="2"]
 position = Vector2(-42, -461)
-rotation = 0.0
 texture = ExtResource("2_8gfbr")
 hframes = 1
-frame = 0
 
 [node name="CrossExplosion" type="Sprite2D" parent="." index="3"]
 visible = false

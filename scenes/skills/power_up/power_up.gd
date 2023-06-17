@@ -22,5 +22,6 @@ func _ready() -> void:
 		effect_on_dog.setup(time, dog)
 		effect_on_dog.global_position = dog.global_position 
 	
+	await $AudioStreamPlayer.finished
 	queue_free()
 

@@ -94,7 +94,7 @@ size = Vector2(192, 178)
 [node name="BaseCat" groups=["cats"] instance=ExtResource("1_xhikh")]
 z_index = 18
 collision_layer = 4
-collision_mask = 35
+collision_mask = 33
 script = ExtResource("2_dyq8c")
 reward_money = 0
 allow_boss_effect = true
@@ -109,9 +109,10 @@ libraries = {
 shape = SubResource("RectangleShape2D_72ktc")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(-96, 0)
+position = Vector2(0, 0)
 target_position = Vector2(-40, 0)
 collision_mask = 34
 
 [node name="BossKnockback" type="AudioStreamPlayer" parent="FiniteStateMachine/KnockbackState" index="1"]
 stream = ExtResource("3_44ji3")
+bus = &"InBattleFX"

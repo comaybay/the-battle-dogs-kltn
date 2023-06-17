@@ -6,10 +6,12 @@ class_name BaseDog extends Character
 
 func _ready() -> void:
 	super._ready()
-	
+
 	var dog_upgrade = Data.dogs[name_id]
 	
 	if dog_upgrade != null:
 		var scale = (1 + (dog_upgrade['level'] - 1) * 0.2)
 		damage *= scale  
 		health *= scale
+		
+	super._reready()

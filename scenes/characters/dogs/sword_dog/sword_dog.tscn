@@ -126,15 +126,15 @@ position = Vector2(64, -57)
 texture = ExtResource("2_8ghqg")
 hframes = 1
 vframes = 17
-frame = 0
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(-1, -23.25)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(95, 0)
+position = Vector2(191, 0)
 target_position = Vector2(90, 0)
 
 [node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
 stream = ExtResource("3_1qucf")
+volume_db = -5.0

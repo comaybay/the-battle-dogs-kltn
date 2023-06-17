@@ -143,14 +143,14 @@ initial_state = NodePath("MoveState")
 script = ExtResource("4_5450c")
 
 [node name="DiChuyen" type="AudioStreamPlayer" parent="FiniteStateMachine/MoveState"]
-bus = &"SoundFX"
+bus = &"InBattleFX"
 
 [node name="AttackState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("5_xi1bt")
 
 [node name="Danh" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState"]
 stream = ExtResource("5_gaay1")
-bus = &"SoundFX"
+bus = &"InBattleFX"
 
 [node name="IdleState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("6_yu7tv")
@@ -159,7 +159,7 @@ script = ExtResource("6_yu7tv")
 script = ExtResource("6_y7l8e")
 
 [node name="Nga" type="AudioStreamPlayer" parent="FiniteStateMachine/KnockbackState"]
-bus = &"SoundFX"
+bus = &"InBattleFX"
 
 [node name="DieState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("7_10dt3")

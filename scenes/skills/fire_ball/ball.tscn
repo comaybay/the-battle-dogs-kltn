@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://cu0by1s72tx3o"]
 
 [ext_resource type="Script" path="res://scenes/skills/fire_ball/ball.gd" id="1_yyqct"]
 [ext_resource type="AudioStream" uid="uid://btyq3ac7d078u" path="res://resources/sound/battlefield/Tieng-min-no.mp3" id="2_6473n"]
@@ -128,9 +128,9 @@ shape = SubResource("RectangleShape2D_oa1yv")
 [node name="move" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_t5c7m")
 volume_db = -5.0
-bus = &"SoundFX"
+bus = &"InBattleFX"
 
 [node name="die" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_6473n")
 volume_db = -20.0
-bus = &"SoundFX"
+bus = &"InBattleFX"

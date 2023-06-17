@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://5joq03mk4kv3"]
 
-[ext_resource type="PackedScene" uid="uid://lxkjj175ygi7" path="res://scenes/characters/character.tscn" id="1_t516l"]
+[ext_resource type="PackedScene" uid="uid://cvno8d4sb6h0s" path="res://scenes/characters/character.tscn" id="1_t516l"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/base_dog.gd" id="2_krygw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6m5t"]
@@ -9,7 +9,7 @@ size = Vector2(192, 178)
 
 [node name="BaseDog" groups=["dogs"] instance=ExtResource("1_t516l")]
 collision_layer = 2
-collision_mask = 21
+collision_mask = 17
 script = ExtResource("2_krygw")
 name_id = ""
 
@@ -17,4 +17,5 @@ name_id = ""
 shape = SubResource("RectangleShape2D_i6m5t")
 
 [node name="RayCast2D" parent="." index="4"]
+position = Vector2(192, 0)
 collision_mask = 20

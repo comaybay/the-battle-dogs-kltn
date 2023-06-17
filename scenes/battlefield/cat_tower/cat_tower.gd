@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 signal zero_health
+signal boss_appeared
 
 const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
 const boss_shader: ShaderMaterial = preload("res://shaders/outline_glow/outline_glow.material")
@@ -86,7 +87,6 @@ func take_damage(damage: int) -> void:
 	else:	
 		health = max(health - damage, 0) 
 	
-	update_health_label()
 	$AnimationPlayer.play("shake" if health > 0 else "fall")
 	
 	while bosses_queue.size() > 0:
@@ -97,7 +97,9 @@ func take_damage(damage: int) -> void:
 			bosses_queue.pop_back()
 		else: 
 			break
-		
+	
+	update_health_label()
+	
 	if health <= 0:
 		for cat in get_tree().get_nodes_in_group("cats"):
 			cat.kill()
@@ -110,14 +112,18 @@ func take_damage(damage: int) -> void:
 func spawn(cat_name: String) -> void:
 	var cat = cats[cat_name].instantiate()
 	cat.global_position = global_position - Vector2(100, 0)
+	cat.ready.connect(_apply_special_instruction.bind(cat))
 	get_tree().current_scene.add_child(cat)
 	
 func spawn_boss(boss_info: Dictionary) -> void:
+	boss_appeared.emit()
+	
 	var cat: BaseCat = cats[boss_info['name']].instantiate()
 	cat.is_boss = true
 	cat.global_position = global_position - Vector2(100, 0)
 	cat.ready.connect(
 		func(): 
+			_apply_special_instruction(cat)
 			if cat.allow_boss_effect == true:
 				var shader = boss_shader.duplicate()
 				shader.set_shader_parameter("frame_size", cat.n_Sprite2D.get_rect().size)
@@ -130,7 +136,13 @@ func spawn_boss(boss_info: Dictionary) -> void:
 		var prop_name = buff["name"]
 		var prop_val = cat.get(prop_name) 
 		if prop_val != null:
-			cat.set(prop_name, cat.get(prop_name) * buff["scale"])
+			var prop_new_value = buff.get("value")
+			if prop_new_value:
+				cat.set(prop_name, prop_new_value)
+			
+			var prop_scale = buff.get("scale")
+			if prop_scale:
+				cat.set(prop_name, cat.get(prop_name) * prop_scale)
 	
 	var tree := get_tree()
 		
@@ -147,3 +159,9 @@ func spawn_boss(boss_info: Dictionary) -> void:
 	
 	for dog in tree.get_nodes_in_group("dogs"):
 		dog.knockback(2.5)
+
+func _apply_special_instruction(cat: BaseCat):
+	var instruction = InBattle.battlefield_data.get('special_instruction')
+	
+	if instruction == "invert_color":
+		cat.n_Sprite2D.material = load("res://shaders/invert_color/invert_color.material")

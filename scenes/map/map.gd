@@ -1,6 +1,8 @@
 extends Control 
 
 func _ready():
+	AudioPlayer.resume_dogbase_music()
+		
 	var levels = $Khung/map/AllLevel/Node.get_children()
 
 	for index in levels.size():
@@ -26,4 +28,5 @@ func _on_quay_lai_pressed():
 	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
 
 func _exit_tree() -> void:
+	AudioPlayer.pause_dogbase_music()
 	Data.save()

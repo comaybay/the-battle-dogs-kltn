@@ -2,9 +2,17 @@ extends Node
 
 const BUTTON_PRESSED_AUDIO: AudioStream = preload("res://resources/sound/button_pressed.mp3")
 const LEVEL_SELECTED_AUDIO: AudioStream = preload("res://resources/sound/level_selected.wav")
+const DOG_BASE_THEME_AUDIO: AudioStream = preload("res://resources/sound/music/dog_base_theme.mp3")
 
+var _playback_position: float = 0
+var _music_stopping: bool = false
+var _music_starting: bool = false
+var _tween: Tween
+
+var custom_sound: AudioStreamPlayer
 var button_pressed: AudioStreamPlayer
-var music: AudioStreamPlayer
+var custom_music: AudioStreamPlayer
+var dogbase_music: AudioStreamPlayer
 var level_selected: AudioStreamPlayer
 
 func _create_audio_sfx(audio: AudioStream):
@@ -15,30 +23,75 @@ func _create_audio_sfx(audio: AudioStream):
 	return audio_player
 	
 func _ready() -> void:
+	custom_sound = _create_audio_sfx(null)
 	button_pressed = _create_audio_sfx(BUTTON_PRESSED_AUDIO)
 	level_selected = _create_audio_sfx(LEVEL_SELECTED_AUDIO)
 		
-	music = AudioStreamPlayer.new()
-	music.bus = "Music"
+	dogbase_music = AudioStreamPlayer.new()
+	dogbase_music.stream = DOG_BASE_THEME_AUDIO
+	dogbase_music.bus = "Music"
+	dogbase_music.volume_db = -7
+	add_child(dogbase_music)
+	
+	custom_music = dogbase_music.duplicate()
+	add_child(custom_music)
 	
 	var sound_fx_idx = AudioServer.get_bus_index("SoundFX")
 	var music_idx = AudioServer.get_bus_index("Music")
-	AudioServer.set_bus_volume_db(sound_fx_idx, Data.sound_fx_volume - 100)
-	AudioServer.set_bus_volume_db(music_idx, Data.music_volume - 100)
+	AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(Data.sound_fx_volume / 100.0))
+	AudioServer.set_bus_volume_db(music_idx, linear_to_db(Data.music_volume / 100.0))
 	Data.sound_fx_volume_changed.connect(
 		func(value: float): 
-			AudioServer.set_bus_volume_db(sound_fx_idx, value - 100)
+			AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(value / 100.0))
 	)
 	Data.music_volume_changed.connect(
 		func(value: float): 
-			AudioServer.set_bus_volume_db(music_idx, value - 100)
+			AudioServer.set_bus_volume_db(music_idx, linear_to_db(value / 100.0))
 	)
-	
-	
-	add_child(music)
 
 func play_button_pressed_audio():
 	button_pressed.play()
 
 func play_level_selected_audio():
 	level_selected.play()
+	
+func pause_dogbase_music():
+	_music_stopping = true
+	_tween = create_tween()
+	_tween.tween_property(dogbase_music, "volume_db", -70, 0.7)
+	
+	_tween.finished.connect(_handle_finished, CONNECT_ONE_SHOT)
+	
+func resume_dogbase_music():
+	if dogbase_music.playing and _music_stopping == false:
+		return
+		
+	_music_starting = true
+	if _music_stopping:
+		_tween.stop()
+	else:
+		dogbase_music.play(_playback_position)
+	
+	_tween = create_tween()
+	_tween.tween_property(dogbase_music, "volume_db", -7, 0.4)
+	
+	await _tween.finished 
+	_music_starting = false
+	
+func _handle_finished():
+	_music_stopping = false
+	if _music_starting == false:
+		_playback_position = dogbase_music.get_playback_position()
+		dogbase_music.stop()
+
+func play_custom_sound(audio_stream: AudioStream):
+	custom_sound.stream = audio_stream
+	custom_sound.play()
+
+func play_custom_music(audio_stream: AudioStream):
+	custom_music.stream = audio_stream
+	custom_music.play()
+	
+func stop_custom_music():
+	custom_music.stop()
+	

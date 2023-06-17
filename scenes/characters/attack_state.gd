@@ -19,6 +19,7 @@ func physics_update(_delta: float) -> void:
 	if start_attack == false:
 		return
 		
+	$Danh.pitch_scale = randf_range(0.85, 1.15)
 	$Danh.play()
 	# custom attack
 	if character.custom_attack_area != null:
@@ -44,12 +45,17 @@ func physics_update(_delta: float) -> void:
 		var shape_query := PhysicsShapeQueryParameters2D.new()
 		shape_query.shape_rid = shape_id
 		
+		if character.character_type == Character.Type.DOG:
+			shape_query.collision_mask = 0b10100 # enemy and cat tower
+		else:
+			shape_query.collision_mask = 0b100010 # enemy and dog tower
+		
 		var attack_midpoint := character.n_RayCast2D.global_position + character.n_RayCast2D.target_position
 		shape_query.transform = Transform2D(0, attack_midpoint) 
 		
 		var results := space_state.intersect_shape(shape_query, 1000)
 		
-		# target can be a dog or a dog tower
+		# target can be a character or a tower tower
 		for result in results:
 			result.collider.take_damage(character.damage)
 			create_attack_fx(result.collider.effect_global_position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddt636yig83rp"]
+[gd_scene load_steps=10 format=3 uid="uid://culho3ivbdqd3"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/battlefield.gd" id="1_qm8p7"]
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="2_aom8l"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c8sa6uo4d7wdb" path="res://resources/battlefield_themes/winter/sky.png" id="3_paug1"]
 [ext_resource type="Script" path="res://scenes/battlefield/Camera2D.gd" id="4_67qqf"]
 [ext_resource type="PackedScene" uid="uid://lyrmnwxclfgn" path="res://scenes/battlefield/dog_tower/dog_tower.tscn" id="7_j5y50"]
+[ext_resource type="AudioStream" uid="uid://dm1ge42cv7vy7" path="res://resources/sound/battlefield/boss_drum.mp3" id="9_6ixii"]
 [ext_resource type="PackedScene" uid="uid://dmhx2wpadmcol" path="res://scenes/battlefield/gui/gui.tscn" id="9_kl1me"]
 
 [node name="Battlefield" type="Node2D"]
@@ -37,3 +38,10 @@ position = Vector2(-303, 0)
 
 [node name="EffectSpace" type="Node2D" parent="."]
 z_index = 40
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+volume_db = -7.0
+bus = &"Music"
+
+[node name="BossDrum" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_6ixii")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://fwaltxldx6f8"]
+[gd_scene load_steps=11 format=3 uid="uid://fwaltxldx6f8"]
 
 [ext_resource type="Script" path="res://scenes/start_menu/Intro.gd" id="1_5e7yh"]
 [ext_resource type="Texture2D" uid="uid://da7stfik0tt85" path="res://scenes/start_menu/intro_background.png" id="2_t66dt"]
+[ext_resource type="AudioStream" uid="uid://dyl4rhrpiko84" path="res://resources/sound/music/intro_sequence_theme.mp3" id="3_ve8ld"]
 
 [sub_resource type="Animation" id="Animation_ttwkk"]
 length = 0.001
@@ -97,17 +98,18 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_jnwsu"]
 length = 0.001
+step = 1.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Label:position")
+tracks/0/path = NodePath("Label:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(233, 704)]
+"values": [Vector2(229, 704)]
 }
 
 [sub_resource type="Animation" id="Animation_37no3"]
@@ -117,14 +119,14 @@ step = 1.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Label:position")
+tracks/0/path = NodePath("Label:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 120),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(233, 704), Vector2(233, -2033)]
+"values": [Vector2(229, 704), Vector2(229, -2033)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ikum5"]
@@ -157,10 +159,10 @@ text = "Bỏ qua"
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -343.0
+offset_left = -347.0
 offset_top = 704.0
-offset_right = 343.0
-offset_bottom = 2702.01
+offset_right = 339.0
+offset_bottom = 2702.03
 grow_horizontal = 2
 text = "Vào một ngày yên bình ở hành tinh Doggo
 
@@ -229,8 +231,13 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayerText" type="AnimationPlayer" parent="."]
-root_node = NodePath("../AnimationPlayer")
 autoplay = "scroll_text"
 libraries = {
 "": SubResource("AnimationLibrary_ikum5")
 }
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ve8ld")
+volume_db = -7.0
+autoplay = true
+bus = &"Music"

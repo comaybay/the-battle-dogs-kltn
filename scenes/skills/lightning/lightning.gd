@@ -13,9 +13,8 @@ func _ready():
 		var random_value_y = randi_range(-800,-900)
 		item.global_position = Vector2(random_value, random_value_y) 		
 		self.add_child(item)
-		$AudioStreamPlayer2D.play()
 		await get_tree().create_timer(0.2).timeout
-		
+	
 	queue_free()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

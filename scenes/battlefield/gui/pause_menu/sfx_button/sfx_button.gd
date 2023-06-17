@@ -14,5 +14,5 @@ func _ready() -> void:
 func set_active(active: bool) -> void:
 	is_active = active 
 	$AnimationPlayer.play("active" if active else "inactive")
-	Data.sound_fx_volume = 100 if active else 0
+	Data.sound_fx_volume = 80 if active else 0
 	Data.save()

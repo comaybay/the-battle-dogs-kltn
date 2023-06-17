@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmdc60cjuki5p"]
+[gd_scene load_steps=5 format=3 uid="uid://dmdc60cjuki5p"]
 
 [ext_resource type="PackedScene" uid="uid://w3ux0r6664nr" path="res://scenes/buttons/cirular_button/circular_button.tscn" id="1_r5ntm"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/efficiency_up_button/efficiency_up_button.gd" id="2_dduux"]
+[ext_resource type="AudioStream" uid="uid://bjx4lj64ekakc" path="res://resources/sound/battlefield/efficiency_up.mp3" id="3_7gvxd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3a7e3"]
 font_size = 74
@@ -43,3 +44,8 @@ grow_vertical = 2
 text = "40₵"
 label_settings = SubResource("LabelSettings_3a7e3")
 horizontal_alignment = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("3_7gvxd")
+volume_db = -5.0
+bus = &"InBattleFX"

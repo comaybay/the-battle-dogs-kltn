@@ -8,11 +8,16 @@ var skill_id_to_item: Dictionary
 @onready var skill_slots: Array[Node] = %SkillSlots.get_children()
 
 func _ready():
+	AudioPlayer.resume_dogbase_music()
+		
 	# Thiết lập nhân vật và kỹ năng
 	loadCharacterList()
 	loadSkillList()
 	# đưa đội hình hiện tại vào teams	6
 	loadTeam()
+	
+func _exit_tree() -> void:
+	AudioPlayer.pause_dogbase_music()
 
 func loadCharacterList() -> void:
 	for data in Data.dogs.values():

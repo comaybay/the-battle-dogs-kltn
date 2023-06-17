@@ -100,3 +100,4 @@ gizmo_extents = 54.5
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_g44t7")
+bus = &"InBattleFX"

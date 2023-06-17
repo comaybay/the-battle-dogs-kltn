@@ -1,5 +1,7 @@
 {
   "theme": "green_grass",
+  "music": "battlefield_theme1",
+  "boss_music": "boss_theme1",
   "stage_width": 5000,
   "cat_tower_health": 999,
   "reward_bone": 9999,
@@ -18,6 +20,15 @@
   "bosses": [
     {
       "health_at": 1000,
+      "name": "smol_cat",
+      "buffs": [
+        { "name": "health", "scale": 10 },
+        { "name": "damage", "scale": 10 },
+        { "name": "reward_money", "scale": 5 }
+      ]
+    },
+    {
+      "health_at": 1,
       "name": "smol_cat",
       "buffs": [
         { "name": "health", "scale": 10 },

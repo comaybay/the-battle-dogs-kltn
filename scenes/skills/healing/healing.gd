@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node2D
 
 @export var veloc = Vector2(0,900)
 @export var heal = 250
@@ -14,10 +14,10 @@ func _ready():
 	self.global_position = dog_tower.global_position + Vector2(0, -500)
 	
 	dog_tower.healing(1000)
-	await get_tree().create_timer(2).timeout
+	await $AudioStreamPlayer.finished
 	die()
 
 func die() :
 	$AnimationPlayer.play("die")
-	await get_tree().create_timer(0.2).timeout
+	await $AnimationPlayer.animation_finished
 	queue_free()

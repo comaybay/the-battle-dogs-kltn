@@ -13,6 +13,9 @@ func _ready() -> void:
 	$Sound.play()
 	$AnimatedSprite.play("default")
 	base_position = position
+	
+	if InBattle.battlefield_data.get('special_instruction') == "invert_color":
+		$AnimatedSprite.material = load("res://shaders/invert_color/invert_color.material")
 
 func _process(delta: float) -> void:
 	position.y -= FLY_SPEED * delta 

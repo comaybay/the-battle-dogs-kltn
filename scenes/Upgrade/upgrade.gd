@@ -2,6 +2,9 @@ extends Control
 
 const ListItem = preload("res://scenes/Upgrade/item_box.tscn")
 
+const UNLOCK_AUDIO: AudioStream = preload("res://resources/sound/unlock.wav")
+const UPGRADE_AUDIO: AudioStream = preload("res://resources/sound/upgrade.mp3")
+
 var character_data 
 var skill_data 
 var selected_item: ItemUpgradeBox
@@ -98,6 +101,7 @@ func _on_nut_nang_cap_pressed():
 	var item_id := selected_item.get_item_id()
 	
 	if selected_item.get_level() > 0:
+		AudioPlayer.play_custom_sound(UPGRADE_AUDIO)
 		if type == ItemUpgradeBox.Type.SKILL:
 			Data.skills[item_id]['level'] += 1
 		elif type == ItemUpgradeBox.Type.CHARACTER:
@@ -106,6 +110,7 @@ func _on_nut_nang_cap_pressed():
 			Data.passives[item_id]['level'] += 1
 	
 	else: 
+		AudioPlayer.play_custom_sound(UNLOCK_AUDIO)
 		var item = {"ID": item_id, "level": 1}
 		if  type == ItemUpgradeBox.Type.SKILL:
 			Data.save_data["skills"].append(item)

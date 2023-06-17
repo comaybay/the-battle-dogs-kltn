@@ -12,7 +12,7 @@ const MAX_EFFICIENCY_LEVEL = 8
 const BASE_WALLET_CAPACITY = 100
 const BASE_EFFICIENCY_UPGRADE_PRICE = 40
 const BASE_MONEY_RATE = 15
-	
+
 var _wallet: int = BASE_WALLET_CAPACITY
 func get_wallet_capacity():
 	return _wallet

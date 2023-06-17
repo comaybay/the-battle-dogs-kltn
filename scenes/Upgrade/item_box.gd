@@ -37,7 +37,6 @@ func setup(type: Type, data: Dictionary, parent: Node) -> void:
 	update_labels()
 	$Button.pressed.connect(_on_pressed)
 	
-		
 func update_labels():
 	var level = get_level()
 	$Background.frame = 0 if level > 0 else 1	

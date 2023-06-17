@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/skills/healing/healing.gd" id="1_igbok"]
 [ext_resource type="Texture2D" uid="uid://s2raiwksecr6" path="res://resources/images/skills/healing.png" id="2_slx5w"]
+[ext_resource type="AudioStream" uid="uid://lqhuk1xn4kcv" path="res://resources/sound/Skill/healing.wav" id="3_q02xb"]
 
 [sub_resource type="Animation" id="Animation_k3r0e"]
 length = 0.6
@@ -60,15 +61,10 @@ _data = {
 "move": SubResource("Animation_7xwcg")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oa1yv"]
-resource_local_to_scene = true
-size = Vector2(128, 638.199)
-
-[node name="Healing" type="CharacterBody2D"]
+[node name="Healing" type="Node2D"]
 z_index = 999
 z_as_relative = false
 position = Vector2(13, -6)
-collision_layer = 64
 script = ExtResource("1_igbok")
 metadata/_edit_horizontal_guides_ = []
 
@@ -83,13 +79,15 @@ libraries = {
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(51.1065, 296)
-scale = Vector2(1.42284, 2.90196)
+position = Vector2(51.1065, -1537)
+scale = Vector2(4, 8.158)
 texture = ExtResource("2_slx5w")
 hframes = 4
 vframes = 3
 region_rect = Rect2(4, 4, 178, 185)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(53, 291)
-shape = SubResource("RectangleShape2D_oa1yv")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_q02xb")
+volume_db = -10.0
+autoplay = true
+bus = &"InBattleFX"

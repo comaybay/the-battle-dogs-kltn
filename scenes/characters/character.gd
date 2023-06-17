@@ -61,7 +61,21 @@ var next_knockback_health: int
 var collision_rect: Rect2
 
 func _ready() -> void:
-	size_character = $CollisionShape2D.get_shape().size
+	_reready()
+	
+	if not Engine.is_editor_hint():
+		$AnimationPlayer.play("move")
+		
+		## add random sprite offset for better visibility when characters are stacked on eachother
+		var rand_y: int = randi_range(-20, 20)
+		$Sprite2D.position += Vector2(randi_range(-20, 20), rand_y)
+		## render stuff correctly
+		z_index = rand_y + 20
+		
+	if Engine.is_editor_hint():
+		property_list_changed.connect(queue_redraw)
+	
+func _reready():
 	# config 
 	max_health = health
 	next_knockback_health = max_health - (max_health / knockbacks)
@@ -72,8 +86,11 @@ func _ready() -> void:
 	
 	n_RayCast2D.target_position.x = attack_range * move_direction
 	
-	collision_rect = $CollisionShape2D.shape.get_rect()
 	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
+	
+	size_character = $CollisionShape2D.get_shape().size
+	
+	collision_rect = $CollisionShape2D.shape.get_rect()
 	
 	if character_type == Type.DOG:
 		n_RayCast2D.position.x += collision_rect.size.x
@@ -81,22 +98,9 @@ func _ready() -> void:
 	if custom_attack_area != null:
 		custom_attack_area.disable_mode
 		
-	if not Engine.is_editor_hint():
-		$AnimationPlayer.play("move")
-		
-		## add random sprite offset for better visibility when characters are stacked on eachother
-		var rand_y: int = randi_range(-20, 20)
-		$Sprite2D.position += Vector2(randi_range(-20, 20), rand_y)
-		## render stuff correctly
-		z_index = rand_y + 20
-	
-	if Engine.is_editor_hint():
-		property_list_changed.connect(queue_redraw)
-
 ## get center point of a character
 func get_center_point():
 	return $CollisionShape2D.position + (collision_rect.size / 2) 
-
 
 func _draw() -> void:
 	if Engine.is_editor_hint() or Debug.is_debug_mode():
@@ -147,7 +151,6 @@ func take_damage(ammount: int) -> void:
 			knockback()
 		else:
 			knockback(1.25) 
-		
 
 func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> void: # gay anh huong trong time
 	if effect == "speed" :

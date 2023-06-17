@@ -10,6 +10,6 @@ func _ready() -> void:
 	
 	var power_scale = InBattle.get_cat_power_scale()
 	damage *= power_scale
-	max_health *= power_scale
-	health = max_health
+	health *= power_scale
 	
+	super._reready()
