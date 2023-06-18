@@ -16,7 +16,8 @@ func _ready() -> void:
 	$Panel/Panel/EscapeBattleButton.pressed.connect(_on_escape_battle)
 	$Panel/Panel/ToMainMenuButton.pressed.connect(_on_to_main_menu)
 	
-func _on_close_menu() -> void:
+
+func _on_close_menu() -> void:	
 	get_tree().paused = false
 	hide()
 	

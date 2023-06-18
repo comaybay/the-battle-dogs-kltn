@@ -45,13 +45,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_uj708")
 
 [node name="CloseButton" parent="Panel/Panel" instance=ExtResource("1_vdlnu")]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -50.0
-offset_top = -38.0
-offset_right = 141.0
-offset_bottom = 155.0
+anchors_preset = -1
+anchor_left = 0.985
+anchor_top = 0.016
+anchor_right = 0.985
+anchor_bottom = 0.016
+offset_left = -43.07
+offset_top = -43.312
+offset_right = 147.93
+offset_bottom = 149.688
 grow_horizontal = 0
 scale = Vector2(0.45, 0.45)
 
