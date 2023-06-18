@@ -3,7 +3,7 @@ extends Node
 var screens 
 var count = 0
 var start = 0
-var end = 3
+var end = 5
 func _ready():
 	screens = $Node.get_children()
 	
