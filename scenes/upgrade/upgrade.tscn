@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckabco7u68yty"]
+[gd_scene load_steps=6 format=3 uid="uid://ch6nssf7rc7pj"]
 
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_kc1qw"]
 [ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="2_u6a31"]
-[ext_resource type="Script" path="res://scenes/upgrade/upgrade.gd" id="3_6lwir"]
+[ext_resource type="Script" path="res://scenes/upgrade/upgrade.gd" id="3_jpfx5"]
 [ext_resource type="AudioStream" uid="uid://djgpt4m0h3eq4" path="res://resources/sound/music/shop.mp3" id="4_53nmh"]
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_pwu7g"]
@@ -28,7 +28,7 @@ texture = ExtResource("2_u6a31")
 text = "Nâng cấp"
 
 [node name="Content" parent="Khung" index="1"]
-script = ExtResource("3_6lwir")
+script = ExtResource("3_jpfx5")
 
 [node name="click" type="AudioStreamPlayer" parent="Khung/Content" index="0"]
 stream = SubResource("AudioStreamMP3_pwu7g")
