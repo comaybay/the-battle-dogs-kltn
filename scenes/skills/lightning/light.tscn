@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b8qd2ufnklca7"]
 
 [ext_resource type="Script" path="res://scenes/skills/lightning/light.gd" id="1_f5oi1"]
-[ext_resource type="Texture2D" uid="uid://bl0u8hg8jup8n" path="res://resources/images/skills/light-strike.png" id="2_wpkp5"]
+[ext_resource type="Texture2D" uid="uid://cjeyw3i40mav6" path="res://resources/images/skills/lightning.png" id="2_h0qfj"]
 [ext_resource type="AudioStream" uid="uid://ckt0xwxej40lw" path="res://resources/sound/Skill/sét đánh.mp3" id="3_0t4sd"]
 
 [sub_resource type="Animation" id="Animation_k3r0e"]
@@ -85,7 +85,7 @@ one_shot = true
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(51.1065, 234)
 scale = Vector2(1.42284, 2.72549)
-texture = ExtResource("2_wpkp5")
+texture = ExtResource("2_h0qfj")
 hframes = 7
 region_rect = Rect2(4, 4, 178, 185)
 

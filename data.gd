@@ -63,12 +63,23 @@ var store := Dictionary()
 var passives := Dictionary()
 
 func _init() -> void:
-	var file = FileAccess.open("res://resources/game_data/speaker_dog_dialogue.json", FileAccess.READ)
+	# new game
+	if not FileAccess.file_exists("user://save.json"):
+		var file: = FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
+		var new_game_save_text := file.get_as_text()
+		
+		file = FileAccess.open("user://save.json", FileAccess.WRITE)
+		file.store_line(new_game_save_text)
+		file.close()
+		
+		save_data = JSON.parse_string(new_game_save_text)
+	else:
+		var file := FileAccess.open("user://save.json", FileAccess.READ)
+		save_data = JSON.parse_string(file.get_as_text())
+		file.close()
+	
+	var file := FileAccess.open("res://resources/game_data/speaker_dog_dialogue.json", FileAccess.READ)
 	speaker_dog_dialogue = JSON.parse_string(file.get_as_text())
-
-	file = FileAccess.open("res://resources/save.json", FileAccess.READ)
-	save_data = JSON.parse_string(file.get_as_text())
-	file.close()
 	
 	file = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	var dog_info_arr = JSON.parse_string(file.get_as_text())
@@ -110,7 +121,7 @@ func compute_values():
 		passives[passive["ID"]] = passive
 
 func save():
-	var file = FileAccess.open("res://resources/save.json", FileAccess.WRITE)
+	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	file.store_line(JSON.stringify(save_data))
 	file.close()
 	compute_values()

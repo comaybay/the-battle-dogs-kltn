@@ -494,7 +494,6 @@ attack_cooldown = 20.0
 attack_frame = 10
 health = 900
 damage = 400
-scale_character = 3
 
 [node name="AttackCooldownTimer" parent="." index="0"]
 wait_time = 20.0

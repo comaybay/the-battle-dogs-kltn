@@ -1,6 +1,6 @@
 extends Control
 
-const ListItem = preload("res://scenes/Upgrade/item_box.tscn")
+const ListItem = preload("res://scenes/upgrade/item_box.tscn")
 
 const UNLOCK_AUDIO: AudioStream = preload("res://resources/sound/unlock.wav")
 const UPGRADE_AUDIO: AudioStream = preload("res://resources/sound/upgrade.mp3")

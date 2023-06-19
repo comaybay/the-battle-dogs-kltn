@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c7qgtejvhcvgx"]
 
-[ext_resource type="Texture2D" uid="uid://b724cfd0acn4x" path="res://resources/images/skills/powerUp.png" id="1_g2koa"]
+[ext_resource type="Texture2D" uid="uid://ghgs12dwjwis" path="res://resources/images/skills/power_up.png" id="1_q40pu"]
 [ext_resource type="Script" path="res://scenes/skills/power_up/sprite.gd" id="2_m2c2p"]
 
 [sub_resource type="Animation" id="Animation_uesxe"]
@@ -43,7 +43,7 @@ _data = {
 }
 
 [node name="UpSprite" type="Sprite2D"]
-texture = ExtResource("1_g2koa")
+texture = ExtResource("1_q40pu")
 vframes = 3
 script = ExtResource("2_m2c2p")
 

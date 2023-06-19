@@ -1,5 +1,7 @@
 extends Sprite2D
 
+const TOP_PADDING = 20;
+
 var _character : Character
 ## anim_type can be "on_cat" or "on_tower"
 func setup(time : float, character : Character ) -> void:
@@ -10,10 +12,8 @@ func setup(time : float, character : Character ) -> void:
 	queue_free()
 
 func _process(delta):
-	var width = 0
-	var scale = 1
-	if (_character != null):
-		width = _character.size_character[1] - 50
-		scale = _character.size_character[0] /200
-		self.global_position = _character.global_position + Vector2(-5,-width)
-		self.scale = Vector2(scale,scale)
+	var collision_rect := _character.collision_rect
+	var new_scale := collision_rect.size.x / get_rect().size.x;
+	scale = Vector2(new_scale, new_scale)
+	self.global_position = _character.global_position
+	self.global_position.y += collision_rect.position.y - (collision_rect.size.y / 2) - TOP_PADDING

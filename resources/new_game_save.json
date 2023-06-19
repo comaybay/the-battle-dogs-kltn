@@ -1,7 +1,7 @@
 {
   "bone": 0,
   "dog_food": 0,
-  "dogs": [{ "ID": "dog", "level": 1 }],
+  "dogs": [],
   "items": [],
   "passed_level": -1,
   "passives": [],
@@ -13,11 +13,7 @@
   "teams": [
     {
       "dog_ids": ["dog", null, null, null, null, null, null, null, null, null],
-      "skill_ids": [null, null, null]
-    },
-    {
-      "dog_ids": [null, null, null, null, null, null, null, null, null, null],
-      "skill_ids": [null, null, null]
+      "skill_ids": [null]
     }
   ]
 }

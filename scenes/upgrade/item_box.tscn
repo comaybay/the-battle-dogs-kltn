@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cc7dso01iv7mj"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/upgrade/item_box.gd" id="1_ufqi7"]
 [ext_resource type="Texture2D" uid="uid://cqte340ris3tl" path="res://scenes/buttons/character_button/character_button.png" id="2_53hkd"]
