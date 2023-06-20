@@ -78,8 +78,4 @@ func _on_boss_appeared() -> void:
 		$Music.stream = boss_audio 
 		await $BossDrum.finished
 		$Music.play()
-	
-func spawn(scene: PackedScene, position: Vector2) -> void:
-	var dog = scene.instantiate()
-	dog.global_position = position 
-	get_tree().current_scene.add_child(dog)
+

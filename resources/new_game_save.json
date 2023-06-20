@@ -1,7 +1,7 @@
 {
   "bone": 0,
   "dog_food": 0,
-  "dogs": [],
+  "dogs": [{"ID": "dog", "level": 1}],
   "items": [],
   "passed_level": -1,
   "passives": [],
@@ -11,9 +11,9 @@
   "settings": { "music": 100, "sound_fx": 80 },
   "skills": [],
   "teams": [
-    {
-      "dog_ids": ["dog", null, null, null, null, null, null, null, null, null],
-      "skill_ids": [null]
-    }
+	{
+	  "dog_ids": ["dog", null, null, null, null, null, null, null, null, null],
+	  "skill_ids": [null, null, null]
+	}
   ]
 }
