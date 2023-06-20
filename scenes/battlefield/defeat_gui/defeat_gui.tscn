@@ -346,6 +346,7 @@ offset_bottom = 57.0001
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(165, 26)
+focus_mode = 0
 theme_type_variation = &"ButtonLarge"
 text = "Về căn cứ"
 

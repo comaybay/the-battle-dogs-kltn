@@ -62,6 +62,7 @@ animations = [{
 [node name="SwitchRowButton" type="TextureButton"]
 offset_right = 191.0
 offset_bottom = 193.0
+focus_mode = 0
 texture_click_mask = ExtResource("1_tboja")
 script = ExtResource("2_m7qsa")
 

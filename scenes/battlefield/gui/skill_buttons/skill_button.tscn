@@ -99,6 +99,7 @@ _data = {
 }
 
 [node name="CharacterButton" instance=ExtResource("1_tqwcl")]
+focus_mode = 0
 script = ExtResource("2_3smka")
 
 [node name="Icon" parent="." index="1"]

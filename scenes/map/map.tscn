@@ -214,25 +214,28 @@ text = "Hành tinh Doggo"
 offset_top = 587.0
 offset_right = 90.0
 offset_bottom = 618.0
+focus_mode = 0
 theme_override_font_sizes/font_size = 18
 text = "< Quay lại"
 
 [node name="NutTanCong" type="Button" parent="Khung/CanvasLayer"]
 custom_minimum_size = Vector2(150, 50)
-offset_left = 935.0
+offset_left = 873.0
 offset_top = 516.0
 offset_right = 1085.0
 offset_bottom = 566.0
 size_flags_horizontal = 4
-text = "Tấn công !
-"
+focus_mode = 0
+theme_type_variation = &"ButtonRed"
+text = "TẤN CÔNG!"
 
 [node name="NutDoiDoiHinh" type="Button" parent="Khung/CanvasLayer"]
-offset_left = 917.0
+offset_left = 891.0
 offset_top = 587.0
-offset_right = 1095.0
+offset_right = 1067.0
 offset_bottom = 614.0
 size_flags_horizontal = 4
+focus_mode = 0
 theme_override_font_sizes/font_size = 16
 text = "Đội hình"
 

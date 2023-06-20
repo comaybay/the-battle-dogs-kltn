@@ -225,15 +225,16 @@ offset_left = 976.0
 offset_top = 568.0
 offset_right = 1103.0
 offset_bottom = 606.0
+focus_mode = 0
 text = "Bỏ qua"
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 229.0
+offset_left = -347.0
 offset_top = 704.0
-offset_right = 915.0
+offset_right = 339.0
 offset_bottom = 4663.0
 grow_horizontal = 2
 text = "Và thế là Đội quân The Battle Dogs

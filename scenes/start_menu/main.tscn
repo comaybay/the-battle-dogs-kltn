@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://b1bdbelxbqc86"]
 
 [ext_resource type="Script" path="res://scenes/start_menu/main.gd" id="1_gee0v"]
 [ext_resource type="Texture2D" uid="uid://ngxqvdd76tr7" path="res://scenes/start_menu/main_background_1.png" id="2_56ofs"]
@@ -292,6 +292,7 @@ size_flags_vertical = 2
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_mode = 0
 text = "Bắt đầu "
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanCuoi"]
@@ -303,6 +304,7 @@ size_flags_vertical = 2
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_mode = 0
 text = "Hướng dẫn"
 language = "vi"
 
@@ -315,6 +317,7 @@ size_flags_vertical = 2
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_mode = 0
 text = "Thoát"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

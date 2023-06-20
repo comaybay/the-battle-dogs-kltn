@@ -136,6 +136,7 @@ text = "Thông tin"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 24
 text = "Nâng cấp
 "
