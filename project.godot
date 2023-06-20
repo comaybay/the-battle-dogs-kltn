@@ -21,6 +21,7 @@ Data="*res://data.gd"
 Debug="*res://debug.gd"
 InBattle="*res://in_battle.gd"
 AudioPlayer="*res://audio_player.gd"
+GlobalControl="*res://global_control.gd"
 
 [debug]
 
@@ -127,6 +128,11 @@ ui_upgrade_efficiency={
 ui_pause={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":80,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+ui_fullscreen={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194335,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 
