@@ -211,32 +211,31 @@ theme_type_variation = &"LabelLarge"
 text = "Hành tinh Doggo"
 
 [node name="NutQuayLai" type="Button" parent="Khung/CanvasLayer"]
-offset_top = 587.0
-offset_right = 90.0
-offset_bottom = 618.0
+offset_top = 579.0
+offset_right = 119.0
+offset_bottom = 611.0
 focus_mode = 0
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "< Quay lại"
 
 [node name="NutTanCong" type="Button" parent="Khung/CanvasLayer"]
 custom_minimum_size = Vector2(150, 50)
 offset_left = 873.0
-offset_top = 516.0
+offset_top = 505.0
 offset_right = 1085.0
-offset_bottom = 566.0
+offset_bottom = 555.0
 size_flags_horizontal = 4
 focus_mode = 0
 theme_type_variation = &"ButtonRed"
+theme_override_font_sizes/font_size = 24
 text = "TẤN CÔNG!"
 
-[node name="NutDoiDoiHinh" type="Button" parent="Khung/CanvasLayer"]
-offset_left = 891.0
-offset_top = 587.0
-offset_right = 1067.0
-offset_bottom = 614.0
-size_flags_horizontal = 4
-focus_mode = 0
-theme_override_font_sizes/font_size = 16
+[node name="NutDoiHinh" type="Button" parent="Khung/CanvasLayer"]
+offset_left = 896.0
+offset_top = 579.0
+offset_right = 1062.0
+offset_bottom = 611.0
+theme_override_font_sizes/font_size = 20
 text = "Đội hình"
 
 [node name="LevelChain" parent="Khung/CanvasLayer" instance=ExtResource("9_m5l3k")]
@@ -246,4 +245,4 @@ offset_bottom = 152.0
 
 [connection signal="pressed" from="Khung/CanvasLayer/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/CanvasLayer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
-[connection signal="pressed" from="Khung/CanvasLayer/NutDoiDoiHinh" to="." method="_on_doi_doi_hinh_pressed"]
+[connection signal="pressed" from="Khung/CanvasLayer/NutDoiHinh" to="." method="_on_nut_doi_hinh_pressed"]

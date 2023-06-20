@@ -24,12 +24,6 @@ func _ready() -> void:
 
 	var initial_zoom_scale = max(0.4, min_zoom_scale) 
 	zoom = Vector2(initial_zoom_scale, initial_zoom_scale)
-	
-	print(float(viewport_size.x))
-	print(parent.stage_width)
-	print(min_zoom_scale)
-	print(initial_zoom_scale)
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

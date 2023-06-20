@@ -15,15 +15,15 @@ func _ready():
 	%Tracker.setup(levels, %LevelChain, %MapSprite, %TouchArea)	
 	%Dog.setup(levels[Data.selected_level], %Tracker)
 
-func _on_nut_tan_cong_pressed():
+func _on_nut_tan_cong_pressed() -> void:
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file("res://scenes/battlefield/battlefield.tscn")
 	
-func _on_doi_doi_hinh_pressed():
+func _on_nut_doi_hinh_pressed() -> void:
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file("res://scenes/selectCharacter/selectCharacter.tscn")
 
-func _on_quay_lai_pressed():
+func _on_quay_lai_pressed() -> void:
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
 
