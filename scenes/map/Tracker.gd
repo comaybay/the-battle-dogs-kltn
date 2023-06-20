@@ -46,7 +46,7 @@ func _input(event):
 	if event.is_action_pressed("ui_left") and current_level.prev_level != null:
 		_move_to_level(current_level.prev_level)
 	
-	elif event.is_action_pressed("ui_right") and current_level.next_level != null and Data.passed_level >= 0 and current_level.index <= passed_level.index:
+	elif event.is_action_pressed("ui_right") and current_level.next_level != null and Data.passed_level >= 0 and current_level.index <= Data.passed_level:
 		_move_to_level(current_level.next_level)
 	
 	if !is_mouse_entered:

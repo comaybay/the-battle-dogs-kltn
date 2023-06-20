@@ -8,7 +8,7 @@ func _ready():
 	for index in levels.size():
 		var level: Level = levels[index]
 		var prev_level: Level = levels[index - 1] if index > 0 else null
-		var next_level: Level = levels[index + 1] if index < levels.size() - 2 else null 
+		var next_level: Level = levels[index + 1] if index < levels.size() - 1 else null 
 		level.setup(index, prev_level, next_level)
 	
 	%LevelChain.setup(levels.slice(0, Data.passed_level + 2))
