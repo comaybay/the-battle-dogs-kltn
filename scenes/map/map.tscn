@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://gny6lao42iqp"]
+[gd_scene load_steps=20 format=3 uid="uid://gny6lao42iqp"]
 
 [ext_resource type="Script" path="res://scenes/map/map.gd" id="1_0p7qx"]
 [ext_resource type="PackedScene" uid="uid://i3waaqjv5m7" path="res://scenes/map/tracker.tscn" id="4_un5ok"]
@@ -44,6 +44,24 @@ animations = [{
 "name": &"default",
 "speed": 6.0
 }]
+
+[sub_resource type="InputEventAction" id="InputEventAction_c8u3c"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_felg0"]
+events = [SubResource("InputEventAction_c8u3c")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ehdw2"]
+action = &"ui_confirm"
+
+[sub_resource type="Shortcut" id="Shortcut_rxot2"]
+events = [SubResource("InputEventAction_ehdw2")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_p45xq"]
+action = &"ui_setup_team"
+
+[sub_resource type="Shortcut" id="Shortcut_0cnn8"]
+events = [SubResource("InputEventAction_p45xq")]
 
 [node name="Map1" type="Control"]
 layout_mode = 3
@@ -216,6 +234,7 @@ offset_right = 119.0
 offset_bottom = 611.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 20
+shortcut = SubResource("Shortcut_felg0")
 text = "< Quay lại"
 
 [node name="NutTanCong" type="Button" parent="Khung/CanvasLayer"]
@@ -228,6 +247,7 @@ size_flags_horizontal = 4
 focus_mode = 0
 theme_type_variation = &"ButtonRed"
 theme_override_font_sizes/font_size = 24
+shortcut = SubResource("Shortcut_rxot2")
 text = "TẤN CÔNG!"
 
 [node name="NutDoiHinh" type="Button" parent="Khung/CanvasLayer"]
@@ -236,6 +256,7 @@ offset_top = 579.0
 offset_right = 1062.0
 offset_bottom = 611.0
 theme_override_font_sizes/font_size = 20
+shortcut = SubResource("Shortcut_0cnn8")
 text = "Đội hình"
 
 [node name="LevelChain" parent="Khung/CanvasLayer" instance=ExtResource("9_m5l3k")]

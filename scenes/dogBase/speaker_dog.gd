@@ -15,11 +15,11 @@ func _ready() -> void:
 	
 	$DialogueLabel.gui_input.connect(func(event):
 		if event is InputEventMouseButton && event.pressed && event.button_index == 1:
+			AudioPlayer.play_custom_sound(BUBBLE_SOUND)
 			pick_random_dialogue()
 	)
 
 func pick_random_dialogue():
-	AudioPlayer.play_custom_sound(BUBBLE_SOUND)
 	$DialogueLabel.text = Data.speaker_dog_dialogue.pick_random()
 	
 	
