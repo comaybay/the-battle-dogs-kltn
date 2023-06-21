@@ -1,8 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://mhk8vyyedlgu"]
+[gd_scene load_steps=10 format=3 uid="uid://mhk8vyyedlgu"]
 
 [ext_resource type="BitMap" uid="uid://tbot5veup00n" path="res://scenes/buttons/icon_button/click_mask.png" id="1_n17tv"]
 [ext_resource type="Texture2D" uid="uid://drmtboiv18k42" path="res://scenes/battlefield/gui/pause_button/pause_button.png" id="2_jyb4p"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/pause_button/pause_button.gd" id="2_rjvie"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_tfred"]
+action = &"ui_pause"
+
+[sub_resource type="Shortcut" id="Shortcut_1ljvj"]
+events = [SubResource("InputEventAction_tfred")]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1r6g"]
 atlas = ExtResource("2_jyb4p")
@@ -34,6 +40,7 @@ animations = [{
 }]
 
 [node name="PauseButton" type="TextureButton"]
+shortcut = SubResource("Shortcut_1ljvj")
 texture_click_mask = ExtResource("1_n17tv")
 script = ExtResource("2_rjvie")
 
