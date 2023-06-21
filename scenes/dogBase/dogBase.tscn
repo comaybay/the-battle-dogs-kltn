@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dysrma6bmdll0" path="res://scenes/dogBase/speaker_dog.tscn" id="2_vvswk"]
 
 [node name="MainGUI" instance=ExtResource("2_i87ga")]
-title = "Căn cứ chó"
+title = "Căn cứ Chó"
 
 [node name="PhanGiua" type="HBoxContainer" parent="Khung/Content" index="0"]
 layout_mode = 1

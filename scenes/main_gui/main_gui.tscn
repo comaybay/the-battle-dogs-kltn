@@ -73,7 +73,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 theme_type_variation = &"LabelLarge"
-text = "Căn cứ chó - Hành tinh Doggo"
+text = "Căn cứ Chó - Hành tinh Doggo"
 
 [node name="Money" type="Label" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
 unique_name_in_owner = true
@@ -114,7 +114,7 @@ theme_override_constants/margin_right = 20
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelLarge"
-text = "Thức ăn cho chó : 100"
+text = "Thức ăn cho Chó : 100"
 horizontal_alignment = 2
 
 [node name="FooterRect" type="TextureRect" parent="."]

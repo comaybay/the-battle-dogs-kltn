@@ -2,14 +2,14 @@
   {
     "ID": "fire_ball",
     "name": "Mưa Cầu Lửa",
-    "description": "Sử dụng khoa học ma thuật loài chó tạo cơn mưa cầu lửa gây sát thương lớn lên kẻ địch, cầu lửa gây sát thương đơn mục tiêu.",
+    "description": "Sử dụng khoa học ma thuật loài Chó tạo cơn mưa cầu lửa gây sát thương lớn lên kẻ địch, cầu lửa gây sát thương đơn mục tiêu.",
     "price": 2000,
     "spawn_time": 45
   },
   {
     "ID": "lightning",
-    "name": "Đường Sấm Cshớp",
-    "description": "Sử dụng khoa học ma thuật loài chó tạo một đường thẳng nơi sấm chớp đâm xuống kẻ địch, sấm chớp này gấy sát thương diện rộng và làm chậm kẻ địch trúng đòn.",
+    "name": "Đường Sấm Chớp",
+    "description": "Sử dụng khoa học ma thuật loài Chó tạo một đường thẳng nơi sấm chớp đâm xuống kẻ địch, sấm chớp này gấy sát thương diện rộng và làm chậm kẻ địch trúng đòn.",
     "price": 2000,
     "spawn_time": 60
   },
@@ -17,7 +17,7 @@
     "ID": "drum",
     "name": "Trống Trận Cẩu Sơn",
     "price": 4000,
-    "description": "Trống Cẩu Sơn được loài chó truyền lại qua nhiều thế hệ, chỉ một tiếng trống vang lên là có thể khiến cả một đội quân hàng vạn mèo phải kinh sợ. Đẩy lùi kẻ địch.",
+    "description": "Trống Cẩu Sơn được loài Chó truyền lại qua nhiều thế hệ, chỉ một tiếng trống vang lên là có thể khiến cả một đội quân hàng vạn Mèo phải kinh sợ. Đẩy lùi kẻ địch.",
     "spawn_time": 90,
     "spawn_price": 100
   },
@@ -31,7 +31,7 @@
   {
     "ID": "power_up",
     "name": "Tăng Sức Mạnh",
-    "description": "Sử dụng sức mạnh của tình bạn để tăng nhuệ khí của những chú chó hiện có trên mặt trận. Hiệu quả trong vòng 5 giây.",
+    "description": "Sử dụng sức mạnh của tình bạn để tăng nhuệ khí của những chú Chó hiện có trên mặt trận. Hiệu quả trong vòng 5 giây.",
     "price": 4000,
     "spawn_time": 90
   }
