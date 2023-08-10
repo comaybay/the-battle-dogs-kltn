@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cto0tiylqerf7"]
+[gd_scene load_steps=7 format=3 uid="uid://cto0tiylqerf7"]
 
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_c10lp"]
 [ext_resource type="Texture2D" uid="uid://cqte340ris3tl" path="res://scenes/buttons/character_button/character_button.png" id="1_udblu"]
 [ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="2_p77s7"]
 
@@ -58,6 +59,7 @@ _data = {
 custom_minimum_size = Vector2(324, 246)
 offset_right = 324.0
 offset_bottom = 246.0
+theme = ExtResource("1_c10lp")
 flat = true
 
 [node name="Background" type="Sprite2D" parent="."]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://gny6lao42iqp"]
+[gd_scene load_steps=21 format=3 uid="uid://gny6lao42iqp"]
 
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_0lsnx"]
 [ext_resource type="Script" path="res://scenes/map/map.gd" id="1_0p7qx"]
 [ext_resource type="PackedScene" uid="uid://i3waaqjv5m7" path="res://scenes/map/tracker.tscn" id="4_un5ok"]
 [ext_resource type="Script" path="res://scenes/map/Levels.gd" id="5_ta18k"]
@@ -70,6 +71,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_0lsnx")
 script = ExtResource("1_0p7qx")
 
 [node name="Khung" type="VBoxContainer" parent="."]
@@ -225,17 +227,20 @@ offset_top = 10.0
 offset_right = 271.0
 offset_bottom = 58.0
 size_flags_horizontal = 2
+theme = ExtResource("1_0lsnx")
 theme_type_variation = &"LabelLarge"
-text = "Hành tinh Doggo"
+text = "@PLANET_DOGGO"
 
 [node name="NutQuayLai" type="Button" parent="Khung/CanvasLayer"]
+custom_minimum_size = Vector2(120, 0)
 offset_top = 579.0
 offset_right = 119.0
 offset_bottom = 611.0
 focus_mode = 0
+theme = ExtResource("1_0lsnx")
 theme_override_font_sizes/font_size = 20
 shortcut = SubResource("Shortcut_felg0")
-text = "< Quay lại"
+text = "@BACK"
 
 [node name="NutTanCong" type="Button" parent="Khung/CanvasLayer"]
 custom_minimum_size = Vector2(150, 50)
@@ -245,19 +250,21 @@ offset_right = 1085.0
 offset_bottom = 555.0
 size_flags_horizontal = 4
 focus_mode = 0
+theme = ExtResource("1_0lsnx")
 theme_type_variation = &"ButtonRed"
 theme_override_font_sizes/font_size = 24
 shortcut = SubResource("Shortcut_rxot2")
-text = "TẤN CÔNG!"
+text = "@ATTACK"
 
 [node name="NutDoiHinh" type="Button" parent="Khung/CanvasLayer"]
 offset_left = 896.0
 offset_top = 579.0
 offset_right = 1062.0
 offset_bottom = 611.0
+theme = ExtResource("1_0lsnx")
 theme_override_font_sizes/font_size = 20
 shortcut = SubResource("Shortcut_0cnn8")
-text = "Đội hình"
+text = "@TEAM_SETUP"
 
 [node name="LevelChain" parent="Khung/CanvasLayer" instance=ExtResource("9_m5l3k")]
 unique_name_in_owner = true

@@ -68,3 +68,19 @@ func get_level() -> int:
 
 func _get_level_or_zero(dict: Variant) -> int:
 	return 0 if dict == null else dict.get('level', 0)
+
+func get_item_name() -> String:
+	if _type == Type.CHARACTER:
+		return tr("@DOG_NAME_%s" % _item_id)
+	elif _type == Type.SKILL:
+		return tr("@SKILL_NAME_%s" % _item_id)
+	else:
+		return tr("@PASSIVE_NAME_%s" % _item_id)
+
+func get_item_description() -> String:
+	if _type == Type.CHARACTER:
+		return tr("@DOG_DESCRIPTION_%s" % _item_id)
+	elif _type == Type.SKILL:
+		return tr("@SKILL_DESCRIPTION_%s" % _item_id)
+	else:
+		return tr("@PASSIVE_DESCRIPTION_%s" % _item_id)

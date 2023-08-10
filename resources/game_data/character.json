@@ -1,41 +1,31 @@
 [
   {
     "ID": "dog",
-    "name": "Chó",
-    "description": "Chó bình thường, đánh đơn mục tiêu.",
     "price": 1000,
     "spawn_time": 2,
     "spawn_price": 50
   },
   {
     "ID": "sword_dog",
-    "name": "Chó Ngậm Kiếm",
     "price": 2000,
-    "description": "Sau 10 năm tu luyện võ công sử dụng Cẩu Xà Kiếm. Với tốc độ chạy và tốc độ đánh cao, chú Chó này có thể cấp tốc đi đến mặt trận để hỗ trợ tấn công kẻ địch. Đánh đơn mục tiêu.",
     "spawn_time": 8,
     "spawn_price": 150
   },
   {
     "ID": "waffle_dog",
-    "name": "Chó Bánh Quế",
     "price": 3000,
-    "description": "Sản phẩm mới nhất của nhiều quá trình thí nghiệm trên Chó, Chó Bánh Quế có lượng máu cao thích hợp cho vị trí đỡ đòn khi giao tranh. Đánh diện rộng nhưng sát thương rất thấp.",
     "spawn_time": 4,
     "spawn_price": 100
   },
   {
     "ID": "angel_dog",
-    "name": "Chó Thiên Thần",
     "price": 4000,
-    "description": "Thiên sứ được Chúa cử xuống nhằm giúp loài Chó hoàn thành mục tiêu của ngài: Tiêu diệt loài Mèo đã đến xâm chiếm hành tinh Doggo. Tầm đánh xa, tốc độ đánh trung bình và nắm giữ sát diện rộng, nhưng không thể tấn công kẻ địch đứng quá gần mình.",
     "spawn_time": 15,
     "spawn_price": 200
   },
   {
     "ID": "sniper_dog",
-    "name": "Chó Bắn Tỉa",
     "price": 8000,
-    "description": "Chó được đào tạo với khả năng sử dụng súng ngắm. Chú Chó này với biệt tài thiện xạ với tầm đánh cực xa và khả năng gây sát thương cao chính là cơn ác mộng của nhiều con Mèo. Đạn bắn xuyên phá đội hình quân địch nằm trong đường đi của viên đạn.",
     "spawn_time": 45,
     "spawn_price": 750
   }

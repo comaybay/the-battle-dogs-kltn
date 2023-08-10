@@ -191,4 +191,5 @@ vframes = 4
 shape = SubResource("RectangleShape2D_c3bis")
 
 [node name="RayCast2D" parent="." index="4"]
+position = Vector2(-96, 0)
 target_position = Vector2(-80, 0)

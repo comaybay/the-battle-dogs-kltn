@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://da4ae3x4yfwyx"]
 
 [ext_resource type="Script" path="res://scenes/store/store.gd" id="1_3iy6a"]
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_e4eei"]
@@ -26,6 +26,9 @@ offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("4_7488s")
+
+[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="0"]
+text = "Cửa hàng"
 
 [node name="Content" parent="Khung" index="1"]
 script = ExtResource("1_3iy6a")

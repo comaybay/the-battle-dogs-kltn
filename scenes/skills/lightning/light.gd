@@ -10,7 +10,7 @@ var allCats = {}
 func _ready():
 	var lightning_upgrade = Data.skills.get('lightning')
 	if lightning_upgrade != null:
-		dame = dame + (dame * 0.5 * lightning_upgrade['level']) 
+		dame = dame + (dame * 0.5 * (lightning_upgrade['level'] - 1))
 		slow_scale = max(slow_scale - (lightning_upgrade['level'] - 1) * 0.05, 0)
 
 func _physics_process(delta):

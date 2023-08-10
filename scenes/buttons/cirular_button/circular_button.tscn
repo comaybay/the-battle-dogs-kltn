@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://w3ux0r6664nr"]
+[gd_scene load_steps=7 format=3 uid="uid://w3ux0r6664nr"]
 
 [ext_resource type="Texture2D" uid="uid://c80egag1e4a2n" path="res://scenes/buttons/cirular_button/circular_button.png" id="1_4xtph"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_ar38d"]
 [ext_resource type="Texture2D" uid="uid://q4tc10n2i5hr" path="res://resources/icons/efficiency_up_icon.png" id="2_i8blc"]
 
 [sub_resource type="Animation" id="Animation_ty6py"]
@@ -70,6 +71,7 @@ _data = {
 custom_minimum_size = Vector2(324, 246)
 offset_right = 382.0
 offset_bottom = 377.0
+theme = ExtResource("1_ar38d")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(191, 190)

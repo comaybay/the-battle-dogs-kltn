@@ -18,9 +18,9 @@ var passive_boxes: Array[ItemUpgradeBox]
 
 func _ready():
 	%NutNangCap.disabled = true
-	%TabContainer.set_tab_title(0, "Nhân vật")
-	%TabContainer.set_tab_title(1, "Kỹ năng")
-	%TabContainer.set_tab_title(2, "Nội tại")
+	%TabContainer.set_tab_title(0, tr("@CHARACTERS"))
+	%TabContainer.set_tab_title(1, tr("@SKILLS"))
+	%TabContainer.set_tab_title(2, tr("@PASSIVES"))
 	%TabContainer.tab_changed.connect(func(tab: int):
 		var options = [last_selected_item_character, last_selected_item_skill, last_selected_item_passive]
 		update_ui(options[tab]) 
@@ -67,10 +67,9 @@ func update_ui(item: ItemUpgradeBox):
 	else:
 		last_selected_item_passive = selected_item
 	
-	var data = item.get_item_data()
-	%ItemName.text = data["name"] 
-	%ItemDescription.text = data['description']
-	%NutNangCap.text = "Nâng cấp" if selected_item.get_level() > 0 else "Mở khóa" 
+	%ItemName.text = item.get_item_name()
+	%ItemDescription.text = item.get_item_description()
+	%NutNangCap.text = tr("@UPGRADE") if selected_item.get_level() > 0 else tr("@UNLOCK") 
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone
 	
 func createItemBox(type: ItemUpgradeBox.Type, data: Dictionary, container: GridContainer) -> ItemUpgradeBox:
@@ -91,7 +90,7 @@ func _on_box_pressed(button):
 func reupdate_current_ui():
 	selected_item.update_labels()
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone
-	%NutNangCap.text = "Nâng cấp"
+	%NutNangCap.text = tr("@UPGRADE")
 
 func _on_nut_nang_cap_pressed():
 	AudioPlayer.play_button_pressed_audio()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://da1jal8d6xyt3"]
+[gd_scene load_steps=6 format=3 uid="uid://da1jal8d6xyt3"]
 
 [ext_resource type="Texture2D" uid="uid://4dgy5g3oucek" path="res://resources/images/dog_base/header.png" id="1_6iv5g"]
 [ext_resource type="Script" path="res://scenes/main_gui/main_gui.gd" id="1_64sa2"]
 [ext_resource type="Texture2D" uid="uid://ddd02ni0o7cr7" path="res://resources/images/dog_base/dogbase_background.png" id="1_gae5p"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_lv0ii"]
 [ext_resource type="Texture2D" uid="uid://b35jkv4tsll0t" path="res://resources/images/dog_base/footer.png" id="2_ts6wt"]
 
 [node name="MainGUI" type="Control"]
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_lv0ii")
 script = ExtResource("1_64sa2")
 title = "Title - Title"
 go_back_scene_path = "res://scenes/start_menu/main.tscn"
@@ -54,9 +56,10 @@ size_flags_vertical = 3
 
 [node name="GoBackButton" type="Button" parent="Khung/Header/Title"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "< Quay lại"
+text = "@BACK"
 
 [node name="MarginContainer" type="MarginContainer" parent="Khung/Header/Title"]
 layout_mode = 2
@@ -73,7 +76,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 theme_type_variation = &"LabelLarge"
-text = "Căn cứ Chó - Hành tinh Doggo"
+text = "Title"
 
 [node name="Money" type="Label" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
 unique_name_in_owner = true
@@ -110,7 +113,8 @@ size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="Label" type="Label" parent="Khung/Footer/TieuDe/ThucAnChoCho/MarginContainer"]
+[node name="DogFoodLabel" type="Label" parent="Khung/Footer/TieuDe/ThucAnChoCho/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelLarge"

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://q3xac7wpx0wx"]
+[gd_scene load_steps=10 format=3 uid="uid://q3xac7wpx0wx"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/cat_tower/cat_tower.gd" id="1_52k0t"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_ff43w"]
 [ext_resource type="Texture2D" uid="uid://cecwl18lrgxig" path="res://resources/battlefield_themes/winter/cat_tower.png" id="2_v8585"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
@@ -79,6 +80,7 @@ offset_top = -1052.0
 offset_right = 14.0
 offset_bottom = -979.0
 size_flags_horizontal = 4
+theme = ExtResource("2_ff43w")
 text = "healh/health"
 label_settings = SubResource("LabelSettings_8inmh")
 

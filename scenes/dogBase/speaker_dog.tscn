@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dysrma6bmdll0"]
+[gd_scene load_steps=9 format=3 uid="uid://dysrma6bmdll0"]
 
 [ext_resource type="Script" path="res://scenes/dogBase/speaker_dog.gd" id="1_fwlw7"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="1_lyaqv"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_v35qx"]
 [ext_resource type="Texture2D" uid="uid://bmievkerp5est" path="res://scenes/dogBase/speech_bubble_pointer.png" id="3_2jwjo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ui5b"]
@@ -90,6 +91,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_v35qx")
 script = ExtResource("1_fwlw7")
 
 [node name="DialogueLabel" type="Label" parent="."]

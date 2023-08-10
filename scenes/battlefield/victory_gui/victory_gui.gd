@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 	var reward_upgrade = Data.passives.get('bone_reward_up')
 	if reward_upgrade != null:
-		reward_bone = reward_bone + (reward_bone * 0.2 * reward_upgrade['level'])
+		reward_bone = reward_bone + (reward_bone * 0.1 * reward_upgrade['level'])
 	
 	tween.tween_method(_tween_bone_number, 0, reward_bone, 2).set_delay(1)
 	

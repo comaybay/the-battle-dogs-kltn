@@ -84,9 +84,8 @@ func _reready():
 	
 	n_RayCast2D.target_position.x = attack_range * move_direction
 	
-	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
-	
 	collision_rect = $CollisionShape2D.shape.get_rect()
+	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
 	
 	if character_type == Type.DOG:
 		n_RayCast2D.position.x += collision_rect.size.x

@@ -2,10 +2,14 @@ extends Control
 
 @onready var original_size: Vector2 = $DialogueLabel.size
 @onready var original_y: float = $SpeechBubblePointer.position.y
+var dialogue_count: int
 
+const TRANSLATION: Translation = preload("res://resources/translations/translations_speaker_dog.vi.translation") 
 const BUBBLE_SOUND: AudioStream = preload("res://resources/sound/battlefield/spawn.wav") 
 
 func _ready() -> void:
+	dialogue_count = TRANSLATION.get_translated_message_list().size()
+	
 	pick_random_dialogue()
 	$DogButton.pressed.connect(pick_random_dialogue)
 	
@@ -20,6 +24,6 @@ func _ready() -> void:
 	)
 
 func pick_random_dialogue():
-	$DialogueLabel.text = Data.speaker_dog_dialogue.pick_random()
+	$DialogueLabel.text = tr("@SPEAKER_DOG_%s" % randi_range(1, dialogue_count))
 	
 	

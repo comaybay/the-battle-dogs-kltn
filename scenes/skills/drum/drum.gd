@@ -2,7 +2,7 @@ extends Node
 
 const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
 
-var knockback_scale: float = 0.5
+var knockback_scale: float = 0.6
 
 func _ready() -> void:
 	var drum_upgrade = Data.skills.get('drum')
@@ -19,7 +19,7 @@ func _ready() -> void:
 	$drum.play()
 	
 	for cat in cats:
-		cat.knockback()	
+		cat.knockback(knockback_scale)	
 		var effect_on_cat: Node2D = EnergyExpand.instantiate()
 		effect_on_cat.setup("on_cat")
 		effect_on_cat.global_position = cat.global_position

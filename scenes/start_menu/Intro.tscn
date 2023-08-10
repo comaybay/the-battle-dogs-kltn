@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://fwaltxldx6f8"]
+[gd_scene load_steps=14 format=3 uid="uid://fwaltxldx6f8"]
 
 [ext_resource type="Script" path="res://scenes/start_menu/Intro.gd" id="1_5e7yh"]
 [ext_resource type="Texture2D" uid="uid://da7stfik0tt85" path="res://scenes/start_menu/intro_background.png" id="2_t66dt"]
 [ext_resource type="AudioStream" uid="uid://dyl4rhrpiko84" path="res://resources/sound/music/intro_sequence_theme.mp3" id="3_ve8ld"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="3_xuu65"]
 
 [sub_resource type="Animation" id="Animation_ttwkk"]
 length = 0.001
@@ -160,73 +161,21 @@ offset_top = 568.0
 offset_right = 1103.0
 offset_bottom = 606.0
 focus_mode = 0
+theme = ExtResource("3_xuu65")
 shortcut = SubResource("Shortcut_7kart")
-text = "Bỏ qua"
+text = "@SKIP"
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -347.0
+offset_left = 229.0
 offset_top = 704.0
-offset_right = 339.0
+offset_right = 915.0
 offset_bottom = 2702.04
 grow_horizontal = 2
-text = "Vào một ngày yên bình ở hành tinh Doggo
-
-
-Loài Mèo từ một hành tinh xa xôi
-Đã đến xâm chiếm mảnh đất này không báo trước.
-
-
-Chúng đến với một quân đoàn hùng mạnh,
-Với sức mạnh không thể tưởng tượng được
-
-Loài Chó, cùng đường, phải rút chạy về
-Nơi phòng thủ cuối cùng: Căn Cứ Chó
-
-
-Một vùng đất nằm trên mây,
-An toàn khỏi tầm kiểm soát của bọn Mèo
-Ít nhất là bây giờ...
-
-
-...Đến giờ ăn trưa rồi à?
-Ok.
-
-
-
-
-
-
-
-
-
-
-
-
-
-...À nói tới đâu rồi nhỉ?
-Sau một khoảng thời gian chuẩn bị và suy nghĩ
-Loài Chó quyết định:
-
-PHẢN CÔNG!!!
-
-Nhằm giành lại chủ quyền, độc lập cho loài Chó.
-
-Và vì bọn tôi cũng ghét bọn Mèo,
-Bọn chúng gọi bản thân là \"The Battle Cats\"
-
-Vậy thì, bọn tôi cũng sẽ xin gọi đội quân chúng tôi là:
-
-THE BATTLE DOGS
-
-
-
-Nghe cũng không tệ chứ nhỉ?
-
-Chuyện chỉ có vậy thôi.
-"
+theme = ExtResource("3_xuu65")
+text = "@INTRO_SEQUENCE_TEXT"
 horizontal_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -236,6 +185,7 @@ offset_top = -114.0
 offset_right = 1353.0
 offset_bottom = 806.0
 mouse_filter = 2
+theme = ExtResource("3_xuu65")
 color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayerText" type="AnimationPlayer" parent="."]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://lyrmnwxclfgn"]
+[gd_scene load_steps=11 format=3 uid="uid://lyrmnwxclfgn"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/dog_tower/dog_tower.gd" id="1_ywct4"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_jattt"]
 [ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/winter/dog_tower.png" id="2_vjxar"]
 [ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="3_g44t7"]
 
@@ -80,6 +81,7 @@ offset_top = -1052.0
 offset_right = 277.0
 offset_bottom = -979.0
 size_flags_horizontal = 4
+theme = ExtResource("2_jattt")
 text = "healh/health"
 label_settings = SubResource("LabelSettings_8inmh")
 

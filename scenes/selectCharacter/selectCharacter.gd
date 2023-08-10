@@ -9,7 +9,11 @@ var skill_id_to_item: Dictionary
 
 func _ready():
 	AudioPlayer.resume_dogbase_music()
-		
+	%TabContainer.set_tab_title(0, tr("@CHARACTERS"))
+	%TabContainer.set_tab_title(1, tr("@SKILLS"))
+	%TabContainer.tab_changed.connect(_on_tab_container_tab_changed)
+	%SaveButton.pressed.connect(_on_save_pressed)
+	
 	# Thiết lập nhân vật và kỹ năng
 	loadCharacterList()
 	loadSkillList()
@@ -34,7 +38,7 @@ func loadSkillList() -> void:
 		item.pressed.connect(_on_add_skill_to_slot.bind(item))
 		
 func _on_add_character_to_slot(item: SelectCharacterBox):
-	for slot in %CharacterSlots.get_children():
+	for slot in character_slots:
 		if slot.get_item_type() == SelectCharacterBox.Type.NONE:
 			slot.change_item(item.get_item_id(), SelectCharacterBox.Type.CHARACTER) 
 			item.visible = false
@@ -42,7 +46,7 @@ func _on_add_character_to_slot(item: SelectCharacterBox):
 			
 
 func _on_add_skill_to_slot(item: SelectCharacterBox):
-	for slot in %SkillSlots.get_children():
+	for slot in skill_slots:
 		if slot.get_item_type() == SelectCharacterBox.Type.NONE:
 			slot.change_item(item.get_item_id(), SelectCharacterBox.Type.SKILL) 
 			item.visible = false
@@ -54,7 +58,6 @@ func create_item(item_id: String, type: SelectCharacterBox.Type) -> SelectCharac
 	return item
 		
 func loadTeam() -> void:
-	var character_slots := %CharacterSlots.get_children()
 	for i in range(10):
 		var slot := character_slots[i] 
 		var character_id = Data.selected_team['dog_ids'][i]
@@ -66,7 +69,6 @@ func loadTeam() -> void:
 
 		slot.pressed.connect(_on_remove_character_from_slot.bind(slot))
 			
-	var skill_slots := %SkillSlots.get_children()
 	for i in range(3):
 		var slot := skill_slots[i] 
 		var skill_id = Data.selected_team['skill_ids'][i]
@@ -88,7 +90,7 @@ func _on_remove_skill_from_slot(slot: SelectCharacterBox):
 		skill_id_to_item[slot.get_item_id()].visible = true
 		slot.clear()
 		
-func _on_luu_pressed():	
+func _on_save_pressed():	
 	AudioPlayer.play_button_pressed_audio()
 	Data.selected_team['dog_ids'] = character_slots.map(func(item: SelectCharacterBox): return item.get_item_id())
 	Data.selected_team['skill_ids'] = skill_slots.map(func(item: SelectCharacterBox): return item.get_item_id())
@@ -96,18 +98,16 @@ func _on_luu_pressed():
 	Data.save()
 	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
-func move(set) :
+func move(a) :
 	$Luu.play()
-	if (set == 1):				
+	if (a == 1):				
 		$Khung/PhanDuoi/DanhSach/Skill.visible = false
 		$Khung/PhanDuoi/DanhSach/NhanVat.visible = true
-		
 	else :
 		$Khung/PhanDuoi/DanhSach/Skill.visible = true
 		$Khung/PhanDuoi/DanhSach/NhanVat.visible = false
 
-
-func _on_tab_container_tab_changed(tab: int) :
+func _on_tab_container_tab_changed(tab: int):
 	if (tab == 0) :
 		move(1)
 	else :

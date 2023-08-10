@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")
 
-@export var veloc = Vector2(300,600)
+@export var veloc = Vector2(300,600)	
 @export var dame = 50
 var count = 0
 func _ready():

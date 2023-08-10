@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bj0cb0c3284hb"]
+[gd_scene load_steps=7 format=3 uid="uid://bj0cb0c3284hb"]
 
 [ext_resource type="BitMap" uid="uid://tbot5veup00n" path="res://scenes/buttons/icon_button/click_mask.png" id="1_3mdfe"]
 [ext_resource type="Texture2D" uid="uid://by820ykqb2iyr" path="res://scenes/buttons/icon_button/icon_button.png" id="1_83ay6"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_kndgg"]
 
 [sub_resource type="Animation" id="Animation_ty6py"]
 length = 0.001
@@ -67,6 +68,7 @@ _data = {
 }
 
 [node name="IconButton" type="TextureButton"]
+theme = ExtResource("1_kndgg")
 texture_click_mask = ExtResource("1_3mdfe")
 
 [node name="Background" type="Sprite2D" parent="."]

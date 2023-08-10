@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1bdbelxbqc86"]
+[gd_scene load_steps=11 format=3 uid="uid://b1bdbelxbqc86"]
 
 [ext_resource type="Script" path="res://scenes/start_menu/main.gd" id="1_gee0v"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_untcg"]
 [ext_resource type="Texture2D" uid="uid://ngxqvdd76tr7" path="res://scenes/start_menu/main_background_1.png" id="2_56ofs"]
 [ext_resource type="Texture2D" uid="uid://ddhk7pykh4wcb" path="res://scenes/start_menu/main_background_2.png" id="3_jin04"]
 [ext_resource type="Texture2D" uid="uid://3mgk1tr4612p" path="res://scenes/ending/main_background_3.png" id="4_xj58w"]
@@ -43,7 +44,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(382.5, 226)]
+"values": [Vector2(408, 211)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -220,6 +221,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+theme = ExtResource("1_untcg")
 script = ExtResource("1_gee0v")
 
 [node name="BG1" type="TextureRect" parent="."]
@@ -227,7 +229,6 @@ layout_mode = 0
 texture = ExtResource("2_56ofs")
 
 [node name="BG2" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 texture = ExtResource("3_jin04")
 
@@ -244,10 +245,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 382.5
-offset_top = 226.0
-offset_right = 769.5
-offset_bottom = 593.0
+offset_left = 408.0
+offset_top = 211.0
+offset_right = 795.0
+offset_bottom = 578.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_ox0nk")
@@ -292,7 +293,7 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
-text = "Bắt đầu "
+text = "@START_GAME"
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="Khung/PhanCuoi"]
 custom_minimum_size = Vector2(0, 10)
@@ -304,7 +305,7 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
-text = "Hướng dẫn"
+text = "@HELP"
 language = "vi"
 
 [node name="NinePatchRect3" type="NinePatchRect" parent="Khung/PhanCuoi"]
@@ -317,7 +318,7 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
-text = "Thoát"
+text = "@QUIT"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "ready"

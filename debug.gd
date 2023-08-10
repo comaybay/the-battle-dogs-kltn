@@ -11,3 +11,7 @@ func _input(event: InputEvent) -> void:
 
 func is_debug_mode() -> bool:
 	return _debug_mode
+
+func _ready() -> void:
+	if not OS.is_debug_build():
+		set_process_input(false)

@@ -132,7 +132,7 @@ region_rect = Rect2(4, 4, 178, 185)
 shape = SubResource("RectangleShape2D_40amy")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(192, 0)
+position = Vector2(96, 0)
 target_position = Vector2(40, 0)
 collision_mask = 0
 

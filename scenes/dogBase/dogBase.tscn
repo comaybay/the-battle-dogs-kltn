@@ -4,8 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="2_i87ga"]
 [ext_resource type="PackedScene" uid="uid://dysrma6bmdll0" path="res://scenes/dogBase/speaker_dog.tscn" id="2_vvswk"]
 
-[node name="MainGUI" instance=ExtResource("2_i87ga")]
-title = "Căn cứ Chó"
+[node name="DogBase" instance=ExtResource("2_i87ga")]
+title = "@DOG_BASE_TITLE"
+
+[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="0"]
+text = "@DOG_BASE_TITLE"
 
 [node name="PhanGiua" type="HBoxContainer" parent="Khung/Content" index="0"]
 layout_mode = 1
@@ -28,7 +31,7 @@ custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-text = "Viễn chinh !!!"
+text = "@EXPEDITION"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Khung/Content/PhanGiua/BenTrai" index="1"]
 custom_minimum_size = Vector2(0, 10)
@@ -40,8 +43,7 @@ custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-text = "Nâng cấp
-"
+text = "@UPGRADE"
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="Khung/Content/PhanGiua/BenTrai" index="3"]
 custom_minimum_size = Vector2(0, 10)
@@ -49,11 +51,12 @@ layout_mode = 2
 size_flags_vertical = 2
 
 [node name="NutCuaHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="4"]
+visible = false
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-text = "Cửa hàng"
+text = "@STORE"
 
 [node name="BenPhai" type="VBoxContainer" parent="Khung/Content/PhanGiua" index="1"]
 layout_mode = 2

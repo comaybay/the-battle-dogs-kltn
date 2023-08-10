@@ -33,7 +33,6 @@ window/stretch/mode="canvas_items"
 
 [gui]
 
-theme/custom="res://resources/theme.tres"
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]
@@ -155,7 +154,7 @@ ui_setup_team={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://resources/translations.en.translation", "res://resources/translations.vi.translation")
+locale/translations=PackedStringArray("res://resources/translations/translations_dogs.en.translation", "res://resources/translations/translations_dogs.vi.translation", "res://resources/translations/translations_common.en.translation", "res://resources/translations/translations_common.vi.translation", "res://resources/translations/translations_skills.en.translation", "res://resources/translations/translations_skills.vi.translation", "res://resources/translations/translations_passives.en.translation", "res://resources/translations/translations_passives.vi.translation", "res://resources/translations/translations_dialogue.en.translation", "res://resources/translations/translations_dialogue.vi.translation", "res://resources/translations/translations_dialogue..translation", "res://resources/translations/translations_speaker_dog.en.translation", "res://resources/translations/translations_speaker_dog.vi.translation")
 
 [layer_names]
 

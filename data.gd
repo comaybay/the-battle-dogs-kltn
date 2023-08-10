@@ -54,7 +54,6 @@ var dog_info := Dictionary()
 var store_info := Dictionary()
 var skill_info := Dictionary()
 var passive_info := Dictionary()
-var speaker_dog_dialogue: Array
 
 # save data
 var dogs := Dictionary()
@@ -78,10 +77,7 @@ func _init() -> void:
 		save_data = JSON.parse_string(file.get_as_text())
 		file.close()
 	
-	var file := FileAccess.open("res://resources/game_data/speaker_dog_dialogue.json", FileAccess.READ)
-	speaker_dog_dialogue = JSON.parse_string(file.get_as_text())
-	
-	file = FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
+	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	var dog_info_arr = JSON.parse_string(file.get_as_text())
 	for info in dog_info_arr:
 		dog_info[info['ID']] = info
