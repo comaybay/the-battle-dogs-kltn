@@ -13,7 +13,7 @@ font_size = 23
 
 [node name="MainGUI" instance=ExtResource("1_e4eei")]
 title = "Cửa hàng"
-go_back_scene_path = "res://scenes/dogBase/dogBase.tscn"
+go_back_scene_path = "res://scenes/dogbase/dogbase.tscn"
 
 [node name="InfoPanel" type="TextureRect" parent="." index="2"]
 layout_mode = 1

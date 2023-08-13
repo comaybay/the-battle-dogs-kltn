@@ -81,7 +81,7 @@ func createItemBox(type: ItemUpgradeBox.Type, data: Dictionary, container: GridC
 func _on_nut_quay_lai_pressed():
 	AudioPlayer.play_button_pressed_audio()
 	await get_tree().create_timer(0.5).timeout
-	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
+	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
 
 func _on_box_pressed(button):

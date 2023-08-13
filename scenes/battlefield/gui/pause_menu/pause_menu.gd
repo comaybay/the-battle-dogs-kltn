@@ -23,7 +23,7 @@ func _on_close_menu() -> void:
 func _on_escape_battle() -> void:
 	Engine.time_scale = 1
 	AudioPlayer.play_button_pressed_audio()
-	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
+	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 	
 func _on_to_main_menu() -> void:
 	Engine.time_scale = 1

@@ -30,8 +30,8 @@ func get_efficiency_level():
 
 func reset():
 	_fmoney = 0
-	_wallet = BASE_WALLET_CAPACITY * (1 + _get_level_or_zero(Data.passives.get('wallet_capacity')) * 0.5)
-	_money_rate = BASE_MONEY_RATE * (1 + _get_level_or_zero(Data.passives.get('money_efficiency')) * 0.1)
+	_wallet = int(BASE_WALLET_CAPACITY * (1 + _get_level_or_zero(Data.passives.get('wallet_capacity')) * 0.5))
+	_money_rate = int(BASE_MONEY_RATE * (1 + _get_level_or_zero(Data.passives.get('money_efficiency')) * 0.1))
 	_efficiency_upgrade_price = BASE_EFFICIENCY_UPGRADE_PRICE * (1 + _get_level_or_zero(Data.passives.get('money_efficiency')) * 0.1)
 	_efficiency_level = 1
 	

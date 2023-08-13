@@ -2,7 +2,7 @@ extends Node
 
 func _ready() -> void:
 	$SkipButton.pressed.connect(_on_skip, CONNECT_ONE_SHOT)
-	$AnimationPlayerText.animation_finished.connect(func(anim_name): 
+	$AnimationPlayerText.animation_finished.connect(func(_anim_name): 
 		$SkipButton.pressed.disconnect(_on_skip)
 		_on_finished()
 	)

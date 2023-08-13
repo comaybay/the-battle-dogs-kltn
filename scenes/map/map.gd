@@ -21,11 +21,11 @@ func _on_nut_tan_cong_pressed() -> void:
 	
 func _on_nut_doi_hinh_pressed() -> void:
 	AudioPlayer.play_button_pressed_audio()
-	get_tree().change_scene_to_file("res://scenes/selectCharacter/selectCharacter.tscn")
+	get_tree().change_scene_to_file("res://scenes/team_setup/team_setup.tscn")
 
 func _on_quay_lai_pressed() -> void:
 	AudioPlayer.play_button_pressed_audio()
-	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
+	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
 func _exit_tree() -> void:
 	AudioPlayer.pause_dogbase_music()

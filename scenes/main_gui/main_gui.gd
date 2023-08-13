@@ -4,14 +4,15 @@ extends Control
 @export var title: String:
 	set(val):
 		title = val
-		
-		if Engine.is_editor_hint():
-			%TitleLabel.text = title
+		notify_property_list_changed()
 		
 @export_file("*.tscn") var go_back_scene_path
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
+		property_list_changed.connect(func(): 
+			%TitleLabel.text = title
+		)
 		return
 		
 	%TitleLabel.text = title

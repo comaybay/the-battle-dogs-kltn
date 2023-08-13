@@ -44,7 +44,7 @@ func reset():
 func _on_quay_lai_pressed():
 	$NhanNut.play()
 	await get_tree().create_timer(0.5).timeout
-	get_tree().change_scene_to_file("res://scenes/dogBase/dogBase.tscn")
+	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
 
 func _on_nut_mua_pressed():

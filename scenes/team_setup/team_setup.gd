@@ -1,6 +1,6 @@
 extends Control
 
-const ListCharacter = preload("res://scenes/selectCharacter/box_character.tscn")
+const ListCharacter = preload("res://scenes/team_setup/box_character.tscn")
 
 var character_id_to_item: Dictionary
 var skill_id_to_item: Dictionary

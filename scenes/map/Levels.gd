@@ -2,10 +2,6 @@ extends Node2D
 
 @onready var levels = get_children()	
 
-func get_selected_level() -> Level:
-	var index := levels.find(func(level: Level): level.battlefield_id == Data.selected_battlefield_id) 
-	return null if index < 0 else levels[index] 
-
 func _draw() -> void:
 	for level in Data.passed_level:
 		var vitri1 = levels[level].position + levels[level].pivot_offset 
