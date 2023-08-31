@@ -158,6 +158,9 @@ locale/translations=PackedStringArray("res://resources/translations/translations
 
 [layer_names]
 
+2d_render/layer_1="walls"
+2d_render/layer_2="dogs"
+2d_render/layer_3="cats"
 2d_physics/layer_1="walls"
 2d_physics/layer_2="dogs"
 2d_physics/layer_3="enemies"
