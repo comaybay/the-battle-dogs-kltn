@@ -60,10 +60,10 @@ anchor_right = 0.985
 anchor_bottom = 0.016
 offset_left = -43.07
 offset_top = -43.312
-offset_right = 147.93
-offset_bottom = 149.688
-grow_horizontal = 0
-scale = Vector2(0.45, 0.45)
+offset_right = 42.93
+offset_bottom = 43.688
+grow_horizontal = 2
+grow_vertical = 2
 theme = null
 shortcut = SubResource("Shortcut_nhona")
 
@@ -74,14 +74,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -98.5
+offset_left = -98.0
 offset_top = -107.0
-offset_right = 92.5
-offset_bottom = 86.0
+offset_right = -12.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.45, 0.45)
 theme = null
+metadata/_edit_group_ = true
 
 [node name="SfxButton" parent="Panel/Panel" instance=ExtResource("4_oskkn")]
 layout_mode = 1
@@ -90,13 +90,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 12.5
+offset_left = 13.0
 offset_top = -107.0
-offset_right = 203.5
-offset_bottom = 86.0
+offset_right = 99.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.45, 0.45)
 theme = null
 
 [node name="EscapeBattleButton" type="Button" parent="Panel/Panel"]

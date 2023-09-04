@@ -1,18 +1,19 @@
 extends TextureButton
 
-var is_active: bool
+var is_mute: bool
 
 func _ready() -> void:
-	is_active = Data.sound_fx_volume > 0
-	$AnimationPlayer.play("active" if is_active else "inactive")
+	is_mute = Data.mute_sound_fx
+	$AnimationPlayer.play("inactive" if is_mute else "active")
 	pressed.connect(
 		func(): 
 			AudioPlayer.play_button_pressed_audio()
-			set_active(!is_active)
+			set_mute(!is_mute)
 	)
 
-func set_active(active: bool) -> void:
-	is_active = active 
-	$AnimationPlayer.play("active" if active else "inactive")
-	Data.sound_fx_volume = 80 if active else 0
+func set_mute(state: bool) -> void:
+	is_mute = state 
+	$AnimationPlayer.play("inactive" if is_mute else "active")
+	Data.mute_sound_fx = is_mute
 	Data.save()
+	

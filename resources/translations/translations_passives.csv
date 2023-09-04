@@ -1,6 +1,6 @@
 keys,vi,en
 @PASSIVE_NAME_money_efficiency,Năng suất Lao động,Workforce Productivity
-@PASSIVE_DESCRIPTION_money_efficiency,Năng suất lao động của giai cấp Chó công - nông. Thu nhập thụ động (số tiền được tạo ra mỗi giây) trong trận đấu được tăng lên.,Workforce productivity of the working class Dogs. Increases passive income (money created every second) in battle.
+@PASSIVE_DESCRIPTION_money_efficiency,Năng suất lao động của giai cấp Chó công - nông. Độ hiệu quả của tiền thụ động được tạo ra trong trận đấu được tăng lên.,Workforce productivity of the working class Dogs. Increases money generation efficiency in battle.
 @PASSIVE_NAME_wallet_capacity,Sức chứa Kho bạc,Treasury Capacity
 @PASSIVE_DESCRIPTION_wallet_capacity,Kho bạc nhà nước. Tăng số tiền tối đa có thể chứa được trong trận đấu.,National Treasury. Increases the maximum amount of money that can be stored in a battle.
 @PASSIVE_NAME_dog_tower_health,Sức chống cự Thành Chó,Dog Tower's Durability

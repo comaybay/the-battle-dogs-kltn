@@ -340,6 +340,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_kecnn")
+theme_type_variation = &"PanelEmpty"
 
 [node name="Decoration" type="ColorRect" parent="Control"]
 layout_mode = 1
@@ -384,6 +385,7 @@ offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
+theme_type_variation = &"PanelEmpty"
 
 [node name="Label" type="Label" parent="Control/Panel"]
 layout_mode = 2

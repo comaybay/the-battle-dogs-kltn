@@ -3,6 +3,8 @@ extends Node
 signal bone_changed(value: int)
 signal music_volume_changed(value: int)
 signal sound_fx_volume_changed(value: int)
+signal mute_music_changed(mute: bool)
+signal mute_sound_fx_changed(mute: bool)
 
 var save_data: Dictionary
 
@@ -37,17 +39,33 @@ var selected_battlefield_id: String:
 	set(value): save_data['selected_battlefield_id'] = value	
 
 var sound_fx_volume: int:
-	get: return save_data['settings']['sound_fx']		
+	get: return save_data['settings']['sound_fx']['volume']		
 	set(value): 
-		save_data['settings']['sound_fx'] = value	
+		save_data['settings']['sound_fx']['volume'] = value	
 		sound_fx_volume_changed.emit(value)
 		
 var music_volume: int:
-	get: return save_data['settings']['music']		
+	get: return save_data['settings']['music']['volume']		
 	set(value): 
-		save_data['settings']['music'] = value	
+		save_data['settings']['music']['volume'] = value	
 		music_volume_changed.emit(value)
 
+var mute_music: bool:
+	get: return save_data['settings']['music']['mute']		
+	set(value): 
+		save_data['settings']['music']['mute'] = value	
+		mute_music_changed.emit(value)	
+		
+var mute_sound_fx: bool:
+	get: return save_data['settings']['sound_fx']['mute']		
+	set(value): 
+		save_data['settings']['sound_fx']['mute'] = value	
+		mute_sound_fx_changed.emit(value)	
+		
+var game_language: String:
+	get: return save_data['settings']['language']
+	set(value): 
+		save_data['settings']['language'] = value	
 
 # general info
 var dog_info := Dictionary()
@@ -76,7 +94,11 @@ func _init() -> void:
 		var file := FileAccess.open("user://save.json", FileAccess.READ)
 		save_data = JSON.parse_string(file.get_as_text())
 		file.close()
+		TranslationServer.set_locale(game_language)	
+		
 	
+	_load_settings()
+
 	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	var dog_info_arr = JSON.parse_string(file.get_as_text())
 	for info in dog_info_arr:
@@ -121,3 +143,20 @@ func save():
 	file.store_line(JSON.stringify(save_data))
 	file.close()
 	compute_values()
+
+func _load_settings():
+	var sound_fx_idx = AudioServer.get_bus_index("SoundFX")
+	var music_idx = AudioServer.get_bus_index("Music")
+	
+	AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(0 if mute_sound_fx else (sound_fx_volume / 100.0)))
+	AudioServer.set_bus_volume_db(music_idx, linear_to_db(0 if mute_music else (music_volume / 100.0)))
+	
+	var key_overwrites: Dictionary = save_data['settings']['key_binding_overwrites']
+	
+	for action in key_overwrites.keys():
+		var event = InputEventKey.new()
+		event.keycode = key_overwrites[action]
+		
+		InputMap.action_erase_events(action)
+		InputMap.action_add_event(action, event)	
+	

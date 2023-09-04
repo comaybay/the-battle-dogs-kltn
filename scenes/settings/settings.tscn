@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://u2gfiv64rmb0"]
+
+[ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_33nqq"]
+[ext_resource type="Texture2D" uid="uid://66akw6rog8ko" path="res://resources/battlefield_themes/heavenly/sky.png" id="1_lx6qp"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_g8saj"]
+[ext_resource type="Script" path="res://scenes/settings/settings.gd" id="2_i0rw8"]
+[ext_resource type="PackedScene" uid="uid://6ewhh0xkgi5q" path="res://scenes/settings/main_setttings/main_settings.tscn" id="4_6qm2c"]
+[ext_resource type="PackedScene" uid="uid://c4n4sr1k86t62" path="res://scenes/settings/key_binding_settings/key_binding_settings.tscn" id="8_wne1d"]
+
+[node name="Settings" type="Control"]
+material = ExtResource("1_33nqq")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_g8saj")
+script = ExtResource("2_i0rw8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource("1_33nqq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2226.0
+offset_bottom = 1252.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.341006, 0.341006)
+texture = ExtResource("1_lx6qp")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MainSettings" parent="." instance=ExtResource("4_6qm2c")]
+layout_mode = 1
+
+[node name="KeyBidingSettings" parent="." instance=ExtResource("8_wne1d")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1

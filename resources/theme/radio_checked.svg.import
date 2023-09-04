@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blm1fveoph3mt"
-path="res://.godot/imported/land.png-818f8cf692659641476aec52bcd2b5e4.ctex"
+uid="uid://b2drlhlbbm6fq"
+path="res://.godot/imported/radio_checked.svg-5b6b2d1ae4ae7ce889b3343e0eb0e8b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/battlefield_themes/heavenly/land.png"
-dest_files=["res://.godot/imported/land.png-818f8cf692659641476aec52bcd2b5e4.ctex"]
+source_file="res://resources/theme/radio_checked.svg"
+dest_files=["res://.godot/imported/radio_checked.svg-5b6b2d1ae4ae7ce889b3343e0eb0e8b9.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

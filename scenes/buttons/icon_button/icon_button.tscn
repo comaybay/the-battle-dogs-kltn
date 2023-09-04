@@ -72,16 +72,16 @@ theme = ExtResource("1_kndgg")
 texture_click_mask = ExtResource("1_3mdfe")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(96.5, 98.5)
+position = Vector2(43.5, 44.5)
 texture = ExtResource("1_83ay6")
 hframes = 5
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(96.5, 98.5)
+position = Vector2(43.5, 44.5)
 hframes = 3
 
 [node name="Border" type="Sprite2D" parent="."]
-position = Vector2(96.5, 98.5)
+position = Vector2(43.5, 44.5)
 texture = ExtResource("1_83ay6")
 hframes = 5
 frame = 2
