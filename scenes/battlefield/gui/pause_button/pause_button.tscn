@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://drmtboiv18k42" path="res://scenes/battlefield/gui/pause_button/pause_button.png" id="2_jyb4p"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/pause_button/pause_button.gd" id="2_rjvie"]
 
-[sub_resource type="InputEventAction" id="InputEventAction_tfred"]
+[sub_resource type="InputEventAction" id="InputEventAction_1x6t0"]
 action = &"ui_pause"
 
 [sub_resource type="Shortcut" id="Shortcut_1ljvj"]
-events = [SubResource("InputEventAction_tfred")]
+events = [SubResource("InputEventAction_1x6t0")]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1r6g"]
 atlas = ExtResource("2_jyb4p")

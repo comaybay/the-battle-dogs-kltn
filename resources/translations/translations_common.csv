@@ -50,5 +50,8 @@ keys,vi,en
 @KEY_ui_skill_2,Dùng kỹ năng 2,Perform Skill 2
 @KEY_ui_skill_3,Dùng kỹ năng 3,Perform Skill 3
 @KEY_ui_upgrade_efficiency,Nâng cấp năng suất lao động,Upgrade money generation efficiency
-@KEY_ui_switch_time_scale,Chuyển đổi tốc độ game,Toggle game speed
+@KEY_ui_switch_time_scale,Chuyển đổi tốc độ trận đấu,Toggle game speed (in battle)
 @KEY_ui_pause,Tạm dừng trận đấu,Pause game
+@TOGGLE_MUSIC,Tắt/Mở nhạc nền,Toggle music
+@TOGGLE_SFX,Tắt/Mở hiệu ứng âm thanh,Toggle sound effects
+@RECEIVED,Nhận được,Received

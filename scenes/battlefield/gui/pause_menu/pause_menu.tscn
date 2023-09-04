@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://btbidqri5t7cx"]
+[gd_scene load_steps=8 format=3 uid="uid://btbidqri5t7cx"]
 
 [ext_resource type="PackedScene" uid="uid://divc2ithyhuj2" path="res://scenes/battlefield/gui/pause_menu/music_button/music_button.tscn" id="1_0jdbh"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/pause_menu/pause_menu.gd" id="1_dcwff"]
@@ -16,12 +16,6 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.0196078, 0, 0.721569, 1)
-
-[sub_resource type="InputEventAction" id="InputEventAction_4u3sl"]
-action = &"ui_pause"
-
-[sub_resource type="Shortcut" id="Shortcut_nhona"]
-events = [SubResource("InputEventAction_4u3sl")]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 2
@@ -65,7 +59,6 @@ offset_bottom = 43.688
 grow_horizontal = 2
 grow_vertical = 2
 theme = null
-shortcut = SubResource("Shortcut_nhona")
 
 [node name="MusicButton" parent="Panel/Panel" instance=ExtResource("1_0jdbh")]
 layout_mode = 1

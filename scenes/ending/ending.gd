@@ -1,11 +1,11 @@
 extends Node
 
-const HEAVENLY_SKY = preload("res://resources/battlefield_themes/heavenly/sky.png")
+const NIGHT_SKY = preload("res://resources/battlefield_themes/night/sky.png")
 const HEAVENLY_LAND = preload("res://resources/battlefield_themes/heavenly/land.png")
 
 func _ready() -> void:
 	# SOME STRANG BS, HAVE TO PRELOAD TO FIX
-	$Sky.texture = HEAVENLY_SKY
+	$Sky.texture = NIGHT_SKY
 	$Land.texture = HEAVENLY_LAND
 	
 	$SkipButton.pressed.connect(_on_skip, CONNECT_ONE_SHOT)

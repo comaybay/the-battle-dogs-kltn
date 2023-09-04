@@ -135,7 +135,7 @@ _data = {
 }
 
 [node name="SfxButton" instance=ExtResource("1_5oc60")]
-tooltip_text = "Tắt/Mở hiệu ứng âm thanh"
+tooltip_text = "@TOGGLE_SFX"
 script = ExtResource("2_vl851")
 
 [node name="Background" parent="." index="0"]

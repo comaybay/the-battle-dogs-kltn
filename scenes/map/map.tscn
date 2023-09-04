@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://gny6lao42iqp"]
+[gd_scene load_steps=19 format=3 uid="uid://gny6lao42iqp"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_0lsnx"]
 [ext_resource type="Script" path="res://scenes/map/map.gd" id="1_0p7qx"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cd5gw7llcsine" path="res://scenes/map/level/level.tscn" id="8_uximv"]
 [ext_resource type="Script" path="res://scenes/map/dog.gd" id="8_vsoej"]
 [ext_resource type="PackedScene" uid="uid://bq2rygho7wb7t" path="res://scenes/map/level_chain/level_chain.tscn" id="9_m5l3k"]
+[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="9_xm0jp"]
+[ext_resource type="Shortcut" uid="uid://moipqlm5cofg" path="res://resources/shortcuts/confirm.tres" id="10_3djod"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_de1st"]
 atlas = ExtResource("7_eb484")
@@ -45,18 +47,6 @@ animations = [{
 "name": &"default",
 "speed": 6.0
 }]
-
-[sub_resource type="InputEventAction" id="InputEventAction_c8u3c"]
-action = &"ui_cancel"
-
-[sub_resource type="Shortcut" id="Shortcut_felg0"]
-events = [SubResource("InputEventAction_c8u3c")]
-
-[sub_resource type="InputEventAction" id="InputEventAction_ehdw2"]
-action = &"ui_confirm"
-
-[sub_resource type="Shortcut" id="Shortcut_rxot2"]
-events = [SubResource("InputEventAction_ehdw2")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_p45xq"]
 action = &"ui_setup_team"
@@ -239,7 +229,7 @@ offset_bottom = 611.0
 focus_mode = 0
 theme = ExtResource("1_0lsnx")
 theme_override_font_sizes/font_size = 20
-shortcut = SubResource("Shortcut_felg0")
+shortcut = ExtResource("9_xm0jp")
 text = "@BACK"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Khung/CanvasLayer"]
@@ -256,7 +246,7 @@ focus_mode = 0
 theme = ExtResource("1_0lsnx")
 theme_type_variation = &"ButtonRed"
 theme_override_font_sizes/font_size = 24
-shortcut = SubResource("Shortcut_rxot2")
+shortcut = ExtResource("10_3djod")
 text = "@ATTACK"
 
 [node name="MarginContainer" type="MarginContainer" parent="Khung/CanvasLayer/VBoxContainer"]

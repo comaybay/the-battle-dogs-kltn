@@ -20,7 +20,3 @@ func _on_upgrade() -> void:
 			$UpgradePriceLabel.text = "MAX"
 		else:
 			$UpgradePriceLabel.text = "%s₵" % InBattle.get_efficiency_upgrade_price()
-
-func _input(event: InputEvent) -> void:
-	if !disabled and event.is_action_pressed("ui_upgrade_efficiency"):
-		_on_upgrade()
