@@ -55,3 +55,11 @@ keys,vi,en
 @TOGGLE_MUSIC,Tắt/Mở nhạc nền,Toggle music
 @TOGGLE_SFX,Tắt/Mở hiệu ứng âm thanh,Toggle sound effects
 @RECEIVED,Nhận được,Received
+@CREDIT,Credits,Credits
+@CREDIT_MADE_BY,Game được phát triển bởi:,Created By:
+@CREDIT_CMB,"Lập trình, Đồ họa, Hoạt hình","Programming, Art, Animations"
+@CREDIT_TAK,"Lập trình, Kiếm resource cho game","Programming, Resource Finding"
+@CREDIT_SPECIAL_THANKS,Special Thanks dành cho:,Special Thanks to:
+@CREDIT_MUSMUS,MusMus (musmus.main.jp) cung cấp BGM miễn phí cho game,MusMus (musmus.main.jp) for providing free BGMs for the game
+@CREDIT_MIXKIT,Mixkit (mixkit.co) cung cấp sound effect miễn phí cho game,MusMus (musmus.main.jp) for providing free sound effects for the game
+@CREDIT_PIXABAY,Pixabay (pixabay.com) cung cấp sound effect miễn phí cho game,Pixabay (pixabay.com) for providing free sound effects for the game
