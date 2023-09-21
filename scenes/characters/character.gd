@@ -72,6 +72,8 @@ func _ready() -> void:
 		
 	if Engine.is_editor_hint():
 		property_list_changed.connect(queue_redraw)
+		
+
 	
 func _reready():
 	# config 

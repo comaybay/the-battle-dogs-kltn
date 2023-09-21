@@ -43,7 +43,7 @@ func _on_state_transition(next_state_name: String, data: Dictionary = {}):
 	change_state(next_state_name, data)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:	
+func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
 		state.update(delta)
 	
