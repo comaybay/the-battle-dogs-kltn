@@ -1,18 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://5joq03mk4kv3"]
+[gd_scene load_steps=5 format=3 uid="uid://5joq03mk4kv3"]
 
 [ext_resource type="PackedScene" uid="uid://cvno8d4sb6h0s" path="res://scenes/characters/character.tscn" id="1_t516l"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/base_dog.gd" id="2_krygw"]
+[ext_resource type="Texture2D" uid="uid://whf5eqdonrk0" path="res://resources/icons/pngwing.com.png" id="3_dhr53"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6m5t"]
 resource_local_to_scene = true
 size = Vector2(192, 178)
 
-[node name="BaseDog" groups=["dogs"] instance=ExtResource("1_t516l")]
+[node name="BaseDog" node_paths=PackedStringArray("attack_sprite") groups=["dogs"] instance=ExtResource("1_t516l")]
 collision_layer = 2
 collision_mask = 17
 input_pickable = true
 script = ExtResource("2_krygw")
 name_id = ""
+attack_sprite = NodePath("")
 
 [node name="CollisionShape2D" parent="." index="3"]
 light_mask = 2
@@ -21,4 +23,14 @@ shape = SubResource("RectangleShape2D_i6m5t")
 [node name="RayCast2D" parent="." index="4"]
 collision_mask = 20
 
+[node name="Arrow" type="Sprite2D" parent="." index="6"]
+visible = false
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(0, -178)
+rotation = 1.5708
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_dhr53")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

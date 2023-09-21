@@ -132,9 +132,12 @@ position = Vector2(-1, -23.25)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(191, 0)
+position = Vector2(95, 0)
 target_position = Vector2(90, 0)
 
 [node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
 stream = ExtResource("3_1qucf")
 volume_db = -7.0
+
+[node name="Arrow" parent="." index="6"]
+position = Vector2(0, 0)
