@@ -8,7 +8,7 @@
   "selected_battlefield_id": "level1",
   "selected_level": 0,
   "selected_team": 0,
-  "settings": { "music": 100, "sound_fx": 80 },
+  "settings": { "music": {"volume": 60, "mute": false}, "sound_fx": {"volume": 50, "mute": false}, "language": "vi", "key_binding_overwrites": {} },
   "skills": [],
   "teams": [
 	{

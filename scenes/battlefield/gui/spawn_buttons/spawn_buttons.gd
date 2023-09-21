@@ -26,10 +26,6 @@ func _ready() -> void:
 		
 	$SwitchRowButton.pressed.connect(_switch_row)
 		
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_switch_row"):
-		_switch_row()
-
 func _switch_row() -> void:
 	# do not switch row when is in tweening process
 	if !done_tweening:

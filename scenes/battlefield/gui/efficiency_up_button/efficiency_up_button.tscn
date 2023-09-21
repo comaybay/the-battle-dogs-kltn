@@ -1,8 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmdc60cjuki5p"]
+[gd_scene load_steps=7 format=3 uid="uid://dmdc60cjuki5p"]
 
 [ext_resource type="PackedScene" uid="uid://w3ux0r6664nr" path="res://scenes/buttons/cirular_button/circular_button.tscn" id="1_r5ntm"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/efficiency_up_button/efficiency_up_button.gd" id="2_dduux"]
 [ext_resource type="AudioStream" uid="uid://bjx4lj64ekakc" path="res://resources/sound/battlefield/efficiency_up.mp3" id="3_7gvxd"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_thrpy"]
+action = &"ui_upgrade_efficiency"
+
+[sub_resource type="Shortcut" id="Shortcut_yykbv"]
+events = [SubResource("InputEventAction_thrpy")]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3a7e3"]
 font_size = 74
@@ -11,6 +17,7 @@ outline_color = Color(0.0196078, 0, 0.721569, 1)
 
 [node name="EfficiencyUpButton" instance=ExtResource("1_r5ntm")]
 focus_mode = 0
+shortcut = SubResource("Shortcut_yykbv")
 script = ExtResource("2_dduux")
 
 [node name="EfficiencyLevelLabel" type="Label" parent="." index="4"]

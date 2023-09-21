@@ -1,8 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5r5fs41wchm6"]
+[gd_scene load_steps=11 format=3 uid="uid://c5r5fs41wchm6"]
 
 [ext_resource type="PackedScene" uid="uid://bj0cb0c3284hb" path="res://scenes/buttons/icon_button/icon_button.tscn" id="1_4baoo"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/pause_menu/close_button/close_button.gd" id="2_htmup"]
 [ext_resource type="Texture2D" uid="uid://b8vorbxft7yvf" path="res://scenes/battlefield/gui/pause_menu/close_button/close_icon.png" id="3_huj3f"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_u2lp1"]
+action = &"ui_cancel"
+
+[sub_resource type="InputEventAction" id="InputEventAction_it7jy"]
+action = &"ui_pause"
+
+[sub_resource type="Shortcut" id="Shortcut_jssxf"]
+events = [SubResource("InputEventAction_u2lp1"), SubResource("InputEventAction_it7jy")]
 
 [sub_resource type="Animation" id="Animation_ty6py"]
 length = 0.001
@@ -135,6 +144,7 @@ _data = {
 }
 
 [node name="CloseButton" instance=ExtResource("1_4baoo")]
+shortcut = SubResource("Shortcut_jssxf")
 script = ExtResource("2_htmup")
 
 [node name="Background" parent="." index="0"]

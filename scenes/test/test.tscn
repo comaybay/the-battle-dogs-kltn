@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b25kjfpqgqbyy"]
 
-[ext_resource type="PackedScene" uid="uid://cue3f8l417jkn" path="res://scenes/characters/cats/cat/cat.tscn" id="1_sorff"]
-[ext_resource type="PackedScene" uid="uid://dhit6457y0brs" path="res://scenes/characters/dogs/dog/dog.tscn" id="2_5e3xs"]
+[ext_resource type="PackedScene" uid="uid://dbx365yymmgo5" path="res://scenes/characters/cats/cat/cat.tscn" id="1_sorff"]
+[ext_resource type="PackedScene" uid="uid://cedh84t4ewxuw" path="res://scenes/characters/dogs/dog/dog.tscn" id="2_5e3xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avlfn"]
 size = Vector2(1799, 40)

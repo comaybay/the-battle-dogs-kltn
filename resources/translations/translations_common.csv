@@ -1,5 +1,7 @@
 keys,vi,en
 @START_GAME,BẮT ĐẦU,START GAME
+@CONFIRM,Đồng ý,Confirm
+@CANCEL,Hủy bỏ,Cancel
 @SETTINGS,Cài Đặt,Settings
 @QUIT,Thoát,Quit
 @HELP,Hướng Dẫn,Help
@@ -26,4 +28,38 @@ keys,vi,en
 @DEFEAT,Thất bại...,Defeat...
 @BACK_TO_DOG_BASE,Về căn cứ,Back to Dog Base
 @LIST,Danh sách,List
+@MUSIC,Nhạc,Music
+@SFX,Hiệu ứng âm thanh,Sound effects
 @SAVE,Lưu,Save
+@LANGUAGE,Ngôn ngữ,Language
+@KEY_BINDING_SETTINGS,Điều khiển,Key binding
+@BIND,Sửa phím cho,Bind
+@KEY_BINDING_INSTRUCTION,Bấm phím mong muốn,Press key to bind
+@RESET_TO_DEFAULT,Khôi phục về mặc định,Reset to default
+@KEY_ui_confirm,Đồng ý,Confirm
+@KEY_ui_cancel,Hủy,Cancel
+@KEY_ui_zoomout,Thu nhỏ,Zoom out
+@KEY_ui_zoomin,Phóng to,Zoom in
+@KEY_ui_switch_row,Đổi hàng triệu hồi Chó,Switch Dog summoning row
+@KEY_ui_spawn_1,Triệu hồi Chó 1,Summon Dog 1
+@KEY_ui_spawn_2,Triệu hồi Chó 2,Summon Dog 2
+@KEY_ui_spawn_3,Triệu hồi Chó 3,Summon Dog 3
+@KEY_ui_spawn_4,Triệu hồi Chó 4,Summon Dog 4
+@KEY_ui_spawn_5,Triệu hồi Chó 5,Summon Dog 5
+@KEY_ui_skill_1,Dùng kỹ năng 1,Perform Skill 1
+@KEY_ui_skill_2,Dùng kỹ năng 2,Perform Skill 2
+@KEY_ui_skill_3,Dùng kỹ năng 3,Perform Skill 3
+@KEY_ui_upgrade_efficiency,Nâng cấp năng suất lao động,Upgrade money generation efficiency
+@KEY_ui_switch_time_scale,Chuyển đổi tốc độ trận đấu,Toggle game speed (in battle)
+@KEY_ui_pause,Tạm dừng trận đấu,Pause game
+@TOGGLE_MUSIC,Tắt/Mở nhạc nền,Toggle music
+@TOGGLE_SFX,Tắt/Mở hiệu ứng âm thanh,Toggle sound effects
+@RECEIVED,Nhận được,Received
+@CREDIT,Credits,Credits
+@CREDIT_MADE_BY,Game được phát triển bởi:,Created By:
+@CREDIT_CMB,"Lập trình, Đồ họa, Hoạt hình","Programming, Art, Animations"
+@CREDIT_TAK,"Lập trình, Kiếm resource cho game","Programming, Resource Finding"
+@CREDIT_SPECIAL_THANKS,Special Thanks dành cho:,Special Thanks to:
+@CREDIT_MUSMUS,MusMus (musmus.main.jp) cung cấp BGM miễn phí cho game,MusMus (musmus.main.jp) for providing free BGMs for the game
+@CREDIT_MIXKIT,Mixkit (mixkit.co) cung cấp sound effect miễn phí cho game,MusMus (musmus.main.jp) for providing free sound effects for the game
+@CREDIT_PIXABAY,Pixabay (pixabay.com) cung cấp sound effect miễn phí cho game,Pixabay (pixabay.com) for providing free sound effects for the game

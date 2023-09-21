@@ -38,8 +38,7 @@ func _ready() -> void:
 	
 	var sound_fx_idx = AudioServer.get_bus_index("SoundFX")
 	var music_idx = AudioServer.get_bus_index("Music")
-	AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(Data.sound_fx_volume / 100.0))
-	AudioServer.set_bus_volume_db(music_idx, linear_to_db(Data.music_volume / 100.0))
+	
 	Data.sound_fx_volume_changed.connect(
 		func(value: float): 
 			AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(value / 100.0))
@@ -47,6 +46,16 @@ func _ready() -> void:
 	Data.music_volume_changed.connect(
 		func(value: float): 
 			AudioServer.set_bus_volume_db(music_idx, linear_to_db(value / 100.0))
+	)
+	Data.mute_music_changed.connect(
+		func(mute: bool): 
+			var value: float = 0 if mute else Data.music_volume 
+			AudioServer.set_bus_volume_db(music_idx, linear_to_db(value / 100.0))
+	)
+	Data.mute_sound_fx_changed.connect(
+		func(mute: bool): 
+			var value: float = 0 if mute else Data.sound_fx_volume
+			AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(value / 100.0))
 	)
 
 func play_button_pressed_audio():
