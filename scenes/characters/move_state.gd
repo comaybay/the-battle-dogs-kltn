@@ -15,12 +15,12 @@ func update(delta: float) -> void:
 	if not character.is_on_floor():
 		character.velocity.y += character.gravity * delta
 	
+	# kiem tra va cham
 	var collider = character.n_RayCast2D.get_collider()
-	if collider == null:
-		character.velocity.x = character.speed * character.move_direction
+	if collider == null: #ko va cham
+		character.velocity.x = character.speed * character.move_direction 
 		
-		
-	else:
+	else:# va cham
 		if character.n_AnimationPlayer.current_animation != "attack":
 			character.velocity = Vector2.ZERO
 			
@@ -30,5 +30,3 @@ func update(delta: float) -> void:
 				transition.emit("IdleState")
 		
 	character.move_and_slide() 
-
-

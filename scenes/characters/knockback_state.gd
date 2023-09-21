@@ -43,7 +43,10 @@ func update(delta: float) -> void:
 			if character.health <= 0:
 				transition.emit("DieState")
 			else:
-				transition.emit("MoveState")
+				if character is BaseDog and character.is_user_control == true:
+					transition.emit("UserMoveState")
+				else: 
+					transition.emit("MoveState")
 		
 	character.move_and_slide() 
 

@@ -8,9 +8,8 @@ class_name FSM extends Node
 @export var initial_state: NodePath = ""
 
 var state: FSMState
-var check_control # auto fight if false
+
 func _ready():
-	check_control = false
 	if Engine.is_editor_hint():
 		return
 		
@@ -45,9 +44,8 @@ func _on_state_transition(next_state_name: String, data: Dictionary = {}):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if check_control == false:
-		if not Engine.is_editor_hint():
-			state.update(delta)
+	if not Engine.is_editor_hint():
+		state.update(delta)
 	
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
@@ -72,10 +70,3 @@ func _get_configuration_warnings() -> PackedStringArray:
 			warnings.append("FSM node's children must extends from FSMState script class or has a 'is_FSM_state' property set to 'false' to be ignored by FSM node")
 	
 	return warnings
-
-func auto_control(check : bool) :
-	if check :
-		check_control = false
-	else :
-		check_control = true
-	
