@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func setup(level_node: Level) -> void:	
 	level = level_node
-	text = level.level_name
+	text = level.get_level_name()
 	$Flag.visible = level.index <= Data.passed_level
 	update_flag_position()
 	resized.connect(update_flag_position)
