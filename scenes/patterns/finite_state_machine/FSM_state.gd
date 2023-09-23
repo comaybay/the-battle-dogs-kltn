@@ -3,8 +3,6 @@ class_name FSMState extends Node
 
 signal transition (state_path: String, data: Dictionary)
 
-@onready var character: Character = owner
-
 # this is used to check if this node is a FSM state
 var is_FSM_state = true
 

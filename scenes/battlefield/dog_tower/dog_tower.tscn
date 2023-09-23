@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/battlefield/dog_tower/dog_tower.gd" id="1_ywct4"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_jattt"]
-[ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/winter/dog_tower.png" id="2_vjxar"]
+[ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/night/dog_tower.png" id="3_dagqg"]
 [ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="3_g44t7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
@@ -87,7 +87,7 @@ label_settings = SubResource("LabelSettings_8inmh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -455)
-texture = ExtResource("2_vjxar")
+texture = ExtResource("3_dagqg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -451.375)

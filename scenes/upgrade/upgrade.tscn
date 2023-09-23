@@ -11,6 +11,7 @@ data = PackedByteArray(73, 68, 51, 4, 0, 0, 0, 0, 2, 21, 84, 88, 88, 88, 0, 0, 0
 [node name="Upgrade" instance=ExtResource("1_kc1qw")]
 title = "@UPGRADE"
 go_back_scene_path = "res://scenes/dogbase/dogbase.tscn"
+metadata/_edit_vertical_guides_ = []
 
 [node name="InfoPanel" type="TextureRect" parent="." index="2"]
 layout_mode = 1

@@ -209,9 +209,10 @@ sprite_frames = SubResource("SpriteFrames_e4la2")
 offset = Vector2(-17.6188, -132.407)
 script = ExtResource("8_vsoej")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Khung"]
+[node name="GUI" type="CanvasLayer" parent="Khung"]
+unique_name_in_owner = true
 
-[node name="Label" type="Label" parent="Khung/CanvasLayer"]
+[node name="Label" type="Label" parent="Khung/GUI"]
 offset_left = 11.0
 offset_top = 10.0
 offset_right = 271.0
@@ -221,7 +222,7 @@ theme = ExtResource("1_0lsnx")
 theme_type_variation = &"LabelLarge"
 text = "@PLANET_DOGGO"
 
-[node name="NutQuayLai" type="Button" parent="Khung/CanvasLayer"]
+[node name="NutQuayLai" type="Button" parent="Khung/GUI"]
 custom_minimum_size = Vector2(120, 0)
 offset_top = 579.0
 offset_right = 119.0
@@ -232,14 +233,14 @@ theme_override_font_sizes/font_size = 20
 shortcut = ExtResource("9_xm0jp")
 text = "@BACK"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Khung/CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Khung/GUI"]
 offset_left = 873.0
 offset_top = 505.0
 offset_right = 913.0
 offset_bottom = 545.0
 theme_override_constants/separation = 10
 
-[node name="NutTanCong" type="Button" parent="Khung/CanvasLayer/VBoxContainer"]
+[node name="NutTanCong" type="Button" parent="Khung/GUI/VBoxContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 focus_mode = 0
@@ -249,23 +250,24 @@ theme_override_font_sizes/font_size = 24
 shortcut = ExtResource("10_3djod")
 text = "@ATTACK"
 
-[node name="MarginContainer" type="MarginContainer" parent="Khung/CanvasLayer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Khung/GUI/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="NutDoiHinh" type="Button" parent="Khung/CanvasLayer/VBoxContainer/MarginContainer"]
+[node name="TeamSetupButton" type="Button" parent="Khung/GUI/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_0lsnx")
 theme_override_font_sizes/font_size = 20
 shortcut = SubResource("Shortcut_0cnn8")
 text = "@TEAM_SETUP"
 
-[node name="LevelChain" parent="Khung/CanvasLayer" instance=ExtResource("9_m5l3k")]
+[node name="LevelChain" parent="Khung/GUI" instance=ExtResource("9_m5l3k")]
 unique_name_in_owner = true
 offset_top = 48.0
 offset_bottom = 152.0
 
-[connection signal="pressed" from="Khung/CanvasLayer/NutQuayLai" to="." method="_on_quay_lai_pressed"]
-[connection signal="pressed" from="Khung/CanvasLayer/VBoxContainer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
-[connection signal="pressed" from="Khung/CanvasLayer/VBoxContainer/MarginContainer/NutDoiHinh" to="." method="_on_nut_doi_hinh_pressed"]
+[connection signal="pressed" from="Khung/GUI/NutQuayLai" to="." method="_on_quay_lai_pressed"]
+[connection signal="pressed" from="Khung/GUI/VBoxContainer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
+[connection signal="pressed" from="Khung/GUI/VBoxContainer/MarginContainer/TeamSetupButton" to="." method="_on_nut_doi_hinh_pressed"]

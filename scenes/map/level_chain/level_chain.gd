@@ -17,7 +17,7 @@ func setup(levels: Array[Node]):
 	for level in levels:
 		var level_box = LevelBox.instantiate()
 		level_box.setup(level)
-		level_box.pressed.connect(focus_camera_to.bind(level.index))
+		level_box.pressed.connect(_on_level_box_preesed.bind(level_box))
 		$SubViewport/HBoxContainer.add_child(level_box)
 		level_boxes.append(level_box)
 
@@ -27,15 +27,18 @@ func setup(levels: Array[Node]):
 	# wait for level boxes name to be loaded in (which will change the size of HBox)
 	var first_box = level_boxes.front()
 	var last_box = level_boxes.back() 
-	selected_level_box = level_boxes[Data.passed_level]
+	selected_level_box = level_boxes[Data.selected_level]
 	
-	$SubViewport/HBoxContainer.resized.connect(func(): 
+	$SubViewport/HBoxContainer.sort_children.connect(func(): 
 		%Camera2D.limit_left = _get_camera_position_from(first_box).x
 		%Camera2D.limit_right = _get_camera_position_from(last_box).x + viewport_size.x
 		focus_camera_to(selected_level_box.level.index)
 	)	
 	
-	
+func _on_level_box_preesed(level_box: LevelBox):
+	if selected_level_box != level_box:
+		focus_camera_to(level_box.level.index)
+
 func focus_camera_to(level_number: int):
 	selected_level_box.set_selected(false)
 	selected_level_box = level_boxes[level_number]
@@ -47,7 +50,7 @@ func _get_camera_position_from(level_box: LevelBox):
 	return Vector2(box_position.x - (viewport_size.x / 2), 0)
 
 func _input(event):
-	if !is_mouse_entered:
+	if not is_mouse_entered and not mouse_pressed:
 		return
 	
 	if event is InputEventMouseButton:
@@ -62,7 +65,7 @@ func _input(event):
 			mouse_pressed = false
 			
 	if event is InputEventMouseMotion and mouse_pressed:
-		%Camera2D.position_smoothing_speed = 20
-		var delta = last_mouse_pos - event.position
-		%Camera2D.position += delta * 2
+		%Camera2D.position_smoothing_speed = 30
+		var delta = last_mouse_pos.x - event.position.x
+		%Camera2D.position.x = clamp(%Camera2D.position.x + (delta * 2), %Camera2D.limit_left, %Camera2D.limit_right - viewport_size.x) 
 		last_mouse_pos = event.position

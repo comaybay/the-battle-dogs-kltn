@@ -1,6 +1,8 @@
 @tool
 extends FSMState
 
+@onready var character: Character = owner
+
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
 	character.n_AnimationPlayer.play("idle")

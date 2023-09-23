@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cc4bqrpdv8f6n"]
 
 [ext_resource type="PackedScene" uid="uid://cto0tiylqerf7" path="res://scenes/buttons/character_button/character_button.tscn" id="1_jeths"]
-[ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="2_gen3m"]
+[ext_resource type="Material" uid="uid://clbdjo2h18v3a" path="res://shaders/invert_color/invert_color.material" id="2_4v5bx"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/spawn_buttons/spawn_button.gd" id="2_icp81"]
 
 [sub_resource type="Animation" id="Animation_ty6py"]
@@ -29,18 +29,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Icon:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_gen3m")]
 }
 
 [sub_resource type="Animation" id="Animation_yukig"]
@@ -111,7 +99,11 @@ _data = {
 }
 
 [node name="SpawnButton" instance=ExtResource("1_jeths")]
+material = ExtResource("2_4v5bx")
 script = ExtResource("2_icp81")
+
+[node name="Icon" parent="." index="1"]
+texture = null
 
 [node name="Border" parent="." index="2"]
 frame = 4

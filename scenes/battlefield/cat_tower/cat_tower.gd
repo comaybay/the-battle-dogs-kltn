@@ -1,6 +1,8 @@
-extends StaticBody2D
+class_name CatTower extends StaticBody2D
 
 signal zero_health
+signal damage_taken
+signal cat_spawn (cat: BaseCat)
 signal boss_appeared
 
 const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
@@ -87,6 +89,7 @@ func take_damage(damage: int) -> void:
 	else:	
 		health = max(health - damage, 0) 
 	
+	damage_taken.emit()
 	$AnimationPlayer.play("shake" if health > 0 else "fall")
 	
 	while bosses_queue.size() > 0:
@@ -109,11 +112,13 @@ func take_damage(damage: int) -> void:
 			
 		zero_health.emit()
 
-func spawn(cat_name: String) -> void:
-	var cat = cats[cat_name].instantiate()
+func spawn(cat_name: String) -> BaseCat:
+	var cat: BaseCat = cats[cat_name].instantiate()
 	cat.global_position = global_position - Vector2(100, 0)
 	cat.ready.connect(_apply_special_instruction.bind(cat))
 	get_tree().current_scene.add_child(cat)
+	cat_spawn.emit(cat)
+	return cat
 	
 func spawn_boss(boss_info: Dictionary) -> void:
 	boss_appeared.emit()

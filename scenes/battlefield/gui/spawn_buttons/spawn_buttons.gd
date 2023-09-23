@@ -1,5 +1,9 @@
 extends Control
 
+@onready var first_row: HBoxContainer = $FirstRow
+@onready var second_row: HBoxContainer = $SecondRow
+@onready var switch_row_button: TextureButton = $SwitchRowButton
+
 var done_tweening := true
 
 func _ready() -> void:

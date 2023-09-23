@@ -64,8 +64,38 @@ var mute_sound_fx: bool:
 		
 var game_language: String:
 	get: return save_data['settings']['language']
-	set(value): 
-		save_data['settings']['language'] = value	
+	set(value): save_data['settings']['language'] = value	
+
+var has_done_battlefield_basics_tutorial: bool:
+	get: return save_data['tutorial']['battlefield_basics']
+	set(value): save_data['tutorial']['battlefield_basics'] = value
+
+var has_done_battlefield_boss_tutorial: bool:
+	get: return save_data['tutorial']['boss']
+	set(value): save_data['tutorial']['boss'] = value
+
+var has_done_battlefield_final_boss_tutorial: bool:
+	get: return save_data['tutorial']['final_boss']
+	set(value): save_data['tutorial']['final_boss'] = value
+
+var has_done_map_tutorial: bool:
+	get: return save_data['tutorial']['map']
+	set(value): save_data['tutorial']['map'] = value
+
+var has_done_upgrade_tutorial: bool:
+	get: return save_data['tutorial']['upgrade']
+	set(value): save_data['tutorial']['upgrade'] = value
+	
+var has_done_team_setup_tutorial: bool:
+	get: return save_data['tutorial']['team_setup']
+	set(value): save_data['tutorial']['team_setup'] = value
+
+var has_done_dogbase_tutorial: bool:
+	get: return save_data['tutorial']['dogbase']
+	set(value): save_data['tutorial']['dogbase'] = value
+
+## count everytime player lost in a tutorial 
+var tutorial_lost: int = 0 
 
 # general info
 var dog_info := Dictionary()

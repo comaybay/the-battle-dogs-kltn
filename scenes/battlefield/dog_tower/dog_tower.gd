@@ -1,6 +1,7 @@
 class_name DogTower extends StaticBody2D
 
 signal zero_health
+signal dog_spawn(dog: BaseDog)
 
 var health: int
 var max_health: int
@@ -47,9 +48,12 @@ func healing(heal : int) -> void :
 		update_health_label()
 	, health, new_health, 2)
 	
-func spawn(dog_scene: PackedScene) -> void:
+func spawn(dog_scene: PackedScene) -> BaseDog:
 	$SpawnSound.play()
 	var dog = dog_scene.instantiate()
 	dog.global_position = global_position + Vector2(100, 0)
 	get_tree().current_scene.add_child(dog)
+	
+	dog_spawn.emit(dog)
+	return dog
 	

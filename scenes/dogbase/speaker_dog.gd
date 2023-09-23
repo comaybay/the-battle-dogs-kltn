@@ -1,29 +1,40 @@
 extends Control
 
-@onready var original_size: Vector2 = $DialogueLabel.size
-@onready var original_y: float = $SpeechBubblePointer.position.y
+@onready var bubble_pointer_offset_y: float = ($DialogueLabel.position.y + $DialogueLabel.size.y) - $SpeechBubblePointer.position.y 
+@onready var original_label_y: float = $DialogueLabel.position.y + $DialogueLabel.size.y
+
 var dialogue_count: int
 
 const TRANSLATION: Translation = preload("res://resources/translations/translations_speaker_dog.vi.translation") 
 const BUBBLE_SOUND: AudioStream = preload("res://resources/sound/battlefield/spawn.wav") 
 
 func _ready() -> void:
+	$AnimationPlayer.play("jump_up")
+	$AnimationPlayer.animation_finished.connect(
+		func(_anim): $AnimationPlayer.play("dog"),
+		CONNECT_ONE_SHOT
+	)
+	
 	dialogue_count = TRANSLATION.get_translated_message_list().size()
 	
 	pick_random_dialogue()
+	
 	$DogButton.pressed.connect(pick_random_dialogue)
 	
-	$DialogueLabel.resized.connect(func(): 
-		$SpeechBubblePointer.position.y = original_y + ($DialogueLabel.size.y - original_size.y)
-	)
+	$DialogueLabel.resized.connect(_update_bubble)
 	
 	$DialogueLabel.gui_input.connect(func(event):
 		if event is InputEventMouseButton && event.pressed && event.button_index == 1:
 			AudioPlayer.play_custom_sound(BUBBLE_SOUND)
 			pick_random_dialogue()
 	)
+	
+## Update bubble pointer position relative to DialogueLabel	
+func _update_bubble():
+	$DialogueLabel.size.y = 0
+	$DialogueLabel.position.y = original_label_y - $DialogueLabel.size.y
+	$SpeechBubblePointer.position.y = ($DialogueLabel.position.y + $DialogueLabel.size.y) - bubble_pointer_offset_y
 
 func pick_random_dialogue():
 	$DialogueLabel.text = tr("@SPEAKER_DOG_%s" % randi_range(1, dialogue_count))
-	
-	
+	_update_bubble()

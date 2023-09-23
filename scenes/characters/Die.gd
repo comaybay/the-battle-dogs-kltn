@@ -1,6 +1,8 @@
 @tool
 extends FSMState
+
 const FlyingSoul: PackedScene = preload("res://scenes/effects/flying_soul/flying_soul.tscn")
+@onready var character: Character = owner
 
 # called when the state is activated
 func enter(_data: Dictionary) -> void:

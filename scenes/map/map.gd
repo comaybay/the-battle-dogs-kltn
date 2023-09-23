@@ -1,8 +1,15 @@
 extends Control 
 
+var TutorialDogScene: PackedScene = preload("res://scenes/map/map_tutorial_dog/map_tutorial_dog.tscn")
+
 func _ready():
 	AudioPlayer.resume_dogbase_music()
-		
+	
+	if (Data.dogs.size() > 1 or Data.skills.size() > 1) and not Data.has_done_map_tutorial:
+		var tutorial_dog: MapTutorialDog = TutorialDogScene.instantiate()
+		tutorial_dog.setup(%TeamSetupButton)
+		%GUI.add_child(tutorial_dog)
+	
 	var levels = $Khung/map/AllLevel/Node.get_children()
 
 	for index in levels.size():
