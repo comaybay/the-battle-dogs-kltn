@@ -23,6 +23,7 @@ func _create_audio_sfx(audio: AudioStream):
 	return audio_player
 	
 func _ready() -> void:
+	process_mode =  PROCESS_MODE_ALWAYS
 	custom_sound = _create_audio_sfx(null)
 	button_pressed = _create_audio_sfx(BUTTON_PRESSED_AUDIO)
 	level_selected = _create_audio_sfx(LEVEL_SELECTED_AUDIO)
@@ -93,8 +94,9 @@ func _handle_finished():
 		_playback_position = dogbase_music.get_playback_position()
 		dogbase_music.stop()
 
-func play_custom_sound(audio_stream: AudioStream):
+func play_custom_sound(audio_stream: AudioStream, pitch_scale: float = 1.0):
 	custom_sound.stream = audio_stream
+	custom_sound.pitch_scale = pitch_scale
 	custom_sound.play()
 
 func play_custom_music(audio_stream: AudioStream):

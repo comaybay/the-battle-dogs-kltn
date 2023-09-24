@@ -5,6 +5,8 @@ const ListItem = preload("res://scenes/upgrade/item_box.tscn")
 const UNLOCK_AUDIO: AudioStream = preload("res://resources/sound/unlock.wav")
 const UPGRADE_AUDIO: AudioStream = preload("res://resources/sound/upgrade.mp3")
 
+var TutorialDogScene: PackedScene = preload("res://scenes/upgrade/upgrade_tutorial_dog/upgrade_tutorial_dog.tscn")
+
 var character_data 
 var skill_data 
 var selected_item: ItemUpgradeBox
@@ -34,6 +36,13 @@ func _ready():
 	
 	# show first item
 	update_ui(selected_item)
+	
+	if not Data.has_done_upgrade_tutorial:
+		var canvas = CanvasLayer.new()
+		get_parent().add_child.call_deferred(canvas)
+		var tutorial_dog = TutorialDogScene.instantiate()
+		canvas.add_child.call_deferred(tutorial_dog)
+		canvas.tree_exited.connect(func(): canvas.queue_free())
 		
 func add_items():
 	var type := ItemUpgradeBox.Type
@@ -69,8 +78,10 @@ func update_ui(item: ItemUpgradeBox):
 	
 	%ItemName.text = item.get_item_name()
 	%ItemDescription.text = item.get_item_description()
+	
 	%NutNangCap.text = tr("@UPGRADE") if selected_item.get_level() > 0 else tr("@UNLOCK") 
-	%NutNangCap.disabled = selected_item.get_price() > Data.bone
+		
+	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_level() >= 10 
 	
 func createItemBox(type: ItemUpgradeBox.Type, data: Dictionary, container: GridContainer) -> ItemUpgradeBox:
 	var item = ListItem.instantiate()
@@ -89,7 +100,7 @@ func _on_box_pressed(button):
 	
 func reupdate_current_ui():
 	selected_item.update_labels()
-	%NutNangCap.disabled = selected_item.get_price() > Data.bone
+	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_level() >= 10 
 	%NutNangCap.text = tr("@UPGRADE")
 
 func _on_nut_nang_cap_pressed():

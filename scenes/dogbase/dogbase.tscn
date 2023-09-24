@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/dogbase/dogbase.gd" id="1_18sea"]
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="2_i87ga"]
 [ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="2_u67sv"]
-[ext_resource type="PackedScene" path="res://scenes/dogbase/speaker_dog.tscn" id="2_vvswk"]
+[ext_resource type="PackedScene" uid="uid://bysj0231a0wgy" path="res://scenes/dogbase/speaker_dog.tscn" id="2_vvswk"]
 
 [node name="DogBase" instance=ExtResource("2_i87ga")]
 title = "@DOG_BASE_TITLE"
@@ -55,6 +55,7 @@ layout_mode = 2
 size_flags_vertical = 2
 
 [node name="NutCuaHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="4"]
+visible = false
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4

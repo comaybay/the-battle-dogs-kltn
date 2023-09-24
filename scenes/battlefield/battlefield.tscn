@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="2_aom8l"]
 [ext_resource type="PackedScene" uid="uid://q3xac7wpx0wx" path="res://scenes/battlefield/cat_tower/cat_tower.tscn" id="2_d2fcp"]
 [ext_resource type="PackedScene" uid="uid://cjhaavd1ipf1v" path="res://scenes/battlefield/land/land.tscn" id="2_wj8bi"]
-[ext_resource type="Texture2D" uid="uid://c37jfkhahmrk3" path="res://resources/battlefield_themes/winter/sky.png" id="3_paug1"]
+[ext_resource type="Texture2D" uid="uid://c8sa6uo4d7wdb" path="res://resources/battlefield_themes/night/sky.png" id="3_q7fa5"]
 [ext_resource type="Script" path="res://scenes/battlefield/Camera2D.gd" id="4_67qqf"]
 [ext_resource type="PackedScene" uid="uid://lyrmnwxclfgn" path="res://scenes/battlefield/dog_tower/dog_tower.tscn" id="7_j5y50"]
 [ext_resource type="AudioStream" uid="uid://dm1ge42cv7vy7" path="res://resources/sound/battlefield/boss_drum.mp3" id="9_6ixii"]
@@ -20,16 +20,13 @@ offset_top = -1064.0
 offset_right = 2312.0
 offset_bottom = 1384.0
 size_flags_horizontal = 4
-texture = ExtResource("3_paug1")
+texture = ExtResource("3_q7fa5")
 stretch_mode = 1
 
 [node name="Land" parent="." instance=ExtResource("2_wj8bi")]
 
 [node name="CatTower" parent="." instance=ExtResource("2_d2fcp")]
 position = Vector2(553, 0)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-script = ExtResource("4_67qqf")
 
 [node name="DogTower" parent="." instance=ExtResource("7_j5y50")]
 position = Vector2(-303, 0)
@@ -39,9 +36,14 @@ position = Vector2(-303, 0)
 [node name="EffectSpace" type="Node2D" parent="."]
 z_index = 40
 
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_67qqf")
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
-volume_db = -7.0
+process_mode = 3
+volume_db = -9.0
 bus = &"Music"
 
 [node name="BossDrum" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_6ixii")
+bus = &"InBattleFX"

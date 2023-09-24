@@ -45,7 +45,7 @@ theme_type_variation = &"LabelLarge"
 theme_override_colors/font_outline_color = Color(0.490196, 0, 0.819608, 1)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 64
-text = "The Battle Dogs @2023 v1.0"
+text = "The Battle Dogs @2023 v1.2"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2

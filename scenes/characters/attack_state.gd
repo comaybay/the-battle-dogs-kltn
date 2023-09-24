@@ -1,6 +1,7 @@
 @tool
 extends FSMState
 
+@onready var character: Character = owner
 var start_attack := false
 var done_attack := false
 const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")

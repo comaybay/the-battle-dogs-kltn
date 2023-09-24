@@ -6,6 +6,9 @@ var is_boss: bool = false
 @export var allow_boss_effect: bool = true
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	super._ready()
 	
 	var power_scale = InBattle.get_cat_power_scale()

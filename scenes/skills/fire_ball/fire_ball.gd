@@ -12,5 +12,5 @@ func _ready():
 		var random_value_y = randi_range(-800,-900)
 		item.global_position = Vector2(random_value, random_value_y) 		
 		self.add_child(item)
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(1, false).timeout
 		

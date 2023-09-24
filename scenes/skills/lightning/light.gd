@@ -3,7 +3,7 @@ extends CharacterBody2D
 const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")
 
 @export var veloc = Vector2(0,900)
-@export var dame = 10
+@export var dame = 50
 @export var slow_scale: float = 0.75
 var allCats = {}
 
@@ -30,7 +30,7 @@ func _physics_process(delta):
 		
 func die() :
 	$AnimationPlayer.play("die")
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.2, false).timeout
 	queue_free()
 	
 func _create_attack_fx(global_position: Vector2):	

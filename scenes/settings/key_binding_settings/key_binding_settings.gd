@@ -6,6 +6,7 @@ const KeyBindingBoxScene: PackedScene = preload("res://scenes/settings/key_bindi
 const KeyBindingListenerScene: PackedScene = preload("res://scenes/settings/key_binding_settings/key_binding_listener/key_binding_listener.tscn")
 
 const _action_list = [
+	"ui_fullscreen",
 	"ui_confirm",
 	"ui_cancel",
 	"ui_zoomin",
