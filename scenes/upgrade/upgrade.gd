@@ -78,8 +78,10 @@ func update_ui(item: ItemUpgradeBox):
 	
 	%ItemName.text = item.get_item_name()
 	%ItemDescription.text = item.get_item_description()
+	
 	%NutNangCap.text = tr("@UPGRADE") if selected_item.get_level() > 0 else tr("@UNLOCK") 
-	%NutNangCap.disabled = selected_item.get_price() > Data.bone
+		
+	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_level() >= 10 
 	
 func createItemBox(type: ItemUpgradeBox.Type, data: Dictionary, container: GridContainer) -> ItemUpgradeBox:
 	var item = ListItem.instantiate()
@@ -98,7 +100,7 @@ func _on_box_pressed(button):
 	
 func reupdate_current_ui():
 	selected_item.update_labels()
-	%NutNangCap.disabled = selected_item.get_price() > Data.bone
+	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_level() >= 10 
 	%NutNangCap.text = tr("@UPGRADE")
 
 func _on_nut_nang_cap_pressed():

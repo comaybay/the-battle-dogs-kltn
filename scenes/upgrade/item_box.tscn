@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbfmdpcdgsce0"]
+[gd_scene load_steps=9 format=3 uid="uid://dbfmdpcdgsce0"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_art0s"]
 [ext_resource type="Script" path="res://scenes/upgrade/item_box.gd" id="1_ufqi7"]
 [ext_resource type="Texture2D" uid="uid://cqte340ris3tl" path="res://scenes/buttons/character_button/character_button.png" id="2_53hkd"]
 [ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="3_q2tcy"]
+[ext_resource type="Texture2D" uid="uid://bnp7cvbuvml6e" path="res://resources/images/bone.png" id="5_51tg7"]
 
 [sub_resource type="Animation" id="Animation_ty6py"]
 length = 0.001
@@ -80,21 +81,6 @@ offset_bottom = 216.0
 focus_mode = 0
 theme_type_variation = &"ButtonItem"
 
-[node name="Price" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -14.0
-offset_right = -14.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_type_variation = &"LabelLarge"
-text = "1000"
-horizontal_alignment = 2
-
 [node name="Level" type="Label" parent="."]
 layout_mode = 2
 offset_left = 12.0
@@ -102,3 +88,29 @@ offset_right = 212.0
 offset_bottom = 37.0
 theme_type_variation = &"LabelLarge"
 text = "Level. 1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 186.0
+offset_right = 254.0
+offset_bottom = 234.0
+alignment = 2
+
+[node name="Price" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelLarge"
+text = "10000"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="BoneIcon" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("5_51tg7")
+expand_mode = 3

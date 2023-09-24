@@ -36,6 +36,7 @@ keys,vi,en
 @BIND,Sửa phím cho,Bind
 @KEY_BINDING_INSTRUCTION,Bấm phím mong muốn,Press key to bind
 @RESET_TO_DEFAULT,Khôi phục về mặc định,Reset to default
+@KEY_ui_fullscreen,Mở game toàn màn hình,Toggle fullscreen
 @KEY_ui_confirm,Đồng ý,Confirm
 @KEY_ui_cancel,Hủy,Cancel
 @KEY_ui_zoomout,Thu nhỏ,Zoom out
@@ -76,3 +77,10 @@ keys,vi,en
 @LEVEL_11_NAME,N.E.K.O HQ,N.E.K.O HQ
 @LEVEL_12_NAME,Đảo Mèo,Cat Island
 @LEVEL_13_NAME,Sào Huyệt Loài Mèo,Catkind Lair
+@LANGUAGE_PREFERENCE,Chọn ngôn ngữ,Select Language
+@FULLSCREEN_PREFERENCE,Bạn có muốn game ở chế độ toàn màn hình?,Do you want the game to be in fullscreen?
+@PLAY_TUTORIAL,Bạn có muốn chú Chó dễ thương này hướng dẫn bạn cách chơi game không?,Do you want this cute Dog to show you how to play the game?
+@PLAY_TUTORIAL_YES,Có chứ (Tôi rất thích chó!),Yes please (I love dogs!)
+@PLAY_TUTORIAL_NO,Không (Tôi có chơi game này rồi),Nah (I have played this game before)
+@YES,Có,Yes
+@NO,Không,No

@@ -5,7 +5,10 @@ var TutorialDogScene: PackedScene = preload("res://scenes/dogbase/dogbase_tutori
 func _ready() -> void:
 	AudioPlayer.resume_dogbase_music()
 	
-	if Data.has_done_battlefield_basics_tutorial and not Data.has_done_dogbase_tutorial:
+	if 	(
+		not Data.has_done_dogbase_tutorial or
+		(Data.has_done_battlefield_basics_tutorial and not Data.has_done_dogbase_after_battlefield_tutorial)
+	):
 		var canvas = CanvasLayer.new()
 		get_parent().add_child.call_deferred(canvas)
 		var tutorial_dog = TutorialDogScene.instantiate()

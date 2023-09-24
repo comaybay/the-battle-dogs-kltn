@@ -9,9 +9,10 @@
   "selected_level": 0,
   "selected_team": 0,
   "settings": {
+    "fullscreen": false,
     "music": { "volume": 60, "mute": false },
     "sound_fx": { "volume": 50, "mute": false },
-    "language": "vi",
+    "language": "",
     "key_binding_overwrites": {}
   },
   "skills": [{ "ID": "fire_ball", "level": 1 }],
@@ -23,9 +24,11 @@
   ],
   "tutorial": {
     "battlefield_basics": false,
+    "battlefield_rush": false,
     "boss": false,
     "final_boss": false,
     "dogbase": false,
+    "dogbase_after_battlefield": false,
     "map": false,
     "upgrade": false,
     "team_setup": false

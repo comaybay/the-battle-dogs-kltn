@@ -7,7 +7,7 @@ class_name TutorialDog extends Control
 ## but we need to listen to those signals in the code (in this case, it is
 ## the DialogueLabel's resized signal).
 
-const BUBBLE_SOUND: AudioStream = preload("res://resources/sound/battlefield/spawn.wav") 
+const BARK_SOUND: AudioStream = preload("res://resources/sound/dog_bark.wav") 
 
 signal dialogue_started
 signal dialogue_ended
@@ -24,6 +24,7 @@ var _placement: PLACEMENT
 
 func _handle_next_line() -> void:
 	if _has_next_dialogue_line():
+		AudioPlayer.play_custom_sound(BARK_SOUND, randf_range(1, 1.2))
 		_dialogue_next_line()
 	else:
 		end_dialogue()
@@ -66,6 +67,7 @@ func start_dialogue(dialogue_code: String, placement: PLACEMENT, pause_game: boo
 	## update bubble pointer on first line to ensure it is in correct position
 	_update_bubble()
 	
+	$IntroSound.play()
 	$AnimationPlayer.play("jump_in_left_side" if left_side else "jump_in_right_side")
 	
 	await $AnimationPlayer.animation_finished
@@ -79,7 +81,8 @@ func start_dialogue(dialogue_code: String, placement: PLACEMENT, pause_game: boo
 func end_dialogue() -> void:
 	_dialogue_index = 0
 	set_process_input(false)
-	
+
+	$OutroSound.play()	
 	var left_side := _placement == PLACEMENT.LEFT
 	$AnimationPlayer.play("jump_out_left_side" if left_side else "jump_out_right_side")
 	await $AnimationPlayer.animation_finished
@@ -95,7 +98,6 @@ func pause_dialogue() -> void:
 
 ## Go to next dialouge line, returns the index of the dialogue line 
 func _dialogue_next_line() -> void:
-	AudioPlayer.play_custom_sound(BUBBLE_SOUND)
 	_dialogue_index += 1
 	$DialogueLabel.text = tr("@%s_%s" % [_dialogue_code, _dialogue_index])
 	_update_bubble()	

@@ -76,14 +76,15 @@ collision_mask = 0
 script = ExtResource("1_ywct4")
 
 [node name="HealthLabel" type="Label" parent="."]
-offset_left = -27.0
-offset_top = -1052.0
-offset_right = 277.0
-offset_bottom = -979.0
+offset_left = -811.0
+offset_top = 60.0
+offset_right = 851.0
+offset_bottom = 135.0
 size_flags_horizontal = 4
 theme = ExtResource("2_jattt")
-text = "healh/health"
+text = "500/500 HP"
 label_settings = SubResource("LabelSettings_8inmh")
+horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -455)

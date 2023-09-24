@@ -66,7 +66,7 @@ var game_language: String:
 	get: return save_data['settings']['language']
 	set(value): save_data['settings']['language'] = value	
 
-var has_done_battlefield_basics_tutorial: bool:
+var has_done_battlefield_basics_tutorial: bool:	
 	get: return save_data['tutorial']['battlefield_basics']
 	set(value): save_data['tutorial']['battlefield_basics'] = value
 
@@ -77,6 +77,10 @@ var has_done_battlefield_boss_tutorial: bool:
 var has_done_battlefield_final_boss_tutorial: bool:
 	get: return save_data['tutorial']['final_boss']
 	set(value): save_data['tutorial']['final_boss'] = value
+
+var has_done_battlefield_rush: bool:
+	get: return save_data['tutorial']['battlefield_rush']
+	set(value): save_data['tutorial']['battlefield_rush'] = value
 
 var has_done_map_tutorial: bool:
 	get: return save_data['tutorial']['map']
@@ -93,6 +97,10 @@ var has_done_team_setup_tutorial: bool:
 var has_done_dogbase_tutorial: bool:
 	get: return save_data['tutorial']['dogbase']
 	set(value): save_data['tutorial']['dogbase'] = value
+
+var has_done_dogbase_after_battlefield_tutorial: bool:
+	get: return save_data['tutorial']['dogbase_after_battlefield']
+	set(value): save_data['tutorial']['dogbase_after_battlefield'] = value
 
 ## count everytime player lost in a tutorial 
 var tutorial_lost: int = 0 
@@ -126,7 +134,6 @@ func _init() -> void:
 		file.close()
 		TranslationServer.set_locale(game_language)	
 		
-	
 	_load_settings()
 
 	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
@@ -154,6 +161,14 @@ func _init() -> void:
 	file.close()
 	
 	compute_values()
+
+func _ready() -> void:
+	if game_language == "":	
+		get_tree().change_scene_to_file.call_deferred("res://scenes/new_game_preferences/new_game_preferences.tscn")
+	
+	if save_data['settings']['fullscreen']:
+		GlobalControl.set_fullscreen(true)
+	
 
 func compute_values():
 	for dog in save_data["dogs"]:

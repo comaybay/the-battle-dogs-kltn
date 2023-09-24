@@ -6,7 +6,7 @@ extends Control
 var dialogue_count: int
 
 const TRANSLATION: Translation = preload("res://resources/translations/translations_speaker_dog.vi.translation") 
-const BUBBLE_SOUND: AudioStream = preload("res://resources/sound/battlefield/spawn.wav") 
+const BARK_SOUND: AudioStream = preload("res://resources/sound/dog_bark.wav") 
 
 func _ready() -> void:
 	$AnimationPlayer.play("jump_up")
@@ -19,13 +19,16 @@ func _ready() -> void:
 	
 	pick_random_dialogue()
 	
-	$DogButton.pressed.connect(pick_random_dialogue)
+	$DogButton.pressed.connect(func():
+		AudioPlayer.play_custom_sound(BARK_SOUND, randf_range(1, 1.2))
+		pick_random_dialogue()
+	)
 	
 	$DialogueLabel.resized.connect(_update_bubble)
 	
 	$DialogueLabel.gui_input.connect(func(event):
 		if event is InputEventMouseButton && event.pressed && event.button_index == 1:
-			AudioPlayer.play_custom_sound(BUBBLE_SOUND)
+			AudioPlayer.play_custom_sound(BARK_SOUND, randf_range(1, 1.2))
 			pick_random_dialogue()
 	)
 	

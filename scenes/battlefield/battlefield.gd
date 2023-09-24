@@ -27,6 +27,7 @@ func _ready() -> void:
 		not Data.has_done_battlefield_basics_tutorial 
 		or not Data.has_done_battlefield_boss_tutorial
 		or not Data.has_done_battlefield_final_boss_tutorial
+		or not Data.has_done_battlefield_rush
 	):
 		_tutorial_dog = TutorialDogScene.instantiate()
 		_tutorial_dog.setup($CatTower, $DogTower, $Camera2D, $Gui)

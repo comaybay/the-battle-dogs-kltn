@@ -40,7 +40,8 @@ z_index = 40
 script = ExtResource("4_67qqf")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-volume_db = -7.0
+process_mode = 3
+volume_db = -9.0
 bus = &"Music"
 
 [node name="BossDrum" type="AudioStreamPlayer" parent="."]

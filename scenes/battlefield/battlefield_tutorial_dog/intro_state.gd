@@ -16,11 +16,18 @@ func enter(data: Dictionary) -> void:
 			transition.emit("BossAppearedState")
 			
 		if (
+			not Data.has_done_battlefield_rush 
+			and Data.selected_battlefield_id == "level6"
+		):
+			transition.emit("RushState")
+			
+			
+		if (
 			not Data.has_done_battlefield_final_boss_tutorial 
 			and Data.selected_battlefield_id == "level13"
 		):
 			transition.emit("FinalBossState")
-			
+		
 		return
 		
 	# tutorial basics section	

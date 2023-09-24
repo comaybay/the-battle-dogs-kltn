@@ -42,7 +42,12 @@ func update_labels():
 	$Background.frame = 0 if level > 0 else 1	
 	$Level.visible = true if level > 0 else false
 	$Level.text = "Level. %s" % level
-	$Price.text = str(get_price())
+	if level < 10:
+		%Price.text = str(get_price()) 
+	else:
+		%Price.text = "MAX"
+		%BoneIcon.hide()
+		$Background.modulate = Color(100, 100, 100)
 	
 func _on_pressed():
 	_parent.sendInfo(self)

@@ -75,7 +75,7 @@ func load_cats(cat_names: Array) -> Dictionary:
 	return cats
 
 func update_health_label():
-	$HealthLabel.text = "%s/%s" % [health, max_health]
+	$HealthLabel.text = "%s/%s HP" % [health, max_health]
 
 func take_damage(damage: int) -> void:
 	if health <= 0:
