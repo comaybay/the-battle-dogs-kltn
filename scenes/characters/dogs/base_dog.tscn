@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cvno8d4sb6h0s" path="res://scenes/characters/character.tscn" id="1_t516l"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/base_dog.gd" id="2_krygw"]
-[ext_resource type="Texture2D" uid="uid://whf5eqdonrk0" path="res://resources/icons/pngwing.com.png" id="3_dhr53"]
+[ext_resource type="Texture2D" path="res://resources/icons/pngwing.com.png" id="3_dhr53"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/user_move_state.gd" id="3_t0eec"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/user_attack_state.gd" id="4_ioj3n"]
 [ext_resource type="AudioStream" uid="uid://byul4hma3ffpq" path="res://resources/sound/battlefield/bite.mp3" id="5_ot2k0"]
