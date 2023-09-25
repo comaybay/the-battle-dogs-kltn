@@ -23,7 +23,7 @@ func _ready() -> void:
 	Data.bone_changed.connect(_on_bone_changed)
 	
 func _on_bone_changed(value: int):
-	%Money.text = tr("@BONE") + ": %s" % value
+	%Money.text = str(Data.bone)
 	
 func _on_go_back_pressed():
 	AudioPlayer.play_button_pressed_audio()
