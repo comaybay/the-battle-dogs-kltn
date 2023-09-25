@@ -568,3 +568,6 @@ target_position = Vector2(1650, 0)
 
 [node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
 stream = ExtResource("7_llot2")
+
+[node name="Arrow" parent="." index="11"]
+position = Vector2(0, -1134)

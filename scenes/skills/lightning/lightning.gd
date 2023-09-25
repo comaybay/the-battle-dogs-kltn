@@ -8,7 +8,6 @@ func _ready():
 	var count = int((InBattle.battlefield_data["stage_width"]- 1400) / 350)
 	for i in range(count+1):
 		var item = FireBall.instantiate()
-		#randi_range(posti-100 , InBattle.battlefield_data["stage_width"] - posti - 1100)
 		var random_value = i * 350 + posti + 450
 		var random_value_y = randi_range(-800,-900)
 		item.global_position = Vector2(random_value, random_value_y) 		

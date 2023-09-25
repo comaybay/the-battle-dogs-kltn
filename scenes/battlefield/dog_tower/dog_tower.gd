@@ -11,7 +11,7 @@ var effect_global_position: Vector2:
 	
 func _ready() -> void:
 	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/dog_tower.png" % InBattle.battlefield_data['theme'])
-
+	
 	max_health = 500
 	var health_upgrade = Data.passives.get('dog_tower_health')
 	if health_upgrade != null:
