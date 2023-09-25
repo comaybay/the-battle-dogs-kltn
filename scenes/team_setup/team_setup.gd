@@ -1,24 +1,31 @@
 extends Control
 
 const ListCharacter = preload("res://scenes/team_setup/box_character.tscn")
+const TutorialDogScene: PackedScene = preload("res://scenes/team_setup/team_setup_tutorial_dog/team_setup_tutorial_dog.tscn")
 
 var character_id_to_item: Dictionary
 var skill_id_to_item: Dictionary
 @onready var character_slots: Array[Node] = %CharacterSlots.get_children()
 @onready var skill_slots: Array[Node] = %SkillSlots.get_children()
 
-func _ready():
+func _ready():		
 	AudioPlayer.resume_dogbase_music()
 	%TabContainer.set_tab_title(0, tr("@CHARACTERS"))
 	%TabContainer.set_tab_title(1, tr("@SKILLS"))
 	%TabContainer.tab_changed.connect(_on_tab_container_tab_changed)
-	%SaveButton.pressed.connect(_on_save_pressed)
 	
 	# Thiết lập nhân vật và kỹ năng
 	loadCharacterList()
 	loadSkillList()
 	# đưa đội hình hiện tại vào teams	6
 	loadTeam()
+	
+	if not Data.has_done_team_setup_tutorial:
+		var canvas = CanvasLayer.new()
+		get_parent().add_child.call_deferred(canvas)
+		var tutorial_dog = TutorialDogScene.instantiate()
+		canvas.add_child.call_deferred(tutorial_dog)
+		canvas.tree_exited.connect(func(): canvas.queue_free())
 	
 func _exit_tree() -> void:
 	AudioPlayer.pause_dogbase_music()
@@ -42,14 +49,16 @@ func _on_add_character_to_slot(item: SelectCharacterBox):
 		if slot.get_item_type() == SelectCharacterBox.Type.NONE:
 			slot.change_item(item.get_item_id(), SelectCharacterBox.Type.CHARACTER) 
 			item.visible = false
+			save_team_setup()
 			return
-			
+	
 
 func _on_add_skill_to_slot(item: SelectCharacterBox):
 	for slot in skill_slots:
 		if slot.get_item_type() == SelectCharacterBox.Type.NONE:
 			slot.change_item(item.get_item_id(), SelectCharacterBox.Type.SKILL) 
 			item.visible = false
+			save_team_setup()
 			return
 				
 func create_item(item_id: String, type: SelectCharacterBox.Type) -> SelectCharacterBox:
@@ -84,19 +93,19 @@ func _on_remove_character_from_slot(slot: SelectCharacterBox):
 	if slot.get_item_type() != SelectCharacterBox.Type.NONE:
 		character_id_to_item[slot.get_item_id()].visible = true
 		slot.clear()
+		save_team_setup()
 		
+	
 func _on_remove_skill_from_slot(slot: SelectCharacterBox):
 	if slot.get_item_type() != SelectCharacterBox.Type.NONE:
 		skill_id_to_item[slot.get_item_id()].visible = true
 		slot.clear()
+		save_team_setup()
 		
-func _on_save_pressed():	
-	AudioPlayer.play_button_pressed_audio()
+func save_team_setup():	
 	Data.selected_team['dog_ids'] = character_slots.map(func(item: SelectCharacterBox): return item.get_item_id())
 	Data.selected_team['skill_ids'] = skill_slots.map(func(item: SelectCharacterBox): return item.get_item_id())
-	
 	Data.save()
-	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
 func move(a) :
 	$Luu.play()

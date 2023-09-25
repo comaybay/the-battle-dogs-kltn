@@ -1,6 +1,7 @@
 @tool
 extends FSMState
 
+@onready var character: Character = owner
 var knockback_countdown: int
 var knockback_vel: Vector2
 

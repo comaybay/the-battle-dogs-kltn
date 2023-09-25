@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://dg431mihiquab"]
 
 [ext_resource type="PackedScene" uid="uid://cto0tiylqerf7" path="res://scenes/buttons/character_button/character_button.tscn" id="1_iqesx"]
 [ext_resource type="Script" path="res://scenes/team_setup/box_character.gd" id="1_p4qam"]

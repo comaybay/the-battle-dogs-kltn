@@ -24,10 +24,17 @@ func setup(levels: Array[Node], level_chain: LevelChain, map: Sprite2D, drag_are
 	drag_area.mouse_exited.connect(func(): is_mouse_entered = false)
 	
 	for level in levels:
-		level.pressed.connect(_move_to_level.bind(level))
+		level.pressed.connect(
+			func():
+				_move_to_level(level)
+				_level_chain.focus_camera_to(level.index)
+		)
 		
 	for level_box in level_chain.level_boxes:
-		level_box.pressed.connect(_move_to_level.bind(level_box.level))
+		level_box.pressed.connect(
+			func():
+				_move_to_level(level_box.level)
+		)
 	
 	_move_to_level(current_level, false)
 		
@@ -35,7 +42,6 @@ func _move_to_level(level: Level, play_sound := true):
 	if play_sound:
 		AudioPlayer.play_level_selected_audio()
 	
-	_level_chain.focus_camera_to(level.index)
 	current_level.set_selected(false)
 	level.set_selected(true)
 	position = level.position #Di chuyen tracker
@@ -44,12 +50,14 @@ func _move_to_level(level: Level, play_sound := true):
 
 func _input(event):
 	if event.is_action_pressed("ui_left") and current_level.prev_level != null:
+		_level_chain.focus_camera_to(current_level.prev_level.index)
 		_move_to_level(current_level.prev_level)
 	
 	elif event.is_action_pressed("ui_right") and current_level.next_level != null and Data.passed_level >= 0 and current_level.index <= Data.passed_level:
+		_level_chain.focus_camera_to(current_level.next_level.index)
 		_move_to_level(current_level.next_level)
 	
-	if !is_mouse_entered:
+	if not is_mouse_entered and not mouse_pressed:
 		return
 	
 	if event is InputEventMouseButton:
@@ -68,3 +76,6 @@ func _input(event):
 		var delta = last_mouse_pos - event.position
 		position += delta
 		last_mouse_pos = event.position
+
+func get_camera() -> Camera2D:
+	return $Camera2D 

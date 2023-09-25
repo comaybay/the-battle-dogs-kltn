@@ -25,6 +25,6 @@ func _ready() -> void:
 		effect_on_cat.global_position = cat.global_position
 		effect_space.add_child(effect_on_cat) 
 	
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(3, false).timeout
 	queue_free()
 

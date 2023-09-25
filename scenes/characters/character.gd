@@ -162,7 +162,7 @@ func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> v
 	elif effect ==  "health" :
 		health = health * number
 	
-	await get_tree().create_timer(time).timeout
+	await get_tree().create_timer(time, false).timeout
 	
 	if effect == "speed" :
 		speed = speed / number 
@@ -191,7 +191,7 @@ func powerUp(types , number : float, time : float) :
 			damage = damage * number
 		if (type == "speed") :
 			speed = speed * number
-	await get_tree().create_timer(time).timeout
+	await get_tree().create_timer(time, false).timeout
 	for type in types :
 		if (type == "attack_cooldown"):
 			attack_cooldown = attack_cooldown * number

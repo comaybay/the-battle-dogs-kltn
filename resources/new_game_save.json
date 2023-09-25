@@ -1,19 +1,36 @@
 {
   "bone": 0,
   "dog_food": 0,
-  "dogs": [{"ID": "dog", "level": 1}],
+  "dogs": [{ "ID": "dog", "level": 1 }],
   "items": [],
   "passed_level": -1,
   "passives": [],
   "selected_battlefield_id": "level1",
   "selected_level": 0,
   "selected_team": 0,
-  "settings": { "music": {"volume": 60, "mute": false}, "sound_fx": {"volume": 50, "mute": false}, "language": "vi", "key_binding_overwrites": {} },
-  "skills": [],
+  "settings": {
+    "fullscreen": false,
+    "music": { "volume": 60, "mute": false },
+    "sound_fx": { "volume": 50, "mute": false },
+    "language": "",
+    "key_binding_overwrites": {}
+  },
+  "skills": [{ "ID": "fire_ball", "level": 1 }],
   "teams": [
-	{
-	  "dog_ids": ["dog", null, null, null, null, null, null, null, null, null],
-	  "skill_ids": [null, null, null]
-	}
-  ]
+    {
+      "dog_ids": ["dog", null, null, null, null, null, null, null, null, null],
+      "skill_ids": ["fire_ball", null, null]
+    }
+  ],
+  "tutorial": {
+    "battlefield_basics": false,
+    "battlefield_rush": false,
+    "boss": false,
+    "final_boss": false,
+    "dogbase": false,
+    "dogbase_after_battlefield": false,
+    "map": false,
+    "upgrade": false,
+    "team_setup": false
+  }
 }

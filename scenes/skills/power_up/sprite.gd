@@ -8,7 +8,7 @@ func setup(time : float, character : Character ) -> void:
 	_character = character
 	$AnimationPlayer.play("play")
 	_character.tree_exiting.connect(func(): queue_free())
-	await get_tree().create_timer(time).timeout
+	await get_tree().create_timer(time, false).timeout
 	queue_free()
 
 func _process(delta):
