@@ -2,6 +2,8 @@
 extends CharacterBody2D
 class_name Character
 
+signal knockbacked
+
 enum Type { DOG, ENEMY }
 
 ## 0 for dog, 1 for enemy
@@ -204,6 +206,7 @@ func powerUp(types , number : float, time : float) :
 
 func knockback(scale: float = 1):
 	$FiniteStateMachine.change_state("KnockbackState", {"scale": scale})	
+	knockbacked.emit()
 	
 func kill():
 	$FiniteStateMachine.change_state("DieState")	

@@ -20,9 +20,8 @@ func _process(delta):
 		
 	if  ($AttackCooldownTimer.is_stopped() == true) and (cat != null):		
 		var item = bullet.instantiate()
-		item.target(cat)
-		item.global_position = $Sprite2D.position
-		self.add_child(item)
+		get_tree().current_scene.add_child(item)
+		item.setup($Sprite2D.global_position, cat)
 		$AttackCooldownTimer.start()
 		
 		
