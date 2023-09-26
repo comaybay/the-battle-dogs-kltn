@@ -7,3 +7,5 @@ keys,vi,en
 @PASSIVE_DESCRIPTION_dog_tower_health,Quyết không để thành bị sụp đổ! Tăng lượng máu ban đầu của thành Chó.,Protect the Dog Tower at all cost! Increases the base health of Dog Tower.
 @PASSIVE_NAME_bone_reward_up,Nghiên cứu và phát triển,R&D
 @PASSIVE_DESCRIPTION_bone_reward_up,Nghiên cứu công nghệ chiếm được từ loài Mèo! Tăng số Xương nhận được sau mỗi trận đấu.,Research Cat's technology stolen after battle! Increases the number of Bones rewarded after a battle.
+@PASSIVE_NAME_gun_tower,Tháp súng,Gun Tower
+@PASSIVE_DESCRIPTION_gun_tower,"Nâng cấp tháp canh, tạo ra súng cho tháp canh, giúp phòng thủ tháp canh","Create gun in tower, help defend your tower"
