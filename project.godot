@@ -22,6 +22,8 @@ Debug="*res://debug.gd"
 InBattle="*res://in_battle.gd"
 AudioPlayer="*res://audio_player.gd"
 GlobalControl="*res://global_control.gd"
+SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+Global="*res://global.gd"
 
 [debug]
 
