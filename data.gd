@@ -11,6 +11,7 @@ var save_data: Dictionary
 var bone: int:
 	get: return save_data['bone']		
 	set(value): 
+		
 		save_data['bone'] = value
 		bone_changed.emit(value)		
 

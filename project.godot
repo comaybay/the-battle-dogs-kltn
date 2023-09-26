@@ -24,9 +24,11 @@ AudioPlayer="*res://audio_player.gd"
 GlobalControl="*res://global_control.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 Global="*res://global.gd"
+SteamUser="*res://steam_user.gd"
 
 [debug]
 
+file_logging/enable_file_logging=true
 gdscript/warnings/integer_division=0
 
 [display]
