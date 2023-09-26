@@ -14,5 +14,9 @@
   {
     "ID": "bone_reward_up",
     "price": 1000
+  },
+  {
+    "ID": "gun_tower",
+    "price": 10000  
   }
 ]

@@ -1,15 +1,20 @@
 extends CharacterBody2D
 
-@export var dame = 50
+@export var dame = 5
 var count = 0
 var object
 var speed = 500
-var _stop_following: bool = true
+var _stop_following: bool = false
 var _direction: Vector2 = Vector2(0.5, 0.5) 
 var _target: BaseCat
 
 const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")
-
+func _ready():
+	var bullet_upgrade = Data.passives.get("gun_tower")
+	if bullet_upgrade != null:
+		dame = dame + (dame * (bullet_upgrade['level']))
+		print(bullet_upgrade)
+		
 func setup(global_position: Vector2, target: BaseCat) :
 	_target = target  
 	self.global_position = global_position 
@@ -35,8 +40,7 @@ func _physics_process(delta):
 				character.take_damage(dame)
 				queue_free()
 		
-		queue_free()
 		var hit_fx: HitFx = HitFx.instantiate()
 		get_tree().current_scene.get_node("EffectSpace").add_child(hit_fx)
 		hit_fx.global_position = global_position
-	
+		queue_free()
