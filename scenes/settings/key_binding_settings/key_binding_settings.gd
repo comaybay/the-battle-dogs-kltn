@@ -34,7 +34,7 @@ func _ready() -> void:
 		key_binding_boxes.push_back(key_binding_box)
 	
 	%ResetToDefaultButton.pressed.connect(_on_reset_to_default_pressed)
-	%ResetKeyBindingPopup.yes.connect(_reset_keybinding_settings)
+	%ResetKeyBindingPopup.confirm.connect(_reset_keybinding_settings)
 		
 func _on_key_binding_requested(action: String):
 	var listener = KeyBindingListenerScene.instantiate()
@@ -59,7 +59,7 @@ func _bind_key(action: String, input: InputEvent):
 	key_binding_box.update_ui()
 
 func _on_reset_to_default_pressed() -> void:
-	%ResetKeyBindingPopup.popup("@CONFIRM_RESET_KEYBINDING_SETTINGS", PopupDialog.Type.CONFIRMATION)
+	%ResetKeyBindingPopup.popup(tr("@CONFIRM_RESET_KEY_BINDING_SETTINGS"), PopupDialog.Type.CONFIRMATION)
 			
 func _reset_keybinding_settings() -> void:
 	InputMap.load_from_project_settings()

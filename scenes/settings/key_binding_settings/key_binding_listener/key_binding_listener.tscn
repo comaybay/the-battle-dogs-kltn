@@ -3,17 +3,17 @@
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_s4ibk"]
 [ext_resource type="Script" path="res://scenes/settings/key_binding_settings/key_binding_listener/key_binding_listener.gd" id="2_o17ok"]
 
-[sub_resource type="InputEventAction" id="InputEventAction_itjlh"]
-action = &"ui_cancel_default"
-
-[sub_resource type="Shortcut" id="Shortcut_7olho"]
-events = [SubResource("InputEventAction_itjlh")]
-
 [sub_resource type="InputEventAction" id="InputEventAction_hbj61"]
 action = &"ui_confirm_default"
 
 [sub_resource type="Shortcut" id="Shortcut_nbyvs"]
 events = [SubResource("InputEventAction_hbj61")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_itjlh"]
+action = &"ui_cancel_default"
+
+[sub_resource type="Shortcut" id="Shortcut_7olho"]
+events = [SubResource("InputEventAction_itjlh")]
 
 [node name="KeyBindingListener" type="Panel"]
 anchors_preset = 15
@@ -89,14 +89,15 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
+[node name="ConfirmButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ButtonRed"
+shortcut = SubResource("Shortcut_nbyvs")
+text = "@CONFIRM"
+
 [node name="CancelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 shortcut = SubResource("Shortcut_7olho")
 text = "@CANCEL"
-
-[node name="ConfirmButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-shortcut = SubResource("Shortcut_nbyvs")
-text = "@CONFIRM"
