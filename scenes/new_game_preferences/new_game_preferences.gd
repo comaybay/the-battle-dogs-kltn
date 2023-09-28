@@ -56,7 +56,7 @@ func set_language_preference(language_code: String):
 	TranslationServer.set_locale(language_code) 
 
 func set_fullscreen_preference(state: bool):
-	Data.save_data['settings']['fullscreen'] = state
+	Data.fullscreen = state
 	GlobalControl.set_fullscreen(state)
 	Data.save()
 	

@@ -66,6 +66,10 @@ var game_language: String:
 	get: return save_data['settings']['language']
 	set(value): save_data['settings']['language'] = value	
 
+var fullscreen: bool:
+	get: return save_data['settings']['fullscreen']
+	set(value): save_data['settings']['fullscreen'] = value	
+
 var has_done_battlefield_basics_tutorial: bool:	
 	get: return save_data['tutorial']['battlefield_basics']
 	set(value): save_data['tutorial']['battlefield_basics'] = value
@@ -175,9 +179,8 @@ func _ready() -> void:
 	if game_language == "":	
 		get_tree().change_scene_to_file.call_deferred("res://scenes/new_game_preferences/new_game_preferences.tscn")
 	
-	if save_data['settings']['fullscreen']:
-		GlobalControl.set_fullscreen(true)
-
+	GlobalControl.set_fullscreen(fullscreen)
+	
 func compute_values():
 	for dog in save_data["dogs"]:
 		dogs[dog["ID"]] = dog
