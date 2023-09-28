@@ -130,6 +130,7 @@ theme_override_constants/margin_right = 20
 
 [node name="DogFoodLabel" type="Label" parent="Khung/Footer/TieuDe/ThucAnChoCho/MarginContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelLarge"
