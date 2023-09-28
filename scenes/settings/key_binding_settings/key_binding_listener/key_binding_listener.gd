@@ -32,7 +32,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouse or event.is_released():
 		return
 	
-	_event = event
 	if event.is_action_pressed("ui_cancel_default"):
 		AudioPlayer.play_button_pressed_audio()
 		canceled.emit()
@@ -43,6 +42,8 @@ func _input(event: InputEvent) -> void:
 		ok.emit(_action, _event)
 		queue_free()
 		
+	_event = event
+	
 	%InputLabel.text = event.as_text()
 
 	%ButtonContainer.show()
