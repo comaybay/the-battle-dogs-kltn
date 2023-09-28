@@ -1,5 +1,4 @@
-class_name MainSettings extends Panel
-signal goback_pressed
+class_name MainSettings extends Control
 signal keybinding_settings_pressed
 
 const DEFAULT_MUSIC_VOLUME: int = 60
@@ -30,11 +29,9 @@ func _ready() -> void:
 		keybinding_settings_pressed.emit()
 	)
 	
-	%GoBackButton.pressed.connect(func() -> void:
-		AudioPlayer.play_button_pressed_audio()
-		goback_pressed.emit()
-	)
-
+	%DeleteSaveButton.pressed.connect(_on_delete_save_button_pressed)
+	%DeleteSavePopup.yes.connect(_delete_save)
+	
 func _exit_tree() -> void:
 	Data.mute_music_changed.disconnect(on_mute_music_changed)
 	Data.mute_sound_fx_changed.disconnect(on_mute_sfx_changed)	
@@ -54,3 +51,26 @@ func on_mute_sfx_changed(mute: bool) -> void:
 			%SFXSlider.set_value_no_signal(Data.sound_fx_volume) 
 		else:
 			%SFXSlider.value = DEFAULT_SFX_VOLUME
+
+func _on_delete_save_button_pressed() -> void:
+	%DeleteSavePopup.popup("@CONFIRM_DELETE_SAVE", PopupDialog.Type.CONFIRMATION)
+
+func _delete_save() -> void:
+	# delete save data but keep some of user preferences
+	var keybinding_settings: Dictionary = Data.save_data['settings']['key_binding_overwrites']
+	var game_langauge: String = Data.game_language
+	var fullscreen: bool = Data.save_data['settings']['fullscreen'] 
+	
+	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
+	var new_game_save_data: Dictionary = JSON.parse_string(new_game_save_file.get_as_text()) 
+	
+	Data.save_data = new_game_save_data
+	Data.save_data['settings']['key_binding_overwrites'] = keybinding_settings
+	Data.save_data['settings']['fullscreen'] = fullscreen
+	Data.game_language = game_langauge
+	
+	Data.save()
+	Data.load_settings()
+	
+	AudioPlayer.stop_custom_music()
+	get_tree().change_scene_to_file("res://scenes/new_game_preferences/new_game_preferences.tscn")

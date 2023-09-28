@@ -5,16 +5,20 @@ class_name Settings extends Control
 signal goback_pressed
 
 func _ready() -> void:
-	$MainSettings.goback_pressed.connect(func() -> void:
-		goback_pressed.emit()		
-	)
+	$MainSettings.keybinding_settings_pressed.connect(_show_keybinding_settings)
 	
-	$MainSettings.keybinding_settings_pressed.connect(func() -> void:
-		$MainSettings.hide()
-		$KeyBidingSettings.show()	
+	%GoBackButton.pressed.connect(func() -> void:
+		if $MainSettings.visible:
+			goback_pressed.emit()
+		else:
+			# is in keybinding settings
+			_show_main_settings()
 	)
+
+func _show_keybinding_settings() -> void:
+	$MainSettings.hide()
+	$KeyBindingSettings.show()
 	
-	$KeyBidingSettings.goback_pressed.connect(func() -> void:
-		$MainSettings.show()
-		$KeyBidingSettings.hide()	
-	)
+func _show_main_settings() -> void:
+	$MainSettings.show()
+	$KeyBindingSettings.hide()	
