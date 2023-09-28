@@ -74,7 +74,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="YesButton" type="Button" parent="PopupPanel/MarginContainer/VBoxContainer/ConfirmationButtons"]
+[node name="ConfirmButton" type="Button" parent="PopupPanel/MarginContainer/VBoxContainer/ConfirmationButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -82,7 +82,7 @@ size_flags_horizontal = 4
 focus_mode = 0
 theme_type_variation = &"ButtonRed"
 shortcut = ExtResource("3_2i100")
-text = "@Yes"
+text = "@CONFIRM"
 
 [node name="CancelButton" type="Button" parent="PopupPanel/MarginContainer/VBoxContainer/ConfirmationButtons"]
 unique_name_in_owner = true
@@ -91,4 +91,4 @@ layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 shortcut = ExtResource("4_tx8jb")
-text = "@Cancel"
+text = "@CANCEL"

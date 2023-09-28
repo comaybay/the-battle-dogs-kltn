@@ -30,7 +30,7 @@ func _ready() -> void:
 	)
 	
 	%DeleteSaveButton.pressed.connect(_on_delete_save_button_pressed)
-	%DeleteSavePopup.yes.connect(_delete_save)
+	%DeleteSavePopup.confirm.connect(_delete_save)
 	
 func _exit_tree() -> void:
 	Data.mute_music_changed.disconnect(on_mute_music_changed)
@@ -53,7 +53,7 @@ func on_mute_sfx_changed(mute: bool) -> void:
 			%SFXSlider.value = DEFAULT_SFX_VOLUME
 
 func _on_delete_save_button_pressed() -> void:
-	%DeleteSavePopup.popup("@CONFIRM_DELETE_SAVE", PopupDialog.Type.CONFIRMATION)
+	%DeleteSavePopup.popup(tr('@CONFIRM_DELETE_SAVE'), PopupDialog.Type.CONFIRMATION)
 
 func _delete_save() -> void:
 	# delete save data but keep some of user preferences

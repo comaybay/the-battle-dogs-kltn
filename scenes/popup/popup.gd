@@ -1,10 +1,10 @@
 class_name PopupDialog extends Control
 
 signal ok
-signal yes
+signal confirm
 signal cancel
 
-const MAX_POPUP_PANEL_WIDTH = 500
+const MAX_POPUP_PANEL_WIDTH = 700
 
 ## Types of popup. [br]
 ## PROGRESS: no buttons, is used as a progress popup telling the player to wait
@@ -18,9 +18,9 @@ func _ready() -> void:
 		ok.emit()
 	)
 	
-	%YesButton.pressed.connect(func(): 
+	%ConfirmButton.pressed.connect(func(): 
 		self.hide()
-		yes.emit()
+		confirm.emit()
 	)
 	
 	%CancelButton.pressed.connect(func(): 
@@ -38,8 +38,9 @@ func popup(message: String, popup_type: Type):
 		%ConfirmationButtons.show()
 			
 	%PopupMessage.autowrap_mode = TextServer.AUTOWRAP_OFF
-	%PopupMessage.text = message
+	%PopupMessage.text = ""
 	%PopupPanel.size.x = 0
+	%PopupMessage.text = message
 	
 	# auto wrap text if popup panel exceed maxium size
 	if %PopupPanel.get_minimum_size().x >= MAX_POPUP_PANEL_WIDTH:
