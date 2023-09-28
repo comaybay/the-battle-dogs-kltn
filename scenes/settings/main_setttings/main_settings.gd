@@ -55,8 +55,10 @@ func on_mute_sfx_changed(mute: bool) -> void:
 		else:
 			%SFXSlider.value = DEFAULT_SFX_VOLUME
 
-func _on_fullscreen_toggled(on: bool) -> void:
-	GlobalControl.set_fullscreen(on)
+func _on_fullscreen_toggled(state: bool) -> void:
+	GlobalControl.set_fullscreen(state)
+	Data.fullscreen = state
+	Data.save()
 
 func _on_delete_save_button_pressed() -> void:
 	%DeleteSavePopup.popup(tr('@CONFIRM_DELETE_SAVE'), PopupDialog.Type.CONFIRMATION)
