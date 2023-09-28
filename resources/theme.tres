@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=42 format=3 uid="uid://b8ikq1gvmxsgp"]
+[gd_resource type="Theme" load_steps=50 format=3 uid="uid://b8ikq1gvmxsgp"]
 
 [ext_resource type="Texture2D" uid="uid://gl5qtsnplgcl" path="res://resources/theme/option_box_arrow.png" id="1_7dw4y"]
+[ext_resource type="Texture2D" uid="uid://db3nxilb68ei4" path="res://resources/theme/toggle_on.svg" id="1_rnsxe"]
+[ext_resource type="Texture2D" uid="uid://bvnppeq3fynx3" path="res://resources/theme/toggle_off.svg" id="2_q51sv"]
 [ext_resource type="Texture2D" uid="uid://b2drlhlbbm6fq" path="res://resources/theme/radio_checked.svg" id="2_wuark"]
 [ext_resource type="Texture2D" uid="uid://hb72u1gtryi2" path="res://resources/theme/radio_unchecked.svg" id="3_gwjnb"]
 
@@ -272,6 +274,18 @@ shadow_color = Color(0.14902, 0.164706, 0.470588, 0.231373)
 shadow_size = 5
 shadow_offset = Vector2(0, 5)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yrsdl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ki41t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abefw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ipy04"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_njakl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7a4k1"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37gu1"]
 bg_color = Color(0.823529, 0.980392, 0.929412, 1)
 corner_radius_top_left = 50
@@ -477,7 +491,23 @@ ButtonRound/styles/pressed = SubResource("StyleBoxFlat_dfr0c")
 ButtonToggle/base_type = &"Button"
 ButtonToggle/colors/font_pressed_color = Color(0.890196, 0.415686, 0, 1)
 ButtonToggle/styles/pressed = SubResource("StyleBoxFlat_af1xu")
-CheckButton/styles/focus = null
+CheckButton/colors/font_color = Color(1, 1, 1, 1)
+CheckButton/colors/font_focus_color = Color(0.94902, 0.94902, 0.94902, 1)
+CheckButton/colors/font_hover_color = Color(0.94902, 0.94902, 0.94902, 1)
+CheckButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+CheckButton/colors/font_outline_color = Color(0.0196078, 0, 0.721569, 1)
+CheckButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+CheckButton/constants/h_separation = 6
+CheckButton/constants/outline_size = 12
+CheckButton/font_sizes/font_size = 24
+CheckButton/icons/checked = ExtResource("1_rnsxe")
+CheckButton/icons/unchecked = ExtResource("2_q51sv")
+CheckButton/styles/disabled = SubResource("StyleBoxEmpty_yrsdl")
+CheckButton/styles/focus = SubResource("StyleBoxEmpty_ki41t")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_abefw")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_ipy04")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_njakl")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_7a4k1")
 HScrollBar/styles/grabber = SubResource("StyleBoxFlat_37gu1")
 HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_37gu1")
 HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_37gu1")
