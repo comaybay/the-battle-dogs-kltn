@@ -1,17 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4jb3wj3w77db"]
+[gd_scene load_steps=4 format=3 uid="uid://c4jb3wj3w77db"]
 
 [ext_resource type="Script" path="res://scenes/dogbase/dogbase.gd" id="1_18sea"]
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="2_i87ga"]
-[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="2_u67sv"]
 [ext_resource type="PackedScene" uid="uid://bysj0231a0wgy" path="res://scenes/dogbase/speaker_dog.tscn" id="2_vvswk"]
 
 [node name="DogBase" instance=ExtResource("2_i87ga")]
 title = "@DOG_BASE_TITLE"
 
-[node name="GoBackButton" parent="Khung/Header/Title" index="0"]
-shortcut = ExtResource("2_u67sv")
-
-[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="0"]
+[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
 text = "@DOG_BASE_TITLE"
 
 [node name="PhanGiua" type="HBoxContainer" parent="Khung/Content" index="0"]
