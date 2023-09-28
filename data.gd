@@ -118,23 +118,13 @@ var store := Dictionary()
 var passives := Dictionary()
 
 func _init() -> void:
-	# new game
+	# if player opens game for the first time
 	if not FileAccess.file_exists("user://save.json"):
-		var file: = FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
-		var new_game_save_text := file.get_as_text()
-		
-		file = FileAccess.open("user://save.json", FileAccess.WRITE)
-		file.store_line(new_game_save_text)
-		file.close()
-		
-		save_data = JSON.parse_string(new_game_save_text)
+		save_data = _create_new_game_save()
 	else:
-		var file := FileAccess.open("user://save.json", FileAccess.READ)
-		save_data = JSON.parse_string(file.get_as_text())
-		file.close()
-		TranslationServer.set_locale(game_language)	
+		save_data = _load_game_save()
 		
-	_load_settings()
+	load_settings()
 
 	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	var dog_info_arr = JSON.parse_string(file.get_as_text())
@@ -162,13 +152,31 @@ func _init() -> void:
 	
 	compute_values()
 
+func _create_new_game_save() -> Dictionary:
+	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
+	var new_game_save_text := new_game_save_file.get_as_text()
+	
+	new_game_save_file.close()
+	var save_file := FileAccess.open("user://save.json", FileAccess.WRITE)
+	save_file.store_line(new_game_save_text)
+	save_file.close()
+	
+	return JSON.parse_string(new_game_save_text)
+	
+func _load_game_save() -> Dictionary:
+	var file := FileAccess.open("user://save.json", FileAccess.READ)
+	var save_data: Dictionary = JSON.parse_string(file.get_as_text())
+	file.close()
+	
+	return save_data
+
 func _ready() -> void:
+	## if player opens the game for the first time (game_language is not chose yet)
 	if game_language == "":	
 		get_tree().change_scene_to_file.call_deferred("res://scenes/new_game_preferences/new_game_preferences.tscn")
 	
 	if save_data['settings']['fullscreen']:
 		GlobalControl.set_fullscreen(true)
-	
 
 func compute_values():
 	for dog in save_data["dogs"]:
@@ -189,7 +197,9 @@ func save():
 	file.close()
 	compute_values()
 
-func _load_settings():
+func load_settings():
+	TranslationServer.set_locale(game_language)	
+	
 	var sound_fx_idx = AudioServer.get_bus_index("SoundFX")
 	var music_idx = AudioServer.get_bus_index("Music")
 	
