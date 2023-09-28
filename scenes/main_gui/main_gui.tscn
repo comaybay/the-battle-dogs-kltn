@@ -55,22 +55,23 @@ localize_numeral_system = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GoBackButton" type="Button" parent="Khung/Header/Title"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "@BACK"
-
 [node name="MarginContainer" type="MarginContainer" parent="Khung/Header/Title"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
 
 [node name="PhanGiua" type="HBoxContainer" parent="Khung/Header/Title/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="GoBackButton" type="Button" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "@BACK"
 
 [node name="TitleLabel" type="Label" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
 unique_name_in_owner = true
@@ -129,6 +130,7 @@ theme_override_constants/margin_right = 20
 
 [node name="DogFoodLabel" type="Label" parent="Khung/Footer/TieuDe/ThucAnChoCho/MarginContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"LabelLarge"

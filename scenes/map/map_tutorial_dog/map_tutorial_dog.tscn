@@ -1,5 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxpwuk07p5a0e"]
 
+
 [ext_resource type="PackedScene" path="res://scenes/tutorial_dog/tutorial_dog.tscn" id="1_u0kjf"]
 [ext_resource type="Script" path="res://scenes/patterns/finite_state_machine/FSM.gd" id="2_2qeav"]
 [ext_resource type="Script" path="res://scenes/map/map_tutorial_dog/map_tutorial_dog.gd" id="2_8c5jk"]

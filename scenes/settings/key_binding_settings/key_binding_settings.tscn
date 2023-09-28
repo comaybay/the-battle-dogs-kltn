@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/settings/key_binding_settings/key_binding_settings.gd" id="1_k74n7"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_du4xw"]
-[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="3_ef0px"]
+[ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="3_4jaut"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17qbd"]
 bg_color = Color(0.2068, 0.53674, 0.94, 1)
@@ -12,15 +12,14 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.0196078, 0, 0.721569, 1)
 
-[node name="KeyBidingSettings" type="Control"]
+[node name="KeyBindingSettings" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("2_du4xw")
 script = ExtResource("1_k74n7")
 
@@ -69,9 +68,8 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -300.0
-offset_top = -317.0
 offset_right = 300.0
-offset_bottom = -247.0
+offset_bottom = 70.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0.0196078, 0, 0.721569, 1)
@@ -82,29 +80,24 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
 offset_left = -190.0
-offset_top = 215.0
+offset_top = 541.0
 offset_right = 190.0
-offset_bottom = 263.0
+offset_bottom = 589.0
 grow_horizontal = 2
-grow_vertical = 0
-
-[node name="GoBackButton" type="Button" parent="HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_mode = 0
-shortcut = ExtResource("3_ef0px")
-text = "@BACK"
+alignment = 1
 
 [node name="ResetToDefaultButton" type="Button" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 4
 focus_mode = 0
 theme_type_variation = &"ButtonRed"
 text = "@RESET_TO_DEFAULT"
+
+[node name="ResetKeyBindingPopup" parent="." instance=ExtResource("3_4jaut")]
+unique_name_in_owner = true
+layout_mode = 1

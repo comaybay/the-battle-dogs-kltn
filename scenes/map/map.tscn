@@ -199,26 +199,27 @@ script = ExtResource("8_vsoej")
 [node name="GUI" type="CanvasLayer" parent="Khung"]
 unique_name_in_owner = true
 
-[node name="Label" type="Label" parent="Khung/GUI"]
-offset_left = 11.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Khung/GUI"]
+offset_left = 10.0
 offset_top = 10.0
-offset_right = 271.0
+offset_right = 431.0
 offset_bottom = 58.0
+theme_override_constants/separation = 20
+
+[node name="NutQuayLai" type="Button" parent="Khung/GUI/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_0lsnx")
+shortcut = ExtResource("9_xm0jp")
+text = "@BACK"
+
+[node name="Label" type="Label" parent="Khung/GUI/HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 2
 theme = ExtResource("1_0lsnx")
 theme_type_variation = &"LabelLarge"
 text = "@PLANET_DOGGO"
-
-[node name="NutQuayLai" type="Button" parent="Khung/GUI"]
-custom_minimum_size = Vector2(120, 0)
-offset_top = 579.0
-offset_right = 119.0
-offset_bottom = 611.0
-focus_mode = 0
-theme = ExtResource("1_0lsnx")
-theme_override_font_sizes/font_size = 20
-shortcut = ExtResource("9_xm0jp")
-text = "@BACK"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Khung/GUI"]
 offset_left = 873.0
@@ -233,7 +234,7 @@ layout_mode = 2
 focus_mode = 0
 theme = ExtResource("1_0lsnx")
 theme_type_variation = &"ButtonRed"
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 30
 shortcut = ExtResource("10_3djod")
 text = "@ATTACK"
 
@@ -245,8 +246,8 @@ theme_override_constants/margin_right = 20
 [node name="TeamSetupButton" type="Button" parent="Khung/GUI/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("1_0lsnx")
-theme_override_font_sizes/font_size = 20
 shortcut = SubResource("Shortcut_0cnn8")
 text = "@TEAM_SETUP"
 
@@ -255,6 +256,6 @@ unique_name_in_owner = true
 offset_top = 48.0
 offset_bottom = 152.0
 
-[connection signal="pressed" from="Khung/GUI/NutQuayLai" to="." method="_on_quay_lai_pressed"]
+[connection signal="pressed" from="Khung/GUI/HBoxContainer/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/GUI/VBoxContainer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
 [connection signal="pressed" from="Khung/GUI/VBoxContainer/MarginContainer/TeamSetupButton" to="." method="_on_nut_doi_hinh_pressed"]

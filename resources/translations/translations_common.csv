@@ -32,10 +32,14 @@ keys,vi,en
 @SFX,Hiệu ứng âm thanh,Sound effects
 @SAVE,Lưu,Save
 @LANGUAGE,Ngôn ngữ,Language
+@FULLSCREEN_ON_STARTUP,Mở toàn màn hình lúc khởi động game,Fullscreen on startup
+@DELETE_SAVE_DATA,Xóa dữ liệu tiến độ game,Delete save data
+@CONFIRM_DELETE_SAVE,Bạn có thật sự muốn xóa dữ liệu tiến độ game? Hành động này không thể hoàn tác được.\n(Cuộc phiêu lưu của bạn và những chú Chó kể từ thời điểm này sẽ bị xóa khỏi thế giới...),Are you sure you want to delete the game save data? This action is not reversible.\n(Your journey with the Dogkind as of now will be erased from existance...)
 @KEY_BINDING_SETTINGS,Điều khiển,Key binding
 @BIND,Sửa phím cho,Bind
 @KEY_BINDING_INSTRUCTION,Bấm phím mong muốn,Press key to bind
 @RESET_TO_DEFAULT,Khôi phục về mặc định,Reset to default
+@CONFIRM_RESET_KEY_BINDING_SETTINGS,Bạn chắc chắn muốn khôi phục cài đặt phím tắt về mặc định chứ?,Are you sure you want to reset key binding settings to default?
 @KEY_ui_fullscreen,Mở game toàn màn hình,Toggle fullscreen
 @KEY_ui_confirm,Đồng ý,Confirm
 @KEY_ui_cancel,Hủy,Cancel
@@ -84,3 +88,5 @@ keys,vi,en
 @PLAY_TUTORIAL_NO,Không (Tôi có chơi game này rồi),Nah (I have played this game before)
 @YES,Có,Yes
 @NO,Không,No
+@OK,Ok,Ok
+@NEED_LOGGED_IN_WITH_STEAM,Chỉ chơi được nếu bạn đã đăng nhập vào tài khoản Steam,Only available if you are logged in with Steam
