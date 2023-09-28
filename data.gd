@@ -159,8 +159,8 @@ func _init() -> void:
 func _create_new_game_save() -> Dictionary:
 	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
 	var new_game_save_text := new_game_save_file.get_as_text()
-	
 	new_game_save_file.close()
+	
 	var save_file := FileAccess.open("user://save.json", FileAccess.WRITE)
 	save_file.store_line(new_game_save_text)
 	save_file.close()
@@ -168,12 +168,38 @@ func _create_new_game_save() -> Dictionary:
 	return JSON.parse_string(new_game_save_text)
 	
 func _load_game_save() -> Dictionary:
+	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
+	var new_game_save_data: Dictionary = JSON.parse_string(new_game_save_file.get_as_text())
+	new_game_save_file.close()
+	
 	var file := FileAccess.open("user://save.json", FileAccess.READ)
 	var save_data: Dictionary = JSON.parse_string(file.get_as_text())
 	file.close()
 	
+	save_data = _compare_and_update_save_file(new_game_save_data, save_data)
+	
+	file = FileAccess.open("user://save.json", FileAccess.WRITE)
+	file.store_line(JSON.stringify(save_data))
+	file.close()
+	
 	return save_data
-
+	
+## compare and update save data in case if the save data of an older version of the game
+func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Dictionary):
+	for key in new_game_save_data:
+		if not save_data.has(key):
+			save_data[key] = new_game_save_data[key]
+			continue
+			
+		if typeof(save_data[key]) != typeof(new_game_save_data[key]):
+			save_data[key] = new_game_save_data[key]
+			continue 
+			
+		if typeof(save_data[key]) == TYPE_DICTIONARY:
+			_compare_and_update_save_file(save_data[key], new_game_save_data[key])
+		
+	return save_data
+			
 func _ready() -> void:
 	## if player opens the game for the first time (game_language is not chose yet)
 	if game_language == "":	
