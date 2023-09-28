@@ -100,7 +100,7 @@ size_flags_vertical = 1
 text = "@SFX"
 horizontal_alignment = 1
 
-[node name="MusicSettings2" type="HBoxContainer" parent="SettingsPanel"]
+[node name="SFXSettings" type="HBoxContainer" parent="SettingsPanel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -111,66 +111,75 @@ offset_bottom = 253.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
 
-[node name="SFXButton" parent="SettingsPanel/MusicSettings2" instance=ExtResource("3_47b4y")]
+[node name="SFXButton" parent="SettingsPanel/SFXSettings" instance=ExtResource("3_47b4y")]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 theme = null
 
-[node name="SFXSlider" type="HSlider" parent="SettingsPanel/MusicSettings2"]
+[node name="SFXSlider" type="HSlider" parent="SettingsPanel/SFXSettings"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 focus_mode = 0
 
-[node name="KeyBindingSettingsButton" type="Button" parent="SettingsPanel"]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="SettingsPanel"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = 53.0
-offset_top = 282.0
-offset_right = -53.0
-offset_bottom = 320.0
+anchor_bottom = 1.0
+offset_top = 279.0
+offset_bottom = -97.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="KeyBindingSettingsButton" type="Button" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 focus_mode = 0
 text = "@KEY_BINDING_SETTINGS"
 
-[node name="LanguageLabel" type="Label" parent="SettingsPanel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
-offset_top = 359.0
-offset_right = 48.5
-offset_bottom = 396.0
-grow_horizontal = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LanguageLabel" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 1
 text = "@LANGUAGE"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LanguageOptionButton" type="OptionButton" parent="SettingsPanel"]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 405.0
-offset_right = 461.0
-offset_bottom = 442.0
+[node name="LanguageOptionButton" type="OptionButton" parent="SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 focus_mode = 0
 script = ExtResource("4_tq8gp")
 
+[node name="FullscreenButton" type="CheckButton" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "@FULLSCREEN_ON_STARTUP"
+
 [node name="DeleteSaveButton" type="Button" parent="SettingsPanel"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -137.5
-offset_top = 479.0
-offset_right = 137.5
-offset_bottom = 527.0
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+offset_left = 139.0
+offset_top = 476.0
+offset_right = 439.0
+offset_bottom = 524.0
 grow_horizontal = 2
+size_flags_horizontal = 4
 focus_mode = 0
 theme_type_variation = &"ButtonRed"
 text = "@DELETE_SAVE_DATA"

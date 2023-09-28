@@ -32,6 +32,7 @@ keys,vi,en
 @SFX,Hiệu ứng âm thanh,Sound effects
 @SAVE,Lưu,Save
 @LANGUAGE,Ngôn ngữ,Language
+@FULLSCREEN_ON_STARTUP,Mở toàn màn hình lúc khởi động game,Fullscreen on startup
 @DELETE_SAVE_DATA,Xóa dữ liệu tiến độ game,Delete save data
 @CONFIRM_DELETE_SAVE,Bạn có thật sự muốn xóa dữ liệu tiến độ game? Hành động này không thể hoàn tác được.\n(Cuộc phiêu lưu của bạn và những chú Chó kể từ thời điểm này sẽ bị xóa khỏi thế giới...),Are you sure you want to delete the game save data? This action is not reversible.\n(Your journey with the Dogkind as of now will be erased from existance...)
 @KEY_BINDING_SETTINGS,Điều khiển,Key binding
