@@ -49,6 +49,8 @@ func _create_credit() -> Credits:
 		credits.hide()
 	)
 	
+	self.tree_exiting.connect(credits.queue_free)	
+	
 	return credits
 	
 func _go_to_settings():
@@ -68,5 +70,7 @@ func _create_settings() -> Settings:
 		self.show()
 		settings.hide()
 	)
+	
+	self.tree_exiting.connect(settings.queue_free)
 	
 	return settings

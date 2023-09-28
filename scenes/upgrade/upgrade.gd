@@ -42,7 +42,7 @@ func _ready():
 		get_parent().add_child.call_deferred(canvas)
 		var tutorial_dog = TutorialDogScene.instantiate()
 		canvas.add_child.call_deferred(tutorial_dog)
-		canvas.tree_exited.connect(func(): canvas.queue_free())
+		tutorial_dog.tree_exited.connect(func(): canvas.queue_free())
 		
 func add_items():
 	var type := ItemUpgradeBox.Type
