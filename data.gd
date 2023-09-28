@@ -197,8 +197,8 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 			continue 
 			
 		if typeof(save_data[key]) == TYPE_DICTIONARY:
-			_compare_and_update_save_file(save_data[key], new_game_save_data[key])
-		
+			_compare_and_update_save_file(new_game_save_data[key], save_data[key])
+			
 	return save_data
 			
 func _ready() -> void:
