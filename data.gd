@@ -209,6 +209,11 @@ func _ready() -> void:
 	GlobalControl.set_fullscreen(fullscreen)
 	
 func compute_values():
+	dogs.clear()
+	skills.clear()
+	store.clear()
+	passives.clear()
+	
 	for dog in save_data["dogs"]:
 		dogs[dog["ID"]] = dog
 	

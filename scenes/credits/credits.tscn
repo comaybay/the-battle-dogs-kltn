@@ -88,6 +88,10 @@ layout_mode = 2
 theme_type_variation = &"LabelLarge"
 text = "@CREDIT_SPECIAL_THANKS"
 
+[node name="RigorMoris" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "@CREDIT_RIGOR_MORTIS"
+
 [node name="MusMus" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "@CREDIT_MUSMUS"
