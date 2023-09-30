@@ -10,7 +10,7 @@ func _ready() -> void:
 		knockback_scale = knockback_scale + ((drum_upgrade['level'] - 1) * 0.1) 
 	
 	var effect: Node2D = EnergyExpand.instantiate()
-	effect.setup("on_tower")
+	effect.setup("on_emitter")
 	var effect_space: Node2D = get_tree().current_scene.get_node("EffectSpace")
 	effect.global_position = get_tree().current_scene.get_node("DogTower").global_position
 	effect_space.add_child(effect)

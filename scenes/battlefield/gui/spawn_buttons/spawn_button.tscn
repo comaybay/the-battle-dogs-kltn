@@ -112,6 +112,7 @@ libraries = {
 }
 
 [node name="SpawnTimer" type="Timer" parent="." index="4"]
+wait_time = 0.001
 one_shot = true
 
 [node name="ProgressBar" type="ProgressBar" parent="." index="5"]

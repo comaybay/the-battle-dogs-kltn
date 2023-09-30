@@ -6,7 +6,6 @@ extends FSMState
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
 	character.get_node("AnimationPlayer").play("move")
-	$DiChuyen.play()
 
 # called when the state is deactivated
 func exit() -> void:

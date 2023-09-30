@@ -158,7 +158,7 @@ func spawn_boss(boss_info: Dictionary) -> void:
 	var effect_space: Node2D = get_tree().current_scene.get_node("EffectSpace")
 	
 	var effect := EnergyExpand.instantiate()
-	effect.setup("on_tower")
+	effect.setup("on_emitter")
 	effect.global_position = effect_global_position
 	tree.current_scene.get_node("EffectSpace").add_child(effect)
 	

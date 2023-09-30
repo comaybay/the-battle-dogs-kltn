@@ -86,6 +86,7 @@ func _reready():
 	
 	collision_rect = $CollisionShape2D.shape.get_rect()
 	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
+	n_RayCast2D.position.y = $CollisionShape2D.position.y + (collision_rect.size.y / 2) - 25
 	
 	if character_type == Type.DOG:
 		n_RayCast2D.position.x += collision_rect.size.x
@@ -93,10 +94,20 @@ func _reready():
 	if custom_attack_area != null:
 		custom_attack_area.disable_mode
 		
-## get center point of a character
-func get_center_point():
-	return $CollisionShape2D.position + (collision_rect.size / 2) 
-
+## get global position of the character's bottom
+func get_bottom_global_position() -> Vector2:
+	return Vector2(
+		$CollisionShape2D.global_position.x, 
+		$CollisionShape2D.global_position.y + (collision_rect.size.y / 2)
+	)
+	
+## get center position of the character's bottom
+func get_center_global_position() -> Vector2:
+	return Vector2(
+		$CollisionShape2D.global_position.x, 
+		$CollisionShape2D.global_position.y
+	)
+	
 func _draw() -> void:
 	if Engine.is_editor_hint() or Debug.is_debug_mode():
 		# draw attack range at the feet of the character

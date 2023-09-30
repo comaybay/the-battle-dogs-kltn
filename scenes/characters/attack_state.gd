@@ -20,8 +20,8 @@ func physics_update(_delta: float) -> void:
 	if start_attack == false:
 		return
 		
-	$Danh.pitch_scale = randf_range(0.85, 1.15)
-	$Danh.play()
+	$AttackSound.pitch_scale = randf_range(0.85, 1.15)
+	$AttackSound.play()
 	# custom attack
 	if character.custom_attack_area != null:
 		for target in character.custom_attack_area.get_overlapping_bodies():
