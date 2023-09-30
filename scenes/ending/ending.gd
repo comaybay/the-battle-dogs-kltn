@@ -21,6 +21,10 @@ func _on_skip() -> void:
 	
 func _on_finished() -> void:
 	$ColorRect.visible = true
+	
+	if Data.dogs.has("batter_dog"):
+		$AnimatedSprite2D.play("bad_ending")
+	
 	var tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property($ColorRect, "color:a8", 255, 1.5)
