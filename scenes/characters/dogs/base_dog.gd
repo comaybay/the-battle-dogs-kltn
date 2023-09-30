@@ -6,7 +6,10 @@ class_name BaseDog extends Character
 
 func _ready() -> void:
 	super._ready()
-
+	
+	if Engine.is_editor_hint():
+		return
+	
 	var dog_upgrade = Data.dogs[name_id]
 	
 	if dog_upgrade != null:

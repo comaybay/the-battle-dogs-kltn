@@ -3,7 +3,7 @@ extends Sprite2D
 const TOP_PADDING = 20;
 
 var _character : Character
-## anim_type can be "on_cat" or "on_tower"
+
 func setup(time : float, character : Character ) -> void:
 	_character = character
 	$AnimationPlayer.play("play")
