@@ -575,4 +575,3 @@ bus = &"InBattleFX"
 
 [node name="Nga" type="AudioStreamPlayer" parent="FiniteStateMachine/KnockbackState" index="0"]
 bus = &"InBattleFX"
-
