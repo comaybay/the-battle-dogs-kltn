@@ -16,6 +16,7 @@ func _batter_dog_inception(_anim) -> void:
 	$Popup.popup(tr('@BAD_ENDING_DOG_OBTAINED'), PopupDialog.Type.INFORMATION)
 	
 	await $Popup.ok
+
 	await get_tree().create_timer(1, false).timeout
 	get_tree().change_scene_to_file("res://scenes/start_menu/main.tscn")
 	
