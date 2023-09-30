@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcjvnsglvwpkl"]
+[gd_scene load_steps=8 format=3 uid="uid://bcjvnsglvwpkl"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_x25ed"]
 [ext_resource type="Script" path="res://scenes/bad_ending/bad_ending.gd" id="2_vjski"]
+[ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="3_b370a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_08a2v"]
 bg_color = Color(0, 0, 0, 1)
@@ -68,7 +69,7 @@ offset_bottom = 18.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0.741176, 0, 0, 1)
-text = "@ENDING_DEATH"
+text = "@BAD_ENDING"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -77,3 +78,6 @@ autoplay = "show_text"
 libraries = {
 "": SubResource("AnimationLibrary_ruqnk")
 }
+
+[node name="Popup" parent="." instance=ExtResource("3_b370a")]
+layout_mode = 1

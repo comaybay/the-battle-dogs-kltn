@@ -11,7 +11,7 @@ func enter(data: Dictionary) -> void:
 		if character is BaseCat and character.is_boss:
 			$BossKnockback.play()
 		else:
-			$Nga.play()
+			$FallSound.play()
 
 	knockback_countdown = 2
 	knockback_vel = Vector2(200, -250) * data['scale']

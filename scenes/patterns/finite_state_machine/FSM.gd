@@ -5,6 +5,8 @@ class_name FSM extends Node
 ##
 ## This node uses it's owner as the target 
 
+signal state_entered (state_path: String)
+
 @export var initial_state: NodePath = ""
 
 var state: FSMState
@@ -24,6 +26,7 @@ func _on_owner_ready():
 	
 	update_FSM_process()
 	state.enter({})
+	state_entered.emit(initial_state)
 
 func change_state(next_state_name: String, data: Dictionary = {}):
 	if state.has_method("exit"):
@@ -32,6 +35,7 @@ func change_state(next_state_name: String, data: Dictionary = {}):
 	state = get_node(next_state_name)
 	state.enter(data)
 	
+	state_entered.emit(next_state_name)
 	update_FSM_process()
 
 func update_FSM_process():

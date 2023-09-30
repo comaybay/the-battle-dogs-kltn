@@ -563,11 +563,15 @@ shape = SubResource("RectangleShape2D_oa1yv")
 metadata/_edit_lock_ = true
 
 [node name="RayCast2D" parent="." index="9"]
-position = Vector2(261, 0)
+position = Vector2(261, 62)
 target_position = Vector2(1650, 0)
 
-[node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
-stream = ExtResource("7_llot2")
+[node name="DiChuyen" type="AudioStreamPlayer" parent="FiniteStateMachine/MoveState" index="0"]
+bus = &"InBattleFX"
 
-[node name="Arrow" parent="." index="11"]
-position = Vector2(0, -1134)
+[node name="Danh" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="0"]
+stream = ExtResource("7_llot2")
+bus = &"InBattleFX"
+
+[node name="Nga" type="AudioStreamPlayer" parent="FiniteStateMachine/KnockbackState" index="0"]
+bus = &"InBattleFX"

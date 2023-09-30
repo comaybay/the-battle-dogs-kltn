@@ -5,7 +5,10 @@ var dog_scene: PackedScene
 var is_active: bool
 
 var spawn_price: int
+var spawn_type: String
 var spawn_input_action: String
+
+var _spawn_dog: BaseDog
 
 func is_spawn_ready() -> bool:
 	return $SpawnTimer.is_stopped()
@@ -14,16 +17,25 @@ func can_afford_dog():
 	return InBattle.money >= spawn_price
 
 func can_spawn():
-	return can_afford_dog() and is_spawn_ready() and is_active
+	var result := can_afford_dog() and is_spawn_ready() and is_active
+	
+	if spawn_type == 'once':
+		result = result and _spawn_dog == null
+		
+	return result
 
 func setup(name_id: String, input_action: String, is_active: bool) -> void:
 	set_active(is_active)
 	spawn_input_action = input_action
+	spawn_type = Data.dog_info[name_id]['spawn_type'] 	
 		
 	$Icon.texture = load("res://resources/icons/%s_icon.png" % name_id)
 	dog_scene = load("res://scenes/characters/dogs/%s/%s.tscn" % [name_id, name_id])
+
+	var spawn_time: float = Data.dog_info[name_id]['spawn_time']
+	if spawn_time > 0:
+		$SpawnTimer.wait_time = Data.dog_info[name_id]['spawn_time']
 	
-	$SpawnTimer.wait_time = Data.dog_info[name_id]['spawn_time']
 	$SpawnTimer.timeout.connect(_on_spawn_ready)
 	
 	spawn_price = Data.dog_info[name_id]['spawn_price']
@@ -53,7 +65,7 @@ func _on_spawn_ready() -> void:
 	
 func _process(delta: float) -> void:
 	self.disabled = !can_spawn()
-	$Background.frame = 0 if can_afford_dog() and is_spawn_ready() else 1	
+	$Background.frame = 0 if can_spawn() else 1	
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(spawn_input_action) and can_spawn():
@@ -62,11 +74,11 @@ func _input(event: InputEvent) -> void:
 func _on_pressed() -> void:
 	spawn_dog()
 	
-func spawn_dog():
+func spawn_dog() -> void:
 	self.disabled = true
 
 	InBattle.money -= spawn_price
-	dog_tower.spawn(dog_scene)
+	_spawn_dog = dog_tower.spawn(dog_scene)
 
 	$ProgressBar.visible = true
 	$Background.frame = 1

@@ -12,6 +12,10 @@ func _ready() -> void:
 	$Arrow.position.y = -round($CollisionShape2D.shape.extents.y * 2)
 	$Arrow.hide()
 	super._ready()
+	
+	if Engine.is_editor_hint():
+		return
+	
 	var dog_upgrade = Data.dogs[name_id]
 	
 	if dog_upgrade != null:
