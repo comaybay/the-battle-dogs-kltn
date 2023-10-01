@@ -260,6 +260,7 @@ script = ExtResource("1_yfkw5")
 [node name="MoveLeft" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(26, 32)
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_57jpa")
 
 [node name="Sprite2D" type="Sprite2D" parent="MoveLeft"]
@@ -278,6 +279,7 @@ libraries = {
 [node name="MoveRight" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(26, 32)
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_c5v6m")
 
 [node name="Sprite2D" type="Sprite2D" parent="MoveRight"]
@@ -295,6 +297,7 @@ libraries = {
 [node name="ZoomOut" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_7l7jn")
 
 [node name="Sprite2D" type="Sprite2D" parent="ZoomOut"]
@@ -313,6 +316,7 @@ libraries = {
 [node name="ZoomIn" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_e22jf")
 
 [node name="Sprite2D" type="Sprite2D" parent="ZoomIn"]
