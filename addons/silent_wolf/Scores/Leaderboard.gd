@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends Control
 
 const ScoreItem = preload("ScoreItem.tscn")
 const SWLogger = preload("res://addons/silent_wolf/utils/SWLogger.gd")
@@ -8,7 +8,6 @@ var list_index = 0
 # Replace the leaderboard name if you're not using the default leaderboard
 var ld_name = "main"
 var max_scores = 10
-
 
 func _ready():
 	print("SilentWolf.Scores.leaderboards: " + str(SilentWolf.Scores.leaderboards))
@@ -83,36 +82,34 @@ func score_in_score_array(scores: Array, new_score: Dictionary) -> bool:
 				in_score_array = true
 	return in_score_array
 
-
+#Show ranking
 func add_item(player_name: String, score_value: String) -> void:
 	var item = ScoreItem.instantiate()
 	list_index += 1
 	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
 	item.get_node("Score").text = score_value
-	item.offset_top = list_index * 100
-	$"Board/HighScores/ScoreItemContainer".add_child(item)
+	item.offset_top = list_index * 100	
+	$"TabContainer/High Scores/MarginContainer/ScoreItemContainer".add_child(item)
 
 
 func add_no_scores_message() -> void:
-	var item = $"Board/MessageContainer/TextMessage"
+	var item = $MessageContainer/TextMessage
 	item.text = "No scores yet!"
-	$"Board/MessageContainer".show()
+	$MessageContainer.show()
 	item.offset_top = 135
 
-
-func add_loading_scores_message() -> void:
-	var item = $"Board/MessageContainer/TextMessage"
+func add_loading_scores_message() -> void:	
+	var item = $MessageContainer/TextMessage
 	item.text = "Loading scores..."
-	$"Board/MessageContainer".show()
+	$MessageContainer.show()
 	item.offset_top = 135
 
 
 func hide_message() -> void:
-	$"Board/MessageContainer".hide()
+	$MessageContainer.hide()
 
-
-func clear_leaderboard() -> void:
-	var score_item_container = $"Board/HighScores/ScoreItemContainer"
+func clear_leaderboard() -> void:	
+	var score_item_container = $"TabContainer/High Scores/MarginContainer/ScoreItemContainer"
 	if score_item_container.get_child_count() > 0:
 		var children = score_item_container.get_children()
 		for c in children:
@@ -120,8 +117,7 @@ func clear_leaderboard() -> void:
 			c.queue_free()
 
 
-func _on_CloseButton_pressed() -> void:
+func _on_go_back_button_pressed():
 	var scene_name = SilentWolf.scores_config.open_scene_on_close
 	SWLogger.info("Closing SilentWolf leaderboard, switching to scene: " + str(scene_name))
-	#global.reset()
-	get_tree().change_scene_to_file(scene_name)
+	

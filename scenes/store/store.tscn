@@ -28,7 +28,7 @@ grow_vertical = 0
 texture = ExtResource("4_7488s")
 
 [node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="0"]
-text = "Cửa hàng"
+text = "@STORE"
 
 [node name="Content" parent="Khung" index="1"]
 script = ExtResource("1_3iy6a")

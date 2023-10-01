@@ -51,12 +51,23 @@ layout_mode = 2
 size_flags_vertical = 2
 
 [node name="NutCuaHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="4"]
-visible = false
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "@STORE"
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="Khung/Content/PhanGiua/BenTrai" index="5"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="NutXepHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="6"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "@RANKING"
 
 [node name="BenPhai" type="VBoxContainer" parent="Khung/Content/PhanGiua" index="1"]
 layout_mode = 2
@@ -72,3 +83,4 @@ offset_right = 574.0
 [connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutVienChinh" to="Khung/Content/PhanGiua" method="_on_nut_vien_chinh_pressed"]
 [connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutNangCap" to="Khung/Content/PhanGiua" method="_on_nut_nang_cap_pressed"]
 [connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutCuaHang" to="Khung/Content/PhanGiua" method="_on_nut_cua_hang_pressed"]
+[connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutXepHang" to="Khung/Content/PhanGiua" method="_on_nut_xep_hang_pressed"]
