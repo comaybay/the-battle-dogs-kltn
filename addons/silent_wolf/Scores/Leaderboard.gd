@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends Control
 
 const ScoreItem = preload("ScoreItem.tscn")
 const SWLogger = preload("res://addons/silent_wolf/utils/SWLogger.gd")
@@ -8,7 +8,6 @@ var list_index = 0
 # Replace the leaderboard name if you're not using the default leaderboard
 var ld_name = "main"
 var max_scores = 10
-
 
 func _ready():
 	print("SilentWolf.Scores.leaderboards: " + str(SilentWolf.Scores.leaderboards))
@@ -90,29 +89,29 @@ func add_item(player_name: String, score_value: String) -> void:
 	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
 	item.get_node("Score").text = score_value
 	item.offset_top = list_index * 100
-	$"Board/HighScores/ScoreItemContainer".add_child(item)
+	$Khung/HighScores/ScoreItemContainer.add_child(item)
 
 
 func add_no_scores_message() -> void:
-	var item = $"Board/MessageContainer/TextMessage"
+	var item = $Khung/MessageContainer/TextMessage
 	item.text = "No scores yet!"
-	$"Board/MessageContainer".show()
+	$Khung/MessageContainer.show()
 	item.offset_top = 135
 
 
 func add_loading_scores_message() -> void:
-	var item = $"Board/MessageContainer/TextMessage"
+	var item = $Khung/MessageContainer/TextMessage
 	item.text = "Loading scores..."
-	$"Board/MessageContainer".show()
+	$Khung/MessageContainer.show()
 	item.offset_top = 135
 
 
 func hide_message() -> void:
-	$"Board/MessageContainer".hide()
+	$Khung/MessageContainer.hide()
 
 
 func clear_leaderboard() -> void:
-	var score_item_container = $"Board/HighScores/ScoreItemContainer"
+	var score_item_container = $Khung/HighScores/ScoreItemContainer
 	if score_item_container.get_child_count() > 0:
 		var children = score_item_container.get_children()
 		for c in children:
