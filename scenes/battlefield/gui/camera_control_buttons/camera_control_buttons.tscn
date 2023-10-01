@@ -1,5 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://cei0cobk4qs0j"]
+[gd_scene load_steps=28 format=3 uid="uid://cei0cobk4qs0j"]
 
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_l4l6m"]
 [ext_resource type="Texture2D" uid="uid://8mxd3pp6wqb8" path="res://scenes/battlefield/gui/camera_control_buttons/camera_control_icons.png" id="1_xqhq0"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/camera_control_buttons/camera_control_buttons.gd" id="1_yfkw5"]
 
@@ -252,12 +253,14 @@ _data = {
 }
 
 [node name="camera_control_buttons" type="HBoxContainer"]
+theme = ExtResource("1_l4l6m")
 theme_override_constants/separation = 5
 script = ExtResource("1_yfkw5")
 
 [node name="MoveLeft" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(26, 32)
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_57jpa")
 
 [node name="Sprite2D" type="Sprite2D" parent="MoveLeft"]
@@ -276,6 +279,7 @@ libraries = {
 [node name="MoveRight" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(26, 32)
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_c5v6m")
 
 [node name="Sprite2D" type="Sprite2D" parent="MoveRight"]
@@ -293,6 +297,7 @@ libraries = {
 [node name="ZoomOut" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_7l7jn")
 
 [node name="Sprite2D" type="Sprite2D" parent="ZoomOut"]
@@ -311,6 +316,7 @@ libraries = {
 [node name="ZoomIn" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_e22jf")
 
 [node name="Sprite2D" type="Sprite2D" parent="ZoomIn"]

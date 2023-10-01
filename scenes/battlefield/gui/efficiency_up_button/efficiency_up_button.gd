@@ -7,7 +7,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	disabled = !InBattle.can_afford_efficiency_upgrade()
-	$Background.frame = 1 if disabled else 0	
+	
+	if InBattle.get_efficiency_level() == InBattle.MAX_EFFICIENCY_LEVEL:
+		$Background.frame = 0
+	else:
+		$Background.frame = 1 if disabled else 0
+		
 	
 func _on_upgrade() -> void:
 	if InBattle.get_efficiency_level() < InBattle.MAX_EFFICIENCY_LEVEL:

@@ -60,7 +60,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_k1auv"]
-resource_name = "on_tower"
+resource_name = "on_emitter"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -91,7 +91,7 @@ tracks/1/keys = {
 _data = {
 "RESET": SubResource("Animation_8c3yh"),
 "on_cat": SubResource("Animation_8kloj"),
-"on_tower": SubResource("Animation_k1auv")
+"on_emitter": SubResource("Animation_k1auv")
 }
 
 [node name="EnergyExpand" type="Sprite2D"]

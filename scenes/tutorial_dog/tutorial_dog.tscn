@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dv351dagw1cbu"]
+[gd_scene load_steps=15 format=3 uid="uid://chnwixpec81w0"]
 
 [ext_resource type="Script" path="res://scenes/tutorial_dog/tutorial_dog.gd" id="1_7chvr"]
 [ext_resource type="Texture2D" uid="uid://bmievkerp5est" path="res://scenes/dogbase/speech_bubble_pointer.png" id="2_xxg2k"]

@@ -1,6 +1,22 @@
 extends Panel
 
+
 func _ready() -> void:
-	$AnimationPlayer.animation_finished.connect(
-		func(_anim): get_tree().change_scene_to_file("res://scenes/start_menu/main.tscn")
-	)
+	if not Data.dogs.has("batter_dog"):
+		Data.save_data['dogs'].append({ 'ID': 'batter_dog', 'level': 1 })
+		Data.teams[0]['dog_ids'][1] = 'batter_dog'
+		Data.save()
+		$AnimationPlayer.animation_finished.connect(_batter_dog_inception)
+	else:
+		$AnimationPlayer.animation_finished.connect(func(_anim):
+			get_tree().change_scene_to_file("res://scenes/start_menu/main.tscn")
+		)
+
+func _batter_dog_inception(_anim) -> void:
+	$Popup.popup(tr('@BAD_ENDING_DOG_OBTAINED'), PopupDialog.Type.INFORMATION)
+	
+	await $Popup.ok
+
+	await get_tree().create_timer(1, false).timeout
+	get_tree().change_scene_to_file("res://scenes/start_menu/main.tscn")
+	

@@ -91,27 +91,22 @@ theme_override_constants/separation = 50
 
 [node name="CharacterButton" parent="SecondRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_cxncl")
 
 [node name="CharacterButton2" parent="SecondRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_lmhjo")
 
 [node name="CharacterButton3" parent="SecondRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_b4u8f")
 
 [node name="CharacterButton4" parent="SecondRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_xo41r")
 
 [node name="CharacterButton5" parent="SecondRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_2e8or")
 
 [node name="FirstRow" type="HBoxContainer" parent="."]
@@ -123,27 +118,22 @@ theme_override_constants/separation = 50
 
 [node name="CharacterButton" parent="FirstRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_7g7m8")
 
 [node name="CharacterButton2" parent="FirstRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_lhqpr")
 
 [node name="CharacterButton3" parent="FirstRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_54m5b")
 
 [node name="CharacterButton4" parent="FirstRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_l0ms7")
 
 [node name="CharacterButton5" parent="FirstRow" instance=ExtResource("2_23hyj")]
 layout_mode = 2
-focus_mode = 0
 shortcut = SubResource("Shortcut_3rmuo")
 
 [node name="SwitchRowButton" parent="." instance=ExtResource("3_lpfmx")]

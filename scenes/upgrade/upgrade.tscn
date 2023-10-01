@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_u6a31")
 
-[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="0"]
+[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
 text = "@UPGRADE"
 
 [node name="Content" parent="Khung" index="1"]

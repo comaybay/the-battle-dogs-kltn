@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc7y2jmahyb3q"]
+
+[ext_resource type="Script" path="res://scenes/characters/dogs/batter_dog/batter_knockback/batter_knockback.gd" id="1_8u61u"]
+[ext_resource type="AudioStream" uid="uid://c3newxc0fjawe" path="res://resources/sound/Skill/Tiếng trống.mp3" id="2_1wp3v"]
+
+[node name="BatterKnockback" type="Node"]
+script = ExtResource("1_8u61u")
+
+[node name="DrumSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1wp3v")
+volume_db = 10.0
+bus = &"InBattleFX"

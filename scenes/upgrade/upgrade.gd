@@ -42,12 +42,16 @@ func _ready():
 		get_parent().add_child.call_deferred(canvas)
 		var tutorial_dog = TutorialDogScene.instantiate()
 		canvas.add_child.call_deferred(tutorial_dog)
-		canvas.tree_exited.connect(func(): canvas.queue_free())
+		tutorial_dog.tree_exited.connect(func(): canvas.queue_free())
 		
 func add_items():
 	var type := ItemUpgradeBox.Type
 	
-	for data in Data.dog_info.values():			
+	for data in Data.dog_info.values():	
+		# only show upgrade box of a dog if it is unlockable or if player already has the dog
+		if data['obtain_type'] != 'unlockable' and not Data.dogs.has(data['ID']):
+			continue 
+				
 		var dog_item_box := createItemBox(type.CHARACTER, data, %NhanVat/MarginContainer/GridContainer)
 		dog_boxes.append(dog_item_box)
 		

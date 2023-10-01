@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cedh84t4ewxuw"]
+[gd_scene load_steps=11 format=3 uid="uid://cedh84t4ewxuw"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_wscv2"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="2_y8xhq"]
+[ext_resource type="AudioStream" uid="uid://byul4hma3ffpq" path="res://resources/sound/battlefield/bite.mp3" id="3_xwum2"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -105,7 +106,7 @@ position = Vector2(-21, -34.5)
 texture = ExtResource("2_y8xhq")
 hframes = 7
 vframes = 2
-frame = 12
+frame = 9
 
 [node name="CollisionShape2D" parent="." index="3"]
 visibility_layer = 2
@@ -113,4 +114,14 @@ position = Vector2(-1, -2.5)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(95, 0)
+position = Vector2(95, 61.5)
+
+[node name="DiChuyen" type="AudioStreamPlayer" parent="FiniteStateMachine/MoveState" index="0"]
+bus = &"InBattleFX"
+
+[node name="Danh" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="0"]
+stream = ExtResource("3_xwum2")
+bus = &"InBattleFX"
+
+[node name="Nga" type="AudioStreamPlayer" parent="FiniteStateMachine/KnockbackState" index="0"]
+bus = &"InBattleFX"

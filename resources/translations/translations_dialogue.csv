@@ -103,7 +103,7 @@ THE BATTLE DOGS
 
 
 
-Doesn't sound to bad, eh?
+Doesn't sound too bad, eh?
 
 That's pretty much it."
 @ENDING_SEQUENCE_TEXT,"Và thế là Đội quân The Battle Dogs
@@ -342,13 +342,14 @@ THANK YOU FOR PLAYING!"
 @TUTORIAL_KILL_3,Tại sao??? Lí do gì mà Người lại để bọn Chó chúng tôi 4 lần liên tiếp phải thất bại. Bao nhiêu chú Chó đã hi sinh trên chiến trường? HỌ CHẾT VÌ LÍ DO GÌ ĐÂY???,Why??? For what reason that You have to let us Dogkind 4 times in a row face defeat. How many Dogs has died on the battlefield? AND FOR WHAT REASON DID THEY DIED???
 @TUTORIAL_KILL_4,Có khi nào... Có khi nào ngươi!!! Ngươi là gián điệp được bọn Mèo gửi qua đây để làm phá hỏng kế hoạch của bọn Chó ta?,Could it be that... that You!!! You must be a spy that the Catkind sent here to sabotage our plan!
 @TUTORIAL_KILL_5,Được lắm... CHẾT!!!,Right... DIE!!!
-@ENDING_DEATH,"Và thế là bạn đã bị thủ tiêu và thay thế bởi một sinh vật...
+@BAD_ENDING,"Và thế là bạn đã bị thủ tiêu và thay thế bởi một sinh vật khác...
 
 
-BAD ENDING...","And so you were disposed of and replaced by another being...
+BAD ENDING.","And so you were disposed of and replaced by another being...
 
 
-BAD ENDING..."
+BAD ENDING."
+@BAD_ENDING_DOG_OBTAINED,Một sự hiện diện đáng kinh hoàng đã được giáng xuống thế giới này.,A terrifying presence has entered this world.
 @TUTORIAL_TEAM_SETUP_BUTTON_1,"Hay lắm, nhờ bạn mà giờ đây sức mạnh của loài chúng tôi đã tăng lên đáng kể hơn trước.","Nice, thanks to you our power has increased significantly."
 @TUTORIAL_TEAM_SETUP_BUTTON_2,"Bạn hãy bấm vào nút ""Thiết lập đội hình"" để thêm Chó hoặc kỹ năng mới mở khóa của bạn vào đội hình của mình.","Press the ""Team setup"" button to add Dogs or Skills that you have unlocked into your team."
 @TUTORIAL_TEAM_SETUP_1,"Đây là nơi thiết lập đội hình, bạn có thể quản lý Chó và kỹ năng vào đội hình hiện tại sao cho phù hợp với lối chơi của bạn.","This is the team setup area, you can manage Dogs and Skills into your team to suits your playstyle."

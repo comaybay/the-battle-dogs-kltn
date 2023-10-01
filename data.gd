@@ -11,6 +11,7 @@ var save_data: Dictionary
 var bone: int:
 	get: return save_data['bone']		
 	set(value): 
+		
 		save_data['bone'] = value
 		bone_changed.emit(value)		
 
@@ -66,6 +67,10 @@ var game_language: String:
 	get: return save_data['settings']['language']
 	set(value): save_data['settings']['language'] = value	
 
+var fullscreen: bool:
+	get: return save_data['settings']['fullscreen']
+	set(value): save_data['settings']['fullscreen'] = value	
+
 var has_done_battlefield_basics_tutorial: bool:	
 	get: return save_data['tutorial']['battlefield_basics']
 	set(value): save_data['tutorial']['battlefield_basics'] = value
@@ -118,23 +123,13 @@ var store := Dictionary()
 var passives := Dictionary()
 
 func _init() -> void:
-	# new game
+	# if player opens game for the first time
 	if not FileAccess.file_exists("user://save.json"):
-		var file: = FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
-		var new_game_save_text := file.get_as_text()
-		
-		file = FileAccess.open("user://save.json", FileAccess.WRITE)
-		file.store_line(new_game_save_text)
-		file.close()
-		
-		save_data = JSON.parse_string(new_game_save_text)
+		save_data = _create_new_game_save()
 	else:
-		var file := FileAccess.open("user://save.json", FileAccess.READ)
-		save_data = JSON.parse_string(file.get_as_text())
-		file.close()
-		TranslationServer.set_locale(game_language)	
+		save_data = _load_game_save()
 		
-	_load_settings()
+	load_settings()
 
 	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
 	var dog_info_arr = JSON.parse_string(file.get_as_text())
@@ -162,15 +157,63 @@ func _init() -> void:
 	
 	compute_values()
 
+func _create_new_game_save() -> Dictionary:
+	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
+	var new_game_save_text := new_game_save_file.get_as_text()
+	new_game_save_file.close()
+	
+	var save_file := FileAccess.open("user://save.json", FileAccess.WRITE)
+	save_file.store_line(new_game_save_text)
+	save_file.close()
+	
+	return JSON.parse_string(new_game_save_text)
+	
+func _load_game_save() -> Dictionary:
+	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
+	var new_game_save_data: Dictionary = JSON.parse_string(new_game_save_file.get_as_text())
+	new_game_save_file.close()
+	
+	var file := FileAccess.open("user://save.json", FileAccess.READ)
+	var save_data: Dictionary = JSON.parse_string(file.get_as_text())
+	file.close()
+	
+	save_data = _compare_and_update_save_file(new_game_save_data, save_data)
+	
+	file = FileAccess.open("user://save.json", FileAccess.WRITE)
+	file.store_line(JSON.stringify(save_data))
+	file.close()
+	
+	return save_data
+	
+## compare and update save data in case if the save data of an older version of the game
+func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Dictionary):
+	for key in new_game_save_data:
+		if not save_data.has(key):
+			save_data[key] = new_game_save_data[key]
+			continue
+			
+		if typeof(save_data[key]) != typeof(new_game_save_data[key]):
+			save_data[key] = new_game_save_data[key]
+			continue 
+			
+		if typeof(save_data[key]) == TYPE_DICTIONARY:
+			_compare_and_update_save_file(new_game_save_data[key], save_data[key])
+			
+	return save_data
+			
 func _ready() -> void:
+	## if player opens the game for the first time (game_language is not chose yet)
 	if game_language == "":	
 		get_tree().change_scene_to_file.call_deferred("res://scenes/new_game_preferences/new_game_preferences.tscn")
 	
-	if save_data['settings']['fullscreen']:
-		GlobalControl.set_fullscreen(true)
+	GlobalControl.set_fullscreen(fullscreen)
 	
-
 func compute_values():
+	dogs.clear()
+	skills.clear()
+	store.clear()
+	passives.clear()
+	
 	for dog in save_data["dogs"]:
 		dogs[dog["ID"]] = dog
 	
@@ -189,7 +232,9 @@ func save():
 	file.close()
 	compute_values()
 
-func _load_settings():
+func load_settings():
+	TranslationServer.set_locale(game_language)	
+	
 	var sound_fx_idx = AudioServer.get_bus_index("SoundFX")
 	var music_idx = AudioServer.get_bus_index("Music")
 	

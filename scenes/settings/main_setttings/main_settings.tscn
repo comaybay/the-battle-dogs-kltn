@@ -5,9 +5,20 @@
 [ext_resource type="Script" path="res://scenes/settings/main_setttings/main_settings.gd" id="2_uvc2n"]
 [ext_resource type="PackedScene" uid="uid://g3tb8fv0v5he" path="res://scenes/battlefield/gui/pause_menu/sfx_button/sfx_button.tscn" id="3_47b4y"]
 [ext_resource type="Script" path="res://scenes/settings/language_option.gd" id="4_tq8gp"]
-[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="6_dm1rh"]
+[ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="6_emdhs"]
 
-[node name="MainSettings" type="Panel"]
+[node name="MainSettings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_uvc2n")
+
+[node name="SettingsPanel" type="Panel" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -20,9 +31,8 @@ offset_bottom = 279.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_jj28c")
-script = ExtResource("2_uvc2n")
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="SettingsPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -38,7 +48,7 @@ text = "@SETTINGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MusicLabel" type="Label" parent="."]
+[node name="MusicLabel" type="Label" parent="SettingsPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -52,7 +62,7 @@ size_flags_vertical = 1
 text = "@MUSIC"
 horizontal_alignment = 1
 
-[node name="MusicSettings" type="HBoxContainer" parent="."]
+[node name="MusicSettings" type="HBoxContainer" parent="SettingsPanel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -63,20 +73,20 @@ offset_bottom = 140.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
 
-[node name="MusicButton" parent="MusicSettings" instance=ExtResource("2_bwvok")]
+[node name="MusicButton" parent="SettingsPanel/MusicSettings" instance=ExtResource("2_bwvok")]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 theme = null
 
-[node name="MusicSlider" type="HSlider" parent="MusicSettings"]
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/MusicSettings"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 focus_mode = 0
 
-[node name="SFXLabel" type="Label" parent="."]
+[node name="SFXLabel" type="Label" parent="SettingsPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -90,7 +100,7 @@ size_flags_vertical = 1
 text = "@SFX"
 horizontal_alignment = 1
 
-[node name="MusicSettings2" type="HBoxContainer" parent="."]
+[node name="SFXSettings" type="HBoxContainer" parent="SettingsPanel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -101,66 +111,79 @@ offset_bottom = 253.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
 
-[node name="SFXButton" parent="MusicSettings2" instance=ExtResource("3_47b4y")]
+[node name="SFXButton" parent="SettingsPanel/SFXSettings" instance=ExtResource("3_47b4y")]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 theme = null
 
-[node name="SFXSlider" type="HSlider" parent="MusicSettings2"]
+[node name="SFXSlider" type="HSlider" parent="SettingsPanel/SFXSettings"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 focus_mode = 0
 
-[node name="KeyBindingSettingsButton" type="Button" parent="."]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="SettingsPanel"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = 53.0
-offset_top = 282.0
-offset_right = -53.0
-offset_bottom = 320.0
+anchor_bottom = 1.0
+offset_top = 279.0
+offset_bottom = -97.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="KeyBindingSettingsButton" type="Button" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 focus_mode = 0
 text = "@KEY_BINDING_SETTINGS"
 
-[node name="LanguageLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
-offset_top = 359.0
-offset_right = 48.5
-offset_bottom = 396.0
-grow_horizontal = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LanguageLabel" type="Label" parent="SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 1
 text = "@LANGUAGE"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LanguageOptionButton" type="OptionButton" parent="."]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 405.0
-offset_right = 461.0
-offset_bottom = 442.0
+[node name="LanguageOptionButton" type="OptionButton" parent="SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 focus_mode = 0
 script = ExtResource("4_tq8gp")
 
-[node name="GoBackButton" type="Button" parent="."]
+[node name="FullscreenButton" type="CheckButton" parent="SettingsPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "@FULLSCREEN_ON_STARTUP"
+
+[node name="DeleteSaveButton" type="Button" parent="SettingsPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+offset_left = 139.0
+offset_top = 476.0
+offset_right = 439.0
+offset_bottom = 524.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_type_variation = &"ButtonRed"
+text = "@DELETE_SAVE_DATA"
+
+[node name="DeleteSavePopup" parent="." instance=ExtResource("6_emdhs")]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -101.0
-offset_top = 474.0
-offset_right = 101.0
-offset_bottom = 522.0
-grow_horizontal = 2
-focus_mode = 0
-shortcut = ExtResource("6_dm1rh")
-text = "@BACK"

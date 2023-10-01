@@ -1,6 +1,6 @@
 extends Sprite2D
 
-## anim_type can be "on_cat" or "on_tower"
+## anim_type can be "on_cat" or "on_emitter"
 func setup(anim_type: String) -> void:
 	$AnimationPlayer.play(anim_type)
 

@@ -28,13 +28,26 @@ func _ready() -> void:
 		queue_free()
 	)
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouse or event.is_released():
+		return
+	
 	if event.is_action_pressed("ui_cancel_default"):
 		AudioPlayer.play_button_pressed_audio()
 		canceled.emit()
 		queue_free()
 		
+	if event.is_action_pressed("ui_confirm_default") and %ButtonContainer.visible:
+		AudioPlayer.play_button_pressed_audio()
+		ok.emit(_action, _event)
+		queue_free()
+		
 	_event = event
+	
 	%InputLabel.text = event.as_text()
 
 	%ButtonContainer.show()
+	
+	#Stop event propagation
+	get_viewport().set_input_as_handled()
+
