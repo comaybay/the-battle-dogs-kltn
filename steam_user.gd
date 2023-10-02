@@ -21,6 +21,19 @@ func _ready() -> void:
 	
 	IS_USING_STEAM = Steam.loggedOn()
 	
-	if IS_USING_STEAM:
+	if IS_USING_STEAM: #have account
 		STEAM_ID = Steam.getSteamID()
 		STEAM_USERNAME = Steam.getPersonaName()
+		if Data.steam_first_login:
+			Data.steam_first_login = false
+			SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, STEAM_ID, STEAM_ID)
+			SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
+	else : # don't have account
+		
+		print("éo")
+
+func _on_registration_complete(sw_result: Dictionary) -> void:
+	if sw_result.success:
+		print("Registration succeeded!")
+	else:
+		print("Error: " + str(sw_result.error))

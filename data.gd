@@ -7,6 +7,9 @@ signal mute_music_changed(mute: bool)
 signal mute_sound_fx_changed(mute: bool)
 
 var save_data: Dictionary
+var steam_first_login: bool:
+	get: return true
+	set(value): return value
 
 var bone: int:
 	get: return save_data['bone']		
