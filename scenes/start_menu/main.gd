@@ -11,6 +11,13 @@ func _ready():
 	if not AudioPlayer.custom_music.playing:
 		AudioPlayer.play_custom_music(MAIN_THEME_AUDIO)
 	
+	if SteamUser.IS_USING_STEAM:
+		%OnlinePlayButton.disabled = false
+		%OnlinePlayButton.pressed.connect(_go_to_lobby)
+	else:
+		%OnlinePlayButton.disabled = true
+		%OnlinePlayButton.tooltip_text = "@NEED_LOGGED_IN_WITH_STEAM"
+		
 	$AnimationPlayer.play("ready")
 	await $AnimationPlayer.animation_finished
 	
@@ -74,3 +81,6 @@ func _create_settings() -> Settings:
 	self.tree_exiting.connect(settings.queue_free)
 	
 	return settings
+
+func _go_to_lobby():
+	get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")

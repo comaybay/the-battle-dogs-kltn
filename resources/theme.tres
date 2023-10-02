@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=50 format=3 uid="uid://b8ikq1gvmxsgp"]
+[gd_resource type="Theme" load_steps=51 format=3 uid="uid://b8ikq1gvmxsgp"]
 
 [ext_resource type="Texture2D" uid="uid://gl5qtsnplgcl" path="res://resources/theme/option_box_arrow.png" id="1_7dw4y"]
 [ext_resource type="Texture2D" uid="uid://db3nxilb68ei4" path="res://resources/theme/toggle_on.svg" id="1_rnsxe"]
@@ -394,6 +394,13 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_el6hd"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0196078, 0, 0.443137, 0.462745)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s3vxm"]
 bg_color = Color(0.156863, 0.156863, 0.45098, 1)
 
@@ -557,6 +564,7 @@ ProgressBar/constants/outline_size = 0
 ProgressBar/font_sizes/font_size = 16
 ProgressBar/styles/background = SubResource("StyleBoxFlat_ndamh")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_33f8g")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_el6hd")
 TabContainer/colors/font_selected_color = Color(0.929412, 1, 0.984314, 1)
 TabContainer/colors/font_unselected_color = Color(0.156863, 0.156863, 0.45098, 1)
 TabContainer/font_sizes/font_size = 24

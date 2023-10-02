@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c72r77wiweut"]
+[gd_scene load_steps=9 format=3 uid="uid://c72r77wiweut"]
 
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_pm7q2"]
 [ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="2_mkhds"]
 [ext_resource type="Script" path="res://scenes/team_setup/team_setup.gd" id="3_j8p7c"]
+[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="3_xenyk"]
 [ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/button_pressed.mp3" id="4_ncv2l"]
 [ext_resource type="PackedScene" uid="uid://dg431mihiquab" path="res://scenes/team_setup/box_character.tscn" id="5_yh2ni"]
 
@@ -29,7 +30,11 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_mkhds")
 
-[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
+[node name="GoBackButton" parent="Khung/Header/Title" index="0"]
+shortcut = ExtResource("3_xenyk")
+
+[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="0"]
+
 text = "@TEAM_SETUP"
 
 [node name="Content" parent="Khung" index="1"]
