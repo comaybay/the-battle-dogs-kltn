@@ -16,14 +16,15 @@ func _ready() -> void:
 	
 	Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "false")
 	
-	_update_lobby_ui()
-	
 	var owner_id: int = Steam.getLobbyOwner(SteamUser.lobby_id)
 	var is_owner: bool = SteamUser.STEAM_ID == owner_id
-	if is_owner:	
-		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_owner)
+	if is_owner:
+		_create_listen_socket()
 	else:
+		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_member)
 		_connect_to_listen_socket()
+	
+	_update_lobby_ui()
 	
 func _on_toggle_ready() -> void:
 	var ready := Steam.getLobbyMemberData(SteamUser.lobby_id, SteamUser.STEAM_ID, "ready")
@@ -46,11 +47,14 @@ func _update_lobby_ui() -> void:
 		%StartButton.hide()
 	
 	var member_count = Steam.getNumLobbyMembers(SteamUser.lobby_id)
+	print("LOBBY CHAT UPADTE. owner: %s, member count: %s" % [owner_id, member_count])
 	
 	if member_count <= 1:
 		%PlayerSlot1.setup(SteamUser.STEAM_ID)
 		%PlayerSlot2.setup_empty()
-		%StartButton.disabled = true
+		##TODO: uncomment this
+#		%StartButton.disabled = true
+		%StartButton.disabled = false
 		return
 	
 	%StartButton.disabled = false
@@ -74,10 +78,18 @@ func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int,
 	# Else if a player has been kicked
 	elif chat_state == 8:
 		print("%s %s" % [username, tr("@PLAYER_HAS_BEEN_KICKED")])
-
+		
 	_update_lobby_ui()
 	
 func _leave_lobby():
+	var owner_id: int = Steam.getLobbyOwner(SteamUser.lobby_id)
+	var is_owner: bool = SteamUser.STEAM_ID == owner_id
+	if is_owner and SteamUser.listen_socket != 0:
+		print("CLOSE SOCKET %s" % SteamUser.listen_socket)
+		Steam.closeListenSocket(SteamUser.listen_socket)
+		SteamUser.listen_socket = 0
+	
+	print("LEAVE LOBBY %s" % SteamUser.lobby_id)
 	Steam.leaveLobby(SteamUser.lobby_id)
 	SteamUser.lobby_id = 0
 	# Close session with all users
@@ -88,11 +100,15 @@ func _leave_lobby():
 	get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")	
 
 func _on_start_game():
-	pass
+	get_tree().change_scene_to_file("res://scenes/online_battle/online_battlefield/online_battlefield.tscn")	
 
 func _on_network_connection_status_changed_room_owner(connection_handle: int, connection: Dictionary, old_state: int):
 	var new_state: int = connection['connection_state']
-
+	print("====")
+	print("NET_WORK_CHANGED:ROOM_OWNER")
+	print(old_state)
+	print(connection)
+	
 	# A new connection arrives on a listen socket
 	if old_state == Steam.CONNECTION_STATE_NONE and new_state == Steam.CONNECTION_STATE_CONNECTING:
 		Steam.acceptConnection(connection_handle)
@@ -107,11 +123,21 @@ func _on_network_connection_status_changed_room_owner(connection_handle: int, co
 		print("OWNER: connection closed from peer")
 
 func _on_network_connection_status_changed_room_member(connection_handle: int, connection: Dictionary, old_state: int):
+	print("====")
+	print("NET_WORK_CHANGED:ROOM_MEMBER")
+	print(old_state)
+	print(connection)
+	
 	var new_state: int = connection['connection_state']
 	
 	# connection accepted
-	if old_state == Steam.CONNECTION_STATE_CONNECTING and new_state == Steam.CONNECTION_STATE_CONNECTED:
+	if (
+		(old_state == Steam.CONNECTION_STATE_CONNECTING or old_state == Steam.CONNECTION_STATE_FINDING_ROUTE) 
+		and new_state == Steam.CONNECTION_STATE_CONNECTED
+	):
 		print("MEMBER: connection established.")
+		SteamUser.connection_handle = connection_handle
+		SteamUser.send_message({"data": "hello"}, SteamUser.SendType.RELIABLE)
 	
 	# connection rejected	
 	if old_state == Steam.CONNECTION_STATE_CONNECTING and new_state == Steam.CONNECTION_STATE_CLOSED_BY_PEER:
@@ -129,12 +155,33 @@ func _on_network_connection_status_changed_room_member(connection_handle: int, c
 	if old_state == Steam.CONNECTION_STATE_CONNECTED and new_state == Steam.CONNECTION_STATE_CLOSED_BY_PEER:
 		print("MEMBER: connection closed owner left. Try connecting to new owner of room")
 		_close_connection(connection_handle)
-		_connect_to_listen_socket()	
+		
+		# let new room owner create connection, while others connect to the room
+		var new_owner := Steam.getLobbyOwner(SteamUser.lobby_id)
+		if new_owner == SteamUser.STEAM_ID:
+			_create_listen_socket()
+		else:
+			_connect_to_listen_socket()
 
 func _close_connection(connection_handle: int):
-	Steam.closeConnection(connection_handle, Steam.CONNECTION_END_REMOTE_TIMEOUT, "", false)
+	Steam.closeConnection(connection_handle, Steam.CONNECTION_END_REMOTE_TIMEOUT, "CLOSE CONNECTION", false)
+	print("CLOSE CONNECTION: " + str(connection_handle))
+	SteamUser.connection_handle = 0
 
 func _connect_to_listen_socket():
-	var id := Steam.getLobbyOwner(SteamUser.lobby_id)
-	Steam.connectP2P(str(id), 0, [])
-	Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_member)
+	print("CONNECTING TO LISTEN SOCKET")
+	var owner_id: int = Steam.getLobbyOwner(SteamUser.lobby_id)
+	Steam.addIdentity(str(owner_id))
+	Steam.setIdentitySteamID64(str(owner_id), owner_id)
+	print(Steam.connectP2P(str(owner_id), 0, []))
+
+func _create_listen_socket():
+	# Create listen socket
+	SteamUser.listen_socket = Steam.createListenSocketP2P(0, [])
+	print("new listen socket: %s" % SteamUser.listen_socket)
+	Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_owner)
+
+func _process(delta: float) -> void:
+	var arr = SteamUser.read_messages()
+	if arr.size() > 0:
+		print(arr)

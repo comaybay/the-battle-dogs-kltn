@@ -61,6 +61,9 @@ func _ready() -> void:
 	$CatTower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)
 	$DogTower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
 
+func get_dog_tower() -> DogTower:
+	return $DogTower
+
 func _process(delta: float) -> void:
 	InBattle.update(delta)
 	

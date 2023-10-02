@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr6jyqaarcfl4"]
+
+[ext_resource type="PackedScene" uid="uid://dmhx2wpadmcol" path="res://scenes/battlefield/gui/gui.tscn" id="1_h3cbx"]
+[ext_resource type="Script" path="res://scenes/online_battle/online_battlefield/gui/gui.gd" id="2_v1tws"]
+
+[node name="Gui" instance=ExtResource("1_h3cbx")]
+script = ExtResource("2_v1tws")

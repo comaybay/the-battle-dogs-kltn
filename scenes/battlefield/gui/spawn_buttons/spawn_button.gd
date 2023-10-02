@@ -1,4 +1,4 @@
-extends Button
+class_name SpawnButton extends Button
 
 var dog_tower
 var dog_scene: PackedScene
@@ -56,7 +56,7 @@ func _ready() -> void:
 	$MoneyLabel.visible = false
 	$ProgressBar.visible = false
 	$AnimationPlayer.play("empty")
-	dog_tower = get_tree().current_scene.get_node("DogTower")
+	dog_tower = get_tree().current_scene.get_dog_tower()
 	set_process(false)
 	set_process_input(false)
 
@@ -74,7 +74,7 @@ func _input(event: InputEvent) -> void:
 func _on_pressed() -> void:
 	spawn_dog()
 	
-func spawn_dog() -> void:
+func spawn_dog() -> BaseDog:
 	self.disabled = true
 
 	InBattle.money -= spawn_price
@@ -85,6 +85,8 @@ func spawn_dog() -> void:
 	var tween := create_tween()
 	tween.tween_method(_tween_progress, 0, 100, $SpawnTimer.wait_time);
 	$SpawnTimer.start()
+	
+	return _spawn_dog
 
 func _tween_progress(value: float) -> void:
 	$ProgressBar.value = value

@@ -80,6 +80,8 @@ func _on_lobby_created(connect: int, lobby_id: int) -> void:
 	if connect != 1:
 		return
 	
+	SteamUser.lobby_members = [SteamUser.STEAM_ID]
+	
 	print("room created: " + str(lobby_id))
 	# Set the lobby ID
 	SteamUser.lobby_id = lobby_id
@@ -92,11 +94,11 @@ func _on_lobby_created(connect: int, lobby_id: int) -> void:
 	Steam.setLobbyData(lobby_id, "name", _request_create_room_name)
 	Steam.setLobbyData(lobby_id, "game", "thebattledogs")
 	Steam.setLobbyData(lobby_id, "mode", "GodotSteam test")
-
-	# Create listen socket
-	SteamUser.listen_socket = Steam.createListenSocketP2P(0, [])
-	Steam.setLobbyData(lobby_id, "listensocket", str(SteamUser.listen_socket))
-	print("ROOM CREATED: listen socket: %s" % SteamUser.listen_socket)
+	
+	Steam.setLobbyData(lobby_id, "theme", ['fall', 'green_grass', 'heavenly', 'night', 'nightmare', 'winter'].pick_random())
+	Steam.setLobbyData(lobby_id, "music", "battlefield_theme1")
+	Steam.setLobbyData(lobby_id, "stage_width", "3500")
+	Steam.setLobbyData(lobby_id, "max_health", "5000")
 
 	# Allow P2P connections to fallback to being relayed through Steam if needed
 	var RELAY: bool = Steam.allowP2PPacketRelay(true)

@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://b06hfe5wavkvw"]
+
+[ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_3ebhf"]
+[ext_resource type="Script" path="res://scenes/online_battle/online_battlefield/online_battlefield.gd" id="1_wrh5b"]
+[ext_resource type="Texture2D" uid="uid://c8sa6uo4d7wdb" path="res://resources/battlefield_themes/night/sky.png" id="2_cuauh"]
+[ext_resource type="PackedScene" uid="uid://xny5rxpmau5y" path="res://scenes/online_battle/online_battlefield/land/land.tscn" id="3_p4hqa"]
+[ext_resource type="PackedScene" uid="uid://uh7hnntqdigc" path="res://scenes/online_battle/online_battlefield/dog_tower/dog_tower.tscn" id="4_vx0va"]
+[ext_resource type="PackedScene" uid="uid://dr6jyqaarcfl4" path="res://scenes/online_battle/online_battlefield/gui/gui.tscn" id="5_y62fp"]
+[ext_resource type="Script" path="res://scenes/battlefield/Camera2D.gd" id="6_cy4w7"]
+[ext_resource type="AudioStream" uid="uid://dm1ge42cv7vy7" path="res://resources/sound/battlefield/boss_drum.mp3" id="7_t23ci"]
+
+[node name="OnlineBattlefield" type="Node2D"]
+script = ExtResource("1_wrh5b")
+
+[node name="Sky" type="TextureRect" parent="."]
+material = ExtResource("1_3ebhf")
+offset_left = -760.0
+offset_top = -1064.0
+offset_right = 2312.0
+offset_bottom = 1384.0
+size_flags_horizontal = 4
+texture = ExtResource("2_cuauh")
+stretch_mode = 1
+
+[node name="Land" parent="." instance=ExtResource("3_p4hqa")]
+
+[node name="DogTower1" parent="." instance=ExtResource("4_vx0va")]
+
+[node name="DogTower2" parent="." instance=ExtResource("4_vx0va")]
+position = Vector2(1118, 0)
+scale = Vector2(-1, 1)
+
+[node name="Gui" parent="." instance=ExtResource("5_y62fp")]
+
+[node name="EffectSpace" type="Node2D" parent="."]
+z_index = 40
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("6_cy4w7")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+volume_db = -9.0
+bus = &"Music"
+
+[node name="BossDrum" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_t23ci")
+bus = &"InBattleFX"
