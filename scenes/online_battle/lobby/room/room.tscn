@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3ogyyyglw3u6"]
+[gd_scene load_steps=9 format=3 uid="uid://d3ogyyyglw3u6"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_m2nsm"]
 [ext_resource type="Script" path="res://scenes/online_battle/lobby/room/room.gd" id="2_4mrey"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://tk6s5oluvidw" path="res://scenes/online_battle/lobby/room/player_slot/player_slot.tscn" id="4_vncec"]
 [ext_resource type="PackedScene" uid="uid://d0p6vdi5tjnfe" path="res://scenes/online_battle/lobby/room/chat_box/chat_box.tscn" id="5_j56qe"]
 [ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="5_ldwqf"]
+[ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="8_pevc4"]
 
 [node name="Room" type="Control"]
 layout_mode = 3
@@ -133,3 +134,6 @@ theme_override_constants/margin_right = 150
 
 [node name="ChatBox" parent="MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("5_j56qe")]
 layout_mode = 2
+
+[node name="Popup" parent="." instance=ExtResource("8_pevc4")]
+layout_mode = 1

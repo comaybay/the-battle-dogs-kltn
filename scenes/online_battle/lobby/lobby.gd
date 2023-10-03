@@ -67,17 +67,18 @@ func _on_lobby_match_list(lobbies: Array) -> void:
 
 func _on_create_Lobby_request(room_name: String) -> void:
 	%CreateRoom.set_create_button_disabled(true)
+	$Popup.popup("@CREATING_ROOM", PopupDialog.Type.PROGRESS)
 	_create_Lobby(room_name)
 	await Steam.lobby_created
 	%CreateRoom.set_create_button_disabled(false)
 
 func _create_Lobby(room_name: String) -> void:
-	print("creating room...")
 	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, LOBBY_MAX_MEMBERS)
 	_request_create_room_name = room_name
 
 func _on_lobby_created(connect: int, lobby_id: int) -> void:
 	if connect != 1:
+		$Popup.popup("@ROOM_CREATE_FAILED", PopupDialog.Type.INFORMATION)
 		return
 	
 	SteamUser.lobby_members = [SteamUser.STEAM_ID]
@@ -100,10 +101,6 @@ func _on_lobby_created(connect: int, lobby_id: int) -> void:
 	Steam.setLobbyData(lobby_id, "stage_width", "3500")
 	Steam.setLobbyData(lobby_id, "max_health", "5000")
 
-	# Allow P2P connections to fallback to being relayed through Steam if needed
-	var RELAY: bool = Steam.allowP2PPacketRelay(true)
-	print("Allowing Steam to be relay backup: "+str(RELAY))
-	
 	_go_to_room()
 
 func _on_room_listing_item_join_request(room_id: int, room: RoomListingItem):

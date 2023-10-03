@@ -13,6 +13,8 @@ const MAX_POPUP_PANEL_WIDTH = 700
 enum Type { PROGRESS, INFORMATION, CONFIRMATION }
 
 func _ready() -> void:
+	set_process_shortcut_input(false)
+	
 	%OkButton.pressed.connect(func(): 
 		self.hide()
 		ok.emit()
@@ -27,8 +29,14 @@ func _ready() -> void:
 		self.hide()
 		cancel.emit()
 	)
+	
+func _shortcut_input(event: InputEvent) -> void:
+	#Stop event propagation
+	get_viewport().set_input_as_handled()
 
 func popup(message: String, popup_type: Type):
+	set_process_shortcut_input(true)
+	
 	%OkButton.hide()
 	%ConfirmationButtons.hide()
 	
@@ -51,3 +59,6 @@ func popup(message: String, popup_type: Type):
 	
 	%PopupPanel.anchors_preset = PRESET_CENTER
 	self.show()
+
+func close():
+	self.hide()
