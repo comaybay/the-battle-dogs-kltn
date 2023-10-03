@@ -6,15 +6,14 @@ extends Control
 
 var done_tweening := true
 
-func _ready() -> void:
+func setup(dog_tower: DogTower):
 	var name_ids: Array = Data.selected_team['dog_ids']
 	var id_index := 0
 	var action_number = 1
-	
 	for button in $FirstRow.get_children():
 		var name_id = name_ids[id_index]
 		if name_id != null:
-			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, true)
+			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, true, dog_tower)
 		
 		id_index += 1	
 		action_number += 1
@@ -23,13 +22,13 @@ func _ready() -> void:
 	for button in $SecondRow.get_children():
 		var name_id = name_ids[id_index]
 		if name_id != null:
-			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, false)
+			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, false, dog_tower)
 		
 		id_index += 1	
 		action_number += 1
 		
 	$SwitchRowButton.pressed.connect(_switch_row)
-		
+
 func _switch_row() -> void:
 	# do not switch row when is in tweening process
 	if !done_tweening:

@@ -114,9 +114,12 @@ func take_damage(damage: int) -> void:
 
 func spawn(cat_name: String) -> BaseCat:
 	var cat: BaseCat = cats[cat_name].instantiate()
-	cat.global_position = global_position - Vector2(100, 0)
 	cat.ready.connect(_apply_special_instruction.bind(cat))
+	
 	get_tree().current_scene.add_child(cat)
+	var offset_y = cat.global_position.y - cat.get_bottom_global_position().y
+	cat.setup(global_position + Vector2(-100, offset_y))
+	
 	cat_spawn.emit(cat)
 	return cat
 	

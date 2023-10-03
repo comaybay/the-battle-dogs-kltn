@@ -4,10 +4,15 @@ class_name Character
 
 signal knockbacked
 
-enum Type { DOG, ENEMY }
+enum Type { DOG, CAT }
 
-## 0 for dog, 1 for enemy
-@export var character_type: int = Type.DOG
+## 0 for dog, 1 for cat
+@export var character_type: int = Type.DOG:
+	set(val):
+		character_type = val
+		notify_property_list_changed()  
+		queue_redraw()
+		
 @export var speed: int = 120 # toc do di chuyen
 
 ## if not null, will be use for attack collision detection
@@ -46,8 +51,11 @@ enum Type { DOG, ENEMY }
 
 @onready var n_RayCast2D := $RayCast2D as RayCast2D
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
-@onready var n_Sprite2D := $Sprite2D as Sprite2D
+@onready var n_Sprite2D := $CharacterAnimation/Character as Sprite2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
+
+func get_character_animation_node() -> Node2D:
+	return $CharacterAnimation
 
 ## position where effect for a character should take place 
 var effect_global_position: Vector2:
@@ -60,6 +68,9 @@ var max_health: int
 var next_knockback_health: int
 var collision_rect: Rect2
 
+func setup(global_position: Vector2) -> void:
+	self.global_position = global_position
+
 func _ready() -> void:
 	_reready()
 	
@@ -68,15 +79,17 @@ func _ready() -> void:
 		
 		## add random sprite offset for better visibility when characters are stacked on eachother
 		var rand_y: int = randi_range(-20, 20)
-		$Sprite2D.position += Vector2(randi_range(-20, 20), rand_y)
+		$CharacterAnimation.position += Vector2(randi_range(-20, 20), rand_y)
 		## render stuff correctly
 		z_index = rand_y + 20
 		
 	if Engine.is_editor_hint():
-		property_list_changed.connect(queue_redraw)
+		property_list_changed.connect(
+			func():
+				_reready()
+				queue_redraw()
+		)
 		
-
-	
 func _reready():
 	# config 
 	max_health = health
@@ -94,6 +107,22 @@ func _reready():
 	
 	if character_type == Type.DOG:
 		n_RayCast2D.position.x += collision_rect.size.x
+		n_RayCast2D.set_collision_mask_value(2, false)
+		n_RayCast2D.set_collision_mask_value(6, false)
+		n_RayCast2D.set_collision_mask_value(3, true)
+		n_RayCast2D.set_collision_mask_value(5, true)
+		
+		set_collision_layer_value(2, true)
+		set_collision_layer_value(3, false)
+	else:
+		n_RayCast2D.set_collision_mask_value(2, true)
+		n_RayCast2D.set_collision_mask_value(6, true)
+		n_RayCast2D.set_collision_mask_value(3, false)
+		n_RayCast2D.set_collision_mask_value(5, false)
+
+		
+		set_collision_layer_value(2, false)
+		set_collision_layer_value(3, true)
 	
 	if custom_attack_area != null:
 		custom_attack_area.disable_mode
@@ -130,7 +159,7 @@ func _draw() -> void:
 		var default_font_size := 42
 		var debug_string := "Attack type: %s" % ("single target" if is_single_target else "area attack") + "\n%s/%s" % [health, max_health] 
 		var character_size := n_Sprite2D.get_rect().size
-		draw_multiline_string(default_font, Vector2(0, $Sprite2D.position.y - (character_size.y / 2) - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
+		draw_multiline_string(default_font, Vector2(0, n_Sprite2D.position.y - (character_size.y / 2) - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
 
 	if not Engine.is_editor_hint() and Debug.is_debug_mode():
 		var rect: Rect2 = $CollisionShape2D.shape.get_rect()

@@ -8,6 +8,9 @@ class_name BattleGUI extends CanvasLayer
 @onready var game_speed_button: GameSpeedButton = $GameSpeedButton
 @onready var camera_control_buttons: CameraControlButtons = $CameraControlButtons
 
+func setup(dog_tower: DogTower):
+	%SpawnButtons.setup(dog_tower)
+	
 func _ready() -> void:
 	$PauseButton.pressed.connect(_on_paused)
 	

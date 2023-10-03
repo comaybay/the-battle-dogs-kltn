@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgi3kjvqr4w1b"
-path="res://.godot/imported/batter_cat_addon.png-0f60d5e7cf5c7943ca7209af8ce83ffd.ctex"
+uid="uid://duitro513iirt"
+path="res://.godot/imported/batter_dog_bat_big.png-beb102b1f0ec91ff8ed967b012fb39ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/characters/dogs/batter_dog/batter_cat_addon.png"
-dest_files=["res://.godot/imported/batter_cat_addon.png-0f60d5e7cf5c7943ca7209af8ce83ffd.ctex"]
+source_file="res://scenes/characters/dogs/batter_dog/batter_dog_bat_big.png"
+dest_files=["res://.godot/imported/batter_dog_bat_big.png-beb102b1f0ec91ff8ed967b012fb39ed.ctex"]
 
 [params]
 

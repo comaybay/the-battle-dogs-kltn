@@ -10,7 +10,10 @@ var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/vict
 ## margin for position.x of cat tower and dog tower
 const TOWER_MARGIN: int = 700
 
-var stage_width: int
+var _stage_width: int
+func get_stage_width() -> int:
+	return _stage_width
+	
 var inbattle_sfx_idx: int
 
 var boss_audio: AudioStream
@@ -20,7 +23,7 @@ var _tutorial_dog: BattlefieldTutorialDog = null
 func _enter_tree() -> void:
 	var battlefield_data = InBattle.load_battlefield_data()
 	InBattle.reset()
-	stage_width = battlefield_data['stage_width']
+	_stage_width = battlefield_data['stage_width']
 	
 func _ready() -> void:
 	if (
@@ -32,6 +35,8 @@ func _ready() -> void:
 		_tutorial_dog = TutorialDogScene.instantiate()
 		_tutorial_dog.setup($CatTower, $DogTower, $Camera2D, $Gui)
 		$Gui.add_child(_tutorial_dog)
+	
+	$Gui.setup($DogTower)
 	
 	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons)
 	
@@ -46,23 +51,18 @@ func _ready() -> void:
 	var half_viewport_size = get_viewport().size / 2
 	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % InBattle.battlefield_data['theme'])
 	$Sky.position = Vector2(0, -$Sky.size.y)
-	$Sky.size.x = stage_width
+	$Sky.size.x = _stage_width
 	
-	$CatTower.position.x = stage_width - TOWER_MARGIN;
-	$CatTower.position.y = -50
+	$CatTower.position.x = _stage_width - TOWER_MARGIN;
 	$DogTower.position.x = TOWER_MARGIN
-	$DogTower.position.y = -50
 	
-	$Land.position.x = stage_width / 2.0
+	$Land.position.x = _stage_width / 2.0
 	
 	$Camera2D.position = Vector2(0, -half_viewport_size.y)
 
 	$CatTower.boss_appeared.connect(_on_boss_appeared)
 	$CatTower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)
 	$DogTower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
-
-func get_dog_tower() -> DogTower:
-	return $DogTower
 
 func _process(delta: float) -> void:
 	InBattle.update(delta)

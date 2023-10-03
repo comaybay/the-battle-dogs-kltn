@@ -50,9 +50,11 @@ func healing(heal : int) -> void :
 	
 func spawn(dog_scene: PackedScene) -> BaseDog:
 	$SpawnSound.play()
-	var dog = dog_scene.instantiate()
-	dog.global_position = global_position + Vector2(100, 0)
+	
+	var dog := dog_scene.instantiate() as BaseDog
 	get_tree().current_scene.add_child(dog)
+	var offset_y = dog.global_position.y - dog.get_bottom_global_position().y
+	dog.setup(global_position + Vector2(100, offset_y))
 	
 	dog_spawn.emit(dog)
 	return dog

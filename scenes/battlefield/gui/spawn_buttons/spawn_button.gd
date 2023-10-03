@@ -1,6 +1,8 @@
 class_name SpawnButton extends Button
 
-var dog_tower
+signal spawn_request
+
+var _dog_tower: DogTower
 var dog_scene: PackedScene
 var is_active: bool
 
@@ -24,7 +26,8 @@ func can_spawn():
 		
 	return result
 
-func setup(name_id: String, input_action: String, is_active: bool) -> void:
+func setup(name_id: String, input_action: String, is_active: bool, dog_tower: DogTower) -> void:
+	_dog_tower = dog_tower
 	set_active(is_active)
 	spawn_input_action = input_action
 	spawn_type = Data.dog_info[name_id]['spawn_type'] 	
@@ -56,7 +59,6 @@ func _ready() -> void:
 	$MoneyLabel.visible = false
 	$ProgressBar.visible = false
 	$AnimationPlayer.play("empty")
-	dog_tower = get_tree().current_scene.get_dog_tower()
 	set_process(false)
 	set_process_input(false)
 
@@ -78,7 +80,7 @@ func spawn_dog() -> BaseDog:
 	self.disabled = true
 
 	InBattle.money -= spawn_price
-	_spawn_dog = dog_tower.spawn(dog_scene)
+	_spawn_dog = _dog_tower.spawn(dog_scene)
 
 	$ProgressBar.visible = true
 	$Background.frame = 1

@@ -4,6 +4,10 @@ extends BaseDog
 const BATTER_KNOCKBACK_SCENE: PackedScene = preload("res://scenes/characters/dogs/batter_dog/batter_knockback/batter_knockback.tscn")
 const EXPLOSION_SPAWNER_SCENE: PackedScene = preload("res://scenes/characters/dogs/batter_dog/explosion/explosion_spawner.tscn")
 
+func setup(global_position: Vector2) -> void:
+	super.setup(global_position)
+	_spawn_drum()
+
 func _ready() -> void:
 	super._ready()
 	
@@ -15,8 +19,6 @@ func _ready() -> void:
 	
 	if Engine.is_editor_hint():
 		return
-	
-	_spawn_drum()
 	
 	attack_sprite.frame_changed.connect(func():
 		if attack_sprite.frame == attack_frame:

@@ -1,11 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://cedh84t4ewxuw"]
+[gd_scene load_steps=10 format=3 uid="uid://cedh84t4ewxuw"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_wscv2"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="2_y8xhq"]
-[ext_resource type="AudioStream" uid="uid://byul4hma3ffpq" path="res://resources/sound/battlefield/bite.mp3" id="3_xwum2"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_8csog"]
 resource_name = "attack"
@@ -14,7 +25,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -32,7 +43,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -50,7 +61,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -68,7 +79,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -96,17 +107,16 @@ z_index = 40
 position = Vector2(2, 1)
 name_id = "dog"
 
-[node name="AnimationPlayer" parent="." index="1"]
-libraries = {
-"": SubResource("AnimationLibrary_rymvr")
-}
-
-[node name="Sprite2D" parent="." index="2"]
+[node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(-21, -34.5)
 texture = ExtResource("2_y8xhq")
 hframes = 7
 vframes = 2
-frame = 9
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_rymvr")
+}
 
 [node name="CollisionShape2D" parent="." index="3"]
 visibility_layer = 2
@@ -115,13 +125,3 @@ shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]
 position = Vector2(95, 61.5)
-
-[node name="DiChuyen" type="AudioStreamPlayer" parent="FiniteStateMachine/MoveState" index="0"]
-bus = &"InBattleFX"
-
-[node name="Danh" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="0"]
-stream = ExtResource("3_xwum2")
-bus = &"InBattleFX"
-
-[node name="Nga" type="AudioStreamPlayer" parent="FiniteStateMachine/KnockbackState" index="0"]
-bus = &"InBattleFX"

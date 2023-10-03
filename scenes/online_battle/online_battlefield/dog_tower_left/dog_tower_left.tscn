@@ -1,15 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://q3xac7wpx0wx"]
+[gd_scene load_steps=11 format=3 uid="uid://uh7hnntqdigc"]
 
-[ext_resource type="Script" path="res://scenes/battlefield/cat_tower/cat_tower.gd" id="1_52k0t"]
-[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_ff43w"]
-[ext_resource type="Texture2D" uid="uid://cecwl18lrgxig" path="res://resources/battlefield_themes/night/cat_tower.png" id="3_ibw82"]
+[ext_resource type="Script" path="res://scenes/online_battle/online_battlefield/dog_tower_left/dog_tower_left.gd" id="1_6smjv"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_c4ln2"]
+[ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/night/dog_tower.png" id="3_r0g87"]
+[ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="4_7wfly"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
 font_size = 52
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hki8p"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rersv"]
 size = Vector2(408, 1002)
 
 [sub_resource type="Animation" id="Animation_uenk0"]
@@ -57,29 +58,29 @@ _data = {
 "shake": SubResource("Animation_1vn7f")
 }
 
-[node name="CatTower" type="StaticBody2D"]
-collision_layer = 16
+[node name="OnlineDogTowerLeft" type="StaticBody2D"]
+collision_layer = 32
 collision_mask = 0
-script = ExtResource("1_52k0t")
+script = ExtResource("1_6smjv")
 
 [node name="HealthLabel" type="Label" parent="."]
-offset_left = -972.0
+offset_left = -811.0
 offset_top = 60.0
-offset_right = 962.0
+offset_right = 851.0
 offset_bottom = 135.0
 size_flags_horizontal = 4
-theme = ExtResource("2_ff43w")
+theme = ExtResource("2_c4ln2")
 text = "500/500 HP"
 label_settings = SubResource("LabelSettings_8inmh")
 horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -500)
-texture = ExtResource("3_ibw82")
+texture = ExtResource("3_r0g87")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -473)
-shape = SubResource("RectangleShape2D_hki8p")
+shape = SubResource("RectangleShape2D_rersv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -87,5 +88,9 @@ libraries = {
 }
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-200, -186)
+position = Vector2(209, -160)
 gizmo_extents = 54.5
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7wfly")
+bus = &"InBattleFX"

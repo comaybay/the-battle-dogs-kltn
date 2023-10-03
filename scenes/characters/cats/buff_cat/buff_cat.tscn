@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmuvom1n8b8aw"]
+[gd_scene load_steps=9 format=3 uid="uid://dmuvom1n8b8aw"]
 
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_umb7d"]
 [ext_resource type="Texture2D" uid="uid://bpn5qyo7s5cfs" path="res://scenes/characters/cats/buff_cat/buff_cat.png" id="2_ase53"]
@@ -8,7 +8,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +25,7 @@ step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -43,7 +43,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -61,7 +61,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +79,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -116,20 +116,19 @@ knockbacks = 5
 [node name="AttackCooldownTimer" parent="." index="0"]
 wait_time = 4.0
 
-[node name="AnimationPlayer" parent="." index="1"]
+[node name="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_5a1bo")
 }
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(-80, -381)
 texture = ExtResource("2_ase53")
 hframes = 3
-
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -302)
 shape = SubResource("RectangleShape2D_8so8p")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(-138, 0)
+position = Vector2(-138, -9.5)
 target_position = Vector2(-150, 0)

@@ -2,7 +2,6 @@ class_name OnlineBattlefield extends Node2D
 
 var VictoryGUI: PackedScene = preload("res://scenes/battlefield/victory_gui/victory_gui.tscn")
 var DefeatGUI: PackedScene = preload("res://scenes/battlefield/defeat_gui/defeat_gui.tscn")
-var TutorialDogScene: PackedScene = preload("res://scenes/battlefield/battlefield_tutorial_dog/battlefield_tutorial_dog.tscn")
 
 var DEFEAT_AUDIO: AudioStream = preload("res://resources/sound/battlefield/defeat.mp3")
 var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/victory.mp3")
@@ -10,14 +9,15 @@ var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/vict
 ## margin for position.x of cat tower and dog tower
 const TOWER_MARGIN: int = 700
 
-var stage_width: int
+var _stage_width: int
+func get_stage_width() -> int:
+	return _stage_width
+	
 var inbattle_sfx_idx: int
-
-var _player_dog_tower: DogTower
 
 func _enter_tree() -> void:
 	InBattle.reset()
-	stage_width = int(SteamUser.get_lobby_data("stage_width"))
+	_stage_width = int(SteamUser.get_lobby_data("stage_width"))
 	
 func _ready() -> void:
 	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons)
@@ -30,30 +30,29 @@ func _ready() -> void:
 	var half_viewport_size = get_viewport().size / 2
 	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % SteamUser.get_lobby_data("theme"))
 	$Sky.position = Vector2(0, -$Sky.size.y)
-	$Sky.size.x = stage_width
+	$Sky.size.x = _stage_width
 	
-	_player_dog_tower = $DogTower1
-	var opponent_dog_tower = $DogTower2
+	var player_dog_tower = $OnlineDogTowerLeft
+	var opponent_dog_tower = $OnlineDogTowerRight
 	$Camera2D.position = Vector2(0, -half_viewport_size.y)
 	
 	if SteamUser.lobby_members[0] != SteamUser.lobby_id:
-		_player_dog_tower = $DogTower2
-		opponent_dog_tower = $DogTower1
-		$Camera2D.position = Vector2(stage_width, -half_viewport_size.y)
+		player_dog_tower = $OnlineDogTowerRight
+		opponent_dog_tower = $OnlineDogTowerLeft
+		$Camera2D.position = Vector2(_stage_width, -half_viewport_size.y)
 	
-	$DogTower1.position.x = TOWER_MARGIN
-	$DogTower1.position.y = -50
+	player_dog_tower.setup(true)
+	opponent_dog_tower.setup(false)
 	
-	$DogTower2.position.x = stage_width - TOWER_MARGIN;
-	$DogTower2.position.y = -50
+	$OnlineDogTowerLeft.position.x = TOWER_MARGIN
+	$OnlineDogTowerRight.position.x = _stage_width - TOWER_MARGIN;
 	
-	$Land.position.x = stage_width / 2.0
+	$Land.position.x = _stage_width / 2.0
+	
+	$Gui.setup(player_dog_tower)
 
-	_player_dog_tower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)
-	opponent_dog_tower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
-
-func get_dog_tower() -> DogTower:
-	return $DogTower1 if SteamUser.lobby_members[0] == SteamUser.STEAM_ID else $DogTower2
+	player_dog_tower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
+	opponent_dog_tower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)
 
 func _process(delta: float) -> void:
 	InBattle.update(delta)
