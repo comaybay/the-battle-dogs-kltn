@@ -29,7 +29,6 @@ func _send_message() -> void:
 
 func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int, chat_state: int) -> void:
 	var username: String = Steam.getFriendPersonaName(change_id)
-	print("LOBBY CHAT UPDATE: " + str(chat_state))
 	# If a player has joined the lobby
 	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
 		_display_message("%s %s" % [username, tr("@PLAYER_HAS_JOINED")], COLOR_EVENT)

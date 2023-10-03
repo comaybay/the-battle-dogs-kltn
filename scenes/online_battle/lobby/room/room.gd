@@ -15,16 +15,18 @@ func _ready() -> void:
 	
 	%ReadyButton.pressed.connect(_on_toggle_ready)
 	%StartButton.pressed.connect(_send_start_message)
+	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
 	Steam.lobby_data_update.connect(_on_lobby_data_update)
 	Steam.persona_state_change.connect(func(_id, _flags): _update_lobby_ui())
 	
-	Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "false")
 	
 	var owner_id: int = Steam.getLobbyOwner(SteamUser.lobby_id)
 	var is_owner: bool = SteamUser.STEAM_ID == owner_id
 	if is_owner:
+		Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "true")
 		_create_listen_socket()
 	else:
+		Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "false")
 		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_member)
 		_connect_to_listen_socket()
 	
@@ -58,15 +60,17 @@ func _update_lobby_ui() -> void:
 	if member_count <= 1:
 		%PlayerSlot1.setup(SteamUser.STEAM_ID)
 		%PlayerSlot2.setup_empty()
-		##TODO: uncomment this
-#		%StartButton.disabled = true
-		%StartButton.disabled = false
+		%StartButton.disabled = true
 		return
 	
-	%StartButton.disabled = false
 	_lobby_members.clear()
 	_lobby_members.append(Steam.getLobbyMemberByIndex(SteamUser.lobby_id, 0))
 	_lobby_members.append(Steam.getLobbyMemberByIndex(SteamUser.lobby_id, 1))
+	
+	%StartButton.disabled = not _lobby_members.all(func(member: int): 
+		return Steam.getLobbyMemberData(SteamUser.lobby_id, member, "ready") == "true"
+	)
+	
 	%PlayerSlot1.setup(_lobby_members[0])
 	%PlayerSlot2.setup(_lobby_members[1])
 
@@ -117,23 +121,22 @@ func _go_to_game():
 
 func _on_network_connection_status_changed_room_owner(connection_handle: int, connection: Dictionary, old_state: int):
 	var new_state: int = connection['connection_state']
+	
 	print("====")
 	print("NET_WORK_CHANGED:ROOM_OWNER")
 	print(old_state)
 	print(connection)
-	
+		
 	# A new connection arrives on a listen socket
 	if old_state == Steam.CONNECTION_STATE_NONE and new_state == Steam.CONNECTION_STATE_CONNECTING:
 		Steam.acceptConnection(connection_handle)
 		SteamUser.connection_handle = connection_handle
-		print("===")
-		print(connection_handle)
-		print(connection)
+		print("ROOM_OWNER: ACCEPT CONNECTION %s" % connection_handle)
 		
 	# connection closed:
 	if old_state == Steam.CONNECTION_STATE_CONNECTED and new_state == Steam.CONNECTION_STATE_CLOSED_BY_PEER:
 		SteamUser.connection_handle == 0
-		print("OWNER: connection closed from peer")
+		print("ROOM_OWNER: connection closed from peer")
 
 func _on_network_connection_status_changed_room_member(connection_handle: int, connection: Dictionary, old_state: int):
 	print("====")
@@ -163,7 +166,7 @@ func _on_network_connection_status_changed_room_member(connection_handle: int, c
 		print("MEMBER: connection timout.")
 		_close_connection(connection_handle)
 		_leave_lobby()
-		$Popup.popup("@ESTABLISH_ROOM_CONNECTION_FAILED", PopupDialog.Type.INFORMATION)
+		$Popup.popup("@LOST_CONNECTION", PopupDialog.Type.INFORMATION)
 		await $Popup.ok
 		_go_back_to_lobby_scene()
 
@@ -175,6 +178,7 @@ func _on_network_connection_status_changed_room_member(connection_handle: int, c
 		# let new room owner create connection, while others connect to the room
 		var new_owner := Steam.getLobbyOwner(SteamUser.lobby_id)
 		if new_owner == SteamUser.STEAM_ID:
+			Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "true")
 			_create_listen_socket()
 		else:
 			_connect_to_listen_socket()

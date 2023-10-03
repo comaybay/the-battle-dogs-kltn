@@ -37,8 +37,8 @@ func _refresh_room_listing():
 	Steam.lobby_match_list.connect(_on_lobby_match_list, CONNECT_ONE_SHOT)
 	%RefreshButton.disabled = true
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
+	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
 	Steam.requestLobbyList()
-#	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
 
 func _on_lobby_match_list(lobbies: Array) -> void:
 	%RefreshButton.disabled = false

@@ -45,9 +45,10 @@ func _process(_delta: float) -> void:
 	
 func _on_lobby_chat_update(_lobby_id: int, _change_id: int, _making_change_id: int, chat_state: int) -> void:
 	lobby_members.clear()
+	print("STEAM_USER: LOBBY MEMBERS: %s " % ",".join(lobby_members))
+	
 	for i in range(0, Steam.getNumLobbyMembers(lobby_id)):
 		lobby_members.append(Steam.getLobbyMemberByIndex(lobby_id, i)) 
-		print("STEAM_USER LOBBY MEMBERS: " % lobby_members)
 	
 func send_message(packet_data: Dictionary, send_type: SteamUser.SendType) -> void:
 	var data: PackedByteArray = var_to_bytes(packet_data).compress(FileAccess.COMPRESSION_GZIP)
@@ -63,3 +64,6 @@ func read_messages():
 
 func get_lobby_data(key: String) -> String:
 	return Steam.getLobbyData(SteamUser.lobby_id, key)
+
+func set_lobby_data(key: String, value: String) -> void:
+	return Steam.setLobbyData(SteamUser.lobby_id, key, value)

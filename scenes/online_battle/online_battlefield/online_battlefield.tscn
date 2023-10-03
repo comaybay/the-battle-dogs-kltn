@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b06hfe5wavkvw"]
+[gd_scene load_steps=11 format=3 uid="uid://b06hfe5wavkvw"]
 
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_3ebhf"]
 [ext_resource type="Script" path="res://scenes/online_battle/online_battlefield/online_battlefield.gd" id="1_wrh5b"]
 [ext_resource type="Texture2D" uid="uid://c8sa6uo4d7wdb" path="res://resources/battlefield_themes/night/sky.png" id="2_cuauh"]
+[ext_resource type="Script" path="res://scenes/online_battle/online_battlefield/connection_handler.gd" id="2_w03bi"]
 [ext_resource type="PackedScene" uid="uid://xny5rxpmau5y" path="res://scenes/online_battle/online_battlefield/land/land.tscn" id="3_p4hqa"]
 [ext_resource type="PackedScene" uid="uid://uh7hnntqdigc" path="res://scenes/online_battle/online_battlefield/dog_tower_left/dog_tower_left.tscn" id="5_8afl3"]
 [ext_resource type="PackedScene" uid="uid://dr6jyqaarcfl4" path="res://scenes/online_battle/online_battlefield/gui/gui.tscn" id="5_y62fp"]
@@ -12,6 +13,9 @@
 
 [node name="OnlineBattlefield" type="Node2D"]
 script = ExtResource("1_wrh5b")
+
+[node name="ConnectionHandler" type="Node" parent="."]
+script = ExtResource("2_w03bi")
 
 [node name="Sky" type="TextureRect" parent="."]
 material = ExtResource("1_3ebhf")
