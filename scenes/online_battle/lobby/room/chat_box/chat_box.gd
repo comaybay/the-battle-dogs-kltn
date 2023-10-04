@@ -1,6 +1,7 @@
-extends PanelContainer
+class_name ChatBox extends PanelContainer
 
-const COLOR_EVENT := '#8ad1e6'
+const COLOR_LOBBY_EVENT := '#81d3eb'
+const COLOR_P2P_EVENT := '#74dba1'
 const COLOR_PLAYER := '#ffffff'
 
 func _ready() -> void:
@@ -12,7 +13,7 @@ func _ready() -> void:
 	if SteamUser.STEAM_ID == Steam.getLobbyOwner(SteamUser.lobby_id):
 		message = "Room created (ID: %s)" % SteamUser.lobby_id
 		
-	_display_message(message, COLOR_EVENT, false)
+	display_message(message, COLOR_LOBBY_EVENT, false)
 
 	%SendButton.pressed.connect(_send_message)
 	%InputLine.text_submitted.connect(func(_new_text): _send_message())
@@ -31,29 +32,27 @@ func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int,
 	var username: String = Steam.getFriendPersonaName(change_id)
 	# If a player has joined the lobby
 	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
-		_display_message("%s %s" % [username, tr("@PLAYER_HAS_JOINED")], COLOR_EVENT)
+		display_message("%s %s" % [username, tr("@PLAYER_HAS_JOINED")], COLOR_LOBBY_EVENT)
 
 	# Else if a player has left the lobby
 	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_LEFT:
-		_display_message("%s %s" % [username, tr("@PLAYER_HAS_LEFT")], COLOR_EVENT)
+		display_message("%s %s" % [username, tr("@PLAYER_HAS_LEFT")], COLOR_LOBBY_EVENT)
 
 	# Else if a player has been kicked
 	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_KICKED:
-		_display_message("%s %s" % [username, tr("@PLAYER_HAS_BEEN_KICKED")], COLOR_EVENT)
+		display_message("%s %s" % [username, tr("@PLAYER_HAS_BEEN_KICKED")], COLOR_LOBBY_EVENT)
 
-func _on_lobby_message(lobby_id: int, user: int, message: String, chat_type: int):
-	#TODO: implement  this
-#	if lobby_id != SteamUser.lobby_id:
-#		return
-
-	print("MESSAGE RECEIVED")
+func _on_lobby_message(_lobby_id: int, user: int, message: String, _chat_type: int):
 	var username := Steam.getFriendPersonaName(user)
-	_display_message("%s: %s" % [username, message], COLOR_PLAYER)
+	display_message("%s: %s" % [username, message], COLOR_PLAYER)
 	
-	
-func _display_message(message: String, color: String, new_line: bool = true):
+func display_message(message: String, color: String, new_line: bool = true):
 	if new_line:
 		%ChatLog.append_text('\n')
+	
+	if color == COLOR_PLAYER:
+		%ChatLog.append_text("[color=%s]%s[/color]" % [color, message]) 
+	else:
+		%ChatLog.append_text("[font_size=16][i][color=%s]%s[/color][/i][/font_size]" % [color, message]) 
 		
-	%ChatLog.append_text("[color=%s]%s[/color]" % [color, message]) 
 	

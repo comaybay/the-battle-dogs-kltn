@@ -37,20 +37,19 @@ func _ready() -> void:
 	STEAM_ID = Steam.getSteamID()
 	lobby_members = [STEAM_ID]
 	STEAM_USERNAME = Steam.getPersonaName()
-	Steam.lobby_chat_update.connect(_on_lobby_chat_update)		
 	Steam.initRelayNetworkAccess()
 
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 	
-func _on_lobby_chat_update(_lobby_id: int, _change_id: int, _making_change_id: int, chat_state: int) -> void:
+func update_lobby_members():
 	lobby_members.clear()
-	print("STEAM_USER: LOBBY MEMBERS: %s " % ",".join(lobby_members))
-	
 	for i in range(0, Steam.getNumLobbyMembers(lobby_id)):
 		lobby_members.append(Steam.getLobbyMemberByIndex(lobby_id, i)) 
+	print("STEAM_USER: LOBBY MEMBERS: %s " % ",".join(lobby_members))	
+		
 	
-func send_message(packet_data: Dictionary, send_type: SteamUser.SendType) -> void:
+func send_message(packet_data, send_type: SteamUser.SendType) -> void:
 	var data: PackedByteArray = var_to_bytes(packet_data).compress(FileAccess.COMPRESSION_GZIP)
 	Steam.sendMessageToConnection(connection_handle, data, send_type)
 	
@@ -58,7 +57,6 @@ func read_messages():
 	var arr: Array = Steam.receiveMessagesOnConnection(connection_handle, MESSAGE_READ_LIMIT)
 	for dict in arr:
 		dict['data'] = bytes_to_var(dict['payload'].decompress_dynamic(-1, FileAccess.COMPRESSION_GZIP))
-		print(dict)
 	
 	return arr
 
@@ -67,3 +65,9 @@ func get_lobby_data(key: String) -> String:
 
 func set_lobby_data(key: String, value: String) -> void:
 	return Steam.setLobbyData(SteamUser.lobby_id, key, value)
+
+func get_member_data(member_id: int, key: String) -> String:
+	return Steam.getLobbyMemberData(lobby_id, member_id, key)
+	
+func get_lobby_owner() -> int:
+	return Steam.getLobbyOwner(lobby_id)

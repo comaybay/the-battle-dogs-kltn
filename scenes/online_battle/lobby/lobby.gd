@@ -34,20 +34,26 @@ func _ready():
 	
 var _request_room_loop: int = 0
 func _refresh_room_listing():
-	Steam.lobby_match_list.connect(_on_lobby_match_list, CONNECT_ONE_SHOT)
+	Steam.lobby_match_list.connect(_on_lobby_match_list)
 	%RefreshButton.disabled = true
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
-	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
+	_apply_room_filter()
 	Steam.requestLobbyList()
+
+func _apply_room_filter():
+	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
+	Steam.addRequestLobbyListStringFilter("game_start", "false", Steam.LOBBY_COMPARISON_EQUAL)
 
 func _on_lobby_match_list(lobbies: Array) -> void:
 	%RefreshButton.disabled = false
 	%RoomCountLabel.text = "%s %s" % [lobbies.size(), tr("@ROOM")]
-	
-	if lobbies.size() == 0 && _request_room_loop == 0:
+
+	if lobbies.size() == 0 && _request_room_loop < 1:
 		_request_room_loop += 1
 		_refresh_room_listing()
 		return
+	else:
+		Steam.lobby_match_list.disconnect(_on_lobby_match_list)
 	
 	_request_room_loop = 0
 	
@@ -55,7 +61,7 @@ func _on_lobby_match_list(lobbies: Array) -> void:
 		room.queue_free()	
 		
 	for lobby_id in lobbies:
-		var room_name: String = Steam.getLobbyData(lobby_id, "name")
+		var room_name: String = SteamUser.get_lobby_data("name")
 		var member_count: int = Steam.getNumLobbyMembers(lobby_id)
 		
 		var room: RoomListingItem = ROOM_LISTING_ITEM_SCENE.instantiate()
@@ -92,14 +98,15 @@ func _on_lobby_created(connect: int, lobby_id: int) -> void:
 	Steam.setLobbyJoinable(lobby_id, true)
 
 	# Set some lobby data
-	Steam.setLobbyData(lobby_id, "name", _request_create_room_name)
-	Steam.setLobbyData(lobby_id, "game", "thebattledogs")
-	Steam.setLobbyData(lobby_id, "mode", "GodotSteam test")
+	SteamUser.set_lobby_data("name", _request_create_room_name)
+	SteamUser.set_lobby_data("game", "thebattledogs")
+	SteamUser.set_lobby_data("mode", "GodotSteam test")
+	SteamUser.set_lobby_data("game_start", "false")
 	
-	Steam.setLobbyData(lobby_id, "theme", ['fall', 'green_grass', 'heavenly', 'night', 'nightmare', 'winter'].pick_random())
-	Steam.setLobbyData(lobby_id, "music", "battlefield_theme1")
-	Steam.setLobbyData(lobby_id, "stage_width", "3500")
-	Steam.setLobbyData(lobby_id, "max_health", "5000")
+	SteamUser.set_lobby_data("theme", ['fall', 'green_grass', 'heavenly', 'night', 'nightmare', 'winter'].pick_random())
+	SteamUser.set_lobby_data("music", "battlefield_theme1")
+	SteamUser.set_lobby_data("stage_width", "3500")
+	SteamUser.set_lobby_data("max_health", "5000")
 
 	_go_to_room()
 
@@ -142,7 +149,7 @@ func _auto_matchmaking():
 		%Popup.popup("@FINDING", PopupDialog.Type.PROGRESS)
 		
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
-	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
+	_apply_room_filter()
 	Steam.requestLobbyList()
 	
 func _on_matchmaking_lobby_match_list(lobbies: Array):

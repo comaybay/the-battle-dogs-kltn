@@ -133,6 +133,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 150
 
 [node name="ChatBox" parent="MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("5_j56qe")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Popup" parent="." instance=ExtResource("8_pevc4")]
