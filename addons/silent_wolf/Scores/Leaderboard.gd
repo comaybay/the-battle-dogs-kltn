@@ -45,8 +45,7 @@ func render_board(scores: Array, local_scores: int,numb : int, time: bool = fals
 			add_item(score.player_name, score.score,local_scores)
 	else : #add time scores
 		list_score.reverse()
-		for score in list_score.slice(0,numb):
-			print(score)
+		for score in list_score.slice(0,numb):			
 			add_time_item(score.player_name, score.score)
 
 #Show ranking
