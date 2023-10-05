@@ -8,116 +8,92 @@ var list_index = 0
 # Replace the leaderboard name if you're not using the default leaderboard
 var ld_name = "main"
 var max_scores = 10
-
+var sw_fastest_time
+var sw_high_scores
+var number = 10
 func _ready():
-	print("SilentWolf.Scores.leaderboards: " + str(SilentWolf.Scores.leaderboards))
-	print("SilentWolf.Scores.ldboard_config: " + str(SilentWolf.Scores.ldboard_config))
-	var scores = SilentWolf.Scores.scores
-	#var scores = []
-	if ld_name in SilentWolf.Scores.leaderboards:
-		scores = SilentWolf.Scores.leaderboards[ld_name]
-	var local_scores = SilentWolf.Scores.local_scores
+	self.set_process_mode(4) 
+	$VBoxContainer/Control/TabContainer.set_tab_title(0, tr("@HIGHSCORE"))
+	$VBoxContainer/Control/TabContainer.set_tab_title(1, tr("@FASTESTTIME"))	
 	
-	if len(scores) > 0: 
-		render_board(scores, local_scores)
-	else:
-		# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
-		add_loading_scores_message()
-		var sw_result = await SilentWolf.Scores.get_scores().sw_get_scores_complete
-		scores = sw_result.scores
-		hide_message()
-		render_board(scores, local_scores)
+#	SilentWolf.Scores.save_score(Steam.getPersonaName(), 64, "fastest_time")
+	# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
+	add_loading_scores_message()
+	sw_high_scores = await SilentWolf.Scores.get_scores(0,"high_scores").sw_get_scores_complete
+	sw_fastest_time = await SilentWolf.Scores.get_scores(0,"fastest_time").sw_get_scores_complete
+	self.set_process_mode(0) 
+	hide_message()
+	render_board(sw_high_scores.scores,number,0)
+	render_board(sw_fastest_time.scores,1,number,true)
+	load_description(0)
+	if sw_high_scores.scores.is_empty():	
+		add_no_scores_message()
+	
 
+func _on_tab_container_tab_changed(tab):
+	hide_message()
+	if (tab == 0) and (sw_high_scores.scores.is_empty() == true):
+		add_no_scores_message()		
+	if (tab == 1) and (sw_fastest_time.scores.is_empty() == true):
+		add_no_scores_message()
+	load_description(tab)
 
-func render_board(scores: Array, local_scores: Array) -> void:
-	var all_scores = scores
-	if ld_name in SilentWolf.Scores.ldboard_config and is_default_leaderboard(SilentWolf.Scores.ldboard_config[ld_name]):
-		all_scores = merge_scores_with_local_scores(scores, local_scores, max_scores)
-		if scores.is_empty() and local_scores.is_empty():
-			add_no_scores_message()
-	else:
-		if scores.is_empty():
-			add_no_scores_message()
-	if all_scores.is_empty():
-		for score in scores:
-			add_item(score.player_name, str(int(score.score)))
-	else:
-		for score in all_scores:
-			add_item(score.player_name, str(int(score.score)))
-
-
-func is_default_leaderboard(ld_config: Dictionary) -> bool:
-	var default_insert_opt = (ld_config.insert_opt == "keep")
-	var not_time_based = !("time_based" in ld_config)
-	return default_insert_opt and not_time_based
-
-
-func merge_scores_with_local_scores(scores: Array, local_scores: Array, max_scores: int=10) -> Array:
-	if local_scores:
-		for score in local_scores:
-			var in_array = score_in_score_array(scores, score)
-			if !in_array:
-				scores.append(score)
-			scores.sort_custom(sort_by_score);
-	if scores.size() > max_scores:
-		var new_size = scores.resize(max_scores)
-	return scores
-
-
-func sort_by_score(a: Dictionary, b: Dictionary) -> bool:
-	if a.score > b.score:
-		return true;
-	else:
-		if a.score < b.score:
-			return false;
-		else:
-			return true;
-
-
-func score_in_score_array(scores: Array, new_score: Dictionary) -> bool:
-	var in_score_array =  false
-	if !new_score.is_empty() and !scores.is_empty():
-		for score in scores:
-			if score.score_id == new_score.score_id: # score.player_name == new_score.player_name and score.score == new_score.score:
-				in_score_array = true
-	return in_score_array
+func render_board(scores: Array, local_scores: int,numb : int, time: bool = false) -> void:
+	var list_score = scores
+	if time == false :
+		for score in list_score.slice(0,numb):
+			add_item(score.player_name, score.score,local_scores)
+	else : #add time scores
+		list_score.reverse()
+		for score in list_score.slice(0,numb):			
+			add_time_item(score.player_name, score.score)
 
 #Show ranking
-func add_item(player_name: String, score_value: String) -> void:
+func add_item(player_name: String, score_value: int, tab: int) -> void:
 	var item = ScoreItem.instantiate()
 	list_index += 1
 	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
 	item.get_node("Score").text = score_value
-	item.offset_top = list_index * 100	
-	$"TabContainer/High Scores/MarginContainer/ScoreItemContainer".add_child(item)
+	item.offset_top = list_index * 100
+	if tab == 0 :
+		$"VBoxContainer/Control/TabContainer/HighScores/MarginContainer/ScoreItemContainer".add_child(item)
+	elif tab == 1:
+		$"VBoxContainer/Control/TabContainer/FastestTime/MarginContainer/ScoreItemContainer".add_child(item)
 
+func add_time_item(player_name: String, score_value: int) -> void:
+	var item = ScoreItem.instantiate()
+	list_index += 1
+	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
+	item.get_node("Score").text =str(int(score_value/60),":",(score_value-(int(score_value/60) * 60)))
+	item.offset_top = list_index * 100
+	$"VBoxContainer/Control/TabContainer/FastestTime/MarginContainer/ScoreItemContainer".add_child(item)
+		
 
 func add_no_scores_message() -> void:
-	var item = $MessageContainer/TextMessage
+	var item = $VBoxContainer/Control/MessageContainer/TextMessage
 	item.text = "No scores yet!"
-	$MessageContainer.show()
-	item.offset_top = 135
+	$VBoxContainer/Control/MessageContainer.show()
 
 func add_loading_scores_message() -> void:	
-	var item = $MessageContainer/TextMessage
+	var item = $VBoxContainer/Control/MessageContainer/TextMessage
 	item.text = "Loading scores..."
-	$MessageContainer.show()
-	item.offset_top = 135
-
-
-func hide_message() -> void:
-	$MessageContainer.hide()
-
-func clear_leaderboard() -> void:	
-	var score_item_container = $"TabContainer/High Scores/MarginContainer/ScoreItemContainer"
-	if score_item_container.get_child_count() > 0:
-		var children = score_item_container.get_children()
-		for c in children:
-			score_item_container.remove_child(c)
-			c.queue_free()
-
-
-func _on_go_back_button_pressed():
-	var scene_name = SilentWolf.scores_config.open_scene_on_close
-	SWLogger.info("Closing SilentWolf leaderboard, switching to scene: " + str(scene_name))
+	$VBoxContainer/Control/MessageContainer.show()
 	
+func hide_message() -> void:
+	$VBoxContainer/Control/MessageContainer.hide()
+
+func load_description(tab : int):
+	if (tab == 0):
+		$VBoxContainer/MarginContainer/ItemDescription.text = tr("@HIGHSCORE_DESCRIPTION")
+	elif (tab == 1):
+		$VBoxContainer/MarginContainer/ItemDescription.text = tr("@FASTESTTIME_DESCRIPTION")
+	elif (tab == 2):
+		pass
+
+#func clear_leaderboard() -> void:	
+#	var score_item_container = $"VBoxContainer/Control/TabContainer/High Scores/MarginContainer/ScoreItemContainer"
+#	if score_item_container.get_child_count() > 0:
+#		var children = score_item_container.get_children()
+#		for c in children:
+#			score_item_container.remove_child(c)
+#			c.queue_free()

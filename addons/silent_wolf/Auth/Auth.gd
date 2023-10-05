@@ -124,7 +124,7 @@ func register_player_user_password(player_name: String, password: String, confir
 
 func _on_RegisterPlayerUserPassword_request_completed(result, response_code, headers, body) -> void:
 	var status_check = SWUtils.check_http_response(response_code, headers, body)
-	#RegisterPlayer.queue_free()
+	
 	SilentWolf.free_request(wrRegisterPlayer, RegisterPlayer)
 	
 	if status_check:
