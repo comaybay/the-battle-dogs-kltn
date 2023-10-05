@@ -92,3 +92,7 @@ keys,vi,en
 @NO,Không,No
 @OK,Ok,Ok
 @NEED_LOGGED_IN_WITH_STEAM,Chỉ chơi được nếu bạn đã đăng nhập vào tài khoản Steam,Only available if you are logged in with Steam
+@HIGHSCORE,Điểm ,High score
+@FASTESTTIME,Thời gian,Time
+@HIGHSCORE_DESCRIPTION,Bảng xếp hạng người chơi có số điểm online cao nhất,@HIGHSCORE_DESCRIPTION
+@FASTESTTIME_DESCRIPTION,Bảng xếp hạng người chơi hoàn thành màn cuối với thời gian nhanh nhất,@FASTESTTIME_DESCRIPTION
