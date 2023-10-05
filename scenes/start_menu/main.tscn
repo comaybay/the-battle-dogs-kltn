@@ -217,6 +217,7 @@ layout_mode = 0
 texture = ExtResource("2_56ofs")
 
 [node name="BG2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 texture = ExtResource("3_jin04")
 
@@ -261,8 +262,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = 51.0
-offset_bottom = 341.0
+offset_top = -10.0
+offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -278,6 +279,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 text = "@START_GAME"
+
+[node name="OnlinePlayButton" type="Button" parent="Khung/PhanCuoi"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "@ONLINE_PLAY"
 
 [node name="NutHuongDan" type="Button" parent="Khung/PhanCuoi"]
 visible = false
