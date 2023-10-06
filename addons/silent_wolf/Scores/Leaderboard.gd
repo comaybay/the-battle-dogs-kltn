@@ -25,7 +25,10 @@ func _ready():
 	hide_message()
 	render_board(sw_high_scores.scores,number,0)
 	render_board(sw_fastest_time.scores,1,number,true)
+	render_board(sw_high_scores.scores,number,2)
 	load_description(0)
+	
+#	print(sw_fastest_time.scores)
 	if sw_high_scores.scores.is_empty():	
 		add_no_scores_message()
 	
@@ -57,8 +60,8 @@ func add_item(player_name: String, score_value: int, tab: int) -> void:
 	item.offset_top = list_index * 100
 	if tab == 0 :
 		$"VBoxContainer/Control/TabContainer/HighScores/MarginContainer/ScoreItemContainer".add_child(item)
-	elif tab == 1:
-		$"VBoxContainer/Control/TabContainer/FastestTime/MarginContainer/ScoreItemContainer".add_child(item)
+	elif tab == 2:
+		$"VBoxContainer/Control/TabContainer/HighScores2/MarginContainer/ScoreItemContainer".add_child(item)
 
 func add_time_item(player_name: String, score_value: int) -> void:
 	var item = ScoreItem.instantiate()
@@ -88,7 +91,7 @@ func load_description(tab : int):
 	elif (tab == 1):
 		$VBoxContainer/MarginContainer/ItemDescription.text = tr("@FASTESTTIME_DESCRIPTION")
 	elif (tab == 2):
-		pass
+		$VBoxContainer/MarginContainer/ItemDescription.text = tr("@HIGHSCORE_DESCRIPTION")
 
 #func clear_leaderboard() -> void:	
 #	var score_item_container = $"VBoxContainer/Control/TabContainer/High Scores/MarginContainer/ScoreItemContainer"
