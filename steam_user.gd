@@ -39,10 +39,10 @@ func _ready() -> void:
 			SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD)
 			SilentWolf.Auth.login_player(STEAM_USERNAME, PASSWORD)
 			SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
-			print("dang ky")
+		#login by STEAM_USERNAME(username) and STEAM_ID(password)
 		SilentWolf.Auth.login_player(STEAM_USERNAME, PASSWORD)
 		SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
-		print("dang nhap")
+		
 		#get silentwolf data
 		get_silentwolf_player_data(STEAM_USERNAME)
 		if Data.silentwolf_data == null :
