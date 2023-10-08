@@ -11,7 +11,6 @@ var save_data: Dictionary
 var old_data: Dictionary
 var silentwolf_data : Dictionary
 var use_sw_data : bool	
-var select_data_notif
 var user_name: String:
 	get: return save_data['user_name']
 	set(value): save_data['user_name'] = value
@@ -218,7 +217,6 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 	return save_data
 			
 func _ready() -> void:
-	select_data_notif = true
 	old_data = save_data	
 	## if player opens the game for the first time (game_language is not chose yet)
 	use_sw_data = false
@@ -255,7 +253,7 @@ func save():
 	else: #play online
 		if (silentwolf_data["user_name"] == old_data["user_name"]):
 			var date1 = Time.get_unix_time_from_datetime_string(save_data.date)
-			var date2 =Time.get_unix_time_from_datetime_string(silentwolf_data.date)
+			var date2 = Time.get_unix_time_from_datetime_string(silentwolf_data.date)
 			if date2 > date1: #luu silentwolf_data vao data			
 				save_data = silentwolf_data				
 			else : #luu data vao silentwolf_data				
@@ -265,12 +263,7 @@ func save():
 			file.store_line(JSON.stringify(save_data))
 			file.close()
 		else : #silentwolf user_name != data user_name
-			# dung sw_data			
-			save_data = silentwolf_data 
-			SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)
-			if select_data_notif == true :
-				select_data.emit()
-			
+			select_data.emit()
 	compute_values()
 
 func load_settings():
