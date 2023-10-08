@@ -7,12 +7,13 @@ signal mute_music_changed(mute: bool)
 signal mute_sound_fx_changed(mute: bool)
 
 var save_data: Dictionary
+var old_data: Dictionary
 var silentwolf_data : Dictionary
 var use_sw_data : bool	
 
 var user_name: String:
-	get: return save_data['user_name']		
-	set(value): save_data['user_name'] = value	
+	get: return save_data['user_name']
+	set(value): save_data['user_name'] = value
 
 var date: String:
 	get: return save_data['date']		
@@ -142,8 +143,7 @@ func _init() -> void:
 	if not FileAccess.file_exists("user://save.json"):
 		save_data = _create_new_game_save()
 	else:
-		save_data = _load_game_save()
-		
+		save_data = _load_game_save()		
 	load_settings()
 
 	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
@@ -217,6 +217,7 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 	return save_data
 			
 func _ready() -> void:
+	old_data = save_data	
 	## if player opens the game for the first time (game_language is not chose yet)
 	use_sw_data = false
 	if game_language == "":	
@@ -250,26 +251,22 @@ func save():
 		file.store_line(JSON.stringify(save_data))
 		file.close()			
 	elif use_sw_data == true: #play online
-		if (str(silentwolf_data["user_name"]) == str(save_data["user_name"])):
+		if (silentwolf_data["user_name"] == old_data["user_name"]):
 			var date1 = Time.get_unix_time_from_datetime_string(save_data.date)
 			var date2 =Time.get_unix_time_from_datetime_string(silentwolf_data.date)
-			if date2 > date1: #luu silentwolf_data vao data
-				print("savecte 1")
+			if date2 > date1: #luu silentwolf_data vao data			
 				save_data = silentwolf_data				
-			else : #luu data vao silentwolf_data
-				print("savecte 2")
+			else : #luu data vao silentwolf_data				
 				silentwolf_data = save_data
-				SilentWolf.Players.save_player_data(user_name, silentwolf_data)
+				SilentWolf.Players.save_player_data(Steam.getPersonaName(), silentwolf_data)
 			var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
 			file.store_line(JSON.stringify(save_data))
-			file.close()	
+			file.close()
 		else : #silentwolf user_name != data user_name
 			# dung sw_data
-			print("savecte 3")
 			save_data = silentwolf_data 
 			SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)		
-		
-		
+			
 	compute_values()
 
 func load_settings():
