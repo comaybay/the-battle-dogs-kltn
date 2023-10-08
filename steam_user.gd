@@ -14,8 +14,6 @@ var PASSWORD: String = ""
 var lobby_id: int = 0
 var lobby_members: Array
 var data
-
-
 ## game connection
 var listen_socket: int = 0
 
@@ -44,6 +42,7 @@ func _ready() -> void:
 		#get silentwolf data		
 		var sw_result = await SilentWolf.Players.get_player_data(STEAM_USERNAME).sw_get_player_data_complete
 		Data.silentwolf_data = sw_result.player_data
+		
 		
 		Data.use_sw_data = true	
 		Data.save()

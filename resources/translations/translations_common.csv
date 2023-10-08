@@ -93,6 +93,10 @@ keys,vi,en
 @OK,Ok,Ok
 @NEED_LOGGED_IN_WITH_STEAM,Chỉ chơi được nếu bạn đã đăng nhập vào tài khoản Steam,Only available if you are logged in with Steam
 @HIGHSCORE,Điểm ,High score
-@FASTESTTIME,Thời gian,Time
-@HIGHSCORE_DESCRIPTION,Bảng xếp hạng người chơi có số điểm online cao nhất,@HIGHSCORE_DESCRIPTION
-@FASTESTTIME_DESCRIPTION,Bảng xếp hạng người chơi hoàn thành màn cuối với thời gian nhanh nhất,@FASTESTTIME_DESCRIPTION
+@FASTESTTIME,Thời gian,Time score
+@HIGHSCORE_DESCRIPTION,Bảng xếp hạng người chơi có số điểm online cao nhất,Ranking table of players with the highest online score
+@FASTESTTIME_DESCRIPTION,Bảng xếp hạng người chơi hoàn thành màn cuối với thời gian nhanh nhất,Ranking table of players completing the final stage with the fastest time
+@NO,Có,Yes
+@SELECT_PLAYER_DATA?,Bạn có muốn sử dụng dữ liệu từ Steam hay không (Lưu ý: hành động này sẽ xóa dữ hiện có trong máy tính của bạn),Do you like to use data from Steam (This action will delete data from your computer)
+@VICTORYCOUNT,Hoàn thành,Victory
+@VICTORYCOUNT_DESCRIPTION,Bảng xếp hạng người chơi có số lần hoàn thành màn cuối nhiều lần nhất,Leaderboard for players who have completed the final level the most times

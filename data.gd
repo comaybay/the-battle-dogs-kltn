@@ -5,12 +5,13 @@ signal music_volume_changed(value: int)
 signal sound_fx_volume_changed(value: int)
 signal mute_music_changed(mute: bool)
 signal mute_sound_fx_changed(mute: bool)
+signal select_data
 
 var save_data: Dictionary
 var old_data: Dictionary
 var silentwolf_data : Dictionary
 var use_sw_data : bool	
-
+var select_data_notif
 var user_name: String:
 	get: return save_data['user_name']
 	set(value): save_data['user_name'] = value
@@ -217,6 +218,7 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 	return save_data
 			
 func _ready() -> void:
+	select_data_notif = true
 	old_data = save_data	
 	## if player opens the game for the first time (game_language is not chose yet)
 	use_sw_data = false
@@ -250,7 +252,7 @@ func save():
 		var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
 		file.store_line(JSON.stringify(save_data))
 		file.close()			
-	elif use_sw_data == true: #play online
+	else: #play online
 		if (silentwolf_data["user_name"] == old_data["user_name"]):
 			var date1 = Time.get_unix_time_from_datetime_string(save_data.date)
 			var date2 =Time.get_unix_time_from_datetime_string(silentwolf_data.date)
@@ -263,9 +265,11 @@ func save():
 			file.store_line(JSON.stringify(save_data))
 			file.close()
 		else : #silentwolf user_name != data user_name
-			# dung sw_data
+			# dung sw_data			
 			save_data = silentwolf_data 
-			SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)		
+			SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)
+			if select_data_notif == true :
+				select_data.emit()
 			
 	compute_values()
 
