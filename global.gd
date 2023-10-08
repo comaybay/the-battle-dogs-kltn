@@ -27,5 +27,11 @@ func delete_score(player_name: String, ldboard_name: String='main') -> void:
 		if score["player_name"] == player_name :
 			print(score)
 #			var sw_delete_score = await SilentWolf.Scores.delete_score(str(score["score_id"]),ldboard_name)
-			
-		
+	
+func sw_get_data(player_name: String, data) -> void:
+	var sw_result = await SilentWolf.Players.get_player_data(player_name).sw_get_player_data_complete
+	Data.silentwolf_data = sw_result.player_data
+	Data.save_data = Data.silentwolf_data
+
+func sw_update_data(player_name: String, data) -> void:
+	SilentWolf.Players.save_player_data(player_name, data)
