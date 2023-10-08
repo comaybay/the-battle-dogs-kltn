@@ -246,3 +246,16 @@ func check_multiplayer_ready():
 func check_sw_ready():
 	if !Auth or !Scores or !Players or !Multiplayer:
 		await get_tree().create_timer(0.01).timeout
+
+func sw_save_score_lw(player_name: String,score:int, ldboard_name: String='main'):	
+	var sw_result = await SilentWolf.Scores.get_scores_by_player(player_name, 10, ldboard_name).sw_get_player_scores_complete
+	var sw_score = sw_result.scores	
+	if score < sw_score[0]["score"]:		
+		await SilentWolf.Scores.save_score(player_name, score , ldboard_name)
+
+func sw_delete_score(player_name: String, ldboard_name: String='main') -> void:	
+	var sw_scores = await SilentWolf.Scores.get_scores(0,ldboard_name).sw_get_scores_complete
+	for score in sw_scores.scores:		
+		if score["player_name"] == player_name :
+			print(score)
+#			var sw_delete_score = await SilentWolf.Scores.delete_score(str(score["score_id"]),ldboard_name)
