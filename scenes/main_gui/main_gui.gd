@@ -24,10 +24,9 @@ func _ready() -> void:
 	
 	Data.select_data.connect(show_select_data_box)
 
-func show_select_data_box():
-	Data.select_data_notif = false
+func show_select_data_box():	
 	$Khung/Content/ConfirmationDialog.show()	
-	pass
+	
 
 func _on_bone_changed(value: int):
 	%Money.text = str(Data.bone)
@@ -38,8 +37,8 @@ func _on_go_back_pressed():
 
 func _on_confirmation_dialog_player():
 	Data.old_data = Data.silentwolf_data
-	pass # Replace with function body.
+	Data.save_data= Data.silentwolf_data
 
-func _on_confirmation_dialog_computer():
-	print("computer data")
-	pass # Replace with function body.
+func _on_confirmation_dialog_computer():	
+	SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.save_data)
+	
