@@ -95,7 +95,7 @@ func load_description(tab : int):
 	elif (tab == 1):
 		$VBoxContainer/MarginContainer/ItemDescription.text = tr("@FASTESTTIME_DESCRIPTION")
 	elif (tab == 2):
-		$VBoxContainer/MarginContainer/ItemDescription.text = tr("@HIGHSCORE_DESCRIPTION")
+		$VBoxContainer/MarginContainer/ItemDescription.text = tr("@VICTORYCOUNT_DESCRIPTION")
 
 #func clear_leaderboard() -> void:	
 #	var score_item_container = $"VBoxContainer/Control/TabContainer/High Scores/MarginContainer/ScoreItemContainer"

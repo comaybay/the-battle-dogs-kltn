@@ -76,6 +76,7 @@ visible = false
 layout_mode = 2
 theme = SubResource("Theme_4jgio")
 horizontal_scroll_mode = 0
+metadata/_tab_name = "@VICTORYCOUNT"
 
 [node name="MarginContainer" type="MarginContainer" parent="Khung/Content/VBoxContainer/Control/TabContainer/VictoryCount" index="0"]
 layout_mode = 2

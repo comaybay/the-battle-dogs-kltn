@@ -24,6 +24,8 @@ func _ready():
 	%SettingsButton.pressed.connect(_go_to_settings)
 	%CreditButton.pressed.connect(_go_to_credits)
 	
+	
+
 func _on_nut_bat_dau_pressed():
 	AudioPlayer.stop_custom_music()
 	
