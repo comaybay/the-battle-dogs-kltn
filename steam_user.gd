@@ -31,22 +31,27 @@ func _ready() -> void:
 	if IS_USING_STEAM: #have account
 		STEAM_ID = Steam.getSteamID()
 		STEAM_USERNAME = Steam.getPersonaName()
-		PASSWORD = "Aa1@" + str( STEAM_ID)
-		print(Data.steam_first_login)
-		if Data.steam_first_login: #register by STEAM_USERNAME(username) and STEAM_ID(password)
+		PASSWORD = "Aa1@" + str( STEAM_ID)		
+		if Data.steam_first_login: #register by STEAM_USERNAME(username) and STEAM_ID(password)			
 			Data.steam_first_login = false
-			Data.save()
+			Data.user_name = STEAM_USERNAME			
 			SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD)
 			SilentWolf.Auth.login_player(STEAM_USERNAME, PASSWORD)
 			SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
+			SilentWolf.Players.save_player_data(STEAM_USERNAME, Data.save_data)
 		#login by STEAM_USERNAME(username) and STEAM_ID(password)
 		SilentWolf.Auth.login_player(STEAM_USERNAME, PASSWORD)
 		SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
 		
-		#get silentwolf data
-		get_silentwolf_player_data(STEAM_USERNAME)
+		#get silentwolf data		
+		var sw_result = await SilentWolf.Players.get_player_data(STEAM_USERNAME).sw_get_player_data_complete
+		Data.silentwolf_data = sw_result.player_data
+		
+		Data.use_sw_data = true
 		if Data.silentwolf_data == null :
-			print("data trong")
+			SilentWolf.Players.save_player_data(STEAM_USERNAME, Data.save_data)
+		Data.save()
+			
 	else : # don't have account
 		pass
 		
@@ -56,13 +61,7 @@ func _on_registration_complete(sw_result: Dictionary) -> void:
 		print("Registration succeeded!")
 	else:
 		print("Error: " + str(sw_result.error))
-
-func save_silentwolf_player_data(player_name : String, player_data : Dictionary) -> void:
-	SilentWolf.Players.save_player_data(player_name, player_data)
-
-func get_silentwolf_player_data(player_name : String) :
-	Data.silentwolf_data = await SilentWolf.Players.get_player_data(player_name).sw_get_player_data_complete
-	print("Player data: " + str(Data.silentwolf_data.player_data))
+		
 	if not IS_USING_STEAM:
 		set_process_input(false)
 		return

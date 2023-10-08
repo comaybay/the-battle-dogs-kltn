@@ -10,25 +10,27 @@ var ld_name = "main"
 var max_scores = 10
 var sw_fastest_time
 var sw_high_scores
+var sw_victory_count
 var number = 10
-func _ready():
+func _ready():		
 	self.set_process_mode(4) 
 	$VBoxContainer/Control/TabContainer.set_tab_title(0, tr("@HIGHSCORE"))
 	$VBoxContainer/Control/TabContainer.set_tab_title(1, tr("@FASTESTTIME"))	
+	$VBoxContainer/Control/TabContainer.set_tab_title(2, tr("@VICTORYCOUNT"))	
 	
 #	SilentWolf.Scores.save_score(Steam.getPersonaName(), 64, "fastest_time")
 	# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
 	add_loading_scores_message()
 	sw_high_scores = await SilentWolf.Scores.get_scores(0,"high_scores").sw_get_scores_complete
 	sw_fastest_time = await SilentWolf.Scores.get_scores(0,"fastest_time").sw_get_scores_complete
+	sw_victory_count = await SilentWolf.Scores.get_scores(0,"victory_count").sw_get_scores_complete
 	self.set_process_mode(0) 
 	hide_message()
 	render_board(sw_high_scores.scores,number,0)
 	render_board(sw_fastest_time.scores,1,number,true)
-	render_board(sw_high_scores.scores,number,2)
+	render_board(sw_victory_count.scores,number,2)
 	load_description(0)
 	
-#	print(sw_fastest_time.scores)
 	if sw_high_scores.scores.is_empty():	
 		add_no_scores_message()
 	
@@ -38,6 +40,8 @@ func _on_tab_container_tab_changed(tab):
 	if (tab == 0) and (sw_high_scores.scores.is_empty() == true):
 		add_no_scores_message()		
 	if (tab == 1) and (sw_fastest_time.scores.is_empty() == true):
+		add_no_scores_message()
+	if (tab == 2) and (sw_victory_count.scores.is_empty() == true):
 		add_no_scores_message()
 	load_description(tab)
 
@@ -61,7 +65,7 @@ func add_item(player_name: String, score_value: int, tab: int) -> void:
 	if tab == 0 :
 		$"VBoxContainer/Control/TabContainer/HighScores/MarginContainer/ScoreItemContainer".add_child(item)
 	elif tab == 2:
-		$"VBoxContainer/Control/TabContainer/HighScores2/MarginContainer/ScoreItemContainer".add_child(item)
+		$"VBoxContainer/Control/TabContainer/VictoryCount/MarginContainer/ScoreItemContainer".add_child(item)
 
 func add_time_item(player_name: String, score_value: int) -> void:
 	var item = ScoreItem.instantiate()

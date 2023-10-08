@@ -8,6 +8,16 @@ signal mute_sound_fx_changed(mute: bool)
 
 var save_data: Dictionary
 var silentwolf_data : Dictionary
+var use_sw_data : bool	
+
+var user_name: String:
+	get: return save_data['user_name']		
+	set(value): save_data['user_name'] = value	
+
+var date: String:
+	get: return save_data['date']		
+	set(value): save_data['date'] = value	
+
 var steam_first_login: bool:
 	get: return save_data['steam_first_login']
 	set(value): 
@@ -208,6 +218,7 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 			
 func _ready() -> void:
 	## if player opens the game for the first time (game_language is not chose yet)
+	use_sw_data = false
 	if game_language == "":	
 		get_tree().change_scene_to_file.call_deferred("res://scenes/new_game_preferences/new_game_preferences.tscn")
 	
@@ -232,9 +243,33 @@ func compute_values():
 		passives[passive["ID"]] = passive
 
 func save():
-	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
-	file.store_line(JSON.stringify(save_data))
-	file.close()
+	date = Time.get_datetime_string_from_system() #save_data.date == date
+	
+	if use_sw_data == false : # play offline
+		var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+		file.store_line(JSON.stringify(save_data))
+		file.close()			
+	elif use_sw_data == true: #play online
+		if (str(silentwolf_data["user_name"]) == str(save_data["user_name"])):
+			var date1 = Time.get_unix_time_from_datetime_string(save_data.date)
+			var date2 =Time.get_unix_time_from_datetime_string(silentwolf_data.date)
+			if date2 > date1: #luu silentwolf_data vao data
+				print("savecte 1")
+				save_data = silentwolf_data				
+			else : #luu data vao silentwolf_data
+				print("savecte 2")
+				silentwolf_data = save_data
+				SilentWolf.Players.save_player_data(user_name, silentwolf_data)
+			var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+			file.store_line(JSON.stringify(save_data))
+			file.close()	
+		else : #silentwolf user_name != data user_name
+			# dung sw_data
+			print("savecte 3")
+			save_data = silentwolf_data 
+			SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)		
+		
+		
 	compute_values()
 
 func load_settings():

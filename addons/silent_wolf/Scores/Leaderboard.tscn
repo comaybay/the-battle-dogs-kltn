@@ -71,18 +71,18 @@ size_flags_vertical = 6
 [node name="ScoreItemContainer" type="GridContainer" parent="Khung/Content/VBoxContainer/Control/TabContainer/FastestTime/MarginContainer" index="0"]
 layout_mode = 2
 
-[node name="HighScores2" type="ScrollContainer" parent="Khung/Content/VBoxContainer/Control/TabContainer" index="3"]
+[node name="VictoryCount" type="ScrollContainer" parent="Khung/Content/VBoxContainer/Control/TabContainer" index="3"]
 visible = false
 layout_mode = 2
 theme = SubResource("Theme_4jgio")
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/VBoxContainer/Control/TabContainer/HighScores2" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/VBoxContainer/Control/TabContainer/VictoryCount" index="0"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="ScoreItemContainer" type="GridContainer" parent="Khung/Content/VBoxContainer/Control/TabContainer/HighScores2/MarginContainer" index="0"]
+[node name="ScoreItemContainer" type="GridContainer" parent="Khung/Content/VBoxContainer/Control/TabContainer/VictoryCount/MarginContainer" index="0"]
 layout_mode = 2
 
 [node name="MessageContainer" type="CenterContainer" parent="Khung/Content/VBoxContainer/Control" index="1"]
