@@ -481,7 +481,7 @@ size = Vector2(1893.99, 2)
 resource_local_to_scene = true
 size = Vector2(604, 1134)
 
-[node name="SniperDog" node_paths=PackedStringArray("custom_attack_area", "attack_sprite") instance=ExtResource("1_qnr0p")]
+[node name="SniperDog" node_paths=PackedStringArray("custom_attack_area") instance=ExtResource("1_qnr0p")]
 z_index = 40
 position = Vector2(2, 1)
 name_id = "sniper_dog"
@@ -490,7 +490,6 @@ custom_attack_area = NodePath("AttackArea")
 attack_range = 1650
 attack_area_range = 60
 attack_cooldown = 20.0
-attack_sprite = NodePath("CharacterAnimation/Sprite2D")
 attack_frame = 10
 health = 900
 damage = 400
@@ -498,10 +497,13 @@ damage = 400
 [node name="AttackCooldownTimer" parent="." index="0"]
 wait_time = 20.0
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterAnimation" index="0"]
-hframes = 2
-vframes = 7
-region_rect = Rect2(4, 4, 178, 185)
+[node name="Character" parent="CharacterAnimation" index="0"]
+position = Vector2(-21, -498.5)
+texture = ExtResource("2_wgnt7")
+hframes = 5
+vframes = 5
+frame = 11
+metadata/_edit_lock_ = true
 
 [node name="FireFX" type="Sprite2D" parent="CharacterAnimation" index="1"]
 visible = false
@@ -536,14 +538,6 @@ position = Vector2(480, -639)
 rotation = -0.259771
 scale = Vector2(0.281763, 0.5)
 texture = ExtResource("6_ogsgu")
-
-[node name="Character" parent="CharacterAnimation" index="5"]
-position = Vector2(-21, -498.5)
-texture = ExtResource("2_wgnt7")
-hframes = 5
-vframes = 5
-frame = 1
-metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {

@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxqh31o16u528"]
+[gd_scene load_steps=10 format=3 uid="uid://dxqh31o16u528"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_ivu0g"]
 [ext_resource type="Texture2D" uid="uid://bxv6vquc0mpo8" path="res://scenes/characters/dogs/sword_dog/sword_dog.png" id="2_8ghqg"]
-[ext_resource type="AudioStream" uid="uid://doyuefw62qbco" path="res://resources/sound/battlefield/sword.mp3" id="3_1qucf"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -116,16 +115,17 @@ knockbacks = 5
 [node name="AttackCooldownTimer" parent="." index="0"]
 wait_time = 0.01
 
-[node name="AnimationPlayer" parent="." index="2"]
-libraries = {
-"": SubResource("AnimationLibrary_qvwfi")
-}
-
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(64, -57)
 texture = ExtResource("2_8ghqg")
 hframes = 1
 vframes = 17
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_qvwfi")
+}
+
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(-1, -23.25)
 shape = SubResource("RectangleShape2D_oa1yv")

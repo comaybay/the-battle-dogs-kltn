@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmuvom1n8b8aw"]
+[gd_scene load_steps=10 format=3 uid="uid://dmuvom1n8b8aw"]
 
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_umb7d"]
 [ext_resource type="Texture2D" uid="uid://bpn5qyo7s5cfs" path="res://scenes/characters/cats/buff_cat/buff_cat.png" id="2_ase53"]
@@ -116,15 +116,16 @@ knockbacks = 5
 [node name="AttackCooldownTimer" parent="." index="0"]
 wait_time = 4.0
 
+[node name="Character" parent="CharacterAnimation" index="0"]
+position = Vector2(-80, -381)
+texture = ExtResource("2_ase53")
+hframes = 3
+
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_5a1bo")
 }
 
-[node name="Character" parent="CharacterAnimation" index="0"]
-position = Vector2(-80, -381)
-texture = ExtResource("2_ase53")
-hframes = 3
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -302)
 shape = SubResource("RectangleShape2D_8so8p")

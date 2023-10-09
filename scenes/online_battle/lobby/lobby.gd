@@ -34,12 +34,14 @@ func _ready():
 	
 var _request_room_loop: int = 0
 func _refresh_room_listing():
-	Steam.lobby_match_list.connect(_on_lobby_match_list)
+	if not Steam.lobby_match_list.is_connected(_on_lobby_match_list):
+		Steam.lobby_match_list.connect(_on_lobby_match_list)
+		
 	%RefreshButton.disabled = true
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
 	_apply_room_filter()
 	Steam.requestLobbyList()
-
+	
 func _apply_room_filter():
 	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
 	Steam.addRequestLobbyListStringFilter("game_start", "false", Steam.LOBBY_COMPARISON_EQUAL)
@@ -61,7 +63,7 @@ func _on_lobby_match_list(lobbies: Array) -> void:
 		room.queue_free()	
 		
 	for lobby_id in lobbies:
-		var room_name: String = SteamUser.get_lobby_data("name")
+		var room_name: String = Steam.getLobbyData(lobby_id, "name")
 		var member_count: int = Steam.getNumLobbyMembers(lobby_id)
 		
 		var room: RoomListingItem = ROOM_LISTING_ITEM_SCENE.instantiate()

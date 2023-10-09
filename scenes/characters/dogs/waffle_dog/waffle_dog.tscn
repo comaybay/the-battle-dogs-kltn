@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvr0kislbyk51"]
+[gd_scene load_steps=10 format=3 uid="uid://bvr0kislbyk51"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_ge6ck"]
 [ext_resource type="Texture2D" uid="uid://dd5uwjk0whsb4" path="res://scenes/characters/dogs/waffle_dog/waffle_dog.png" id="2_3v1gi"]
@@ -112,17 +112,17 @@ health = 640
 damage = 5
 knockbacks = 1
 
-[node name="AnimationPlayer" parent="." index="2"]
-libraries = {
-"": SubResource("AnimationLibrary_i6qkr")
-}
-
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(66, -100)
 texture = ExtResource("2_3v1gi")
 hframes = 4
 vframes = 4
 frame = 4
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_i6qkr")
+}
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(-3.5, -77)

@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Character
 
 signal knockbacked
+signal zero_health
 
 enum Type { DOG, CAT }
 
@@ -68,12 +69,11 @@ var max_health: int
 var next_knockback_health: int
 var collision_rect: Rect2
 
-func setup(global_position: Vector2) -> void:
+func setup(global_position: Vector2) -> void:	
 	self.global_position = global_position
+	_reready()
 
 func _ready() -> void:
-	_reready()
-	
 	if not Engine.is_editor_hint():
 		$AnimationPlayer.play("move")
 		
@@ -112,6 +112,11 @@ func _reready():
 		n_RayCast2D.set_collision_mask_value(3, true)
 		n_RayCast2D.set_collision_mask_value(5, true)
 		
+		set_collision_mask_value(2, false)
+		set_collision_mask_value(6, false)
+		set_collision_mask_value(3, true)
+		set_collision_mask_value(5, true)
+		
 		set_collision_layer_value(2, true)
 		set_collision_layer_value(3, false)
 	else:
@@ -120,6 +125,10 @@ func _reready():
 		n_RayCast2D.set_collision_mask_value(3, false)
 		n_RayCast2D.set_collision_mask_value(5, false)
 
+		set_collision_mask_value(2, true)
+		set_collision_mask_value(6, true)
+		set_collision_mask_value(3, false)
+		set_collision_mask_value(5, false)
 		
 		set_collision_layer_value(2, false)
 		set_collision_layer_value(3, true)
@@ -180,16 +189,16 @@ func _get_configuration_warnings() -> PackedStringArray:
 	
 func take_damage(ammount: int) -> void:
 	health -= ammount
+	if is_past_knockback_health():
+		if health > 0:
+			update_next_knockback_health()
+		else:
+			zero_health.emit()
+			
+		knockback()
+	
 	if Debug.is_debug_mode():
 		queue_redraw()
-	
-	if _is_pass_knockback_health():
-		if health > 0:
-			while _is_pass_knockback_health():
-				next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
-			knockback()
-		else:
-			knockback(1.25) 
 
 func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> void: # gay anh huong trong time
 	if effect == "speed" :
@@ -219,9 +228,12 @@ func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> v
 		health = health / number
 	
 
-func _is_pass_knockback_health():
+func is_past_knockback_health() -> bool:
 	return health <= next_knockback_health
-	
+
+func update_next_knockback_health() -> void:	
+	while is_past_knockback_health():
+		next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
 
 func powerUp(types , number : float, time : float) :
 	for type in types :
@@ -245,9 +257,15 @@ func powerUp(types , number : float, time : float) :
 			speed = speed / number
 
 func knockback(scale: float = 1):
+	if health <= 0:
+		# override scale when character is about to die
+		scale = max(1.25, scale)
+	
 	$FiniteStateMachine.change_state("KnockbackState", {"scale": scale})	
 	knockbacked.emit()
 	
 func kill():
 	$FiniteStateMachine.change_state("DieState")	
 
+func get_FSM() -> FSM:
+	return $FiniteStateMachine

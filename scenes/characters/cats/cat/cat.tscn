@@ -109,7 +109,6 @@ health = 80
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(3, -25)
 texture = ExtResource("1_lqadi")
-frame = 1
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {

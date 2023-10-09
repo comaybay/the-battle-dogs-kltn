@@ -11,7 +11,8 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 		
-	var power_scale = InBattle.get_cat_power_scale()
+	var battlefield := get_tree().current_scene as Battlefield
+	var power_scale = battlefield.get_cat_power_scale()
 	damage *= power_scale
 	health *= power_scale
 	

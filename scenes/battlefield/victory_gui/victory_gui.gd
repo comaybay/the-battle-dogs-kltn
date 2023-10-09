@@ -4,11 +4,14 @@ extends CanvasLayer
 @onready var return_button = $Control/Panel/Button 
 
 func _ready() -> void:	
+	var battlefield = get_tree().current_scene as Battlefield
+	var battlefield_data = battlefield.get_battlefield_data()
+	
 	return_button.pressed.connect(_go_to_dog_base)
 	$AnimationPlayer.play("default")
 	var tween = create_tween()
 	
-	var reward_bone: int = InBattle.battlefield_data['reward_bone']
+	var reward_bone: int = battlefield_data['reward_bone']
 	
 	var reward_upgrade = Data.passives.get('bone_reward_up')
 	if reward_upgrade != null:

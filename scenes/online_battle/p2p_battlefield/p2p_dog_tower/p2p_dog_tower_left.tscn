@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://uh7hnntqdigc"]
 
-[ext_resource type="Script" path="res://scenes/online_battle/online_battlefield/dog_tower_left/dog_tower_left.gd" id="1_6smjv"]
-[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_c4ln2"]
-[ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/night/dog_tower.png" id="3_r0g87"]
-[ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="4_7wfly"]
+[ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower.gd" id="1_3wavf"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_77w0d"]
+[ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/night/dog_tower.png" id="3_6hao2"]
+[ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="4_bicf2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
 font_size = 52
@@ -31,7 +31,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(8, -455), Vector2(-4, -455), Vector2(8, -455), Vector2(-4, -455), Vector2(8, -455), Vector2(-4, -455), Vector2(8, -455), Vector2(-4, -455)]
+"values": [Vector2(8, -500), Vector2(-4, -500), Vector2(8, -500), Vector2(-4, -500), Vector2(8, -500), Vector2(-4, -500), Vector2(8, -500), Vector2(-4, -500)]
 }
 
 [sub_resource type="Animation" id="Animation_1vn7f"]
@@ -48,7 +48,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(8, -455), Vector2(-4, -455), Vector2(8, -455), Vector2(-4, -455), Vector2(8, -455), Vector2(-4, -455), Vector2(8, -455), Vector2(-4, -455)]
+"values": [Vector2(8, -500), Vector2(-4, -500), Vector2(8, -500), Vector2(-4, -500), Vector2(8, -500), Vector2(-4, -500), Vector2(8, -500), Vector2(-4, -500)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qra5t"]
@@ -61,7 +61,7 @@ _data = {
 [node name="OnlineDogTowerLeft" type="StaticBody2D"]
 collision_layer = 32
 collision_mask = 0
-script = ExtResource("1_6smjv")
+script = ExtResource("1_3wavf")
 
 [node name="HealthLabel" type="Label" parent="."]
 offset_left = -811.0
@@ -69,14 +69,14 @@ offset_top = 60.0
 offset_right = 851.0
 offset_bottom = 135.0
 size_flags_horizontal = 4
-theme = ExtResource("2_c4ln2")
+theme = ExtResource("2_77w0d")
 text = "500/500 HP"
 label_settings = SubResource("LabelSettings_8inmh")
 horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -500)
-texture = ExtResource("3_r0g87")
+texture = ExtResource("3_6hao2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -473)
@@ -92,5 +92,5 @@ position = Vector2(209, -160)
 gizmo_extents = 54.5
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_7wfly")
+stream = ExtResource("4_bicf2")
 bus = &"InBattleFX"

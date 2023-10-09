@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The Battle Dogs"
-run/main_scene="res://scenes/start_menu/Intro.tscn"
+run/main_scene="res://scenes/online_battle/lobby/lobby.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
@@ -19,7 +19,6 @@ config/icon="res://icon.png"
 
 Data="*res://data.gd"
 Debug="*res://debug.gd"
-InBattle="*res://in_battle.gd"
 AudioPlayer="*res://audio_player.gd"
 GlobalControl="*res://global_control.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"

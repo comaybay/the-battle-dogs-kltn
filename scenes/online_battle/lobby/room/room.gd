@@ -134,7 +134,7 @@ func _send_start_message():
 	SteamUser.set_lobby_data("game_start", "true")
 	
 func _go_to_game():
-	get_tree().change_scene_to_file("res://scenes/online_battle/online_battlefield/online_battlefield.tscn")	
+	get_tree().change_scene_to_file("res://scenes/online_battle/p2p_battlefield/p2p_battlefield.tscn")	
 
 func _on_network_connection_status_changed_room_owner(connection_handle: int, connection: Dictionary, old_state: int):	
 	print("=".repeat(10))

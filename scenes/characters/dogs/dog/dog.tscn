@@ -105,6 +105,7 @@ size = Vector2(192, 178)
 [node name="Dog" instance=ExtResource("1_wscv2")]
 z_index = 40
 position = Vector2(2, 1)
+collision_mask = 21
 name_id = "dog"
 
 [node name="Character" parent="CharacterAnimation" index="0"]

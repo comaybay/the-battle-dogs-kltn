@@ -7,7 +7,6 @@ signal boss_appeared
 
 const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
 const boss_shader: ShaderMaterial = preload("res://shaders/outline_glow/outline_glow.material")
-
 const MAX_RANDOM_DELAY: float = 2.5
 
 var health: int
@@ -21,15 +20,21 @@ var alive_boss_count: int = 0
 ## position where effect for the tower should take place 
 var effect_global_position: Vector2:
 	get: return $Marker2D.global_position
-	
+
+var _battlefield_data: Dictionary
+
+
 func _ready() -> void:
-	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/cat_tower.png" % InBattle.battlefield_data['theme'])
-	max_health = InBattle.battlefield_data['cat_tower_health']
+	var battlefield := get_tree().current_scene as Battlefield
+	_battlefield_data = battlefield.get_battlefield_data()
+	
+	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/cat_tower.png" % battlefield.get_theme())
+	max_health = _battlefield_data['cat_tower_health']
 	health = max_health
 	update_health_label()
 	
-	var spawn_patterns: Array = InBattle.battlefield_data['spawn_patterns']
-	var bosses: Array = InBattle.battlefield_data['bosses'] if InBattle.battlefield_data.has('bosses') else []
+	var spawn_patterns: Array = _battlefield_data['spawn_patterns']
+	var bosses: Array = _battlefield_data['bosses'] if _battlefield_data.has('bosses') else []
 	
 	var spawn_cat_names := spawn_patterns.map(func(s): return s['name'])
 	var boss_cat_names := bosses.map(func(s): return s['name'])
@@ -169,7 +174,5 @@ func spawn_boss(boss_info: Dictionary) -> void:
 		dog.knockback(2.5)
 
 func _apply_special_instruction(cat: BaseCat):
-	var instruction = InBattle.battlefield_data.get('special_instruction')
-	
-	if instruction == "invert_color":
+	if _battlefield_data.has('special_instruction') and _battlefield_data['special_instruction'] == "invert_color":
 		cat.n_Sprite2D.material = load("res://shaders/invert_color/invert_color.material")

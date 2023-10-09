@@ -5,9 +5,8 @@ var stage_width
 var listCat = []
 var cat
 func _ready() -> void:
-	var battlefield_data = InBattle.load_battlefield_data()
-	InBattle.reset()
-	stage_width = battlefield_data['stage_width']
+	var battlefield = get_tree().current_scene as BaseBattlefield
+	stage_width = battlefield.get_stage_width()
 	
 	$AttackArea/AttackCollisionShape.shape.extents = Vector2(stage_width/2, 8000)
 	$AttackArea/AttackCollisionShape.position = Vector2(0, 0)

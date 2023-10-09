@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://cvno8d4sb6h0s"]
 
 [ext_resource type="Script" path="res://scenes/characters/character.gd" id="1_taq0m"]
-[ext_resource type="PackedScene" uid="uid://yg61w87455ho" path="res://scenes/patterns/finite_state_machine/FSM.tscn" id="3_dcvdl"]
+[ext_resource type="PackedScene" uid="uid://yg61w87455ho" path="res://scenes/common/finite_state_machine/FSM.tscn" id="3_dcvdl"]
 [ext_resource type="Script" path="res://scenes/characters/move_state.gd" id="4_5450c"]
 [ext_resource type="AudioStream" uid="uid://byul4hma3ffpq" path="res://resources/sound/battlefield/bite.mp3" id="5_gaay1"]
 [ext_resource type="Script" path="res://scenes/characters/attack_state.gd" id="5_xi1bt"]

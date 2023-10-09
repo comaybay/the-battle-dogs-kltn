@@ -6,14 +6,14 @@ extends Control
 
 var done_tweening := true
 
-func setup(dog_tower: DogTower):
+func setup(dog_tower: BaseDogTower, player_data: BaseBattlefieldPlayerData):
 	var name_ids: Array = Data.selected_team['dog_ids']
 	var id_index := 0
 	var action_number = 1
 	for button in $FirstRow.get_children():
 		var name_id = name_ids[id_index]
 		if name_id != null:
-			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, true, dog_tower)
+			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, true, dog_tower, player_data)
 		
 		id_index += 1	
 		action_number += 1
@@ -22,7 +22,7 @@ func setup(dog_tower: DogTower):
 	for button in $SecondRow.get_children():
 		var name_id = name_ids[id_index]
 		if name_id != null:
-			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, false, dog_tower)
+			button.setup(name_ids[id_index], "ui_spawn_%s" % action_number, false, dog_tower, player_data)
 		
 		id_index += 1	
 		action_number += 1
