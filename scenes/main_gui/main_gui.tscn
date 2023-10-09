@@ -147,3 +147,17 @@ offset_top = -59.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_ts6wt")
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+mode = 1
+title = ""
+initial_position = 2
+size = Vector2i(500, 150)
+visible = true
+ok_button_text = "@COMPUTER"
+dialog_text = "@SELECT_PLAYER_DATA?"
+dialog_autowrap = true
+cancel_button_text = "@STEAM"
+
+[connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_player"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_computer"]

@@ -5,8 +5,24 @@ signal music_volume_changed(value: int)
 signal sound_fx_volume_changed(value: int)
 signal mute_music_changed(mute: bool)
 signal mute_sound_fx_changed(mute: bool)
+signal select_data
 
 var save_data: Dictionary
+var old_data: Dictionary
+var silentwolf_data : Dictionary
+var use_sw_data : bool	
+var user_name: String:
+	get: return save_data['user_name']
+	set(value): save_data['user_name'] = value
+
+var date: String:
+	get: return save_data['date']		
+	set(value): save_data['date'] = value	
+
+var steam_first_login: bool:
+	get: return save_data['steam_first_login']
+	set(value): 
+		save_data['steam_first_login'] = value
 
 var bone: int:
 	get: return save_data['bone']		
@@ -127,8 +143,7 @@ func _init() -> void:
 	if not FileAccess.file_exists("user://save.json"):
 		save_data = _create_new_game_save()
 	else:
-		save_data = _load_game_save()
-		
+		save_data = _load_game_save()		
 	load_settings()
 
 	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
@@ -202,7 +217,9 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 	return save_data
 			
 func _ready() -> void:
+	old_data = save_data	
 	## if player opens the game for the first time (game_language is not chose yet)
+	use_sw_data = false
 	if game_language == "":	
 		get_tree().change_scene_to_file.call_deferred("res://scenes/new_game_preferences/new_game_preferences.tscn")
 	
@@ -227,9 +244,26 @@ func compute_values():
 		passives[passive["ID"]] = passive
 
 func save():
-	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
-	file.store_line(JSON.stringify(save_data))
-	file.close()
+	date = Time.get_datetime_string_from_system() #save_data.date == date
+	
+	if use_sw_data == false : # play offline
+		var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+		file.store_line(JSON.stringify(save_data))
+		file.close()			
+	else: #play online
+		if (silentwolf_data["user_name"] == old_data["user_name"]):
+			var date1 = Time.get_unix_time_from_datetime_string(save_data.date)
+			var date2 = Time.get_unix_time_from_datetime_string(silentwolf_data.date)
+			if date2 > date1: #luu silentwolf_data vao data			
+				save_data = silentwolf_data				
+			else : #luu data vao silentwolf_data				
+				silentwolf_data = save_data
+				SilentWolf.Players.save_player_data(Steam.getPersonaName(), silentwolf_data)
+			var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+			file.store_line(JSON.stringify(save_data))
+			file.close()
+		else : #silentwolf user_name != data user_name
+			select_data.emit()
 	compute_values()
 
 func load_settings():

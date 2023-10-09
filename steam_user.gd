@@ -8,12 +8,12 @@ const MESSAGE_READ_LIMIT: int = 32
 
 var STEAM_ID: int = 0
 var STEAM_USERNAME: String = ""
+var PASSWORD: String = ""
 
 # lobby
 var lobby_id: int = 0
 var lobby_members: Array
 var data
-
 ## game connection
 var listen_socket: int = 0
 
@@ -30,6 +30,37 @@ func _ready() -> void:
 	
 	IS_USING_STEAM = Steam.loggedOn()
 	
+	if IS_USING_STEAM: #have account
+		STEAM_ID = Steam.getSteamID()
+		STEAM_USERNAME = Steam.getPersonaName()
+		PASSWORD = "Aa1@" + str( STEAM_ID)		
+		if Data.steam_first_login: #register by STEAM_USERNAME(username) and STEAM_ID(password)			
+			Data.steam_first_login = false
+			Data.user_name = STEAM_USERNAME			
+			SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD)
+			SilentWolf.Players.save_player_data(STEAM_USERNAME, Data.save_data)
+		#login by STEAM_USERNAME(username) and STEAM_ID(password)
+		SilentWolf.Auth.login_player(STEAM_USERNAME, PASSWORD)
+		SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
+		
+		#get silentwolf data		
+		var sw_result = await SilentWolf.Players.get_player_data(STEAM_USERNAME).sw_get_player_data_complete
+		Data.silentwolf_data = sw_result.player_data
+		
+		
+		Data.use_sw_data = true	
+		Data.save()
+			
+	else : # don't have account
+		pass
+		
+
+func _on_registration_complete(sw_result: Dictionary) -> void:
+	if sw_result.success:
+		print("Registration succeeded!")
+	else:
+		print("Error: " + str(sw_result.error))
+		
 	if not IS_USING_STEAM:
 		set_process_input(false)
 		return
