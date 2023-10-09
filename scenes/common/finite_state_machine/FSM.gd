@@ -16,7 +16,10 @@ func _ready():
 		return
 		
 	owner.connect("ready", _on_owner_ready)
-	
+
+func get_current_state() -> String:
+	return state.name
+
 func _on_owner_ready():
 	state = get_node(initial_state)
 	

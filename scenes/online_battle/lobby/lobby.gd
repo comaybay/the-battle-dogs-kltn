@@ -34,20 +34,28 @@ func _ready():
 	
 var _request_room_loop: int = 0
 func _refresh_room_listing():
-	Steam.lobby_match_list.connect(_on_lobby_match_list, CONNECT_ONE_SHOT)
+	if not Steam.lobby_match_list.is_connected(_on_lobby_match_list):
+		Steam.lobby_match_list.connect(_on_lobby_match_list)
+		
 	%RefreshButton.disabled = true
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
+	_apply_room_filter()
 	Steam.requestLobbyList()
-#	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
+	
+func _apply_room_filter():
+	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
+	Steam.addRequestLobbyListStringFilter("game_start", "false", Steam.LOBBY_COMPARISON_EQUAL)
 
 func _on_lobby_match_list(lobbies: Array) -> void:
 	%RefreshButton.disabled = false
 	%RoomCountLabel.text = "%s %s" % [lobbies.size(), tr("@ROOM")]
-	
-	if lobbies.size() == 0 && _request_room_loop == 0:
+
+	if lobbies.size() == 0 && _request_room_loop < 1:
 		_request_room_loop += 1
 		_refresh_room_listing()
 		return
+	else:
+		Steam.lobby_match_list.disconnect(_on_lobby_match_list)
 	
 	_request_room_loop = 0
 	
@@ -67,18 +75,21 @@ func _on_lobby_match_list(lobbies: Array) -> void:
 
 func _on_create_Lobby_request(room_name: String) -> void:
 	%CreateRoom.set_create_button_disabled(true)
+	$Popup.popup("@CREATING_ROOM", PopupDialog.Type.PROGRESS)
 	_create_Lobby(room_name)
 	await Steam.lobby_created
 	%CreateRoom.set_create_button_disabled(false)
 
 func _create_Lobby(room_name: String) -> void:
-	print("creating room...")
 	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, LOBBY_MAX_MEMBERS)
 	_request_create_room_name = room_name
 
 func _on_lobby_created(connect: int, lobby_id: int) -> void:
 	if connect != 1:
+		$Popup.popup("@ROOM_CREATE_FAILED", PopupDialog.Type.INFORMATION)
 		return
+	
+	SteamUser.lobby_members = [SteamUser.STEAM_ID]
 	
 	print("room created: " + str(lobby_id))
 	# Set the lobby ID
@@ -89,19 +100,16 @@ func _on_lobby_created(connect: int, lobby_id: int) -> void:
 	Steam.setLobbyJoinable(lobby_id, true)
 
 	# Set some lobby data
-	Steam.setLobbyData(lobby_id, "name", _request_create_room_name)
-	Steam.setLobbyData(lobby_id, "game", "thebattledogs")
-	Steam.setLobbyData(lobby_id, "mode", "GodotSteam test")
-
-	# Create listen socket
-	SteamUser.listen_socket = Steam.createListenSocketP2P(0, [])
-	Steam.setLobbyData(lobby_id, "listensocket", str(SteamUser.listen_socket))
-	print("ROOM CREATED: listen socket: %s" % SteamUser.listen_socket)
-
-	# Allow P2P connections to fallback to being relayed through Steam if needed
-	var RELAY: bool = Steam.allowP2PPacketRelay(true)
-	print("Allowing Steam to be relay backup: "+str(RELAY))
+	SteamUser.set_lobby_data("name", _request_create_room_name)
+	SteamUser.set_lobby_data("game", "thebattledogs")
+	SteamUser.set_lobby_data("mode", "GodotSteam test")
+	SteamUser.set_lobby_data("game_start", "false")
 	
+	SteamUser.set_lobby_data("theme", ['fall', 'green_grass', 'heavenly', 'night', 'nightmare', 'winter'].pick_random())
+	SteamUser.set_lobby_data("music", "battlefield_theme1")
+	SteamUser.set_lobby_data("stage_width", "3500")
+	SteamUser.set_lobby_data("max_health", "5000")
+
 	_go_to_room()
 
 func _on_room_listing_item_join_request(room_id: int, room: RoomListingItem):
@@ -143,7 +151,7 @@ func _auto_matchmaking():
 		%Popup.popup("@FINDING", PopupDialog.Type.PROGRESS)
 		
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
-	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
+	_apply_room_filter()
 	Steam.requestLobbyList()
 	
 func _on_matchmaking_lobby_match_list(lobbies: Array):

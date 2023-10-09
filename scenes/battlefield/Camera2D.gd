@@ -10,25 +10,25 @@ var _camera_control_buttons: CameraControlButtons
 var viewport_size: Vector2
 var half_viewport_size: Vector2
 var _delta: float = 0
+var _stage_width: int
 
-func setup(camera_control_buttons: CameraControlButtons):
+func setup(camera_control_buttons: CameraControlButtons, stage_width: int):
 	_camera_control_buttons = camera_control_buttons
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+	_stage_width = stage_width
+	
 	viewport_size = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
 	half_viewport_size =  viewport_size / 2
 	
-	var parent :Node = get_parent()
 	limit_left = 0
-	limit_right = parent.stage_width
+	limit_right = _stage_width
 	limit_bottom = LAND_HEIGHT
 	
-	var min_zoom_scale:float = max(float(viewport_size.x) / parent.stage_width, 0.25) 
+	var min_zoom_scale:float = max(float(viewport_size.x) / _stage_width, 0.25) 
 	min_zoom = Vector2(min_zoom_scale, min_zoom_scale) 
 
 	var initial_zoom_scale = max(0.375, min_zoom_scale) 
 	zoom = Vector2(initial_zoom_scale, initial_zoom_scale)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -12,7 +12,6 @@ resource_local_to_scene = true
 size = Vector2(192, 178)
 
 [node name="BaseDog" groups=["dogs"] instance=ExtResource("1_t516l")]
-collision_layer = 2
 collision_mask = 17
 input_pickable = true
 script = ExtResource("2_krygw")
@@ -21,9 +20,6 @@ name_id = ""
 [node name="CollisionShape2D" parent="." index="3"]
 light_mask = 2
 shape = SubResource("RectangleShape2D_i6m5t")
-
-[node name="RayCast2D" parent="." index="4"]
-collision_mask = 20
 
 [node name="UserMoveState" type="Node" parent="FiniteStateMachine" index="5"]
 script = ExtResource("3_t0eec")

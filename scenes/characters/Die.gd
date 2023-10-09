@@ -12,6 +12,10 @@ func enter(_data: Dictionary) -> void:
 	soul_fx.position = character.position
 	soul_fx.z_index = character.z_index
 	get_tree().current_scene.add_child(soul_fx)
+	soul_fx.setup(character)
+	
+	var battlefield = get_tree().current_scene as BaseBattlefield
+	var _player_data := battlefield.get_player_data()
 	
 	if character is BaseCat:
-		InBattle.money += character.reward_money
+		_player_data.fmoney += character.reward_money

@@ -8,11 +8,17 @@ class_name BattleGUI extends CanvasLayer
 @onready var game_speed_button: GameSpeedButton = $GameSpeedButton
 @onready var camera_control_buttons: CameraControlButtons = $CameraControlButtons
 
+var _player_data: BaseBattlefieldPlayerData
+
+func setup(dog_tower: DogTower, player_data: BaseBattlefieldPlayerData):
+	%SpawnButtons.setup(dog_tower, player_data)
+	_player_data = player_data
+	
 func _ready() -> void:
 	$PauseButton.pressed.connect(_on_paused)
 	
 func _process(_delta: float) -> void:
-	$MoneyLabel.text = "%s/%s ₵" % [InBattle.money, InBattle.get_wallet_capacity()]	
+	$MoneyLabel.text = "%s/%s ₵" % [_player_data.get_money_int(), _player_data.get_wallet_capacity()]	
 
 func _on_paused() -> void:
 	$PauseMenu.show()

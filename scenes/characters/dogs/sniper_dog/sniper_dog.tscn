@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b2lwyl0fu7ayt"]
+[gd_scene load_steps=15 format=3 uid="uid://b2lwyl0fu7ayt"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_qnr0p"]
 [ext_resource type="Texture2D" uid="uid://dsanqteu4fv2s" path="res://scenes/characters/cats/sniper_cat.png" id="2_wgnt7"]
@@ -6,14 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://kstfevv07gtr" path="res://scenes/characters/dogs/sniper_dog/ground_hit_fx.png" id="4_2umbi"]
 [ext_resource type="Texture2D" uid="uid://cgekoyn0cbk5t" path="res://scenes/characters/dogs/sniper_dog/laser.png" id="4_flcht"]
 [ext_resource type="Texture2D" uid="uid://dp5o53ipm322s" path="res://scenes/characters/dogs/sniper_dog/Bullet.png" id="6_ogsgu"]
-[ext_resource type="AudioStream" uid="uid://cg022lnv5qfyx" path="res://resources/sound/battlefield/gun_shot.mp3" id="7_llot2"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("FireFX:visible")
+tracks/0/path = NodePath("CharacterAnimation/FireFX:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +24,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("FireFX:frame")
+tracks/1/path = NodePath("CharacterAnimation/FireFX:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -37,7 +36,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Laser:visible")
+tracks/2/path = NodePath("CharacterAnimation/Laser:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -49,7 +48,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Laser:frame")
+tracks/3/path = NodePath("CharacterAnimation/Laser:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -61,7 +60,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Laser:position")
+tracks/4/path = NodePath("CharacterAnimation/Laser:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -73,7 +72,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Laser:rotation")
+tracks/5/path = NodePath("CharacterAnimation/Laser:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -85,7 +84,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Bullet:visible")
+tracks/6/path = NodePath("CharacterAnimation/Bullet:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -97,7 +96,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Bullet:position")
+tracks/7/path = NodePath("CharacterAnimation/Bullet:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -109,7 +108,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("GroundHitFX:visible")
+tracks/8/path = NodePath("CharacterAnimation/GroundHitFX:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -121,7 +120,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("GroundHitFX:frame")
+tracks/9/path = NodePath("CharacterAnimation/GroundHitFX:frame")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -133,7 +132,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Bullet:rotation")
+tracks/10/path = NodePath("CharacterAnimation/Bullet:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -145,7 +144,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Bullet:scale")
+tracks/11/path = NodePath("CharacterAnimation/Bullet:scale")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -162,7 +161,7 @@ step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -174,7 +173,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("FireFX:visible")
+tracks/1/path = NodePath("CharacterAnimation/FireFX:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -186,7 +185,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("FireFX:frame")
+tracks/2/path = NodePath("CharacterAnimation/FireFX:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -198,7 +197,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Laser:visible")
+tracks/3/path = NodePath("CharacterAnimation/Laser:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -210,7 +209,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Laser:frame")
+tracks/4/path = NodePath("CharacterAnimation/Laser:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -222,7 +221,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Laser:position")
+tracks/5/path = NodePath("CharacterAnimation/Laser:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -234,7 +233,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Laser:rotation")
+tracks/6/path = NodePath("CharacterAnimation/Laser:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -246,7 +245,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Bullet:visible")
+tracks/7/path = NodePath("CharacterAnimation/Bullet:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -258,7 +257,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Bullet:position")
+tracks/8/path = NodePath("CharacterAnimation/Bullet:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -270,7 +269,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("GroundHitFX:visible")
+tracks/9/path = NodePath("CharacterAnimation/GroundHitFX:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -282,7 +281,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("GroundHitFX:frame")
+tracks/10/path = NodePath("CharacterAnimation/GroundHitFX:frame")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -294,7 +293,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Bullet:rotation")
+tracks/11/path = NodePath("CharacterAnimation/Bullet:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -306,7 +305,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Bullet:scale")
+tracks/12/path = NodePath("CharacterAnimation/Bullet:scale")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -324,7 +323,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -336,7 +335,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("FireFX:visible")
+tracks/1/path = NodePath("CharacterAnimation/FireFX:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -348,7 +347,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("GroundHitFX:visible")
+tracks/2/path = NodePath("CharacterAnimation/GroundHitFX:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -360,7 +359,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Laser:visible")
+tracks/3/path = NodePath("CharacterAnimation/Laser:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -372,7 +371,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Bullet:visible")
+tracks/4/path = NodePath("CharacterAnimation/Bullet:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -390,7 +389,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -402,7 +401,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("FireFX:visible")
+tracks/1/path = NodePath("CharacterAnimation/FireFX:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -414,7 +413,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("GroundHitFX:visible")
+tracks/2/path = NodePath("CharacterAnimation/GroundHitFX:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -426,7 +425,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Laser:visible")
+tracks/3/path = NodePath("CharacterAnimation/Laser:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -438,7 +437,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Bullet:visible")
+tracks/4/path = NodePath("CharacterAnimation/Bullet:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -456,7 +455,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -498,20 +497,15 @@ damage = 400
 [node name="AttackCooldownTimer" parent="." index="0"]
 wait_time = 20.0
 
-[node name="AnimationPlayer" parent="." index="1"]
-libraries = {
-"": SubResource("AnimationLibrary_na047")
-}
-
-[node name="Sprite2D" parent="." index="2"]
+[node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(-21, -498.5)
 texture = ExtResource("2_wgnt7")
 hframes = 5
 vframes = 5
-frame = 6
+frame = 11
 metadata/_edit_lock_ = true
 
-[node name="FireFX" type="Sprite2D" parent="." index="3"]
+[node name="FireFX" type="Sprite2D" parent="CharacterAnimation" index="1"]
 visible = false
 position = Vector2(444, -641)
 scale = Vector2(1.00413, 1.00535)
@@ -520,7 +514,7 @@ hframes = 3
 region_rect = Rect2(4, 4, 178, 185)
 metadata/_edit_lock_ = true
 
-[node name="GroundHitFX" type="Sprite2D" parent="." index="4"]
+[node name="GroundHitFX" type="Sprite2D" parent="CharacterAnimation" index="2"]
 visible = false
 position = Vector2(2237, 4)
 scale = Vector2(1.00413, 1.00535)
@@ -529,7 +523,7 @@ vframes = 4
 region_rect = Rect2(4, 4, 178, 185)
 metadata/_edit_lock_ = true
 
-[node name="Laser" type="Sprite2D" parent="." index="5"]
+[node name="Laser" type="Sprite2D" parent="CharacterAnimation" index="3"]
 visible = false
 position = Vector2(1336, -251)
 rotation = 0.41907
@@ -538,14 +532,19 @@ hframes = 3
 vframes = 2
 metadata/_edit_lock_ = true
 
-[node name="Bullet" type="Sprite2D" parent="." index="6"]
+[node name="Bullet" type="Sprite2D" parent="CharacterAnimation" index="4"]
 visible = false
 position = Vector2(480, -639)
 rotation = -0.259771
 scale = Vector2(0.281763, 0.5)
 texture = ExtResource("6_ogsgu")
 
-[node name="AttackArea" type="Area2D" parent="." index="7"]
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_na047")
+}
+
+[node name="AttackArea" type="Area2D" parent="." index="3"]
 position = Vector2(1244.1, -282.553)
 rotation = 0.408407
 collision_layer = 0
@@ -557,21 +556,14 @@ position = Vector2(0.000488281, -0.00012207)
 rotation = -0.000669386
 shape = SubResource("RectangleShape2D_60oqg")
 
-[node name="CollisionShape2D" parent="." index="8"]
+[node name="CollisionShape2D" parent="." index="4"]
 position = Vector2(-41, -480)
 shape = SubResource("RectangleShape2D_oa1yv")
 metadata/_edit_lock_ = true
 
-[node name="RayCast2D" parent="." index="9"]
+[node name="RayCast2D" parent="." index="5"]
 position = Vector2(261, 62)
 target_position = Vector2(1650, 0)
 
-[node name="DiChuyen" type="AudioStreamPlayer" parent="FiniteStateMachine/MoveState" index="0"]
-bus = &"InBattleFX"
-
-[node name="Danh" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="0"]
-stream = ExtResource("7_llot2")
-bus = &"InBattleFX"
-
-[node name="Nga" type="AudioStreamPlayer" parent="FiniteStateMachine/KnockbackState" index="0"]
-bus = &"InBattleFX"
+[node name="Arrow" parent="." index="7"]
+position = Vector2(0, -1134)

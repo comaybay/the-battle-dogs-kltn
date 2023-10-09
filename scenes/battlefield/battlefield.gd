@@ -1,4 +1,4 @@
-class_name Battlefield extends Node2D
+class_name Battlefield extends BaseBattlefield
 
 var VictoryGUI: PackedScene = preload("res://scenes/battlefield/victory_gui/victory_gui.tscn")
 var DefeatGUI: PackedScene = preload("res://scenes/battlefield/defeat_gui/defeat_gui.tscn")
@@ -7,21 +7,37 @@ var TutorialDogScene: PackedScene = preload("res://scenes/battlefield/battlefiel
 var DEFEAT_AUDIO: AudioStream = preload("res://resources/sound/battlefield/defeat.mp3")
 var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/victory.mp3")
 
-## margin for position.x of cat tower and dog tower
-const TOWER_MARGIN: int = 700
-
-var stage_width: int
 var inbattle_sfx_idx: int
-
 var boss_audio: AudioStream
+var _player_data: BattlefieldPlayerData
 
+var _battlefield_data: Dictionary
+## get battlefield data from .json file
+func get_battlefield_data() -> Dictionary: return _battlefield_data
+	
 var _tutorial_dog: BattlefieldTutorialDog = null
 
 func _enter_tree() -> void:
-	var battlefield_data = InBattle.load_battlefield_data()
-	InBattle.reset()
-	stage_width = battlefield_data['stage_width']
-	
+	_battlefield_data = _load_battlefield_data()
+	_player_data = BattlefieldPlayerData.new()
+
+func _load_battlefield_data() -> Dictionary:
+	var file = FileAccess.open("res://resources/battlefield_data/%s.json" % Data.selected_battlefield_id, FileAccess.READ)
+	var battlefield_data: Dictionary = JSON.parse_string(file.get_as_text())
+	battlefield_data['stage_width'] += 300 * 2
+	file.close()
+	return battlefield_data	
+
+func get_stage_width() -> int: return _battlefield_data['stage_width']
+
+func get_player_data() -> BaseBattlefieldPlayerData: return _player_data
+
+func get_theme() -> String: return _battlefield_data['theme']
+
+func get_cat_power_scale() -> float:
+	var scale = _battlefield_data.get('power_scale')
+	return scale if scale != null else 1
+
 func _ready() -> void:
 	if (
 		not Data.has_done_battlefield_basics_tutorial 
@@ -33,25 +49,27 @@ func _ready() -> void:
 		_tutorial_dog.setup($CatTower, $DogTower, $Camera2D, $Gui)
 		$Gui.add_child(_tutorial_dog)
 	
-	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons)
+	$Gui.setup($DogTower, _player_data)
+	
+	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons, get_stage_width())
 	
 	inbattle_sfx_idx = AudioServer.get_bus_index("InBattleFX")
 	
-	$Music.stream = load("res://resources/sound/music/%s.mp3" % InBattle.battlefield_data['music'])
+	$Music.stream = load("res://resources/sound/music/%s.mp3" % _battlefield_data['music'])
 	$Music.play()
 	
-	if InBattle.battlefield_data.get('boss_music') != null:
-		boss_audio = load("res://resources/sound/music/%s.mp3" % InBattle.battlefield_data['boss_music'])
+	if _battlefield_data.get('boss_music') != null:
+		boss_audio = load("res://resources/sound/music/%s.mp3" % _battlefield_data['boss_music'])
 	
-	var half_viewport_size = get_viewport().size / 2
-	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % InBattle.battlefield_data['theme'])
+	var half_viewport_size: Vector2i = get_viewport().size / 2
+	var stage_width := get_stage_width()
+	
+	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % _battlefield_data['theme'])
 	$Sky.position = Vector2(0, -$Sky.size.y)
 	$Sky.size.x = stage_width
 	
 	$CatTower.position.x = stage_width - TOWER_MARGIN;
-	$CatTower.position.y = -50
 	$DogTower.position.x = TOWER_MARGIN
-	$DogTower.position.y = -50
 	
 	$Land.position.x = stage_width / 2.0
 	
@@ -62,7 +80,7 @@ func _ready() -> void:
 	$DogTower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
 
 func _process(delta: float) -> void:
-	InBattle.update(delta)
+	_player_data.update(delta)
 	
 func _show_win_ui():
 	clean_up()

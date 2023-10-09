@@ -6,12 +6,13 @@ var is_boss: bool = false
 @export var allow_boss_effect: bool = true
 
 func _ready() -> void:
+	super._ready()
+
 	if Engine.is_editor_hint():
 		return
-	
-	super._ready()
-	
-	var power_scale = InBattle.get_cat_power_scale()
+		
+	var battlefield := get_tree().current_scene as Battlefield
+	var power_scale = battlefield.get_cat_power_scale()
 	damage *= power_scale
 	health *= power_scale
 	

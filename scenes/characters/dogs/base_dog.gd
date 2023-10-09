@@ -7,27 +7,39 @@ class_name BaseDog extends Character
 var is_user_control 
 var check_hover
 
-func _ready() -> void:
+## online p2p game variables
+var _is_p2p_mode: bool = false
+var _is_server: bool = false
+
+func setup(global_position: Vector2) -> void:
 	$Arrow.position =  Vector2(0,0)
 	$Arrow.position.y = -round($CollisionShape2D.shape.extents.y * 2)
 	$Arrow.hide()
-	super._ready()
 	
-	if Engine.is_editor_hint():
-		return
+	var battlefield: BaseBattlefield = get_tree().current_scene
 	
-	var dog_upgrade = Data.dogs[name_id]
+	# if is in online p2p battle
+	if battlefield is OnlineBattlefield:
+		_is_p2p_mode = true
+		_is_server = battlefield.is_server()
 	
-	if dog_upgrade != null:
-		var scale = (1 + (dog_upgrade['level'] - 1) * 0.2)
-		damage *= scale  
-		health *= scale
+	if not _is_p2p_mode:
+		var dog_upgrade = Data.dogs[name_id]
 		
-	super._reready()
-	
+		if dog_upgrade != null:
+			var scale = (1 + (dog_upgrade['level'] - 1) * 0.2)
+			damage *= scale  
+			health *= scale
+		
 	is_user_control = false
 	check_hover = 0
+	
+	super.setup(global_position)
 
+func take_damage(ammount: int) -> void:
+	# allow take damage if is in single player mode or if is server
+	if not _is_p2p_mode or _is_server:
+		super.take_damage(ammount)
 
 func _on_mouse_entered():
 	check_hover = 1
@@ -61,7 +73,3 @@ func set_control() :
 		$Arrow.hide()		
 		is_user_control = false
 		$FiniteStateMachine.change_state("MoveState")
-	
-
-
-

@@ -4,8 +4,9 @@ const FireBall =  preload("res://scenes/skills/lightning/light.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var posti = InBattle.STAGE_WIDTH_MARGIN 
-	var count = int((InBattle.battlefield_data["stage_width"]- 1400) / 350)
+	var battlefield := get_tree().current_scene as BaseBattlefield
+	var posti = 300
+	var count = int((battlefield.get_stage_width() - 1400) / 350)
 	for i in range(count+1):
 		var item = FireBall.instantiate()
 		var random_value = i * 350 + posti + 450

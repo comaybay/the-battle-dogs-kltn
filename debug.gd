@@ -14,6 +14,11 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_pressed('ui_debug_speed'):
 		Engine.time_scale = 10 if Engine.time_scale == 1 else 1
+		
+	if event.is_action_pressed('ui_debug_save_file'):
+		Data.passed_level = 12
+		Data.bone = 999999999
+		Data.save()
 
 func is_debug_mode() -> bool:
 	return _debug_mode
