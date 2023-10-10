@@ -12,9 +12,9 @@ var _is_p2p_mode: bool = false
 var _is_server: bool = false
 
 func setup(global_position: Vector2) -> void:
-	$Arrow.position =  Vector2(0,0)
+	$Arrow.position =  Vector2(20,0)
 	$Arrow.position.y = -round($CollisionShape2D.shape.extents.y * 2)
-	$Arrow.hide()
+	$Arrow.hide()	
 	
 	var battlefield: BaseBattlefield = get_tree().current_scene
 	
@@ -33,8 +33,8 @@ func setup(global_position: Vector2) -> void:
 		
 	is_user_control = false
 	check_hover = 0
-	
 	super.setup(global_position)
+	
 
 func take_damage(ammount: int) -> void:
 	# allow take damage if is in single player mode or if is server
@@ -45,6 +45,7 @@ func _on_mouse_entered():
 	check_hover = 1
 	if is_user_control == false :
 		$Arrow.show()
+		$Arrow.tint_under = Color.WHITE
 
 func _on_mouse_exited():
 	check_hover = 0
@@ -59,17 +60,22 @@ func set_control() :
 	if is_user_control == false : # player can control dog
 		var dogs: Array[Node] = get_tree().get_nodes_in_group("dogs")
 		for dog in dogs:
+			$Arrow.tint_under = Color.RED
 			dog.is_user_control = false			
-			dog.get_node("Arrow").hide()
-			dog.get_node("Arrow").self_modulate =  Color.RED			
+			dog.get_node("Arrow").hide()		
 			dog.get_node("FiniteStateMachine").change_state("MoveState")
 		is_user_control = true
-		$Arrow.self_modulate =  Color.YELLOW
-		$Arrow.show()
+		$Arrow.show()		
 		$FiniteStateMachine.change_state("UserMoveState")
 		
 	else : # set dog to auto fight
-		$Arrow.self_modulate =  Color.RED
-		$Arrow.hide()		
+		$Arrow.hide()
 		is_user_control = false
 		$FiniteStateMachine.change_state("MoveState")
+
+func _process(delta):
+	if $AttackCooldownTimer.is_stopped() == false :
+		$Arrow.value = float(($AttackCooldownTimer.wait_time - $AttackCooldownTimer.time_left) * (float(100/$AttackCooldownTimer.wait_time)))		
+	else :
+		$Arrow.value = 0
+

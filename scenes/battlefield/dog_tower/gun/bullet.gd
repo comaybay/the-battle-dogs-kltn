@@ -12,8 +12,7 @@ const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")
 func _ready():
 	var bullet_upgrade = Data.passives.get("gun_tower")
 	if bullet_upgrade != null:
-		dame = dame + (dame * (bullet_upgrade['level']))
-		print(bullet_upgrade)
+		dame = dame + (dame * (bullet_upgrade['level']))		
 		
 func setup(global_position: Vector2, target: BaseCat) :
 	_target = target  

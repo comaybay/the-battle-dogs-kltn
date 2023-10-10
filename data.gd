@@ -10,7 +10,10 @@ signal select_data
 var save_data: Dictionary
 var old_data: Dictionary
 var silentwolf_data : Dictionary
-var use_sw_data : bool	
+var use_sw_data : bool
+var data_notifi : bool:
+	get: return true
+	set(value): data_notifi = value
 var user_name: String:
 	get: return save_data['user_name']
 	set(value): save_data['user_name'] = value
@@ -25,10 +28,9 @@ var steam_first_login: bool:
 		save_data['steam_first_login'] = value
 
 var bone: int:
-	get: return save_data['bone']		
+	get: return save_data["bone"]
 	set(value): 
-		
-		save_data['bone'] = value
+		save_data["bone"] = value
 		bone_changed.emit(value)		
 
 var dog_food: int:
@@ -217,7 +219,7 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 	return save_data
 			
 func _ready() -> void:
-	old_data = save_data	
+	old_data = save_data
 	## if player opens the game for the first time (game_language is not chose yet)
 	use_sw_data = false
 	if game_language == "":	
@@ -249,6 +251,7 @@ func save():
 	if use_sw_data == false : # play offline
 		var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
 		file.store_line(JSON.stringify(save_data))
+		print("play offf")
 		file.close()			
 	else: #play online
 		if (silentwolf_data["user_name"] == old_data["user_name"]):

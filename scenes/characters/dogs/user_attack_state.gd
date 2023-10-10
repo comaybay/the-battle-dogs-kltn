@@ -4,7 +4,7 @@ extends FSMState
 var start_attack := false
 var done_attack := false
 const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")
-
+signal dog_attack
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
 	character.attack_sprite.frame_changed.connect(on_frame_changed)
@@ -21,6 +21,7 @@ func physics_update(_delta: float) -> void:
 		
 	$Danh.pitch_scale = randf_range(0.85, 1.15)
 	$Danh.play()
+	dog_attack.emit()
 	# custom attack
 	if character.custom_attack_area != null:
 		for target in character.custom_attack_area.get_overlapping_bodies():

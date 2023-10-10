@@ -34,14 +34,23 @@ script = ExtResource("4_ioj3n")
 stream = ExtResource("5_ot2k0")
 bus = &"InBattleFX"
 
-[node name="Arrow" type="Sprite2D" parent="." index="6"]
-visible = false
-self_modulate = Color(1, 0, 0, 1)
-position = Vector2(0, -178)
+[node name="Arrow" type="TextureProgressBar" parent="." index="6"]
+anchors_preset = -1
+offset_left = 21.0
+offset_top = -184.0
+offset_right = 741.0
+offset_bottom = 222.0
 rotation = 1.5708
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_dhr53")
+size_flags_horizontal = 4
+size_flags_vertical = 6
+nine_patch_stretch = true
+texture_under = ExtResource("3_dhr53")
+texture_progress = ExtResource("3_dhr53")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(1, 1, 0, 1)
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

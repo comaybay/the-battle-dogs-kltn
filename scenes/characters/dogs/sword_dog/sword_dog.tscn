@@ -135,4 +135,8 @@ position = Vector2(95, 61.5)
 target_position = Vector2(90, 0)
 
 [node name="Arrow" parent="." index="6"]
-position = Vector2(0, -220)
+anchors_preset = 0
+offset_left = 0.0
+offset_top = -220.0
+offset_right = 720.0
+offset_bottom = 186.0
