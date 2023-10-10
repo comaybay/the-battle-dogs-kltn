@@ -9,7 +9,9 @@ signal select_data
 
 var save_data: Dictionary
 var old_data: Dictionary
-var silentwolf_data : Dictionary
+var silentwolf_data : Dictionary:
+	get: return save_data
+	set(value): silentwolf_data = value
 var use_sw_data : bool
 var data_notifi : bool:
 	get: return true
@@ -21,11 +23,6 @@ var user_name: String:
 var date: String:
 	get: return save_data['date']		
 	set(value): save_data['date'] = value	
-
-var steam_first_login: bool:
-	get: return save_data['steam_first_login']
-	set(value): 
-		save_data['steam_first_login'] = value
 
 var bone: int:
 	get: return save_data["bone"]
@@ -194,7 +191,7 @@ func _load_game_save() -> Dictionary:
 	var save_data: Dictionary = JSON.parse_string(file.get_as_text())
 	file.close()
 	
-	save_data = _compare_and_update_save_file(new_game_save_data, save_data)
+	save_data = _compare_and_update_save_file(new_game_save_data, save_data)	
 	
 	file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	file.store_line(JSON.stringify(save_data))
@@ -247,26 +244,28 @@ func compute_values():
 
 func save():
 	date = Time.get_datetime_string_from_system() #save_data.date == date
-	
-	if use_sw_data == false : # play offline
-		var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
-		file.store_line(JSON.stringify(save_data))
-		print("play offf")
-		file.close()			
-	else: #play online
-		if (silentwolf_data["user_name"] == old_data["user_name"]):
-			var date1 = Time.get_unix_time_from_datetime_string(save_data.date)
-			var date2 = Time.get_unix_time_from_datetime_string(silentwolf_data.date)
-			if date2 > date1: #luu silentwolf_data vao data			
-				save_data = silentwolf_data				
-			else : #luu data vao silentwolf_data				
-				silentwolf_data = save_data
-				SilentWolf.Players.save_player_data(Steam.getPersonaName(), silentwolf_data)
-			var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
-			file.store_line(JSON.stringify(save_data))
-			file.close()
-		else : #silentwolf user_name != data user_name
-			select_data.emit()
+	var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+	file.store_line(JSON.stringify(save_data))
+	file.close()	
+#	if use_sw_data == false : # play offline
+#		var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+#		file.store_line(JSON.stringify(save_data))
+#		file.close()			
+#	else: #play online
+#		if (Steam.getPersonaName() == old_data["user_name"]):
+#			print("steam1")
+#			var date1 = Time.get_unix_time_from_datetime_string(save_data.date)
+#			var date2 = Time.get_unix_time_from_datetime_string(silentwolf_data.date)
+#			if date2 > date1: #luu silentwolf_data vao data			
+#				save_data = silentwolf_data
+#			else : #luu data vao silentwolf_data
+#				silentwolf_data = save_data
+#				SilentWolf.Players.save_player_data(Steam.getPersonaName(), silentwolf_data)
+#			var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+#			file.store_line(JSON.stringify(save_data))
+#			file.close()
+#		else : #silentwolf user_name != data user_name			
+#			print("steam2")
 	compute_values()
 
 func load_settings():
@@ -287,3 +286,8 @@ func load_settings():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, event)	
 	
+
+func _exit_tree():
+	if use_sw_data == true :
+		SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)
+		save_data = old_data
