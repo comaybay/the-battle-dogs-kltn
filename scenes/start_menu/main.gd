@@ -103,6 +103,6 @@ func _on_confirmation_dialog_player():
 	
 
 func _on_confirmation_dialog_computer():
-	SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.save_data)
+#	SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.save_data)
 	Data.save()
 	
