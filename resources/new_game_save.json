@@ -3,7 +3,6 @@
   "dog_food": 0,
 	"date" : "2020-10-10T10:30:33",
 	"user_name": "",
-	"steam_first_login": true,
   "dogs": [{ "ID": "dog", "level": 1 }],
   "items": [],
   "passed_level": -1,

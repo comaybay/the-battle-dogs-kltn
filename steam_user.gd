@@ -33,14 +33,19 @@ func _ready() -> void:
 	if IS_USING_STEAM: #have account
 		STEAM_ID = Steam.getSteamID()
 		STEAM_USERNAME = Steam.getPersonaName()
+		lobby_members = [STEAM_ID]
 		PASSWORD = "Aa1@" + str( STEAM_ID)
+		Steam.initRelayNetworkAccess()
 		#register by STEAM_USERNAME(username) and STEAM_ID(password)			
 		var sw_result = await SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD).sw_registration_user_pwd_complete		
 		if sw_result.success :
+			print("dang ky")
 			dang_ky_sw()
 		dang_nhap_sw()
+	
+	if not IS_USING_STEAM:
+		set_process_input(false)
 		
-		Data.save()
 	else : # don't have account
 		pass
 	
@@ -57,24 +62,25 @@ func dang_ky_sw():
 	if Data.user_name == "":
 		Data.user_name = STEAM_USERNAME
 
-func dang_nhap_sw():
+func dang_nhap_sw():	
 	var sw_result = await SilentWolf.Players.get_player_data(STEAM_USERNAME).sw_get_player_data_complete
 	Data.silentwolf_data = sw_result.player_data
-	if (STEAM_USERNAME == Data.old_data["user_name"]) or (Data.old_data["user_name"] == "") :
-		print("dang nhap old: ",Data.old_data["user_name"])
-		print("dang nhap sw: ",Data.silentwolf_data["user_name"])
+	if (STEAM_USERNAME == Data.old_data["user_name"]) or (Data.old_data["user_name"] == "") :		
 		Data.save_data["user_name"] = STEAM_USERNAME
+		print("dang nhap1 : ",Data.save_data.date)
+		print("dang nhap1 : ",Data.silentwolf_data.date)
 		var date1 = Time.get_unix_time_from_datetime_string(Data.save_data.date)
 		var date2 = Time.get_unix_time_from_datetime_string(Data.silentwolf_data.date)
-		if date2 > date1: #luu silentwolf_data vao data			
+		print("dang1 : ",date1)
+		print("dang1 : ",date2)
+		if date2 > date1: #luu silentwolf_data vao data
 			Data.save_data = Data.silentwolf_data
-			SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.save_data)
-		else : #luu data vao silentwolf_data
+			print("dang1")
+		else : #luu data vao silentwolf_data			
+			SilentWolf.Players.save_player_data(STEAM_USERNAME, Data.save_data)
 			Data.silentwolf_data = Data.save_data
-			SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.silentwolf_data)
-		var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
-		file.store_line(JSON.stringify(Data.save_data))
-		file.close()
+			print("dang2")
+		Data.save()
 	else :
 		Data.select_data.emit()
 
@@ -83,15 +89,7 @@ func _on_registration_complete(sw_result: Dictionary) -> void:
 		print("Registration succeeded!")
 	else:
 		print("Error: " + str(sw_result.error))
-		
-	if not IS_USING_STEAM:
-		set_process_input(false)
-		return
 
-	STEAM_ID = Steam.getSteamID()
-	lobby_members = [STEAM_ID]
-	STEAM_USERNAME = Steam.getPersonaName()
-	Steam.initRelayNetworkAccess()
 
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
