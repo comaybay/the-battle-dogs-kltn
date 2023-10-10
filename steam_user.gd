@@ -33,27 +33,47 @@ func _ready() -> void:
 	if IS_USING_STEAM: #have account
 		STEAM_ID = Steam.getSteamID()
 		STEAM_USERNAME = Steam.getPersonaName()
-		PASSWORD = "Aa1@" + str( STEAM_ID)		
-		if Data.steam_first_login: #register by STEAM_USERNAME(username) and STEAM_ID(password)			
-			Data.steam_first_login = false
-			Data.user_name = STEAM_USERNAME			
-			SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD)
-			SilentWolf.Players.save_player_data(STEAM_USERNAME, Data.save_data)
-		#login by STEAM_USERNAME(username) and STEAM_ID(password)
-		SilentWolf.Auth.login_player(STEAM_USERNAME, PASSWORD)
-		SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
-		
-		#get silentwolf data		
-		var sw_result = await SilentWolf.Players.get_player_data(STEAM_USERNAME).sw_get_player_data_complete
-		Data.silentwolf_data = sw_result.player_data
-		
-		
-		Data.use_sw_data = true	
+		PASSWORD = "Aa1@" + str( STEAM_ID)
+		#register by STEAM_USERNAME(username) and STEAM_ID(password)			
+		var sw_result = await SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD).sw_registration_user_pwd_complete		
+		if sw_result.success :
+			dang_ky_sw()
+		else :
+			dang_nhap_sw()
 		Data.save()
-			
 	else : # don't have account
 		pass
-		
+	
+
+func dang_ky_sw():
+	var file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
+	var new_game_save_text: Dictionary = JSON.parse_string(file.get_as_text())	
+	file.close()
+	new_game_save_text["date"] = Time.get_datetime_string_from_system()
+	new_game_save_text['user_name'] = STEAM_USERNAME
+	await SilentWolf.Players.save_player_data(STEAM_USERNAME, new_game_save_text)
+	SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
+	#get silentwolf data		
+	if Data.user_name == "":
+		Data.user_name = STEAM_USERNAME
+	Data.select_data.emit()
+
+func dang_nhap_sw():
+	var sw_result = await SilentWolf.Players.get_player_data(Data.silentwolf_data["user_name"]).sw_get_player_data_complete
+	Data.silentwolf_data = sw_result.player_data
+	if Data.silentwolf_data["user_name"] == Data.old_data["user_name"] :
+		var date1 = Time.get_unix_time_from_datetime_string(Data.save_data.date)
+		var date2 = Time.get_unix_time_from_datetime_string(Data.silentwolf_data.date)
+		if date2 > date1: #luu silentwolf_data vao data			
+			Data.save_data = Data.silentwolf_data
+		else : #luu data vao silentwolf_data
+			Data.silentwolf_data = Data.save_data
+			SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.silentwolf_data)
+		var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+		file.store_line(JSON.stringify(Data.save_data))
+		file.close()
+	else :
+		Data.select_data.emit()
 
 func _on_registration_complete(sw_result: Dictionary) -> void:
 	if sw_result.success:
