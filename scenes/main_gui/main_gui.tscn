@@ -153,7 +153,6 @@ mode = 1
 title = ""
 initial_position = 2
 size = Vector2i(500, 150)
-visible = true
 ok_button_text = "@COMPUTER"
 dialog_text = "@SELECT_PLAYER_DATA?"
 dialog_autowrap = true

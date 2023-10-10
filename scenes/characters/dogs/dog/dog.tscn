@@ -100,7 +100,7 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa1yv"]
 resource_local_to_scene = true
-size = Vector2(192, 178)
+size = Vector2(192, 223.5)
 
 [node name="Dog" instance=ExtResource("1_wscv2")]
 z_index = 40
@@ -121,8 +121,15 @@ libraries = {
 
 [node name="CollisionShape2D" parent="." index="3"]
 visibility_layer = 2
-position = Vector2(-1, -2.5)
+position = Vector2(-1, -25.25)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]
 position = Vector2(95, 61.5)
+
+[node name="Arrow" parent="." index="6"]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = -216.0
+offset_right = 740.0
+offset_bottom = 190.0
