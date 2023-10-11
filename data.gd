@@ -9,7 +9,9 @@ signal select_data
 
 var save_data: Dictionary
 var old_data: Dictionary
-var silentwolf_data : Dictionary
+var silentwolf_data : Dictionary:
+	get: return save_data
+	set(value): silentwolf_data = value
 var use_sw_data : bool
 var data_notifi : bool:
 	get: return true
@@ -169,7 +171,7 @@ func _init() -> void:
 	
 	compute_values()
 
-func  _create_new_game_save() -> Dictionary:
+func _create_new_game_save() -> Dictionary:
 	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
 	var new_game_save_text := new_game_save_file.get_as_text()
 	new_game_save_file.close()
@@ -177,7 +179,7 @@ func  _create_new_game_save() -> Dictionary:
 	var save_file := FileAccess.open("user://save.json", FileAccess.WRITE)
 	save_file.store_line(new_game_save_text)
 	save_file.close()
-	print(new_game_save_text)
+	
 	return JSON.parse_string(new_game_save_text)
 	
 func _load_game_save() -> Dictionary:
@@ -241,12 +243,10 @@ func compute_values():
 		passives[passive["ID"]] = passive
 
 func save():
-	date = Time.get_datetime_string_from_system() 
+	date = Time.get_datetime_string_from_system() #save_data.date == date
 	var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
 	file.store_line(JSON.stringify(save_data))
 	file.close()
-	if use_sw_data == true :
-		await SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)
 	compute_values()
 
 func load_settings():
