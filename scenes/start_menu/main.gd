@@ -24,7 +24,12 @@ func _ready():
 	%SettingsButton.pressed.connect(_go_to_settings)
 	%CreditButton.pressed.connect(_go_to_credits)
 	
-	
+	Data.select_data.connect(show_select_data_box)
+
+func show_select_data_box():
+	if Data.data_notifi == true:		
+		Data.data_notifi = false
+		$ConfirmationDialog.show()	
 
 func _on_nut_bat_dau_pressed():
 	AudioPlayer.stop_custom_music()
@@ -86,3 +91,18 @@ func _create_settings() -> Settings:
 
 func _go_to_lobby():
 	get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")
+
+
+func _on_confirmation_dialog_player():
+	var sw_result = await SilentWolf.Players.get_player_data(Steam.getPersonaName()).sw_get_player_data_complete
+#	Data.old_data = sw_result.player_data
+	Data.save_data = sw_result.player_data
+	Data.silentwolf_data = sw_result.player_data
+	Data.use_sw_data = true
+	Data.save()
+	
+
+func _on_confirmation_dialog_computer():
+	SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.save_data)
+	Data.save()
+	
