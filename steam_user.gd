@@ -46,12 +46,12 @@ func _ready() -> void:
 	
 
 func dang_ky_sw():
-#	var file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
-#	var new_game_save_text: Dictionary = JSON.parse_string(file.get_as_text())	
-#	file.close()
-#	new_game_save_text["date"] = Time.get_datetime_string_from_system()
-#	new_game_save_text['user_name'] = STEAM_USERNAME
-	await SilentWolf.Players.save_player_data(STEAM_USERNAME, Data.save_data)
+	var file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
+	var new_game_save_text: Dictionary = JSON.parse_string(file.get_as_text())	
+	file.close()
+	new_game_save_text["date"] = Time.get_datetime_string_from_system()
+	new_game_save_text['user_name'] = STEAM_USERNAME
+	await SilentWolf.Players.save_player_data(STEAM_USERNAME, new_game_save_text)
 	SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
 	#get silentwolf data		
 	if Data.user_name == "":
