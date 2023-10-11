@@ -35,6 +35,7 @@ stream = ExtResource("5_ot2k0")
 bus = &"InBattleFX"
 
 [node name="Arrow" type="TextureProgressBar" parent="." index="6"]
+anchors_preset = -1
 offset_left = 21.0
 offset_top = -184.0
 offset_right = 741.0

@@ -21,9 +21,26 @@ func _ready() -> void:
 	%DogFoodLabel.text = tr("@DOG_FOOD") + ": %s" % Data.dog_food
 	#TODO: Dog food changed
 	Data.bone_changed.connect(_on_bone_changed)
+	print("Data.data_notifi: ",Data.data_notifi)
+	Data.select_data.connect(show_select_data_box)
+
+func show_select_data_box():
+	if Data.data_notifi == true:		
+		Data.data_notifi = false
+		$Khung/Content/ConfirmationDialog.show()	
+	
+
 func _on_bone_changed(value: int):
 	%Money.text = str(Data.bone)
 	
 func _on_go_back_pressed():
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file(go_back_scene_path)
+
+func _on_confirmation_dialog_player():
+	Data.old_data = Data.silentwolf_data
+	Data.save_data= Data.silentwolf_data
+
+func _on_confirmation_dialog_computer():	
+	await SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.save_data)
+	
