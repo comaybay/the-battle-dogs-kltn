@@ -246,7 +246,26 @@ func save():
 	date = Time.get_datetime_string_from_system() #save_data.date == date
 	var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
 	file.store_line(JSON.stringify(save_data))
-	file.close()
+	file.close()	
+#	if use_sw_data == false : # play offline
+#		var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+#		file.store_line(JSON.stringify(save_data))
+#		file.close()			
+#	else: #play online
+#		if (Steam.getPersonaName() == old_data["user_name"]):
+#			print("steam1")
+#			var date1 = Time.get_unix_time_from_datetime_string(save_data.date)
+#			var date2 = Time.get_unix_time_from_datetime_string(silentwolf_data.date)
+#			if date2 > date1: #luu silentwolf_data vao data			
+#				save_data = silentwolf_data
+#			else : #luu data vao silentwolf_data
+#				silentwolf_data = save_data
+#				SilentWolf.Players.save_player_data(Steam.getPersonaName(), silentwolf_data)
+#			var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+#			file.store_line(JSON.stringify(save_data))
+#			file.close()
+#		else : #silentwolf user_name != data user_name			
+#			print("steam2")
 	compute_values()
 
 func load_settings():
@@ -270,5 +289,5 @@ func load_settings():
 
 func _exit_tree():
 	if use_sw_data == true :
-		await SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)
+		SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)
 		save_data = old_data
