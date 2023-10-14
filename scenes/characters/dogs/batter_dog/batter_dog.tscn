@@ -810,3 +810,6 @@ bus = &"InBattleFX"
 
 [node name="AttackSound" parent="FiniteStateMachine/AttackState" index="0"]
 stream = ExtResource("8_h2ih3")
+
+[node name="Arrow" parent="." index="6"]
+anchors_preset = 0

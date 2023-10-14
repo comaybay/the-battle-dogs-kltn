@@ -2,7 +2,7 @@
   "theme": "night",
   "music": "battlefield_theme4",
   "boss_music": "boss_theme3",
-  "stage_width": 6000,
+  "stage_width": 5200,
   "cat_tower_health": 18000,
   "reward_bone": 333333,
   "power_scale": 2,

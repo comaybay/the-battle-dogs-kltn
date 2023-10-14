@@ -16,7 +16,7 @@ func _ready() -> void:
 	_setup_max_health()
 	
 func _setup_max_health() -> void:
-	max_health =  int(Steam.getLobbyData(SteamUser.lobby_id, "max_health"))
+	max_health = int(SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_DOG_TOWER_HEALTH))
 	health = max_health
 	update_health_label()
 

@@ -38,31 +38,31 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	inbattle_sfx_idx = AudioServer.get_bus_index("InBattleFX")
+	var stage_width_with_margin = _stage_width + (TOWER_MARGIN * 2)
 	
 	$ConnectionHandler.setup(%Popup)
-	$Camera2D.setup(($Gui as OnlineBattleGUI).camera_control_buttons, _stage_width)
+	$Camera2D.setup(($Gui as OnlineBattleGUI).camera_control_buttons, stage_width_with_margin)
 	$Music.stream = load("res://resources/sound/music/%s.mp3" % SteamUser.get_lobby_data("music"))
 	$Music.play()
 	
-	var half_viewport_size = get_viewport().size / 2
 	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % SteamUser.get_lobby_data("theme"))
 	$Sky.position = Vector2(0, -$Sky.size.y)
-	$Sky.size.x = _stage_width
+	$Sky.size.x = stage_width_with_margin
 	
 	var player_dog_tower := $OnlineDogTowerLeft as OnlineDogTower
 	var opponent_dog_tower := $OnlineDogTowerRight as OnlineDogTower
+	
+	var half_viewport_size = get_viewport().size / 2
 	$Camera2D.position = Vector2(0, -half_viewport_size.y)
 	
-	if SteamUser.lobby_members[0] != SteamUser.STEAM_ID:
+	if SteamUser.STEAM_ID != SteamUser.get_lobby_owner():
 		player_dog_tower = $OnlineDogTowerRight
 		opponent_dog_tower = $OnlineDogTowerLeft
 		$Camera2D.position = Vector2(_stage_width, -half_viewport_size.y)
 	
 	$OnlineDogTowerLeft.position.x = TOWER_MARGIN
-	$OnlineDogTowerRight.position.x = _stage_width - TOWER_MARGIN;
+	$OnlineDogTowerRight.position.x = stage_width_with_margin - TOWER_MARGIN
 	
-	$Land.position.x = _stage_width / 2.0
-		
 	if _is_server:
 		_p2p_networking = $ServerSide
 		$ServerSide.setup(_this_player_data, _opponent_player_data, player_dog_tower, opponent_dog_tower)

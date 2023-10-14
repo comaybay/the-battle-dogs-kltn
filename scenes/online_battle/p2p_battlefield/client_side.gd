@@ -92,7 +92,6 @@ func _handling_this_player_spawn(spawn_data: Dictionary):
 		spawn_request_accepted.emit(dog_id)
 
 func _handling_recharge_times(recharge_times: Array):
-	print(recharge_times)
 	var dog_ids = _this_player_data.team_dog_ids.filter(func(dog_id): return dog_id != null)
 	for i in range(recharge_times.size()):
 		var dog_id: String = dog_ids[i]
@@ -107,7 +106,7 @@ func _hanlding_opponent_spawn(spawn_data: Dictionary):
 
 func _handling_dog_attack_state_sync(dog_instances: Array) -> void:
 	for server_instance_id in dog_instances:
-		print("sync dog: %s" % server_instance_id)
+		print("sync dog attack animation: %s" % server_instance_id)
 		var dog := instance_from_id(_dog_instance_map[server_instance_id]) as BaseDog
 		dog.get_FSM().change_state("AttackState")
 

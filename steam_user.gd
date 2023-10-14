@@ -99,7 +99,6 @@ func update_lobby_members():
 	for i in range(0, Steam.getNumLobbyMembers(lobby_id)):
 		lobby_members.append(Steam.getLobbyMemberByIndex(lobby_id, i)) 
 	print("STEAM_USER: LOBBY MEMBERS: %s " % ",".join(lobby_members))	
-		
 	
 func send_message(packet_data, send_type: SteamUser.SendType) -> void:
 	var data: PackedByteArray = var_to_bytes(packet_data).compress(FileAccess.COMPRESSION_GZIP)

@@ -1,7 +1,7 @@
 {
   "theme": "heavenly",
   "music": "battlefield_theme_heavenly",
-  "stage_width": 8000,
+  "stage_width": 7200,
   "cat_tower_health": 100000,
   "reward_bone": 999999,
   "power_scale": 1.5,

@@ -105,11 +105,6 @@ func _on_lobby_created(connect: int, lobby_id: int) -> void:
 	SteamUser.set_lobby_data("mode", "GodotSteam test")
 	SteamUser.set_lobby_data("game_start", "false")
 	
-	SteamUser.set_lobby_data("theme", ['fall', 'green_grass', 'heavenly', 'night', 'nightmare', 'winter'].pick_random())
-	SteamUser.set_lobby_data("music", "battlefield_theme1")
-	SteamUser.set_lobby_data("stage_width", "3500")
-	SteamUser.set_lobby_data("max_health", "5000")
-
 	_go_to_room()
 
 func _on_room_listing_item_join_request(room_id: int, room: RoomListingItem):

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower.gd" id="1_3wavf"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_77w0d"]
-[ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/night/dog_tower.png" id="3_6hao2"]
+[ext_resource type="Texture2D" uid="uid://chienqihdhe53" path="res://resources/battlefield_themes/green_grass/dog_tower.png" id="3_d6q6y"]
 [ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="4_bicf2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
@@ -76,7 +76,7 @@ horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -500)
-texture = ExtResource("3_6hao2")
+texture = ExtResource("3_d6q6y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -473)
