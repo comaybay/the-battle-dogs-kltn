@@ -94,15 +94,17 @@ func _go_to_lobby():
 
 
 func _on_confirmation_dialog_player():
-	var sw_result = await SilentWolf.Players.get_player_data(Steam.getPersonaName()).sw_get_player_data_complete
-#	Data.old_data = sw_result.player_data
+	var sw_result = await SilentWolf.Players.get_player_data(Data.silentwolf_data.user_name).sw_get_player_data_complete
 	Data.save_data = sw_result.player_data
 	Data.silentwolf_data = sw_result.player_data
 	Data.use_sw_data = true
-	Data.save()
+
 	
 
 func _on_confirmation_dialog_computer():
-	SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.save_data)
+	var sw_result = await SilentWolf.Players.get_player_data(Data.silentwolf_data.user_name).sw_get_player_data_complete
+	var user_name = Data.silentwolf_data["user_name"]
+	Data.silentwolf_data = Data.save_data
+	await SilentWolf.Players.save_player_data(user_name, Data.silentwolf_data)
 	Data.save()
 	
