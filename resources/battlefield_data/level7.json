@@ -2,7 +2,7 @@
   "theme": "winter",
   "music": "battlefield_theme3",
   "boss_music": "boss_theme2",
-  "stage_width": 6000,
+  "stage_width": 5200,
   "cat_tower_health": 8000,
   "reward_bone": 80000,
   "power_scale": 1.25,

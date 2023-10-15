@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/battlefield/cat_tower/cat_tower.gd" id="1_52k0t"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_ff43w"]
-[ext_resource type="Texture2D" uid="uid://cecwl18lrgxig" path="res://resources/battlefield_themes/night/cat_tower.png" id="3_ibw82"]
+[ext_resource type="Texture2D" uid="uid://brjsgem5u8g2p" path="res://resources/battlefield_themes/green_grass/cat_tower.png" id="3_xbiff"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
 font_size = 52
@@ -75,7 +75,7 @@ horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -500)
-texture = ExtResource("3_ibw82")
+texture = ExtResource("3_xbiff")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -473)

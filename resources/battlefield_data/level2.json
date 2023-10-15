@@ -1,7 +1,7 @@
 {
   "theme": "green_grass",
   "music": "battlefield_theme1",
-  "stage_width": 3500,
+  "stage_width": 2700,
   "cat_tower_health": 750,
   "reward_bone": 4500,
   "spawn_patterns": [

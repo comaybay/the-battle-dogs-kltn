@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_battlefield.gd" id="1_i8anq"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/server_side.gd" id="2_54xfd"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/client_side.gd" id="2_4858x"]
-[ext_resource type="Texture2D" uid="uid://c8sa6uo4d7wdb" path="res://resources/battlefield_themes/night/sky.png" id="2_cuauh"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/connection_handler.gd" id="2_w03bi"]
 [ext_resource type="PackedScene" uid="uid://xny5rxpmau5y" path="res://scenes/online_battle/p2p_battlefield/p2p_land/p2p_land.tscn" id="3_p4hqa"]
 [ext_resource type="PackedScene" uid="uid://uh7hnntqdigc" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower_left.tscn" id="5_8afl3"]
 [ext_resource type="PackedScene" uid="uid://btcyop0so1g7h" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_gui.tscn" id="5_y62fp"]
 [ext_resource type="Script" path="res://scenes/battlefield/Camera2D.gd" id="6_cy4w7"]
+[ext_resource type="Texture2D" uid="uid://btso87xve0gsq" path="res://resources/battlefield_themes/green_grass/sky.png" id="6_kiamq"]
 [ext_resource type="PackedScene" uid="uid://inelp1r1r34q" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower_right.tscn" id="6_v6ew7"]
 [ext_resource type="AudioStream" uid="uid://dm1ge42cv7vy7" path="res://resources/sound/battlefield/boss_drum.mp3" id="7_t23ci"]
 [ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="11_ovxua"]
@@ -33,7 +33,7 @@ offset_top = -1064.0
 offset_right = 2312.0
 offset_bottom = 1384.0
 size_flags_horizontal = 4
-texture = ExtResource("2_cuauh")
+texture = ExtResource("6_kiamq")
 stretch_mode = 1
 
 [node name="Land" parent="." instance=ExtResource("3_p4hqa")]

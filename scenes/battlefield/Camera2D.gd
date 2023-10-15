@@ -16,7 +16,7 @@ func setup(camera_control_buttons: CameraControlButtons, stage_width: int):
 	_camera_control_buttons = camera_control_buttons
 	_stage_width = stage_width
 	
-	viewport_size = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
+	viewport_size = get_viewport().size 
 	half_viewport_size =  viewport_size / 2
 	
 	limit_left = 0
@@ -28,6 +28,8 @@ func setup(camera_control_buttons: CameraControlButtons, stage_width: int):
 
 	var initial_zoom_scale = max(0.375, min_zoom_scale) 
 	zoom = Vector2(initial_zoom_scale, initial_zoom_scale)
+	
+	position = Vector2(0, -half_viewport_size.y)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

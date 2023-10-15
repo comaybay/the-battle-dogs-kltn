@@ -1,7 +1,7 @@
 {
   "theme": "fall",
   "music": "battlefield_theme_rush1",
-  "stage_width": 4500,
+  "stage_width": 3700,
   "cat_tower_health": 1,
   "power_scale": 0.75,
   "reward_bone": 50000,
