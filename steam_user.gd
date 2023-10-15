@@ -67,9 +67,7 @@ func dang_nhap_sw():
 		if date2 > date1: #luu silentwolf_data vao data			
 			Data.save_data = Data.silentwolf_data
 		else : #luu data vao silentwolf_data
-			print("dang_nhap_sw2")
 			Data.silentwolf_data = Data.save_data
-			SilentWolf.Players.save_player_data(Steam.getPersonaName(), Data.silentwolf_data)
 		Data.use_sw_data = true
 	else :
 		Data.select_data.emit()
