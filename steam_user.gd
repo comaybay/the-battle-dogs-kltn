@@ -25,62 +25,50 @@ enum SendType {
 }
 
 func _ready() -> void:
+	
 	var INIT: Dictionary = Steam.steamInit(false)
-	print("Did Steam initialize?: "+str(INIT))
-	
+	print("Did Steam initialize?: "+str(INIT))	
 	IS_USING_STEAM = Steam.loggedOn()
-	
+	Data.old_data = Data.save_data
+	Data.silentwolf_data = Data.save_data
 	if IS_USING_STEAM: #have account
 		STEAM_ID = Steam.getSteamID()
 		STEAM_USERNAME = Steam.getPersonaName()
 		lobby_members = [STEAM_ID]
-		PASSWORD = "Aa1@" + str( STEAM_ID)
 		Steam.initRelayNetworkAccess()
-		#register by STEAM_USERNAME(username) and STEAM_ID(password)			
+		PASSWORD = "Aa1@" + str( STEAM_ID)
+		#register by STEAM_USERNAME(username) and STEAM_ID(password)
 		var sw_result = await SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD).sw_registration_user_pwd_complete		
 		if sw_result.success :
-			print("dang ky")
-			dang_ky_sw()
-		dang_nhap_sw()
-	
+			await dang_ky_sw()
+		await dang_nhap_sw()
+		Data.save()
 	if not IS_USING_STEAM:
 		set_process_input(false)
-		
-	else : # don't have account
-		pass
+
 	
 
 func dang_ky_sw():
-	var file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
-	var new_game_save_text: Dictionary = JSON.parse_string(file.get_as_text())	
-	file.close()
-	new_game_save_text["date"] = Time.get_datetime_string_from_system()
-	new_game_save_text['user_name'] = STEAM_USERNAME
-	await SilentWolf.Players.save_player_data(STEAM_USERNAME, new_game_save_text)
+	print("dang_ky_sw")
+	Data.silentwolf_data.date = Time.get_datetime_string_from_system()
+	Data.silentwolf_data.user_name = STEAM_USERNAME
+	await SilentWolf.Players.save_player_data(STEAM_USERNAME, Data.silentwolf_data)
 	SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
-	#get silentwolf data		
-	if Data.user_name == "":
-		Data.user_name = STEAM_USERNAME
+	Data.select_data.emit()
 
-func dang_nhap_sw():	
+func dang_nhap_sw():
 	var sw_result = await SilentWolf.Players.get_player_data(STEAM_USERNAME).sw_get_player_data_complete
 	Data.silentwolf_data = sw_result.player_data
-	if (STEAM_USERNAME == Data.old_data["user_name"]) or (Data.old_data["user_name"] == "") :		
-		Data.save_data["user_name"] = STEAM_USERNAME
-		print("dang nhap1 : ",Data.save_data.date)
-		print("dang nhap1 : ",Data.silentwolf_data.date)
+	if Data.old_data.user_name == "" :
+		Data.save_data.user_name = STEAM_USERNAME
+	if Data.silentwolf_data.user_name == Data.save_data.user_name:
 		var date1 = Time.get_unix_time_from_datetime_string(Data.save_data.date)
 		var date2 = Time.get_unix_time_from_datetime_string(Data.silentwolf_data.date)
-		print("dang1 : ",date1)
-		print("dang1 : ",date2)
-		if date2 > date1: #luu silentwolf_data vao data
+		if date2 > date1: #luu silentwolf_data vao data			
 			Data.save_data = Data.silentwolf_data
-			print("dang1")
-		else : #luu data vao silentwolf_data			
-			SilentWolf.Players.save_player_data(STEAM_USERNAME, Data.save_data)
+		else : #luu data vao silentwolf_data
 			Data.silentwolf_data = Data.save_data
-			print("dang2")
-		Data.save()
+		Data.use_sw_data = true
 	else :
 		Data.select_data.emit()
 

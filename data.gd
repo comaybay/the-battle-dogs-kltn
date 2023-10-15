@@ -7,8 +7,8 @@ signal mute_music_changed(mute: bool)
 signal mute_sound_fx_changed(mute: bool)
 signal select_data
 
-var save_data: Dictionary
 var old_data: Dictionary
+var save_data: Dictionary
 var silentwolf_data : Dictionary
 var use_sw_data : bool
 var data_notifi : bool:
@@ -140,7 +140,8 @@ func _init() -> void:
 	if not FileAccess.file_exists("user://save.json"):
 		save_data = _create_new_game_save()
 	else:
-		save_data = _load_game_save()		
+		save_data = _load_game_save()
+	old_data = save_data
 	load_settings()
 
 	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
@@ -169,7 +170,7 @@ func _init() -> void:
 	
 	compute_values()
 
-func  _create_new_game_save() -> Dictionary:
+func _create_new_game_save() -> Dictionary:
 	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
 	var new_game_save_text := new_game_save_file.get_as_text()
 	new_game_save_file.close()
@@ -177,7 +178,6 @@ func  _create_new_game_save() -> Dictionary:
 	var save_file := FileAccess.open("user://save.json", FileAccess.WRITE)
 	save_file.store_line(new_game_save_text)
 	save_file.close()
-	print(new_game_save_text)
 	return JSON.parse_string(new_game_save_text)
 	
 func _load_game_save() -> Dictionary:
@@ -213,8 +213,7 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 			
 	return save_data
 			
-func _ready() -> void:
-	old_data = save_data
+func _ready() -> void:	
 	## if player opens the game for the first time (game_language is not chose yet)
 	use_sw_data = false
 	if game_language == "":	
@@ -241,12 +240,12 @@ func compute_values():
 		passives[passive["ID"]] = passive
 
 func save():
-	date = Time.get_datetime_string_from_system() 
+	save_data.date = Time.get_datetime_string_from_system()
 	var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
 	file.store_line(JSON.stringify(save_data))
 	file.close()
 	if use_sw_data == true :
-		await SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)
+		SilentWolf.Players.save_player_data(save_data.user_name, save_data)
 	compute_values()
 
 func load_settings():
@@ -270,5 +269,6 @@ func load_settings():
 
 func _exit_tree():
 	if use_sw_data == true :
-		await SilentWolf.Players.save_player_data(Steam.getPersonaName(), save_data)
+		SilentWolf.Players.save_player_data(save_data.user_name, save_data)
 		save_data = old_data
+
