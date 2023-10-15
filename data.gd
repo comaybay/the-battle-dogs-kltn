@@ -269,6 +269,5 @@ func load_settings():
 
 func _exit_tree():
 	if use_sw_data == true :
-		SilentWolf.Players.save_player_data(save_data.user_name, save_data)
 		save_data = old_data
 
