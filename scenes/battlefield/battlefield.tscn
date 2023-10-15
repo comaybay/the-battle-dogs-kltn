@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="2_aom8l"]
 [ext_resource type="PackedScene" uid="uid://q3xac7wpx0wx" path="res://scenes/battlefield/cat_tower/cat_tower.tscn" id="2_d2fcp"]
 [ext_resource type="PackedScene" uid="uid://cjhaavd1ipf1v" path="res://scenes/battlefield/land/land.tscn" id="2_wj8bi"]
-[ext_resource type="Texture2D" uid="uid://c8sa6uo4d7wdb" path="res://resources/battlefield_themes/green_grass/sky.png" id="3_nrxqs"]
+[ext_resource type="Texture2D" uid="uid://c8sa6uo4d7wdb" path="res://resources/battlefield_themes/winter/sky.png" id="3_nrxqs"]
 [ext_resource type="Script" path="res://scenes/battlefield/Camera2D.gd" id="4_67qqf"]
 [ext_resource type="PackedScene" uid="uid://lyrmnwxclfgn" path="res://scenes/battlefield/dog_tower/dog_tower.tscn" id="7_j5y50"]
 [ext_resource type="AudioStream" uid="uid://dm1ge42cv7vy7" path="res://resources/sound/battlefield/boss_drum.mp3" id="9_6ixii"]

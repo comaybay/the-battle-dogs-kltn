@@ -27,11 +27,11 @@ func _ready():
 	self.set_process_mode(0) 
 	hide_message()
 	render_board(sw_high_scores.scores,number,0)
-	render_board(sw_fastest_time.scores,1,number,true)
+	render_board(sw_fastest_time.scores,number,1,true)	
 	render_board(sw_victory_count.scores,number,2)
 	load_description(0)
 	
-	if sw_high_scores.scores.is_empty():	
+	if sw_high_scores.scores.is_empty() == true:	
 		add_no_scores_message()
 	
 
@@ -45,14 +45,15 @@ func _on_tab_container_tab_changed(tab):
 		add_no_scores_message()
 	load_description(tab)
 
-func render_board(scores: Array, local_scores: int,numb : int, time: bool = false) -> void:
+func render_board(scores : Array ,numb : int, local_scores: int, time: bool = false) -> void:
 	var list_score = scores
 	if time == false :
 		for score in list_score.slice(0,numb):
-			add_item(score.player_name, score.score,local_scores)
+			print("score1 : ",score)
+			add_item(score.player_name, score.score,local_scores)			
 	else : #add time scores
 		list_score.reverse()
-		for score in list_score.slice(0,numb):			
+		for score in list_score.slice(0,numb):
 			add_time_item(score.player_name, score.score)
 
 #Show ranking
@@ -60,10 +61,10 @@ func add_item(player_name: String, score_value: int, tab: int) -> void:
 	var item = ScoreItem.instantiate()
 	list_index += 1
 	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
-	item.get_node("Score").text = score_value
+	item.get_node("Score").text = str(score_value)
 	item.offset_top = list_index * 100
 	if tab == 0 :
-		$"VBoxContainer/Control/TabContainer/HighScores/MarginContainer/ScoreItemContainer".add_child(item)
+		$VBoxContainer/Control/TabContainer/HighScores/MarginContainer/ScoreItemContainer.add_child(item)
 	elif tab == 2:
 		$"VBoxContainer/Control/TabContainer/VictoryCount/MarginContainer/ScoreItemContainer".add_child(item)
 
