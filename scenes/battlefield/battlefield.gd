@@ -10,7 +10,7 @@ var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/vict
 var inbattle_sfx_idx: int
 var boss_audio: AudioStream
 var _player_data: BattlefieldPlayerData
-
+var time_batlle : float
 var _battlefield_data: Dictionary
 ## get battlefield data from .json file
 func get_battlefield_data() -> Dictionary: return _battlefield_data
@@ -38,6 +38,7 @@ func get_cat_power_scale() -> float:
 	return scale if scale != null else 1
 
 func _ready() -> void:
+	time_batlle = 0
 	if (
 		not Data.has_done_battlefield_basics_tutorial 
 		or not Data.has_done_battlefield_boss_tutorial
@@ -78,11 +79,16 @@ func _process(delta: float) -> void:
 	_player_data.update(delta)
 	
 func _show_win_ui():
+	$TimeBattle.stop()
+	var get_time = int(Time.get_ticks_msec() / 1000)
 	clean_up()
 	$Music.stream = VICTORY_AUDIO
-	$Music.play() 
-	add_child(VictoryGUI.instantiate())	
-	
+	$Music.play() 	
+	await add_child(VictoryGUI.instantiate())	
+	if (Data.use_sw_data == true) and (Data.passed_level == 13) :
+		Data.victory_count += 1 
+		SilentWolf.Scores.save_score(Data.save_data["user_name"],Data.victory_count, "victory_count")
+		SilentWolf.sw_save_score_time(Data.save_data["user_name"], get_time,"fastest_time")
 	# move the tutorial dog outside of gui
 	if _tutorial_dog != null:
 		_move_tutorial_dog()

@@ -33,7 +33,6 @@ func show_select_data_box():
 
 func _on_nut_bat_dau_pressed():
 	AudioPlayer.stop_custom_music()
-	
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
