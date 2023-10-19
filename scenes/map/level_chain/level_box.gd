@@ -6,6 +6,7 @@ var color_override: Color = 0xcc3300FF
 
 func _ready() -> void:
 	stylebox_override = get_theme_stylebox("pressed").duplicate()
+	pivot_offset = size / 2.0
 
 func setup(level_node: Level) -> void:	
 	level = level_node
@@ -32,3 +33,15 @@ func set_selected(selected: bool) -> void:
 
 func update_flag_position():
 	$Flag.position.x = size.x - 35
+
+
+var _pressed: bool = false
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		_pressed = event.pressed
+		
+		if not _pressed:
+			disabled = false
+		
+	if _pressed and event is InputEventMouseMotion:
+		disabled = true

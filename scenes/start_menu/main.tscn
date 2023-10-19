@@ -280,15 +280,6 @@ size_flags_horizontal = 4
 focus_mode = 0
 text = "@START_GAME"
 
-[node name="NutHuongDan" type="Button" parent="Khung/PhanCuoi"]
-visible = false
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-focus_mode = 0
-text = "@HELP"
-language = "vi"
-
 [node name="SettingsButton" type="Button" parent="Khung/PhanCuoi"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 50)
@@ -307,7 +298,8 @@ focus_mode = 0
 text = "@CREDIT"
 language = "vi"
 
-[node name="NutThoat" type="Button" parent="Khung/PhanCuoi"]
+[node name="QuitButton" type="Button" parent="Khung/PhanCuoi"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -321,5 +313,4 @@ libraries = {
 }
 
 [connection signal="pressed" from="Khung/PhanCuoi/NutBatDau" to="." method="_on_nut_bat_dau_pressed"]
-[connection signal="pressed" from="Khung/PhanCuoi/NutHuongDan" to="." method="_on_nut_huong_dan_pressed"]
-[connection signal="pressed" from="Khung/PhanCuoi/NutThoat" to="." method="_on_nut_thoat_pressed"]
+[connection signal="pressed" from="Khung/PhanCuoi/QuitButton" to="." method="_on_nut_thoat_pressed"]

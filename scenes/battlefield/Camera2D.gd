@@ -19,7 +19,7 @@ func _ready() -> void:
 	viewport_size = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
 	half_viewport_size =  viewport_size / 2
 	
-	var parent :Node = get_parent()
+	var parent :Node = get_tree().current_scene
 	limit_left = 0
 	limit_right = parent.stage_width
 	limit_bottom = LAND_HEIGHT

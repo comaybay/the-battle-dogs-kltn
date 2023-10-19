@@ -11,6 +11,9 @@ func _ready():
 	if not AudioPlayer.custom_music.playing:
 		AudioPlayer.play_custom_music(MAIN_THEME_AUDIO)
 	
+	if OS.get_name() == "Web":
+		%QuitButton.visible = false
+	
 	$AnimationPlayer.play("ready")
 	await $AnimationPlayer.animation_finished
 	
@@ -26,10 +29,6 @@ func _on_nut_bat_dau_pressed():
 func _on_nut_thoat_pressed():
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().quit()
-
-func _on_nut_huong_dan_pressed():
-	AudioPlayer.play_button_pressed_audio()
-	get_tree().change_scene_to_file("res://scenes/instruction/instruction.tscn")
 
 func _go_to_credits():
 	AudioPlayer.play_button_pressed_audio()
