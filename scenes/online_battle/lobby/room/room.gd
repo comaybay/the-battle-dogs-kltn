@@ -40,7 +40,7 @@ func _ready() -> void:
 			[CustomBattlefieldSettings.TYPE_STAGE_WIDTH, CustomBattlefieldSettings.DEFAULT_STAGE_WIDTH],
 			[CustomBattlefieldSettings.TYPE_DOG_TOWER_HEALTH, CustomBattlefieldSettings.DEFAULT_DOG_TOWER_HEALTH],
 			[CustomBattlefieldSettings.TYPE_MONEY_EFFICIENCY_LEVEL, CustomBattlefieldSettings.DEFAULT_EFFICIENCY_LEVEL],
-			[CustomBattlefieldSettings.TYPE_DOG_POWER_LEVEL, CustomBattlefieldSettings.DEFAULT_DOG_POWER_LEVEL],
+			[CustomBattlefieldSettings.TYPE_POWER_LEVEL, CustomBattlefieldSettings.DEFAULT_POWER_LEVEL],
 			[CustomBattlefieldSettings.TYPE_MUSIC, CustomBattlefieldSettings.DEFAULT_MUSIC],
 			[CustomBattlefieldSettings.TYPE_THEME, CustomBattlefieldSettings.DEFAULT_THEME]
 		]

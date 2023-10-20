@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://da1jal8d6xyt3"]
+[gd_scene load_steps=8 format=3 uid="uid://da1jal8d6xyt3"]
 
 [ext_resource type="Texture2D" uid="uid://4dgy5g3oucek" path="res://resources/images/dog_base/header.png" id="1_6iv5g"]
 [ext_resource type="Script" path="res://scenes/main_gui/main_gui.gd" id="1_64sa2"]
 [ext_resource type="Texture2D" uid="uid://ddd02ni0o7cr7" path="res://resources/images/dog_base/dogbase_background.png" id="1_gae5p"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_lv0ii"]
 [ext_resource type="Texture2D" uid="uid://b35jkv4tsll0t" path="res://resources/images/dog_base/footer.png" id="2_ts6wt"]
+[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="5_ah25s"]
 [ext_resource type="Texture2D" uid="uid://bnp7cvbuvml6e" path="res://resources/images/bone.png" id="5_gf3n3"]
 
 [node name="MainGUI" type="Control"]
@@ -71,6 +72,7 @@ theme_override_constants/separation = 10
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+shortcut = ExtResource("5_ah25s")
 text = "@BACK"
 
 [node name="TitleLabel" type="Label" parent="Khung/Header/Title/MarginContainer/PhanGiua"]

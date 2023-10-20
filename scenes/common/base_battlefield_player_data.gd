@@ -9,7 +9,7 @@ var team_dog_ids: Array
 var team_dog_scenes: Array[PackedScene]
 
 var team_skill_ids: Array
-var team_skills: Array[PackedScene]
+var team_skill_scenes: Array[PackedScene]
 
 var fmoney: float = 0:
 	set(value): fmoney = clamp(value, 0, _wallet) 
@@ -25,14 +25,11 @@ func get_efficiency_upgrade_price() -> int:
 	return _efficiency_upgrade_price	
 
 ## money per second
-var _money_rate: int
+var _money_rate: float
 
 var _efficiency_level: int
 func get_efficiency_level():
 	return _efficiency_level
-
-func _get_level_or_zero(dict: Variant) -> int:
-	return 0 if dict == null else dict.get('level', 0)
 	
 func update(delta: float):
 	var efficiency = 1 + ((_efficiency_level - 1) * 0.05)
@@ -45,3 +42,8 @@ func increase_efficiency_level() -> void:
 
 func _init() -> void:
 	push_error("ERROR: _init() NOT IMPLEMENTED")
+	
+## get skill level, if not unlocked returns 0
+func get_skill_level(skill_id: String) -> int:
+	push_error("ERROR: get_skill_level(skill_id: String) NOT IMPLEMENTED")
+	return 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b06hfe5wavkvw"]
+[gd_scene load_steps=14 format=3 uid="uid://b0ihidn3ggmh5"]
 
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_3ebhf"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_battlefield.gd" id="1_i8anq"]
@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://xny5rxpmau5y" path="res://scenes/online_battle/p2p_battlefield/p2p_land/p2p_land.tscn" id="3_p4hqa"]
 [ext_resource type="PackedScene" uid="uid://uh7hnntqdigc" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower_left.tscn" id="5_8afl3"]
 [ext_resource type="PackedScene" uid="uid://btcyop0so1g7h" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_gui.tscn" id="5_y62fp"]
+[ext_resource type="Texture2D" uid="uid://dl847jxlc5jay" path="res://resources/battlefield_themes/green_grass/sky.png" id="6_acvgk"]
 [ext_resource type="Script" path="res://scenes/battlefield/Camera2D.gd" id="6_cy4w7"]
-[ext_resource type="Texture2D" uid="uid://btso87xve0gsq" path="res://resources/battlefield_themes/green_grass/sky.png" id="6_kiamq"]
 [ext_resource type="PackedScene" uid="uid://inelp1r1r34q" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower_right.tscn" id="6_v6ew7"]
 [ext_resource type="AudioStream" uid="uid://dm1ge42cv7vy7" path="res://resources/sound/battlefield/boss_drum.mp3" id="7_t23ci"]
 [ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="11_ovxua"]
@@ -33,14 +33,14 @@ offset_top = -1064.0
 offset_right = 2312.0
 offset_bottom = 1384.0
 size_flags_horizontal = 4
-texture = ExtResource("6_kiamq")
+texture = ExtResource("6_acvgk")
 stretch_mode = 1
 
 [node name="Land" parent="." instance=ExtResource("3_p4hqa")]
 
-[node name="OnlineDogTowerLeft" parent="." instance=ExtResource("5_8afl3")]
+[node name="P2PDogTowerLeft" parent="." instance=ExtResource("5_8afl3")]
 
-[node name="OnlineDogTowerRight" parent="." instance=ExtResource("6_v6ew7")]
+[node name="P2PDogTowerRight" parent="." instance=ExtResource("6_v6ew7")]
 position = Vector2(1039, 0)
 
 [node name="Gui" parent="." instance=ExtResource("5_y62fp")]

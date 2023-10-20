@@ -18,6 +18,8 @@ func get_battlefield_data() -> Dictionary: return _battlefield_data
 var _tutorial_dog: BattlefieldTutorialDog = null
 
 func _enter_tree() -> void:
+	InBattle.in_p2p_battle = false
+	InBattle.in_request_mode = false
 	_battlefield_data = _load_battlefield_data()
 	_player_data = BattlefieldPlayerData.new()
 
@@ -32,6 +34,12 @@ func get_stage_width() -> int: return _battlefield_data['stage_width']
 func get_player_data() -> BaseBattlefieldPlayerData: return _player_data
 
 func get_theme() -> String: return _battlefield_data['theme']
+
+func get_dog_tower() -> DogTower:
+	return $DogTower
+	
+func get_cat_tower() -> CatTower:
+	return $CatTower
 
 func get_cat_power_scale() -> float:
 	var scale = _battlefield_data.get('power_scale')

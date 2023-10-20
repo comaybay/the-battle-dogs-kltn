@@ -34,14 +34,14 @@ offset_right = 324.0
 offset_bottom = 838.0
 theme_override_constants/separation = 25
 
-[node name="CharacterButton" parent="FirstRow" instance=ExtResource("2_3tx0w")]
+[node name="SkillButton" parent="FirstRow" instance=ExtResource("2_3tx0w")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_tbf2l")
 
-[node name="CharacterButton2" parent="FirstRow" instance=ExtResource("2_3tx0w")]
+[node name="SkillButton2" parent="FirstRow" instance=ExtResource("2_3tx0w")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_4k6lo")
 
-[node name="CharacterButton3" parent="FirstRow" instance=ExtResource("2_3tx0w")]
+[node name="SkillButton3" parent="FirstRow" instance=ExtResource("2_3tx0w")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_ckb02")

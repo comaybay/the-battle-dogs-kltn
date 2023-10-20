@@ -7,9 +7,8 @@ class_name BaseDog extends Character
 var is_user_control 
 var check_hover
 
-## online p2p game variables
-var _is_p2p_mode: bool = false
-var _is_server: bool = false
+## p2p variables
+var _sync_data: Dictionary
 
 func setup(global_position: Vector2) -> void:
 	$Arrow.position =  Vector2(20,0)
@@ -18,28 +17,32 @@ func setup(global_position: Vector2) -> void:
 	
 	var battlefield: BaseBattlefield = get_tree().current_scene
 	
-	# if is in online p2p battle
-	if battlefield is OnlineBattlefield:
-		_is_p2p_mode = true
-		_is_server = battlefield.is_server()
-	
-	if not _is_p2p_mode:
-		var dog_upgrade = Data.dogs[name_id]
-		
-		if dog_upgrade != null:
-			var scale = (1 + (dog_upgrade['level'] - 1) * 0.2)
-			damage *= scale  
-			health *= scale
+	var level = InBattle.get_dog_level(name_id)
+	var scale = 1 + ((level - 1) * 2.0 / 9.0)
+	damage *= scale  
+	health *= scale
 		
 	is_user_control = false
 	check_hover = 0
+	
 	super.setup(global_position)
 	
+	_sync_data = { 
+		"object_type": P2PObjectSync.ObjectType.DOG,
+		"instance_id": get_instance_id(),
+		"dog_id": name_id,
+		"character_type": character_type,
+	}
+	add_to_group(P2PObjectSync.SYNC_GROUP)
 
 func take_damage(ammount: int) -> void:
 	# allow take damage if is in single player mode or if is server
-	if not _is_p2p_mode or _is_server:
-		super.take_damage(ammount)
+	if InBattle.in_request_mode:
+		return
+		
+	super.take_damage(ammount)
+	if health <= 0:
+		remove_from_group("p2p_sync")
 
 func _on_mouse_entered():
 	check_hover = 1
@@ -79,3 +82,54 @@ func _process(delta):
 	else :
 		$Arrow.value = 0
 
+func get_p2p_sync_data() -> Dictionary:
+	_sync_data["position"] = position
+	_sync_data["health"] = health
+	_sync_data["multipliers"] = _multipliers
+	_sync_data["FSM"] = {
+		'state': get_FSM().get_current_state(),
+		'data': get_FSM().get_current_state_data()
+	}
+	
+	return _sync_data
+
+## dogs are create from dog tower which do not need to be setup manually
+func p2p_setup(_sync_data: Dictionary) -> void:
+	return
+
+var _attack_synced: bool = false
+func p2p_sync(sync_data: Dictionary) -> void:
+	position = sync_data['position']
+	
+	if health != sync_data['health']:
+		health = sync_data['health']
+		if is_past_knockback_health():
+			update_next_knockback_health()
+					
+		if Debug.is_debug_mode():
+			queue_redraw()
+	
+	var multipliers = sync_data['multipliers']
+	for type in multipliers:
+		set_multiplier(type, multipliers[type])
+	
+	var fsm_sync_data = sync_data['FSM']
+	var fsm = get_FSM()
+
+	# sync every state but IdleState 
+	if fsm_sync_data['state'] == "AttackState" and not _attack_synced:
+		_attack_synced = true
+		fsm.change_state(fsm_sync_data['state'])
+		
+	elif fsm_sync_data['state'] == "KnockbackState":
+		fsm.change_state(fsm_sync_data['state'], fsm_sync_data['data'])
+		
+	elif fsm_sync_data['state'] == "MoveState":
+		fsm.change_state(fsm_sync_data['state'])
+		
+	if fsm_sync_data['state'] != "AttackState":
+		_attack_synced = false
+
+func p2p_remove() -> void:
+	health = 0
+	knockback()

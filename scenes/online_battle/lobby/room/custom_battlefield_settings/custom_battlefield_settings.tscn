@@ -87,7 +87,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 min_value = 1.0
-max_value = 10.0
+max_value = 20.0
 value = 1.0
 
 [node name="MoneyEfficiencyValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
@@ -101,18 +101,18 @@ alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
-text = "@DOG_POWER_LEVEL"
+text = "@POWER_LEVEL"
 
-[node name="DogPowerSlider" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="PowerSlider" type="HSlider" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 min_value = 1.0
-max_value = 10.0
+max_value = 20.0
 value = 1.0
 
-[node name="DogPowerValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="PowerValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
 unique_name_in_owner = true
 layout_mode = 2
 

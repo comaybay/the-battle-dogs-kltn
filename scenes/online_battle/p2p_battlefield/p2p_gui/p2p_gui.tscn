@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_gui.gd" id="2_4obiv"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_guf6c"]
 [ext_resource type="PackedScene" uid="uid://bsad8f7goqbjv" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_spawn_buttons/p2p_spawn_buttons.tscn" id="2_yp16q"]
-[ext_resource type="PackedScene" uid="uid://b428rqk33viy3" path="res://scenes/battlefield/gui/skill_buttons/skill_buttons.tscn" id="4_nqp0h"]
+[ext_resource type="PackedScene" uid="uid://da3r4sj0ik6iq" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_skill_buttons/p2p_skill_buttons.tscn" id="4_hksxv"]
 [ext_resource type="PackedScene" uid="uid://dmdc60cjuki5p" path="res://scenes/battlefield/gui/efficiency_up_button/efficiency_up_button.tscn" id="5_ehgkl"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_efficiency_up_button.gd" id="6_5sgev"]
 [ext_resource type="PackedScene" uid="uid://mhk8vyyedlgu" path="res://scenes/battlefield/gui/pause_button/pause_button.tscn" id="6_hdrqg"]
@@ -25,7 +25,7 @@ grow_horizontal = 2
 scale = Vector2(0.35, 0.35)
 alignment = 1
 
-[node name="SpawnButtons" parent="HBoxContainer" instance=ExtResource("2_yp16q")]
+[node name="P2PSpawnButtons" parent="HBoxContainer" instance=ExtResource("2_yp16q")]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -56,7 +56,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 1
 
-[node name="SkillButtons" parent="HBoxContainer2" instance=ExtResource("4_nqp0h")]
+[node name="P2PSkillButtons" parent="HBoxContainer2" instance=ExtResource("4_hksxv")]
 unique_name_in_owner = true
 layout_mode = 2
 

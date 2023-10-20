@@ -12,7 +12,3 @@ func _ready() -> void:
 	$CollisionShape2D.shape.extents = Vector2(shape_extents_x, 20)
 	$CollisionShape2D.position.x = stage_width_with_margin / 2
 	$TextureRect.size.x = stage_width_with_margin 
-
-func spawn(scene: PackedScene) -> void:
-	var skill = scene.instantiate()
-	get_tree().current_scene.add_child(skill)

@@ -12,6 +12,7 @@ var _player_data: BaseBattlefieldPlayerData
 
 func setup(dog_tower: DogTower, player_data: BaseBattlefieldPlayerData):
 	%SpawnButtons.setup(dog_tower, player_data)
+	%SkillButtons.setup(dog_tower, player_data)
 	_player_data = player_data
 	
 func _ready() -> void:

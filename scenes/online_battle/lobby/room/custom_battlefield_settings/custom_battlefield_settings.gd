@@ -4,20 +4,20 @@ signal settings_changed(type: String, value: Variant)
 
 const DEFAULT_STAGE_WIDTH: int = 3000 
 const DEFAULT_DOG_TOWER_HEALTH: int = 5000 
-const DEFAULT_EFFICIENCY_LEVEL: int = 5 
-const DEFAULT_DOG_POWER_LEVEL: int = 5 
+const DEFAULT_EFFICIENCY_LEVEL: int = 10 
+const DEFAULT_POWER_LEVEL: int = 10
 const DEFAULT_MUSIC: String = "battlefield_theme1" 
 const DEFAULT_THEME: String = "green_grass" 
 
 const TYPE_STAGE_WIDTH := "stage_width"
 const TYPE_DOG_TOWER_HEALTH := "dog_tower_health"
 const TYPE_MONEY_EFFICIENCY_LEVEL := "efficiency_level"
-const TYPE_DOG_POWER_LEVEL := "dog_power_level"
+const TYPE_POWER_LEVEL := "power_level"
 const TYPE_MUSIC := "music"
 const TYPE_THEME := "theme"
 const TYPES: Array[String] = [
 		TYPE_STAGE_WIDTH, TYPE_DOG_TOWER_HEALTH, TYPE_MONEY_EFFICIENCY_LEVEL,
-		TYPE_DOG_POWER_LEVEL, TYPE_MUSIC, TYPE_THEME
+		TYPE_POWER_LEVEL, TYPE_MUSIC, TYPE_THEME
 ]
 
 const MUSIC_CODE_TO_NAME := {
@@ -40,12 +40,12 @@ func _ready() -> void:
 	%StageWidthSlider.value_changed.connect(_on_value_changed.bind(%StageWidthValue, TYPE_STAGE_WIDTH))
 	%TowerHealthSlider.value_changed.connect(_on_value_changed.bind(%TowerHealthValue, TYPE_DOG_TOWER_HEALTH))
 	%MoneyEfficiencySlider.value_changed.connect(_on_value_changed.bind(%MoneyEfficiencyValue, TYPE_MONEY_EFFICIENCY_LEVEL))
-	%DogPowerSlider.value_changed.connect(_on_value_changed.bind(%DogPowerValue, TYPE_DOG_POWER_LEVEL))
+	%PowerSlider.value_changed.connect(_on_value_changed.bind(%PowerValue, TYPE_POWER_LEVEL))
 	
 	%StageWidthValue.text = str(DEFAULT_STAGE_WIDTH)
 	%TowerHealthValue.text = str(DEFAULT_DOG_TOWER_HEALTH)
 	%MoneyEfficiencyValue.text = str(DEFAULT_EFFICIENCY_LEVEL)
-	%DogPowerValue.text = str(DEFAULT_DOG_POWER_LEVEL)
+	%PowerValue.text = str(DEFAULT_POWER_LEVEL)
 	%MusicLabel.text = "%s: " % tr("@MUSIC")
 	%ThemeLabel.text = "%s: " % tr("@THEME")
 	%MusicName.text = MUSIC_CODE_TO_NAME[DEFAULT_MUSIC]
@@ -65,7 +65,7 @@ func set_editable(editable: bool) -> void:
 	%StageWidthSlider.editable = editable
 	%TowerHealthSlider.editable = editable
 	%MoneyEfficiencySlider.editable = editable
-	%DogPowerSlider.editable = editable
+	%PowerSlider.editable = editable
 	%MusicOptions.visible = editable
 	%ThemeOptions.visible = editable
 	%MusicName.visible = !editable
@@ -89,8 +89,8 @@ func set_settings(type: String, value: Variant) -> void:
 		%TowerHealthSlider.set_value_no_signal(value)
 	elif type == TYPE_MONEY_EFFICIENCY_LEVEL:
 		%MoneyEfficiencySlider.set_value_no_signal(value)
-	elif type == TYPE_DOG_POWER_LEVEL:
-		%DogPowerSlider.set_value_no_signal(value)
+	elif type == TYPE_POWER_LEVEL:
+		%PowerSlider.set_value_no_signal(value)
 	elif type == TYPE_MUSIC:
 		var index: int = MUSIC_CODE_TO_NAME.keys().find(value)
 		%MusicOptions.select(index)

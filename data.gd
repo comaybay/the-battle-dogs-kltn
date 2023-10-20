@@ -172,13 +172,15 @@ func _init() -> void:
 
 func _create_new_game_save() -> Dictionary:
 	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
-	var new_game_save_text := new_game_save_file.get_as_text()
+	var new_save_data: Dictionary = JSON.parse_string(new_game_save_file.get_as_text())
 	new_game_save_file.close()
 	
-	var save_file := FileAccess.open("user://save.json", FileAccess.WRITE)
-	save_file.store_line(new_game_save_text)
-	save_file.close()
-	return JSON.parse_string(new_game_save_text)
+	new_save_data.date = Time.get_datetime_string_from_system()
+	var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+	file.store_line(JSON.stringify(save_data))
+	file.close()
+
+	return new_save_data
 	
 func _load_game_save() -> Dictionary:
 	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
@@ -188,6 +190,10 @@ func _load_game_save() -> Dictionary:
 	var file := FileAccess.open("user://save.json", FileAccess.READ)
 	var save_data: Dictionary = JSON.parse_string(file.get_as_text())
 	file.close()
+	
+	## add date to save file if empty (this is to make overwriting save files easier)
+	if not save_data.has("date"):
+		save_data['date'] = Time.get_datetime_string_from_system()
 	
 	save_data = _compare_and_update_save_file(new_game_save_data, save_data)	
 	
@@ -266,7 +272,6 @@ func load_settings():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, event)	
 	
-
 func _exit_tree():
 	if use_sw_data == true :
 		save_data = old_data

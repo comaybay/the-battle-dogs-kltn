@@ -45,7 +45,7 @@ _data = {
 "start": SubResource("Animation_javg2")
 }
 
-[node name="BatterDogExplosion" type="Node2D"]
+[node name="BatterDogExplosion" type="Node2D" groups=["p2p_sync"]]
 script = ExtResource("1_7m7ys")
 
 [node name="explosion" type="Sprite2D" parent="."]

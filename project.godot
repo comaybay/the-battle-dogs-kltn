@@ -24,6 +24,7 @@ GlobalControl="*res://global_control.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 Global="*res://global.gd"
 SteamUser="*res://steam_user.gd"
+InBattle="*res://in_battle.gd"
 
 [debug]
 

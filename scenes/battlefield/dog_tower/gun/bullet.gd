@@ -8,7 +8,6 @@ var _stop_following: bool = false
 var _direction: Vector2 = Vector2(0.5, 0.5) 
 var _target: BaseCat
 
-const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")
 func _ready():
 	var bullet_upgrade = Data.passives.get("gun_tower")
 	if bullet_upgrade != null:
@@ -39,7 +38,5 @@ func _physics_process(delta):
 				character.take_damage(dame)
 				queue_free()
 		
-		var hit_fx: HitFx = HitFx.instantiate()
-		get_tree().current_scene.get_node("EffectSpace").add_child(hit_fx)
-		hit_fx.global_position = global_position
+		InBattle.add_hit_effect(global_position)
 		queue_free()
