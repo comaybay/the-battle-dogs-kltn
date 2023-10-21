@@ -11,8 +11,13 @@ var viewport_size: Vector2
 var half_viewport_size: Vector2
 var _delta: float = 0
 
+## https://github.com/godotengine/godot-proposals/issues/685
+var _last_center_x: float = 0
+var _last_pos_x: float = 0
+
 func setup(camera_control_buttons: CameraControlButtons):
 	_camera_control_buttons = camera_control_buttons
+	_camera_control_buttons.dragged.connect(_handle_screen_drag)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,16 +39,30 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_delta = delta
 	
-	# see if user press buttons / keynoard
-	var left := int(_camera_control_buttons.is_move_left_on())
-	var right := int(_camera_control_buttons.is_move_right_on())
-	var direction := right - left
-	
 	position = get_screen_center_position()
-	position.x = position.x + MOVE_SPEED * direction * delta  	
+	# stop flick velocity if camera has reach it's limit position
+	if (
+		not is_equal_approx(position.x, _last_pos_x) 
+		and is_equal_approx(position.x, _last_center_x)
+	):
+		_camera_control_buttons.flick_velocity = 0
+
+	if _camera_control_buttons.is_dragging():
+		# dont do anything if is in dragging mode
+		pass
+	elif not is_zero_approx(_camera_control_buttons.flick_velocity):
+		position.x = position.x + _camera_control_buttons.flick_velocity * delta
+	else:
+		var left := int(_camera_control_buttons.is_move_left_on())
+		var right := int(_camera_control_buttons.is_move_right_on())
+		var direction := right - left
+		position.x = position.x + MOVE_SPEED * direction * delta 
+		
 	position.y = limit_bottom - half_viewport_size.y
 	position.y -= zoom.x * 200
-	
+	_last_center_x = get_screen_center_position().x
+	_last_pos_x = position.x
+			
 	var zoom_in := int(_camera_control_buttons.is_zoom_in_on())
 	var zoom_out := int(_camera_control_buttons.is_zoom_out_on())
 	var zoom_dir := zoom_in - zoom_out
@@ -56,3 +75,6 @@ func handle_zoom(direction: int, delta: float):
 
 func allow_user_input_camera_movement(state: bool) -> void:
 	set_process(state)
+
+func _handle_screen_drag(value: float) -> void:
+	position.x -= value

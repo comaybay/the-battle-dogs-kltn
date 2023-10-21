@@ -47,18 +47,14 @@ func _get_x_of(level_box: LevelBox):
 	return -box_position.x + (viewport_size.x / 2)
 
 var swiping = false
-var swipe_start
 var swipe_mouse_start
 var swipe_mouse_times = []
 var swipe_mouse_positions = []
-
-var scrolled: bool = false
 
 func _input(ev):
 	if ev is InputEventMouseButton:
 		if ev.pressed:
 			swiping = true
-			swipe_start = Vector2(position.x, position.y)
 			swipe_mouse_start = ev.position
 			swipe_mouse_times = [Time.get_ticks_msec()]
 			swipe_mouse_positions = [swipe_mouse_start]
@@ -88,10 +84,8 @@ func _input(ev):
 				tween.play()
 			
 			swiping = false
-			scrolled = false
 				
 	elif swiping and ev is InputEventMouseMotion:
-		scrolled = true
 		%HBoxContainer.position.x += ev.relative.x
 		%HBoxContainer.position.x = _x_clamp(%HBoxContainer.position.x)
 		swipe_mouse_times.append(Time.get_ticks_msec())
