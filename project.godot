@@ -15,6 +15,10 @@ run/main_scene="res://scenes/start_menu/Intro.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
+[audio]
+
+driver/mix_rate.web=44100
+
 [autoload]
 
 Data="*res://data.gd"

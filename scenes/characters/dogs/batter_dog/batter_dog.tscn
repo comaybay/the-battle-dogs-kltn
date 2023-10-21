@@ -745,7 +745,6 @@ resource_local_to_scene = true
 size = Vector2(192, 178)
 
 [node name="BatterDog" node_paths=PackedStringArray("attack_sprite") instance=ExtResource("1_wgfpp")]
-z_index = 40
 position = Vector2(2, 1)
 script = ExtResource("2_vko5u")
 name_id = "batter_dog"

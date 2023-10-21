@@ -92,7 +92,6 @@ resource_local_to_scene = true
 size = Vector2(192, 178)
 
 [node name="Dog" instance=ExtResource("1_wscv2")]
-z_index = 40
 position = Vector2(2, 1)
 name_id = "dog"
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dxqh31o16u528"]
+[gd_scene load_steps=10 format=3 uid="uid://dxqh31o16u528"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_ivu0g"]
 [ext_resource type="Texture2D" uid="uid://bxv6vquc0mpo8" path="res://scenes/characters/dogs/sword_dog/sword_dog.png" id="2_8ghqg"]
-[ext_resource type="AudioStream" uid="uid://doyuefw62qbco" path="res://resources/sound/battlefield/sword.mp3" id="3_1qucf"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -104,7 +103,6 @@ resource_local_to_scene = true
 size = Vector2(192, 219.5)
 
 [node name="SwordDog" instance=ExtResource("1_ivu0g")]
-z_index = 40
 position = Vector2(2, 1)
 name_id = "sword_dog"
 speed = 320
@@ -132,9 +130,5 @@ position = Vector2(-1, -23.25)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(191, 0)
+position = Vector2(95, 61.5)
 target_position = Vector2(90, 0)
-
-[node name="Danh" parent="FiniteStateMachine/AttackState" index="0"]
-stream = ExtResource("3_1qucf")
-volume_db = -7.0
