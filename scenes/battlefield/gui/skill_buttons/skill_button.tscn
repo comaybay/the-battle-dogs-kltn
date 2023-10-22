@@ -140,7 +140,6 @@ focus_mode = 0
 script = ExtResource("2_3smka")
 
 [node name="Icon" parent="." index="1"]
-texture = ExtResource("3_hk037")
 
 [node name="AnimationPlayer" parent="." index="3"]
 libraries = {
