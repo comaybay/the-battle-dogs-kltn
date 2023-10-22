@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://bu4jes5vivej0"]
+
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_0tkrk"]
+[ext_resource type="Script" path="res://scenes/battlefield/gui/item_buttons/item_buttons.gd" id="2_54fxh"]
+[ext_resource type="PackedScene" uid="uid://33bborh4tyop" path="res://scenes/battlefield/gui/skill_buttons/skill_button.tscn" id="3_oiqs4"]
+[ext_resource type="Script" path="res://scenes/battlefield/gui/item_buttons/item_button.gd" id="4_643yj"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_qf8to"]
+action = &"ui_skill_1"
+
+[sub_resource type="Shortcut" id="Shortcut_tbf2l"]
+events = [SubResource("InputEventAction_qf8to")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ccv6u"]
+action = &"ui_skill_2"
+
+[sub_resource type="Shortcut" id="Shortcut_4k6lo"]
+events = [SubResource("InputEventAction_ccv6u")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_wyxva"]
+action = &"ui_skill_3"
+
+[sub_resource type="Shortcut" id="Shortcut_ckb02"]
+events = [SubResource("InputEventAction_wyxva")]
+
+[node name="ItemButtons" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_0tkrk")
+script = ExtResource("2_54fxh")
+
+[node name="FirstRow" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1022.0
+offset_bottom = 246.0
+theme_override_constants/separation = 25
+
+[node name="CharacterButton" parent="FirstRow" instance=ExtResource("3_oiqs4")]
+layout_mode = 2
+shortcut = SubResource("Shortcut_tbf2l")
+script = ExtResource("4_643yj")
+
+[node name="CharacterButton2" parent="FirstRow" instance=ExtResource("3_oiqs4")]
+layout_mode = 2
+size_flags_horizontal = 0
+shortcut = SubResource("Shortcut_4k6lo")
+script = ExtResource("4_643yj")
+
+[node name="CharacterButton3" parent="FirstRow" instance=ExtResource("3_oiqs4")]
+layout_mode = 2
+shortcut = SubResource("Shortcut_ckb02")
+script = ExtResource("4_643yj")

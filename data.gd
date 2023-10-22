@@ -167,7 +167,7 @@ func _init() -> void:
 		skill_info[info['ID']] = info
 	file.close()
 	
-	file = FileAccess.open("res://resources/game_data/store.json", FileAccess.READ)
+	file = FileAccess.open("res://resources/game_data/item.json", FileAccess.READ)
 	var store_info_arr = JSON.parse_string(file.get_as_text())
 	for info in store_info_arr:
 		store_info[info['ID']] = info
