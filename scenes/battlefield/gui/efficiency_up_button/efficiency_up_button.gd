@@ -1,27 +1,37 @@
-extends TextureButton
+class_name EfficiencyUpButton extends TextureButton
+
+var _player_data: BaseBattlefieldPlayerData
 
 func _ready() -> void:
+	var battlefield := get_tree().current_scene as BaseBattlefield
+	_player_data = battlefield.get_player_data()
+	
 	$AnimationPlayer.play("ready")
-	$UpgradePriceLabel.text = "%s₵" % InBattle.get_efficiency_upgrade_price()
-	pressed.connect(_on_upgrade)
+	$UpgradePriceLabel.text = "%s₵" % _player_data.get_efficiency_upgrade_price()
+	pressed.connect(_on_upgrade_pressed)
 
 func _process(delta: float) -> void:
-	disabled = !InBattle.can_afford_efficiency_upgrade()
+	disabled = not can_afford_efficiency_upgrade()
 	
-	if InBattle.get_efficiency_level() == InBattle.MAX_EFFICIENCY_LEVEL:
+	if _player_data.get_efficiency_level() == _player_data.MAX_EFFICIENCY_LEVEL:
 		$Background.frame = 0
 	else:
 		$Background.frame = 1 if disabled else 0
 		
+func can_afford_efficiency_upgrade() -> bool:
+	return _player_data.get_money_int() >= _player_data.get_efficiency_upgrade_price()
 	
-func _on_upgrade() -> void:
-	if InBattle.get_efficiency_level() < InBattle.MAX_EFFICIENCY_LEVEL:
+func _on_upgrade_pressed() -> void:
+	if _player_data.get_efficiency_level() < _player_data.MAX_EFFICIENCY_LEVEL:
 		$AudioStreamPlayer.play()
-		InBattle.money -= InBattle.get_efficiency_upgrade_price()
-		InBattle.increase_efficiency_level()
-		$EfficiencyLevelLabel.text = "LV.%s" % InBattle.get_efficiency_level()
+		_player_data.fmoney -= _player_data.get_efficiency_upgrade_price()
+		_player_data.increase_efficiency_level()
+		_update_ui()
+
+func _update_ui() -> void:
+	$EfficiencyLevelLabel.text = "LV.%s" % _player_data.get_efficiency_level()
 		
-		if InBattle.get_efficiency_level() == InBattle.MAX_EFFICIENCY_LEVEL:
-			$UpgradePriceLabel.text = "MAX"
-		else:
-			$UpgradePriceLabel.text = "%s₵" % InBattle.get_efficiency_upgrade_price()
+	if _player_data.get_efficiency_level() == _player_data.MAX_EFFICIENCY_LEVEL:
+		$UpgradePriceLabel.text = "MAX"
+	else:
+		$UpgradePriceLabel.text = "%s₵" % _player_data.get_efficiency_upgrade_price()

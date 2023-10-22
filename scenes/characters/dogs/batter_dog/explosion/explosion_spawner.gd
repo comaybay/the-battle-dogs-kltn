@@ -2,17 +2,34 @@ extends Node
 
 const EXPLOSION_SCENE: PackedScene = preload("res://scenes/characters/dogs/batter_dog/explosion/batter_dog_explosion.tscn") 
 
-func setup(emitter: BaseDog) -> void:
-	var stage_witdh = InBattle.battlefield_data["stage_width"] + Land.OUTER_PADDING 
-	var explosion_position := Vector2(emitter.global_position.x + 200, emitter.get_bottom_global_position().y)
+func setup(start_global_position: Vector2, batter_damage: int, character_type: Character.Type) -> void:
+	var explosion_position := start_global_position
+	var destination_x: int
+	if character_type == Character.Type.DOG:
+		explosion_position.x += 200
+		destination_x = InBattle.get_battlefield().get_stage_width() + BaseBattlefield.TOWER_MARGIN * 2.5
+	else:
+		explosion_position.x -= 200
+		destination_x = -BaseBattlefield.TOWER_MARGIN * 0.5
 
 	await get_tree().create_timer(0.3, false).timeout
 	
-	while explosion_position.x <= stage_witdh:
-		await get_tree().create_timer(0.15, false).timeout
-		var explosion: BatterDogExplosion = EXPLOSION_SCENE.instantiate()
-		explosion.setup(explosion_position, emitter.damage / 10)
-		get_tree().current_scene.get_node("EffectSpace").add_child(explosion)
-		explosion_position.x += 400
-
+	if character_type == Character.Type.DOG:
+		while explosion_position.x <= destination_x:
+			await get_tree().create_timer(0.15, false).timeout
+			add_explostion(explosion_position, batter_damage / 10, character_type)
+			explosion_position.x += 400
+	else:
+		while explosion_position.x >= destination_x:
+			await get_tree().create_timer(0.15, false).timeout
+			add_explostion(explosion_position, batter_damage / 10, character_type)
+			explosion_position.x -= 400
+				
 	queue_free()
+	
+func add_explostion(position: Vector2, damage: float, character_type: Character.Type) -> void:
+	var explosion: BatterDogExplosion = EXPLOSION_SCENE.instantiate()
+	explosion.setup(position, damage, character_type)
+	InBattle.get_battlefield().get_effect_space().add_child(explosion)	
+
+

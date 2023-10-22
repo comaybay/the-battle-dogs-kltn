@@ -1,62 +1,66 @@
 extends Node
 
-var battlefield_data: Dictionary
+var in_p2p_battle: bool = false
 
-var _fmoney: float = 0 
-var money: int:
-	get: return int(_fmoney)
-	set(value): _fmoney = clamp(value, 0, _wallet) 
+## wether or not the player is in a p2p game, and is a client peer, 
+## which can only make requests and every actions in the game needs to be confirm by the server 
+var in_request_mode: bool = false
 
-const STAGE_WIDTH_MARGIN = 300
-const MAX_EFFICIENCY_LEVEL = 8
-const BASE_WALLET_CAPACITY = 100
-const BASE_EFFICIENCY_UPGRADE_PRICE = 40
-const BASE_MONEY_RATE = 15
+## preloaded scenes
+const SCENE_FX_HIT: String = "res://scenes/effects/fx_hit/hit.tscn"
+const SCENE_FLYING_SOUL: String = "res://scenes/effects/flying_soul/flying_soul.tscn"
+const SCENE_FX_ENERGY_EXPAND: String = "res://scenes/effects/energy_expand/energy_expand.tscn"
 
-var _wallet: int = BASE_WALLET_CAPACITY
-func get_wallet_capacity():
-	return _wallet
+## load when needed scene
+const SCENE_FIRE_BALL: String = "res://scenes/skills/fire_ball/ball.tscn"
+const SCENE_HEALING: String = "res://scenes/skills/healing/healing.tscn"
 
-var _efficiency_upgrade_price = BASE_EFFICIENCY_UPGRADE_PRICE
-func get_efficiency_upgrade_price() -> int:
-	return _efficiency_upgrade_price	
+var _packed_scenes = {
+	SCENE_FX_HIT: preload(SCENE_FX_HIT),
+	SCENE_FLYING_SOUL: preload(SCENE_FLYING_SOUL),
+	SCENE_FX_ENERGY_EXPAND: preload(SCENE_FX_ENERGY_EXPAND),
+}
 
-## money per second
-var _money_rate: int = BASE_MONEY_RATE
+## get packed scene from cache, will load packed scene and returns it if it does not cache it yet
+func get_packed_scene(scene_path: String) -> PackedScene:
+	if not _packed_scenes.has(scene_path):
+		_packed_scenes[scene_path] = load(scene_path)
+		
+	return _packed_scenes[scene_path] 
+		
+## add a hit effect to the battlefield
+func add_hit_effect(global_position: Vector2) -> FXHit:	
+	var fx_hit := InBattle.get_packed_scene(InBattle.SCENE_FX_HIT).instantiate() as FXHit
+	get_tree().current_scene.get_node("EffectSpace").add_child(fx_hit)
+	fx_hit.global_position = global_position
+	return fx_hit
 
-var _efficiency_level: int = 1
-func get_efficiency_level():
-	return _efficiency_level
+func get_battlefield() -> BaseBattlefield:
+	return get_tree().current_scene as BaseBattlefield
 
-func reset():
-	_fmoney = 0
-	_wallet = int(BASE_WALLET_CAPACITY * (1 + _get_level_or_zero(Data.passives.get('wallet_capacity')) * 0.5))
-	_money_rate = int(BASE_MONEY_RATE * (1 + _get_level_or_zero(Data.passives.get('money_efficiency')) * 0.1))
-	_efficiency_upgrade_price = BASE_EFFICIENCY_UPGRADE_PRICE * (1 + _get_level_or_zero(Data.passives.get('money_efficiency')) * 0.1)
-	_efficiency_level = 1
+func get_player_data() -> BaseBattlefieldPlayerData:
+	return get_battlefield().get_player_data()
 	
-func _get_level_or_zero(dict: Variant) -> int:
-	return 0 if dict == null else dict.get('level', 0)
+## only works if is in p2p mode
+func get_opponent_data() -> P2PBattlefieldPlayerData:
+	return (get_battlefield() as OnlineBattlefield)._opponent_player_data
 	
-func update(delta: float):
-	var efficiency = 1 + ((_efficiency_level - 1) * 0.05)
-	_fmoney = min(_fmoney + (_money_rate * efficiency * delta), _wallet)
-
-func load_battlefield_data() -> Dictionary:
-	var file = FileAccess.open("res://resources/battlefield_data/%s.json" % Data.selected_battlefield_id, FileAccess.READ)
-	battlefield_data = JSON.parse_string(file.get_as_text())
-	battlefield_data['stage_width'] += STAGE_WIDTH_MARGIN * 2
-	file.close()
-	return battlefield_data
-
-func increase_efficiency_level() -> void:
-	_efficiency_level += 1
-	_wallet *= 2
-	_efficiency_upgrade_price *= 2
+## Helper function to get skill level of player or enemy depeneding on the given 'skill_user' 
+func get_skill_level(skill_id: String, skill_user: Character.Type) -> int:
+	if not in_p2p_battle:
+		return get_player_data().get_skill_level(skill_id)
+		
+	var battlefield := get_battlefield() as OnlineBattlefield
+	var player_data: P2PBattlefieldPlayerData
+	if skill_user == Character.Type.DOG:
+		player_data = battlefield.get_dog_tower_left().get_player_data()
+	else:
+		player_data = battlefield.get_dog_tower_right().get_player_data()
 	
-func can_afford_efficiency_upgrade() -> bool:
-	return money >= get_efficiency_upgrade_price()
+	return player_data.get_skill_level(skill_id)
 
-func get_cat_power_scale() -> float:
-	var scale = battlefield_data.get('power_scale')
-	return scale if scale != null else 1
+func get_dog_level(dog_id: String) -> int:
+	if not in_p2p_battle:
+		return Data.dogs[dog_id]['level']
+	
+	return int(SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_POWER_LEVEL))

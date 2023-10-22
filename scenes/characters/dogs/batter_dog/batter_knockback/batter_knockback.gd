@@ -4,20 +4,26 @@ const ENERGY_EXPAND_SCENE: PackedScene = preload("res://scenes/effects/energy_ex
 
 func setup(emitter: BaseDog) -> void:
 	var effect: Node2D = ENERGY_EXPAND_SCENE.instantiate()
-	effect.setup("on_emitter")
-	var effect_space: Node2D = get_tree().current_scene.get_node("EffectSpace")
-	effect.global_position = emitter.get_center_global_position()
+	var effect_space: = InBattle.get_battlefield().get_effect_space()
+	
 	effect_space.add_child(effect)
-	var cats: Array[Node] = get_tree().get_nodes_in_group("cats")
+	effect.setup(emitter.get_center_global_position(), "on_emitter")
+	
+	var enemies: Array[Node]
+	if emitter.character_type == Character.Type.DOG:
+		enemies = get_tree().get_nodes_in_group("cats")
+	else:
+		# in pvp battle, Batter Dog that are spawn on the right side dog tower
+		# will act as "Cat" character type
+		enemies = get_tree().get_nodes_in_group("dogs")
 	
 	$DrumSound.play()
 	
-	for cat in cats:
-		cat.knockback()	
-		var effect_on_cat: Node2D = ENERGY_EXPAND_SCENE.instantiate()
-		effect_on_cat.setup("on_cat")
-		effect_on_cat.global_position = cat.global_position
-		effect_space.add_child(effect_on_cat) 
+	for enemy in enemies:
+		enemy.knockback()	
+		var effect_on_enemy: Node2D = ENERGY_EXPAND_SCENE.instantiate()
+		effect_space.add_child(effect_on_enemy) 
+		effect_on_enemy.setup(enemy.global_position, "on_subject")
 		
 	await $DrumSound.finished
 	queue_free()

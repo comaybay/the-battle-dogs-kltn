@@ -8,7 +8,9 @@ keys,vi,en
 @SKIP,Bỏ qua,Skip
 @BACK,< Quay lại,< Back
 @EXPEDITION,Viễn chinh !!!,Expedition !!!
-@UPGRADE,"Nâng cấp",Upgrade
+@UPGRADE,"Nâng cấp
+",Upgrade
+@RANKING,Bảng xếp hạng,Rankings
 @UNLOCK,Mở khóa,Unlock
 @STORE,Cửa hàng,Store
 @DOG_BASE_TITLE,Căn cứ Chó - Hành tinh Doggo,Dog Base - Planet Doggo
@@ -91,3 +93,13 @@ keys,vi,en
 @NO,Không,No
 @OK,Ok,Ok
 @NEED_LOGGED_IN_WITH_STEAM,Chỉ chơi được nếu bạn đã đăng nhập vào tài khoản Steam,Only available if you are logged in with Steam
+@HIGHSCORE,Điểm ,High score
+@FASTESTTIME,Thời gian,Time score
+@HIGHSCORE_DESCRIPTION,Bảng xếp hạng người chơi có số điểm online cao nhất,Ranking table of players with the highest online score
+@FASTESTTIME_DESCRIPTION,Bảng xếp hạng người chơi hoàn thành màn cuối với thời gian nhanh nhất,Ranking table of players completing the final stage with the fastest time
+@NO,Có,Yes
+@SELECT_PLAYER_DATA?,Bạn muốn sử dụng dữ liệu từ Steam hay máy tính (Lưu ý: hành động này sẽ xóa dữ hiện có trong máy tính hoặc Steam của bạn),Do you like to use data from Steam or computer (This action will delete data from your computer or your Steam)
+@VICTORYCOUNT,Hoàn thành,Victory
+@VICTORYCOUNT_DESCRIPTION,Bảng xếp hạng người chơi có số lần hoàn thành màn cuối nhiều lần nhất,Leaderboard for players who have completed the final level the most times
+@COMPUTER,Máy tính,Computer
+@STEAM,Steam,Steam

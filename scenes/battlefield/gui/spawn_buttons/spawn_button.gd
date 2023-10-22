@@ -1,20 +1,21 @@
-extends Button
+class_name SpawnButton extends Button
 
-var dog_tower
-var dog_scene: PackedScene
-var is_active: bool
-
+var dog_id: String
 var spawn_price: int
 var spawn_type: String
+var spawn_time: float
 var spawn_input_action: String
 
+var is_active: bool
+var _dog_tower: BaseDogTower
+var _player_data: BaseBattlefieldPlayerData
 var _spawn_dog: BaseDog
 
 func is_spawn_ready() -> bool:
 	return $SpawnTimer.is_stopped()
 
 func can_afford_dog():
-	return InBattle.money >= spawn_price
+	return _player_data.get_money_int() >= spawn_price
 
 func can_spawn():
 	var result := can_afford_dog() and is_spawn_ready() and is_active
@@ -24,23 +25,25 @@ func can_spawn():
 		
 	return result
 
-func setup(name_id: String, input_action: String, is_active: bool) -> void:
+func setup(dog_id: String, input_action: String, is_active: bool, dog_tower: BaseDogTower, player_data: BaseBattlefieldPlayerData) -> void:
+	self.dog_id = dog_id 
 	set_active(is_active)
+	_dog_tower = dog_tower
+	_player_data = player_data
 	spawn_input_action = input_action
-	spawn_type = Data.dog_info[name_id]['spawn_type'] 	
+	spawn_type = Data.dog_info[dog_id]['spawn_type'] 	
 		
-	$Icon.texture = load("res://resources/icons/%s_icon.png" % name_id)
-	dog_scene = load("res://scenes/characters/dogs/%s/%s.tscn" % [name_id, name_id])
+	$Icon.texture = load("res://resources/icons/%s_icon.png" % dog_id)
 
-	var spawn_time: float = Data.dog_info[name_id]['spawn_time']
+	spawn_time = Data.dog_info[dog_id]['spawn_time']
 	if spawn_time > 0:
-		$SpawnTimer.wait_time = Data.dog_info[name_id]['spawn_time']
+		$SpawnTimer.wait_time = Data.dog_info[dog_id]['spawn_time']
 	
 	$SpawnTimer.timeout.connect(_on_spawn_ready)
 	
-	spawn_price = Data.dog_info[name_id]['spawn_price']
+	spawn_price = Data.dog_info[dog_id]['spawn_price']
 	$MoneyLabel.text = str(spawn_price) + "₵"
-	pressed.connect(_on_pressed)
+	pressed.connect(_on_spawn_pressed)
 	$AnimationPlayer.play("ready")
 	set_process(true)
 	set_process_input(true)
@@ -56,35 +59,46 @@ func _ready() -> void:
 	$MoneyLabel.visible = false
 	$ProgressBar.visible = false
 	$AnimationPlayer.play("empty")
-	dog_tower = get_tree().current_scene.get_node("DogTower")
 	set_process(false)
 	set_process_input(false)
-
-func _on_spawn_ready() -> void:
-	$ProgressBar.visible = false
 	
-func _process(delta: float) -> void:
-	self.disabled = !can_spawn()
-	$Background.frame = 0 if can_spawn() else 1	
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(spawn_input_action) and can_spawn():
 		spawn_dog()
 			
-func _on_pressed() -> void:
+func _on_spawn_pressed() -> void:
 	spawn_dog()
 	
-func spawn_dog() -> void:
+func spawn_dog() -> BaseDog:
+
+	_player_data.fmoney -= spawn_price
+	_spawn_dog = _dog_tower.spawn(dog_id)
+
+	_start_recharge_ui()
+	
+	return _spawn_dog
+
+func _start_recharge_ui() -> void:
 	self.disabled = true
-
-	InBattle.money -= spawn_price
-	_spawn_dog = dog_tower.spawn(dog_scene)
-
 	$ProgressBar.visible = true
 	$Background.frame = 1
-	var tween := create_tween()
-	tween.tween_method(_tween_progress, 0, 100, $SpawnTimer.wait_time);
 	$SpawnTimer.start()
+	
+func _on_spawn_ready() -> void:
+	$ProgressBar.visible = false
+	self.disabled = not can_spawn()
+	$Background.frame = 0 if can_spawn() else 1	
 
-func _tween_progress(value: float) -> void:
-	$ProgressBar.value = value
+func _process(delta: float) -> void:
+	if $ProgressBar.visible:
+		var elapsed_time = spawn_time - $SpawnTimer.time_left	
+		
+		var tween = create_tween()
+		var value = tween.interpolate_value(
+			0.0, 100.0, elapsed_time, spawn_time, Tween.TRANS_LINEAR, Tween.EASE_IN
+		)
+		$ProgressBar.value = value
+		tween.kill()
+	
+	self.disabled = not can_spawn()
+	$Background.frame = 0 if can_spawn() else 1	

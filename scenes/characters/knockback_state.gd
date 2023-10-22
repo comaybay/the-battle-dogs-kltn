@@ -30,7 +30,7 @@ func exit() -> void:
 		character.set_collision_layer_value(3, true) 
 		
 # called every frame when the state is active
-func update(delta: float) -> void:
+func physics_update(delta: float) -> void:
 	if not character.is_on_floor():
 		character.velocity.y += character.gravity * delta
 	else:
@@ -44,7 +44,10 @@ func update(delta: float) -> void:
 			if character.health <= 0:
 				transition.emit("DieState")
 			else:
-				transition.emit("MoveState")
+				if character is BaseDog and character.is_user_control == true:
+					transition.emit("UserMoveState")
+				else: 
+					transition.emit("MoveState")
 		
 	character.move_and_slide() 
 

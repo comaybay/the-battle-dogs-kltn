@@ -1,7 +1,7 @@
 {
   "theme": "night",
   "music": "battlefield_theme_rush2",
-  "stage_width": 4500,
+  "stage_width": 3700,
   "cat_tower_health": 12000,
   "reward_bone": 200000,
   "power_scale": 1.5,

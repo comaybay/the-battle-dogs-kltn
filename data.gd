@@ -5,13 +5,27 @@ signal music_volume_changed(value: int)
 signal sound_fx_volume_changed(value: int)
 signal mute_music_changed(mute: bool)
 signal mute_sound_fx_changed(mute: bool)
+signal select_data
 
+var old_data: Dictionary
 var save_data: Dictionary
+var silentwolf_data : Dictionary
+var use_sw_data : bool
+var data_notifi : bool:
+	get: return true
+	set(value): data_notifi = value
+var user_name: String:
+	get: return save_data['user_name']
+	set(value): save_data['user_name'] = value
+
+var date: String:
+	get: return save_data['date']		
+	set(value): save_data['date'] = value	
 
 var bone: int:
-	get: return save_data['bone']		
+	get: return save_data["bone"]
 	set(value): 
-		save_data['bone'] = value
+		save_data["bone"] = value
 		bone_changed.emit(value)		
 
 var dog_food: int:
@@ -127,7 +141,7 @@ func _init() -> void:
 		save_data = _create_new_game_save()
 	else:
 		save_data = _load_game_save()
-		
+	old_data = save_data
 	load_settings()
 
 	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
@@ -158,14 +172,15 @@ func _init() -> void:
 
 func _create_new_game_save() -> Dictionary:
 	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
-	var new_game_save_text := new_game_save_file.get_as_text()
+	var new_save_data: Dictionary = JSON.parse_string(new_game_save_file.get_as_text())
 	new_game_save_file.close()
 	
-	var save_file := FileAccess.open("user://save.json", FileAccess.WRITE)
-	save_file.store_line(new_game_save_text)
-	save_file.close()
-	
-	return JSON.parse_string(new_game_save_text)
+	new_save_data.date = Time.get_datetime_string_from_system()
+	var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
+	file.store_line(JSON.stringify(save_data))
+	file.close()
+
+	return new_save_data
 	
 func _load_game_save() -> Dictionary:
 	var new_game_save_file := FileAccess.open("res://resources/new_game_save.json", FileAccess.READ)
@@ -176,7 +191,11 @@ func _load_game_save() -> Dictionary:
 	var save_data: Dictionary = JSON.parse_string(file.get_as_text())
 	file.close()
 	
-	save_data = _compare_and_update_save_file(new_game_save_data, save_data)
+	## add date to save file if empty (this is to make overwriting save files easier)
+	if not save_data.has("date"):
+		save_data['date'] = Time.get_datetime_string_from_system()
+	
+	save_data = _compare_and_update_save_file(new_game_save_data, save_data)	
 	
 	file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	file.store_line(JSON.stringify(save_data))
@@ -200,8 +219,9 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 			
 	return save_data
 			
-func _ready() -> void:
+func _ready() -> void:	
 	## if player opens the game for the first time (game_language is not chose yet)
+	use_sw_data = false
 	if game_language == "":	
 		get_tree().change_scene_to_file.call_deferred("res://scenes/new_game_preferences/new_game_preferences.tscn")
 	
@@ -226,9 +246,12 @@ func compute_values():
 		passives[passive["ID"]] = passive
 
 func save():
-	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
+	save_data.date = Time.get_datetime_string_from_system()
+	var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
 	file.store_line(JSON.stringify(save_data))
 	file.close()
+	if use_sw_data == true :
+		SilentWolf.Players.save_player_data(save_data.user_name, save_data)
 	compute_values()
 
 func load_settings():
@@ -249,3 +272,7 @@ func load_settings():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, event)	
 	
+func _exit_tree():
+	if use_sw_data == true :
+		save_data = old_data
+

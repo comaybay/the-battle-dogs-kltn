@@ -1,7 +1,7 @@
 {
   "theme": "fall",
   "music": "battlefield_theme2",
-  "stage_width": 4000,
+  "stage_width": 3200,
   "cat_tower_health": 2000,
   "reward_bone": 20000,
   "spawn_patterns": [

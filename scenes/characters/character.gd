@@ -2,11 +2,29 @@
 extends CharacterBody2D
 class_name Character
 
-enum Type { DOG, ENEMY }
+signal knockbacked
+signal zero_health
 
-## 0 for dog, 1 for enemy
-@export var character_type: int = Type.DOG
-@export var speed: int = 120 # toc do di chuyen
+enum Type { DOG, CAT }
+
+## Multiplier will affect the character's resulting output (such as damage inflicted, movement speed, etc) 
+enum MultiplierTypes { DAMAGE, DAMAGE_TAKEN, SPEED, ATTACK_SPEED }
+var _multipliers: Dictionary = {
+	MultiplierTypes.DAMAGE: 1.0,
+	MultiplierTypes.DAMAGE_TAKEN: 1.0,
+	MultiplierTypes.SPEED: 1.0,
+	MultiplierTypes.ATTACK_SPEED: 1.0
+}
+
+## 0 for dog, 1 for cat
+@export var character_type: Type = Type.DOG:
+	set(val):
+		character_type = val
+		notify_property_list_changed()  
+		queue_redraw()
+		
+@export var speed: int = 120:
+	get: return speed * _multipliers[MultiplierTypes.SPEED]
 
 ## if not null, will be use for attack collision detection
 ## and will ignore the "attack range" and "attack area range" properties when attacking
@@ -37,17 +55,24 @@ enum Type { DOG, ENEMY }
 ## check what frame should an attack occurr when playing the attack animation
 @export var attack_sprite: Sprite2D = null
 @export var attack_frame: int = 12
-@export var health: int = 160 # mau
-@export var damage: int = 20 # sat thuong
-@export var knockbacks: int = 3
-@export var sound_danh = "res://resources/sound/danh nhau/Tieng-bup.mp3"
+@export var health: int = 160 
 
+@export var damage: int = 20:
+	get: return int(damage * _multipliers[MultiplierTypes.DAMAGE])
+	
+@export var knockbacks: int = 3
+
+	
 @onready var n_RayCast2D := $RayCast2D as RayCast2D
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
-@onready var n_Sprite2D := $Sprite2D as Sprite2D
+@onready var n_Sprite2D := $CharacterAnimation/Character as Sprite2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
 
-## position where effect for a character should take place 
+func get_character_animation_node() -> Node2D:
+	return $CharacterAnimation
+
+## A general position where effect for a character should take place (example: hit effect). 
+## Use this when unsure where the effect should be at
 var effect_global_position: Vector2:
 	get: return n_RayCast2D.global_position
 
@@ -58,21 +83,26 @@ var max_health: int
 var next_knockback_health: int
 var collision_rect: Rect2
 
-func _ready() -> void:
+func setup(global_position: Vector2) -> void:
+	self.global_position = global_position
 	_reready()
-	
+
+func _ready() -> void:
 	if not Engine.is_editor_hint():
-		$AnimationPlayer.play("move")
-		
 		## add random sprite offset for better visibility when characters are stacked on eachother
 		var rand_y: int = randi_range(-20, 20)
-		$Sprite2D.position += Vector2(randi_range(-20, 20), rand_y)
+		$CharacterAnimation.position += Vector2(randi_range(-20, 20), rand_y)
 		## render stuff correctly
 		z_index = rand_y + 20
+		_reready()
 		
 	if Engine.is_editor_hint():
-		property_list_changed.connect(queue_redraw)
-	
+		property_list_changed.connect(
+			func():
+				_reready()
+				queue_redraw()
+		)
+		
 func _reready():
 	# config 
 	max_health = health
@@ -90,10 +120,28 @@ func _reready():
 	
 	if character_type == Type.DOG:
 		n_RayCast2D.position.x += collision_rect.size.x
-	
-	if custom_attack_area != null:
-		custom_attack_area.disable_mode
+		n_RayCast2D.set_collision_mask_value(2, false)
+		n_RayCast2D.set_collision_mask_value(6, false)
+		n_RayCast2D.set_collision_mask_value(3, true)
+		n_RayCast2D.set_collision_mask_value(5, true)
 		
+		set_collision_mask_value(6, false)
+		set_collision_mask_value(5, true)
+		
+		set_collision_layer_value(2, true)
+		set_collision_layer_value(3, false)
+	else:
+		n_RayCast2D.set_collision_mask_value(2, true)
+		n_RayCast2D.set_collision_mask_value(6, true)
+		n_RayCast2D.set_collision_mask_value(3, false)
+		n_RayCast2D.set_collision_mask_value(5, false)
+
+		set_collision_mask_value(6, true)
+		set_collision_mask_value(5, false)
+		
+		set_collision_layer_value(2, false)
+		set_collision_layer_value(3, true)
+	
 ## get global position of the character's bottom
 func get_bottom_global_position() -> Vector2:
 	return Vector2(
@@ -126,7 +174,7 @@ func _draw() -> void:
 		var default_font_size := 42
 		var debug_string := "Attack type: %s" % ("single target" if is_single_target else "area attack") + "\n%s/%s" % [health, max_health] 
 		var character_size := n_Sprite2D.get_rect().size
-		draw_multiline_string(default_font, Vector2(0, $Sprite2D.position.y - (character_size.y / 2) - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
+		draw_multiline_string(default_font, Vector2(0, n_Sprite2D.position.y - (character_size.y / 2) - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
 
 	if not Engine.is_editor_hint() and Debug.is_debug_mode():
 		var rect: Rect2 = $CollisionShape2D.shape.get_rect()
@@ -146,74 +194,53 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return warnings
 	
 func take_damage(ammount: int) -> void:
-	health -= ammount
+	health -= ammount * _multipliers[MultiplierTypes.DAMAGE_TAKEN]
+	if is_past_knockback_health():
+		if health > 0:
+			update_next_knockback_health()
+		else:
+			zero_health.emit()
+			
+		knockback()
+	
 	if Debug.is_debug_mode():
 		queue_redraw()
-	
-	if _is_pass_knockback_health():
-		if health > 0:
-			while _is_pass_knockback_health():
-				next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
-			knockback()
-		else:
-			knockback(1.25) 
 
-func effect_reduce(effect : String , number : float  = 1, time : float = 0) -> void: # gay anh huong trong time
-	if effect == "speed" :
-		speed = speed * number 
-		n_AnimationPlayer.speed_scale = 1 * number
-	elif effect ==  "damage" :
-		damage = damage * number
-	elif effect ==  "attack_cooldown" :
-		attack_cooldown = attack_cooldown / number
-	elif effect ==  "attack_area_range" :
-		attack_area_range = attack_area_range * number
-	elif effect ==  "health" :
-		health = health * number
+## Set multiplier for a property [/br]
+## This can be use to increase/decrease dog power such as damage, speed, etc. [/br]
+## multiplier: this multipler will affect the base value of the character,
+## set to 1 to reset property value back to normal 
+func set_multiplier(type: MultiplierTypes, multiplier: float) -> void:
+	_multipliers[type] = multiplier
 	
-	await get_tree().create_timer(time, false).timeout
-	
-	if effect == "speed" :
-		speed = speed / number 
-		n_AnimationPlayer.speed_scale = 1 
-	elif effect ==  "damage" :
-		damage = damage / number
-	elif effect ==  "attack_cooldown" :
-		attack_cooldown = attack_cooldown * number
-	elif effect ==  "attack_area_range" :
-		attack_area_range = attack_area_range / number
-	elif effect ==  "health" :
-		health = health / number
-	
+	if type == MultiplierTypes.ATTACK_SPEED:
+		n_AttackCooldownTimer.wait_time = attack_cooldown * multiplier
+		$AnimationPlayer.speed_scale = multiplier
+		
+func reset_multipliers() -> void:
+	for type in _multipliers:
+		_multipliers[type] = 1.0
+		
+	n_AttackCooldownTimer.wait_time = attack_cooldown
+	$AnimationPlayer.speed_scale = 1.0
 
-func _is_pass_knockback_health():
+func is_past_knockback_health() -> bool:
 	return health <= next_knockback_health
-	
 
-func powerUp(types , number : float, time : float) :
-	for type in types :
-		if (type == "attack_cooldown"):
-			attack_cooldown = attack_cooldown / number
-		if (type == "health"):
-			health = health * number
-		if (type == "damage") :
-			damage = damage * number
-		if (type == "speed") :
-			speed = speed * number
-	await get_tree().create_timer(time, false).timeout
-	for type in types :
-		if (type == "attack_cooldown"):
-			attack_cooldown = attack_cooldown * number
-		if (type == "health"):
-			health = health / number
-		if (type == "damage") :
-			damage = damage / number
-		if (type == "speed") :
-			speed = speed / number
+func update_next_knockback_health() -> void:	
+	while is_past_knockback_health():
+		next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
 
 func knockback(scale: float = 1):
+	if health <= 0:
+		# override scale when character is about to die
+		scale = max(1.25, scale)
+	
 	$FiniteStateMachine.change_state("KnockbackState", {"scale": scale})	
+	knockbacked.emit()
 	
 func kill():
 	$FiniteStateMachine.change_state("DieState")	
 
+func get_FSM() -> FSM:
+	return $FiniteStateMachine

@@ -20,16 +20,15 @@ knockbacks = 6
 [node name="AttackCooldownTimer" parent="." index="0"]
 wait_time = 0.01
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="Character" parent="CharacterAnimation" index="0"]
 texture = ExtResource("2_j1rjt")
 hframes = 3
 vframes = 4
-frame = 7
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_m5olg")
 
 [node name="RayCast2D" parent="." index="4"]
-position = Vector2(-56, 0)
+position = Vector2(-56, 39)
 target_position = Vector2(-20, 0)

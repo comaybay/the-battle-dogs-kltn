@@ -4,7 +4,6 @@ extends FSMState
 @onready var character: Character = owner
 var start_attack := false
 var done_attack := false
-const HitFx := preload("res://scenes/effects/hit_fx/hit_fx.tscn")
 
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
@@ -22,11 +21,12 @@ func physics_update(_delta: float) -> void:
 		
 	$AttackSound.pitch_scale = randf_range(0.85, 1.15)
 	$AttackSound.play()
+	
 	# custom attack
 	if character.custom_attack_area != null:
 		for target in character.custom_attack_area.get_overlapping_bodies():
 			target.take_damage(character.damage)
-			create_attack_fx(target.effect_global_position)
+			InBattle.add_hit_effect(target.effect_global_position)
 	
 	# single target
 	elif character.attack_area_range <= 0:
@@ -34,7 +34,7 @@ func physics_update(_delta: float) -> void:
 		var target := character.n_RayCast2D.get_collider()
 		if target != null:
 			target.take_damage(character.damage)
-			create_attack_fx(target.effect_global_position)
+			InBattle.add_hit_effect(target.effect_global_position)
 
 	# area attack
 	else:
@@ -59,16 +59,11 @@ func physics_update(_delta: float) -> void:
 		# target can be a character or a tower tower
 		for result in results:
 			result.collider.take_damage(character.damage)
-			create_attack_fx(result.collider.effect_global_position)
+			InBattle.add_hit_effect(result.collider.effect_global_position)
 
 	start_attack = false
 	done_attack = true
 
-func create_attack_fx(global_position: Vector2):	
-	var hit_fx: HitFx = HitFx.instantiate()
-	get_tree().current_scene.get_node("EffectSpace").add_child(hit_fx)
-	hit_fx.global_position = global_position
-			
 func on_animation_finished(_name):	
 	character.n_AttackCooldownTimer.start()
 	transition.emit("IdleState")

@@ -1,26 +1,28 @@
-extends Button
+class_name SkillButton extends Button
 
-var skill_position
-var skill_scene: PackedScene
-var is_active: bool
-
+var skill_id: String
 var spawn_input_action: String
+var spawn_time: float
+
+var is_active: bool
+var _dog_tower: BaseDogTower
 
 func is_spawn_ready() -> bool:
 	return $SpawnTimer.is_stopped()
 
-
 func can_spawn():
 	return is_spawn_ready() and is_active
 
-func setup(name_id: String, input_action: String, is_active: bool) -> void:
+func setup(skill_id: String, input_action: String, is_active: bool, dog_tower: BaseDogTower) -> void:
+	_dog_tower = dog_tower
+	self.skill_id = skill_id
 	set_active(is_active)
 	spawn_input_action = input_action
 	
-	$Icon.texture = load("res://resources/images/skills/%s_icon.png" % name_id)
-	skill_scene = load("res://scenes/skills/%s/%s.tscn" % [name_id, name_id])
+	$Icon.texture = load("res://resources/images/skills/%s_icon.png" % skill_id)
 	
-	$SpawnTimer.wait_time = Data.skill_info[name_id]['spawn_time']
+	spawn_time = Data.skill_info[skill_id]['spawn_time']
+	$SpawnTimer.wait_time = spawn_time 
 	$SpawnTimer.timeout.connect(_on_spawn_ready)
 	
 	pressed.connect(_on_pressed)
@@ -36,16 +38,13 @@ func _ready() -> void:
 	$Background.frame = 1
 	$ProgressBar.visible = false
 	$AnimationPlayer.play("empty")
-	skill_position = get_tree().current_scene.get_node("Land")
 	set_process(false)
 	set_process_input(false)
 
 func _on_spawn_ready() -> void:
 	$ProgressBar.visible = false
-	
-func _process(delta: float) -> void:
-	self.disabled = !can_spawn()
-	$Background.frame = 0 if  is_spawn_ready() else 1	
+	self.disabled = not can_spawn()
+	$Background.frame = 0 if can_spawn() else 1	
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(spawn_input_action) and can_spawn():
@@ -55,15 +54,25 @@ func _on_pressed() -> void:
 	spawn_skill()
 	
 func spawn_skill():
+	_dog_tower.use_skill(skill_id)
+	_start_recharge_ui()
+	
+func _start_recharge_ui() -> void:
 	self.disabled = true
-	
-	skill_position.spawn(skill_scene) #goi linh ở vị trí vector
-	
 	$ProgressBar.visible = true
 	$Background.frame = 1
-	var tween := create_tween()
-	tween.tween_method(_tween_progress, 0, 100, $SpawnTimer.wait_time);
 	$SpawnTimer.start()
 
-func _tween_progress(value: float) -> void:
-	$ProgressBar.value = value
+func _process(delta: float) -> void:
+	if $ProgressBar.visible:
+		var elapsed_time = spawn_time - $SpawnTimer.time_left	
+		
+		var tween = create_tween()
+		var value = tween.interpolate_value(
+			0.0, 100.0, elapsed_time, spawn_time, Tween.TRANS_LINEAR, Tween.EASE_IN
+		)
+		$ProgressBar.value = value
+		tween.kill()
+	
+	self.disabled = not can_spawn()
+	$Background.frame = 0 if can_spawn() else 1	

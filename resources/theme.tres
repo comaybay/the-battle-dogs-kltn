@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=50 format=3 uid="uid://b8ikq1gvmxsgp"]
+[gd_resource type="Theme" load_steps=53 format=3 uid="uid://b8ikq1gvmxsgp"]
 
 [ext_resource type="Texture2D" uid="uid://gl5qtsnplgcl" path="res://resources/theme/option_box_arrow.png" id="1_7dw4y"]
 [ext_resource type="Texture2D" uid="uid://db3nxilb68ei4" path="res://resources/theme/toggle_on.svg" id="1_rnsxe"]
 [ext_resource type="Texture2D" uid="uid://bvnppeq3fynx3" path="res://resources/theme/toggle_off.svg" id="2_q51sv"]
 [ext_resource type="Texture2D" uid="uid://b2drlhlbbm6fq" path="res://resources/theme/radio_checked.svg" id="2_wuark"]
 [ext_resource type="Texture2D" uid="uid://hb72u1gtryi2" path="res://resources/theme/radio_unchecked.svg" id="3_gwjnb"]
+[ext_resource type="Texture2D" uid="uid://b8kcxd6ff25mq" path="res://resources/theme/grabber.png" id="3_syew5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lga3"]
 content_margin_left = 14.0
@@ -302,8 +303,10 @@ bg_color = Color(0.0196078, 0, 0.721569, 0.560784)
 color = Color(0.0196078, 0, 0.721569, 1)
 thickness = 5
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mcyro"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sfcg"]
-bg_color = Color(0.713726, 0.980392, 0.898039, 1)
+bg_color = Color(0.811765, 1, 0.917647, 1)
 corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
@@ -393,6 +396,13 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_el6hd"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0196078, 0, 0.443137, 0.462745)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s3vxm"]
 bg_color = Color(0.156863, 0.156863, 0.45098, 1)
@@ -516,6 +526,8 @@ HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_37gu1")
 HScrollBar/styles/scroll = SubResource("StyleBoxFlat_sjxxi")
 HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_sjxxi")
 HSeparator/styles/separator = SubResource("StyleBoxLine_0rp6r")
+HSlider/icons/grabber = ExtResource("3_syew5")
+HSlider/icons/grabber_disabled = SubResource("CompressedTexture2D_mcyro")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_8sfcg")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_8sfcg")
 HSlider/styles/slider = SubResource("StyleBoxFlat_n4q3d")
@@ -559,6 +571,7 @@ ProgressBar/constants/outline_size = 0
 ProgressBar/font_sizes/font_size = 16
 ProgressBar/styles/background = SubResource("StyleBoxFlat_ndamh")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_33f8g")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_el6hd")
 TabContainer/colors/font_selected_color = Color(0.929412, 1, 0.984314, 1)
 TabContainer/colors/font_unselected_color = Color(0.156863, 0.156863, 0.45098, 1)
 TabContainer/font_sizes/font_size = 24

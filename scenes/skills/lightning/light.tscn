@@ -64,10 +64,9 @@ _data = {
 resource_local_to_scene = true
 size = Vector2(128, 638.199)
 
-[node name="light" type="CharacterBody2D"]
+[node name="Lightning" type="CharacterBody2D"]
 z_index = 999
 z_as_relative = false
-position = Vector2(13, -6)
 collision_layer = 64
 script = ExtResource("1_f5oi1")
 metadata/_edit_horizontal_guides_ = []
@@ -83,22 +82,22 @@ libraries = {
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(51.1065, 234)
+position = Vector2(-2.10647, -376)
 scale = Vector2(1.42284, 2.72549)
 texture = ExtResource("2_h0qfj")
 hframes = 7
 region_rect = Rect2(4, 4, 178, 185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(53, 291)
+position = Vector2(-0.212959, -319)
 shape = SubResource("RectangleShape2D_oa1yv")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CharacterDetector" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(53, 291)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterDetector"]
+position = Vector2(-0.212959, -319)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

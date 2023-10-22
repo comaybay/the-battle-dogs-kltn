@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://cvno8d4sb6h0s"]
 
 [ext_resource type="Script" path="res://scenes/characters/character.gd" id="1_taq0m"]
-[ext_resource type="PackedScene" uid="uid://yg61w87455ho" path="res://scenes/patterns/finite_state_machine/FSM.tscn" id="3_dcvdl"]
+[ext_resource type="PackedScene" uid="uid://yg61w87455ho" path="res://scenes/common/finite_state_machine/FSM.tscn" id="3_dcvdl"]
 [ext_resource type="Script" path="res://scenes/characters/move_state.gd" id="4_5450c"]
 [ext_resource type="AudioStream" uid="uid://byul4hma3ffpq" path="res://resources/sound/battlefield/bite.mp3" id="5_gaay1"]
 [ext_resource type="Script" path="res://scenes/characters/attack_state.gd" id="5_xi1bt"]
@@ -14,7 +14,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -31,7 +31,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,7 +49,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -67,7 +67,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -85,7 +85,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterAnimation/Character:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -110,23 +110,24 @@ size = Vector2(192, 178)
 
 [node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("attack_sprite") groups=["character"]]
 collision_layer = 0
-collision_mask = 0
 script = ExtResource("1_taq0m")
-attack_sprite = NodePath("Sprite2D")
+attack_sprite = NodePath("CharacterAnimation/Character")
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
+[node name="CharacterAnimation" type="Node2D" parent="."]
+
+[node name="Character" type="Sprite2D" parent="CharacterAnimation"]
+hframes = 2
+vframes = 7
+region_rect = Rect2(4, 4, 178, 185)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_p6yas")
 }
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-hframes = 2
-vframes = 7
-region_rect = Rect2(4, 4, 178, 185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_40amy")
@@ -134,7 +135,7 @@ shape = SubResource("RectangleShape2D_40amy")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(96, 64)
 target_position = Vector2(40, 0)
-collision_mask = 0
+collision_mask = 20
 
 [node name="FiniteStateMachine" parent="." instance=ExtResource("3_dcvdl")]
 initial_state = NodePath("MoveState")

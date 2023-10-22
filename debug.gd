@@ -14,6 +14,20 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_pressed('ui_debug_speed'):
 		Engine.time_scale = 10 if Engine.time_scale == 1 else 1
+	
+	if event.is_action_pressed('ui_debug_battlefield_money'):
+		var battlefield = get_tree().current_scene
+		if battlefield is BaseBattlefield:
+			var player_data: BaseBattlefieldPlayerData = battlefield.get_player_data()
+			for i in range(player_data.MAX_EFFICIENCY_LEVEL - player_data.get_efficiency_level()):
+				player_data.increase_efficiency_level()
+			
+			player_data.fmoney = player_data.get_wallet_capacity()
+	
+	if event.is_action_pressed('ui_debug_save_file'):
+		Data.passed_level = 12
+		Data.bone = 999999999
+		Data.save()
 
 func is_debug_mode() -> bool:
 	return _debug_mode
