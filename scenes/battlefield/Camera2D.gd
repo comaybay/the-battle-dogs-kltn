@@ -9,11 +9,12 @@ var min_zoom: Vector2
 var _camera_control_buttons: CameraControlButtons
 var viewport_size: Vector2
 var half_viewport_size: Vector2
-var _delta: float = 0
 
 ## https://github.com/godotengine/godot-proposals/issues/685
 var _last_center_x: float = 0
 var _last_pos_x: float = 0
+
+var _zoom_value_before_pinch: Vector2 = Vector2.ZERO
 
 func setup(camera_control_buttons: CameraControlButtons):
 	_camera_control_buttons = camera_control_buttons
@@ -35,10 +36,7 @@ func _ready() -> void:
 	var initial_zoom_scale = max(0.375, min_zoom_scale) 
 	zoom = Vector2(initial_zoom_scale, initial_zoom_scale)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	_delta = delta
-	
 	position = get_screen_center_position()
 	# stop flick velocity if camera has reach it's limit position
 	if (
@@ -47,26 +45,29 @@ func _process(delta: float) -> void:
 	):
 		_camera_control_buttons.flick_velocity = 0
 
-	if _camera_control_buttons.is_dragging():
-		# dont do anything if is in dragging mode
-		pass
-	elif not is_zero_approx(_camera_control_buttons.flick_velocity):
-		position.x = position.x + _camera_control_buttons.flick_velocity * delta
-	else:
-		var left := int(_camera_control_buttons.is_move_left_on())
-		var right := int(_camera_control_buttons.is_move_right_on())
-		var direction := right - left
-		position.x = position.x + MOVE_SPEED * direction * delta 
+	if not _camera_control_buttons.is_dragging():
+		if not is_zero_approx(_camera_control_buttons.flick_velocity):
+			position.x = position.x + _camera_control_buttons.flick_velocity * delta
+		else:
+			var left := int(_camera_control_buttons.is_move_left_on())
+			var right := int(_camera_control_buttons.is_move_right_on())
+			var direction := right - left
+			position.x = position.x + MOVE_SPEED * direction * delta 
 		
 	position.y = limit_bottom - half_viewport_size.y
 	position.y -= zoom.x * 200
 	_last_center_x = get_screen_center_position().x
 	_last_pos_x = position.x
-			
-	var zoom_in := int(_camera_control_buttons.is_zoom_in_on())
-	var zoom_out := int(_camera_control_buttons.is_zoom_out_on())
-	var zoom_dir := zoom_in - zoom_out
-	handle_zoom(zoom_dir, delta)
+	
+	if _camera_control_buttons.is_pinch_zooming():
+		zoom = _zoom_value_before_pinch * _camera_control_buttons.get_pinch_zoom_scale()
+		zoom = clamp(zoom, min_zoom, MAX_ZOOM)
+	else:	
+		var zoom_in := int(_camera_control_buttons.is_zoom_in_on())
+		var zoom_out := int(_camera_control_buttons.is_zoom_out_on())
+		var zoom_dir := zoom_in - zoom_out
+		handle_zoom(zoom_dir, delta)
+		_zoom_value_before_pinch = zoom
 
 func handle_zoom(direction: int, delta: float):
 	zoom.x += zoom.x * ZOOM_SPEED * delta * direction

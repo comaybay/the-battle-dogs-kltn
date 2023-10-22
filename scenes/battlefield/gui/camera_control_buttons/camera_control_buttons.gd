@@ -1,4 +1,5 @@
 class_name CameraControlButtons extends HBoxContainer
+## This class contains buttons to control camera as well as
 
 ## velocity to move camera when user flick the screen
 var flick_velocity: float = 0
@@ -71,10 +72,16 @@ func _process(delta: float) -> void:
 	)
 
 	$ZoomOut/AnimationPlayer.play(
-		"on" if Input.is_action_pressed("ui_zoomout") or _scroll_down or $ZoomOut.button_pressed else "off"
+		"on" if Input.is_action_pressed("ui_zoomout") 
+		or _scroll_down 
+		or (_pinch_zoom_scale - _prev_pinch_zoom_scale) < 0
+		or $ZoomOut.button_pressed else "off"
 	)
 	$ZoomIn/AnimationPlayer.play(
-		"on" if Input.is_action_pressed("ui_zoomin") or _scroll_up or $ZoomIn.button_pressed else "off"
+		"on" if Input.is_action_pressed("ui_zoomin") 
+		or _scroll_up 
+		or (_pinch_zoom_scale - _prev_pinch_zoom_scale) > 0
+		or $ZoomIn.button_pressed else "off"
 	)
 	
 func _input(event: InputEvent) -> void:
@@ -91,15 +98,68 @@ func _input(event: InputEvent) -> void:
 		$ZoomOut/AnimationPlayer.play("on")
 		$ZoomIn/AnimationPlayer.play("off")
 		$Timer.start()
-		
+
+func _unhandled_input(event: InputEvent) -> void:
+	_handle_pinch_zoom_input(event)
 	
+	if is_pinch_zooming():
+		_drag_relative_x = 0
+		swiping = false
+	else:
+		_handle_swipe_and_drag_input(event)
+	
+var _touch_positions: Dictionary = {}
+var _initial_distance: float = 0
+var _pinch_zoom_scale: float = 1
+var _prev_pinch_zoom_scale: float = 1
+
+func _handle_pinch_zoom_input(event: InputEvent) -> void:
+	## event.index < 2 to ignore 3th fingers onward
+	if event is InputEventScreenTouch:
+		if event.is_pressed():
+			_touch_positions[event.index] = event.position
+			
+			if _touch_positions.size() > 1:
+				_calculate_pinch_zoom_scale()
+				
+		else:
+			_touch_positions.erase(event.index)
+			if _touch_positions.size() <= 1:
+				_initial_distance = 0
+				_pinch_zoom_scale = 1
+				_prev_pinch_zoom_scale = 1
+			
+	if event is InputEventScreenDrag:
+		_touch_positions[event.index] = event.position	
+		
+		if _touch_positions.size() > 1:
+			_calculate_pinch_zoom_scale()		
+
+func _calculate_pinch_zoom_scale() -> void:
+	var positions = _touch_positions.values() 
+	var a := Vector2.ZERO
+	
+	var distance = positions[0].distance_to(positions[1])
+	
+	if _initial_distance == 0:
+		_initial_distance = distance
+	
+	_prev_pinch_zoom_scale = _pinch_zoom_scale
+	_pinch_zoom_scale = distance / _initial_distance
+
+func is_pinch_zooming() -> bool: 
+	return _touch_positions.size() > 1
+
+func get_pinch_zoom_scale() -> float:
+	return _pinch_zoom_scale
+
 ## mobile camera control
 var swiping = false
 var swipe_mouse_start
 var swipe_mouse_times = []
 var swipe_mouse_positions = []
 
-func _unhandled_input(ev: InputEvent) -> void:
+func _handle_swipe_and_drag_input(ev: InputEvent) -> void:
 	if ev is InputEventMouseButton:
 		if ev.pressed:
 			swiping = true

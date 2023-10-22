@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dxqh31o16u528"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_ivu0g"]
-[ext_resource type="Texture2D" uid="uid://bxv6vquc0mpo8" path="res://scenes/characters/dogs/sword_dog/sword_dog.png" id="2_8ghqg"]
+[ext_resource type="Texture2D" uid="uid://dtolw2l0a45sl" path="res://scenes/characters/dogs/sword_dog/sword_dog.png" id="2_8ghqg"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -103,6 +103,7 @@ resource_local_to_scene = true
 size = Vector2(192, 219.5)
 
 [node name="SwordDog" instance=ExtResource("1_ivu0g")]
+light_mask = 0
 position = Vector2(2, 1)
 name_id = "sword_dog"
 speed = 320
@@ -112,7 +113,7 @@ health = 400
 knockbacks = 5
 
 [node name="AttackCooldownTimer" parent="." index="0"]
-wait_time = 0.01
+wait_time = 0.05
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
@@ -120,6 +121,7 @@ libraries = {
 }
 
 [node name="Sprite2D" parent="." index="2"]
+light_mask = 0
 position = Vector2(64, -57)
 texture = ExtResource("2_8ghqg")
 hframes = 1
