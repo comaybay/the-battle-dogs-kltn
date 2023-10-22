@@ -1,16 +1,17 @@
 class_name OnlineBattleGUI extends CanvasLayer
 
-@onready var spawn_buttons: Control = %SpawnButtons
+@onready var spawn_buttons: Control = %P2PSpawnButtons
 @onready var money_label: Label = $MoneyLabel
-@onready var skill_buttons: Control = %SkillButtons
+@onready var skill_buttons: Control = %P2PSkillButtons
 @onready var efficiency_up_button: TextureButton = $EfficiencyUpButton
 @onready var pause_button: TextureButton = $PauseButton
 @onready var camera_control_buttons: CameraControlButtons = $CameraControlButtons
 
-var _player_data: OnlineBattlefieldPlayerData
+var _player_data: P2PBattlefieldPlayerData
 
-func setup(dog_tower: OnlineDogTower, player_data: OnlineBattlefieldPlayerData):
-	%SpawnButtons.setup(dog_tower, player_data)
+func setup(dog_tower: P2PDogTower, player_data: P2PBattlefieldPlayerData):
+	%P2PSpawnButtons.setup(dog_tower, player_data)
+	%P2PSkillButtons.setup(dog_tower, player_data)
 	_player_data = player_data
 	
 func _ready() -> void:

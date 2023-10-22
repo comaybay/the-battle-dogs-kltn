@@ -1,4 +1,4 @@
-class_name HitFx extends Node2D
+class_name FXHit extends Node2D
 
 func _ready() -> void:
 	rotation_degrees = randi_range(0, 360)

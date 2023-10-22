@@ -1,55 +1,64 @@
 extends BattlefieldP2PNetworking
 
 const UPDATE_INTERVAL: float = 1/30
-const TEAM_SIZE: int = 10
+const MAX_TEAM_SIZE: int = 10
+const MAX_SKILL_SIZE: int = 3
 
-var _this_player_data: OnlineBattlefieldPlayerData
-var _opponent_data: OnlineBattlefieldPlayerData
-var _this_player_dog_tower: OnlineDogTower
-var _opponent_dog_tower: OnlineDogTower
+var _this_player_data: P2PBattlefieldPlayerData
+var _opponent_data: P2PBattlefieldPlayerData
+var _this_player_dog_tower: P2PDogTower
+var _opponent_dog_tower: P2PDogTower
 
 var _delta_passed: float = 0
 var _received_message_number: int = 0
-var _client_efficiency_upgrade_request_accepted: bool = 0
+var _client_efficiency_upgrade_request_accepted: bool = false
 
-## used to keep track of client's summon box's recharge time
-var _client_spawn_timers := {}
+## Used to keep track of client's dogs and skills recharge time.
+## The first 10 is for dogs, next 3 is for item
+var _opponent_timers: Array[Timer] = []
 
-## oppoonent dog instances, this will be cleared everytime an authoritative message is sent
-var _opponent_dog_instances := {}
-
-## this player dog instances, this will be cleared everytime an authoritative message is sent
-var _this_player_dog_instances := {}
-
-## instances of zero health dogs used to confirm to client what dogs to kill,
-## this will be cleared everytime an authoritative message is sent
-var _zero_health_dog_instances: Array[int] = []
-
-var _attacking_dog_instances: Array[int] = []
+## skills used by the server, used for notifying to the client
+## This will be cleared everytime an authoritative message is sent
+var _this_player_used_skills: Array[String] = []
 
 func _ready() -> void:
 	set_process(false)
 	
 func setup(
-		this_player_data: OnlineBattlefieldPlayerData, 
-		opponent_player_data: OnlineBattlefieldPlayerData, 
-		this_player_dog_tower: OnlineDogTower,
-		opponent_dog_tower: OnlineDogTower
+		this_player_data: P2PBattlefieldPlayerData, 
+		opponent_player_data: P2PBattlefieldPlayerData, 
+		this_player_dog_tower: P2PDogTower,
+		opponent_dog_tower: P2PDogTower
 	):
 	_this_player_data = this_player_data
 	_opponent_data = opponent_player_data
 	_opponent_dog_tower = opponent_dog_tower
 	_this_player_dog_tower = this_player_dog_tower
 	
-	for dog_id in opponent_player_data.team_dog_ids:
+	for index in range(MAX_TEAM_SIZE):
+		var dog_id = _opponent_data.team_dog_ids[index]
 		if dog_id == null:
+			_opponent_timers.append(null)
 			continue
 			
 		var timer: = Timer.new()
 		timer.wait_time = Data.dog_info[dog_id]['spawn_time']
 		timer.one_shot = true		
-		_client_spawn_timers[dog_id] = timer
+		_opponent_timers.append(timer)
 		add_child(timer)
+		
+	for index in range(MAX_SKILL_SIZE):
+		var skill_id = _opponent_data.team_skill_ids[index]
+		if skill_id == null:
+			_opponent_timers.append(null)
+			continue
+			
+		var timer: = Timer.new()
+		timer.wait_time = Data.skill_info[skill_id]['spawn_time']
+		timer.one_shot = true		
+		_opponent_timers.append(timer)
+		add_child(timer)		
+		print(Data.skill_info[skill_id]['spawn_time'])
 	
 	set_process(true)
 	
@@ -71,6 +80,8 @@ func _process(delta: float):
 	if _delta_passed >= UPDATE_INTERVAL:
 		_delta_passed -= UPDATE_INTERVAL
 		var message := {
+			'dog_tower_health': _opponent_dog_tower.health,
+			'opponent_dog_tower_health': _this_player_dog_tower.health,
 			'fmoney': _opponent_data.fmoney,
 			'received_message_number': _received_message_number
 		}
@@ -79,41 +90,42 @@ func _process(delta: float):
 			message['efficiency_level'] = _opponent_data.get_efficiency_level()
 			_client_efficiency_upgrade_request_accepted = false
 		
-		if _opponent_dog_instances.size() > 0:
-			message['spawn'] = _opponent_dog_instances
+		if _opponent_data.input_mask != 0:
+			message['accepted_input_requests'] = _opponent_data.input_mask
 			
-		if _this_player_dog_instances.size() > 0:
-			message['opponent_spawn'] = _this_player_dog_instances
+		_add_if_not_empty('opponent_skills', _this_player_used_skills, message)
 		
-		if _zero_health_dog_instances.size() > 0:
-			message['zero_health_dogs'] = _zero_health_dog_instances
-			
-		if _attacking_dog_instances.size() > 0:
-			message['sync_attack_state_dogs'] = _attacking_dog_instances
+		_add_if_not_empty('recharge_times', _get_client_recharge_times(), message)
 		
-		var client_recharge_times = []
-		for i in range(TEAM_SIZE):
-			var dog_id = _opponent_data.team_dog_ids[i]
-			if dog_id != null:
-				var time_left: float = (_client_spawn_timers[dog_id] as Timer).time_left
-				client_recharge_times.append(time_left)
-				
-		if client_recharge_times.size() > 0:
-			message['recharge_times'] = client_recharge_times
-		
-		var dogs = get_tree().get_nodes_in_group("dogs")
-		if dogs.size() > 0: 
-			message['dog_states'] = dogs.map(func(dog: BaseDog): 
-				return { "instance_id": dog.get_instance_id(), "position": dog.position, "health": dog.health }
-			)
-			
+		# Note: sync array should always be sent, even if it is empty
+		message['sync'] = _get_game_objects_sync_data(message)
+
 		SteamUser.send_message(message, SteamUser.SendType.RELIABLE)
 		
-		_opponent_dog_instances.clear()
-		_this_player_dog_instances.clear()
-		_zero_health_dog_instances.clear()
-		_attacking_dog_instances.clear()
+		_opponent_data.input_mask = 0
 
+func _add_if_not_empty(key: String, array_or_dict: Variant, message: Dictionary):
+	if array_or_dict.size() > 0:
+		message[key] = array_or_dict
+
+func _get_game_objects_sync_data(message: Dictionary) -> Array:
+	var sync_objects = get_tree().get_nodes_in_group("p2p_sync")
+	
+	## by convention every object that is in the "p2p_sync" group
+	## will implement a "get_sync_data()" function
+	var sync_objects_data = sync_objects.map(
+		func(obj: Object): return obj.get_p2p_sync_data()
+	)
+	
+	return sync_objects_data
+
+func _get_client_recharge_times() -> Array:
+	var client_recharge_times = _opponent_timers.map(
+		func (timer: Timer):
+			return null if timer == null else timer.time_left	
+	)
+	return client_recharge_times
+	
 func _apply_client_messages():
 	for message in SteamUser.read_messages():
 		var data: Dictionary = message['data']
@@ -121,17 +133,18 @@ func _apply_client_messages():
 		
 		var input_mask: int = data['input_mask']
 		_handling_client_spawn(input_mask)
+		_handling_client_skill(input_mask)
 		_handling_efficiency_upgrade(input_mask)
 
 func _handling_client_spawn(input: int):
-	for i in range(0, 10):
+	for i in range(10):
 		var input_mask: int = (1 << i)
 		var request_spawn: bool = input & input_mask == input_mask
-		if not request_spawn or _opponent_data.team_dog_ids[i] == null:
+		var dog_id = _opponent_data.team_dog_ids[i]
+		if not request_spawn or dog_id == null:
 			continue
 			
-		var dog_id = _opponent_data.team_dog_ids[i]
-		var timer := _client_spawn_timers[dog_id] as Timer
+		var timer := _opponent_timers[i]
 		var spawn_ready: bool = timer.is_stopped()
 		if not spawn_ready:
 			continue
@@ -139,11 +152,28 @@ func _handling_client_spawn(input: int):
 		var spawn_price: int = Data.dog_info[dog_id]['spawn_price']
 		var can_afford: bool = _opponent_data.get_money_int() >= spawn_price
 		if can_afford:
+			_opponent_data.input_mask |= input_mask
 			_opponent_data.fmoney -= spawn_price
-			var dog: BaseDog = _opponent_dog_tower.spawn(_opponent_data.team_dog_ids[i])	
-			_connect_dog_signals(dog)
-			_opponent_dog_instances[dog.name_id] = dog.get_instance_id()
+			var dog: BaseDog = _opponent_dog_tower.spawn(dog_id)	
 			timer.start()
+			
+func _handling_client_skill(input: int):	
+	for i in range(3):
+		var input_mask: int = (1 << MAX_TEAM_SIZE + i)
+		var request_skill: bool = input & input_mask == input_mask
+		var skill_id = _opponent_data.team_skill_ids[i]
+		
+		if not request_skill or skill_id == null:
+			continue
+			
+		var timer := _opponent_timers[MAX_TEAM_SIZE + i]
+		var spawn_ready: bool = timer.is_stopped()
+		if not spawn_ready:
+			continue
+		
+		_opponent_data.input_mask |= input_mask   
+		_opponent_dog_tower.use_skill(skill_id)	
+		timer.start()
 			
 func _handling_efficiency_upgrade(input_mask: int):
 	var request_upgrade: bool = input_mask & (1 << 13) == (1 << 13)
@@ -169,22 +199,9 @@ func request_spawn(dog_id: String):
 	_this_player_data.fmoney -= spawn_price
 	
 	var dog = _this_player_dog_tower.spawn(dog_id)
-	_connect_dog_signals(dog)
-	
-	if _this_player_dog_instances.has(dog.name_id):
-		_this_player_dog_instances[dog.name_id] = dog.get_instance_id()
-	else:
-		_this_player_dog_instances[dog.name_id] = [dog.get_instance_id()]
-	
 	spawn_request_accepted.emit(dog_id)
-
-func _connect_dog_signals(dog: BaseDog):
-	dog.zero_health.connect(_on_dog_zero_health.bind(dog))		
-	dog.get_FSM().state_entered.connect(_on_dog_state_changed.bind(dog))
-
-func _on_dog_zero_health(dog: BaseDog):
-	_zero_health_dog_instances.append(dog.get_instance_id())
-
-func _on_dog_state_changed(state_path: String, dog: BaseDog):
-	if state_path == "AttackState":
-		_attacking_dog_instances.append(dog.get_instance_id())
+	
+func request_skill(skill_id: String):
+	_this_player_dog_tower.use_skill(skill_id)
+	skill_request_accepted.emit(skill_id)
+	_this_player_used_skills.append(skill_id)

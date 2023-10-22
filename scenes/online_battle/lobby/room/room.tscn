@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3ogyyyglw3u6"]
+[gd_scene load_steps=10 format=3 uid="uid://drhsbv7ry1lnp"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_m2nsm"]
 [ext_resource type="Script" path="res://scenes/online_battle/lobby/room/room.gd" id="2_4mrey"]
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="2_t0w5s"]
-[ext_resource type="Texture2D" uid="uid://btso87xve0gsq" path="res://resources/battlefield_themes/green_grass/sky.png" id="4_fhtyc"]
+[ext_resource type="Texture2D" uid="uid://c8sa6uo4d7wdb" path="res://resources/battlefield_themes/green_grass/sky.png" id="4_gsmrn"]
 [ext_resource type="PackedScene" uid="uid://tk6s5oluvidw" path="res://scenes/online_battle/lobby/room/player_slot/player_slot.tscn" id="4_vncec"]
 [ext_resource type="PackedScene" uid="uid://d0p6vdi5tjnfe" path="res://scenes/online_battle/lobby/room/chat_box/chat_box.tscn" id="5_j56qe"]
 [ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="5_ldwqf"]
@@ -36,7 +36,7 @@ offset_bottom = 2411.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.27, 0.27)
-texture = ExtResource("4_fhtyc")
+texture = ExtResource("4_gsmrn")
 expand_mode = 1
 stretch_mode = 1
 

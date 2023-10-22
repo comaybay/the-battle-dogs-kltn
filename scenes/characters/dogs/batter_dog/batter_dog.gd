@@ -20,10 +20,11 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	attack_sprite.frame_changed.connect(func():
-		if attack_sprite.frame == attack_frame:
-			_spawn_expolsion()
-	)
+	if not InBattle.in_request_mode: 
+		attack_sprite.frame_changed.connect(func():
+			if attack_sprite.frame == attack_frame:
+				_spawn_expolsion()
+		)
 	
 	$FiniteStateMachine.state_entered.connect(_on_state_entered)
 	
@@ -44,7 +45,7 @@ func _on_state_entered(state_path: String):
 func _spawn_expolsion() -> void:
 	var explosion_spawner = EXPLOSION_SPAWNER_SCENE.instantiate()
 	get_tree().current_scene.add_child(explosion_spawner)
-	explosion_spawner.setup(self)
+	explosion_spawner.setup(get_bottom_global_position(), damage, character_type)
 	
 		
 	

@@ -21,7 +21,9 @@ func take_damage(damage: int) -> void:
 	if health <= 0:
 		return
 	
-	health = max(health - damage, 0) 
+	if not InBattle.in_request_mode:
+		health = max(health - damage, 0) 
+	
 	update_health_label()
 	$AnimationPlayer.play("shake" if health > 0 else "fall")
 	
@@ -31,11 +33,14 @@ func take_damage(damage: int) -> void:
 			
 		zero_health.emit()
 	
-func healing(heal : int) -> void :
+func healing(heal : int) -> Tween :
 	var new_health = min(health + heal, max_health) 
 	
 	var tween := create_tween()
 	tween.tween_method(func(value: float):
 		health = value	
 		update_health_label()
-	, health, new_health, 2)
+	, health, new_health, 4)
+	tween.play()
+	
+	return tween

@@ -10,6 +10,7 @@ signal state_entered (state_path: String)
 @export var initial_state: NodePath = ""
 
 var state: FSMState
+var _state_data: Dictionary 
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -19,6 +20,9 @@ func _ready():
 
 func get_current_state() -> String:
 	return state.name
+	
+func get_current_state_data() -> Dictionary:
+	return _state_data
 
 func _on_owner_ready():
 	state = get_node(initial_state)
@@ -32,6 +36,8 @@ func _on_owner_ready():
 	state_entered.emit(initial_state)
 
 func change_state(next_state_name: String, data: Dictionary = {}):
+	_state_data = data
+	
 	if state.has_method("exit"):
 		state.exit()
 	

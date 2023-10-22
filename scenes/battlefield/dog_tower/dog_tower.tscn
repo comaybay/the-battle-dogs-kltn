@@ -89,7 +89,7 @@ libraries = {
 }
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(209, -160)
+position = Vector2(62, -183)
 gizmo_extents = 54.5
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]

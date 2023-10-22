@@ -12,7 +12,7 @@ func exit() -> void:
 	pass 
 		
 # called every frame when the state is active
-func update(delta: float) -> void:
+func physics_update(delta: float) -> void:
 	if not character.is_on_floor():
 		character.velocity.y += character.gravity * delta
 	

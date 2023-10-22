@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scenes/skills/drum/drum.gd" id="2_01l4y"]
 [ext_resource type="AudioStream" uid="uid://c3newxc0fjawe" path="res://resources/sound/Skill/Tiếng trống.mp3" id="2_53nbv"]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node2D"]
 script = ExtResource("2_01l4y")
 
-[node name="drum" type="AudioStreamPlayer" parent="."]
+[node name="DrumSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_53nbv")
 volume_db = 10.0
 bus = &"InBattleFX"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower.gd" id="1_3wavf"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_77w0d"]
-[ext_resource type="Texture2D" uid="uid://chienqihdhe53" path="res://resources/battlefield_themes/green_grass/dog_tower.png" id="3_d6q6y"]
+[ext_resource type="Texture2D" uid="uid://c6xd01h520fti" path="res://resources/battlefield_themes/night/dog_tower.png" id="3_d6q6y"]
 [ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="4_bicf2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
@@ -58,7 +58,7 @@ _data = {
 "shake": SubResource("Animation_1vn7f")
 }
 
-[node name="OnlineDogTowerLeft" type="StaticBody2D"]
+[node name="P2PDogTowerLeft" type="StaticBody2D"]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_3wavf")
@@ -88,7 +88,7 @@ libraries = {
 }
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(209, -160)
+position = Vector2(63, -160)
 gizmo_extents = 54.5
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]

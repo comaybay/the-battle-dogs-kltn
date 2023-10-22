@@ -1,16 +1,13 @@
 class_name SpawnButton extends Button
 
-var _dog_tower: BaseDogTower
-var dog_scene: PackedScene
-var is_active: bool
-var _tween: Tween = null
-
 var dog_id: String
 var spawn_price: int
 var spawn_type: String
 var spawn_time: float
 var spawn_input_action: String
 
+var is_active: bool
+var _dog_tower: BaseDogTower
 var _player_data: BaseBattlefieldPlayerData
 var _spawn_dog: BaseDog
 
@@ -29,12 +26,12 @@ func can_spawn():
 	return result
 
 func setup(dog_id: String, input_action: String, is_active: bool, dog_tower: BaseDogTower, player_data: BaseBattlefieldPlayerData) -> void:
-	_player_data = player_data
-	_dog_tower = dog_tower
+	self.dog_id = dog_id 
 	set_active(is_active)
+	_dog_tower = dog_tower
+	_player_data = player_data
 	spawn_input_action = input_action
 	spawn_type = Data.dog_info[dog_id]['spawn_type'] 	
-	self.dog_id = dog_id 
 		
 	$Icon.texture = load("res://resources/icons/%s_icon.png" % dog_id)
 

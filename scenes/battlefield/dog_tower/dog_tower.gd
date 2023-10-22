@@ -28,4 +28,11 @@ func spawn(dog_id: String) -> BaseDog:
 	
 	dog_spawn.emit(dog)
 	return dog
+
+func use_skill(skill_id: String) -> void:
+	$SpawnSound.play()
 	
+	var index = _player_data.team_skill_ids.find(skill_id)
+	var skill := _player_data.team_skill_scenes[index].instantiate()
+	get_tree().current_scene.add_child(skill)
+	skill.setup(Character.Type.DOG)
