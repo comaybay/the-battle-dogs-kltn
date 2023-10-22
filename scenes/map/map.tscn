@@ -253,8 +253,8 @@ text = "@TEAM_SETUP"
 
 [node name="LevelChain" parent="Khung/GUI" instance=ExtResource("9_m5l3k")]
 unique_name_in_owner = true
-offset_top = 48.0
-offset_bottom = 152.0
+offset_top = 63.0
+offset_bottom = 167.0
 
 [connection signal="pressed" from="Khung/GUI/HBoxContainer/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/GUI/VBoxContainer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]

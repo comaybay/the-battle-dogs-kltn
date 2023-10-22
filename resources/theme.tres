@@ -106,18 +106,6 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0.333333, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hcij"]
-content_margin_left = 50.0
-content_margin_top = 25.0
-content_margin_right = 50.0
-content_margin_bottom = 25.0
-bg_color = Color(0.870588, 1, 0.952941, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.109804, 0.262745, 0.929412, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2d15"]
 content_margin_left = 50.0
 content_margin_top = 25.0
@@ -129,6 +117,18 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0.372549, 0.8, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hcij"]
+content_margin_left = 50.0
+content_margin_top = 25.0
+content_margin_right = 50.0
+content_margin_bottom = 25.0
+bg_color = Color(0.870588, 1, 0.952941, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.109804, 0.262745, 0.929412, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kr0t8"]
 content_margin_left = 50.0
@@ -482,8 +482,10 @@ ButtonLarge/base_type = &"Button"
 ButtonLarge/font_sizes/font_size = 32
 ButtonLevelBox/base_type = &"Button"
 ButtonLevelBox/colors/font_color = Color(0, 0.372549, 0.8, 1)
+ButtonLevelBox/colors/font_disabled_color = Color(0.109804, 0.262745, 0.929412, 1)
 ButtonLevelBox/colors/font_hover_color = Color(0.109804, 0.262745, 0.929412, 1)
 ButtonLevelBox/colors/font_pressed_color = Color(0.8, 0.2, 0, 1)
+ButtonLevelBox/styles/disabled = SubResource("StyleBoxFlat_p2d15")
 ButtonLevelBox/styles/hover = SubResource("StyleBoxFlat_2hcij")
 ButtonLevelBox/styles/normal = SubResource("StyleBoxFlat_p2d15")
 ButtonLevelBox/styles/pressed = SubResource("StyleBoxFlat_kr0t8")

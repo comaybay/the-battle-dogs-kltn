@@ -304,7 +304,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 text = "@SETTINGS"
-language = "vi"
 
 [node name="CreditButton" type="Button" parent="Khung/PhanCuoi"]
 unique_name_in_owner = true
@@ -313,9 +312,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 text = "@CREDIT"
-language = "vi"
 
-[node name="NutThoat" type="Button" parent="Khung/PhanCuoi"]
+[node name="QuitButton" type="Button" parent="Khung/PhanCuoi"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4

@@ -103,7 +103,7 @@ resource_local_to_scene = true
 size = Vector2(192, 219.5)
 
 [node name="SwordDog" instance=ExtResource("1_ivu0g")]
-z_index = 40
+light_mask = 0
 position = Vector2(2, 1)
 name_id = "sword_dog"
 speed = 320
@@ -113,7 +113,7 @@ health = 400
 knockbacks = 5
 
 [node name="AttackCooldownTimer" parent="." index="0"]
-wait_time = 0.01
+wait_time = 0.05
 
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(64, -57)
