@@ -70,5 +70,5 @@ func get_passive_level(passive_id: String) -> int:
 		push_error("Error: get_passive_level(passive_id: String) not implemented")
 		return 0
 	
-	return Data.passives[passive_id]['level']
+	return get_player_data().get_passive_level(passive_id) 
 	

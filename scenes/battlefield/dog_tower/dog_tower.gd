@@ -1,9 +1,19 @@
 class_name DogTower extends BaseDogTower
 
+const WIZARD_DOG_SCENE: PackedScene = preload("res://scenes/battlefield/dog_tower/gandoglf/gandoglf.tscn")
+
 var _player_data: BattlefieldPlayerData
 
 func _ready() -> void:
-	var battlefield = get_tree().current_scene as Battlefield
+	if InBattle.get_passive_level('gandolfg') > 0:
+		var gandolfg: Gandolfg = WIZARD_DOG_SCENE.instantiate()
+		add_child(gandolfg)
+		
+		var rect = $CollisionShape2D.shape.get_rect()
+		var gandolfg_position: Vector2 = $CollisionShape2D.global_position + Vector2(0, -rect.size.y / 2) 
+		gandolfg.setup(gandolfg_position)
+	
+	var battlefield := InBattle.get_battlefield()
 	_player_data = battlefield.get_player_data()
 	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/dog_tower.png" % battlefield.get_theme())
 	_setup_max_health()

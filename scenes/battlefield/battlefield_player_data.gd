@@ -19,4 +19,7 @@ func _get_level_or_zero(dict: Variant) -> int:
 	return 0 if dict == null else dict.get('level', 0)
 
 func get_skill_level(skill_id: String) -> int:
-	return _get_level_or_zero(Data.skills[skill_id])
+	return _get_level_or_zero(Data.skills.get(skill_id))
+
+func get_passive_level(passive_id: String) -> int:
+	return _get_level_or_zero(Data.passives.get(passive_id))

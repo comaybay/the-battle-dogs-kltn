@@ -3,10 +3,10 @@ class_name CameraControlButtons extends HBoxContainer
 
 ## velocity to move camera when user flick the screen
 var flick_velocity: float = 0
-var _drag_relative_x: float = 0
+var _drag_relative: Vector2 = Vector2.ZERO
 
 ## screen dragged, used for mocing camera to the dragged position 
-signal dragged(relative: float)
+signal dragged(relative: Vector2)
 
 func is_move_left_on() -> bool:
 	return _is_on($MoveLeft/AnimationPlayer)
@@ -25,6 +25,8 @@ func _is_on(anim_player: AnimationPlayer) -> bool:
 
 var _scroll_up: bool = false
 var _scroll_down: bool = false
+func is_scrolling() -> bool: 
+	return _scroll_up or _scroll_down
 
 func _ready() -> void:
 	$MoveRight.button_down.connect(func(): $MoveRight/AnimationPlayer.play("on"))
@@ -44,7 +46,7 @@ func _stop_scroll():
 	$ZoomIn/AnimationPlayer.play("off")
 	$ZoomOut/AnimationPlayer.play("off")
 	
-func is_dragging() -> bool: return not is_zero_approx(_drag_relative_x) 
+func is_dragging() -> bool: return not _drag_relative == Vector2.ZERO 
 	
 func _process(delta: float) -> void:
 	var is_controlling: bool = (
@@ -54,20 +56,20 @@ func _process(delta: float) -> void:
 	## prioritize any other user inputs over touch inputs
 	if is_controlling:
 		flick_velocity = 0
-		_drag_relative_x = 0
+		_drag_relative = Vector2.ZERO
 		
 	$MoveLeft/AnimationPlayer.play(
 		"on" if Input.is_action_pressed("ui_left") 
 		or $MoveLeft.button_pressed
 		or flick_velocity < 0 
-		or _drag_relative_x > 0
+		or _drag_relative.x > 0
 		else "off"
 	)
 	$MoveRight/AnimationPlayer.play(
 		"on" if Input.is_action_pressed("ui_right") 
 		or $MoveRight.button_pressed 
 		or flick_velocity > 0
-		or _drag_relative_x < 0
+		or _drag_relative.x < 0
 		else "off"
 	)
 
@@ -103,7 +105,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	_handle_pinch_zoom_input(event)
 	
 	if is_pinch_zooming():
-		_drag_relative_x = 0
+		_drag_relative = Vector2.ZERO
 		swiping = false
 	else:
 		_handle_swipe_and_drag_input(event)
@@ -187,15 +189,15 @@ func _handle_swipe_and_drag_input(ev: InputEvent) -> void:
 				flick_velocity = 0
 			
 			swiping = false
-			_drag_relative_x = 0
+			_drag_relative = Vector2.ZERO
 				
 	elif swiping and ev is InputEventMouseMotion:
-		dragged.emit(ev.relative.x)
-		_drag_relative_x = ev.relative.x
+		_drag_relative = ev.relative
+		dragged.emit(_drag_relative)
 		swipe_mouse_times.append(Time.get_ticks_msec())
 		swipe_mouse_positions.append(ev.position)
 		
 		## stop button from active if drag stopped
 		await get_tree().create_timer(0.1, false).timeout
-		if _drag_relative_x == ev.relative.x:
-			_drag_relative_x = 0
+		if _drag_relative == ev.relative:
+			_drag_relative = Vector2.ZERO
