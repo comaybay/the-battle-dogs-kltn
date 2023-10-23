@@ -87,6 +87,10 @@ func setup(global_position: Vector2) -> void:
 	self.global_position = global_position
 	_reready()
 
+func _init() -> void:
+	# hide away the character until everything is setup
+	position.y = 999999 
+
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		## add random sprite offset for better visibility when characters are stacked on eachother

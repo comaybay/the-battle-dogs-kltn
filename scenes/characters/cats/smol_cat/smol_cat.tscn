@@ -8,10 +8,11 @@ resource_local_to_scene = true
 size = Vector2(112, 118)
 
 [node name="SmolCat" instance=ExtResource("1_nw3qr")]
+position = Vector2(0, 999999)
 reward_money = 20
 speed = 300
 attack_range = 20
-attack_cooldown = 0.0
+attack_cooldown = 0.05
 attack_frame = 11
 health = 180
 damage = 5

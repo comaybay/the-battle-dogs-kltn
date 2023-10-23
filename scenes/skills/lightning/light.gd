@@ -59,8 +59,10 @@ func _on_enemy_entered(enemy: Character):
 		enemy.set_multiplier(Character.MultiplierTypes.ATTACK_SPEED, _multiplier)	
 		enemy.set_multiplier(Character.MultiplierTypes.SPEED, _multiplier)	
 		
-		await get_tree().create_timer(_duration, false).timeout
-		enemy.reset_multipliers()
+		get_tree().create_timer(_duration, false).timeout.connect(
+			func(): enemy.reset_multipliers(),
+			CONNECT_ONE_SHOT
+		)
 	
 func die() :
 	set_physics_process(false)
