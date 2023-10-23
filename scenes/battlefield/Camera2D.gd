@@ -1,6 +1,6 @@
 extends Camera2D
 
-const ZOOM_SPEED: float = 1.5
+const ZOOM_SPEED: float = 2
 const MOVE_SPEED: int = 2500
 const MAX_ZOOM := Vector2.ONE
 const LAND_HEIGHT: int = 283
@@ -16,7 +16,9 @@ var _last_pos_x: float = 0
 
 var _zoom_value_before_pinch: Vector2 = Vector2.ZERO
 
-func setup(camera_control_buttons: CameraControlButtons, stage_width: int):
+var _mouse_pos: Vector2
+
+func setup(camera_control_buttons: CameraControlButtons, stage_width_with_margin: int, stage_height: int):
 	_camera_control_buttons = camera_control_buttons
 	_camera_control_buttons.dragged.connect(_handle_screen_drag)
 
@@ -24,10 +26,11 @@ func setup(camera_control_buttons: CameraControlButtons, stage_width: int):
 	half_viewport_size =  viewport_size / 2
 
 	limit_left = 0
-	limit_right = stage_width
+	limit_right = stage_width_with_margin
 	limit_bottom = LAND_HEIGHT
+	limit_top = -stage_height
 	
-	var min_zoom_scale:float = max(float(viewport_size.x) / stage_width, 0.25) 
+	var min_zoom_scale:float = max(float(viewport_size.x) / stage_width_with_margin, 0.25) 
 	min_zoom = Vector2(min_zoom_scale, min_zoom_scale) 
 	var initial_zoom_scale = max(0.375, min_zoom_scale) 
 	zoom = Vector2(initial_zoom_scale, initial_zoom_scale)
@@ -52,8 +55,6 @@ func _process(delta: float) -> void:
 			var direction := right - left
 			position.x = position.x + MOVE_SPEED * direction * delta 
 		
-	position.y = limit_bottom - half_viewport_size.y
-	position.y -= zoom.x * 200
 	_last_center_x = get_screen_center_position().x
 	_last_pos_x = position.x
 	
@@ -64,16 +65,31 @@ func _process(delta: float) -> void:
 		var zoom_in := int(_camera_control_buttons.is_zoom_in_on())
 		var zoom_out := int(_camera_control_buttons.is_zoom_out_on())
 		var zoom_dir := zoom_in - zoom_out
-		handle_zoom(zoom_dir, delta)
+		if zoom_dir != 0:
+			handle_zoom(zoom_dir, delta)
+			
 		_zoom_value_before_pinch = zoom
 
+## https://ask.godotengine.org/25983/camera2d-zoom-position-towards-the-mouse
+## with modifications
 func handle_zoom(direction: int, delta: float):
-	zoom.x += zoom.x * ZOOM_SPEED * delta * direction
-	zoom.y = zoom.x
+	var prev_zoom := zoom
+	zoom += zoom * ZOOM_SPEED * delta * direction
 	zoom = zoom.clamp(min_zoom, MAX_ZOOM)
-
+	
+	position = position  + (_mouse_pos - half_viewport_size) * (
+		(Vector2.ONE/prev_zoom) - (Vector2.ONE/zoom)
+	)
+	
+	if not _camera_control_buttons.is_scrolling():
+		position.y = limit_bottom - half_viewport_size.y
+	
 func allow_user_input_camera_movement(state: bool) -> void:
 	set_process(state)
 
-func _handle_screen_drag(value: float) -> void:
-	position.x -= value
+func _handle_screen_drag(value: Vector2) -> void:
+	position -= value
+	
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		_mouse_pos = event.position
