@@ -61,7 +61,7 @@ func _ready() -> void:
 	var stage_width := get_stage_width()
 	var stage_width_with_margin := stage_width + (TOWER_MARGIN * 2)
 	
-	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons, stage_width_with_margin)
+	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons, stage_width_with_margin, get_stage_height())
 	
 	inbattle_sfx_idx = AudioServer.get_bus_index("InBattleFX")
 	
