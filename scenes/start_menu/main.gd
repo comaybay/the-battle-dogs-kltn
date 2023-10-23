@@ -23,6 +23,7 @@ func _ready():
 	
 	%SettingsButton.pressed.connect(_go_to_settings)
 	%CreditButton.pressed.connect(_go_to_credits)
+	%QuitButton.visible
 	
 	Data.select_data.connect(show_select_data_box)
 

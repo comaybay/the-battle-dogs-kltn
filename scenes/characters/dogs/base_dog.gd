@@ -11,9 +11,13 @@ var check_hover
 var _sync_data: Dictionary
 
 func setup(global_position: Vector2) -> void:
-	$Arrow.position =  Vector2(20,0)
-	$Arrow.position.y = -round($CollisionShape2D.shape.extents.y * 2)
-	$Arrow.hide()	
+	if not Global.is_host_OS_web_mobile():
+		$Arrow.position =  Vector2(20,0)
+		$Arrow.position.y = -round($CollisionShape2D.shape.extents.y * 2)
+		$Arrow.show()	
+		input_event.connect(_on_input_event)
+		input_event.connect(_on_mouse_entered)
+		input_event.connect(_on_mouse_entered)
 	
 	var battlefield: BaseBattlefield = get_tree().current_scene
 	
@@ -77,10 +81,11 @@ func set_control() :
 		$FiniteStateMachine.change_state("MoveState")
 
 func _process(delta):
-	if $AttackCooldownTimer.is_stopped() == false :
-		$Arrow.value = float(($AttackCooldownTimer.wait_time - $AttackCooldownTimer.time_left) * (float(100/$AttackCooldownTimer.wait_time)))		
-	else :
-		$Arrow.value = 0
+	if not Engine.is_editor_hint():
+		if $AttackCooldownTimer.is_stopped() == false :
+			$Arrow.value = float(($AttackCooldownTimer.wait_time - $AttackCooldownTimer.time_left) * (float(100/$AttackCooldownTimer.wait_time)))		
+		else :
+			$Arrow.value = 0
 
 func get_p2p_sync_data() -> Dictionary:
 	_sync_data["position"] = position

@@ -88,8 +88,9 @@ func setup(global_position: Vector2) -> void:
 	_reready()
 
 func _init() -> void:
-	# hide away the character until everything is setup
-	position.y = 999999 
+	if not Engine.is_editor_hint():
+		# hide away the character until everything is setup
+		position.y = 999999 
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():

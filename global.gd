@@ -13,3 +13,9 @@ func _ready():
 	}) 
 	
 	
+func is_host_OS_web() -> bool:
+	return OS.get_name() == "WEB"
+
+func is_host_OS_web_mobile() -> bool:
+	return OS.has_feature("web_android") or OS.has_feature("web_ios")
+	

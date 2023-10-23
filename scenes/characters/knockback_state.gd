@@ -49,7 +49,6 @@ func physics_update(delta: float) -> void:
 			character.velocity.y += character.gravity * remainder_delta
 			
 			knockback_countdown -= 1
-			print(knockback_countdown)
 			knockback_vel = knockback_vel * 0.75
 		else:
 			if character.health <= 0:
