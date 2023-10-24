@@ -125,18 +125,21 @@ size_flags_stretch_ratio = 0.82
 [node name="MarginContainer2" type="MarginContainer" parent="Khung/Content/PhanGiua/PhanDuoi" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 80
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
 
 [node name="TieuDe" type="HBoxContainer" parent="Khung/Content/PhanGiua/PhanDuoi/MarginContainer2" index="0"]
 layout_mode = 2
 alignment = 1
 
 [node name="InfoLabel" type="Label" parent="Khung/Content/PhanGiua/PhanDuoi/MarginContainer2/TieuDe" index="0"]
+custom_minimum_size = Vector2(258, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 theme_type_variation = &"LabelWhite"
 theme_override_font_sizes/font_size = 32
 text = "@INFORMATION"
+horizontal_alignment = 1
 
 [node name="NutNangCap" type="Button" parent="Khung/Content/PhanGiua/PhanDuoi/MarginContainer2/TieuDe" index="1"]
 unique_name_in_owner = true
