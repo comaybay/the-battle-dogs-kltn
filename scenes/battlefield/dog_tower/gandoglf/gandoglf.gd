@@ -2,7 +2,7 @@ class_name Gandolfg extends Node2D
 
 const ATTACK_FRAME: int = 8
 const BASE_ATTACK_RANGE: int = 1500
-const BASE_ATTACK_COOLDOWN: int = 12
+const BASE_ATTACK_COOLDOWN: int = 13
 
 const BULLET_SCENE: PackedScene = preload("res://scenes/battlefield/dog_tower/gandoglf/bullet.tscn")
 var _ennemies: Dictionary = {}  

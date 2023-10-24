@@ -106,3 +106,5 @@ func play_custom_music(audio_stream: AudioStream):
 func stop_custom_music():
 	custom_music.stop()
 	
+func get_random_pitch_scale() -> float:
+	return randf_range(0.85, 1.15)

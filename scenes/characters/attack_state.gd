@@ -19,7 +19,7 @@ func physics_update(_delta: float) -> void:
 	if start_attack == false:
 		return
 		
-	$AttackSound.pitch_scale = randf_range(0.85, 1.15)
+	$AttackSound.pitch_scale = AudioPlayer.get_random_pitch_scale()
 	$AttackSound.play()
 	
 	# custom attack

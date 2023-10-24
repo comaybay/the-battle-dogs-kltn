@@ -19,6 +19,9 @@ func _ready():
 func setup(global_position: Vector2, target: Character) :
 	_target = target  
 	self.global_position = global_position 
+	
+	$SpellCastAudio.pitch_scale = AudioPlayer.get_random_pitch_scale()
+	$SpellCastAudio.play()
 	_calculate_direction()
 	
 	# Khong thay doi vi tri vien dan nua neu meo da chet hoac dang bi vap nga
@@ -53,11 +56,19 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	
 	_collided = true
+	$HitAudio.play()
+	
 	set_physics_process(false)
 	
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(self, "scale", Vector2(1.5, 1.5), 0.1)
 	tween.tween_property(self, "scale", Vector2(0, 0), 0.25)
+	
 	await tween.finished
+	$CollisionShape2D.disabled = true
+	
+	if $HitAudio.playing:
+		await $HitAudio.finished
+	
 	queue_free()
