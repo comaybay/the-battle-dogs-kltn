@@ -185,7 +185,6 @@ position = Vector2(-42, -173)
 [node name="Staff" type="Sprite2D" parent="Animation/StaffWrapper"]
 unique_name_in_owner = true
 position = Vector2(-3.8147e-06, -1.52588e-05)
-scale = Vector2(1, 1)
 texture = ExtResource("3_hx5cd")
 hframes = 3
 vframes = 3

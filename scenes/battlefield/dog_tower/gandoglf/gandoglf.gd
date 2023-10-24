@@ -1,7 +1,7 @@
 class_name Gandolfg extends Node2D
 
 const ATTACK_FRAME: int = 8
-const BASE_ATTACK_RANGE: int = 2000
+const BASE_ATTACK_RANGE: int = 1500
 const BASE_ATTACK_COOLDOWN: int = 12
 
 const BULLET_SCENE: PackedScene = preload("res://scenes/battlefield/dog_tower/gandoglf/bullet.tscn")
@@ -14,7 +14,7 @@ func setup(global_position: Vector2):
 	self.global_position = global_position
 	var level := InBattle.get_passive_level('gandolfg')
 	$AttackCooldownTimer.wait_time = BASE_ATTACK_COOLDOWN - (level * 1)
-	$AttackArea/AttackCollisionShape.shape.extents = Vector2(BASE_ATTACK_RANGE * level, 1000)
+	$AttackArea/AttackCollisionShape.shape.extents = Vector2(BASE_ATTACK_RANGE + (500 * level), 1000)
 	$AttackArea/AttackCollisionShape.position = Vector2(0, 0)
 	$AttackArea.body_entered.connect(_on_attack_area_body_entered)
 	$AttackCooldownTimer.timeout.connect(_on_cooldown_time_out)

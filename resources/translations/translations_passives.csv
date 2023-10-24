@@ -8,4 +8,4 @@ keys,vi,en
 @PASSIVE_NAME_bone_reward_up,Nghiên cứu và phát triển,R&D
 @PASSIVE_DESCRIPTION_bone_reward_up,Nghiên cứu công nghệ chiếm được từ loài Mèo! Tăng số Xương nhận được sau mỗi trận đấu.,Research Cat's technology stolen after battle! Increases the number of Bones rewarded after a battle.
 @PASSIVE_NAME_gandolfg,Gandolfg (Phù thủy canh Thành),Gandolfg (Defense Wizard)
-@PASSIVE_DESCRIPTION_gandolfg,Phù thủy Chó mũ xám Gandolfg đến từ vùng đất Endog. Ông có khả năng triệu hồi quả cầu điện để đánh bọn Mèo nào dám lại gần Thành Chó. Đánh đơn mục tiêu.,A wizard wearing a gray hat from the land of Endog named Gandolfg the Dog. He can summon electric balls to attack any Cat that dare to step near the Dog Tower. Performs single target attack.
+@PASSIVE_DESCRIPTION_gandolfg,Phù thủy Chó mũ xám Gandolfg đến từ vùng đất Endog. Ông có khả năng triệu hồi quả cầu điện để đánh bọn Mèo nào dám lại gần Thành Chó. Cầu điện gây sát thương diện rộng.,A wizard wearing a gray hat from the land of Endog named Gandolfg the Dog. He can summon electric balls to attack any Cat that dare to step near the Dog Tower. Electric ball performs area attack.

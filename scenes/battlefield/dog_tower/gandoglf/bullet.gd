@@ -1,4 +1,4 @@
-class_name GandolfgBullet extends CharacterBody2D
+class_name GandolfgBullet extends Area2D
 
 const BASE_DAMAGE = 50
 const SPEED = 700
@@ -6,10 +6,12 @@ var _stop_following: bool = false
 var _direction: Vector2 = Vector2(0.5, 0.5) 
 var _target: Character
 
+var _collided: bool = false
+
 func _ready():
 	set_physics_process(false)
 	rotation = randi_range(0, 360)
-	var tween := get_tree().create_tween()
+	var tween := create_tween()
 	tween.set_loops(0)
 	tween.tween_property(self, "rotation", 360, 120.0).as_relative()
 	tween.bind_node(self)
@@ -27,6 +29,8 @@ func setup(global_position: Vector2, target: Character) :
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(self, "scale", Vector2(1, 1), 0.45).from(Vector2(0, 0))
 	await tween.finished
+	
+	body_entered.connect(_on_body_entered)
 	set_physics_process(true)
 
 func _calculate_direction():
@@ -36,12 +40,24 @@ func _physics_process(delta):
 	if not _stop_following:
 		_calculate_direction()
 	
-	var collision = move_and_collide(_direction * SPEED * delta)
-	if collision:
-		var collider := collision.get_collider()
-		if collider is Character:
-			var level := InBattle.get_passive_level("gandolfg")
-			collider.take_damage(BASE_DAMAGE + (level * 10))
-		
-		InBattle.add_hit_effect(global_position)
-		queue_free()
+	position += _direction * SPEED * delta
+
+func _on_body_entered(body: Node2D) -> void:	
+	InBattle.add_hit_effect(global_position)
+	
+	if body is Character:
+		var level := InBattle.get_passive_level("gandolfg")
+		body.take_damage(BASE_DAMAGE + (level * 10))
+	
+	if _collided:
+		return
+	
+	_collided = true
+	set_physics_process(false)
+	
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "scale", Vector2(1.5, 1.5), 0.1)
+	tween.tween_property(self, "scale", Vector2(0, 0), 0.25)
+	await tween.finished
+	queue_free()
