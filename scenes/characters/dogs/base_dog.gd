@@ -14,10 +14,9 @@ func setup(global_position: Vector2) -> void:
 	if not Global.is_host_OS_web_mobile():
 		$Arrow.position =  Vector2(20,0)
 		$Arrow.position.y = -round($CollisionShape2D.shape.extents.y * 2)
-		$Arrow.show()	
 		input_event.connect(_on_input_event)
-		input_event.connect(_on_mouse_entered)
-		input_event.connect(_on_mouse_entered)
+		mouse_entered.connect(_on_mouse_entered)
+		mouse_exited.connect(_on_mouse_exited)
 	
 	var battlefield: BaseBattlefield = get_tree().current_scene
 	
