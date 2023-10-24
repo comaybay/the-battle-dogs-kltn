@@ -29,7 +29,7 @@ func _ready() -> void:
 	)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouse or event.is_released():
+	if event is InputEventMouse or event is InputEventScreenTouch or event.is_released():
 		return
 	
 	if event.is_action_pressed("ui_cancel_default"):

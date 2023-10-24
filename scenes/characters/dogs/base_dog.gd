@@ -5,7 +5,6 @@ class_name BaseDog extends Character
 @export var name_id: String 
 # Kiem tra xem nhan vat co dang bi dieu khien hay khong
 var is_user_control 
-var check_hover
 
 ## p2p variables
 var _sync_data: Dictionary
@@ -26,7 +25,6 @@ func setup(global_position: Vector2) -> void:
 	health *= scale
 		
 	is_user_control = false
-	check_hover = 0
 	
 	super.setup(global_position)
 	
@@ -48,13 +46,11 @@ func take_damage(ammount: int) -> void:
 		remove_from_group("p2p_sync")
 
 func _on_mouse_entered():
-	check_hover = 1
 	if is_user_control == false :
 		$Arrow.show()
 		$Arrow.tint_under = Color.WHITE
 
 func _on_mouse_exited():
-	check_hover = 0
 	if is_user_control == false :
 		$Arrow.hide()
 
