@@ -42,6 +42,7 @@ func _gui_input(event: InputEvent) -> void:
 		_pressed = event.pressed
 		
 		if not _pressed:
+			_drag_distance = Vector2.ZERO
 			disabled = false
 		
 	if _pressed and event is InputEventMouseMotion:
