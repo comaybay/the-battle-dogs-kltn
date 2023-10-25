@@ -30,7 +30,6 @@ func _input(event: InputEvent) -> void:
 		Data.save()
 		
 	if event.is_action_pressed('ui_debug_switch_language'):
-		print( TranslationServer.get_locale() )
 		TranslationServer.set_locale("en" if TranslationServer.get_locale() == "vi" else "vi")	
 
 func is_debug_mode() -> bool:

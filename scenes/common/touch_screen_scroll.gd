@@ -55,7 +55,6 @@ func _input(ev):
 				
 	elif swiping and ev is InputEventMouseMotion:
 		drag_distance += ev.relative.abs()
-		print(ev.relative.abs())
 		var delta = ev.position - swipe_mouse_start
 		set_h_scroll(swipe_start.x - delta.x)
 		set_v_scroll(swipe_start.y - delta.y)

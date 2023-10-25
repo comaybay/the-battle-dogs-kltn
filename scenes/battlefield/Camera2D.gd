@@ -22,7 +22,7 @@ func setup(camera_control_buttons: CameraControlButtons, stage_width_with_margin
 	_camera_control_buttons = camera_control_buttons
 	_camera_control_buttons.dragged.connect(_handle_screen_drag)
 
-	viewport_size = get_viewport().size 
+	viewport_size = Global.VIEWPORT_SIZE
 	half_viewport_size =  viewport_size / 2
 
 	limit_left = 0
