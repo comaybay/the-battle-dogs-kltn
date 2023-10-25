@@ -2,7 +2,7 @@ class_name CameraControlButtons extends HBoxContainer
 ## This class contains buttons to control camera as well as
 
 ## velocity to move camera when user flick the screen
-var flick_velocity: float = 0
+var flick_velocity: Vector2 = Vector2.ZERO
 var _drag_relative: Vector2 = Vector2.ZERO
 
 ## screen dragged, used for mocing camera to the dragged position 
@@ -55,20 +55,20 @@ func _process(delta: float) -> void:
 	)
 	## prioritize any other user inputs over touch inputs
 	if is_controlling:
-		flick_velocity = 0
+		flick_velocity = Vector2.ZERO
 		_drag_relative = Vector2.ZERO
 		
 	$MoveLeft/AnimationPlayer.play(
 		"on" if Input.is_action_pressed("ui_left") 
 		or $MoveLeft.button_pressed
-		or flick_velocity < 0 
+		or flick_velocity.x < 0 
 		or _drag_relative.x > 0
 		else "off"
 	)
 	$MoveRight/AnimationPlayer.play(
 		"on" if Input.is_action_pressed("ui_right") 
 		or $MoveRight.button_pressed 
-		or flick_velocity > 0
+		or flick_velocity.x > 0
 		or _drag_relative.x < 0
 		else "off"
 	)
@@ -165,7 +165,7 @@ func _handle_swipe_and_drag_input(ev: InputEvent) -> void:
 	if ev is InputEventMouseButton:
 		if ev.pressed:
 			swiping = true
-			flick_velocity = 0
+			flick_velocity = Vector2.ZERO
 			swipe_mouse_start = ev.position
 			swipe_mouse_times = [Time.get_ticks_msec()]
 			swipe_mouse_positions = [swipe_mouse_start]
@@ -184,9 +184,9 @@ func _handle_swipe_and_drag_input(ev: InputEvent) -> void:
 			if flick_dur > 0.0:
 				var delta = flick_start - ev.position 
 				var target = source + delta * flick_dur * 25.0
-				flick_velocity = (target.x - position.x) / flick_dur
+				flick_velocity = (target - position) / flick_dur
 			else:
-				flick_velocity = 0
+				flick_velocity = Vector2.ZERO
 			
 			swiping = false
 			_drag_relative = Vector2.ZERO

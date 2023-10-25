@@ -44,11 +44,11 @@ func _process(delta: float) -> void:
 		not is_equal_approx(position.x, _last_pos_x) 
 		and is_equal_approx(position.x, _last_center_x)
 	):
-		_camera_control_buttons.flick_velocity = 0
+		_camera_control_buttons.flick_velocity = Vector2.ZERO
 
 	if not _camera_control_buttons.is_dragging():
-		if not is_zero_approx(_camera_control_buttons.flick_velocity):
-			position.x = position.x + _camera_control_buttons.flick_velocity * delta
+		if not _camera_control_buttons.flick_velocity.is_zero_approx():
+			position = position + _camera_control_buttons.flick_velocity * delta
 		else:
 			var left := int(_camera_control_buttons.is_move_left_on())
 			var right := int(_camera_control_buttons.is_move_right_on())
