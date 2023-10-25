@@ -3,9 +3,8 @@
   "dog_food": 0,
   "date": "2014-11-15T9:09:09",
   "user_name": "",
-  "steam_first_login": true,
   "dogs": [{ "ID": "dog", "level": 1 }],
-  "items": [],
+  "store": [],
   "victory_count": 0,
 	"fastest_time": 0,
 	"online_score": 0,
@@ -25,7 +24,8 @@
   "teams": [
 	{
 	  "dog_ids": ["dog", null, null, null, null, null, null, null, null, null],
-	  "skill_ids": ["fire_ball", null, null]
+	  "skill_ids": ["fire_ball", null, null],
+		"store_ids": [null,null,null]
 	}
   ],
   "tutorial": {
@@ -37,6 +37,7 @@
 	"dogbase_after_battlefield": false,
 	"map": false,
 	"upgrade": false,
+	"store": false,
 	"team_setup": false
   }
 }

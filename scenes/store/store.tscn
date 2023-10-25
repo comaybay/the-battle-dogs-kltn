@@ -54,58 +54,19 @@ layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
 
-[node name="NhanVat" type="ScrollContainer" parent="Khung/Content/PhanGiua/TabContainer" index="1"]
+[node name="Item" type="ScrollContainer" parent="Khung/Content/PhanGiua/TabContainer" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "@STORE"
 
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/TabContainer/NhanVat" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/TabContainer/Item" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/TabContainer/NhanVat/MarginContainer" index="0"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 50
-
-[node name="Skill" type="ScrollContainer" parent="Khung/Content/PhanGiua/TabContainer" index="2"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/TabContainer/Skill" index="0"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
-
-[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/TabContainer/Skill/MarginContainer" index="0"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 50
-
-[node name="Passives" type="ScrollContainer" parent="Khung/Content/PhanGiua/TabContainer" index="3"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/TabContainer/Passives" index="0"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
-
-[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/TabContainer/Passives/MarginContainer" index="0"]
+[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/TabContainer/Item/MarginContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6

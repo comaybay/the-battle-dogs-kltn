@@ -1,38 +1,26 @@
 extends Control
 
-const ListItem = preload("res://scenes/upgrade/item_box.tscn")
+const ListItem = preload("res://scenes/store/item_box.tscn")
 
 const UNLOCK_AUDIO: AudioStream = preload("res://resources/sound/unlock.wav")
 const UPGRADE_AUDIO: AudioStream = preload("res://resources/sound/upgrade.mp3")
 
-var TutorialDogScene: PackedScene = preload("res://scenes/upgrade/upgrade_tutorial_dog/upgrade_tutorial_dog.tscn")
+var TutorialDogScene: PackedScene = preload("res://scenes/store/store_tutorial_dog/store_tutorial_dog.tscn")
 
-var character_data 
-var skill_data 
-var selected_item: ItemUpgradeBox
-var last_selected_item_character: ItemUpgradeBox
-var last_selected_item_skill: ItemUpgradeBox
-var last_selected_item_passive: ItemUpgradeBox
+var store_data 
+var selected_item: ItemStoreBox
+var last_selected_item_store: ItemStoreBox
 
-var dog_boxes: Array[ItemUpgradeBox]
-var skill_boxes: Array[ItemUpgradeBox]
-var passive_boxes: Array[ItemUpgradeBox]
+var store_boxes: Array[ItemStoreBox]
+
 
 func _ready():
 	%NutNangCap.disabled = true
-	%TabContainer.set_tab_title(0, tr("@CHARACTERS"))
-	%TabContainer.set_tab_title(1, tr("@SKILLS"))
-	%TabContainer.set_tab_title(2, tr("@PASSIVES"))
-	%TabContainer.tab_changed.connect(func(tab: int):
-		var options = [last_selected_item_character, last_selected_item_skill, last_selected_item_passive]
-		update_ui(options[tab]) 
-	)
+	%TabContainer.set_tab_title(0,tr("@STORE"))
 		
 	add_items()
-	selected_item = dog_boxes[0]
-	last_selected_item_character = dog_boxes[0]
-	last_selected_item_skill = skill_boxes[0]
-	last_selected_item_passive = passive_boxes[0]
+	selected_item = store_boxes[0]
+	last_selected_item_store = store_boxes[0]
 	
 	# show first item
 	update_ui(selected_item)
@@ -45,93 +33,55 @@ func _ready():
 		tutorial_dog.tree_exited.connect(func(): canvas.queue_free())
 		
 func add_items():
-	var type := ItemUpgradeBox.Type
-	
-	for data in Data.dog_info.values():	
-		# only show upgrade box of a dog if it is unlockable or if player already has the dog
-		if data['obtain_type'] != 'unlockable' and not Data.dogs.has(data['ID']):
-			continue 
-				
-		var dog_item_box := createItemBox(type.CHARACTER, data, %NhanVat/MarginContainer/GridContainer)
-		dog_boxes.append(dog_item_box)
-		
-	for data in Data.skill_info.values():			
-		var skill_item_box := createItemBox(type.SKILL, data, %Skill/MarginContainer/GridContainer)
-		skill_boxes.append(skill_item_box)
+	var type := ItemStoreBox
+	print(Data.store.values())
+	for data in Data.store_info.values():		
+		var store_item_box := createItemBox(data, %Item/MarginContainer/GridContainer)
+		store_boxes.append(store_item_box)
 
-	for data in Data.passive_info.values():			
-		var passive_item_box := createItemBox(type.PASSIVE, data, %Passives/MarginContainer/GridContainer)
-		passive_boxes.append(passive_item_box)
-
-func sendInfo(item: ItemUpgradeBox):
+func sendInfo(item: ItemStoreBox):
 	$click.play()
 	update_ui(item)
 
-func update_ui(item: ItemUpgradeBox):
+func update_ui(item: ItemStoreBox):
 	selected_item.set_selected(false)
 	selected_item = item
 	selected_item.set_selected(true)
 	
-	var type := item.get_item_type() 
-	if type == ItemUpgradeBox.Type.SKILL:
-		last_selected_item_skill = selected_item
-	elif type == ItemUpgradeBox.Type.CHARACTER:
-		last_selected_item_character = selected_item
-	else:
-		last_selected_item_passive = selected_item
+	last_selected_item_store = selected_item
 	
 	%ItemName.text = item.get_item_name()
 	%ItemDescription.text = item.get_item_description()
 	
-	%NutNangCap.text = tr("@UPGRADE") if selected_item.get_level() > 0 else tr("@UNLOCK") 
+	%NutNangCap.text = tr("@BUY")
 		
-	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_level() >= 10 
+	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_amount() >= 10 
 	
-func createItemBox(type: ItemUpgradeBox.Type, data: Dictionary, container: GridContainer) -> ItemUpgradeBox:
+func createItemBox(data: Dictionary, container: GridContainer) -> ItemStoreBox:
 	var item = ListItem.instantiate()
-	item.setup(type, data, self)
+	item.setup(data, self)
 	container.add_child(item)
 	return item
 
-func _on_nut_quay_lai_pressed():
-	AudioPlayer.play_button_pressed_audio()
-	await get_tree().create_timer(0.5).timeout
-	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
-
-
-func _on_box_pressed(button):
-	$PhanGiua/PhanDuoi/ThongTin/Label_Item.text = button.text
-	
 func reupdate_current_ui():
 	selected_item.update_labels()
-	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_level() >= 10 
-	%NutNangCap.text = tr("@UPGRADE")
+	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_amount() >= 10 
+	%NutNangCap.text = tr("@BUY")
 
 func _on_nut_nang_cap_pressed():
 	AudioPlayer.play_button_pressed_audio()
 	Data.bone -= selected_item.get_price()
 	
-	var type := selected_item.get_item_type() 
 	var item_id := selected_item.get_item_id()
 	
-	if selected_item.get_level() > 0:
+	if selected_item.get_amount() > 0:
 		AudioPlayer.play_custom_sound(UPGRADE_AUDIO)
-		if type == ItemUpgradeBox.Type.SKILL:
-			Data.skills[item_id]['level'] += 1
-		elif type == ItemUpgradeBox.Type.CHARACTER:
-			Data.dogs[item_id]['level'] += 1
-		else:
-			Data.passives[item_id]['level'] += 1
+		Data.store[item_id]['amount'] += 1
 	
 	else: 
 		AudioPlayer.play_custom_sound(UNLOCK_AUDIO)
-		var item = {"ID": item_id, "level": 1}
-		if  type == ItemUpgradeBox.Type.SKILL:
-			Data.save_data["skills"].append(item)
-		elif type == ItemUpgradeBox.Type.CHARACTER:
-			Data.save_data["dogs"].append(item)
-		else:
-			Data.save_data["passives"].append(item)
+		var item = {"ID": item_id, "amount": 1}
+		Data.save_data["store"].append(item)
 	
 	Data.save()
 	reupdate_current_ui()

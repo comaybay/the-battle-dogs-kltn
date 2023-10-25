@@ -93,15 +93,7 @@ func createItemBox(type: ItemUpgradeBox.Type, data: Dictionary, container: GridC
 	container.add_child(item)
 	return item
 
-func _on_nut_quay_lai_pressed():
-	AudioPlayer.play_button_pressed_audio()
-	await get_tree().create_timer(0.5).timeout
-	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
-
-func _on_box_pressed(button):
-	$PhanGiua/PhanDuoi/ThongTin/Label_Item.text = button.text
-	
 func reupdate_current_ui():
 	selected_item.update_labels()
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_level() >= 10 

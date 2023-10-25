@@ -167,7 +167,7 @@ func _init() -> void:
 		skill_info[info['ID']] = info
 	file.close()
 	
-	file = FileAccess.open("res://resources/game_data/item.json", FileAccess.READ)
+	file = FileAccess.open("res://resources/game_data/store.json", FileAccess.READ)
 	var store_info_arr = JSON.parse_string(file.get_as_text())
 	for info in store_info_arr:
 		store_info[info['ID']] = info
@@ -249,10 +249,10 @@ func compute_values():
 	
 	for skill in save_data["skills"]:
 		skills[skill["ID"]] = skill
-		
-	for item in save_data["items"]:
+	
+	for item in save_data["store"]:
 		store[item["ID"]] = item
-		
+	
 	for passive in save_data["passives"]:
 		passives[passive["ID"]] = passive
 

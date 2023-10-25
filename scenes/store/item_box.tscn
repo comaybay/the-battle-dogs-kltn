@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dk7bj5d8loqag"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_l0dwr"]
-[ext_resource type="Script" path="res://scenes/upgrade/item_box.gd" id="2_44r87"]
+[ext_resource type="Script" path="res://scenes/store/item_box.gd" id="2_1r6l5"]
 [ext_resource type="Texture2D" uid="uid://cqte340ris3tl" path="res://scenes/buttons/character_button/character_button.png" id="3_mqac3"]
 [ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="4_i5a0s"]
 [ext_resource type="Texture2D" uid="uid://bnp7cvbuvml6e" path="res://resources/images/bone.png" id="5_wtanw"]
@@ -52,7 +52,7 @@ anchors_preset = 0
 offset_right = 200.0
 offset_bottom = 200.0
 theme = ExtResource("1_l0dwr")
-script = ExtResource("2_44r87")
+script = ExtResource("2_1r6l5")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(130.04, 116)
@@ -81,13 +81,13 @@ offset_bottom = 216.0
 focus_mode = 0
 theme_type_variation = &"ButtonItem"
 
-[node name="Level" type="Label" parent="."]
+[node name="Amount" type="Label" parent="."]
 layout_mode = 2
 offset_left = 12.0
 offset_right = 212.0
 offset_bottom = 37.0
 theme_type_variation = &"LabelLarge"
-text = "Level. 1"
+text = "x0"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
