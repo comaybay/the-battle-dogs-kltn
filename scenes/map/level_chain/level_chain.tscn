@@ -16,14 +16,9 @@ size = Vector2i(1152, 104)
 render_target_update_mode = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewport"]
+unique_name_in_owner = true
 offset_top = 10.0
 offset_right = 800.0
 offset_bottom = 94.0
 theme = ExtResource("1_7vyg4")
-theme_override_constants/separation = 25
-
-[node name="Camera2D" type="Camera2D" parent="SubViewport"]
-unique_name_in_owner = true
-anchor_mode = 0
-position_smoothing_enabled = true
-editor_draw_limits = true
+theme_override_constants/separation = 30

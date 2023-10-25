@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxhxq16wxf2v4"]
+[gd_scene load_steps=13 format=3 uid="uid://dxhxq16wxf2v4"]
 
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_8y4hw"]
 [ext_resource type="Texture2D" uid="uid://n6v67c6byuj1" path="res://scenes/characters/cats/ramiel_cat/ramiel_cat.png" id="2_0ud4e"]
 [ext_resource type="Texture2D" uid="uid://dyirkswmt6hyu" path="res://scenes/characters/cats/ramiel_cat/attack_effect.png" id="3_6718s"]
 [ext_resource type="Texture2D" uid="uid://cnj7qy5b1vg30" path="res://scenes/characters/cats/ramiel_cat/explosion.png" id="4_j44cu"]
+[ext_resource type="AudioStream" uid="uid://b8ve6a44ao51y" path="res://scenes/characters/cats/ramiel_cat/attack.mp3" id="5_g4u3k"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -382,3 +383,6 @@ shape = SubResource("RectangleShape2D_8x7au")
 [node name="RayCast2D" parent="." index="4"]
 position = Vector2(-292, 252)
 target_position = Vector2(-1450, 0)
+
+[node name="AttackSound" parent="FiniteStateMachine/AttackState" index="0"]
+stream = ExtResource("5_g4u3k")

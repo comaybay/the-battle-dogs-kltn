@@ -66,10 +66,11 @@ keys,vi,en
 @CREDIT_CMB,"Lập trình, Đồ họa, Hoạt hình","Programming, Art, Animations"
 @CREDIT_TAK,"Lập trình, Kiếm resource cho game","Programming, Resource Finding"
 @CREDIT_SPECIAL_THANKS,Special Thanks dành cho:,Special Thanks to:
-@CREDIT_MUSMUS,MusMus (musmus.main.jp) cung cấp BGM miễn phí cho game,MusMus (musmus.main.jp) for providing free BGMs for the game
+@CREDIT_MUSMUS,MusMus (musmus.main.jp) cung cấp BGM miễn phí cho game (nhạc quá hay luôn!),MusMus (musmus.main.jp) for providing free BGMs for the game (they're so good!)
 @CREDIT_MIXKIT,Mixkit (mixkit.co) cung cấp sound effect miễn phí cho game,MusMus (musmus.main.jp) for providing free sound effects for the game
 @CREDIT_PIXABAY,Pixabay (pixabay.com) cung cấp sound effect miễn phí cho game,Pixabay (pixabay.com) for providing free sound effects for the game
 @CREDIT_RIGOR_MORTIS,"Rigor Mortis: Test game, góp ý và gợi ý tưởng cho game","Rigor Mortis: Testing out the game, provide feedback and ideas for the game"
+@CREDIT_BILITIS,Bilitis: Test game phiên bản web trên điện thoại,Bilitis: Testing the web version of the game on mobile
 @LEVEL_1_NAME,Doggonamu,Doggonamu
 @LEVEL_2_NAME,Cẩupuchia,Dogbodia
 @LEVEL_3_NAME,Xích Cẩu,Crimsom Hound
@@ -96,7 +97,6 @@ keys,vi,en
 @FASTESTTIME,Thời gian,Time score
 @HIGHSCORE_DESCRIPTION,Bảng xếp hạng người chơi có số điểm online cao nhất,Ranking table of players with the highest online score
 @FASTESTTIME_DESCRIPTION,Bảng xếp hạng người chơi hoàn thành màn cuối với thời gian nhanh nhất,Ranking table of players completing the final stage with the fastest time
-@NO,Có,Yes
 @SELECT_PLAYER_DATA?,Bạn muốn sử dụng dữ liệu từ Steam hay máy tính (Lưu ý: hành động này sẽ xóa dữ hiện có trong máy tính hoặc Steam của bạn),Do you like to use data from Steam or computer (This action will delete data from your computer or your Steam)
 @VICTORYCOUNT,Hoàn thành,Victory
 @VICTORYCOUNT_DESCRIPTION,Bảng xếp hạng người chơi có số lần hoàn thành màn cuối nhiều lần nhất,Leaderboard for players who have completed the final level the most times

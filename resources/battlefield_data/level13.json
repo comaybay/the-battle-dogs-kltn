@@ -1,10 +1,11 @@
 {
   "theme": "heavenly",
   "music": "battlefield_theme_heavenly",
+  "boss_music": "final_boss_theme",
   "stage_width": 7200,
   "cat_tower_health": 100000,
   "reward_bone": 999999,
-  "power_scale": 1.5,
+  "power_scale": 2.5,
   "spawn_patterns": [
     {
       "name": "cat",

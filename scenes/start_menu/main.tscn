@@ -274,7 +274,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 10
 
 [node name="NutBatDau" type="Button" parent="Khung/PhanCuoi"]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
@@ -282,41 +282,31 @@ text = "@START_GAME"
 
 [node name="OnlinePlayButton" type="Button" parent="Khung/PhanCuoi"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 text = "@ONLINE_PLAY"
 
-[node name="NutHuongDan" type="Button" parent="Khung/PhanCuoi"]
-visible = false
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-focus_mode = 0
-text = "@HELP"
-language = "vi"
-
 [node name="SettingsButton" type="Button" parent="Khung/PhanCuoi"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 text = "@SETTINGS"
-language = "vi"
 
 [node name="CreditButton" type="Button" parent="Khung/PhanCuoi"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 text = "@CREDIT"
-language = "vi"
 
-[node name="NutThoat" type="Button" parent="Khung/PhanCuoi"]
-custom_minimum_size = Vector2(150, 50)
+[node name="QuitButton" type="Button" parent="Khung/PhanCuoi"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
@@ -339,7 +329,5 @@ dialog_autowrap = true
 cancel_button_text = "@STEAM"
 
 [connection signal="pressed" from="Khung/PhanCuoi/NutBatDau" to="." method="_on_nut_bat_dau_pressed"]
-[connection signal="pressed" from="Khung/PhanCuoi/NutHuongDan" to="." method="_on_nut_huong_dan_pressed"]
-[connection signal="pressed" from="Khung/PhanCuoi/NutThoat" to="." method="_on_nut_thoat_pressed"]
 [connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_player"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_computer"]

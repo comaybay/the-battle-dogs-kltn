@@ -64,3 +64,11 @@ func get_dog_level(dog_id: String) -> int:
 		return Data.dogs[dog_id]['level']
 	
 	return int(SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_POWER_LEVEL))
+
+func get_passive_level(passive_id: String) -> int:
+	if in_p2p_battle:
+		push_error("Error: get_passive_level(passive_id: String) not implemented")
+		return 0
+	
+	return get_player_data().get_passive_level(passive_id) 
+	

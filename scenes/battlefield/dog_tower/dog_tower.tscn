@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://lyrmnwxclfgn"]
+[gd_scene load_steps=11 format=3 uid="uid://lyrmnwxclfgn"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/dog_tower/dog_tower.gd" id="1_ywct4"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_jattt"]
 [ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="3_g44t7"]
-[ext_resource type="Texture2D" uid="uid://chienqihdhe53" path="res://resources/battlefield_themes/green_grass/dog_tower.png" id="3_x1awv"]
-[ext_resource type="PackedScene" uid="uid://dwob74kj32y7y" path="res://scenes/battlefield/dog_tower/gun/gun.tscn" id="5_ndalp"]
+[ext_resource type="Texture2D" uid="uid://30y660mghnsm" path="res://resources/battlefield_themes/green_grass/dog_tower.png" id="3_x1awv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]
 font_size = 52
@@ -12,7 +11,7 @@ outline_size = 20
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghq1y"]
-size = Vector2(408, 1002)
+size = Vector2(408, 914)
 
 [sub_resource type="Animation" id="Animation_uenk0"]
 length = 0.001
@@ -80,7 +79,7 @@ position = Vector2(8, -500)
 texture = ExtResource("3_x1awv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -473)
+position = Vector2(-1, -429)
 shape = SubResource("RectangleShape2D_ghq1y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -95,6 +94,3 @@ gizmo_extents = 54.5
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_g44t7")
 bus = &"InBattleFX"
-
-[node name="Gun" parent="." instance=ExtResource("5_ndalp")]
-position = Vector2(19, -667)

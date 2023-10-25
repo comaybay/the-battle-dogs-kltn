@@ -47,10 +47,10 @@ var _multipliers: Dictionary = {
 ## in seconds
 @export var attack_cooldown: float = 2: # toc do danh
 	set(val):
-		attack_cooldown = val
+		attack_cooldown = max(val, 0.05)
 		if n_AttackCooldownTimer:
 		# for some reason timer do not take in 0 correctly	
-			n_AttackCooldownTimer.wait_time = max(attack_cooldown, 0.01)
+			n_AttackCooldownTimer.wait_time = attack_cooldown
 		
 ## check what frame should an attack occurr when playing the attack animation
 @export var attack_sprite: Sprite2D = null
@@ -87,6 +87,11 @@ func setup(global_position: Vector2) -> void:
 	self.global_position = global_position
 	_reready()
 
+func _init() -> void:
+	if not Engine.is_editor_hint():
+		# hide away the character until everything is setup
+		position.y = 999999 
+
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		## add random sprite offset for better visibility when characters are stacked on eachother
@@ -110,7 +115,7 @@ func _reready():
 	move_direction = (1 if character_type == Type.DOG else -1)
 	
 	# for some reason timer do not take in 0 correctly
-	n_AttackCooldownTimer.wait_time = max(attack_cooldown, 0.01)
+	n_AttackCooldownTimer.wait_time = attack_cooldown
 	
 	n_RayCast2D.target_position.x = attack_range * move_direction
 	
@@ -214,7 +219,7 @@ func set_multiplier(type: MultiplierTypes, multiplier: float) -> void:
 	_multipliers[type] = multiplier
 	
 	if type == MultiplierTypes.ATTACK_SPEED:
-		n_AttackCooldownTimer.wait_time = attack_cooldown * multiplier
+		n_AttackCooldownTimer.wait_time = max(attack_cooldown * multiplier, 0.05)
 		$AnimationPlayer.speed_scale = multiplier
 		
 func reset_multipliers() -> void:

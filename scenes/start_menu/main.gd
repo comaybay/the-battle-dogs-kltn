@@ -24,6 +24,11 @@ func _ready():
 	%SettingsButton.pressed.connect(_go_to_settings)
 	%CreditButton.pressed.connect(_go_to_credits)
 	
+	if Global.is_host_OS_web():
+		%QuitButton.visible = false
+	else:
+		%QuitButton.pressed.connect(_quit_game)
+	
 	Data.select_data.connect(show_select_data_box)
 
 func show_select_data_box():
@@ -36,13 +41,9 @@ func _on_nut_bat_dau_pressed():
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
-func _on_nut_thoat_pressed():
+func _quit_game():
 	AudioPlayer.play_button_pressed_audio()
 	get_tree().quit()
-
-func _on_nut_huong_dan_pressed():
-	AudioPlayer.play_button_pressed_audio()
-	get_tree().change_scene_to_file("res://scenes/instruction/instruction.tscn")
 
 func _go_to_credits():
 	AudioPlayer.play_button_pressed_audio()

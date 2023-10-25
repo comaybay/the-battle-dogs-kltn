@@ -16,7 +16,7 @@ func _on_dog_spawn(dog: BaseDog):
 	
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
-	tween.tween_property(camera, "position:x", dog.position.x, 1)
+	tween.tween_property(camera, "position", dog.position, 1)
 	
 	await tween.finished
 	await get_tree().create_timer(0.5).timeout

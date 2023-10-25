@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ptefimb4e1sb"
-path="res://.godot/imported/new_bullet.png-e44a5932f3a4e71f1792dc8e4a6693d5.ctex"
+uid="uid://t34bq117ctbi"
+path="res://.godot/imported/gandolfg.png-c46b2579ea6271cede6d3d5bd744c21d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/icons/new_bullet.png"
-dest_files=["res://.godot/imported/new_bullet.png-e44a5932f3a4e71f1792dc8e4a6693d5.ctex"]
+source_file="res://scenes/battlefield/dog_tower/gandoglf/gandolfg.png"
+dest_files=["res://.godot/imported/gandolfg.png-c46b2579ea6271cede6d3d5bd744c21d.ctex"]
 
 [params]
 

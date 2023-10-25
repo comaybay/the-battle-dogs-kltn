@@ -482,7 +482,6 @@ resource_local_to_scene = true
 size = Vector2(604, 1134)
 
 [node name="SniperDog" node_paths=PackedStringArray("custom_attack_area") instance=ExtResource("1_qnr0p")]
-z_index = 40
 position = Vector2(2, 1)
 name_id = "sniper_dog"
 speed = 80
@@ -566,4 +565,7 @@ position = Vector2(261, 62)
 target_position = Vector2(1650, 0)
 
 [node name="Arrow" parent="." index="7"]
-position = Vector2(0, -1134)
+offset_left = 0.0
+offset_top = -1134.0
+offset_right = 720.0
+offset_bottom = -728.0

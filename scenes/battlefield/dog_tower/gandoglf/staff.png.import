@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbfva6ifdxxdl"
-path="res://.godot/imported/arrow.jpg-5ce7294624b2608e51bf7962f24faae3.ctex"
+uid="uid://caabxbxbqmlc6"
+path="res://.godot/imported/staff.png-5f457c940d43fbb6d4ae6fc21f786fe1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/icons/arrow.jpg"
-dest_files=["res://.godot/imported/arrow.jpg-5ce7294624b2608e51bf7962f24faae3.ctex"]
+source_file="res://scenes/battlefield/dog_tower/gandoglf/staff.png"
+dest_files=["res://.godot/imported/staff.png-5f457c940d43fbb6d4ae6fc21f786fe1.ctex"]
 
 [params]
 

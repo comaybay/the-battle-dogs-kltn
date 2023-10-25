@@ -62,7 +62,7 @@ func _ready() -> void:
 	_player_dog_tower = $P2PDogTowerLeft as P2PDogTower
 	_opponent_dog_tower = $P2PDogTowerRight as P2PDogTower
 	
-	var half_viewport_size = get_viewport().size / 2
+	var half_viewport_size = Global.VIEWPORT_SIZE / 2
 	$Camera2D.position = Vector2(0, -half_viewport_size.y)
 	
 	if SteamUser.STEAM_ID != SteamUser.get_lobby_owner():
