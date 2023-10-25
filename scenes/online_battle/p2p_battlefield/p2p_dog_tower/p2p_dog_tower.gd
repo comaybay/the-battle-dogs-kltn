@@ -15,7 +15,7 @@ func setup(is_player_tower: bool, player_data: P2PBattlefieldPlayerData):
 	_player_data = player_data
 
 func _ready() -> void:
-	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/dog_tower.png" % Steam.getLobbyData(SteamUser.lobby_id, "theme"))
+	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/dog_tower.png" % SteamUser.get_lobby_data("theme"))
 	_setup_max_health()
 	
 func _setup_max_health() -> void:

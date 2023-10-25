@@ -262,8 +262,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -10.0
-offset_bottom = 280.0
+offset_top = 33.0
+offset_bottom = 323.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -282,6 +282,7 @@ text = "@START_GAME"
 
 [node name="OnlinePlayButton" type="Button" parent="Khung/PhanCuoi"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4

@@ -51,6 +51,7 @@ layout_mode = 2
 size_flags_vertical = 2
 
 [node name="NutCuaHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="4"]
+visible = false
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -63,6 +64,7 @@ layout_mode = 2
 size_flags_vertical = 2
 
 [node name="NutXepHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="6"]
+visible = false
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4

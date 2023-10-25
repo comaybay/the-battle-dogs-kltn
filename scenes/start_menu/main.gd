@@ -29,13 +29,6 @@ func _ready():
 	else:
 		%QuitButton.pressed.connect(_quit_game)
 	
-	Data.select_data.connect(show_select_data_box)
-
-func show_select_data_box():
-	if Data.data_notifi == true:		
-		Data.data_notifi = false
-		$ConfirmationDialog.show()	
-
 func _on_nut_bat_dau_pressed():
 	AudioPlayer.stop_custom_music()
 	
@@ -94,18 +87,4 @@ func _go_to_lobby():
 	get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")
 
 
-func _on_confirmation_dialog_player():
-	var sw_result = await SilentWolf.Players.get_player_data(Data.silentwolf_data.user_name).sw_get_player_data_complete
-	Data.save_data = sw_result.player_data
-	Data.silentwolf_data = sw_result.player_data
-	Data.use_sw_data = true
 
-	
-
-func _on_confirmation_dialog_computer():
-	var sw_result = await SilentWolf.Players.get_player_data(Data.silentwolf_data.user_name).sw_get_player_data_complete
-	var user_name = Data.silentwolf_data["user_name"]
-	Data.silentwolf_data = Data.save_data
-	await SilentWolf.Players.save_player_data(user_name, Data.silentwolf_data)
-	Data.save()
-	
