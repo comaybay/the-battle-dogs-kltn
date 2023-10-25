@@ -1,5 +1,7 @@
 extends Node
 
+const TOUCH_EPSISLON: float = 2
+
 # called when the state is activated
 func _ready():
 #	delete_score("yyyanhkhoa","fastest_time")

@@ -36,6 +36,7 @@ func update_flag_position():
 
 
 var _pressed: bool = false
+var _drag_distance := Vector2.ZERO
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		_pressed = event.pressed
@@ -44,4 +45,7 @@ func _gui_input(event: InputEvent) -> void:
 			disabled = false
 		
 	if _pressed and event is InputEventMouseMotion:
-		disabled = true
+		_drag_distance += event.relative.abs()
+		
+		if _drag_distance.length() > Global.TOUCH_EPSISLON:
+			disabled = true

@@ -1,7 +1,6 @@
 extends ScrollContainer
-
-# Allows you to scroll a scroll container by dragging.
-# Includes momentum.
+## Allows you to scroll a scroll container by dragging.
+## Includes momentum.
 
 var swiping = false
 var swipe_start
@@ -9,7 +8,7 @@ var swipe_mouse_start
 var swipe_mouse_times = []
 var swipe_mouse_positions = []
 
-var scrolled: bool = false
+var drag_distance := Vector2.ZERO
 
 func _ready() -> void:
 	set_process_input(visible)
@@ -48,14 +47,15 @@ func _input(ev):
 				tween.play()
 			
 			## consume the input to avoid children from reacting if has been scrolled
-			if scrolled:
+			if drag_distance.length() > Global.TOUCH_EPSISLON:
 				get_viewport().set_input_as_handled()
 				
 			swiping = false
-			scrolled = false
+			drag_distance = Vector2.ZERO
 				
 	elif swiping and ev is InputEventMouseMotion:
-		scrolled = true
+		drag_distance += ev.relative.abs()
+		print(ev.relative.abs())
 		var delta = ev.position - swipe_mouse_start
 		set_h_scroll(swipe_start.x - delta.x)
 		set_v_scroll(swipe_start.y - delta.y)
