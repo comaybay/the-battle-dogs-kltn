@@ -1,6 +1,8 @@
 class_name CameraControlButtons extends HBoxContainer
 ## This class contains buttons to control camera as well as
 
+const SCROLL_WAIT_TIME: float = 0.1
+
 ## velocity to move camera when user flick the screen
 var flick_velocity: Vector2 = Vector2.ZERO
 var _drag_relative: Vector2 = Vector2.ZERO
@@ -92,6 +94,7 @@ func _input(event: InputEvent) -> void:
 		_scroll_down = false
 		$ZoomIn/AnimationPlayer.play("on")
 		$ZoomOut/AnimationPlayer.play("off")
+		$Timer.wait_time = SCROLL_WAIT_TIME * Engine.time_scale
 		$Timer.start()
 		
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
@@ -99,6 +102,7 @@ func _input(event: InputEvent) -> void:
 		_scroll_up = false
 		$ZoomOut/AnimationPlayer.play("on")
 		$ZoomIn/AnimationPlayer.play("off")
+		$Timer.wait_time = SCROLL_WAIT_TIME * Engine.time_scale
 		$Timer.start()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -198,6 +202,6 @@ func _handle_swipe_and_drag_input(ev: InputEvent) -> void:
 		swipe_mouse_positions.append(ev.position)
 		
 		## stop button from active if drag stopped
-		await get_tree().create_timer(0.1, false).timeout
+		await get_tree().create_timer(0.1 * Engine.time_scale, false).timeout
 		if _drag_relative == ev.relative:
 			_drag_relative = Vector2.ZERO

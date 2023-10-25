@@ -48,12 +48,12 @@ func _process(delta: float) -> void:
 
 	if not _camera_control_buttons.is_dragging():
 		if not _camera_control_buttons.flick_velocity.is_zero_approx():
-			position = position + _camera_control_buttons.flick_velocity * delta
+			position = position + _camera_control_buttons.flick_velocity * (delta / Engine.time_scale)
 		else:
 			var left := int(_camera_control_buttons.is_move_left_on())
 			var right := int(_camera_control_buttons.is_move_right_on())
 			var direction := right - left
-			position.x = position.x + MOVE_SPEED * direction * delta 
+			position.x = position.x + MOVE_SPEED * direction * (delta / Engine.time_scale)
 		
 	_last_center_x = get_screen_center_position().x
 	_last_pos_x = position.x
@@ -74,7 +74,7 @@ func _process(delta: float) -> void:
 ## with modifications
 func handle_zoom(direction: int, delta: float):
 	var prev_zoom := zoom
-	zoom += zoom * ZOOM_SPEED * delta * direction
+	zoom += zoom * ZOOM_SPEED * (delta / Engine.time_scale) * direction
 	zoom = zoom.clamp(min_zoom, MAX_ZOOM)
 	
 	position = position  + (_mouse_pos - half_viewport_size) * (

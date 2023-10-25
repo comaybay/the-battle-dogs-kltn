@@ -16,7 +16,7 @@ func enter(data: Dictionary) -> void:
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 
-	tween.tween_property(camera, "position:x", cat_tower.position.x, 1.5)
+	tween.tween_property(camera, "position", cat_tower.position, 1.5)
 	
 	await tween.finished
 	
