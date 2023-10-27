@@ -43,14 +43,14 @@ func get_player_data() -> BaseBattlefieldPlayerData:
 	
 ## only works if is in p2p mode
 func get_opponent_data() -> P2PBattlefieldPlayerData:
-	return (get_battlefield() as OnlineBattlefield)._opponent_player_data
+	return (get_battlefield() as P2PBattlefield)._opponent_player_data
 	
 ## Helper function to get skill level of player or enemy depeneding on the given 'skill_user' 
 func get_skill_level(skill_id: String, skill_user: Character.Type) -> int:
 	if not in_p2p_battle:
 		return get_player_data().get_skill_level(skill_id)
 		
-	var battlefield := get_battlefield() as OnlineBattlefield
+	var battlefield := get_battlefield() as P2PBattlefield
 	var player_data: P2PBattlefieldPlayerData
 	if skill_user == Character.Type.DOG:
 		player_data = battlefield.get_dog_tower_left().get_player_data()

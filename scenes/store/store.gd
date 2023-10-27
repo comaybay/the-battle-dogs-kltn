@@ -48,7 +48,7 @@ func _on_quay_lai_pressed():
 
 
 func _on_nut_mua_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	Data.bone -= selected_item.get_price()
 	
 	if selected_item.get_amount() > 0:

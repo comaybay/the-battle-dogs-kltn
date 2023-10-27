@@ -1,42 +1,18 @@
 extends Node
 
+# preloaded audio
 const BUTTON_PRESSED_AUDIO: AudioStream = preload("res://resources/sound/button_pressed.mp3")
-const LEVEL_SELECTED_AUDIO: AudioStream = preload("res://resources/sound/level_selected.wav")
-const DOG_BASE_THEME_AUDIO: AudioStream = preload("res://resources/sound/music/dog_base_theme.mp3")
 
-var _playback_position: float = 0
-var _music_stopping: bool = false
-var _music_starting: bool = false
-var _tween: Tween
+enum AudioType { MUSIC, SFX }
+const MUSIC_DEFAULT_DB: float = -7.0
+const SFX_DEFAULT_DB: float = 0.0
 
-var custom_sound: AudioStreamPlayer
-var button_pressed: AudioStreamPlayer
-var custom_music: AudioStreamPlayer
-var dogbase_music: AudioStreamPlayer
-var level_selected: AudioStreamPlayer
+## contain players and related data like tween node and playback position 
+var music_players: Dictionary = {} 
 
-func _create_audio_sfx(audio: AudioStream):
-	var audio_player = AudioStreamPlayer.new()
-	audio_player.bus = "SoundFX"
-	audio_player.stream = audio
-	add_child(audio_player)
-	return audio_player
-	
 func _ready() -> void:
 	process_mode =  PROCESS_MODE_ALWAYS
-	custom_sound = _create_audio_sfx(null)
-	button_pressed = _create_audio_sfx(BUTTON_PRESSED_AUDIO)
-	level_selected = _create_audio_sfx(LEVEL_SELECTED_AUDIO)
 		
-	dogbase_music = AudioStreamPlayer.new()
-	dogbase_music.stream = DOG_BASE_THEME_AUDIO
-	dogbase_music.bus = "Music"
-	dogbase_music.volume_db = -7
-	add_child(dogbase_music)
-	
-	custom_music = dogbase_music.duplicate()
-	add_child(custom_music)
-	
 	var sound_fx_idx = AudioServer.get_bus_index("SoundFX")
 	var music_idx = AudioServer.get_bus_index("Music")
 	
@@ -59,52 +35,92 @@ func _ready() -> void:
 			AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(value / 100.0))
 	)
 
-func play_button_pressed_audio():
-	button_pressed.play()
+func _create_audio_player_data(audio: AudioStream, type: AudioType) -> Dictionary:
+	return {
+		"tween": create_tween(),
+		"player": ( 
+			_create_music_audio_plyaer(audio) if type == AudioType.MUSIC 
+			else _create_sfx_audio_player(audio)
+		),
+		"playback_position": 0.0
+	}
 
-func play_level_selected_audio():
-	level_selected.play()
+func _create_music_audio_plyaer(audio: AudioStream) -> AudioStreamPlayer:
+	var music_player := AudioStreamPlayer.new()
+	music_player.stream = audio
+	music_player.bus = "Music"
+	music_player.volume_db = MUSIC_DEFAULT_DB
+	add_child(music_player)
+	return music_player
 	
-func pause_dogbase_music():
-	_music_stopping = true
-	_tween = create_tween()
-	_tween.tween_property(dogbase_music, "volume_db", -70, 0.7)
+func _create_sfx_audio_player(audio: AudioStream) -> AudioStreamPlayer:
+	var sfx_player = AudioStreamPlayer.new()
+	sfx_player.bus = "SoundFX"
+	sfx_player.stream = audio
+	sfx_player.volume_db = SFX_DEFAULT_DB
+	add_child(sfx_player)
+	return sfx_player
 	
-	_tween.finished.connect(_handle_finished, CONNECT_ONE_SHOT)
+func play_sfx(audio_stream: AudioStream, pitch_scale: float = 1.0):
+	var sfx_player = _create_sfx_audio_player(audio_stream)
+	sfx_player.pitch_scale = pitch_scale
+	sfx_player.play()
 	
-func resume_dogbase_music():
-	if dogbase_music.playing and _music_stopping == false:
-		return
+	await sfx_player.finished
+	sfx_player.queue_free()
+
+func play_music(audio_stream: AudioStream, resume: bool = false, with_transition: bool = false):
+	if not music_players.has(audio_stream.resource_path):
+		music_players[audio_stream.resource_path] = _create_audio_player_data(audio_stream, AudioType.MUSIC)
 		
-	_music_starting = true
-	if _music_stopping:
-		_tween.stop()
+	var music_data: Dictionary = music_players[audio_stream.resource_path]
+	var music_player: AudioStreamPlayer = music_data['player']
+			
+	var tween: Tween = music_data['tween']
+	
+	if not with_transition:
+		music_player.volume_db = MUSIC_DEFAULT_DB
+		tween.kill()
+	else:		
+		tween.pause()
+		tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_property(music_player, "volume_db", -7, 0.5)
+		music_data['tween'] = tween
+	
+	# music is not fully stopped yet (still being in fade out transition)
+	if resume and music_player.playing:
+		return
+	
+	if resume:
+		music_player.play(music_data['playback_position'])
 	else:
-		dogbase_music.play(_playback_position)
+		music_player.play()
 	
-	_tween = create_tween()
-	_tween.tween_property(dogbase_music, "volume_db", -7, 0.4)
+func stop_music(audio_stream: AudioStream, with_transition: bool = false):
+	var music_data: Dictionary = music_players[audio_stream.resource_path]
+	var music_player: AudioStreamPlayer = music_data['player']
 	
-	await _tween.finished 
-	_music_starting = false
+	var tween: Tween = music_data['tween']
+	tween.pause()
+	tween = create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(music_player, "volume_db", -80, 0.5)
+	music_data['tween'] = tween
 	
-func _handle_finished():
-	_music_stopping = false
-	if _music_starting == false:
-		_playback_position = dogbase_music.get_playback_position()
-		dogbase_music.stop()
+	await tween.finished
+	
+	# data might be removed  
+	if music_players.has(audio_stream.resource_path):
+		music_data['playback_position'] = music_player.get_playback_position()
+	
+	music_player.stop()	
+	
+## remove music data from memory (this includes playback position)
+func remove_music(audio_stream: AudioStream):
+	music_players.erase(audio_stream.resource_path)
 
-func play_custom_sound(audio_stream: AudioStream, pitch_scale: float = 1.0):
-	custom_sound.stream = audio_stream
-	custom_sound.pitch_scale = pitch_scale
-	custom_sound.play()
-
-func play_custom_music(audio_stream: AudioStream):
-	custom_music.stream = audio_stream
-	custom_music.play()
-	
-func stop_custom_music():
-	custom_music.stop()
-	
 func get_random_pitch_scale() -> float:
 	return randf_range(0.85, 1.15)

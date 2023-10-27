@@ -4,6 +4,6 @@ signal goback_pressed
 
 func _ready() -> void:
 	%GoBackButton.pressed.connect(func(): 
-		AudioPlayer.play_button_pressed_audio()
+		AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 		goback_pressed.emit()
 	)

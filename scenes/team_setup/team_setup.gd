@@ -9,7 +9,6 @@ var skill_id_to_item: Dictionary
 @onready var skill_slots: Array[Node] = %SkillSlots.get_children()
 
 func _ready():		
-	AudioPlayer.resume_dogbase_music()
 	%TabContainer.set_tab_title(0, tr("@CHARACTERS"))
 	%TabContainer.set_tab_title(1, tr("@SKILLS"))
 	%TabContainer.tab_changed.connect(_on_tab_container_tab_changed)
@@ -27,9 +26,6 @@ func _ready():
 		canvas.add_child.call_deferred(tutorial_dog)
 		tutorial_dog.tree_exited.connect(func(): canvas.queue_free())
 	
-func _exit_tree() -> void:
-	AudioPlayer.pause_dogbase_music()
-
 func loadCharacterList() -> void:
 	for data in Data.dogs.values():
 		var item := create_item(data['ID'], SelectCharacterBox.Type.CHARACTER)

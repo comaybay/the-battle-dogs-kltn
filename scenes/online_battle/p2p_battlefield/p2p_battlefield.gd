@@ -1,4 +1,4 @@
-class_name OnlineBattlefield extends BaseBattlefield
+class_name P2PBattlefield extends BaseBattlefield
 
 var VictoryGUI: PackedScene = preload("res://scenes/battlefield/victory_gui/victory_gui.tscn")
 var DefeatGUI: PackedScene = preload("res://scenes/battlefield/defeat_gui/defeat_gui.tscn")
@@ -51,7 +51,7 @@ func _ready() -> void:
 	var stage_width_with_margin = _stage_width + (TOWER_MARGIN * 2)
 	
 	$ConnectionHandler.setup(%Popup)
-	$Camera2D.setup(($Gui as OnlineBattleGUI).camera_control_buttons, stage_width_with_margin)
+	$Camera2D.setup(($Gui as P2PBattleGUI).camera_control_buttons, stage_width_with_margin)
 	$Music.stream = load("res://resources/sound/music/%s.mp3" % SteamUser.get_lobby_data("music"))
 	$Music.play()
 	

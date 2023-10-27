@@ -11,7 +11,7 @@ func _ready():
 		$BackForward.disabled = true
 		
 func _on_move_forward_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	count += 1
 	screens[count-1].visible = false
 	screens[count].visible = true
@@ -22,7 +22,7 @@ func _on_move_forward_pressed():
 
 
 func _on_back_forward_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	count -= 1
 	screens[count+1].visible = false
 	screens[count].visible = true
@@ -34,6 +34,6 @@ func _on_back_forward_pressed():
 
 
 func _on_go_back_button_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file("res://scenes/start_menu/main.tscn")
 	pass # Replace with function body.

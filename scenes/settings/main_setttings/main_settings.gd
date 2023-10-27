@@ -18,14 +18,14 @@ func _ready() -> void:
 	)
 	
 	%SFXSlider.drag_ended.connect(func(_value_changed: bool) -> void:
-		AudioPlayer.play_button_pressed_audio()
+		AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	)
 
 	Data.mute_music_changed.connect(on_mute_music_changed)
 	Data.mute_sound_fx_changed.connect(on_mute_sfx_changed)	
 	
 	%KeyBindingSettingsButton.pressed.connect(func() -> void:
-		AudioPlayer.play_button_pressed_audio()
+		AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 		keybinding_settings_pressed.emit()
 	)
 	

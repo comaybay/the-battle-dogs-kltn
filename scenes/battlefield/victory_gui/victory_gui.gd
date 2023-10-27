@@ -27,7 +27,7 @@ func _tween_bone_number(value: int):
 	bone_label.text = str(value)
 
 func _go_to_dog_base():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	if Data.selected_level < 12:
 		get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 	else:

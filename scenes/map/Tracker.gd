@@ -1,5 +1,7 @@
 class_name Tracker extends Node2D
 
+const LEVEL_SELECTED_AUDIO: AudioStream = preload("res://resources/sound/level_selected.wav")
+
 signal move_level(target_level: Level)
 
 var mouse_pressed = false
@@ -40,7 +42,7 @@ func setup(levels: Array[Node], level_chain: LevelChain, map: Sprite2D, drag_are
 		
 func _move_to_level(level: Level, play_sound := true):
 	if play_sound:
-		AudioPlayer.play_level_selected_audio()
+		AudioPlayer.play_sfx(LEVEL_SELECTED_AUDIO)
 	
 	current_level.set_selected(false)
 	level.set_selected(true)

@@ -8,7 +8,7 @@ func _ready() -> void:
 	select(LANGUAGES.find(Data.game_language))
 
 	item_selected.connect(func (index: int) -> void:
-		AudioPlayer.play_button_pressed_audio()
+		AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 		TranslationServer.set_locale(LANGUAGES[index])	
 		
 		Data.game_language = LANGUAGES[index]

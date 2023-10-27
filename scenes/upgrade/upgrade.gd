@@ -2,6 +2,7 @@ extends Control
 
 const ListItem = preload("res://scenes/upgrade/item_box.tscn")
 
+const SHOP_THEME: AudioStream = preload("res://resources/sound/music/shop.mp3")
 const UNLOCK_AUDIO: AudioStream = preload("res://resources/sound/unlock.wav")
 const UPGRADE_AUDIO: AudioStream = preload("res://resources/sound/upgrade.mp3")
 
@@ -19,6 +20,8 @@ var skill_boxes: Array[ItemUpgradeBox]
 var passive_boxes: Array[ItemUpgradeBox]
 
 func _ready():
+	AudioPlayer.play_music(SHOP_THEME, false, false)
+	
 	%NutNangCap.disabled = true
 	%TabContainer.set_tab_title(0, tr("@CHARACTERS"))
 	%TabContainer.set_tab_title(1, tr("@SKILLS"))
@@ -43,6 +46,9 @@ func _ready():
 		var tutorial_dog = TutorialDogScene.instantiate()
 		canvas.add_child.call_deferred(tutorial_dog)
 		tutorial_dog.tree_exited.connect(func(): canvas.queue_free())
+
+func _exit_tree() -> void:
+	AudioPlayer.stop_music(SHOP_THEME, true)
 		
 func add_items():
 	var type := ItemUpgradeBox.Type
@@ -94,7 +100,7 @@ func createItemBox(type: ItemUpgradeBox.Type, data: Dictionary, container: GridC
 	return item
 
 func _on_nut_quay_lai_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
@@ -108,14 +114,14 @@ func reupdate_current_ui():
 	%NutNangCap.text = tr("@UPGRADE")
 
 func _on_nut_nang_cap_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	Data.bone -= selected_item.get_price()
 	
 	var type := selected_item.get_item_type() 
 	var item_id := selected_item.get_item_id()
 	
 	if selected_item.get_level() > 0:
-		AudioPlayer.play_custom_sound(UPGRADE_AUDIO)
+		AudioPlayer.play_sfx(UPGRADE_AUDIO)
 		if type == ItemUpgradeBox.Type.SKILL:
 			Data.skills[item_id]['level'] += 1
 		elif type == ItemUpgradeBox.Type.CHARACTER:
@@ -124,7 +130,7 @@ func _on_nut_nang_cap_pressed():
 			Data.passives[item_id]['level'] += 1
 	
 	else: 
-		AudioPlayer.play_custom_sound(UNLOCK_AUDIO)
+		AudioPlayer.play_sfx(UNLOCK_AUDIO)
 		var item = {"ID": item_id, "level": 1}
 		if  type == ItemUpgradeBox.Type.SKILL:
 			Data.save_data["skills"].append(item)

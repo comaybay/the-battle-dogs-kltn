@@ -25,7 +25,7 @@ func setup(skill_user: Character.Type) -> void:
 		effect.setup(global_pos, "on_emitter")
 	
 	else:
-		var bf := battlefield as OnlineBattlefield
+		var bf := battlefield as P2PBattlefield
 		var global_pos = (
 			bf.get_dog_tower_left().global_position if skill_user_is_dog
 			else bf.get_dog_tower_right().global_position

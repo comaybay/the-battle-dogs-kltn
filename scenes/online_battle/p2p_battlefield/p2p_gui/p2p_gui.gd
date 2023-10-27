@@ -1,4 +1,4 @@
-class_name OnlineBattleGUI extends CanvasLayer
+class_name P2PBattleGUI extends CanvasLayer
 
 @onready var spawn_buttons: Control = %P2PSpawnButtons
 @onready var money_label: Label = $MoneyLabel
@@ -23,4 +23,4 @@ func _process(_delta: float) -> void:
 func _on_paused() -> void:
 	$PauseMenu.show()
 	get_tree().paused = true
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)

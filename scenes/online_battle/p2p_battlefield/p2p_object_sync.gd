@@ -20,11 +20,11 @@ var _objectFactory: Dictionary = {
 var instance_map := {}
 var synced_map := {}
 
-var _battlefield: OnlineBattlefield
+var _battlefield: P2PBattlefield
 var _dog_tower_left: P2PDogTower
 var _dog_tower_right: P2PDogTower
 
-func setup(battlefield: OnlineBattlefield, dog_tower_left: P2PDogTower, dog_tower_right: P2PDogTower):
+func setup(battlefield: P2PBattlefield, dog_tower_left: P2PDogTower, dog_tower_right: P2PDogTower):
 	_battlefield = battlefield
 	_dog_tower_left = dog_tower_left
 	_dog_tower_right = dog_tower_right

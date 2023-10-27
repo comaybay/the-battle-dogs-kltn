@@ -7,7 +7,7 @@ func _ready() -> void:
 	$AnimationPlayer.play("inactive" if is_mute else "active")
 	pressed.connect(
 		func(): 
-			AudioPlayer.play_button_pressed_audio()
+			AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 			set_mute(!is_mute)
 	)
 

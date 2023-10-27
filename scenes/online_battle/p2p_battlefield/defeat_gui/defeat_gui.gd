@@ -6,5 +6,5 @@ func _ready() -> void:
 	return_button.pressed.connect(_go_to_dog_base)
 
 func _go_to_dog_base():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")

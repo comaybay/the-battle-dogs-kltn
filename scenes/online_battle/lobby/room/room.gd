@@ -75,7 +75,7 @@ func _on_lobby_data_update(success: int, lobby_id: int, member_id: int) -> void:
 	var music: String = SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_MUSIC)
 	if music != _prev_music_settings:
 		_prev_music_settings = music
-		AudioPlayer.play_custom_music(load("res://resources/sound/music/%s.mp3" % music))
+		AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % music))
 		
 	var battlefield_theme: String = SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_THEME)
 	if battlefield_theme != _prev_theme_settings:

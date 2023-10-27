@@ -13,7 +13,7 @@ func _ready() -> void:
 	set_process(false)
 
 func setup(
-		battlefield: OnlineBattlefield,
+		battlefield: P2PBattlefield,
 		this_player_data: P2PBattlefieldPlayerData, 
 		opponent_player_data: P2PBattlefieldPlayerData, 
 		this_player_dog_tower: P2PDogTower,

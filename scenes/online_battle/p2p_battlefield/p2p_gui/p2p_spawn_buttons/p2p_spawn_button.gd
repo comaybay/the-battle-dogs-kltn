@@ -6,7 +6,7 @@ const ERROR_MARGIN_EPSILON = 0.01
 var _p2p_networking: BattlefieldP2PNetworking
 
 func _ready() -> void:
-	var battlefield = get_tree().current_scene as OnlineBattlefield
+	var battlefield = get_tree().current_scene as P2PBattlefield
 	
 	battlefield.ready.connect(func():
 		_p2p_networking = battlefield.get_p2p_networking()
