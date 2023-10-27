@@ -51,11 +51,6 @@ z_index = 40
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("6_cy4w7")
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-volume_db = -9.0
-bus = &"Music"
-
 [node name="BossDrum" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_t23ci")
 bus = &"InBattleFX"

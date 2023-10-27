@@ -8,7 +8,10 @@ const MUSIC_DEFAULT_DB: float = -7.0
 const SFX_DEFAULT_DB: float = 0.0
 
 ## contain players and related data like tween node and playback position 
-var music_players: Dictionary = {} 
+var _music_players: Dictionary = {} 
+var _current_music: AudioStream
+## get currently playing music
+func get_current_music() -> AudioStream: return _current_music
 
 func _ready() -> void:
 	process_mode =  PROCESS_MODE_ALWAYS
@@ -70,10 +73,12 @@ func play_sfx(audio_stream: AudioStream, pitch_scale: float = 1.0):
 	sfx_player.queue_free()
 
 func play_music(audio_stream: AudioStream, resume: bool = false, with_transition: bool = false):
-	if not music_players.has(audio_stream.resource_path):
-		music_players[audio_stream.resource_path] = _create_audio_player_data(audio_stream, AudioType.MUSIC)
-		
-	var music_data: Dictionary = music_players[audio_stream.resource_path]
+	if not _music_players.has(audio_stream.resource_path):
+		_music_players[audio_stream.resource_path] = _create_audio_player_data(audio_stream, AudioType.MUSIC)
+	
+	_current_music = audio_stream
+	
+	var music_data: Dictionary = _music_players[audio_stream.resource_path]
 	var music_player: AudioStreamPlayer = music_data['player']
 			
 	var tween: Tween = music_data['tween']
@@ -97,12 +102,24 @@ func play_music(audio_stream: AudioStream, resume: bool = false, with_transition
 		music_player.play(music_data['playback_position'])
 	else:
 		music_player.play()
+		
+	music_player.finished.connect(
+		func():
+			_current_music = null
+			remove_music(audio_stream)
+	, CONNECT_ONE_SHOT)
 	
-func stop_music(audio_stream: AudioStream, with_transition: bool = false):
-	var music_data: Dictionary = music_players[audio_stream.resource_path]
+func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove_data: bool = false):
+	if audio_stream.resource_path == _current_music.resource_path:
+		_current_music = null
+		
+	var music_data: Dictionary = _music_players[audio_stream.resource_path]
 	var music_player: AudioStreamPlayer = music_data['player']
-	
 	var tween: Tween = music_data['tween']
+
+	if remove_data:
+		remove_music(audio_stream)
+	
 	tween.pause()
 	tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
@@ -113,14 +130,14 @@ func stop_music(audio_stream: AudioStream, with_transition: bool = false):
 	await tween.finished
 	
 	# data might be removed  
-	if music_players.has(audio_stream.resource_path):
+	if _music_players.has(audio_stream.resource_path):
 		music_data['playback_position'] = music_player.get_playback_position()
 	
 	music_player.stop()	
 	
 ## remove music data from memory (this includes playback position)
 func remove_music(audio_stream: AudioStream):
-	music_players.erase(audio_stream.resource_path)
+	_music_players.erase(audio_stream.resource_path)
 
 func get_random_pitch_scale() -> float:
 	return randf_range(0.85, 1.15)

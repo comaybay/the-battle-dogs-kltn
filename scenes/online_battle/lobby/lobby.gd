@@ -2,10 +2,12 @@ extends Control
 
 const LOBBY_MAX_MEMBERS = 2
 const ROOM_LISTING_ITEM_SCENE: PackedScene = preload("res://scenes/online_battle/lobby/room_listing_item/room_listing_item.tscn")
+const MAIN_THEME_AUDIO: AudioStream = preload("res://resources/sound/music/main_theme.mp3")
 
 var _request_create_room_name: String
 
 func _ready():
+	AudioPlayer.play_music(MAIN_THEME_AUDIO, true, true)
 	Steam.lobby_created.connect(_on_lobby_created)
 	
 	%GoBackButton.pressed.connect(func():
@@ -128,6 +130,7 @@ func _on_lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response:
 		%Popup.popup(tr("@ROOM_NOT_EXIST"))			
 
 func _go_to_room():
+	AudioPlayer.stop_music(MAIN_THEME_AUDIO, true)
 	get_tree().change_scene_to_file("res://scenes/online_battle/lobby/room/room.tscn")
 
 var matchmaking_loop_count = 0

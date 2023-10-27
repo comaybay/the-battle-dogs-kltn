@@ -16,7 +16,7 @@ func _ready() -> void:
 	%RoomIdLabel.text = "%s: %s" % [tr("@ROOM_ID"), SteamUser.lobby_id]
 
 	%GoBackButton.pressed.connect(func():
-		_leave_lobby()
+		_handle_connection_leave_lobby()
 		_go_back_to_lobby_scene()
 	)	
 	
@@ -75,6 +75,11 @@ func _on_lobby_data_update(success: int, lobby_id: int, member_id: int) -> void:
 	var music: String = SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_MUSIC)
 	if music != _prev_music_settings:
 		_prev_music_settings = music
+		var prev_music = AudioPlayer.get_current_music()
+		if prev_music != null:
+			AudioPlayer.stop_music(prev_music, true)
+			AudioPlayer.remove_music(prev_music)
+		
 		AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % music))
 		
 	var battlefield_theme: String = SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_THEME)
@@ -158,7 +163,7 @@ func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int,
 	
 	_update_lobby_ui()
 	
-func _leave_lobby():
+func _handle_connection_leave_lobby():
 	var owner_id: int = Steam.getLobbyOwner(SteamUser.lobby_id)
 	var is_room_owner: bool = SteamUser.STEAM_ID == owner_id
 	
@@ -179,12 +184,22 @@ func _leave_lobby():
 			Steam.closeP2PSessionWithUser(member_id)
 
 func _go_back_to_lobby_scene():	
+	var current_music = AudioPlayer.get_current_music()
+	if current_music != null:
+		AudioPlayer.stop_music(current_music, true)
+		AudioPlayer.remove_music(current_music)
+	
 	get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")	
 
 func _send_start_message():
 	SteamUser.set_lobby_data("game_start", "true")
 	
 func _go_to_game():
+	var current_music = AudioPlayer.get_current_music()
+	if current_music != null:
+		AudioPlayer.stop_music(current_music, true)
+		AudioPlayer.remove_music(current_music)
+		
 	get_tree().change_scene_to_file("res://scenes/online_battle/p2p_battlefield/p2p_battlefield.tscn")	
 
 func _on_network_connection_status_changed_room_owner(connection_handle: int, connection: Dictionary, old_state: int):	
@@ -269,7 +284,7 @@ func _on_network_connection_status_changed_room_member(connection_handle: int, c
 	# timeout
 	if old_state == Steam.CONNECTION_STATE_CONNECTING and new_state == Steam.CONNECTION_STATE_PROBLEM_DETECTED_LOCALLY:
 		print("MEMBER: connection timout.")
-		_leave_lobby()
+		_handle_connection_leave_lobby()
 		$Popup.popup("@LOST_CONNECTION", PopupDialog.Type.INFORMATION)
 		await $Popup.ok
 		_go_back_to_lobby_scene()
