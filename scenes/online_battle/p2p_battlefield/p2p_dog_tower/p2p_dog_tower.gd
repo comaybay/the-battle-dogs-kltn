@@ -66,3 +66,10 @@ func use_skill(skill_id: String) -> BaseSkill:
 	
 	skill.setup(skill_user)
 	return skill
+
+## p2p method to set health in client peer
+func set_health(health: int) -> void:
+	self.health = health
+	update_health_label()
+	if health == 0:
+		$AnimationPlayer.play("fall")

@@ -39,10 +39,10 @@ func _process(delta: float):
 			_this_player_data.fmoney = data['fmoney']
 		
 		if data.has('dog_tower_health'):
-			_this_player_dog_tower.health = data['dog_tower_health']		
+			_this_player_dog_tower.set_health(data['dog_tower_health'])	
 		
 		if data.has('opponent_dog_tower_health'):
-			_opponent_dog_tower.health = data['opponent_dog_tower_health']		
+			_opponent_dog_tower.set_health(data['opponent_dog_tower_health'])		
 		
 		if data.has('efficiency_level'):
 			_handling_efficiency_upgrade(data['efficiency_level'])
@@ -55,6 +55,9 @@ func _process(delta: float):
 		
 		if data.has('sync'):
 			_hanlding_game_objects_sync(data['sync'])
+		
+		if data.has('winner'):
+			_on_game_end(data['winner'])
 			
 	_this_player_data.update(delta)
 	
@@ -133,3 +136,20 @@ func request_skill(skill_id: String):
 	const SKILL_BIT_OFFSET: int = 10
 	var index: int = _this_player_data.team_skill_ids.find(skill_id) + SKILL_BIT_OFFSET
 	_this_player_data.input_mask |= (1 << index)
+
+func _on_game_end(winner_id: int) -> void:
+	# update tower health before showing game end scene
+	if winner_id == SteamUser.STEAM_ID:
+		_opponent_dog_tower.health = 0
+	else:
+		_this_player_dog_tower.health = 0
+	
+	InBattle.get_battlefield().show_game_end_gui(winner_id)
+	
+	set_process(false)
+	
+	## clear all messages before close
+	while SteamUser.read_messages().size() > 0:
+		continue
+	
+	queue_free()

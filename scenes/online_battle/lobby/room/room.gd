@@ -8,8 +8,10 @@ var _prev_music_settings: String = ""
 var _prev_theme_settings: String = ""
 
 func _ready() -> void:
+	SteamUser.players.clear()
+	
 	SteamUser.update_lobby_members()
-	SteamUser.connection_handle = 0
+	
 	%CustomBattlefieldSettings.settings_changed.connect(_on_battlefield_settings_changed)
 
 	%RoomNameLabel.text = SteamUser.get_lobby_data("name")
@@ -31,9 +33,20 @@ func _ready() -> void:
 	var owner_id: int = Steam.getLobbyOwner(SteamUser.lobby_id)
 	_prev_owner_id = owner_id
 	
-	var is_room_owner: bool = SteamUser.STEAM_ID == owner_id
-	if is_room_owner:
+	if SteamUser.is_lobby_owner():
 		Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "true")
+		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_owner)
+	else:
+		Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "false")
+		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_member)
+	
+	if SteamUser.connection_handle == 0:
+		_new_room_setup()
+		
+	_update_lobby_ui()
+
+func _new_room_setup() -> void:
+	if SteamUser.is_lobby_owner():
 		_create_listen_socket()
 		
 		var default_battlefield_settings = [
@@ -47,15 +60,10 @@ func _ready() -> void:
 		for settings in default_battlefield_settings:
 			SteamUser.set_lobby_data(settings[0], str(settings[1]))
 			%CustomBattlefieldSettings.set_settings(settings[0], settings[1])
-			
 	else:
-		Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "false")
-		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_member)
 		_connect_to_listen_socket()
 	
 	Steam.setLobbyMemberData(SteamUser.lobby_id, "team_setup", JSON.stringify(Data.teams[0]))
-	
-	_update_lobby_ui()
 
 ## disabled starting game button until the settings is updated to the lobby
 func _on_battlefield_settings_changed(type: String, value: Variant) -> void:
@@ -87,15 +95,18 @@ func _on_lobby_data_update(success: int, lobby_id: int, member_id: int) -> void:
 		_prev_theme_settings = battlefield_theme
 		%BG.texture = load("res://resources/battlefield_themes/%s/sky.png" % battlefield_theme) 
 
-	if SteamUser.get_lobby_data("game_start") == "true":
+	if SteamUser.get_lobby_data("game_status") == "starting":		
+		# set ready to false so that when game is ended players must re-ready again to start game
+		Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "false")
+		
 		$Popup.popup("@STARTING_GAME", PopupDialog.Type.PROGRESS)
 		chat_box.display_message(tr("@STARTING_GAME"), ChatBox.COLOR_P2P_EVENT)
 		await get_tree().process_frame
 		_go_to_game()
 
 func _update_lobby_ui() -> void:
-	var owner_id: int = Steam.getLobbyOwner(SteamUser.lobby_id)
-	var is_room_owner: bool = SteamUser.STEAM_ID == owner_id
+	var owner_id: int = SteamUser.get_lobby_owner()
+	var is_room_owner: bool = SteamUser.is_lobby_owner()
 	
 	%CustomBattlefieldSettings.set_editable(is_room_owner)
 
@@ -126,9 +137,9 @@ func _update_lobby_ui() -> void:
 		%ReadyButton.text = "@UNREADY" if is_ready else "@READY"  
 		%GoBackButton.disabled = is_ready
 		
-		update_custom_battlefield_settings_ui_room_member()
+	update_custom_battlefield_settings()
 
-func update_custom_battlefield_settings_ui_room_member():
+func update_custom_battlefield_settings():
 	# updpate the settings set by the room owner
 	for type in CustomBattlefieldSettings.TYPES:
 		var value: String = SteamUser.get_lobby_data(type)
@@ -156,6 +167,7 @@ func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int,
 	
 		if new_owner == SteamUser.STEAM_ID:
 			Steam.network_connection_status_changed.disconnect(_on_network_connection_status_changed_room_member)
+			Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_owner)
 			Steam.setLobbyMemberData(SteamUser.lobby_id, "ready", "true")
 			_create_listen_socket()
 		else:
@@ -191,10 +203,23 @@ func _go_back_to_lobby_scene():
 	
 	get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")	
 
-func _send_start_message():
-	SteamUser.set_lobby_data("game_start", "true")
+func _send_start_message():	
+	SteamUser.set_lobby_data("game_status", "starting")
 	
 func _go_to_game():
+	## owner always comes first
+	var members = [SteamUser.get_lobby_owner()]
+	for member_id in SteamUser.lobby_members:
+		if member_id != SteamUser.get_lobby_owner():
+			members.append(member_id)
+		
+	SteamUser.players = members.map(
+		func(member_id): return {
+			"steam_id": member_id,
+			"username": Steam.getFriendPersonaName(member_id) 
+		}
+	) 
+	
 	var current_music = AudioPlayer.get_current_music()
 	if current_music != null:
 		AudioPlayer.stop_music(current_music, true)
@@ -318,4 +343,3 @@ func _create_listen_socket():
 	
 	SteamUser.listen_socket = Steam.createListenSocketP2P(0, [])
 	print("new listen socket: %s" % SteamUser.listen_socket)
-	Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_owner)

@@ -46,7 +46,7 @@ func _refresh_room_listing():
 	
 func _apply_room_filter():
 	Steam.addRequestLobbyListStringFilter("game", "thebattledogs", Steam.LOBBY_COMPARISON_EQUAL)
-	Steam.addRequestLobbyListStringFilter("game_start", "false", Steam.LOBBY_COMPARISON_EQUAL)
+	Steam.addRequestLobbyListStringFilter("game_status", "waiting", Steam.LOBBY_COMPARISON_EQUAL)
 
 func _on_lobby_match_list(lobbies: Array) -> void:
 	%RefreshButton.disabled = false
@@ -105,7 +105,7 @@ func _on_lobby_created(connect: int, lobby_id: int) -> void:
 	SteamUser.set_lobby_data("name", _request_create_room_name)
 	SteamUser.set_lobby_data("game", "thebattledogs")
 	SteamUser.set_lobby_data("mode", "GodotSteam test")
-	SteamUser.set_lobby_data("game_start", "false")
+	SteamUser.set_lobby_data("game_status", "waiting")
 	
 	_go_to_room()
 

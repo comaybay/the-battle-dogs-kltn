@@ -14,8 +14,13 @@ var PASSWORD: String = ""
 var lobby_id: int = 0
 var lobby_members: Array
 var data
+
 ## game connection
 var listen_socket: int = 0
+
+## In battle player data (this data will stay even if player left the game / lobby mid game).
+## The first player in the list is the left dog tower, second player is the right tower.
+var players: Array
 
 ## the other player that connecting to the room owner socket 
 var connection_handle: int = 0
@@ -25,7 +30,6 @@ enum SendType {
 }
 
 func _ready() -> void:
-	
 	var INIT: Dictionary = Steam.steamInit(false)
 	print("Did Steam initialize?: "+str(INIT))	
 	IS_USING_STEAM = Steam.loggedOn()
@@ -45,8 +49,6 @@ func _ready() -> void:
 		Data.save()
 	if not IS_USING_STEAM:
 		set_process_input(false)
-
-	
 
 func dang_ky_sw():
 	print("dang_ky_sw")
@@ -110,3 +112,6 @@ func get_member_data(member_id: int, key: String) -> String:
 	
 func get_lobby_owner() -> int:
 	return Steam.getLobbyOwner(lobby_id)
+
+func is_lobby_owner() -> bool:
+	return SteamUser.STEAM_ID == get_lobby_owner()
