@@ -22,6 +22,7 @@ var _opponent_timers: Array[Timer] = []
 var _this_player_used_skills: Array[String] = []
 
 func _ready() -> void:
+	SteamUser.set_lobby_data("game_status", "started")
 	set_process(false)
 	
 func setup(
@@ -59,6 +60,13 @@ func setup(
 		_opponent_timers.append(timer)
 		add_child(timer)		
 		print(Data.skill_info[skill_id]['spawn_time'])
+	
+	this_player_dog_tower.zero_health.connect(
+		_on_game_end.bind(_opponent_data.get_steam_id()), CONNECT_ONE_SHOT
+	)
+	opponent_dog_tower.zero_health.connect(
+		_on_game_end.bind(SteamUser.STEAM_ID), CONNECT_ONE_SHOT
+	)
 	
 	set_process(true)
 	
@@ -205,3 +213,10 @@ func request_skill(skill_id: String):
 	_this_player_dog_tower.use_skill(skill_id)
 	skill_request_accepted.emit(skill_id)
 	_this_player_used_skills.append(skill_id)
+
+func _on_game_end(winner_id: int) -> void:
+	SteamUser.send_message({ "winner": winner_id }, SteamUser.SendType.RELIABLE)
+	SteamUser.set_lobby_data("game_status", "waiting")
+	InBattle.get_battlefield().show_game_end_gui(winner_id)
+	set_process(false)
+	queue_free()

@@ -1,10 +1,6 @@
 class_name P2PBattlefield extends BaseBattlefield
 
-var VictoryGUI: PackedScene = preload("res://scenes/battlefield/victory_gui/victory_gui.tscn")
-var DefeatGUI: PackedScene = preload("res://scenes/battlefield/defeat_gui/defeat_gui.tscn")
-
-var DEFEAT_AUDIO: AudioStream = preload("res://resources/sound/battlefield/defeat.mp3")
-var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/victory.mp3")
+var GAME_END_SCENE: PackedScene = preload("res://scenes/online_battle/p2p_battlefield/p2p_game_end_gui/p2p_game_end_gui.tscn")
 
 var inbattle_sfx_idx: int
 
@@ -64,7 +60,7 @@ func _ready() -> void:
 	var half_viewport_size = Global.VIEWPORT_SIZE / 2
 	$Camera2D.position = Vector2(0, -half_viewport_size.y)
 	
-	if SteamUser.STEAM_ID != SteamUser.get_lobby_owner():
+	if SteamUser.STEAM_ID != SteamUser.players[0]['steam_id']:
 		_player_dog_tower = $P2PDogTowerRight
 		_opponent_dog_tower = $P2PDogTowerLeft
 		$Camera2D.position = Vector2(_stage_width, -half_viewport_size.y)
@@ -86,23 +82,14 @@ func _ready() -> void:
 	_opponent_dog_tower.setup(false, _opponent_player_data)
 	
 	$Gui.setup(_player_dog_tower, _this_player_data)
+	
+func show_game_end_gui(winner_id: int):
+	clean_up()
 
-	_player_dog_tower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
-	_opponent_dog_tower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)
-	
-func _show_win_ui():
-	clean_up()
-	var current_music = AudioPlayer.get_current_music()
-	AudioPlayer.stop_music(current_music, true, true)
-	AudioPlayer.play_music(VICTORY_AUDIO)
-	add_child(VictoryGUI.instantiate())	
-	
-func _show_defeat_ui():
-	clean_up()
-	var current_music = AudioPlayer.get_current_music()
-	AudioPlayer.stop_music(current_music, true, true)
-	AudioPlayer.play_music(DEFEAT_AUDIO)
-	add_child(DefeatGUI.instantiate())	
+	var game_end: P2PGameEndGUI = GAME_END_SCENE.instantiate()
+	game_end.setup(winner_id)	
+
+	add_child(game_end)	
 	
 func clean_up():
 	$Camera2D.allow_user_input_camera_movement(false)

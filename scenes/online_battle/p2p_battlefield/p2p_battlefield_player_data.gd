@@ -4,7 +4,11 @@ class_name P2PBattlefieldPlayerData extends BaseBattlefieldPlayerData
 ## last bit represent the efficiency upgrade button 
 var input_mask := 0b00000000000000
 
+var _member_id: int
+func get_steam_id() -> int: return _member_id
+
 func _init(member_id: int) -> void:
+	_member_id = member_id
 	var team_setup = JSON.parse_string(SteamUser.get_member_data(member_id, "team_setup"))
 			
 	team_dog_ids = team_setup['dog_ids']
