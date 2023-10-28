@@ -1,5 +1,5 @@
 @tool
-extends Control
+class_name MainGUI extends Control
 
 @export var title: String:
 	set(val):
@@ -25,5 +25,8 @@ func _on_bone_changed(value: int):
 	%Money.text = str(Data.bone)
 	
 func _on_go_back_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file(go_back_scene_path)
+
+func get_go_back_button() -> Button:
+	return %GoBackButton

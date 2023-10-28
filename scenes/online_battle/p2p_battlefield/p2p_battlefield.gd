@@ -1,4 +1,4 @@
-class_name OnlineBattlefield extends BaseBattlefield
+class_name P2PBattlefield extends BaseBattlefield
 
 var VictoryGUI: PackedScene = preload("res://scenes/battlefield/victory_gui/victory_gui.tscn")
 var DefeatGUI: PackedScene = preload("res://scenes/battlefield/defeat_gui/defeat_gui.tscn")
@@ -51,9 +51,8 @@ func _ready() -> void:
 	var stage_width_with_margin = _stage_width + (TOWER_MARGIN * 2)
 	
 	$ConnectionHandler.setup(%Popup)
-	$Camera2D.setup(($Gui as OnlineBattleGUI).camera_control_buttons, stage_width_with_margin)
-	$Music.stream = load("res://resources/sound/music/%s.mp3" % SteamUser.get_lobby_data("music"))
-	$Music.play()
+	$Camera2D.setup(($Gui as P2PBattleGUI).camera_control_buttons, stage_width_with_margin, get_stage_height())
+	AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % SteamUser.get_lobby_data("music")))
 	
 	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % SteamUser.get_lobby_data("theme"))
 	$Sky.position = Vector2(0, -$Sky.size.y)
@@ -93,26 +92,28 @@ func _ready() -> void:
 	
 func _show_win_ui():
 	clean_up()
-	$Music.stream = VICTORY_AUDIO
-	$Music.play() 
+	var current_music = AudioPlayer.get_current_music()
+	AudioPlayer.stop_music(current_music, true, true)
+	AudioPlayer.play_music(VICTORY_AUDIO)
 	add_child(VictoryGUI.instantiate())	
 	
 func _show_defeat_ui():
 	clean_up()
-	$Music.stream = DEFEAT_AUDIO
-	$Music.play() 
+	var current_music = AudioPlayer.get_current_music()
+	AudioPlayer.stop_music(current_music, true, true)
+	AudioPlayer.play_music(DEFEAT_AUDIO)
 	add_child(DefeatGUI.instantiate())	
 	
 func clean_up():
-	# set back to 1 in case user change game speed
-	Engine.time_scale = 1
 	$Camera2D.allow_user_input_camera_movement(false)
 	
 	$Gui.queue_free()
-	AudioServer.set_bus_volume_db(inbattle_sfx_idx, -70)	
-	# victory/defeat music is a lil quiet
-	$Music.volume_db = -5
+	AudioServer.set_bus_volume_db(inbattle_sfx_idx, -80)	
 
 func _exit_tree() -> void:
+	var current_music := AudioPlayer.get_current_music()
+	if current_music:
+		AudioPlayer.stop_music(current_music, true, true)
+		
 	AudioServer.set_bus_volume_db(inbattle_sfx_idx, 0)
 	

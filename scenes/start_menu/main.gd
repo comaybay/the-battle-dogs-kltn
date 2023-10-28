@@ -8,8 +8,7 @@ var _settings: Settings = null
 var _credits: Credits = null
 
 func _ready():
-	if not AudioPlayer.custom_music.playing:
-		AudioPlayer.play_custom_music(MAIN_THEME_AUDIO)
+	AudioPlayer.play_music(MAIN_THEME_AUDIO, true)
 	
 	if SteamUser.IS_USING_STEAM:
 		%OnlinePlayButton.disabled = false
@@ -37,16 +36,18 @@ func show_select_data_box():
 		$ConfirmationDialog.show()	
 
 func _on_nut_bat_dau_pressed():
-	AudioPlayer.stop_custom_music()
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.stop_music(MAIN_THEME_AUDIO, true)
+	AudioPlayer.remove_music(MAIN_THEME_AUDIO)
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
+	
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
 func _quit_game():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().quit()
 
 func _go_to_credits():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	
 	if (_credits == null):
 		_credits = _create_credit()
@@ -68,7 +69,7 @@ func _create_credit() -> Credits:
 	return credits
 	
 func _go_to_settings():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	
 	if (_settings == null):
 		_settings = _create_settings()	

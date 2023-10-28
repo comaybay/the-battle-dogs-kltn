@@ -24,7 +24,7 @@ var _placement: PLACEMENT
 
 func _handle_next_line() -> void:
 	if _has_next_dialogue_line():
-		AudioPlayer.play_custom_sound(BARK_SOUND, randf_range(1, 1.2))
+		AudioPlayer.play_music(BARK_SOUND, randf_range(1, 1.2))
 		_dialogue_next_line()
 	else:
 		end_dialogue()

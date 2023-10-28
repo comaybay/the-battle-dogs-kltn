@@ -24,4 +24,4 @@ func _process(_delta: float) -> void:
 func _on_paused() -> void:
 	$PauseMenu.show()
 	get_tree().paused = true
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)

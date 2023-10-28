@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch6nssf7rc7pj"]
+[gd_scene load_steps=6 format=3 uid="uid://ch6nssf7rc7pj"]
 
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_kc1qw"]
 [ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="2_u6a31"]
 [ext_resource type="Script" path="res://scenes/upgrade/upgrade.gd" id="3_jpfx5"]
-[ext_resource type="AudioStream" uid="uid://djgpt4m0h3eq4" path="res://resources/sound/music/shop.mp3" id="4_53nmh"]
 [ext_resource type="Script" path="res://scenes/common/touch_screen_scroll.gd" id="4_iw7cb"]
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_pwu7g"]
@@ -182,12 +181,5 @@ text = "Mô tả
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-
-[node name="Music" type="AudioStreamPlayer" parent="." index="5"]
-process_mode = 3
-stream = ExtResource("4_53nmh")
-volume_db = -7.0
-autoplay = true
-bus = &"Music"
 
 [connection signal="pressed" from="Khung/Content/PhanGiua/PhanDuoi/MarginContainer2/TieuDe/NutNangCap" to="Khung/Content" method="_on_nut_nang_cap_pressed"]

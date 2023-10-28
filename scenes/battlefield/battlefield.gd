@@ -8,7 +8,7 @@ var DEFEAT_AUDIO: AudioStream = preload("res://resources/sound/battlefield/defea
 var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/victory.mp3")
 
 var inbattle_sfx_idx: int
-var boss_audio: AudioStream
+var _boss_music: AudioStream
 var _player_data: BattlefieldPlayerData
 var time_batlle : float
 var _battlefield_data: Dictionary
@@ -66,11 +66,10 @@ func _ready() -> void:
 	
 	inbattle_sfx_idx = AudioServer.get_bus_index("InBattleFX")
 	
-	$Music.stream = load("res://resources/sound/music/%s.mp3" % _battlefield_data['music'])
-	$Music.play()
+	AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % _battlefield_data['music']))
 	
 	if _battlefield_data.get('boss_music') != null:
-		boss_audio = load("res://resources/sound/music/%s.mp3" % _battlefield_data['boss_music'])
+		_boss_music = load("res://resources/sound/music/%s.mp3" % _battlefield_data['boss_music'])
 	
 	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % _battlefield_data['theme'])
 	$Sky.position = Vector2(0, -$Sky.size.y)
@@ -90,21 +89,26 @@ func _show_win_ui():
 	$TimeBattle.stop()
 	var get_time = int(Time.get_ticks_msec() / 1000)
 	clean_up()
-	$Music.stream = VICTORY_AUDIO
-	$Music.play() 	
-	await add_child(VictoryGUI.instantiate())	
+	
 	if (Data.use_sw_data == true) and (Data.passed_level == 13) :
 		Data.victory_count += 1 
 		SilentWolf.Scores.save_score(Data.save_data["user_name"],Data.victory_count, "victory_count")
 		SilentWolf.sw_save_score_time(Data.save_data["user_name"], get_time,"fastest_time")
+
+	var current_music = AudioPlayer.get_current_music()
+	AudioPlayer.stop_music(current_music, true, true)
+	AudioPlayer.play_music(VICTORY_AUDIO)
+	add_child(VictoryGUI.instantiate())	
+
 	# move the tutorial dog outside of gui
 	if _tutorial_dog != null:
 		_move_tutorial_dog()
 	
 func _show_defeat_ui():
 	clean_up()
-	$Music.stream = DEFEAT_AUDIO
-	$Music.play() 
+	var current_music = AudioPlayer.get_current_music()
+	AudioPlayer.stop_music(current_music, true, true)
+	AudioPlayer.play_music(DEFEAT_AUDIO)
 	add_child(DefeatGUI.instantiate())	
 	
 	# move the tutorial dog outside of gui
@@ -123,10 +127,12 @@ func clean_up():
 	
 	$Gui.queue_free()
 	AudioServer.set_bus_volume_db(inbattle_sfx_idx, -70)	
-	# victory/defeat music is a lil quiet
-	$Music.volume_db = -5
 
 func _exit_tree() -> void:
+	var current_music := AudioPlayer.get_current_music()
+	if current_music:
+		AudioPlayer.stop_music(current_music, true, true)
+	
 	AudioServer.set_bus_volume_db(inbattle_sfx_idx, 0)
 
 func _on_boss_appeared() -> void:
@@ -135,10 +141,8 @@ func _on_boss_appeared() -> void:
 		game_speed_button.toggle_game_speed()
 	
 	$BossDrum.play()
-	
-	if boss_audio != null and $Music.stream != boss_audio:
-		$Music.stop()
-		$Music.stream = boss_audio 
+	var current_music = AudioPlayer.get_current_music()
+	if _boss_music != null and current_music != _boss_music:
+		AudioPlayer.stop_music(current_music, false, true)
 		await $BossDrum.finished
-		$Music.play()
-
+		AudioPlayer.play_music(_boss_music)

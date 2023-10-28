@@ -21,7 +21,7 @@ func setup(skill_user: Character.Type) -> void:
 	if not InBattle.in_p2p_battle:
 		dog_tower = (InBattle.get_battlefield() as Battlefield).get_dog_tower()
 	else:
-		var battlefield := InBattle.get_battlefield() as OnlineBattlefield
+		var battlefield := InBattle.get_battlefield() as P2PBattlefield
 		dog_tower = (
 			battlefield.get_dog_tower_left() if skill_user == Character.Type.DOG
 			else battlefield.get_dog_tower_right()

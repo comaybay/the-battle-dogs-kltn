@@ -6,7 +6,7 @@ func _ready() -> void:
 	
 	%ButtonEnglish.pressed.connect(
 		func():
-			AudioPlayer.play_button_pressed_audio()
+			AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 			set_language_preference("en")
 			show_fullscreen_preference()
 			
@@ -14,7 +14,7 @@ func _ready() -> void:
 
 	%ButtonVietnamese.pressed.connect(
 		func():
-			AudioPlayer.play_button_pressed_audio()
+			AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 			set_language_preference("vi")
 			show_fullscreen_preference()
 	)
@@ -28,7 +28,7 @@ func _ready() -> void:
 	
 	%FullscreenNo.pressed.connect(
 		func():
-			AudioPlayer.play_button_pressed_audio()
+			AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 			set_fullscreen_preference(false)
 			show_tutorial_preference()
 	)
@@ -43,7 +43,7 @@ func _ready() -> void:
 	
 	%TutorialNo.pressed.connect(
 		func():
-			AudioPlayer.play_button_pressed_audio()
+			AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 			choose_skip_tutorial()
 			$AnimationPlayer.play("dog_jump_off")
 			await $AnimationPlayer.animation_finished

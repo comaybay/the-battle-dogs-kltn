@@ -17,13 +17,13 @@ func setup(action: String):
 
 func _ready() -> void:
 	%CancelButton.pressed.connect(func() -> void:
-		AudioPlayer.play_button_pressed_audio()
+		AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 		canceled.emit()
 		queue_free()
 	)
 	
 	%ConfirmButton.pressed.connect(func() -> void:
-		AudioPlayer.play_button_pressed_audio()
+		AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 		ok.emit(_action, _event)
 		queue_free()
 	)
@@ -33,12 +33,12 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed("ui_cancel_default"):
-		AudioPlayer.play_button_pressed_audio()
+		AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 		canceled.emit()
 		queue_free()
 		
 	if event.is_action_pressed("ui_confirm_default") and %ButtonContainer.visible:
-		AudioPlayer.play_button_pressed_audio()
+		AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 		ok.emit(_action, _event)
 		queue_free()
 		

@@ -1,11 +1,8 @@
 extends Control 
 
-var TutorialDogScene: PackedScene = preload("res://scenes/map/map_tutorial_dog/map_tutorial_dog.tscn")
-
 func _ready():
-	AudioPlayer.resume_dogbase_music()
-	
 	if (Data.dogs.size() > 1 or Data.skills.size() > 1) and not Data.has_done_map_tutorial:
+		var TutorialDogScene: PackedScene = load("res://scenes/map/map_tutorial_dog/map_tutorial_dog.tscn")
 		var tutorial_dog: MapTutorialDog = TutorialDogScene.instantiate()
 		tutorial_dog.setup(%TeamSetupButton)
 		%GUI.add_child(tutorial_dog)
@@ -23,17 +20,21 @@ func _ready():
 	%Dog.setup(levels[Data.selected_level], %Tracker)
 
 func _on_nut_tan_cong_pressed() -> void:
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
+	
+	var dobase_theme := AudioPlayer.get_current_music()
+	AudioPlayer.stop_music(dobase_theme, true)
+	AudioPlayer.remove_music(dobase_theme)
+	
 	get_tree().change_scene_to_file("res://scenes/battlefield/battlefield.tscn")
 	
 func _on_nut_doi_hinh_pressed() -> void:
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file("res://scenes/team_setup/team_setup.tscn")
 
 func _on_quay_lai_pressed() -> void:
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
 func _exit_tree() -> void:
-	AudioPlayer.pause_dogbase_music()
 	Data.save()

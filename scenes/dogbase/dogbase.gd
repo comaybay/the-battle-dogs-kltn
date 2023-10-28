@@ -1,9 +1,19 @@
 extends Control
+const DOG_BASE_THEME_AUDIO: AudioStream = preload("res://resources/sound/music/dog_base_theme.mp3")
 
 var TutorialDogScene: PackedScene = preload("res://scenes/dogbase/dogbase_tutorial_dog/dogbase_tutorial_dog.tscn")
 
 func _ready() -> void:
-	AudioPlayer.resume_dogbase_music()
+	AudioPlayer.play_music(DOG_BASE_THEME_AUDIO, true, true)
+	
+	var on_go_back_pressed = func():
+		var main_gui: = get_tree().current_scene as MainGUI
+		main_gui.get_go_back_button().pressed.connect(func():
+			AudioPlayer.stop_music(DOG_BASE_THEME_AUDIO, true)
+			AudioPlayer.remove_music(DOG_BASE_THEME_AUDIO)
+		)
+		
+	on_go_back_pressed.call_deferred()
 	
 	if 	(
 		not Data.has_done_dogbase_tutorial or
@@ -18,22 +28,23 @@ func _ready() -> void:
 	if not Data.has_done_battlefield_basics_tutorial:
 		$BenTrai/NutNangCap.disabled = true
 	
-func _exit_tree() -> void:
-	AudioPlayer.pause_dogbase_music()
+
 
 func _on_nut_vien_chinh_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
 
 func _on_nut_nang_cap_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.stop_music(DOG_BASE_THEME_AUDIO, true)
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file("res://scenes/upgrade/upgrade.tscn")
 
 func _on_nut_cua_hang_pressed():
-	AudioPlayer.play_button_pressed_audio()
+	AudioPlayer.stop_music(DOG_BASE_THEME_AUDIO, true)
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file("res://scenes/store/store.tscn")
 
 @onready var ranking = preload("res://addons/silent_wolf/Scores/Leaderboard.tscn")
 func _on_nut_xep_hang_pressed():
-	AudioPlayer.play_button_pressed_audio()	
+	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)	
 	get_tree().change_scene_to_packed(ranking)

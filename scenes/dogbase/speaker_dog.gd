@@ -20,7 +20,7 @@ func _ready() -> void:
 	pick_random_dialogue()
 	
 	$DogButton.pressed.connect(func():
-		AudioPlayer.play_custom_sound(BARK_SOUND, randf_range(1, 1.2))
+		AudioPlayer.play_sfx(BARK_SOUND, randf_range(1, 1.2))
 		pick_random_dialogue()
 	)
 	
@@ -28,7 +28,7 @@ func _ready() -> void:
 	
 	$DialogueLabel.gui_input.connect(func(event):
 		if event is InputEventMouseButton && event.pressed && event.button_index == 1:
-			AudioPlayer.play_custom_sound(BARK_SOUND, randf_range(1, 1.2))
+			AudioPlayer.play_sfx(BARK_SOUND, randf_range(1, 1.2))
 			pick_random_dialogue()
 	)
 	
