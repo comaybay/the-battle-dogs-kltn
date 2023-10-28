@@ -1,6 +1,6 @@
 class_name SelectCharacterBox extends Button
 
-enum Type { CHARACTER, SKILL, NONE }
+enum Type { CHARACTER, SKILL, NONE, STORE }
 
 var _type: Type
 func get_item_type() -> Type:
@@ -17,8 +17,11 @@ func setup(item_id: String, type: Type) -> void:
 	
 	if type == Type.CHARACTER:
 		$Icon.texture = load("res://resources/icons/%s_icon.png" % item_id)
-	else: 
+	elif type == Type.SKILL:
 		$Icon.texture = load("res://resources/images/skills/%s_icon.png" % item_id)
+	else: 
+		$Icon.texture = load("res://resources/images/store/%s_icon.png" % item_id)
+		
 
 func change_item(item_id: String, type: Type) -> void:
 	setup(item_id, type)
