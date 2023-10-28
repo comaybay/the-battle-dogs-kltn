@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://35ixgpw6435s"]
 
-[ext_resource type="Script" path="res://scenes/skills/fire_ball/ball.gd" id="1_ogi8t"]
+[ext_resource type="Script" path="res://scenes/stores/random_fire_ball/ball.gd" id="1_en5ap"]
 [ext_resource type="Texture2D" uid="uid://deh28ywd0ub80" path="res://resources/images/store/nuclear_bomb.png" id="2_sdn2n"]
 [ext_resource type="AudioStream" uid="uid://dm3m3nmm7d1bh" path="res://resources/sound/battlefield/Tieng-lua-chay.mp3" id="3_jg2ml"]
 
@@ -68,7 +68,7 @@ size = Vector2(109.42, 298.67)
 [node name="FireBall" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 5
-script = ExtResource("1_ogi8t")
+script = ExtResource("1_en5ap")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "move"

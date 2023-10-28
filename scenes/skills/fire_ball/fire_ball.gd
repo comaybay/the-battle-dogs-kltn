@@ -8,8 +8,8 @@ const BASE_ROWS: int = 1
 
 func setup(skill_user: Character.Type):
 	var battlefield := get_tree().current_scene as BaseBattlefield
-	var destination_x_from: int = -battlefield.TOWER_MARGIN * 1.25
-	var destination_x_to: int = battlefield.get_stage_width() - (battlefield.TOWER_MARGIN * 3)
+	var destination_x_from: int = -battlefield.TOWER_MARGIN + 100
+	var destination_x_to: int = battlefield.get_stage_width() - 800
 	
 	if skill_user == Character.Type.CAT:
 		var old_dest_x_from: int = destination_x_from
@@ -20,7 +20,6 @@ func setup(skill_user: Character.Type):
 	
 	var level := InBattle.get_skill_level('fire_ball', skill_user)
 	var rows = BASE_ROWS + int(0.5 * level)
-		
 	for i in range(rows):
 		var x = destination_x_from
 		while x < destination_x_to:
@@ -32,3 +31,4 @@ func setup(skill_user: Character.Type):
 			self.add_child(fire_ball)
 			x += X_STEP
 		y -= Y_STEP
+
