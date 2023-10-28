@@ -29,7 +29,7 @@ anchors_preset = 0
 theme = ExtResource("1_0tkrk")
 script = ExtResource("2_54fxh")
 
-[node name="FirstRow" type="HBoxContainer" parent="."]
+[node name="FirstRow" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 1022.0
 offset_bottom = 246.0
