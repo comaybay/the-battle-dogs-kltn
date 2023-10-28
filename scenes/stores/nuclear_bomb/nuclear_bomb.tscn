@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cu0by1s72tx3o"]
+[gd_scene load_steps=8 format=3 uid="uid://b25xc8rg2w0wb"]
 
-[ext_resource type="Script" path="res://scenes/skills/fire_ball/ball.gd" id="1_yyqct"]
-[ext_resource type="Texture2D" uid="uid://deh28ywd0ub80" path="res://resources/images/store/fire_ball.png" id="2_jb27i"]
-[ext_resource type="AudioStream" uid="uid://dm3m3nmm7d1bh" path="res://resources/sound/battlefield/Tieng-lua-chay.mp3" id="2_t5c7m"]
+[ext_resource type="Script" path="res://scenes/stores/nuclear_bomb/nuclear_bomb.gd" id="1_wk13y"]
+[ext_resource type="AudioStream" uid="uid://dm3m3nmm7d1bh" path="res://resources/sound/battlefield/Tieng-lua-chay.mp3" id="3_hkec7"]
 
 [sub_resource type="Animation" id="Animation_k3r0e"]
 length = 0.001
@@ -65,10 +64,10 @@ _data = {
 resource_local_to_scene = true
 size = Vector2(109.42, 298.67)
 
-[node name="FireBall" type="CharacterBody2D"]
+[node name="NuclearBomb" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 5
-script = ExtResource("1_yyqct")
+script = ExtResource("1_wk13y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "move"
@@ -81,21 +80,19 @@ wait_time = 10.0
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-70.5037, -128.398)
-rotation = 1.05941
-texture = ExtResource("2_jb27i")
+position = Vector2(558, -113)
+rotation = 1.5708
 hframes = 4
 vframes = 13
 frame = 12
 region_rect = Rect2(4, 4, 178, 185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-41.8202, -78.4877)
-rotation = -0.424115
+position = Vector2(555, -56)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="move" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_t5c7m")
+stream = ExtResource("3_hkec7")
 volume_db = -5.0
 autoplay = true
 bus = &"InBattleFX"

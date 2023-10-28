@@ -42,3 +42,6 @@ script = ExtResource("4_67qqf")
 [node name="BossDrum" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_6ixii")
 bus = &"InBattleFX"
+
+[node name="TimeBattle" type="Timer" parent="."]
+autostart = true

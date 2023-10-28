@@ -12,25 +12,33 @@ var _parent: Node
 var stylebox_override: StyleBoxFlat
 
 func _ready():
+	$AnimationPlayer.play("ready")
 	stylebox_override = $Button.get_theme_stylebox("normal").duplicate()
 	stylebox_override.border_color = Color.hex(0xbde300FF)
 
-func setup(data: Dictionary, parent: Node) -> void:
+func setup( data: Dictionary, parent: Node) -> void:
 	_item_data = data
 	_parent = parent
 	_item_id = data['ID']
-	$TextureRect.texture = load(data["path"])
+	$Icon.texture = load("res://resources/images/store/%s_icon.png" % data["ID"])
+		
 	update_labels()
 	$Button.pressed.connect(_on_pressed)
 	
-		
 func update_labels():
 	var amount = get_amount()
-	$Amount.text = "x%s" % amount
-	$Price.text = str(get_price())
+	$Background.frame = 0 if amount > 0 else 1	
+	$Amount.visible = true if amount > 0 else false
+	$Amount.text = "x %s" % amount
+	if amount < 10:
+		%Price.text = str(get_price()) 
+	else:
+		%Price.text = "MAX"
+		%BoneIcon.hide()
+		$Background.modulate = Color(100, 100, 100)
 	
 func _on_pressed():
-	_parent.sendInfo(self, _item_data)
+	_parent.sendInfo(self)
 
 func set_selected(selected: bool):
 	if selected:
@@ -41,16 +49,18 @@ func set_selected(selected: bool):
 		$Button.remove_theme_stylebox_override("hover")
 
 func get_price() -> int:
-	return _item_data['price']
-
-func get_max() -> int:
-	if !Data.store_info.has(_item_id):
-		return 0
-	else: 
-		return Data.store_info[_item_id]['max']
+	return int(_item_data['price'] + (_item_data['price'] ))
 
 func get_amount() -> int:
-	if !Data.store.has(_item_id):
-		return 0
-	else: 
-		return Data.store[_item_id]['amount']
+	return _get_amount_or_zero(Data.store.get(_item_id))
+
+func _get_amount_or_zero(dict: Variant) -> int:
+	return 0 if dict == null else dict.get('amount', 0)
+
+func get_item_name() -> String:
+	print(tr("@STORE_NAME_%s" % _item_id))
+	return tr("@STORE_NAME_%s" % _item_id)
+	
+
+func get_item_description() -> String:
+	return tr("@STORE_DESCRIPTION_%s" % _item_id)

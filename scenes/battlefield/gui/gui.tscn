@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmhx2wpadmcol"]
+[gd_scene load_steps=11 format=3 uid="uid://dmhx2wpadmcol"]
 
 [ext_resource type="PackedScene" uid="uid://e7fcshjccrpt" path="res://scenes/battlefield/gui/spawn_buttons/spawn_buttons.tscn" id="1_2pq88"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/gui.gd" id="1_e3bvc"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://mhk8vyyedlgu" path="res://scenes/battlefield/gui/pause_button/pause_button.tscn" id="5_n23wx"]
 [ext_resource type="PackedScene" uid="uid://btbidqri5t7cx" path="res://scenes/battlefield/gui/pause_menu/pause_menu.tscn" id="6_atit2"]
 [ext_resource type="PackedScene" uid="uid://cei0cobk4qs0j" path="res://scenes/battlefield/gui/camera_control_buttons/camera_control_buttons.tscn" id="8_hlrc2"]
+[ext_resource type="PackedScene" uid="uid://bu4jes5vivej0" path="res://scenes/battlefield/gui/item_buttons/item_buttons.tscn" id="10_l7c5n"]
 
 [node name="Gui" type="CanvasLayer"]
 script = ExtResource("1_e3bvc")
@@ -40,6 +41,22 @@ theme = ExtResource("3_72yr3")
 theme_type_variation = &"LabelLarge"
 text = "0/100 ₵"
 
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1033.0
+offset_top = -455.0
+offset_right = 1033.0
+offset_bottom = -455.0
+grow_vertical = 0
+scale = Vector2(0.35, 0.35)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ItemButtons" parent="HBoxContainer4" instance=ExtResource("10_l7c5n")]
+layout_mode = 2
+
 [node name="GameSpeedButton" parent="." instance=ExtResource("4_3i3bf")]
 offset_left = 780.0
 offset_top = 121.0
@@ -53,9 +70,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -566.0
-offset_top = -459.0
+offset_top = -441.911
 offset_right = -566.0
-offset_bottom = -459.0
+offset_bottom = -441.911
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.35, 0.35)

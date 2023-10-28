@@ -36,6 +36,17 @@ var passed_level: int:
 	get: return save_data['passed_level']		
 	set(value): save_data['passed_level'] = value		
 
+var victory_count: int:
+	get: return save_data['victory_count']
+	set(value): save_data['victory_count'] = value
+
+var fastest_time: int:
+	get: return save_data['fastest_time']
+	set(value): save_data['fastest_time'] = value
+var online_score: int:
+	get: return save_data['online_score']
+	set(value): save_data['online_score'] = value
+	
 var selected_level: int:
 	get: return save_data['selected_level']		
 	set(value): save_data['selected_level'] = value		
@@ -238,10 +249,10 @@ func compute_values():
 	
 	for skill in save_data["skills"]:
 		skills[skill["ID"]] = skill
-		
-	for item in save_data["items"]:
+	
+	for item in save_data["store"]:
 		store[item["ID"]] = item
-		
+	
 	for passive in save_data["passives"]:
 		passives[passive["ID"]] = passive
 

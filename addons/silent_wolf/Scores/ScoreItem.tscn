@@ -5,13 +5,15 @@ custom_minimum_size = Vector2(500, 50)
 offset_right = 500.0
 offset_bottom = 50.0
 
-[node name="PlayerName" type="RichTextLabel" parent="."]
+[node name="PlayerName" type="Label" parent="."]
 custom_minimum_size = Vector2(100, 25)
-layout_mode = 0
-offset_left = 8.0
-offset_right = 359.0
-offset_bottom = 50.0
-theme_override_font_sizes/normal_font_size = 30
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.862
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_bottom = -5.0
+theme_override_font_sizes/font_size = 30
 text = "1. Godzilla"
 
 [node name="Score" type="Label" parent="."]
