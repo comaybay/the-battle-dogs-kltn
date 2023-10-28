@@ -53,8 +53,6 @@ func update_ui(item: ItemStoreBox):
 	%ItemName.text = item.get_item_name()
 	%ItemDescription.text = item.get_item_description()
 	
-	%NutNangCap.text = tr("@BUY")
-		
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_amount() >= 10 
 	
 func createItemBox(data: Dictionary, container: GridContainer) -> ItemStoreBox:
@@ -66,7 +64,6 @@ func createItemBox(data: Dictionary, container: GridContainer) -> ItemStoreBox:
 func reupdate_current_ui():
 	selected_item.update_labels()
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_amount() >= 10 
-	%NutNangCap.text = tr("@BUY")
 
 func _on_nut_nang_cap_pressed():
 	AudioPlayer.play_button_pressed_audio()

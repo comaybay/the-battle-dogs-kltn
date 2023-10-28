@@ -1,27 +1,7 @@
 [
 	{
-		"ID": "fire_ball",
+		"ID": "nuclear_bomb",
 		"price": 2000,
 		"spawn_time": 45
-	},
-	{
-		"ID": "lightning",
-		"price": 2000,
-		"spawn_time": 60
-	},
-	{
-		"ID": "drum",
-		"price": 4000,
-		"spawn_time": 90
-	},
-	{
-		"ID": "healing",
-		"price": 1000,
-		"spawn_time": 90
-	},
-	{
-		"ID": "power_up",
-		"price": 4000,
-		"spawn_time": 90
 	}
 ]

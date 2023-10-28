@@ -26,7 +26,7 @@ grow_vertical = 0
 texture = ExtResource("2_3v0io")
 
 [node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
-text = "@UPGRADE"
+text = "@STORE"
 
 [node name="Content" parent="Khung" index="1"]
 script = ExtResource("3_3v0w7")
@@ -101,7 +101,7 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 24
-text = "@UPGRADE"
+text = "@BUY"
 
 [node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/PhanDuoi" index="1"]
 layout_mode = 2

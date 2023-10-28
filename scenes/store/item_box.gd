@@ -58,7 +58,9 @@ func _get_amount_or_zero(dict: Variant) -> int:
 	return 0 if dict == null else dict.get('amount', 0)
 
 func get_item_name() -> String:
-	return tr("@ITEM_NAME_%s" % _item_id)
+	print(tr("@STORE_NAME_%s" % _item_id))
+	return tr("@STORE_NAME_%s" % _item_id)
+	
 
 func get_item_description() -> String:
-	return tr("@ITEM_DESCRIPTION_%s" % _item_id)
+	return tr("@STORE_DESCRIPTION_%s" % _item_id)

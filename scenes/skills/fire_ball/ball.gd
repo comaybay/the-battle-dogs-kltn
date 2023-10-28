@@ -1,4 +1,4 @@
-class_name FireBall extends CharacterBody2D
+extends CharacterBody2D
 
 var _damage = 100
 var _sync_data: Dictionary
