@@ -8,7 +8,7 @@ var _settings: Settings = null
 var _credits: Credits = null
 
 func _ready():
-	AudioPlayer.play_music(MAIN_THEME_AUDIO, true)
+	AudioPlayer.play_music(MAIN_THEME_AUDIO)
 	
 	if SteamUser.IS_USING_STEAM:
 		%OnlinePlayButton.disabled = false
