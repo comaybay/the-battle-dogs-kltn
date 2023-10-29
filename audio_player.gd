@@ -136,8 +136,11 @@ func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove
 	music_player.stop()	
 	
 ## remove music data from memory (this includes playback position)
-func remove_music(audio_stream: AudioStream):
+func remove_music(audio_stream: AudioStream) -> void:
 	_music_players.erase(audio_stream.resource_path)
+
+func remove_all_music() -> void:
+	_music_players.clear()
 
 func get_random_pitch_scale() -> float:
 	return randf_range(0.85, 1.15)

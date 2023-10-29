@@ -223,8 +223,8 @@ func _go_to_game():
 	var current_music = AudioPlayer.get_current_music()
 	if current_music != null:
 		AudioPlayer.stop_music(current_music, true)
-		AudioPlayer.remove_music(current_music)
-		
+	
+	AudioPlayer.remove_all_music()
 	get_tree().change_scene_to_file("res://scenes/online_battle/p2p_battlefield/p2p_battlefield.tscn")	
 
 func _on_network_connection_status_changed_room_owner(connection_handle: int, connection: Dictionary, old_state: int):	
