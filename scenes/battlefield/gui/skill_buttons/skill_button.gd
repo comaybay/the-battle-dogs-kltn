@@ -46,10 +46,6 @@ func _on_spawn_ready() -> void:
 	self.disabled = not can_spawn()
 	$Background.frame = 0 if can_spawn() else 1	
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(spawn_input_action) and can_spawn():
-		spawn_skill()
-			
 func _on_pressed() -> void:
 	spawn_skill()
 	

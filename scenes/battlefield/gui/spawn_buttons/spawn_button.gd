@@ -62,15 +62,10 @@ func _ready() -> void:
 	set_process(false)
 	set_process_input(false)
 	
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(spawn_input_action) and can_spawn():
-		spawn_dog()
-			
 func _on_spawn_pressed() -> void:
 	spawn_dog()
 	
 func spawn_dog() -> BaseDog:
-
 	_player_data.fmoney -= spawn_price
 	_spawn_dog = _dog_tower.spawn(dog_id)
 
