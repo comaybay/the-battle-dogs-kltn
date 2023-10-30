@@ -41,15 +41,23 @@ func _ready() -> void:
 		lobby_members = [STEAM_ID]
 		Steam.initRelayNetworkAccess()
 		PASSWORD = "Aa1@" + str( STEAM_ID)
-		#register by STEAM_USERNAME(username) and STEAM_ID(password)
-		var sw_result = await SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD).sw_registration_user_pwd_complete		
-		if sw_result.success :
-			await dang_ky_sw()
+		
+		SilentWolf.Auth.login_player(STEAM_USERNAME, PASSWORD)
+		SilentWolf.Auth.sw_login_complete.connect(_on_login_complete)
 		await dang_nhap_sw()
 		Data.save()
 	if not IS_USING_STEAM:
 		set_process_input(false)
 
+func _on_login_complete(sw_result: Dictionary) -> void:
+	if sw_result.success:
+		print("Login succeeded!")
+	else:
+		#register by STEAM_USERNAME(username) and STEAM_ID(password)
+		var sw_register = await SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD).sw_registration_user_pwd_complete		
+		if sw_register.success :
+			await dang_ky_sw()
+	
 func dang_ky_sw():
 	print("dang_ky_sw")
 	Data.silentwolf_data.date = Time.get_datetime_string_from_system()
