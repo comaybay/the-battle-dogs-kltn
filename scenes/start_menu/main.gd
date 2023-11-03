@@ -99,7 +99,7 @@ func _on_confirmation_dialog_player():
 	Data.save_data = sw_result.player_data
 	Data.silentwolf_data = sw_result.player_data
 	Data.use_sw_data = true
-
+	SteamUser.sw_dangky.emit()
 	
 
 func _on_confirmation_dialog_computer():
@@ -108,4 +108,5 @@ func _on_confirmation_dialog_computer():
 	Data.silentwolf_data = Data.save_data
 	await SilentWolf.Players.save_player_data(user_name, Data.silentwolf_data)
 	Data.save()
+	SteamUser.sw_dangky.emit()
 	

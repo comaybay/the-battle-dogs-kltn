@@ -29,6 +29,7 @@ var connection_handle: int = 0
 enum SendType {
 	UNRELIABLE = 0, NO_NAGLE = 1, NO_DELAY = 4, RELIABLE = 8, 
 }
+signal sw_dangky
 
 func is_logged_on() -> bool:
 	return Steam.loggedOn()
@@ -51,7 +52,7 @@ func _ready() -> void:
 		
 		SilentWolf.Auth.login_player(STEAM_USERNAME, PASSWORD)
 		SilentWolf.Auth.sw_login_complete.connect(_on_login_complete)
-		await dang_nhap_sw()
+		
 		Data.save()
 	if not IS_USING_STEAM:
 		set_process_input(false)
@@ -59,11 +60,13 @@ func _ready() -> void:
 func _on_login_complete(sw_result: Dictionary) -> void:
 	if sw_result.success:
 		print("Login succeeded!")
+		await dang_nhap_sw()
 	else:
 		#register by STEAM_USERNAME(username) and STEAM_ID(password)
 		var sw_register = await SilentWolf.Auth.register_player_user_password(STEAM_USERNAME, PASSWORD, PASSWORD).sw_registration_user_pwd_complete		
 		if sw_register.success :
 			await dang_ky_sw()
+			sw_dangky.connect(dang_nhap_sw)
 	
 func dang_ky_sw():
 	print("dang_ky_sw")
@@ -71,7 +74,6 @@ func dang_ky_sw():
 	Data.silentwolf_data.user_name = STEAM_USERNAME
 	await SilentWolf.Players.save_player_data(STEAM_USERNAME, Data.silentwolf_data)
 	SilentWolf.Auth.sw_registration_complete.connect(_on_registration_complete)
-	Data.select_data.emit()
 
 func dang_nhap_sw():
 	var sw_result = await SilentWolf.Players.get_player_data(STEAM_USERNAME).sw_get_player_data_complete
