@@ -136,6 +136,8 @@ func _on_lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response:
 		_go_to_room()
 	elif response == Steam.CHAT_ROOM_ENTER_RESPONSE_DOESNT_EXIST:
 		%Popup.popup(tr("@ROOM_NOT_EXIST"), PopupDialog.Type.INFORMATION)			
+	elif response == Steam.CHAT_ROOM_ENTER_RESPONSE_FULL:
+		%Popup.popup(tr("@ROOM_JOIN_FAILED_FULL"), PopupDialog.Type.INFORMATION)	
 	else:
 		%Popup.popup(tr("@ROOM_JOIN_FAILED"), PopupDialog.Type.INFORMATION)			
 
