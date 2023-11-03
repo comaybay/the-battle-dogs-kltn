@@ -7,6 +7,9 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ti00"]
 bg_color = Color(0, 0.0196078, 0.0705882, 0.443137)
 
+[sub_resource type="Animation" id="Animation_xhvfg"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_nk5dc"]
 resource_name = "start"
 length = 1.50001
@@ -106,9 +109,6 @@ tracks/7/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_xhvfg"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ywhn5"]
 _data = {

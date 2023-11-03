@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_battlefield.gd" id="1_i8anq"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/server_side.gd" id="2_54xfd"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/client_side.gd" id="2_4858x"]
-[ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/connection_handler.gd" id="2_w03bi"]
 [ext_resource type="PackedScene" uid="uid://xny5rxpmau5y" path="res://scenes/online_battle/p2p_battlefield/p2p_land/p2p_land.tscn" id="3_p4hqa"]
+[ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_connection_handler.gd" id="4_4ppfx"]
 [ext_resource type="PackedScene" uid="uid://uh7hnntqdigc" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower_left.tscn" id="5_8afl3"]
 [ext_resource type="PackedScene" uid="uid://btcyop0so1g7h" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_gui.tscn" id="5_y62fp"]
 [ext_resource type="Texture2D" uid="uid://dl847jxlc5jay" path="res://resources/battlefield_themes/green_grass/sky.png" id="6_acvgk"]
@@ -23,8 +23,17 @@ script = ExtResource("2_54xfd")
 [node name="ClientSide" type="Node" parent="."]
 script = ExtResource("2_4858x")
 
-[node name="ConnectionHandler" type="Node" parent="."]
-script = ExtResource("2_w03bi")
+[node name="P2PConnectionHandler" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("4_4ppfx")
+
+[node name="ReconnectTimer" type="Timer" parent="P2PConnectionHandler"]
+process_mode = 3
+wait_time = 60.0
+one_shot = true
+
+[node name="AttemptReconnectTimer" type="Timer" parent="P2PConnectionHandler"]
+wait_time = 5.0
 
 [node name="Sky" type="TextureRect" parent="."]
 material = ExtResource("1_3ebhf")
@@ -59,5 +68,3 @@ bus = &"InBattleFX"
 
 [node name="Popup" parent="CanvasLayer" instance=ExtResource("11_ovxua")]
 unique_name_in_owner = true
-
-[node name="ClientSide2" type="Node" parent="."]

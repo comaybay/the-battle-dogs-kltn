@@ -28,9 +28,6 @@ func take_damage(damage: int) -> void:
 	$AnimationPlayer.play("shake" if health > 0 else "fall")
 	
 	if health <= 0:
-		for dog in get_tree().get_nodes_in_group("dogs"):
-			dog.kill()
-			
 		zero_health.emit()
 	
 func healing(heal : int) -> Tween :

@@ -16,7 +16,14 @@ func _ready() -> void:
 	var battlefield := InBattle.get_battlefield()
 	_player_data = battlefield.get_player_data()
 	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/dog_tower.png" % battlefield.get_theme())
+	
+	zero_health.emit(_kill_all_dogs, CONNECT_ONE_SHOT)	
+	
 	_setup_max_health()
+	
+func _kill_all_dogs() -> void:
+	for dog in get_tree().get_nodes_in_group("dogs"):
+		dog.kill()
 	
 func _setup_max_health() -> void:
 	max_health = 500

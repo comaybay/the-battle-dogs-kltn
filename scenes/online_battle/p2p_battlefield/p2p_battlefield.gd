@@ -32,11 +32,12 @@ func get_dog_tower_right() -> P2PDogTower:
 
 func _enter_tree() -> void:
 	_stage_width = int(SteamUser.get_lobby_data("stage_width"))
-	var is_server: bool = SteamUser.get_lobby_owner() == SteamUser.STEAM_ID
+	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID
 	InBattle.in_p2p_battle = true
 	InBattle.in_request_mode = not is_server
 	
-	for member_id in SteamUser.lobby_members:
+	for player_data in SteamUser.players:
+		var member_id: int = player_data['steam_id']
 		if member_id == SteamUser.STEAM_ID:
 			_this_player_data = P2PBattlefieldPlayerData.new(member_id)
 		else:
@@ -46,7 +47,7 @@ func _ready() -> void:
 	inbattle_sfx_idx = AudioServer.get_bus_index("InBattleFX")
 	var stage_width_with_margin = _stage_width + (TOWER_MARGIN * 2)
 	
-	$ConnectionHandler.setup(%Popup)
+	$P2PConnectionHandler.setup(%Popup)
 	$Camera2D.setup(($Gui as P2PBattleGUI).camera_control_buttons, stage_width_with_margin, get_stage_height())
 	AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % SteamUser.get_lobby_data("music")))
 	
@@ -68,7 +69,7 @@ func _ready() -> void:
 	$P2PDogTowerLeft.position.x = TOWER_MARGIN
 	$P2PDogTowerRight.position.x = stage_width_with_margin - TOWER_MARGIN
 	
-	var is_server: bool = SteamUser.get_lobby_owner() == SteamUser.STEAM_ID
+	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID
 	if is_server:
 		_p2p_networking = $ServerSide
 		$ServerSide.setup(_this_player_data, _opponent_player_data, _player_dog_tower, _opponent_dog_tower)
@@ -83,7 +84,7 @@ func _ready() -> void:
 	
 	$Gui.setup(_player_dog_tower, _this_player_data)
 	
-func show_game_end_gui(winner_id: int):
+func end_game(winner_id: int):
 	clean_up()
 
 	var game_end: P2PGameEndGUI = GAME_END_SCENE.instantiate()
@@ -92,8 +93,16 @@ func show_game_end_gui(winner_id: int):
 	add_child(game_end)	
 	
 func clean_up():
-	$Camera2D.allow_user_input_camera_movement(false)
+	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID
+	if is_server:
+		$ServerSide.set_process(false)
+		$ServerSide.queue_free()
+	else:
+		$ClientSide.set_process(false)
+		$ClientSide.queue_free()
 	
+	$Camera2D.allow_user_input_camera_movement(false)
+	SteamUser.set_lobby_data("game_status", "waiting")
 	$Gui.queue_free()
 	AudioServer.set_bus_volume_db(inbattle_sfx_idx, -80)	
 

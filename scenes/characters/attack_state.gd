@@ -10,6 +10,9 @@ func enter(_data: Dictionary) -> void:
 	character.attack_sprite.frame_changed.connect(on_frame_changed)
 	character.n_AnimationPlayer.animation_finished.connect(on_animation_finished)
 	character.n_AnimationPlayer.play("attack")
+	
+	if character.custom_attack_area != null:
+		character.custom_attack_area.collision_mask = character.n_RayCast2D.collision_mask
 
 func on_frame_changed() -> void:
 	if done_attack == false && character.attack_sprite.frame >= character.attack_frame:
@@ -45,11 +48,7 @@ func physics_update(_delta: float) -> void:
 		
 		var shape_query := PhysicsShapeQueryParameters2D.new()
 		shape_query.shape_rid = shape_id
-		
-		if character.character_type == Character.Type.DOG:
-			shape_query.collision_mask = 0b10100 # enemy and cat tower
-		else:
-			shape_query.collision_mask = 0b100010 # enemy and dog tower
+		shape_query.collision_mask = character.n_RayCast2D.collision_mask
 		
 		var attack_midpoint := character.n_RayCast2D.global_position + character.n_RayCast2D.target_position
 		shape_query.transform = Transform2D(0, attack_midpoint) 

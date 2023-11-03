@@ -6,6 +6,7 @@
 [ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="4_tx8jb"]
 
 [node name="Popup" type="Control"]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 15

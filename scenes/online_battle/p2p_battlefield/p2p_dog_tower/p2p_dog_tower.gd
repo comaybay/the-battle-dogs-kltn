@@ -16,7 +16,16 @@ func setup(is_player_tower: bool, player_data: P2PBattlefieldPlayerData):
 
 func _ready() -> void:
 	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/dog_tower.png" % Steam.getLobbyData(SteamUser.lobby_id, "theme"))
+	
+	zero_health.connect(kill_all_dogs, CONNECT_ONE_SHOT)	
+	
 	_setup_max_health()
+	
+func kill_all_dogs() -> void:
+	for dog in get_tree().get_nodes_in_group(
+		"dogs" if direction == Direction.LEFT_TO_RIGHT else "cats"
+	):
+		dog.kill()
 	
 func _setup_max_health() -> void:
 	max_health = int(SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_DOG_TOWER_HEALTH))
@@ -71,5 +80,5 @@ func use_skill(skill_id: String) -> BaseSkill:
 func set_health(health: int) -> void:
 	self.health = health
 	update_health_label()
-	if health == 0:
+	if health <= 0:
 		$AnimationPlayer.play("fall")

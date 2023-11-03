@@ -140,11 +140,13 @@ func request_skill(skill_id: String):
 func _on_game_end(winner_id: int) -> void:
 	# update tower health before showing game end scene
 	if winner_id == SteamUser.STEAM_ID:
-		_opponent_dog_tower.health = 0
+		_opponent_dog_tower.set_health(0) 
+		_opponent_dog_tower.kill_all_dogs() 
 	else:
-		_this_player_dog_tower.health = 0
+		_this_player_dog_tower.set_health(0)
+		_this_player_dog_tower.kill_all_dogs() 
 	
-	InBattle.get_battlefield().show_game_end_gui(winner_id)
+	InBattle.get_battlefield().end_game(winner_id)
 	
 	set_process(false)
 	

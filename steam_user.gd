@@ -18,6 +18,7 @@ var data
 ## game connection
 var listen_socket: int = 0
 
+# In battle variables
 ## In battle player data (this data will stay even if player left the game / lobby mid game).
 ## The first player in the list is the left dog tower, second player is the right tower.
 var players: Array
@@ -29,12 +30,18 @@ enum SendType {
 	UNRELIABLE = 0, NO_NAGLE = 1, NO_DELAY = 4, RELIABLE = 8, 
 }
 
+func is_logged_on() -> bool:
+	return Steam.loggedOn()
+
 func _ready() -> void:
+	process_mode =  PROCESS_MODE_ALWAYS
+	
 	var INIT: Dictionary = Steam.steamInit(false)
 	print("Did Steam initialize?: "+str(INIT))	
 	IS_USING_STEAM = Steam.loggedOn()
 	Data.old_data = Data.save_data
 	Data.silentwolf_data = Data.save_data
+	
 	if IS_USING_STEAM: #have account
 		STEAM_ID = Steam.getSteamID()
 		STEAM_USERNAME = Steam.getPersonaName()
@@ -88,7 +95,6 @@ func _on_registration_complete(sw_result: Dictionary) -> void:
 	else:
 		print("Error: " + str(sw_result.error))
 
-
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 	
@@ -97,7 +103,7 @@ func update_lobby_members():
 	for i in range(0, Steam.getNumLobbyMembers(lobby_id)):
 		lobby_members.append(Steam.getLobbyMemberByIndex(lobby_id, i)) 
 	print("STEAM_USER: LOBBY MEMBERS: %s " % ",".join(lobby_members))	
-	
+
 func send_message(packet_data, send_type: SteamUser.SendType) -> void:
 	var data: PackedByteArray = var_to_bytes(packet_data).compress(FileAccess.COMPRESSION_GZIP)
 	Steam.sendMessageToConnection(connection_handle, data, send_type)
@@ -113,7 +119,10 @@ func get_lobby_data(key: String) -> String:
 	return Steam.getLobbyData(SteamUser.lobby_id, key)
 
 func set_lobby_data(key: String, value: String) -> void:
-	return Steam.setLobbyData(SteamUser.lobby_id, key, value)
+	Steam.setLobbyData(SteamUser.lobby_id, key, value)
+
+func set_lobby_member_data(key: String, value: String) -> void:
+	Steam.setLobbyMemberData(SteamUser.lobby_id, key, value)
 
 func get_member_data(member_id: int, key: String) -> String:
 	return Steam.getLobbyMemberData(lobby_id, member_id, key)

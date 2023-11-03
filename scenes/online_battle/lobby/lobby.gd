@@ -7,6 +7,11 @@ const MAIN_THEME_AUDIO: AudioStream = preload("res://resources/sound/music/main_
 var _request_create_room_name: String
 
 func _ready():
+	if not SteamUser.is_logged_on():
+		$Popup.popup("@QUIT_GAME_STEAM_DISCONNECTED", PopupDialog.Type.INFORMATION)
+		await $Popup.ok
+		get_tree().change_scene_to_file("res://scenes/start_menu/main.tscn")
+	
 	AudioPlayer.play_music(MAIN_THEME_AUDIO, true, true)
 	Steam.lobby_created.connect(_on_lobby_created)
 	
@@ -111,23 +116,28 @@ func _on_lobby_created(connect: int, lobby_id: int) -> void:
 
 func _on_room_listing_item_join_request(room_id: int, room: RoomListingItem):
 	room.set_join_button_disabled(true)
+	%Popup.popup(tr("@ROOM_JOINING"), PopupDialog.Type.PROGRESS)			
 	Steam.lobby_joined.connect(_on_lobby_joined, CONNECT_ONE_SHOT)
 	Steam.joinLobby(room_id)
 	await Steam.lobby_joined
 	room.set_join_button_disabled(false)
+	_refresh_room_listing()
 
 func _on_join_lobby_with_code(): 
 	%JoinWithCodeButton.disabled = true
+	%Popup.popup(tr("@ROOM_JOINING"), PopupDialog.Type.PROGRESS)			
 	Steam.lobby_joined.connect(_on_lobby_joined, CONNECT_ONE_SHOT)
 	Steam.joinLobby(int(%RoomCodeInput.text))
 	%JoinWithCodeButton.disabled = false
 
 func _on_lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
-	if response == 1:
+	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		SteamUser.lobby_id = lobby_id
 		_go_to_room()
+	elif response == Steam.CHAT_ROOM_ENTER_RESPONSE_DOESNT_EXIST:
+		%Popup.popup(tr("@ROOM_NOT_EXIST"), PopupDialog.Type.INFORMATION)			
 	else:
-		%Popup.popup(tr("@ROOM_NOT_EXIST"))			
+		%Popup.popup(tr("@ROOM_JOIN_FAILED"), PopupDialog.Type.INFORMATION)			
 
 func _go_to_room():
 	AudioPlayer.stop_music(MAIN_THEME_AUDIO, true)
@@ -163,7 +173,7 @@ func _on_matchmaking_lobby_match_list(lobbies: Array):
 	_auto_matchmaking()
 		
 func _on_matchmaking_lobby_joined(lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
-	if response == 1:
+	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		SteamUser.lobby_id = lobby_id
 		_go_to_room()
 		

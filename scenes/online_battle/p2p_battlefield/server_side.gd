@@ -216,7 +216,5 @@ func request_skill(skill_id: String):
 
 func _on_game_end(winner_id: int) -> void:
 	SteamUser.send_message({ "winner": winner_id }, SteamUser.SendType.RELIABLE)
-	SteamUser.set_lobby_data("game_status", "waiting")
-	InBattle.get_battlefield().show_game_end_gui(winner_id)
-	set_process(false)
-	queue_free()
+	InBattle.get_battlefield().end_game(winner_id)
+	

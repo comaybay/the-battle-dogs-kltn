@@ -10,7 +10,7 @@ var _credits: Credits = null
 func _ready():
 	AudioPlayer.play_music(MAIN_THEME_AUDIO)
 	
-	if SteamUser.IS_USING_STEAM:
+	if SteamUser.IS_USING_STEAM and SteamUser.is_logged_on():
 		%OnlinePlayButton.disabled = false
 		%OnlinePlayButton.pressed.connect(_go_to_lobby)
 	else:

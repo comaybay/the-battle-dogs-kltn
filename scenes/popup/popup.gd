@@ -12,7 +12,10 @@ const MAX_POPUP_PANEL_WIDTH = 700
 ## CONFIRMATION: popup with Yes and Cancel buttons 
 enum Type { PROGRESS, INFORMATION, CONFIRMATION }
 
+var _process_method: Callable
+
 func _ready() -> void:
+	set_process(false)
 	set_process_shortcut_input(false)
 	
 	%OkButton.pressed.connect(func(): 
@@ -35,6 +38,7 @@ func _shortcut_input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func popup(message: String, popup_type: Type):
+	set_process(false)
 	set_process_shortcut_input(true)
 	
 	%OkButton.hide()
@@ -45,6 +49,11 @@ func popup(message: String, popup_type: Type):
 	elif popup_type == Type.CONFIRMATION:
 		%ConfirmationButtons.show()
 			
+	set_message(message)
+	
+	self.show()
+	
+func set_message(message: String) -> void:
 	%PopupMessage.autowrap_mode = TextServer.AUTOWRAP_OFF
 	%PopupMessage.text = ""
 	%PopupPanel.size.x = 0
@@ -58,7 +67,16 @@ func popup(message: String, popup_type: Type):
 		%PopupMessage.text = message
 	
 	%PopupPanel.anchors_preset = PRESET_CENTER
-	self.show()
+
+func popup_process(method: Callable, popup_type: Type) -> void:
+	popup(method.call(), popup_type)
+	
+	set_process(true)
+	_process_method = method
+
+func _process(delta: float) -> void:
+	if _process_method.is_valid():
+		set_message(_process_method.call())
 
 func close():
 	self.hide()

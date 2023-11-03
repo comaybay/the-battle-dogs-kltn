@@ -143,8 +143,6 @@ func _handle_pinch_zoom_input(event: InputEvent) -> void:
 
 func _calculate_pinch_zoom_scale() -> void:
 	var positions = _touch_positions.values() 
-	var a := Vector2.ZERO
-	
 	var distance = positions[0].distance_to(positions[1])
 	
 	if _initial_distance == 0:
