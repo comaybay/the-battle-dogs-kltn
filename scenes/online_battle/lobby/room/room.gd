@@ -41,6 +41,8 @@ func _ready() -> void:
 	var owner_id: int = Steam.getLobbyOwner(SteamUser.lobby_id)
 	_prev_owner_id = owner_id
 	
+	SteamUser.set_lobby_member_data("in_battle_ready", "false")
+
 	if SteamUser.is_lobby_owner():
 		SteamUser.set_lobby_member_data("ready", "true")
 		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_owner)
@@ -212,10 +214,6 @@ func _handle_connection_leave_lobby():
 	print("LEAVE LOBBY %s" % SteamUser.lobby_id)
 	Steam.leaveLobby(SteamUser.lobby_id)
 	SteamUser.lobby_id = 0
-	# Close session with all users
-	for member_id in SteamUser.lobby_members:
-		if SteamUser.STEAM_ID != member_id:
-			Steam.closeP2PSessionWithUser(member_id)
 
 func _go_back_to_lobby_scene():	
 	var current_music = AudioPlayer.get_current_music()
