@@ -23,6 +23,7 @@ var _this_player_used_skills: Array[String] = []
 
 func _ready() -> void:
 	SteamUser.set_lobby_data("game_status", "started")
+	SteamUser.set_lobby_data("winner", "")
 	set_process(false)
 	
 func setup(
@@ -137,6 +138,10 @@ func _get_client_recharge_times() -> Array:
 func _apply_client_messages():
 	for message in SteamUser.read_messages():
 		var data: Dictionary = message['data']
+		if data.has('surrender'):
+			end_game(_this_player_data.get_steam_id())
+			return
+			
 		_received_message_number = data['message_number']
 		
 		var input_mask: int = data['input_mask']
@@ -214,7 +219,11 @@ func request_skill(skill_id: String):
 	skill_request_accepted.emit(skill_id)
 	_this_player_used_skills.append(skill_id)
 
-func _on_game_end(winner_id: int) -> void:
+func end_game(winner_id: int) -> void:
 	SteamUser.send_message({ "winner": winner_id }, SteamUser.SendType.RELIABLE)
+	SteamUser.set_lobby_data("winner", str(winner_id))
+	
 	InBattle.get_battlefield().end_game(winner_id)
 	
+func _on_surrendered() -> void:
+	end_game(_opponent_data.get_steam_id())
