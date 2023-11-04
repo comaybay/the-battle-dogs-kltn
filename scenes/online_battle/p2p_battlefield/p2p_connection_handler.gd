@@ -12,7 +12,6 @@ func _init() -> void:
 
 func setup(popup: PopupDialog) -> void:
 	$ReconnectTimer.timeout.connect(_on_reconnect_timeout)
-	$AttemptReconnectTimer.timeout.connect(_reconnect_to_listen_socket)
 	_popup = popup
 
 func _on_network_connection_status_changed_server(connection_handle: int, connection: Dictionary, old_state: int):
@@ -86,7 +85,6 @@ func _on_reconnect_timeout():
 		await _popup.ok
 		(InBattle.get_battlefield() as P2PBattlefield).end_game(SteamUser.STEAM_ID)
 	else:
-		$AttemptReconnectTimer.stop()
 		Steam.network_connection_status_changed.disconnect(_on_network_connection_status_changed_client)
 		_popup.popup("@RECONNECT_FAILED", PopupDialog.Type.INFORMATION)
 		await _popup.ok
@@ -106,17 +104,11 @@ func _on_network_connection_status_changed_client(connection_handle: int, connec
 		or old_state == Steam.CONNECTION_STATE_FINDING_ROUTE
 	)
 	
-
 	# connection accepted
 	if old_state_equals_connecting and new_state == Steam.CONNECTION_STATE_CONNECTED:
-		get_tree().paused = false
-		$ReconnectTimer.stop()
-		$AttemptReconnectTimer.stop()
 		print("CLIENT: connection re-established.")
-		_popup.close()
-		SteamUser.connection_handle = connection_handle
+		_handle_connection_reestablished(connection_handle)
 		return
-	
 	
 	## server close connection
 	if new_state == Steam.CONNECTION_STATE_CLOSED_BY_PEER:			
@@ -130,19 +122,40 @@ func _on_network_connection_status_changed_client(connection_handle: int, connec
 		print("CLIENT: disconnected, reconnecting...")
 		
 		_close_connection(connection_handle)
-		
-		# reconnect to make sure that socket is actuallly closed
 		_reconnect_to_listen_socket()
 		
-		# if not, reconnecting
+		# show reconnecting message
 		if $ReconnectTimer.is_stopped():
 			get_tree().paused = true
 			$ReconnectTimer.start()
-			
 			_popup.popup_process(func():
 				return "%s (%s)" % [tr("@RECONNECTING"), int($ReconnectTimer.time_left)]
 			, PopupDialog.Type.PROGRESS)
 
+func _handle_connection_reestablished(connection_handle: int) -> void:
+	get_tree().paused = false
+	$ReconnectTimer.stop()
+	_popup.close()
+	SteamUser.connection_handle = connection_handle
+	
+	## rejoin lobby
+	Steam.joinLobby(SteamUser.lobby_id)
+	Steam.lobby_joined.connect(_on_lobby_rejoined, CONNECT_ONE_SHOT)
+
+func _on_lobby_rejoined(lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
+	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
+		# check if game has ended
+		var winner := SteamUser.get_lobby_data("winner")
+		print(winner)
+		if winner != "":
+			(InBattle.get_battlefield() as P2PBattlefield).end_game(int(winner))
+	else:
+		SteamUser.lobby_id = 0
+		_close_connection(SteamUser.connection_handle)
+		_popup.popup("@GAME_LOST_CONNECTION", PopupDialog.Type.INFORMATION)	
+		await _popup.ok	
+		get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")
+		
 func _handle_server_close_connection(connection_handle: int) -> void:
 	print("CLIENT: connection closed, owner left.")
 	_close_connection(connection_handle)

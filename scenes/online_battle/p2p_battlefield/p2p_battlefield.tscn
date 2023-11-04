@@ -18,9 +18,11 @@
 script = ExtResource("1_i8anq")
 
 [node name="ServerSide" type="Node" parent="."]
+process_mode = 1
 script = ExtResource("2_54xfd")
 
 [node name="ClientSide" type="Node" parent="."]
+process_mode = 1
 script = ExtResource("2_4858x")
 
 [node name="P2PConnectionHandler" type="Node" parent="."]
@@ -53,6 +55,7 @@ stretch_mode = 1
 position = Vector2(1039, 0)
 
 [node name="Gui" parent="." instance=ExtResource("5_y62fp")]
+process_mode = 1
 
 [node name="EffectSpace" type="Node2D" parent="."]
 z_index = 40
