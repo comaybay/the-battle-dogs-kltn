@@ -17,7 +17,8 @@ func setup(
 		this_player_data: P2PBattlefieldPlayerData, 
 		opponent_player_data: P2PBattlefieldPlayerData, 
 		this_player_dog_tower: P2PDogTower,
-		opponent_dog_tower: P2PDogTower
+		opponent_dog_tower: P2PDogTower,
+		battle_gui: P2PBattleGUI
 	):
 	_this_player_data = this_player_data
 	_opponent_data = opponent_player_data
@@ -31,6 +32,8 @@ func setup(
 	else:
 		_p2p_object_sync.setup(battlefield, opponent_dog_tower, this_player_dog_tower)
 
+	battle_gui.surrendered.connect(_on_surrendered)
+	
 ## update game state using data sent from server
 func _process(delta: float):	
 	for message in SteamUser.read_messages():
@@ -155,3 +158,10 @@ func _on_game_end(winner_id: int) -> void:
 		continue
 	
 	queue_free()
+
+func _on_surrendered() -> void:
+	_message_number += 1
+	SteamUser.send_message({
+		'surrender': true,
+		'message_number': _message_number
+	}, SteamUser.SendType.RELIABLE)

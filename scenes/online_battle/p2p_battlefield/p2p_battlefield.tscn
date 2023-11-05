@@ -34,9 +34,6 @@ process_mode = 3
 wait_time = 60.0
 one_shot = true
 
-[node name="AttemptReconnectTimer" type="Timer" parent="P2PConnectionHandler"]
-wait_time = 5.0
-
 [node name="Sky" type="TextureRect" parent="."]
 material = ExtResource("1_3ebhf")
 offset_left = -760.0

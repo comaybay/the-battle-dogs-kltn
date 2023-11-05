@@ -134,6 +134,9 @@ func _exit_tree() -> void:
 		AudioPlayer.stop_music(current_music, true, true)
 	
 	AudioServer.set_bus_volume_db(inbattle_sfx_idx, 0)
+	
+	# in case game is paused before moving to a different scene
+	get_tree().paused = false
 
 func _on_boss_appeared() -> void:
 	var game_speed_button := ($Gui as BattleGUI).game_speed_button
@@ -146,3 +149,4 @@ func _on_boss_appeared() -> void:
 		AudioPlayer.stop_music(current_music, false, true)
 		await $BossDrum.finished
 		AudioPlayer.play_music(_boss_music)
+

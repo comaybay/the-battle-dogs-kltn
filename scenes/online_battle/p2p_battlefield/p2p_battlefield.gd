@@ -31,8 +31,8 @@ func get_dog_tower_right() -> P2PDogTower:
 	return $P2PDogTowerRight
 
 func _enter_tree() -> void:
-	get_tree().paused = true
 	process_mode = PROCESS_MODE_ALWAYS
+	ready.connect(func(): get_tree().paused = true, CONNECT_ONE_SHOT) 
 	Steam.lobby_data_update.connect(_start_game_when_all_is_ready)
 	%Popup.popup("@WAITTING_FOR_OTHER_PLAYER_IN_BATTLE", PopupDialog.Type.PROGRESS)
 	
@@ -77,11 +77,11 @@ func _ready() -> void:
 	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID
 	if is_server:
 		_p2p_networking = $ServerSide
-		$ServerSide.setup(_this_player_data, _opponent_player_data, _player_dog_tower, _opponent_dog_tower)
+		$ServerSide.setup(_this_player_data, _opponent_player_data, _player_dog_tower, _opponent_dog_tower, $Gui)
 		$ClientSide.queue_free()
 	else:
 		_p2p_networking = $ClientSide
-		$ClientSide.setup(self, _this_player_data, _opponent_player_data, _player_dog_tower, _opponent_dog_tower)
+		$ClientSide.setup(self, _this_player_data, _opponent_player_data, _player_dog_tower, _opponent_dog_tower, $Gui)
 		$ServerSide.queue_free()
 	
 	_player_dog_tower.setup(true, _this_player_data)
@@ -100,12 +100,18 @@ func _start_game_when_all_is_ready(success: int, lobby_id: int, member_id: int) 
 	)
 	
 	if is_everyone_ready:
-		process_mode = PROCESS_MODE_ALWAYS
-		get_tree().paused = false
-		Steam.lobby_data_update.disconnect(_start_game_when_all_is_ready)
-		%Popup.close()
+		if is_node_ready():
+			_start_game()
+		else:
+			ready.connect(_start_game, CONNECT_ONE_SHOT)
+
+func _start_game() -> void: 
+	process_mode = PROCESS_MODE_ALWAYS
+	get_tree().paused = false
+	Steam.lobby_data_update.disconnect(_start_game_when_all_is_ready)
+	%Popup.close()
 		
-func end_game(winner_id: int):
+func end_game(winner_id: int) -> void:
 	clean_up()
 
 	var game_end: P2PGameEndGUI = GAME_END_SCENE.instantiate()

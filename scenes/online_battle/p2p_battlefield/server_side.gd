@@ -30,7 +30,8 @@ func setup(
 		this_player_data: P2PBattlefieldPlayerData, 
 		opponent_player_data: P2PBattlefieldPlayerData, 
 		this_player_dog_tower: P2PDogTower,
-		opponent_dog_tower: P2PDogTower
+		opponent_dog_tower: P2PDogTower,
+		battle_gui: P2PBattleGUI
 	):
 	_this_player_data = this_player_data
 	_opponent_data = opponent_player_data
@@ -63,11 +64,13 @@ func setup(
 		print(Data.skill_info[skill_id]['spawn_time'])
 	
 	this_player_dog_tower.zero_health.connect(
-		_on_game_end.bind(_opponent_data.get_steam_id()), CONNECT_ONE_SHOT
+		end_game.bind(_opponent_data.get_steam_id()), CONNECT_ONE_SHOT
 	)
 	opponent_dog_tower.zero_health.connect(
-		_on_game_end.bind(SteamUser.STEAM_ID), CONNECT_ONE_SHOT
+		end_game.bind(SteamUser.STEAM_ID), CONNECT_ONE_SHOT
 	)
+	
+	battle_gui.surrendered.connect(_on_surrendered)
 	
 	set_process(true)
 	
@@ -139,7 +142,7 @@ func _apply_client_messages():
 	for message in SteamUser.read_messages():
 		var data: Dictionary = message['data']
 		if data.has('surrender'):
-			end_game(_this_player_data.get_steam_id())
+			_handle_client_surrender()
 			return
 			
 		_received_message_number = data['message_number']
@@ -199,6 +202,9 @@ func _handling_efficiency_upgrade(input_mask: int):
 		_opponent_data.fmoney -= upgrade_price
 		_opponent_data.increase_efficiency_level()
 		_client_efficiency_upgrade_request_accepted = true
+
+func _handle_client_surrender():
+	end_game(_this_player_data.get_steam_id())
 
 func request_efficiency_upgrade():
 	if _this_player_data.get_efficiency_level() < _this_player_data.MAX_EFFICIENCY_LEVEL:

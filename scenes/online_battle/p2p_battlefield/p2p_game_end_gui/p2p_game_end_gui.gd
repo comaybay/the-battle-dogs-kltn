@@ -3,9 +3,6 @@ class_name P2PGameEndGUI extends CanvasLayer
 var DEFEAT_AUDIO: AudioStream = preload("res://resources/sound/battlefield/defeat.mp3")
 var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/victory.mp3")
 
-func _init() -> void:
-	visible = false
-	
 func setup(winner_id: int) -> void:	
 	var current_music = AudioPlayer.get_current_music()
 	AudioPlayer.stop_music(current_music, true, true)
@@ -25,7 +22,6 @@ func setup(winner_id: int) -> void:
 		_setup_victory_status_text(%Player2Status, true)
 	
 	%ToRoomButton.pressed.connect(_go_to_room)
-	visible = true
 	$AnimationPlayer.play("start")
 	
 func _setup_victory_status_text(label: Label, is_winner: bool):
