@@ -227,7 +227,6 @@ func request_skill(skill_id: String):
 
 func end_game(winner_id: int) -> void:
 	SteamUser.send_message({ "winner": winner_id }, SteamUser.SendType.RELIABLE)
-	SteamUser.set_lobby_data("winner", str(winner_id))
 	
 	InBattle.get_battlefield().end_game(winner_id)
 	

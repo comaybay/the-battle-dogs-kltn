@@ -12,6 +12,7 @@ var _starting_game: bool = false
 func _ready() -> void:
 	## if user lost connection to room after game end
 	if SteamUser.get_lobby_owner() == 0:
+		_handle_connection_leave_lobby()
 		$Popup.popup("@ROOM_LOST_CONNECTION", PopupDialog.Type.INFORMATION)
 		await $Popup.ok
 		get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")
@@ -41,7 +42,9 @@ func _ready() -> void:
 	var owner_id: int = Steam.getLobbyOwner(SteamUser.lobby_id)
 	_prev_owner_id = owner_id
 	
+	# reset in battle variables
 	SteamUser.set_lobby_member_data("in_battle_ready", "false")
+	SteamUser.set_lobby_member_data("received_ready_message", "false")
 
 	if SteamUser.is_lobby_owner():
 		SteamUser.set_lobby_member_data("ready", "true")
@@ -178,10 +181,19 @@ func update_custom_battlefield_settings():
 func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int, chat_state: int) -> void:
 	SteamUser.update_lobby_members()
 	var username: String = Steam.getFriendPersonaName(change_id)
+	
+	# if player is disconnected
+	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_DISCONNECTED and change_id == SteamUser.STEAM_ID:
+		_handle_connection_leave_lobby()
+		$Popup.popup("@ROOM_LOST_CONNECTION", PopupDialog.Type.INFORMATION)
+		await $Popup.ok
+		_go_back_to_lobby_scene()
+		return
+	
 	# if a player has left the lobby and the player was a lobby owner
-	if chat_state == 2 and _prev_owner_id == change_id:
+	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_LEFT and _prev_owner_id == change_id:
 		print("%s %s" % [username, tr("@PLAYER_HAS_LEFT")])
-		_close_connection(SteamUser.connection_handle)
+		SteamUser.close_connection(SteamUser.connection_handle)
 		
 		# let new room owner create connection, while others connect to the room
 		var new_owner := Steam.getLobbyOwner(SteamUser.lobby_id)
@@ -190,6 +202,7 @@ func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int,
 		chat_box.display_message(new_owner_message, ChatBox.COLOR_LOBBY_EVENT)
 	
 		if new_owner == SteamUser.STEAM_ID:
+			_prev_owner_id = new_owner
 			Steam.network_connection_status_changed.disconnect(_on_network_connection_status_changed_room_member)
 			Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_owner)
 			SteamUser.set_lobby_member_data("ready", "true")
@@ -209,7 +222,7 @@ func _handle_connection_leave_lobby():
 		SteamUser.connection_handle = 0
 		SteamUser.listen_socket = 0
 	else:
-		_close_connection(SteamUser.connection_handle)
+		SteamUser.close_connection(SteamUser.connection_handle)
 	
 	print("LEAVE LOBBY %s" % SteamUser.lobby_id)
 	Steam.leaveLobby(SteamUser.lobby_id)
@@ -340,12 +353,6 @@ func _on_network_connection_status_changed_room_member(connection_handle: int, c
 		var message := "%s %s" % [tr("@CONNECTION_CLOSED_BY"), username]
 		chat_box.display_message(message, ChatBox.COLOR_P2P_EVENT)
 
-func _close_connection(connection_handle: int):
-	Steam.closeConnection(connection_handle, Steam.CONNECTION_END_REMOTE_TIMEOUT, "CLOSE CONNECTION", false)
-	print("CLOSE CONNECTION: " + str(connection_handle))
-	Steam.clearIdentity("room_owner")
-	SteamUser.connection_handle = 0
-
 func _connect_to_listen_socket():
 	print("CONNECTING TO LISTEN SOCKET")
 	var owner_id := Steam.getLobbyOwner(SteamUser.lobby_id)
@@ -360,7 +367,5 @@ func _connect_to_listen_socket():
 
 func _create_listen_socket():
 	var message := "%s %s" % [SteamUser.STEAM_USERNAME, tr("@HAS_CREATED_CONNECTION")]
+	SteamUser.create_listen_socket()
 	chat_box.display_message(message, ChatBox.COLOR_P2P_EVENT)
-	
-	SteamUser.listen_socket = Steam.createListenSocketP2P(0, [])
-	print("new listen socket: %s" % SteamUser.listen_socket)

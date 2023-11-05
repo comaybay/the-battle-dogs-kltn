@@ -2,6 +2,10 @@ extends Node
 
 var _popup: PopupDialog
 
+# client side variables
+var _reconnecting_connection_handle: int
+var _client_connection_closed_by_server: bool = false
+
 func _init() -> void:
 	var is_owner: bool = SteamUser.is_lobby_owner()
 	
@@ -9,7 +13,7 @@ func _init() -> void:
 		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_server)
 	else:
 		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_client)
-
+		
 func setup(popup: PopupDialog) -> void:
 	$ReconnectTimer.timeout.connect(_on_reconnect_timeout)
 	_popup = popup
@@ -53,8 +57,8 @@ func _on_network_connection_status_changed_server(connection_handle: int, connec
 	# failed to connect
 	if new_state == Steam.CONNECTION_STATE_PROBLEM_DETECTED_LOCALLY:
 		print("SERVER: failed to connect with peer")
-		_close_connection(connection_handle)
-
+		SteamUser.close_connection(connection_handle)
+		
 		if $ReconnectTimer.is_stopped():
 			get_tree().paused = true
 			$ReconnectTimer.start()
@@ -66,12 +70,14 @@ func _on_network_connection_status_changed_server(connection_handle: int, connec
 				PopupDialog.Type.PROGRESS
 			)
 
-	if new_state == Steam.CONNECTION_STATE_CLOSED_BY_PEER:
-		print("SERVER: connection closed by peer")
-		_close_connection(connection_handle)
-		_popup.popup("@OTHER_PLAYER_LEFT", PopupDialog.Type.INFORMATION)
-		await _popup.ok
-		(InBattle.get_battlefield() as P2PBattlefield).end_game(SteamUser.STEAM_ID)
+		if new_state == Steam.CONNECTION_STATE_CLOSED_BY_PEER:
+			get_tree().paused = true
+			print("SERVER: connection closed by peer")
+			SteamUser.close_connection(connection_handle)
+			_popup.popup("@OTHER_PLAYER_LEFT", PopupDialog.Type.INFORMATION)
+			await _popup.ok
+			get_tree().paused = false
+			(InBattle.get_battlefield() as P2PBattlefield).end_game(SteamUser.STEAM_ID)
 		
 func _on_reconnect_timeout():
 	var is_server: = SteamUser.is_lobby_owner()
@@ -79,12 +85,16 @@ func _on_reconnect_timeout():
 	if is_server:
 		SteamUser.set_lobby_data("game_status", "waiting")
 		Steam.network_connection_status_changed.disconnect(_on_network_connection_status_changed_server)
-		Steam.closeListenSocket(SteamUser.listen_socket)
-		SteamUser.listen_socket = 0
 		_popup.popup("@OTHER_PLAYER_LEFT", PopupDialog.Type.INFORMATION)
 		await _popup.ok
 		(InBattle.get_battlefield() as P2PBattlefield).end_game(SteamUser.STEAM_ID)
 	else:
+		if _client_connection_closed_by_server:
+			_client_handle_server_close_connection(_reconnecting_connection_handle)
+		else:
+			_client_handle_reconnect_failed(_reconnecting_connection_handle)
+
+func _client_handle_reconnect_failed(connection_handle) -> void:
 		Steam.network_connection_status_changed.disconnect(_on_network_connection_status_changed_client)
 		_popup.popup("@RECONNECT_FAILED", PopupDialog.Type.INFORMATION)
 		await _popup.ok
@@ -92,8 +102,10 @@ func _on_reconnect_timeout():
 		SteamUser.lobby_id = 0
 		var opponent_id = InBattle.get_opponent_data().get_steam_id()
 		(InBattle.get_battlefield() as P2PBattlefield).end_game(opponent_id)
-
+		
 func _on_network_connection_status_changed_client(connection_handle: int, connection: Dictionary, old_state: int):
+	_reconnecting_connection_handle = connection_handle
+	
 	print("==========")
 	print(connection)
 	print("==========")
@@ -107,21 +119,22 @@ func _on_network_connection_status_changed_client(connection_handle: int, connec
 	# connection accepted
 	if old_state_equals_connecting and new_state == Steam.CONNECTION_STATE_CONNECTED:
 		print("CLIENT: connection re-established.")
-		_handle_connection_reestablished(connection_handle)
+		_client_handle_connection_reestablished(connection_handle)
 		return
-	
-	## server close connection
-	if new_state == Steam.CONNECTION_STATE_CLOSED_BY_PEER:			
-		_handle_server_close_connection(connection_handle)
-		return 
 			
-	# disconnected
-	if (
+	# disconnected, reconnecting
+	if ( 
 		new_state == Steam.CONNECTION_STATE_PROBLEM_DETECTED_LOCALLY 
+		or new_state == Steam.CONNECTION_STATE_CLOSED_BY_PEER
 	):
+		# this is either server close the connection or client has bad internet speed,
+		# therefore retry to connect again, if not working then that means server has close the connection
+		if new_state == Steam.CONNECTION_STATE_CLOSED_BY_PEER:
+			_client_connection_closed_by_server = true
+			
 		print("CLIENT: disconnected, reconnecting...")
 		
-		_close_connection(connection_handle)
+		SteamUser.close_connection(connection_handle)
 		_reconnect_to_listen_socket()
 		
 		# show reconnecting message
@@ -131,8 +144,8 @@ func _on_network_connection_status_changed_client(connection_handle: int, connec
 			_popup.popup_process(func():
 				return "%s (%s)" % [tr("@RECONNECTING"), int($ReconnectTimer.time_left)]
 			, PopupDialog.Type.PROGRESS)
-
-func _handle_connection_reestablished(connection_handle: int) -> void:
+					
+func _client_handle_connection_reestablished(connection_handle: int) -> void:
 	get_tree().paused = false
 	$ReconnectTimer.stop()
 	_popup.close()
@@ -151,14 +164,19 @@ func _on_lobby_rejoined(lobby_id: int, _permissions: int, _locked: bool, respons
 			(InBattle.get_battlefield() as P2PBattlefield).end_game(int(winner))
 	else:
 		SteamUser.lobby_id = 0
-		_close_connection(SteamUser.connection_handle)
+		SteamUser.close_connection(SteamUser.connection_handle)
 		_popup.popup("@GAME_LOST_CONNECTION", PopupDialog.Type.INFORMATION)	
 		await _popup.ok	
 		get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")
 		
-func _handle_server_close_connection(connection_handle: int) -> void:
+func _client_handle_server_close_connection(connection_handle: int) -> void:
 	print("CLIENT: connection closed, owner left.")
-	_close_connection(connection_handle)
+	SteamUser.close_connection(connection_handle)
+	
+	# leave lobby (in case where server did not close conenction but due to bad internet)
+	Steam.leaveLobby(SteamUser.lobby_id)
+	SteamUser.lobby_id = 0
+	
 	_popup.popup("@OTHER_PLAYER_HAS_LEFT", PopupDialog.Type.INFORMATION)
 	await _popup.ok
 	(InBattle.get_battlefield() as P2PBattlefield).end_game(SteamUser.STEAM_ID)
@@ -172,12 +190,3 @@ func _reconnect_to_listen_socket() -> void:
 	Steam.addIdentity("room_owner")
 	Steam.setIdentitySteamID64("room_owner", server_id)
 	Steam.connectP2P("room_owner", 0, [])	
-		
-func _close_connection(connection_handle: int) -> void:
-	Steam.closeConnection(connection_handle, Steam.CONNECTION_END_REMOTE_TIMEOUT, "CLOSE CONNECTION", false)
-	Steam.clearIdentity("room_owner")
-	print("CLOSE CONNECTION: " + str(connection_handle))
-	SteamUser.connection_handle = 0
-
-func _start_timer():
-	get_tree().paused = true

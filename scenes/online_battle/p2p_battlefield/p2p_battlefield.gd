@@ -31,11 +31,6 @@ func get_dog_tower_right() -> P2PDogTower:
 	return $P2PDogTowerRight
 
 func _enter_tree() -> void:
-	process_mode = PROCESS_MODE_ALWAYS
-	ready.connect(func(): get_tree().paused = true, CONNECT_ONE_SHOT) 
-	Steam.lobby_data_update.connect(_start_game_when_all_is_ready)
-	%Popup.popup("@WAITTING_FOR_OTHER_PLAYER_IN_BATTLE", PopupDialog.Type.PROGRESS)
-	
 	_stage_width = int(SteamUser.get_lobby_data("stage_width"))
 	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID
 	InBattle.in_p2p_battle = true
@@ -88,31 +83,13 @@ func _ready() -> void:
 	_opponent_dog_tower.setup(false, _opponent_player_data)
 	
 	$Gui.setup(_player_dog_tower, _this_player_data)
-	
-	SteamUser.set_lobby_member_data("in_battle_ready", "true")
-
-func _start_game_when_all_is_ready(success: int, lobby_id: int, member_id: int) -> void:
-	if success == 0 or member_id == lobby_id:
-		return
-		
-	var is_everyone_ready = SteamUser.players.all(func(player):
-		return SteamUser.get_member_data(player['steam_id'], "in_battle_ready") == "true"
-	)
-	
-	if is_everyone_ready:
-		if is_node_ready():
-			_start_game()
-		else:
-			ready.connect(_start_game, CONNECT_ONE_SHOT)
-
-func _start_game() -> void: 
-	process_mode = PROCESS_MODE_ALWAYS
-	get_tree().paused = false
-	Steam.lobby_data_update.disconnect(_start_game_when_all_is_ready)
-	%Popup.close()
 		
 func end_game(winner_id: int) -> void:
 	clean_up()
+	
+	var is_room_owner: bool = SteamUser.get_lobby_owner() == SteamUser.STEAM_ID
+	if is_room_owner:
+		SteamUser.set_lobby_data("winner", str(winner_id))
 
 	var game_end: P2PGameEndGUI = GAME_END_SCENE.instantiate()
 	game_end.setup(winner_id)	
@@ -128,8 +105,13 @@ func clean_up():
 		$ClientSide.set_process(false)
 		$ClientSide.queue_free()
 	
+	$P2PConnectionHandler.queue_free()
 	$Camera2D.allow_user_input_camera_movement(false)
-	SteamUser.set_lobby_data("game_status", "waiting")
+	
+	var is_room_owner: bool = SteamUser.get_lobby_owner() == SteamUser.STEAM_ID
+	if is_room_owner:
+		SteamUser.set_lobby_data("game_status", "waiting")
+	
 	$Gui.queue_free()
 	AudioServer.set_bus_volume_db(inbattle_sfx_idx, -80)	
 

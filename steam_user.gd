@@ -134,3 +134,12 @@ func get_lobby_owner() -> int:
 
 func is_lobby_owner() -> bool:
 	return SteamUser.STEAM_ID == get_lobby_owner()
+
+func close_connection(connection_handle: int) -> void:
+	print("CLOSE CONNECTION: " + str(connection_handle))
+	Steam.closeConnection(connection_handle, Steam.CONNECTION_END_REMOTE_TIMEOUT, "CLOSE CONNECTION", false)
+	SteamUser.connection_handle = 0
+
+func create_listen_socket():
+	SteamUser.listen_socket = Steam.createListenSocketP2P(0, [])
+	print("new listen socket: %s" % SteamUser.listen_socket)

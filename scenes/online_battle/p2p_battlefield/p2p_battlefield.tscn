@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://b0ihidn3ggmh5"]
+[gd_scene load_steps=15 format=3 uid="uid://b0ihidn3ggmh5"]
 
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_3ebhf"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_battlefield.gd" id="1_i8anq"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/server_side.gd" id="2_54xfd"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/client_side.gd" id="2_4858x"]
+[ext_resource type="PackedScene" uid="uid://csqn20ypesci4" path="res://scenes/online_battle/p2p_battlefield/in_battle_ready/in_battle_ready.tscn" id="2_xki2s"]
 [ext_resource type="PackedScene" uid="uid://xny5rxpmau5y" path="res://scenes/online_battle/p2p_battlefield/p2p_land/p2p_land.tscn" id="3_p4hqa"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_connection_handler.gd" id="4_4ppfx"]
 [ext_resource type="PackedScene" uid="uid://uh7hnntqdigc" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower_left.tscn" id="5_8afl3"]
@@ -15,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="11_ovxua"]
 
 [node name="P2PBattlefield" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_i8anq")
 
 [node name="ServerSide" type="Node" parent="."]
@@ -63,6 +65,8 @@ script = ExtResource("6_cy4w7")
 [node name="BossDrum" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_t23ci")
 bus = &"InBattleFX"
+
+[node name="InBattleReady" parent="." instance=ExtResource("2_xki2s")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
