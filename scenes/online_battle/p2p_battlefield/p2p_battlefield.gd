@@ -93,8 +93,10 @@ func end_game(winner_id: int) -> void:
 
 	var game_end: P2PGameEndGUI = GAME_END_SCENE.instantiate()
 	game_end.setup(winner_id)	
-
 	add_child(game_end)	
+
+	# let client handle it's own attack from this point since the game is over	
+	InBattle.in_request_mode = false
 	
 func clean_up():
 	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID

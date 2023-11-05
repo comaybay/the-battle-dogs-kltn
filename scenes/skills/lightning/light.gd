@@ -41,7 +41,7 @@ func setup(global_position: Vector2, skill_user: Character.Type):
 
 func _physics_process(delta):
 	var collsion := move_and_collide(velocity * delta)
-	if not InBattle.in_request_mode and collsion:
+	if collsion:
 		die()
 
 func _on_enemy_entered(enemy: Character):
@@ -64,13 +64,14 @@ func _on_enemy_entered(enemy: Character):
 			CONNECT_ONE_SHOT
 		)
 	
-func die() :
+func die():
 	set_physics_process(false)
 	$AnimationPlayer.play("die")
 	await $AnimationPlayer.animation_finished
 	queue_free()
 	
 func get_p2p_sync_data() -> Dictionary:
+	remove_from_group(P2PObjectSync.SYNC_GROUP)
 	_sync_data['position'] = global_position
 	return _sync_data
 	
@@ -81,4 +82,4 @@ func p2p_sync(sync_data: Dictionary) -> void:
 	global_position = sync_data['position'] 
 	
 func p2p_remove() -> void:
-	die()
+	pass

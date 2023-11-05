@@ -25,7 +25,7 @@ func physics_update(delta: float) -> void:
 		if character.n_AnimationPlayer.current_animation != "attack":
 			character.velocity = Vector2.ZERO
 			
-			if character.n_AttackCooldownTimer.is_stopped():
+			if character.n_AttackCooldownTimer.is_stopped() and not InBattle.in_request_mode:
 				transition.emit("AttackState", { "target": collider })
 			else:
 				transition.emit("IdleState")

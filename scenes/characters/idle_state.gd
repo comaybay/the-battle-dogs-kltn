@@ -15,7 +15,7 @@ func enter(_data: Dictionary) -> void:
 		
 func on_timeout() -> void:
 	var collider = character.n_RayCast2D.get_collider() 
-	if collider != null:
+	if collider != null and not InBattle.in_request_mode:
 		transition.emit("AttackState", {'target': collider })
 	else:
 		transition.emit("MoveState")

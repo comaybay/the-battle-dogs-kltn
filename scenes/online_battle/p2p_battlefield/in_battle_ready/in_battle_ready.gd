@@ -1,4 +1,4 @@
-extends Node
+extends CanvasLayer
 ## this node will start the game when everyone has load the battlefield and is ready 
 
 func _init() -> void:
@@ -30,8 +30,6 @@ func _start_game_when_all_is_ready(success: int, lobby_id: int, member_id: int) 
 		return
 	
 	var everyone_readied_and_received_message = SteamUser.players.all(func(player):
-		print("====: %s" % player['steam_id'])
-		print("ready: %s" % SteamUser.get_member_data(player['steam_id'], "received_ready_message"))
 		return (
 			SteamUser.get_member_data(player['steam_id'], "in_battle_ready") == "true"
 			and SteamUser.get_member_data(player['steam_id'], "received_ready_message") == "true"

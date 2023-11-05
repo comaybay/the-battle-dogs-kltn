@@ -97,7 +97,9 @@ func get_p2p_sync_data() -> Dictionary:
 func p2p_setup(_sync_data: Dictionary) -> void:
 	return
 
-var _attack_synced: bool = false
+## prevent multiple attacks if client attack state is completed faster than server
+var _synced_attack: bool = false
+
 func p2p_sync(sync_data: Dictionary) -> void:
 	position = sync_data['position']
 	
@@ -116,10 +118,12 @@ func p2p_sync(sync_data: Dictionary) -> void:
 	var fsm_sync_data = sync_data['FSM']
 	var fsm = get_FSM()
 
-	# sync every state but IdleState 
-	if fsm_sync_data['state'] == "AttackState" and not _attack_synced:
-		_attack_synced = true
+	if fsm_sync_data['state'] != "AttackState":
+		_synced_attack = false
+
+	if fsm_sync_data['state'] == "AttackState" and not _synced_attack:
 		fsm.change_state(fsm_sync_data['state'])
+		_synced_attack = true
 		
 	elif fsm_sync_data['state'] == "KnockbackState":
 		fsm.change_state(fsm_sync_data['state'], fsm_sync_data['data'])
@@ -127,9 +131,6 @@ func p2p_sync(sync_data: Dictionary) -> void:
 	elif fsm_sync_data['state'] == "MoveState":
 		fsm.change_state(fsm_sync_data['state'])
 		
-	if fsm_sync_data['state'] != "AttackState":
-		_attack_synced = false
-
 func p2p_remove() -> void:
 	health = 0
 	knockback()

@@ -36,6 +36,9 @@ func _on_owner_ready():
 	state_entered.emit(initial_state)
 
 func change_state(next_state_name: String, data: Dictionary = {}):
+	if next_state_name == get_current_state():
+		return
+	
 	_state_data = data
 	
 	if state.has_method("exit"):
