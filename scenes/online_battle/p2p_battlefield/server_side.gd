@@ -171,6 +171,9 @@ func _handling_client_spawn(input: int):
 			_opponent_data.input_mask |= input_mask
 			_opponent_data.fmoney -= spawn_price
 			var dog: BaseDog = _opponent_dog_tower.spawn(dog_id)	
+			dog.zero_health.connect(
+				func(): _this_player_data.fmoney += int(spawn_price / 4), CONNECT_ONE_SHOT
+			)
 			timer.start()
 			
 func _handling_client_skill(input: int):	
@@ -218,7 +221,11 @@ func request_spawn(dog_id: String):
 	_this_player_data.fmoney -= spawn_price
 	
 	var dog = _this_player_dog_tower.spawn(dog_id)
+	dog.zero_health.connect(
+		func(): _opponent_data.fmoney += int(spawn_price / 4), CONNECT_ONE_SHOT
+	)
 	spawn_request_accepted.emit(dog_id)
+	
 	
 func request_skill(skill_id: String):
 	_this_player_dog_tower.use_skill(skill_id)
