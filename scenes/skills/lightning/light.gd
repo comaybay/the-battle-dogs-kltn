@@ -32,7 +32,7 @@ func setup(global_position: Vector2, skill_user: Character.Type):
 		$CharacterDetector.set_collision_mask_value(2, true)
 	
 	var level = InBattle.get_skill_level('lightning', skill_user)
-	_damage = BASE_DAMAGE * 0.1 * level
+	_damage = BASE_DAMAGE + (5 * level)
 	_multiplier = max(BASE_MULTIPLIER - level * 0.07, 0.05)
 	_duration = BASE_DURATION + level * 0.3
 	
