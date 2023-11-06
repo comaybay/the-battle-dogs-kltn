@@ -11,6 +11,9 @@ var team_dog_scenes: Array[PackedScene]
 var team_skill_ids: Array
 var team_skill_scenes: Array[PackedScene]
 
+var team_store_ids: Array
+var team_store_scenes: Array[PackedScene]
+
 var fmoney: float = 0:
 	set(value): fmoney = clamp(value, 0, _wallet) 
 	

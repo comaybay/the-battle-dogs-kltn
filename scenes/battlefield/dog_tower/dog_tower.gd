@@ -53,3 +53,11 @@ func use_skill(skill_id: String) -> void:
 	var skill := _player_data.team_skill_scenes[index].instantiate()
 	get_tree().current_scene.add_child(skill)
 	skill.setup(Character.Type.DOG)
+	
+func use_store(store_id: String) -> void:
+	$SpawnSound.play()
+	
+	var index = _player_data.team_store_ids.find(store_id)
+	var store := _player_data.team_store_scenes[index].instantiate()
+	get_tree().current_scene.add_child(store)
+	store.setup(Character.Type.DOG)

@@ -1,22 +1,19 @@
 extends CharacterBody2D
 
-var _damage = 100
+var _damage = 10000
 var _sync_data: Dictionary
 
 func setup(global_position: Vector2, skill_user: Character.Type):
 	self.global_position = global_position
 	velocity = Vector2(300, 600)
 	velocity *= randf_range(1.0, 1.5)
-	
+		
 	if skill_user == Character.Type.CAT:
 		scale.x = -1
 		velocity.x = -velocity.x
 		set_collision_mask_value(2, true)
 		set_collision_mask_value(3, false)
 	
-	var level := InBattle.get_skill_level('fire_ball', skill_user)
-	_damage = _damage + (_damage * 0.1 * level)
-		
 	_sync_data = { 
 		"object_type": P2PObjectSync.ObjectType.SKILL,
 		"scene": InBattle.SCENE_FIRE_BALL,
