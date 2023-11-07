@@ -10,7 +10,7 @@ var is_user_control
 var _sync_data: Dictionary
 
 func setup(global_position: Vector2) -> void:
-	if not Global.is_host_OS_web_mobile():
+	if not Global.is_host_OS_web_mobile() and not InBattle.in_p2p_battle:
 		$Arrow.position =  Vector2(20,0)
 		$Arrow.position.y = -round($CollisionShape2D.shape.extents.y * 2)
 		input_event.connect(_on_input_event)

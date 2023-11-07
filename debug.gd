@@ -9,7 +9,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('ui_debug_mode'):
 		_debug_mode = !_debug_mode
 		
-		for node in get_tree().get_nodes_in_group('character'):
+		for node in get_tree().get_nodes_in_group('characters'):
 			node.queue_redraw()
 
 	if event.is_action_pressed('ui_debug_speed'):
