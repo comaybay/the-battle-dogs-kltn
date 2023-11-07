@@ -2,6 +2,7 @@
 	{
 		"ID": "nuclear_bomb",
 		"price": 2000,
-		"spawn_time": 45
+		"spawn_time": 45,
+		"auto_activate": false 
 	}
 ]

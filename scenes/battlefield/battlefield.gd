@@ -12,6 +12,7 @@ var _boss_music: AudioStream
 var _player_data: BattlefieldPlayerData
 var time_batlle : float
 var _battlefield_data: Dictionary
+
 ## get battlefield data from .json file
 func get_battlefield_data() -> Dictionary: return _battlefield_data
 	
@@ -58,7 +59,7 @@ func _ready() -> void:
 		$Gui.add_child(_tutorial_dog)
 	
 	$Gui.setup($DogTower, _player_data)
-	
+	$store_gui.setup($DogTower, _player_data)
 	var stage_width := get_stage_width()
 	var stage_width_with_margin := stage_width + (TOWER_MARGIN * 2)
 	
@@ -81,6 +82,7 @@ func _ready() -> void:
 	$CatTower.boss_appeared.connect(_on_boss_appeared)
 	$CatTower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)
 	$DogTower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
+	
 
 func _process(delta: float) -> void:
 	_player_data.update(delta)

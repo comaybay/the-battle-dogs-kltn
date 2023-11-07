@@ -10,9 +10,8 @@ func _init() -> void:
 		team_skill_scenes.append(null if id == null else load("res://scenes/skills/%s/%s.tscn" % [id, id]))
 		
 	team_store_ids = Data.selected_team['store_ids']
-	print("Data.selected_team['store_ids']", Data.selected_team['store_ids'])
 	for id in team_store_ids:
-		team_skill_scenes.append(null if id == null else load("res://scenes/stores/%s/%s.tscn" % [id, id]))
+		team_store_scenes.append(null if id == null else load("res://scenes/stores/%s/%s.tscn" % [id, id]))
 	
 	fmoney = 0
 	_wallet = int(BASE_WALLET_CAPACITY * (1 + _get_level_or_zero(Data.passives.get('wallet_capacity')) * 0.5))

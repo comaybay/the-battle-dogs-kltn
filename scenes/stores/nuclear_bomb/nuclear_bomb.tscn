@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b25xc8rg2w0wb"]
+[gd_scene load_steps=9 format=3 uid="uid://b25xc8rg2w0wb"]
 
 [ext_resource type="Script" path="res://scenes/stores/nuclear_bomb/nuclear_bomb.gd" id="1_wk13y"]
+[ext_resource type="Texture2D" uid="uid://deh28ywd0ub80" path="res://resources/images/store/nuclear_bomb.png" id="2_oprel"]
 [ext_resource type="AudioStream" uid="uid://dm3m3nmm7d1bh" path="res://resources/sound/battlefield/Tieng-lua-chay.mp3" id="3_hkec7"]
 
 [sub_resource type="Animation" id="Animation_k3r0e"]
@@ -62,7 +63,7 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa1yv"]
 resource_local_to_scene = true
-size = Vector2(109.42, 298.67)
+size = Vector2(124.71, 332.335)
 
 [node name="NuclearBomb" type="CharacterBody2D"]
 collision_layer = 0
@@ -79,15 +80,17 @@ wait_time = 10.0
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(558, -113)
+position = Vector2(557, -98)
 rotation = 1.5708
+scale = Vector2(1.18288, 1.50988)
+texture = ExtResource("2_oprel")
 hframes = 4
 vframes = 13
 frame = 12
 region_rect = Rect2(4, 4, 178, 185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(555, -56)
+position = Vector2(551, -27)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="move" type="AudioStreamPlayer2D" parent="."]

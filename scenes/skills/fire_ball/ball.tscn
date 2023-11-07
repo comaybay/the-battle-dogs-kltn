@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cu0by1s72tx3o"]
 
 [ext_resource type="Script" path="res://scenes/skills/fire_ball/ball.gd" id="1_yyqct"]
-[ext_resource type="Texture2D" uid="uid://deh28ywd0ub80" path="res://resources/images/store/fire_ball.png" id="2_jb27i"]
+[ext_resource type="Texture2D" uid="uid://deh28ywd0ub80" path="res://resources/images/store/nuclear_bomb.png" id="2_jb27i"]
 [ext_resource type="AudioStream" uid="uid://dm3m3nmm7d1bh" path="res://resources/sound/battlefield/Tieng-lua-chay.mp3" id="2_t5c7m"]
 
 [sub_resource type="Animation" id="Animation_k3r0e"]

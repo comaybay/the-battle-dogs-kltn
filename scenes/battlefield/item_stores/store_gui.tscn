@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtepcyc438je4"]
+
+[ext_resource type="Script" path="res://scenes/battlefield/item_stores/store_gui.gd" id="1_8bsa1"]
+[ext_resource type="PackedScene" uid="uid://b25xc8rg2w0wb" path="res://scenes/stores/nuclear_bomb/nuclear_bomb.tscn" id="2_y64ea"]
+
+[node name="store_gui" type="CanvasLayer"]
+script = ExtResource("1_8bsa1")
+
+[node name="Launch_nuclear_bomb" type="Button" parent="."]
+offset_left = 62.0
+offset_top = 232.0
+offset_right = 314.0
+offset_bottom = 338.0
+text = "phóng"
+
+[node name="NuclearBomb" parent="." instance=ExtResource("2_y64ea")]
+position = Vector2(2, 7)
+
+[connection signal="pressed" from="Launch_nuclear_bomb" to="." method="_on_Launch_nuclear_bomb_pressed"]
