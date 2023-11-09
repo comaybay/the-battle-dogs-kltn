@@ -80,7 +80,14 @@ func _add_dog(sync_data: Dictionary) -> BaseDog:
 		else _dog_tower_left
 	)
 	
-	var dog := dog_tower.spawn(sync_data['dog_id'])
+	var dog_id: String = sync_data['dog_id']
+	var dog := dog_tower.spawn(dog_id)
+	
+	if Data.dog_info[dog_id]['spawn_type'] == "once":
+		var player_data := InBattle.get_player_data() as P2PBattlefieldPlayerData
+		player_data.spawn_once_dogs[dog_id] = dog
+		dog.tree_exiting.connect(func(): player_data.spawn_once_dogs[dog_id] = null)
+	
 	return dog
 	
 ## will not return BaseSkill since some skill will create children not of that type

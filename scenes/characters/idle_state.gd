@@ -8,12 +8,12 @@ func enter(_data: Dictionary) -> void:
 	character.n_AnimationPlayer.play("idle")
 	
 	if character.n_AttackCooldownTimer.is_stopped():
-		transition.emit("MoveState")
+		handle_stop_idle()
 	else:
-		character.n_AttackCooldownTimer.timeout.connect(on_timeout)
+		character.n_AttackCooldownTimer.timeout.connect(handle_stop_idle)
 		
 		
-func on_timeout() -> void:
+func handle_stop_idle() -> void:
 	var collider = character.n_RayCast2D.get_collider() 
 	if collider != null and not InBattle.in_request_mode:
 		transition.emit("AttackState", {'target': collider })
@@ -22,7 +22,8 @@ func on_timeout() -> void:
 
 # called when the state is deactivated
 func exit() -> void:
-	character.n_AttackCooldownTimer.timeout.disconnect(on_timeout) 
+	if character.n_AttackCooldownTimer.timeout.is_connected(handle_stop_idle):
+		character.n_AttackCooldownTimer.timeout.disconnect(handle_stop_idle) 
 		
 # called every frame when the state is active
 func update(_delta: float) -> void:

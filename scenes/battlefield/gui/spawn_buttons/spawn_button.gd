@@ -9,7 +9,6 @@ var spawn_input_action: String
 var is_active: bool
 var _dog_tower: BaseDogTower
 var _player_data: BaseBattlefieldPlayerData
-var _spawn_dog: BaseDog
 
 func is_spawn_ready() -> bool:
 	return $SpawnTimer.is_stopped()
@@ -20,8 +19,8 @@ func can_afford_dog():
 func can_spawn():
 	var result := can_afford_dog() and is_spawn_ready() and is_active
 	
-	if spawn_type == 'once':
-		result = result and _spawn_dog == null
+	if spawn_type == 'once' and _player_data.spawn_once_dogs.get(dog_id) != null:
+		result = false
 		
 	return result
 
@@ -67,17 +66,23 @@ func _on_spawn_pressed() -> void:
 	
 func spawn_dog() -> BaseDog:
 	_player_data.fmoney -= spawn_price
-	_spawn_dog = _dog_tower.spawn(dog_id)
+	var dog := _dog_tower.spawn(dog_id)
+	
+	if spawn_type == "once":
+		_player_data.spawn_once_dogs[dog_id] = dog
+		dog.tree_exiting.connect(func(): _player_data.spawn_once_dogs[dog_id] = null)
 
 	_start_recharge_ui()
 	
-	return _spawn_dog
+	return dog
 
 func _start_recharge_ui() -> void:
 	self.disabled = true
-	$ProgressBar.visible = true
-	$Background.frame = 1
-	$SpawnTimer.start()
+	
+	if spawn_time > 0:
+		$ProgressBar.visible = true
+		$Background.frame = 1
+		$SpawnTimer.start()
 	
 func _on_spawn_ready() -> void:
 	$ProgressBar.visible = false

@@ -42,9 +42,17 @@
   {
     "ID": "batter_dog",
     "obtain_type": "bad_ending",
-    "price": 20000,
+    "price": 25000,
     "spawn_type": "once",
     "spawn_time": 0,
+    "spawn_price": 2000
+  },
+  {
+    "ID": "miko_dog",
+    "obtain_type": "challange_stage",
+    "price": 50000,
+    "spawn_type": "default",
+    "spawn_time": 90,
     "spawn_price": 2000
   }
 ]

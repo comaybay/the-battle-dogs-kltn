@@ -66,6 +66,9 @@ func _find_closest_enemy(enemies: Array) -> Character:
 	var min_distance: float = 1.79769e308
 	
 	for enemy in enemies:
+		if enemy == null:
+			continue
+			
 		var distance := global_position.distance_squared_to(enemy.global_position)
 		if min_distance > distance:
 			min_distance = distance

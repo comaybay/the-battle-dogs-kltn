@@ -7,7 +7,6 @@ var TutorialDogScene: PackedScene = preload("res://scenes/battlefield/battlefiel
 var DEFEAT_AUDIO: AudioStream = preload("res://resources/sound/battlefield/defeat.mp3")
 var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/victory.mp3")
 
-var inbattle_sfx_idx: int
 var _boss_music: AudioStream
 var _player_data: BattlefieldPlayerData
 var time_batlle : float
@@ -65,8 +64,6 @@ func _ready() -> void:
 	
 	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons, stage_width_with_margin, get_stage_height())
 	
-	inbattle_sfx_idx = AudioServer.get_bus_index("InBattleFX")
-	
 	AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % _battlefield_data['music']))
 	
 	if _battlefield_data.get('boss_music') != null:
@@ -90,7 +87,7 @@ func _process(delta: float) -> void:
 func _show_win_ui():
 	$TimeBattle.stop()
 	var get_time = int(Time.get_ticks_msec() / 1000)
-	clean_up()
+	_clean_up()
 	
 	if (Data.use_sw_data == true) and (Data.passed_level == 13) :
 		Data.victory_count += 1 
@@ -107,7 +104,7 @@ func _show_win_ui():
 		_move_tutorial_dog()
 	
 func _show_defeat_ui():
-	clean_up()
+	_clean_up()
 	var current_music = AudioPlayer.get_current_music()
 	AudioPlayer.stop_music(current_music, true, true)
 	AudioPlayer.play_music(DEFEAT_AUDIO)
@@ -121,24 +118,6 @@ func _move_tutorial_dog():
 	var canvas_layer: = CanvasLayer.new()
 	add_child(canvas_layer)
 	_tutorial_dog.reparent(canvas_layer)
-
-func clean_up():
-	# set back to 1 in case user change game speed
-	Engine.time_scale = 1
-	$Camera2D.allow_user_input_camera_movement(false)
-	
-	$Gui.queue_free()
-	AudioServer.set_bus_volume_db(inbattle_sfx_idx, -70)	
-
-func _exit_tree() -> void:
-	var current_music := AudioPlayer.get_current_music()
-	if current_music:
-		AudioPlayer.stop_music(current_music, true, true)
-	
-	AudioServer.set_bus_volume_db(inbattle_sfx_idx, 0)
-	
-	# in case game is paused before moving to a different scene
-	get_tree().paused = false
 
 func _on_boss_appeared() -> void:
 	var game_speed_button := ($Gui as BattleGUI).game_speed_button

@@ -2,8 +2,6 @@ class_name P2PBattlefield extends BaseBattlefield
 
 var GAME_END_SCENE: PackedScene = preload("res://scenes/online_battle/p2p_battlefield/p2p_game_end_gui/p2p_game_end_gui.tscn")
 
-var inbattle_sfx_idx: int
-
 var _p2p_networking: BattlefieldP2PNetworking
 func get_p2p_networking() -> BattlefieldP2PNetworking: return _p2p_networking
 
@@ -44,7 +42,6 @@ func _enter_tree() -> void:
 			_opponent_player_data = P2PBattlefieldPlayerData.new(member_id)
 
 func _ready() -> void:
-	inbattle_sfx_idx = AudioServer.get_bus_index("InBattleFX")
 	var stage_width_with_margin = _stage_width + (TOWER_MARGIN * 2)
 	
 	$P2PConnectionHandler.setup(%Popup)
@@ -85,7 +82,7 @@ func _ready() -> void:
 	$Gui.setup(_player_dog_tower, _this_player_data)
 		
 func end_game(winner_id: int) -> void:
-	clean_up()
+	_clean_up()
 	
 	var is_room_owner: bool = SteamUser.get_lobby_owner() == SteamUser.STEAM_ID
 	if is_room_owner:
@@ -98,7 +95,9 @@ func end_game(winner_id: int) -> void:
 	# let client handle it's own attack from this point since the game is over	
 	InBattle.in_request_mode = false
 	
-func clean_up():
+func _clean_up():
+	super._clean_up()
+	
 	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID
 	if is_server:
 		$ServerSide.set_process(false)
@@ -108,19 +107,7 @@ func clean_up():
 		$ClientSide.queue_free()
 	
 	$P2PConnectionHandler.queue_free()
-	$Camera2D.allow_user_input_camera_movement(false)
 	
 	var is_room_owner: bool = SteamUser.get_lobby_owner() == SteamUser.STEAM_ID
 	if is_room_owner:
 		SteamUser.set_lobby_data("game_status", "waiting")
-	
-	$Gui.queue_free()
-	AudioServer.set_bus_volume_db(inbattle_sfx_idx, -80)	
-
-func _exit_tree() -> void:
-	var current_music := AudioPlayer.get_current_music()
-	if current_music:
-		AudioPlayer.stop_music(current_music, true, true)
-		
-	AudioServer.set_bus_volume_db(inbattle_sfx_idx, 0)
-	

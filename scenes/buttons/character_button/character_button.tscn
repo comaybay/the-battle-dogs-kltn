@@ -80,7 +80,7 @@ vframes = 5
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(160.5, 122)
-vframes = 3
+hframes = 3
 frame = 2
 
 [node name="Border" type="Sprite2D" parent="."]

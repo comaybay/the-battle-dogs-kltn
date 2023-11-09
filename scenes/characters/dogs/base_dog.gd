@@ -121,15 +121,14 @@ func p2p_sync(sync_data: Dictionary) -> void:
 	if fsm_sync_data['state'] != "AttackState":
 		_synced_attack = false
 
-	if fsm_sync_data['state'] == "AttackState" and not _synced_attack:
-		fsm.change_state(fsm_sync_data['state'])
+	if fsm_sync_data['state'] == "AttackState":
+		if _synced_attack:
+			return
+			
+		fsm.change_state(fsm_sync_data['state'], fsm_sync_data['data'])
 		_synced_attack = true
 		
-	elif fsm_sync_data['state'] == "KnockbackState":
-		fsm.change_state(fsm_sync_data['state'], fsm_sync_data['data'])
-		
-	elif fsm_sync_data['state'] == "MoveState":
-		fsm.change_state(fsm_sync_data['state'])
+	fsm.change_state(fsm_sync_data['state'], fsm_sync_data['data'])
 		
 func p2p_remove() -> void:
 	health = 0

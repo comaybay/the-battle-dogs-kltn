@@ -36,8 +36,7 @@ func show_select_data_box():
 		$ConfirmationDialog.show()	
 
 func _on_nut_bat_dau_pressed():
-	AudioPlayer.stop_music(MAIN_THEME_AUDIO, true)
-	AudioPlayer.remove_music(MAIN_THEME_AUDIO)
+	AudioPlayer.stop_music(MAIN_THEME_AUDIO, true, true)
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")

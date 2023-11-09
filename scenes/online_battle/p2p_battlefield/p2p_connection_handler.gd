@@ -87,6 +87,7 @@ func _on_reconnect_timeout():
 		Steam.network_connection_status_changed.disconnect(_on_network_connection_status_changed_server)
 		_popup.popup("@OTHER_PLAYER_LEFT", PopupDialog.Type.INFORMATION)
 		await _popup.ok
+		get_tree().paused = false
 		(InBattle.get_battlefield() as P2PBattlefield).end_game(SteamUser.STEAM_ID)
 	else:
 		if _client_connection_closed_by_server:
@@ -98,6 +99,7 @@ func _client_handle_reconnect_failed(connection_handle) -> void:
 		Steam.network_connection_status_changed.disconnect(_on_network_connection_status_changed_client)
 		_popup.popup("@RECONNECT_FAILED", PopupDialog.Type.INFORMATION)
 		await _popup.ok
+		get_tree().paused = false
 		Steam.leaveLobby(SteamUser.lobby_id)
 		SteamUser.lobby_id = 0
 		var opponent_id = InBattle.get_opponent_data().get_steam_id()
@@ -167,6 +169,7 @@ func _on_lobby_rejoined(lobby_id: int, _permissions: int, _locked: bool, respons
 		SteamUser.close_connection(SteamUser.connection_handle)
 		_popup.popup("@GAME_LOST_CONNECTION", PopupDialog.Type.INFORMATION)	
 		await _popup.ok	
+		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")
 		
 func _client_handle_server_close_connection(connection_handle: int) -> void:
@@ -179,6 +182,7 @@ func _client_handle_server_close_connection(connection_handle: int) -> void:
 	
 	_popup.popup("@OTHER_PLAYER_HAS_LEFT", PopupDialog.Type.INFORMATION)
 	await _popup.ok
+	get_tree().paused = false
 	(InBattle.get_battlefield() as P2PBattlefield).end_game(SteamUser.STEAM_ID)
 	return
 

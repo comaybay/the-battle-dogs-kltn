@@ -22,7 +22,7 @@ func _on_spawn_pressed() -> void:
 func _on_spawn_request_accepted(dog_id: String) -> void:
 	if dog_id == self.dog_id:
 		_start_recharge_ui()
-
+		
 func _on_spawn_recharge_time_updated(dog_id: String, time_left: float) -> void:
 	if (
 		dog_id != self.dog_id

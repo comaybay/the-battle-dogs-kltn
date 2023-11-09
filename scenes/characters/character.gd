@@ -156,10 +156,10 @@ func get_bottom_global_position() -> Vector2:
 	
 ## get center position of the character's bottom
 func get_center_global_position() -> Vector2:
-	return Vector2(
-		$CollisionShape2D.global_position.x, 
-		$CollisionShape2D.global_position.y
-	)
+	return $CollisionShape2D.global_position
+	
+func get_center_position() -> Vector2:
+	return $CollisionShape2D.position
 	
 func _draw() -> void:
 	if Engine.is_editor_hint() or Debug.is_debug_mode():
@@ -205,7 +205,8 @@ func take_damage(ammount: int) -> void:
 			update_next_knockback_health()
 		else:
 			zero_health.emit()
-			
+		
+		n_AttackCooldownTimer.stop()	
 		knockback()
 	
 	if Debug.is_debug_mode():

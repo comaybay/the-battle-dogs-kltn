@@ -751,7 +751,7 @@ script = ExtResource("2_vko5u")
 name_id = "batter_dog"
 attack_range = 570
 attack_area_range = 200
-attack_cooldown = 30.0
+attack_cooldown = 35.0
 attack_sprite = NodePath("CharacterAnimation/BatBig")
 attack_frame = 4
 health = 2000
@@ -759,7 +759,7 @@ damage = 999
 knockbacks = 1
 
 [node name="AttackCooldownTimer" parent="." index="0"]
-wait_time = 30.0
+wait_time = 40.0
 
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(-21, -34.5)

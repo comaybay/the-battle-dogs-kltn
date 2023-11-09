@@ -98,8 +98,7 @@ func _on_lobby_data_update(success: int, lobby_id: int, member_id: int) -> void:
 		_prev_music_settings = music
 		var prev_music = AudioPlayer.get_current_music()
 		if prev_music != null:
-			AudioPlayer.stop_music(prev_music, true)
-			AudioPlayer.remove_music(prev_music)
+			AudioPlayer.stop_music(prev_music, true, true)
 		
 		AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % music))
 		
@@ -231,8 +230,7 @@ func _handle_connection_leave_lobby():
 func _go_back_to_lobby_scene():	
 	var current_music = AudioPlayer.get_current_music()
 	if current_music != null:
-		AudioPlayer.stop_music(current_music, true)
-		AudioPlayer.remove_music(current_music)
+		AudioPlayer.stop_music(current_music, true, true)
 	
 	get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")	
 

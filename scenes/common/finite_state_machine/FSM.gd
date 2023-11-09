@@ -5,12 +5,16 @@ class_name FSM extends Node
 ##
 ## This node uses it's owner as the target 
 
-signal state_entered (state_path: String)
+## notify when about to enter state, use this to modify state data before entering state
+signal state_entering (state_name: String, state_data: Dictionary)
+
+## notify when entered a state
+signal state_entered (state_name: String)
 
 @export var initial_state: NodePath = ""
 
 var state: FSMState
-var _state_data: Dictionary 
+var _state_data: Dictionary = {}
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -31,6 +35,7 @@ func _on_owner_ready():
 		if node.is_FSM_state == true:
 			node.connect("transition", _on_state_transition)
 	
+	state_entering.emit(initial_state, _state_data)
 	update_FSM_process()
 	state.enter({})
 	state_entered.emit(initial_state)
@@ -45,10 +50,11 @@ func change_state(next_state_name: String, data: Dictionary = {}):
 		state.exit()
 	
 	state = get_node(next_state_name)
-	state.enter(data)
 	
-	state_entered.emit(next_state_name)
+	state_entering.emit(next_state_name, _state_data)
 	update_FSM_process()
+	state.enter(data)
+	state_entered.emit(next_state_name)
 
 func update_FSM_process():
 	set_physics_process(state.has_method("physics_update"))

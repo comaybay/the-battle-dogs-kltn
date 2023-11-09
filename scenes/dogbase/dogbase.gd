@@ -9,8 +9,7 @@ func _ready() -> void:
 	var on_go_back_pressed = func():
 		var main_gui: = get_tree().current_scene as MainGUI
 		main_gui.get_go_back_button().pressed.connect(func():
-			AudioPlayer.stop_music(DOG_BASE_THEME_AUDIO, true)
-			AudioPlayer.remove_music(DOG_BASE_THEME_AUDIO)
+			AudioPlayer.stop_music(DOG_BASE_THEME_AUDIO, true, true)
 		)
 		
 	on_go_back_pressed.call_deferred()

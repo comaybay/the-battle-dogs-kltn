@@ -1,5 +1,5 @@
 @tool
-extends FSMState
+class_name CharacterKnockbackState extends FSMState
 
 @onready var character: Character = owner
 var knockback_countdown: int

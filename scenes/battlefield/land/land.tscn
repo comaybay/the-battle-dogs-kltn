@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjhaavd1ipf1v"]
 
 [ext_resource type="Script" path="res://scenes/battlefield/land/land.gd" id="1_d7wn3"]
-[ext_resource type="Texture2D" uid="uid://bmnxrvwk6nuv3" path="res://resources/battlefield_themes/green_grass/land.png" id="2_m7spp"]
+[ext_resource type="Texture2D" uid="uid://dee0clgixn5ho" path="res://resources/battlefield_themes/green_grass/land.png" id="2_m7spp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dg48x"]
-size = Vector2(1352, 20)
+size = Vector2(1352, 279)
 
 [node name="Land" type="StaticBody2D"]
+collision_mask = 0
 script = ExtResource("1_d7wn3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -19,5 +20,5 @@ texture = ExtResource("2_m7spp")
 stretch_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 139.5)
 shape = SubResource("RectangleShape2D_dg48x")

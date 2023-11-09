@@ -23,8 +23,7 @@ func _on_nut_tan_cong_pressed() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	
 	var dobase_theme := AudioPlayer.get_current_music()
-	AudioPlayer.stop_music(dobase_theme, true)
-	AudioPlayer.remove_music(dobase_theme)
+	AudioPlayer.stop_music(dobase_theme, true, true)
 	
 	get_tree().change_scene_to_file("res://scenes/battlefield/battlefield.tscn")
 	

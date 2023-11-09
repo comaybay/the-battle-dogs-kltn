@@ -14,6 +14,9 @@ var team_skill_scenes: Array[PackedScene]
 var team_store_ids: Array
 var team_store_scenes: Array[PackedScene]
 
+## contains dogs that is of "once" spawn type, use this to determined if a dog of this type should be allow to spawn 
+var spawn_once_dogs: Dictionary
+
 var fmoney: float = 0:
 	set(value): fmoney = clamp(value, 0, _wallet) 
 	

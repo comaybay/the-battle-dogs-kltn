@@ -32,10 +32,7 @@ func _setup_max_health() -> void:
 	health = max_health
 	update_health_label()
 
-func spawn(dog_id: String) -> BaseDog:
-	if _is_player_tower:
-		$SpawnSound.play()
-	
+func spawn(dog_id: String) -> BaseDog:	
 	var index = _player_data.team_dog_ids.find(dog_id)
 	var dog := _player_data.team_dog_scenes[index].instantiate() as BaseDog
 	
@@ -53,10 +50,19 @@ func spawn(dog_id: String) -> BaseDog:
 		var offset_y = dog.global_position.y - dog.get_bottom_global_position().y - 1
 		dog.setup(global_position + Vector2(-100, offset_y))
 	
-	if not _is_player_tower:
+	var reward_money := int(Data.dog_info[dog_id]['spawn_price'] / 4) 
+	if _is_player_tower:
+		$SpawnSound.play()	
+		dog.zero_health.connect(
+			func(): InBattle.get_opponent_data().fmoney += reward_money, CONNECT_ONE_SHOT
+		)
+	else:
 		# this group is used to determine the enemies RELATIVE to the player
 		dog.add_to_group("enemies")	
-	
+		dog.zero_health.connect(
+			func(): _player_data.fmoney += reward_money, CONNECT_ONE_SHOT
+		)		
+		
 	dog_spawn.emit(dog)
 	return dog
 

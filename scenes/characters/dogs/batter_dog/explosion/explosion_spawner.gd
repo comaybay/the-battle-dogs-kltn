@@ -14,16 +14,21 @@ func setup(start_global_position: Vector2, batter_damage: int, character_type: C
 
 	await get_tree().create_timer(0.3, false).timeout
 	
+	var level: int = InBattle.get_dog_level("batter_dog")
+	var explosion_num = (2 + level) if level < 10 else 999
+	
 	if character_type == Character.Type.DOG:
-		while explosion_position.x <= destination_x:
+		while explosion_position.x <= destination_x and explosion_num > 0:
 			await get_tree().create_timer(0.15, false).timeout
 			add_explostion(explosion_position, batter_damage / 10, character_type)
 			explosion_position.x += 400
+			explosion_num -= 1
 	else:
-		while explosion_position.x >= destination_x:
+		while explosion_position.x >= destination_x and explosion_num > 0:
 			await get_tree().create_timer(0.15, false).timeout
 			add_explostion(explosion_position, batter_damage / 10, character_type)
 			explosion_position.x -= 400
+			explosion_num -= 1
 				
 	queue_free()
 	
