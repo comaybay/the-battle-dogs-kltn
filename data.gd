@@ -215,20 +215,30 @@ func _load_game_save() -> Dictionary:
 	return save_data
 	
 ## compare and update save data in case if the save data of an older version of the game
-func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Dictionary):
+func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Dictionary) -> Dictionary:
 	for key in new_game_save_data:
 		if not save_data.has(key):
 			save_data[key] = new_game_save_data[key]
-			continue
 			
-		if typeof(save_data[key]) != typeof(new_game_save_data[key]):
+		elif typeof(save_data[key]) != typeof(new_game_save_data[key]):
 			save_data[key] = new_game_save_data[key]
-			continue 
 			
-		if typeof(save_data[key]) == TYPE_DICTIONARY:
+		elif typeof(save_data[key]) == TYPE_DICTIONARY:
 			_compare_and_update_save_file(new_game_save_data[key], save_data[key])
 			
+		elif typeof(save_data[key]) == TYPE_ARRAY and new_game_save_data[key].size() > 0:
+			_compare_and_update_save_file_array(new_game_save_data[key][0], save_data[key])
+			
 	return save_data
+			
+func _compare_and_update_save_file_array(new_game_save_elem: Variant, save_data: Array) -> void:
+	for i in range(save_data.size()):
+		var elem = save_data[i]
+		if typeof(elem) != typeof(new_game_save_elem):
+			save_data[i] = new_game_save_elem
+		
+		elif typeof(elem) == TYPE_DICTIONARY:
+			_compare_and_update_save_file(new_game_save_elem, elem)
 			
 func _ready() -> void:	
 	## if player opens the game for the first time (game_language is not chose yet)

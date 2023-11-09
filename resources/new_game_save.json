@@ -25,7 +25,7 @@
 	{
 	  "dog_ids": ["dog", null, null, null, null, null, null, null, null, null],
 	  "skill_ids": ["fire_ball", null, null],
-		"store_ids": [null,null,null]
+	  "store_ids": []
 	}
   ],
   "tutorial": {
