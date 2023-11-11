@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_l0dwr"]
 [ext_resource type="Script" path="res://scenes/store/item_box.gd" id="2_1r6l5"]
-[ext_resource type="Texture2D" uid="uid://cqte340ris3tl" path="res://scenes/buttons/rectangular_button/rectangular_button.png" id="3_mqac3"]
+[ext_resource type="Texture2D" uid="uid://cqte340ris3tl" path="res://scenes/common/buttons/rectangular_button/rectangular_button.png" id="3_bvmql"]
 [ext_resource type="Texture2D" uid="uid://drqpmw6wuepbt" path="res://resources/icons/dog_icon.png" id="4_i5a0s"]
 [ext_resource type="Texture2D" uid="uid://bnp7cvbuvml6e" path="res://resources/images/bone.png" id="5_wtanw"]
 
@@ -57,14 +57,14 @@ script = ExtResource("2_1r6l5")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(130.04, 116)
 scale = Vector2(0.819, 0.819)
-texture = ExtResource("3_mqac3")
+texture = ExtResource("3_bvmql")
 vframes = 5
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(130.04, 116)
 scale = Vector2(0.819, 0.819)
 texture = ExtResource("4_i5a0s")
-vframes = 3
+hframes = 3
 frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -29,7 +29,7 @@ func setup(levels: Array[Node], level_chain: HSlideSelection, map: Sprite2D, dra
 		level.pressed.connect(
 			func():
 				_move_to_level(level)
-				_level_chain.focus_camera_to(level.index)
+				_level_chain.select(level.index)
 		)
 		
 	for level_box in level_chain.get_items():

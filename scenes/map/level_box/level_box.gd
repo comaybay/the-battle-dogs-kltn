@@ -15,11 +15,7 @@ func setup(level_node: Level) -> void:
 	update_flag_position()
 	resized.connect(update_flag_position)
 
-func set_selected(selected: bool) -> void:
-	var tween = create_tween()
-	var scale_value = Vector2(1.1, 1.1) if selected else Vector2(1, 1)
-	tween.tween_property(self, "scale", scale_value, 0.2)
-	
+func set_selected(selected: bool) -> void:	
 	if selected:
 		add_theme_color_override("font_color", color_override)
 		add_theme_color_override("font_hover_color", color_override)
@@ -33,7 +29,7 @@ func set_selected(selected: bool) -> void:
 
 func update_flag_position():
 	$Flag.position.x = size.x - 35
-
+	$Flag.position.y = size.y - 27
 
 var _pressed: bool = false
 var _drag_distance := Vector2.ZERO

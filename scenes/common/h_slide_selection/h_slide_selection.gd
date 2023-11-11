@@ -3,39 +3,54 @@ class_name HSlideSelection extends SubViewportContainer
 var _items: Array[Selectable] 
 func get_items() -> Array[Selectable]: return _items
 
-var selected_item: Selectable
-@onready var _sub_viewport_size = $SubViewport.size
+var _selected_item: Selectable
+var _hovered: bool = false
+
+func _ready() -> void:
+	mouse_entered.connect(func(): _hovered = true)
+	mouse_exited.connect(func(): _hovered = false)
 
 func setup(items: Array[Selectable], selected_item_index: int):
 	_items = items
 	for item in items:
 		item.pressed.connect(_on_item_pressed.bind(item))
-		%HBoxContainer.add_child(item)
+		var control := Control.new()
+		control.custom_minimum_size = item.size
+		control.add_child(item)
+		item.resized.connect(func(): control.custom_minimum_size = item.size)
+		%HBoxContainer.add_child(control)
 
-	
 	# wait for level boxes name to be loaded in (which will change the size of HBox)
-	selected_item = _items[selected_item_index]
+	_selected_item = _items[selected_item_index]
 	select.call_deferred(selected_item_index)
+	
+	size.y = items[0].size.y * 1.2
+	%HBoxContainer.position.y = size.y * 0.2 * 0.5
 
 func _on_item_pressed(item: Selectable):
-	if selected_item != item:
+	if _selected_item != item:
 		select_by_item(item)
 
 func select_by_item(item: Selectable) -> void:
-	selected_item.set_selected(false)
-	selected_item = item
-	selected_item.set_selected(true)
-	var tween = create_tween()
+	_selected_item.set_selected(false)
+	var tween := create_tween()
+	tween.set_parallel()
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(%HBoxContainer, "position:x", _get_x_of(selected_item), 0.5)
+	tween.tween_property(_selected_item, "scale", Vector2(1, 1), 0.2)
+	
+	_selected_item = item
+	_selected_item.set_selected(true)
+	tween.tween_property(_selected_item, "scale", Vector2(1.1, 1.1), 0.2)
+	
+	tween.tween_property(%HBoxContainer, "position:x", _get_x_of(_selected_item), 0.5)
 
 func select(index: int) -> void:
 	select_by_item(_items[index])
 
 func _get_x_of(level_box: Selectable):
-	var box_position = level_box.position + (level_box.size / 2)
-	return -box_position.x + (_sub_viewport_size.x / 2)
+	var box_position = level_box.get_parent().position + (level_box.size / 2)
+	return -box_position.x + (size.x / 2)
 
 var swiping = false
 var swipe_mouse_start
@@ -43,6 +58,9 @@ var swipe_mouse_times = []
 var swipe_mouse_positions = []
 
 func _input(ev):
+	if swiping == false and not _hovered:
+		return
+	
 	if ev is InputEventMouseButton:
 		if ev.pressed:
 			swiping = true
@@ -83,4 +101,5 @@ func _input(ev):
 		swipe_mouse_positions.append(ev.position)
 
 func _x_clamp(x: float) -> float:
+	print(_get_x_of(_items[-1]))
 	return clamp(x, _get_x_of(_items[-1]), _get_x_of(_items[0]))
