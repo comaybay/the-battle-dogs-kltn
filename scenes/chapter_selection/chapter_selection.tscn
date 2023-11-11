@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://crluqfyv7dbna"]
+[gd_scene load_steps=5 format=3 uid="uid://crluqfyv7dbna"]
 
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_18dgk"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_evkhq"]
 [ext_resource type="Texture2D" uid="uid://li12t8q3hrbi" path="res://resources/battlefield_themes/winter/sky.png" id="2_p8ou1"]
+[ext_resource type="PackedScene" uid="uid://tkpm6wqd2nn7" path="res://scenes/chapter_selection/chapter_button/chapter_button.tscn" id="4_ju3mb"]
 
 [node name="ChapterSelection" type="Control"]
 layout_mode = 3
@@ -50,6 +51,9 @@ text = "@MAIN_STORY"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ChapterButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ju3mb")]
 layout_mode = 2
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://btd4tym33guis"]
 
-[ext_resource type="Script" path="res://scenes/map/level_chain/level_box.gd" id="1_i0a1c"]
+[ext_resource type="Script" path="res://scenes/map/level_box/level_box.gd" id="1_i0a1c"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_lgg30"]
 [ext_resource type="Texture2D" uid="uid://nvan3y1v8yvf" path="res://scenes/map/flag.png" id="2_wywqt"]
 

@@ -9,9 +9,9 @@ var last_mouse_pos = Vector2.ZERO
 var current_level: Level
 var passed_level: Level
 var is_mouse_entered: bool
-var _level_chain: LevelChain
+var _level_chain: HSlideSelection
 
-func setup(levels: Array[Node], level_chain: LevelChain, map: Sprite2D, drag_area: Control):
+func setup(levels: Array[Node], level_chain: HSlideSelection, map: Sprite2D, drag_area: Control):
 	var map_size := map.get_rect().size
 	$Camera2D.limit_left = 0
 	$Camera2D.limit_right = map_size.x
@@ -32,7 +32,7 @@ func setup(levels: Array[Node], level_chain: LevelChain, map: Sprite2D, drag_are
 				_level_chain.focus_camera_to(level.index)
 		)
 		
-	for level_box in level_chain.level_boxes:
+	for level_box in level_chain.get_items():
 		level_box.pressed.connect(
 			func():
 				_move_to_level(level_box.level)

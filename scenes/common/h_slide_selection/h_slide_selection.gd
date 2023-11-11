@@ -1,50 +1,41 @@
-class_name LevelChain extends SubViewportContainer
+class_name HSlideSelection extends SubViewportContainer
 
-const LevelBox: PackedScene = preload("res://scenes/map/level_chain/level_box.tscn")
+var _items: Array[Selectable] 
+func get_items() -> Array[Selectable]: return _items
 
-var level_boxes: Array[LevelBox] 
-@onready var viewport_size = $SubViewport.size
-var mouse_pressed := false
-var last_mouse_pos: Vector2
-var selected_level_box: LevelBox
-var is_mouse_entered: bool
+var selected_item: Selectable
+@onready var _sub_viewport_size = $SubViewport.size
 
-func _ready() -> void:
-	mouse_entered.connect(func(): is_mouse_entered = true)
-	mouse_exited.connect(func(): is_mouse_entered = false)
+func setup(items: Array[Selectable], selected_item_index: int):
+	_items = items
+	for item in items:
+		item.pressed.connect(_on_item_pressed.bind(item))
+		%HBoxContainer.add_child(item)
 
-func setup(levels: Array[Node]):
-	for level in levels:
-		var level_box = LevelBox.instantiate()
-		level_box.setup(level)
-		level_box.pressed.connect(_on_level_box_preesed.bind(level_box))
-		$SubViewport/HBoxContainer.add_child(level_box)
-		level_boxes.append(level_box)
-
+	
 	# wait for level boxes name to be loaded in (which will change the size of HBox)
-	var first_box = level_boxes.front()
-	var last_box = level_boxes.back() 
-	selected_level_box = level_boxes[Data.selected_level]
-	
-	select.call_deferred(selected_level_box.level.index)
+	selected_item = _items[selected_item_index]
+	select.call_deferred(selected_item_index)
 
-	
-func _on_level_box_preesed(level_box: LevelBox):
-	if selected_level_box != level_box:
-		select(level_box.level.index)
+func _on_item_pressed(item: Selectable):
+	if selected_item != item:
+		select_by_item(item)
 
-func select(level_number: int):
-	selected_level_box.set_selected(false)
-	selected_level_box = level_boxes[level_number]
-	selected_level_box.set_selected(true)
+func select_by_item(item: Selectable) -> void:
+	selected_item.set_selected(false)
+	selected_item = item
+	selected_item.set_selected(true)
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(%HBoxContainer, "position:x", _get_x_of(selected_level_box), 0.5)
+	tween.tween_property(%HBoxContainer, "position:x", _get_x_of(selected_item), 0.5)
 
-func _get_x_of(level_box: LevelBox):
+func select(index: int) -> void:
+	select_by_item(_items[index])
+
+func _get_x_of(level_box: Selectable):
 	var box_position = level_box.position + (level_box.size / 2)
-	return -box_position.x + (viewport_size.x / 2)
+	return -box_position.x + (_sub_viewport_size.x / 2)
 
 var swiping = false
 var swipe_mouse_start
@@ -92,4 +83,4 @@ func _input(ev):
 		swipe_mouse_positions.append(ev.position)
 
 func _x_clamp(x: float) -> float:
-	return clamp(x, _get_x_of(level_boxes[-1]), _get_x_of(level_boxes[0]))
+	return clamp(x, _get_x_of(_items[-1]), _get_x_of(_items[0]))

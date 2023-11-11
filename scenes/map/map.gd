@@ -1,5 +1,7 @@
 extends Control 
 
+const LevelBox: PackedScene = preload("res://scenes/map/level_box/level_box.tscn")
+
 func _ready():
 	if (Data.dogs.size() > 1 or Data.skills.size() > 1) and not Data.has_done_map_tutorial:
 		var TutorialDogScene: PackedScene = load("res://scenes/map/map_tutorial_dog/map_tutorial_dog.tscn")
@@ -15,7 +17,15 @@ func _ready():
 		var next_level: Level = levels[index + 1] if index < levels.size() - 1 else null 
 		level.setup(tr("@LEVEL_%s_NAME" % (index + 1)), index, prev_level, next_level)
 	
-	%LevelChain.setup(levels.slice(0, Data.passed_level + 2))
+	
+	var level_boxes: Array[Selectable] = []
+	for level in levels:
+		var level_box = LevelBox.instantiate()
+		level_box.setup(level)
+		level_boxes.append(level_box)
+		
+	%LevelChain.setup(level_boxes, Data.selected_level)
+	
 	%Tracker.setup(levels, %LevelChain, %MapSprite, %TouchArea)	
 	%Dog.setup(levels[Data.selected_level], %Tracker)
 

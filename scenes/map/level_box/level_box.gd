@@ -1,4 +1,4 @@
-class_name LevelBox extends Button
+class_name LevelBox extends Selectable
 
 var level: Level
 var stylebox_override: StyleBoxFlat

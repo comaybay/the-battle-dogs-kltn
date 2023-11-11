@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="7_eb484"]
 [ext_resource type="PackedScene" uid="uid://cd5gw7llcsine" path="res://scenes/map/level/level.tscn" id="8_uximv"]
 [ext_resource type="Script" path="res://scenes/map/dog.gd" id="8_vsoej"]
-[ext_resource type="PackedScene" uid="uid://bq2rygho7wb7t" path="res://scenes/map/level_chain/level_chain.tscn" id="9_m5l3k"]
 [ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="9_xm0jp"]
 [ext_resource type="Shortcut" uid="uid://moipqlm5cofg" path="res://resources/shortcuts/confirm.tres" id="10_3djod"]
+[ext_resource type="PackedScene" uid="uid://c2u0llmni7n54" path="res://scenes/common/h_slide_selection/h_slide_selection.tscn" id="12_3x1s8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_de1st"]
 atlas = ExtResource("7_eb484")
@@ -251,9 +251,10 @@ theme = ExtResource("1_0lsnx")
 shortcut = SubResource("Shortcut_0cnn8")
 text = "@TEAM_SETUP"
 
-[node name="LevelChain" parent="Khung/GUI" instance=ExtResource("9_m5l3k")]
+[node name="LevelChain" parent="Khung/GUI" instance=ExtResource("12_3x1s8")]
 unique_name_in_owner = true
 offset_top = 63.0
+offset_right = 1152.0
 offset_bottom = 167.0
 
 [connection signal="pressed" from="Khung/GUI/HBoxContainer/NutQuayLai" to="." method="_on_quay_lai_pressed"]
