@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://divc2ithyhuj2"]
 
-[ext_resource type="PackedScene" uid="uid://bj0cb0c3284hb" path="res://scenes/buttons/icon_button/icon_button.tscn" id="1_g8of7"]
+[ext_resource type="PackedScene" uid="uid://bj0cb0c3284hb" path="res://scenes/common/buttons/icon_button/icon_button.tscn" id="1_g8of7"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/pause_menu/music_button/music_button.gd" id="2_0t4p1"]
 [ext_resource type="Texture2D" uid="uid://2pd4bafopvco" path="res://scenes/battlefield/gui/pause_menu/music_button/music_icon.png" id="3_8wbsb"]
 

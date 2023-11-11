@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c80egag1e4a2n"
-path="res://.godot/imported/circular_button.png-d4de18a6fba8f0f118af4870b9706d37.ctex"
+path="res://.godot/imported/circular_button.png-711f3c62e83720b4e9b7c2ebea00da65.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/buttons/cirular_button/circular_button.png"
-dest_files=["res://.godot/imported/circular_button.png-d4de18a6fba8f0f118af4870b9706d37.ctex"]
+source_file="res://scenes/common/buttons/cirular_button/circular_button.png"
+dest_files=["res://.godot/imported/circular_button.png-711f3c62e83720b4e9b7c2ebea00da65.ctex"]
 
 [params]
 
