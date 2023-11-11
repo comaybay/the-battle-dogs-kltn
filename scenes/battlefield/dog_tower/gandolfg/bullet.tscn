@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://bgylpgef3843m"]
 
-[ext_resource type="Script" path="res://scenes/battlefield/dog_tower/gandoglf/bullet.gd" id="1_2peel"]
-[ext_resource type="Texture2D" uid="uid://ccr41m6f4iikc" path="res://scenes/battlefield/dog_tower/gandoglf/bullet.png" id="2_kk4ya"]
-[ext_resource type="AudioStream" uid="uid://dhvcfxros1ly7" path="res://scenes/battlefield/dog_tower/gandoglf/electric_ball.mp3" id="3_pqnkt"]
-[ext_resource type="AudioStream" uid="uid://c2gpilc6x2usf" path="res://scenes/battlefield/dog_tower/gandoglf/electric_ball_hit.mp3" id="4_2ljp4"]
+[ext_resource type="Script" path="res://scenes/battlefield/dog_tower/gandolfg/bullet.gd" id="1_2peel"]
+[ext_resource type="Texture2D" uid="uid://ccr41m6f4iikc" path="res://scenes/battlefield/dog_tower/gandolfg/bullet.png" id="2_kk4ya"]
+[ext_resource type="AudioStream" uid="uid://dhvcfxros1ly7" path="res://scenes/battlefield/dog_tower/gandolfg/electric_ball.mp3" id="3_pqnkt"]
+[ext_resource type="AudioStream" uid="uid://c2gpilc6x2usf" path="res://scenes/battlefield/dog_tower/gandolfg/electric_ball_hit.mp3" id="4_2ljp4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1rg3w"]
 atlas = ExtResource("2_kk4ya")

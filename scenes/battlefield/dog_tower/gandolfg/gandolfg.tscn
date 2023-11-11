@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dwob74kj32y7y"]
 
-[ext_resource type="Script" path="res://scenes/battlefield/dog_tower/gandoglf/gandoglf.gd" id="1_8h8ix"]
-[ext_resource type="Texture2D" uid="uid://t34bq117ctbi" path="res://scenes/battlefield/dog_tower/gandoglf/gandolfg.png" id="2_uk7ua"]
-[ext_resource type="Texture2D" uid="uid://caabxbxbqmlc6" path="res://scenes/battlefield/dog_tower/gandoglf/staff.png" id="3_hx5cd"]
+[ext_resource type="Script" path="res://scenes/battlefield/dog_tower/gandolfg/gandolfg.gd" id="1_m75x0"]
+[ext_resource type="Texture2D" uid="uid://t34bq117ctbi" path="res://scenes/battlefield/dog_tower/gandolfg/gandolfg.png" id="2_vdj8u"]
+[ext_resource type="Texture2D" uid="uid://caabxbxbqmlc6" path="res://scenes/battlefield/dog_tower/gandolfg/staff.png" id="3_7sy6i"]
 
 [sub_resource type="Animation" id="Animation_83m20"]
 length = 0.001
@@ -161,7 +161,7 @@ _data = {
 size = Vector2(2000, 1000)
 
 [node name="Gandolfg" type="Node2D"]
-script = ExtResource("1_8h8ix")
+script = ExtResource("1_m75x0")
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 process_callback = 0
@@ -173,7 +173,7 @@ one_shot = true
 [node name="GandolfgSprite" type="Sprite2D" parent="Animation"]
 unique_name_in_owner = true
 position = Vector2(-12, -100)
-texture = ExtResource("2_uk7ua")
+texture = ExtResource("2_vdj8u")
 hframes = 2
 vframes = 5
 region_rect = Rect2(4, 4, 178, 185)
@@ -185,7 +185,7 @@ position = Vector2(-42, -173)
 [node name="Staff" type="Sprite2D" parent="Animation/StaffWrapper"]
 unique_name_in_owner = true
 position = Vector2(-3.8147e-06, -1.52588e-05)
-texture = ExtResource("3_hx5cd")
+texture = ExtResource("3_7sy6i")
 hframes = 3
 vframes = 3
 

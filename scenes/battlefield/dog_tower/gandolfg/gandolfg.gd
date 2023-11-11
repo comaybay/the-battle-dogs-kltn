@@ -4,7 +4,7 @@ const ATTACK_FRAME: int = 8
 const BASE_ATTACK_RANGE: int = 1500
 const BASE_ATTACK_COOLDOWN: int = 13
 
-const BULLET_SCENE: PackedScene = preload("res://scenes/battlefield/dog_tower/gandoglf/bullet.tscn")
+const BULLET_SCENE: PackedScene = preload("res://scenes/battlefield/dog_tower/gandolfg/bullet.tscn")
 var _ennemies: Dictionary = {}  
 
 var _closest_enemy: Character
@@ -14,7 +14,7 @@ func setup(global_position: Vector2):
 	self.global_position = global_position
 	var level := InBattle.get_passive_level('gandolfg')
 	$AttackCooldownTimer.wait_time = BASE_ATTACK_COOLDOWN - (level * 1)
-	$AttackArea/AttackCollisionShape.shape.extents = Vector2(BASE_ATTACK_RANGE + (500 * level), 1000)
+	$AttackArea/AttackCollisionShape.shape.extents = Vector2(BASE_ATTACK_RANGE + (150 * level), 1000)
 	$AttackArea/AttackCollisionShape.position = Vector2(0, 0)
 	$AttackArea.body_entered.connect(_on_attack_area_body_entered)
 	$AttackCooldownTimer.timeout.connect(_on_cooldown_time_out)
@@ -55,7 +55,7 @@ func _on_cooldown_time_out() -> void:
 	if _closest_enemy != null and $AttackCooldownTimer.is_stopped():
 		$AnimationPlayer.play("attack")
 	else:
-		$AnimationPlayer.play("Idle")
+		$AnimationPlayer.play("idle")
 		
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == "attack":
