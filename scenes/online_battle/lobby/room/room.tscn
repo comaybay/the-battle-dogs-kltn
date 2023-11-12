@@ -5,8 +5,8 @@
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="2_t0w5s"]
 [ext_resource type="Texture2D" uid="uid://dl847jxlc5jay" path="res://resources/battlefield_themes/green_grass/sky.png" id="4_gsmrn"]
 [ext_resource type="PackedScene" uid="uid://tk6s5oluvidw" path="res://scenes/online_battle/lobby/room/player_slot/player_slot.tscn" id="4_vncec"]
+[ext_resource type="PackedScene" uid="uid://d0jrn2xo773qv" path="res://scenes/common/buttons/go_back_button/go_back_button.tscn" id="5_csr0e"]
 [ext_resource type="PackedScene" uid="uid://d0p6vdi5tjnfe" path="res://scenes/online_battle/lobby/room/chat_box/chat_box.tscn" id="5_j56qe"]
-[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="5_ldwqf"]
 [ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="8_pevc4"]
 [ext_resource type="PackedScene" uid="uid://cn1xpwhtwrkon" path="res://scenes/online_battle/lobby/room/custom_battlefield_settings/custom_battlefield_settings.tscn" id="8_qr6s3"]
 
@@ -64,11 +64,13 @@ size_flags_vertical = 2
 size_flags_stretch_ratio = 0.65
 theme_override_constants/separation = 20
 
-[node name="GoBackButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(87, 0)
+layout_mode = 2
+
+[node name="GoBackButton" parent="MarginContainer/VBoxContainer/HBoxContainer2/Control" instance=ExtResource("5_csr0e")]
 unique_name_in_owner = true
 layout_mode = 2
-shortcut = ExtResource("5_ldwqf")
-text = "@BACK"
 
 [node name="RoomNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true

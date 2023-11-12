@@ -28,6 +28,8 @@ func _ready():
 	
 	%Tracker.setup(levels, %LevelChain, %MapSprite, %TouchArea)	
 	%Dog.setup(levels[Data.selected_level], %Tracker)
+	
+	%GoBackButton.pressed.connect(_go_back_to_dog_base)
 
 func _on_nut_tan_cong_pressed() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
@@ -41,8 +43,7 @@ func _on_nut_doi_hinh_pressed() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file("res://scenes/team_setup/team_setup.tscn")
 
-func _on_quay_lai_pressed() -> void:
-	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
+func _go_back_to_dog_base() -> void:
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
 func _exit_tree() -> void:

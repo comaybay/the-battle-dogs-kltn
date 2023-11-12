@@ -7,6 +7,9 @@
 [node name="DogBase" instance=ExtResource("2_i87ga")]
 title = "@DOG_BASE_TITLE"
 
+[node name="GoBackButton" parent="Khung/Header/Title/MarginContainer/PhanGiua/Control" index="0"]
+focus_mode = 2
+
 [node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
 text = "@DOG_BASE_TITLE"
 

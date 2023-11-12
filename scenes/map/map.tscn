@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="7_eb484"]
 [ext_resource type="PackedScene" uid="uid://cd5gw7llcsine" path="res://scenes/map/level/level.tscn" id="8_uximv"]
 [ext_resource type="Script" path="res://scenes/map/dog.gd" id="8_vsoej"]
-[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="9_xm0jp"]
+[ext_resource type="PackedScene" uid="uid://d0jrn2xo773qv" path="res://scenes/common/buttons/go_back_button/go_back_button.tscn" id="9_cbb4a"]
 [ext_resource type="Shortcut" uid="uid://moipqlm5cofg" path="res://resources/shortcuts/confirm.tres" id="10_3djod"]
 [ext_resource type="PackedScene" uid="uid://c2u0llmni7n54" path="res://scenes/common/h_slide_selection/h_slide_selection.tscn" id="12_3x1s8"]
 
@@ -206,17 +206,15 @@ offset_right = 431.0
 offset_bottom = 58.0
 theme_override_constants/separation = 20
 
-[node name="NutQuayLai" type="Button" parent="Khung/GUI/HBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
+[node name="GoBackButton" parent="Khung/GUI/HBoxContainer" instance=ExtResource("9_cbb4a")]
+unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 0
-theme = ExtResource("1_0lsnx")
-shortcut = ExtResource("9_xm0jp")
-text = "@BACK"
+focus_mode = 2
 
 [node name="Label" type="Label" parent="Khung/GUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
+size_flags_vertical = 0
 theme = ExtResource("1_0lsnx")
 theme_type_variation = &"LabelLarge"
 text = "@PLANET_DOGGO"
@@ -253,10 +251,9 @@ text = "@TEAM_SETUP"
 
 [node name="LevelChain" parent="Khung/GUI" instance=ExtResource("12_3x1s8")]
 unique_name_in_owner = true
-offset_top = 63.0
+offset_top = 93.0
 offset_right = 1152.0
-offset_bottom = 167.0
+offset_bottom = 197.0
 
-[connection signal="pressed" from="Khung/GUI/HBoxContainer/NutQuayLai" to="." method="_on_quay_lai_pressed"]
 [connection signal="pressed" from="Khung/GUI/VBoxContainer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
 [connection signal="pressed" from="Khung/GUI/VBoxContainer/MarginContainer/TeamSetupButton" to="." method="_on_nut_doi_hinh_pressed"]

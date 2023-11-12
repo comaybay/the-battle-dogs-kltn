@@ -138,9 +138,6 @@ _data = {
 tooltip_text = "@TOGGLE_SFX"
 script = ExtResource("2_vl851")
 
-[node name="Background" parent="." index="0"]
-frame = 1
-
 [node name="Icon" parent="." index="1"]
 texture = ExtResource("3_5mbf8")
 hframes = 2

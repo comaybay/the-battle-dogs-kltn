@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ddd02ni0o7cr7" path="res://resources/images/dog_base/dogbase_background.png" id="1_gae5p"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_lv0ii"]
 [ext_resource type="Texture2D" uid="uid://b35jkv4tsll0t" path="res://resources/images/dog_base/footer.png" id="2_ts6wt"]
-[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="5_ah25s"]
+[ext_resource type="PackedScene" uid="uid://d0jrn2xo773qv" path="res://scenes/common/buttons/go_back_button/go_back_button.tscn" id="5_a24hl"]
 [ext_resource type="Texture2D" uid="uid://bnp7cvbuvml6e" path="res://resources/images/bone.png" id="5_gf3n3"]
 
 [node name="MainGUI" type="Control"]
@@ -68,22 +68,27 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="GoBackButton" type="Button" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 0)
+[node name="Control" type="Control" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
+custom_minimum_size = Vector2(87, 0)
 layout_mode = 2
-shortcut = ExtResource("5_ah25s")
-text = "@BACK"
+
+[node name="GoBackButton" parent="Khung/Header/Title/MarginContainer/PhanGiua/Control" instance=ExtResource("5_a24hl")]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 86.0
+focus_mode = 2
 
 [node name="TitleLabel" type="Label" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
+size_flags_vertical = 0
 theme_type_variation = &"LabelLarge"
 text = "<Title>"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Money" type="Label" parent="Khung/Header/Title/MarginContainer/PhanGiua/HBoxContainer"]
 unique_name_in_owner = true
@@ -92,15 +97,12 @@ size_flags_horizontal = 8
 theme_type_variation = &"LabelLarge"
 text = "15000"
 
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Header/Title/MarginContainer/PhanGiua/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Sprite2D" type="TextureRect" parent="Khung/Header/Title/MarginContainer/PhanGiua/HBoxContainer/MarginContainer"]
+[node name="Sprite2D" type="TextureRect" parent="Khung/Header/Title/MarginContainer/PhanGiua/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 texture = ExtResource("5_gf3n3")
-expand_mode = 3
+expand_mode = 5
+stretch_mode = 5
 
 [node name="Content" type="Control" parent="Khung"]
 layout_mode = 2
