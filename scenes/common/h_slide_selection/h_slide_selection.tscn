@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_vfyry"]
 
 [node name="HSlideSelection" type="SubViewportContainer"]
+focus_mode = 2
 stretch = true
 script = ExtResource("1_vehk4")
 

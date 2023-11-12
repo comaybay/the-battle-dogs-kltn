@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://crluqfyv7dbna"]
+[gd_scene load_steps=8 format=3 uid="uid://crluqfyv7dbna"]
 
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_18dgk"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_evkhq"]
+[ext_resource type="Script" path="res://scenes/chapter_selection/chapter_selection.gd" id="2_1art8"]
 [ext_resource type="Texture2D" uid="uid://li12t8q3hrbi" path="res://resources/battlefield_themes/winter/sky.png" id="2_p8ou1"]
-[ext_resource type="PackedScene" uid="uid://tkpm6wqd2nn7" path="res://scenes/chapter_selection/chapter_button/chapter_button.tscn" id="4_ju3mb"]
+[ext_resource type="PackedScene" uid="uid://c2u0llmni7n54" path="res://scenes/common/h_slide_selection/h_slide_selection.tscn" id="5_a64pq"]
+[ext_resource type="PackedScene" uid="uid://b2g2at480k1wu" path="res://scenes/chapter_selection/navigation_button/navigation_button.tscn" id="6_j8gfm"]
+[ext_resource type="PackedScene" uid="uid://d0jrn2xo773qv" path="res://scenes/common/buttons/go_back_button/go_back_button.tscn" id="7_qisty"]
 
 [node name="ChapterSelection" type="Control"]
 layout_mode = 3
@@ -13,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_evkhq")
+script = ExtResource("2_1art8")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = ExtResource("1_18dgk")
@@ -30,34 +34,66 @@ expand_mode = 1
 stretch_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 1154.0
 grow_horizontal = 2
-grow_vertical = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_bottom = 80
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 50
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_type_variation = &"LabelLarge"
 text = "@MAIN_STORY"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MainChapters" parent="MarginContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("5_a64pq")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
 
-[node name="ChapterButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ju3mb")]
+[node name="NavigationButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_j8gfm")]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"LabelLarge"
-text = "@CHARACTER_STORY"
+text = "@CHARACTER_STORIES"
 horizontal_alignment = 1
+
+[node name="CharacterChapters" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_a64pq")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(10, 10)
+transform = Transform2D(1, 0, 0, 1, 10, 10)
+
+[node name="GoBackButton" parent="CanvasLayer" instance=ExtResource("7_qisty")]
+unique_name_in_owner = true
+focus_mode = 2

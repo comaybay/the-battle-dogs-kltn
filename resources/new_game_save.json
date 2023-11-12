@@ -6,9 +6,9 @@
   "dogs": [{ "ID": "dog", "level": 1 }],
   "store": [],
   "victory_count": 0,
-	"fastest_time": 0,
-	"online_score": 0,
-	"passed_level": -1,
+  "fastest_time": 0,
+  "online_score": 0,
+  "passed_level": -1,
   "passives": [],
   "selected_battlefield_id": "level1",
   "selected_level": 0,
@@ -39,5 +39,8 @@
 	"upgrade": false,
 	"store": false,
 	"team_setup": false
-  }
+  },
+  "selected_main_story_chapter": 0,
+  "selected_character_story_chapter": 0,
+  "selected_chapter_id": "main_story_chapter_1"
 }

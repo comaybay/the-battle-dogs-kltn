@@ -16,8 +16,9 @@ func setup(items: Array[Selectable], selected_item_index: int):
 		item.pressed.connect(_on_item_pressed.bind(item))
 		var control := Control.new()
 		control.custom_minimum_size = item.size
-		control.add_child(item)
 		item.resized.connect(func(): control.custom_minimum_size = item.size)
+		item.focus_entered.connect(select_by_item.bind(item))
+		control.add_child(item)
 		%HBoxContainer.add_child(control)
 
 	# wait for level boxes name to be loaded in (which will change the size of HBox)
@@ -57,7 +58,18 @@ var swipe_mouse_start
 var swipe_mouse_times = []
 var swipe_mouse_positions = []
 
-func _input(ev):
+func _gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_left"):
+		var index = _items.find(_selected_item)
+		if index > 0:
+			select(index - 1)
+			
+	elif event.is_action_pressed("ui_right"):
+		var index = _items.find(_selected_item)
+		if index < _items.size() - 1:
+			select(index + 1)
+			
+func _input(ev: InputEvent):
 	if swiping == false and not _hovered:
 		return
 	
@@ -101,5 +113,4 @@ func _input(ev):
 		swipe_mouse_positions.append(ev.position)
 
 func _x_clamp(x: float) -> float:
-	print(_get_x_of(_items[-1]))
 	return clamp(x, _get_x_of(_items[-1]), _get_x_of(_items[0]))
