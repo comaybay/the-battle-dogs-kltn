@@ -3,6 +3,7 @@ extends Node2D
 @onready var levels = get_children()	
 
 func _draw() -> void:
+	print( Data.passed_level)
 	for level in Data.passed_level:
 		var vitri1 = levels[level].position + levels[level].pivot_offset 
 		var vitri2 = levels[level+1].position + levels[level+1].pivot_offset 

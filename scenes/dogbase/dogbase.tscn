@@ -1,14 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4jb3wj3w77db"]
+[gd_scene load_steps=5 format=3 uid="uid://c4jb3wj3w77db"]
 
 [ext_resource type="Script" path="res://scenes/dogbase/dogbase.gd" id="1_18sea"]
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="2_i87ga"]
 [ext_resource type="PackedScene" uid="uid://bysj0231a0wgy" path="res://scenes/dogbase/speaker_dog.tscn" id="2_vvswk"]
+[ext_resource type="PackedScene" uid="uid://ceqhbfis7gleh" path="res://scenes/dogbase/select_chapter_button/select_chapter_button.tscn" id="3_e126c"]
 
 [node name="DogBase" instance=ExtResource("2_i87ga")]
 title = "@DOG_BASE_TITLE"
-
-[node name="GoBackButton" parent="Khung/Header/Title/MarginContainer/PhanGiua/Control" index="0"]
-focus_mode = 2
 
 [node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
 text = "@DOG_BASE_TITLE"
@@ -24,57 +22,63 @@ size_flags_vertical = 3
 script = ExtResource("1_18sea")
 
 [node name="BenTrai" type="VBoxContainer" parent="Khung/Content/PhanGiua" index="0"]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/separation = 5
+theme_override_constants/separation = 15
+alignment = 2
 
-[node name="NutVienChinh" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Khung/Content/PhanGiua/BenTrai" index="0"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="ExpeditionButton" type="Button" parent="Khung/Content/PhanGiua/BenTrai/HBoxContainer" index="0"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+theme_type_variation = &"ButtonExpedition"
 text = "@EXPEDITION"
+alignment = 0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Khung/Content/PhanGiua/BenTrai" index="1"]
-custom_minimum_size = Vector2(0, 10)
+[node name="Control" type="Control" parent="Khung/Content/PhanGiua/BenTrai/HBoxContainer" index="1"]
+z_index = 1
+custom_minimum_size = Vector2(0, 87)
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_horizontal = 0
 
-[node name="NutNangCap" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="2"]
+[node name="SelectChapterIcon" parent="Khung/Content/PhanGiua/BenTrai/HBoxContainer/Control" index="0" instance=ExtResource("3_e126c")]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = -286.0
+offset_top = -4.0
+offset_right = -199.0
+offset_bottom = 83.0
+scale = Vector2(1.1, 1.1)
+
+[node name="NutNangCap" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="1"]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "@UPGRADE"
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="Khung/Content/PhanGiua/BenTrai" index="3"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="NutCuaHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="4"]
+[node name="NutCuaHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="2"]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "@STORE"
 
-[node name="NinePatchRect3" type="NinePatchRect" parent="Khung/Content/PhanGiua/BenTrai" index="5"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="NutXepHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="6"]
+[node name="NutXepHang" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="3"]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "@RANKING"
-
-[node name="BenPhai" type="VBoxContainer" parent="Khung/Content/PhanGiua" index="1"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="SpeakerDog" parent="." index="3" instance=ExtResource("2_vvswk")]
 layout_mode = 2
@@ -83,7 +87,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 offset_right = 574.0
 
-[connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutVienChinh" to="Khung/Content/PhanGiua" method="_on_nut_vien_chinh_pressed"]
+[connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/HBoxContainer/ExpeditionButton" to="Khung/Content/PhanGiua" method="_on_nut_vien_chinh_pressed"]
 [connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutNangCap" to="Khung/Content/PhanGiua" method="_on_nut_nang_cap_pressed"]
 [connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutCuaHang" to="Khung/Content/PhanGiua" method="_on_nut_cua_hang_pressed"]
 [connection signal="pressed" from="Khung/Content/PhanGiua/BenTrai/NutXepHang" to="Khung/Content/PhanGiua" method="_on_nut_xep_hang_pressed"]

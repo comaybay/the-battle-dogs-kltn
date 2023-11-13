@@ -17,19 +17,21 @@ func _ready():
 		var next_level: Level = levels[index + 1] if index < levels.size() - 1 else null 
 		level.setup(tr("@LEVEL_%s_NAME" % (index + 1)), index, prev_level, next_level)
 	
-	
 	var level_boxes: Array[Selectable] = []
-	for level in levels:
+	for level in levels.slice(0, Data.passed_level + 2):
 		var level_box = LevelBox.instantiate()
 		level_box.setup(level)
 		level_boxes.append(level_box)
 		
-	%LevelChain.setup(level_boxes, Data.selected_level)
+	%LevelChain.setup(level_boxes, Data.selected_level, true)
 	
 	%Tracker.setup(levels, %LevelChain, %MapSprite, %TouchArea)	
 	%Dog.setup(levels[Data.selected_level], %Tracker)
 	
 	%GoBackButton.pressed.connect(_go_back_to_dog_base)
+	
+	Data.chapter_last_level = get_tree().get_nodes_in_group("levels").size() - 1
+	Data.save()
 
 func _on_nut_tan_cong_pressed() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)

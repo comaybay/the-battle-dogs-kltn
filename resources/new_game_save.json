@@ -1,6 +1,5 @@
 {
   "bone": 0,
-  "dog_food": 0,
   "date": "2014-11-15T9:09:09",
   "user_name": "",
   "dogs": [{ "ID": "dog", "level": 1 }],
@@ -8,7 +7,6 @@
   "victory_count": 0,
   "fastest_time": 0,
   "online_score": 0,
-  "passed_level": -1,
   "passives": [],
   "selected_battlefield_id": "level1",
   "selected_level": 0,
@@ -40,7 +38,16 @@
 	"store": false,
 	"team_setup": false
   },
-  "selected_main_story_chapter": 0,
-  "selected_character_story_chapter": 0,
-  "selected_chapter_id": "main_story_chapter_1"
+  "selected_chapter_id": "the_battle_dogs_rising",
+  "selected_story_id": "main_story",
+  "chapters": {
+	"the_battle_dogs_rising": {
+	  "passed_level": -1,
+	  "selected_level": -1,
+	  "completed": false
+	}
+  },
+  "story_selected_chapters": {
+	"main_story": 0
+  }
 }

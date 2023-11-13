@@ -4,6 +4,12 @@
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_vfyry"]
 
 [node name="HSlideSelection" type="SubViewportContainer"]
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
 focus_mode = 2
 stretch = true
 script = ExtResource("1_vehk4")

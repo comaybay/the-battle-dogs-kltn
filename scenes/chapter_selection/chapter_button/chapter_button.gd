@@ -41,9 +41,11 @@ func _gui_input(event: InputEvent) -> void:
 		elif event.double_click and _first_click:
 			set_process_input(false)
 			chapter_entering.emit()
-
+			
+			handle_selected()
 			await play_enter_chapter_animation()
 			get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
-func set_selected(selected: bool) -> void:
-	pass
+func handle_selected() -> void:
+	await play_enter_chapter_animation()
+	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")

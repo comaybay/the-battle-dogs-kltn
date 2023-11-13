@@ -1,75 +1,105 @@
 class_name HSlideSelection extends SubViewportContainer
 
+signal item_focus(item: Selectable)
+
 var _items: Array[Selectable] 
 func get_items() -> Array[Selectable]: return _items
 
 var _selected_item: Selectable
+func get_selected_item() -> Selectable: return _selected_item
+
 var _hovered: bool = false
+var _always_listen: bool
+var _in_focus: bool = false
 
 func _ready() -> void:
 	mouse_entered.connect(func(): _hovered = true)
 	mouse_exited.connect(func(): _hovered = false)
 
-func setup(items: Array[Selectable], selected_item_index: int):
+## always listen: if true, listen to user input even if not focusing. 
+## if false, will only listen when focus
+func setup(items: Array[Selectable], selected_item_index: int, always_listen: bool = false):
+	_always_listen = always_listen
 	_items = items
-	for item in items:
+	for i in range(items.size()):
+		var item := items[i]
+
 		item.pressed.connect(_on_item_pressed.bind(item))
+		item.focus_entered.connect(focus.bind(i))
 		var control := Control.new()
 		control.custom_minimum_size = item.size
 		item.resized.connect(func(): control.custom_minimum_size = item.size)
-		item.focus_entered.connect(select_by_item.bind(item))
 		control.add_child(item)
 		%HBoxContainer.add_child(control)
-
-	# wait for level boxes name to be loaded in (which will change the size of HBox)
-	_selected_item = _items[selected_item_index]
-	select.call_deferred(selected_item_index)
+				
+	_selected_item = items[selected_item_index]
 	
-	size.y = items[0].size.y * 1.2
-	%HBoxContainer.position.y = size.y * 0.2 * 0.5
-
+	## setup item navigation
+	ready.connect(func():
+		for i in range(items.size()):
+			var item = items[i]
+			var item_path := item.get_path()	
+			
+			var left_path := items[i - 1].get_path() if i > 0 else item_path
+			item.focus_neighbor_left = left_path
+			item.focus_previous = left_path
+					
+			var right_path := items[i + 1].get_path() if i < items.size() - 1 else item_path
+			item.focus_neighbor_right = right_path
+			item.focus_next = right_path
+	)
+	
+	# wait for level boxes name to be loaded in (which will change the size of HBox)
+	%HBoxContainer.sort_children.connect(func():
+		custom_minimum_size.y = items[0].size.y * 1.2
+		%HBoxContainer.position.y = custom_minimum_size.y * 0.2 * 0.5
+		_selected_item.grab_focus()
+	, CONNECT_ONE_SHOT)	
+	
+	focus_entered.connect(func(): 
+		_selected_item.grab_focus()
+	)
+	
 func _on_item_pressed(item: Selectable):
 	if _selected_item != item:
-		select_by_item(item)
+		focus_by_item(item)
 
-func select_by_item(item: Selectable) -> void:
-	_selected_item.set_selected(false)
+func focus_by_item(item: Selectable) -> void:
 	var tween := create_tween()
 	tween.set_parallel()
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(_selected_item, "scale", Vector2(1, 1), 0.2)
 	
+	_selected_item.handle_local_focus_exited()
 	_selected_item = item
-	_selected_item.set_selected(true)
+	_selected_item.handle_local_focus_entered()
+	
 	tween.tween_property(_selected_item, "scale", Vector2(1.1, 1.1), 0.2)
 	
 	tween.tween_property(%HBoxContainer, "position:x", _get_x_of(_selected_item), 0.5)
+	
+	item_focus.emit(_selected_item)
 
-func select(index: int) -> void:
-	select_by_item(_items[index])
+func focus(index: int) -> void:
+	focus_by_item(_items[index])
 
 func _get_x_of(level_box: Selectable):
 	var box_position = level_box.get_parent().position + (level_box.size / 2)
 	return -box_position.x + (size.x / 2)
 
+func _input(ev: InputEvent):
+	if _always_listen and not _selected_item.has_focus():
+		_handle_navigation_input(ev)
+		
+	_handle_selection_input(ev)	
+	_handle_swipe_input(ev)
+
 var swiping = false
 var swipe_mouse_start
 var swipe_mouse_times = []
 var swipe_mouse_positions = []
-
-func _gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_left"):
-		var index = _items.find(_selected_item)
-		if index > 0:
-			select(index - 1)
-			
-	elif event.is_action_pressed("ui_right"):
-		var index = _items.find(_selected_item)
-		if index < _items.size() - 1:
-			select(index + 1)
-			
-func _input(ev: InputEvent):
+func _handle_swipe_input(ev: InputEvent) -> void:
 	if swiping == false and not _hovered:
 		return
 	
@@ -111,6 +141,15 @@ func _input(ev: InputEvent):
 		%HBoxContainer.position.x = _x_clamp(%HBoxContainer.position.x)
 		swipe_mouse_times.append(Time.get_ticks_msec())
 		swipe_mouse_positions.append(ev.position)
+		
+func _handle_navigation_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right"):
+		_selected_item.grab_focus()
+
+func _handle_selection_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_confirm") or event.is_action_pressed("ui_confirm_default"):
+		_selected_item.handle_selected()
 
 func _x_clamp(x: float) -> float:
 	return clamp(x, _get_x_of(_items[-1]), _get_x_of(_items[0]))
+

@@ -4,6 +4,9 @@ const DOG_BASE_THEME_AUDIO: AudioStream = preload("res://resources/sound/music/d
 var TutorialDogScene: PackedScene = preload("res://scenes/dogbase/dogbase_tutorial_dog/dogbase_tutorial_dog.tscn")
 
 func _ready() -> void:
+	if Data.save_data['passed_main_story_chapter'] != -1:
+		%SelectChapterIcon.position.x = -%ExpeditionButton.size.x - (%SelectChapterIcon.size.x * 0.5)
+	
 	AudioPlayer.play_music(DOG_BASE_THEME_AUDIO, true, true)
 	
 	var on_go_back_pressed = func():

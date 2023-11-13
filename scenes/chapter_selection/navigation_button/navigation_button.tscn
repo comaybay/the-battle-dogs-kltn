@@ -60,16 +60,15 @@ _data = {
 "on": SubResource("Animation_f2qfw")
 }
 
-[node name="vv" type="TextureButton"]
-custom_minimum_size = Vector2(336, 87)
-offset_right = 336.0
-offset_bottom = 87.0
-pivot_offset = Vector2(168, 44)
+[node name="NavigationButton" type="TextureButton"]
+custom_minimum_size = Vector2(270, 70)
+offset_right = 270.0
+offset_bottom = 70.0
+pivot_offset = Vector2(135, 35)
 theme = ExtResource("1_pryvj")
 script = ExtResource("2_qo6r7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.25, 1.25)
 texture = ExtResource("1_56p0g")
 offset = Vector2(134.133, 34.6667)
 hframes = 3

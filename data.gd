@@ -28,13 +28,9 @@ var bone: int:
 		save_data["bone"] = value
 		bone_changed.emit(value)		
 
-var dog_food: int:
-	get: return save_data['dog_food']		
-	set(value): save_data['dog_food'] = value		
-
 var passed_level: int:
-	get: return save_data['passed_level']		
-	set(value): save_data['passed_level'] = value		
+	get: return save_data['chapters'][selected_chapter_id]['passed_level']		
+	set(value): save_data['chapters'][selected_chapter_id]['passed_level'] = value		
 
 var victory_count: int:
 	get: return save_data['victory_count']
@@ -48,8 +44,8 @@ var online_score: int:
 	set(value): save_data['online_score'] = value
 	
 var selected_level: int:
-	get: return save_data['selected_level']		
-	set(value): save_data['selected_level'] = value		
+	get: return save_data['chapters'][Data.selected_chapter_id]['selected_level']		
+	set(value): save_data['chapters'][Data.selected_chapter_id]['selected_level'] = value		
 
 var selected_team: Dictionary:
 	get: return teams[save_data['selected_team']]		
@@ -131,20 +127,34 @@ var has_done_dogbase_after_battlefield_tutorial: bool:
 	get: return save_data['tutorial']['dogbase_after_battlefield']
 	set(value): save_data['tutorial']['dogbase_after_battlefield'] = value
 
-## count everytime player lost in a tutorial 
-var tutorial_lost: int = 0 
+var selected_chapter_id: String:
+	get: return save_data['selected_chapter_id']
+	set(value): save_data['selected_chapter_id'] = value
+	
+var selected_story_id: String:
+	get: return save_data['selected_story_id']
+	set(value): save_data['selected_story_id'] = value
+
+# auto generated data
 
 # general info
 var dog_info := Dictionary()
 var store_info := Dictionary()
 var skill_info := Dictionary()
 var passive_info := Dictionary()
+var story_info := Dictionary()
 
 # save data
 var dogs := Dictionary()
 var skills := Dictionary()
 var store := Dictionary()
 var passives := Dictionary()
+
+## this will be generated on entering a map
+var chapter_last_level: int
+
+## count everytime player lost in a tutorial 
+var tutorial_lost: int = 0 
 
 func _init() -> void:
 	# if player opens game for the first time
@@ -179,6 +189,10 @@ func _init() -> void:
 		passive_info[info['ID']] = info
 	file.close()
 	
+	file = FileAccess.open("res://resources/game_data/stories.json", FileAccess.READ)
+	story_info = JSON.parse_string(file.get_as_text())
+	file.close()
+	
 	compute_values()
 
 func _create_new_game_save() -> Dictionary:
@@ -207,6 +221,7 @@ func _load_game_save() -> Dictionary:
 		save_data['date'] = Time.get_datetime_string_from_system()
 	
 	save_data = _compare_and_update_save_file(new_game_save_data, save_data)	
+	save_data = _migrate_older_version_data(save_data)
 	
 	file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	file.store_line(JSON.stringify(save_data))
@@ -215,7 +230,7 @@ func _load_game_save() -> Dictionary:
 	return save_data
 	
 ## compare and update save data in case if the save data of an older version of the game
-func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Dictionary) -> Dictionary:
+func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Dictionary) -> Dictionary:	
 	for key in new_game_save_data:
 		if not save_data.has(key):
 			save_data[key] = new_game_save_data[key]
@@ -228,7 +243,7 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 			
 		elif typeof(save_data[key]) == TYPE_ARRAY and new_game_save_data[key].size() > 0:
 			_compare_and_update_save_file_array(new_game_save_data[key][0], save_data[key])
-			
+
 	return save_data
 			
 func _compare_and_update_save_file_array(new_game_save_elem: Variant, save_data: Array) -> void:
@@ -239,7 +254,21 @@ func _compare_and_update_save_file_array(new_game_save_elem: Variant, save_data:
 		
 		elif typeof(elem) == TYPE_DICTIONARY:
 			_compare_and_update_save_file(new_game_save_elem, elem)
-			
+
+func _migrate_older_version_data(save_data: Dictionary) -> Dictionary:
+	## version <= 1.8 migration		
+	if save_data.has("passed_level"):
+		save_data["chapters"]["the_battle_dogs_rising"]["passed_level"] = save_data["passed_level"]
+		if save_data["passed_level"] == 12:
+			save_data["chapters"]["the_battle_dogs_rising"]["completed"] = true
+		save_data.erase("passed_level")
+		
+	if save_data.has("selected_level"):
+		save_data["chapters"]["the_battle_dogs_rising"]["selected_level"] = save_data["selected_level"]
+		save_data.erase("selected_level")
+		
+	return save_data
+
 func _ready() -> void:	
 	## if player opens the game for the first time (game_language is not chose yet)
 	use_sw_data = false

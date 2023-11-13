@@ -1,106 +1,110 @@
 extends Control
 
-const CHAPTER_BUTTON: PackedScene = preload("res://scenes/chapter_selection/chapter_button/chapter_button.tscn")
+const STORY_SCENE: PackedScene = preload("res://scenes/chapter_selection/story/story.tscn")
 
-var main_chapters: Array[Selectable] = []
-var character_chapters: Array[Selectable] = []
-var is_main_chapter_focused := true
+var _character_story_nodes: Array[Story] = []
+var _selected_story_index: int = 0
 
 func _init() -> void:
-	load_main_chapters()
-	load_character_chapters()
+	load_stories()
 
-func load_main_chapters() -> void:
-	var dir_path := "res://resources/chapters/main_story"
+func load_stories() -> void:
+	var dir_path := "res://resources/stories"
 	var dir := DirAccess.open(dir_path)
+	for story_dir in dir.get_directories():
+		var story: Story = STORY_SCENE.instantiate()
+		story.setup(story_dir, get_chapter_image_paths(story_dir))
+		_character_story_nodes.append(story)
+
+func get_chapter_image_paths(story_dir: String) -> Array[String]:
+	var chapter_ids: Array[String] = []
+	var dir_path := "res://resources/stories/%s" % story_dir
+	var dir := DirAccess.open(dir_path)
+		
 	dir.list_dir_begin()
 	var file_name = dir.get_next()
-	var index = 0
 	while file_name != "":
 		if file_name.get_extension() != "png":
 			file_name = dir.get_next()
 			continue
-		
-		var chapter_button: ChapterButton = CHAPTER_BUTTON.instantiate()
-		var chapter_id = file_name.get_file().trim_suffix(".png")
-		chapter_button.setup(chapter_id, load("%s/%s" % [dir_path, file_name]))
-		chapter_button.chapter_entering.connect(func():
-			Data.save_data['selected_main_story_chapter'] = index
-			Data.save_data['selected_chapter_id'] = chapter_id
-			Data.save()
-		)
-		main_chapters.append(chapter_button)
+			
+		chapter_ids.append("%s/%s" % [dir_path, file_name])
 		file_name = dir.get_next()	
-		index += 1
-		
-func load_character_chapters() -> void:
-	var dir_path := "res://resources/chapters/character_stories"
-	var dir := DirAccess.open(dir_path)
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	var index = 0
-	while file_name != "":
-		if file_name.get_extension() != "png":
-			file_name = dir.get_next()
-			continue
-		
-		var chapter_button: ChapterButton = CHAPTER_BUTTON.instantiate()
-		var chapter_id = file_name.get_file().trim_suffix(".png")
-		chapter_button.setup(chapter_id, load("%s/%s" % [dir_path, file_name]))
-		chapter_button.chapter_entering.connect(func():
-			Data.save_data['selected_character_story_chapter'] = index
-			Data.save_data['selected_chapter_id'] = chapter_id
-			Data.save()
-		)
-		character_chapters.append(chapter_button)
-		file_name = dir.get_next()	
-		index += 1
-		
+	
+	return chapter_ids
+	
 func _ready() -> void:
 	%GoBackButton.pressed.connect(_go_to_dogbase)
-	%MainChapters.setup(main_chapters, Data.save_data['selected_main_story_chapter'])
-	%MainChapters.grab_focus()
-	%CharacterChapters.setup(character_chapters, Data.save_data['selected_character_story_chapter'])
-	%NavigationButton.pressed.connect(_navigate)
+	%NavigationButtonDown.pressed.connect(_navigate_down)
+	%NavigationButtonUp.pressed.connect(_navigate_up)
+	
+	for story in _character_story_nodes:
+		%StoryContainer.add_child(story)
+
+	var selected_story = _character_story_nodes.filter(func(story: Story):
+		return story.get_story_id() == Data.save_data['selected_story_id']
+	)[0]
+	
+	_selected_story_index = _character_story_nodes.find(selected_story) 
+	_update_navigation_ui()
+	
+	await get_tree().process_frame
+	
+	selected_story.grab_focus()
+	%Camera2D.global_position.y = selected_story.global_position.y
+	print(selected_story.global_position.y)
+	print(selected_story.get_story_id())
 
 func _go_to_dogbase() -> void:
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
-func _navigate() -> void:
-	if is_main_chapter_focused:
-		_navigate_to_character_chapters()
-	else:
-		_navigate_to_main_chapters()
-
-func _navigate_to_main_chapters() -> void:
-	is_main_chapter_focused = true
-	var tween := create_tween()
-	tween.set_parallel()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(%MarginContainer, "position:y", 0, 0.25)
-	tween.tween_property(%NavigationButton, "scale:y", 1, 0.25)
-	%MainChapters.grab_focus()
-	%NavigationButton.set_activated(true)
-	await tween.finished
-	%NavigationButton.set_activated(false)
+func _navigate_up() -> void:
+	if _selected_story_index <= 0:
+		return
+		
+	_selected_story_index -= 1
 	
-func _navigate_to_character_chapters() -> void:
-	is_main_chapter_focused = false
+	var	story: Story = %StoryContainer.get_child(_selected_story_index)
+	story.get_child(0).get_child(1).grab_focus()
+	
+	%NavigationButtonUp.set_activated(true)
+	var	target_position_y: float = story.global_position.y
+	await _story_transition(target_position_y)
+	%NavigationButtonUp.set_activated(false)
+	_update_navigation_ui()
+	
+func _navigate_down() -> void:
+	var story_count: int = %StoryContainer.get_children().size()
+	if _selected_story_index >= story_count - 1:
+		return
+		
+	_selected_story_index += 1
+	
+	var	story: Story = %StoryContainer.get_child(_selected_story_index)
+	story.get_child(0).get_child(1).grab_focus()
+	
+	%NavigationButtonDown.set_activated(true)
+	var	target_position_y: float = story.global_position.y
+	await _story_transition(target_position_y)
+	%NavigationButtonDown.set_activated(false)
+	_update_navigation_ui()
+
+func _story_transition(target_position_y: float) -> void:
 	var tween := create_tween()
 	tween.set_parallel()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(%MarginContainer, "position:y", -510, 0.25)
-	tween.tween_property(%NavigationButton, "scale:y", -1, 0.25)
-	%CharacterChapters.grab_focus()
-	%NavigationButton.set_activated(true)
+	tween.tween_property(%Camera2D, "global_position:y", target_position_y, 0.25)
 	await tween.finished
-	%NavigationButton.set_activated(false)
+
+func _update_navigation_ui() -> void:
+	var story_count: int = %StoryContainer.get_children().size()
+	%NavigationButtonUp.visible = _selected_story_index > 0
+	%NavigationButtonDown.visible = _selected_story_index < story_count - 1
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_down"):
-		_navigate_to_character_chapters()
+		_navigate_down()
 		
 	elif event.is_action_pressed("ui_up"):
-		_navigate_to_main_chapters()
+		_navigate_up()

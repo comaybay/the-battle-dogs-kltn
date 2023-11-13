@@ -10,7 +10,6 @@ offset_right = 250.0
 offset_bottom = 84.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-focus_mode = 0
 theme = ExtResource("1_sxu73")
 theme_type_variation = &"ButtonLevelBox"
 text = "Unnamed"

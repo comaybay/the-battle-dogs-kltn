@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f5x0ks68fcht"
-path="res://.godot/imported/main_background_1.png-411f4f8525589512a55aba0936811843.ctex"
+uid="uid://flkiom836ojk"
+path="res://.godot/imported/select_chapter_icon.png-ac199dc9a97f1573542e70bf5e83f2a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/ending/main_background_1.png"
-dest_files=["res://.godot/imported/main_background_1.png-411f4f8525589512a55aba0936811843.ctex"]
+source_file="res://scenes/dogbase/select_chapter_button/select_chapter_icon.png"
+dest_files=["res://.godot/imported/select_chapter_icon.png-ac199dc9a97f1573542e70bf5e83f2a0.ctex"]
 
 [params]
 
