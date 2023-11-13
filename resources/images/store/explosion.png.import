@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gbn1reuvq5d7"
-path="res://.godot/imported/nuclear_bomb.png-7d666c20067138263e58103bdf9a55f3.ctex"
+uid="uid://goj66gooe1qq"
+path="res://.godot/imported/explosion.png-77d9e55d23bccb4b89a0e55cfe17b114.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/store/nuclear_bomb.png"
-dest_files=["res://.godot/imported/nuclear_bomb.png-7d666c20067138263e58103bdf9a55f3.ctex"]
+source_file="res://resources/images/store/explosion.png"
+dest_files=["res://.godot/imported/explosion.png-77d9e55d23bccb4b89a0e55cfe17b114.ctex"]
 
 [params]
 

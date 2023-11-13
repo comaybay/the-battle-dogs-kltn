@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b13l3bcxvughy"
-path="res://.godot/imported/nuclear_bomb_icon.png-d6a3516c2c0393171269de28e4ce088a.ctex"
+uid="uid://diisp34lfcb2j"
+path="res://.godot/imported/explosion_mushroom.png-80f6103d6b2b5e322250824c03e64529.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/store/nuclear_bomb_icon.png"
-dest_files=["res://.godot/imported/nuclear_bomb_icon.png-d6a3516c2c0393171269de28e4ce088a.ctex"]
+source_file="res://resources/images/store/explosion_mushroom.png"
+dest_files=["res://.godot/imported/explosion_mushroom.png-80f6103d6b2b5e322250824c03e64529.ctex"]
 
 [params]
 
