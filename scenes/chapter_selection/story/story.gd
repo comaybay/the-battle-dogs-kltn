@@ -5,12 +5,17 @@ const CHAPTER_BUTTON: PackedScene = preload("res://scenes/chapter_selection/chap
 var _story_id: String
 func get_story_id() -> String: return _story_id
 
+func _ready() -> void:
+	focus_entered.connect(func():
+		%HSlideSelection.grab_focus()
+	)
+
 func setup(story_dir: String, chapter_iamge_paths: Array[String]) -> void:
 	_story_id = story_dir.split('.')[1]
 	%StoryLabel.text = tr("@CHARACTER_STORY_%s" % _story_id)
 	
 	var selected_index = Data.save_data['story_selected_chapters'].get(_story_id)
-	$VBoxContainer/HSlideSelection.setup(
+	%HSlideSelection.setup(
 		_create_chapter_buttons(story_dir, chapter_iamge_paths), 
 		selected_index if selected_index != null else 0
 	)

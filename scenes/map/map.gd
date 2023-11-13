@@ -2,7 +2,13 @@ extends Control
 
 const LevelBox: PackedScene = preload("res://scenes/map/level_box/level_box.tscn")
 
+@export var location: String 
+
 func _ready():
+	%StoryTitle.text = tr("@STORY_%s" % Data.selected_story_id)
+	%ChapterTitle.text = tr("@CHAPTER_%s" % Data.selected_chapter_id)
+	%Location.text = tr(location)
+	
 	if (Data.dogs.size() > 1 or Data.skills.size() > 1) and not Data.has_done_map_tutorial:
 		var TutorialDogScene: PackedScene = load("res://scenes/map/map_tutorial_dog/map_tutorial_dog.tscn")
 		var tutorial_dog: MapTutorialDog = TutorialDogScene.instantiate()

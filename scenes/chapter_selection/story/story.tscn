@@ -7,6 +7,7 @@
 [node name="Story" type="MarginContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+focus_mode = 2
 theme = ExtResource("1_cjdbe")
 theme_override_constants/margin_top = 120
 script = ExtResource("2_gyb5i")
@@ -22,4 +23,5 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="HSlideSelection" parent="VBoxContainer" instance=ExtResource("2_g3k53")]
+unique_name_in_owner = true
 layout_mode = 2

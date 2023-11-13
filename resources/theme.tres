@@ -82,13 +82,13 @@ shadow_color = Color(0.298039, 0.239216, 0.501961, 0)
 shadow_size = 5
 shadow_offset = Vector2(0, 5)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grmnj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yb7ay"]
 bg_color = Color(0.780392, 0.980392, 0.917647, 0)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0, 0.333333, 1, 1)
+border_color = Color(0.960784, 0.929412, 0.337255, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ffpo"]
 bg_color = Color(0.780392, 0.980392, 0.917647, 0)
@@ -117,7 +117,7 @@ border_color = Color(0, 0.333333, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ud5np"]
 content_margin_left = 56.0
 content_margin_top = 7.0
-content_margin_right = 14.0
+content_margin_right = 28.0
 content_margin_bottom = 7.0
 bg_color = Color(0.584314, 0.631373, 0.623529, 1)
 border_width_left = 2
@@ -136,7 +136,7 @@ shadow_offset = Vector2(0, 5)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s536g"]
 content_margin_left = 56.0
 content_margin_top = 7.0
-content_margin_right = 14.0
+content_margin_right = 28.0
 content_margin_bottom = 7.0
 bg_color = Color(0.929412, 1, 0.984314, 0)
 border_width_left = 2
@@ -154,7 +154,7 @@ shadow_offset = Vector2(0, 5)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_an0sj"]
 content_margin_left = 56.0
 content_margin_top = 7.0
-content_margin_right = 14.0
+content_margin_right = 28.0
 content_margin_bottom = 7.0
 bg_color = Color(0.823529, 0.980392, 0.929412, 1)
 border_width_left = 2
@@ -173,7 +173,7 @@ shadow_offset = Vector2(0, 5)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24ghw"]
 content_margin_left = 56.0
 content_margin_top = 7.0
-content_margin_right = 14.0
+content_margin_right = 28.0
 content_margin_bottom = 7.0
 bg_color = Color(0.823529, 0.980392, 0.929412, 1)
 border_width_left = 2
@@ -192,7 +192,7 @@ shadow_offset = Vector2(0, 5)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_30olk"]
 content_margin_left = 56.0
 content_margin_top = 7.0
-content_margin_right = 14.0
+content_margin_right = 28.0
 content_margin_bottom = 7.0
 bg_color = Color(0.929412, 1, 0.984314, 1)
 border_width_left = 2
@@ -601,7 +601,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_asld2")
 Button/styles/normal = SubResource("StyleBoxFlat_asld2")
 Button/styles/pressed = SubResource("StyleBoxFlat_8535s")
 ButtonChapter/base_type = &"Button"
-ButtonChapter/styles/focus = SubResource("StyleBoxFlat_grmnj")
+ButtonChapter/styles/focus = SubResource("StyleBoxFlat_yb7ay")
 ButtonChapter/styles/hover = SubResource("StyleBoxFlat_3ffpo")
 ButtonChapter/styles/normal = SubResource("StyleBoxFlat_y3h4c")
 ButtonChapter/styles/pressed = SubResource("StyleBoxFlat_fwgql")

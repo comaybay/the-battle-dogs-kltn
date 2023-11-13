@@ -2,15 +2,12 @@ class_name ChapterButton extends Selectable
 
 signal chapter_entering
 
-const ACCENT_COLOR: Color = 0xf5ed56ff
 var _accent_stylebox: StyleBoxFlat
 
 func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 	_accent_stylebox = get_theme_stylebox("pressed").duplicate() as StyleBoxFlat
-	_accent_stylebox.border_color = ACCENT_COLOR
-	add_theme_stylebox_override("pressed", _accent_stylebox)
-	
+
 func setup(chapter_id: String, image: Texture2D) -> void:
 	$TextureRect.texture = image
 	$Label.text = tr("@CHAPTER_%s" % chapter_id)

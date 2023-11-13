@@ -4,9 +4,13 @@ const DOG_BASE_THEME_AUDIO: AudioStream = preload("res://resources/sound/music/d
 var TutorialDogScene: PackedScene = preload("res://scenes/dogbase/dogbase_tutorial_dog/dogbase_tutorial_dog.tscn")
 
 func _ready() -> void:
-	if Data.save_data['passed_main_story_chapter'] != -1:
+	if Data.save_data['chapters']['the_battle_dogs_rising']['completed']:
 		%SelectChapterIcon.position.x = -%ExpeditionButton.size.x - (%SelectChapterIcon.size.x * 0.5)
-	
+	else:
+		%ExpeditionButton.theme_type_variation = ""
+		%ExpeditionButton.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		%SelectChapterIcon.get_parent().queue_free()
+		
 	AudioPlayer.play_music(DOG_BASE_THEME_AUDIO, true, true)
 	
 	var on_go_back_pressed = func():

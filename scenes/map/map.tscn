@@ -63,6 +63,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_0lsnx")
 script = ExtResource("1_0p7qx")
+location = "@PLANET_DOGGO"
 
 [node name="Khung" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -199,25 +200,56 @@ script = ExtResource("8_vsoej")
 [node name="GUI" type="CanvasLayer" parent="Khung"]
 unique_name_in_owner = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Khung/GUI"]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 431.0
-offset_bottom = 58.0
+[node name="MarginContainer" type="MarginContainer" parent="Khung/GUI"]
+offset_right = 1152.0
+offset_bottom = 87.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Khung/GUI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="GoBackButton" parent="Khung/GUI/HBoxContainer" instance=ExtResource("9_cbb4a")]
+[node name="GoBackButton" parent="Khung/GUI/MarginContainer/HBoxContainer" instance=ExtResource("9_cbb4a")]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
 
-[node name="Label" type="Label" parent="Khung/GUI/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Khung/GUI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StoryTitle" type="Label" parent="Khung/GUI/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme = ExtResource("1_0lsnx")
+theme_type_variation = &"Label"
+text = "<STORY TITLE>"
+
+[node name="ChapterTitle" type="Label" parent="Khung/GUI/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 theme = ExtResource("1_0lsnx")
 theme_type_variation = &"LabelLarge"
-text = "@PLANET_DOGGO"
+text = "<CHAPTER_TITLE>"
+
+[node name="Location" type="Label" parent="Khung/GUI/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme = ExtResource("1_0lsnx")
+theme_type_variation = &"LabelLarge"
+text = "<LOCATION>"
+horizontal_alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Khung/GUI"]
 offset_left = 873.0

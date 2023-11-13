@@ -5,6 +5,7 @@ signal item_focus(item: Selectable)
 var _items: Array[Selectable] 
 func get_items() -> Array[Selectable]: return _items
 
+var _prev_selected_item: Selectable
 var _selected_item: Selectable
 func get_selected_item() -> Selectable: return _selected_item
 
@@ -61,10 +62,13 @@ func setup(items: Array[Selectable], selected_item_index: int, always_listen: bo
 	)
 	
 func _on_item_pressed(item: Selectable):
-	if _selected_item != item:
+	if _prev_selected_item != item:
 		focus_by_item(item)
 
 func focus_by_item(item: Selectable) -> void:
+	if _prev_selected_item == item:
+		return
+		
 	var tween := create_tween()
 	tween.set_parallel()
 	tween.set_trans(Tween.TRANS_CUBIC)
@@ -73,6 +77,7 @@ func focus_by_item(item: Selectable) -> void:
 	
 	_selected_item.handle_local_focus_exited()
 	_selected_item = item
+	_selected_item.grab_focus()
 	_selected_item.handle_local_focus_entered()
 	
 	tween.tween_property(_selected_item, "scale", Vector2(1.1, 1.1), 0.2)
@@ -80,6 +85,7 @@ func focus_by_item(item: Selectable) -> void:
 	tween.tween_property(%HBoxContainer, "position:x", _get_x_of(_selected_item), 0.5)
 	
 	item_focus.emit(_selected_item)
+	_prev_selected_item = item
 
 func focus(index: int) -> void:
 	focus_by_item(_items[index])

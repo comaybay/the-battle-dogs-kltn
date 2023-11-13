@@ -52,8 +52,6 @@ func _ready() -> void:
 	
 	selected_story.grab_focus()
 	%Camera2D.global_position.y = selected_story.global_position.y
-	print(selected_story.global_position.y)
-	print(selected_story.get_story_id())
 
 func _go_to_dogbase() -> void:
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
@@ -65,7 +63,7 @@ func _navigate_up() -> void:
 	_selected_story_index -= 1
 	
 	var	story: Story = %StoryContainer.get_child(_selected_story_index)
-	story.get_child(0).get_child(1).grab_focus()
+	story.grab_focus()
 	
 	%NavigationButtonUp.set_activated(true)
 	var	target_position_y: float = story.global_position.y
@@ -81,7 +79,7 @@ func _navigate_down() -> void:
 	_selected_story_index += 1
 	
 	var	story: Story = %StoryContainer.get_child(_selected_story_index)
-	story.get_child(0).get_child(1).grab_focus()
+	story.grab_focus()
 	
 	%NavigationButtonDown.set_activated(true)
 	var	target_position_y: float = story.global_position.y

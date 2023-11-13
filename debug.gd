@@ -32,6 +32,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('ui_debug_switch_language'):
 		TranslationServer.set_locale("en" if TranslationServer.get_locale() == "vi" else "vi")	
 
+	if event.is_action_pressed('ui_debug_win_battle'):
+		InBattle.get_battlefield().get_cat_tower().zero_health.emit()
+
 func is_debug_mode() -> bool:
 	return _debug_mode
 
