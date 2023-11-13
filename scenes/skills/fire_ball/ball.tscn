@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://cu0by1s72tx3o"]
 
 [ext_resource type="Script" path="res://scenes/skills/fire_ball/ball.gd" id="1_yyqct"]
-[ext_resource type="Texture2D" uid="uid://deh28ywd0ub80" path="res://resources/images/store/nuclear_bomb.png" id="2_jb27i"]
 [ext_resource type="AudioStream" uid="uid://dm3m3nmm7d1bh" path="res://resources/sound/battlefield/Tieng-lua-chay.mp3" id="2_t5c7m"]
+[ext_resource type="Texture2D" uid="uid://deh28ywd0ub80" path="res://resources/images/skills/fire_ball.png" id="2_v8lff"]
 
 [sub_resource type="Animation" id="Animation_k3r0e"]
 length = 0.001
@@ -66,6 +66,7 @@ resource_local_to_scene = true
 size = Vector2(109.42, 298.67)
 
 [node name="FireBall" type="CharacterBody2D"]
+position = Vector2(236.052, 136.381)
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_yyqct")
@@ -83,7 +84,7 @@ one_shot = true
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-70.5037, -128.398)
 rotation = 1.05941
-texture = ExtResource("2_jb27i")
+texture = ExtResource("2_v8lff")
 hframes = 4
 vframes = 13
 frame = 12
