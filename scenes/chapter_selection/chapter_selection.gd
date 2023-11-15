@@ -12,26 +12,20 @@ func load_stories() -> void:
 	var dir_path := "res://resources/stories"
 	var dir := DirAccess.open(dir_path)
 	for story_dir in dir.get_directories():
+		var story_dir_path: String = "%s/%s" % [dir_path, story_dir]
 		var story: Story = STORY_SCENE.instantiate()
-		story.setup(story_dir, get_chapter_image_paths(story_dir))
+		story.setup(story_dir_path, get_chapter_dir_paths(story_dir))
 		_character_story_nodes.append(story)
 
-func get_chapter_image_paths(story_dir: String) -> Array[String]:
-	var chapter_ids: Array[String] = []
+func get_chapter_dir_paths(story_dir: String) -> Array:
 	var dir_path := "res://resources/stories/%s" % story_dir
 	var dir := DirAccess.open(dir_path)
 		
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	while file_name != "":
-		if file_name.get_extension() != "png":
-			file_name = dir.get_next()
-			continue
-			
-		chapter_ids.append("%s/%s" % [dir_path, file_name])
-		file_name = dir.get_next()	
+	var chapter_dir_paths: Array[String] = []
+	for dir_name in dir.get_directories():
+		chapter_dir_paths.append("%s/%s" % [dir_path, dir_name]) 
 	
-	return chapter_ids
+	return chapter_dir_paths
 	
 func _ready() -> void:
 	%GoBackButton.pressed.connect(_go_to_dogbase)

@@ -12,3 +12,9 @@ func handle_local_focus_entered() -> void:
 	
 func handle_local_focus_exited() -> void:
 	pass
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed():
+		focus_mode = Control.FOCUS_NONE
+	else:
+		focus_mode = Control.FOCUS_ALL

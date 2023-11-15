@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bas6e15j1tw6l"
-path="res://.godot/imported/0.shrine_maiden_of_paradise.png-e52889ef2f480cc4abd4636e5a95018a.ctex"
+uid="uid://ycmeqryvywsc"
+path="res://.godot/imported/map.png-11537cc0d5b873f8e239302f0c0ce5f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/stories/1.eastern_boundaries/0.shrine_maiden_of_paradise.png"
-dest_files=["res://.godot/imported/0.shrine_maiden_of_paradise.png-e52889ef2f480cc4abd4636e5a95018a.ctex"]
+source_file="res://resources/stories/0.main_story/0.the_battle_dogs_rising/map.png"
+dest_files=["res://.godot/imported/map.png-11537cc0d5b873f8e239302f0c0ce5f5.ctex"]
 
 [params]
 

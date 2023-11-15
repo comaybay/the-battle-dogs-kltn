@@ -1,8 +1,7 @@
 {
   "main_story": {
     "the_battle_dogs_rising": {
-      "reward_type": "none",
-      "ending": "battle_dogs_rising_ending"
+      "reward_type": "none"
     }
   },
   "eastern_boundaries": {

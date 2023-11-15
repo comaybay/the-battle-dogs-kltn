@@ -1,13 +1,13 @@
 [gd_scene load_steps=19 format=3 uid="uid://gny6lao42iqp"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_0lsnx"]
-[ext_resource type="Script" path="res://scenes/map/map.gd" id="1_0p7qx"]
-[ext_resource type="PackedScene" uid="uid://i3waaqjv5m7" path="res://scenes/map/tracker.tscn" id="4_un5ok"]
-[ext_resource type="Script" path="res://scenes/map/Levels.gd" id="5_ta18k"]
-[ext_resource type="Texture2D" uid="uid://ycmeqryvywsc" path="res://scenes/map/map.png" id="5_weho0"]
+[ext_resource type="Script" path="res://scenes/maps/base_map/map.gd" id="1_0p7qx"]
+[ext_resource type="Texture2D" uid="uid://ycmeqryvywsc" path="res://resources/stories/0.main_story/0.the_battle_dogs_rising/map.png" id="3_08hy2"]
+[ext_resource type="PackedScene" uid="uid://i3waaqjv5m7" path="res://scenes/maps/base_map/tracker/tracker.tscn" id="4_un5ok"]
+[ext_resource type="Script" path="res://scenes/maps/base_map/stages.gd" id="5_ta18k"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="7_eb484"]
-[ext_resource type="PackedScene" uid="uid://cd5gw7llcsine" path="res://scenes/map/level/level.tscn" id="8_uximv"]
-[ext_resource type="Script" path="res://scenes/map/dog.gd" id="8_vsoej"]
+[ext_resource type="PackedScene" uid="uid://cd5gw7llcsine" path="res://scenes/maps/base_map/stage/stage.tscn" id="8_uximv"]
+[ext_resource type="Script" path="res://scenes/maps/base_map/dog.gd" id="8_vsoej"]
 [ext_resource type="PackedScene" uid="uid://d0jrn2xo773qv" path="res://scenes/common/buttons/go_back_button/go_back_button.tscn" id="9_cbb4a"]
 [ext_resource type="Shortcut" uid="uid://moipqlm5cofg" path="res://resources/shortcuts/confirm.tres" id="10_3djod"]
 [ext_resource type="PackedScene" uid="uid://c2u0llmni7n54" path="res://scenes/common/h_slide_selection/h_slide_selection.tscn" id="12_3x1s8"]
@@ -54,7 +54,7 @@ action = &"ui_setup_team"
 [sub_resource type="Shortcut" id="Shortcut_0cnn8"]
 events = [SubResource("InputEventAction_p45xq")]
 
-[node name="Map1" type="Control"]
+[node name="Map" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,131 +65,115 @@ theme = ExtResource("1_0lsnx")
 script = ExtResource("1_0p7qx")
 location = "@PLANET_DOGGO"
 
-[node name="Khung" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="map" type="NinePatchRect" parent="Khung"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 20.0
-
-[node name="MapSprite" type="Sprite2D" parent="Khung/map"]
+[node name="MapSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(1248, 702)
-texture = ExtResource("5_weho0")
+texture = ExtResource("3_08hy2")
 
-[node name="TouchArea" type="Control" parent="Khung/map"]
+[node name="TouchArea" type="Control" parent="."]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 2496.0
 offset_bottom = 1404.0
 
-[node name="AllLevel" type="Node2D" parent="Khung/map"]
-process_mode = 1
-
-[node name="Node" type="Node2D" parent="Khung/map/AllLevel"]
+[node name="Stages" type="Node2D" parent="."]
 script = ExtResource("5_ta18k")
 
-[node name="Level" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 812.0
 offset_top = 769.0
 offset_right = 839.0
 offset_bottom = 796.0
 battlefield_id = "level1"
 
-[node name="Level2" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level2" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 1018.0
 offset_top = 1024.0
 offset_right = 1045.0
 offset_bottom = 1051.0
 battlefield_id = "level2"
 
-[node name="Level3" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level3" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 1231.0
 offset_top = 769.0
 offset_right = 1258.0
 offset_bottom = 796.0
 battlefield_id = "level3"
 
-[node name="Level4" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level4" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 1612.0
 offset_top = 808.0
 offset_right = 1639.0
 offset_bottom = 835.0
 battlefield_id = "level4"
 
-[node name="Level5" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level5" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 1559.0
 offset_top = 409.0
 offset_right = 1586.0
 offset_bottom = 436.0
 battlefield_id = "level5"
 
-[node name="Level6" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level6" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 1270.0
 offset_top = 285.0
 offset_right = 1297.0
 offset_bottom = 312.0
 battlefield_id = "level6"
 
-[node name="Level7" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level7" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 773.0
 offset_top = 324.0
 offset_right = 800.0
 offset_bottom = 351.0
 battlefield_id = "level7"
 
-[node name="Level8" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level8" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 194.0
 offset_top = 162.0
 offset_right = 221.0
 offset_bottom = 189.0
 battlefield_id = "level8"
 
-[node name="Level9" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level9" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 338.0
 offset_top = 988.0
 offset_right = 365.0
 offset_bottom = 1015.0
 battlefield_id = "level9"
 
-[node name="Level10" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level10" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 517.0
 offset_top = 1241.0
 offset_right = 544.0
 offset_bottom = 1268.0
 battlefield_id = "level10"
 
-[node name="Level11" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level11" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 1518.0
 offset_top = 1241.0
 offset_right = 1545.0
 offset_bottom = 1268.0
 battlefield_id = "level11"
 
-[node name="Level12" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level12" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 2250.0
 offset_top = 988.0
 offset_right = 2277.0
 offset_bottom = 1015.0
 battlefield_id = "level12"
 
-[node name="Level13" parent="Khung/map/AllLevel/Node" instance=ExtResource("8_uximv")]
+[node name="Level13" parent="Stages" instance=ExtResource("8_uximv")]
 offset_left = 2199.0
 offset_top = 256.0
 offset_right = 2226.0
 offset_bottom = 283.0
 battlefield_id = "level13"
 
-[node name="Tracker" parent="Khung/map/AllLevel" instance=ExtResource("4_un5ok")]
+[node name="Tracker" parent="." instance=ExtResource("4_un5ok")]
 unique_name_in_owner = true
 
-[node name="Dog" type="AnimatedSprite2D" parent="Khung/map/AllLevel"]
+[node name="Dog" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(706, 587)
 scale = Vector2(0.269345, 0.269345)
@@ -197,10 +181,10 @@ sprite_frames = SubResource("SpriteFrames_e4la2")
 offset = Vector2(-17.6188, -132.407)
 script = ExtResource("8_vsoej")
 
-[node name="GUI" type="CanvasLayer" parent="Khung"]
+[node name="GUI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Khung/GUI"]
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
 offset_right = 1152.0
 offset_bottom = 87.0
 size_flags_horizontal = 3
@@ -208,22 +192,22 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Khung/GUI/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="GoBackButton" parent="Khung/GUI/MarginContainer/HBoxContainer" instance=ExtResource("9_cbb4a")]
+[node name="GoBackButton" parent="GUI/MarginContainer/HBoxContainer" instance=ExtResource("9_cbb4a")]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Khung/GUI/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="StoryTitle" type="Label" parent="Khung/GUI/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="StoryTitle" type="Label" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -232,7 +216,7 @@ theme = ExtResource("1_0lsnx")
 theme_type_variation = &"Label"
 text = "<STORY TITLE>"
 
-[node name="ChapterTitle" type="Label" parent="Khung/GUI/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ChapterTitle" type="Label" parent="GUI/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -241,7 +225,7 @@ theme = ExtResource("1_0lsnx")
 theme_type_variation = &"LabelLarge"
 text = "<CHAPTER_TITLE>"
 
-[node name="Location" type="Label" parent="Khung/GUI/MarginContainer/HBoxContainer"]
+[node name="Location" type="Label" parent="GUI/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -251,14 +235,15 @@ theme_type_variation = &"LabelLarge"
 text = "<LOCATION>"
 horizontal_alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Khung/GUI"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
 offset_left = 873.0
 offset_top = 505.0
 offset_right = 913.0
 offset_bottom = 545.0
 theme_override_constants/separation = 10
 
-[node name="NutTanCong" type="Button" parent="Khung/GUI/VBoxContainer"]
+[node name="AttackButton" type="Button" parent="GUI/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 focus_mode = 0
@@ -268,12 +253,12 @@ theme_override_font_sizes/font_size = 30
 shortcut = ExtResource("10_3djod")
 text = "@ATTACK"
 
-[node name="MarginContainer" type="MarginContainer" parent="Khung/GUI/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GUI/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="TeamSetupButton" type="Button" parent="Khung/GUI/VBoxContainer/MarginContainer"]
+[node name="TeamSetupButton" type="Button" parent="GUI/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
@@ -281,11 +266,8 @@ theme = ExtResource("1_0lsnx")
 shortcut = SubResource("Shortcut_0cnn8")
 text = "@TEAM_SETUP"
 
-[node name="LevelChain" parent="Khung/GUI" instance=ExtResource("12_3x1s8")]
+[node name="LevelChain" parent="GUI" instance=ExtResource("12_3x1s8")]
 unique_name_in_owner = true
 offset_top = 93.0
 offset_right = 1152.0
 offset_bottom = 197.0
-
-[connection signal="pressed" from="Khung/GUI/VBoxContainer/NutTanCong" to="." method="_on_nut_tan_cong_pressed"]
-[connection signal="pressed" from="Khung/GUI/VBoxContainer/MarginContainer/TeamSetupButton" to="." method="_on_nut_doi_hinh_pressed"]

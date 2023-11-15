@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbmjh526u38rr"
-path="res://.godot/imported/0.the_battle_dogs_rising.png-e2728ff8802ad987bc6b65a15d2ee742.ctex"
+uid="uid://nvan3y1v8yvf"
+path="res://.godot/imported/flag.png-7666367b5c402fbf0eeb5b376e77b644.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/stories/0.main_story/0.the_battle_dogs_rising.png"
-dest_files=["res://.godot/imported/0.the_battle_dogs_rising.png-e2728ff8802ad987bc6b65a15d2ee742.ctex"]
+source_file="res://scenes/maps/base_map/stage_box/flag.png"
+dest_files=["res://.godot/imported/flag.png-7666367b5c402fbf0eeb5b376e77b644.ctex"]
 
 [params]
 

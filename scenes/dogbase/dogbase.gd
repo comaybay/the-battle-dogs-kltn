@@ -34,11 +34,13 @@ func _ready() -> void:
 	if not Data.has_done_battlefield_basics_tutorial:
 		$BenTrai/NutNangCap.disabled = true
 	
+	%ExpeditionButton.pressed.connect(_go_to_map)
 
-
-func _on_nut_vien_chinh_pressed():
+func _go_to_map():
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
-	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
+	get_tree().change_scene_to_file(
+		"res://scenes/maps/%s_map/%s_map.tscn" % [Data.selected_chapter_id, Data.selected_chapter_id]
+	)
 
 func _on_nut_nang_cap_pressed():
 	AudioPlayer.stop_music(DOG_BASE_THEME_AUDIO, true)

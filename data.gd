@@ -131,6 +131,10 @@ var selected_chapter_id: String:
 	get: return save_data['selected_chapter_id']
 	set(value): save_data['selected_chapter_id'] = value
 	
+var selected_chapter_dir_path: String:
+	get: return save_data['selected_chapter_dir_path']
+	set(value): save_data['selected_chapter_dir_path'] = value
+
 var selected_story_id: String:
 	get: return save_data['selected_story_id']
 	set(value): save_data['selected_story_id'] = value

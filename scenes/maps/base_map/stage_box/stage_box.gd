@@ -32,18 +32,4 @@ func update_flag_position():
 	$Flag.position.x = size.x - 35
 	$Flag.position.y = size.y - 27
 
-var _pressed: bool = false
-var _drag_distance := Vector2.ZERO
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		_pressed = event.pressed
-		
-		if not _pressed:
-			_drag_distance = Vector2.ZERO
-			disabled = false
-		
-	if _pressed and event is InputEventMouseMotion:
-		_drag_distance += event.relative.abs()
-		
-		if _drag_distance.length() > Global.TOUCH_EPSISLON:
-			disabled = true
+

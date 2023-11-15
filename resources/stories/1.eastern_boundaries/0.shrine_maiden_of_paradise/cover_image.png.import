@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nvan3y1v8yvf"
-path="res://.godot/imported/flag.png-0aec40bb8bec3aeffad44fbc960b509d.ctex"
+uid="uid://ba8l8dyv8twxb"
+path="res://.godot/imported/cover_image.png-f585793f2514067478a5026bab3a67e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/map/flag.png"
-dest_files=["res://.godot/imported/flag.png-0aec40bb8bec3aeffad44fbc960b509d.ctex"]
+source_file="res://resources/stories/1.eastern_boundaries/0.shrine_maiden_of_paradise/cover_image.png"
+dest_files=["res://.godot/imported/cover_image.png-f585793f2514067478a5026bab3a67e2.ctex"]
 
 [params]
 

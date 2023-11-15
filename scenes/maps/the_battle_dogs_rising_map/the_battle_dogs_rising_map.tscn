@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu8js5obflbl1"]
+
+[ext_resource type="PackedScene" uid="uid://gny6lao42iqp" path="res://scenes/maps/base_map/map.tscn" id="1_12sle"]
+
+[node name="TheBattleDogsRisingMap" instance=ExtResource("1_12sle")]

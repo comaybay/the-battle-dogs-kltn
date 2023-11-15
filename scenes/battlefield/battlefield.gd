@@ -24,7 +24,12 @@ func _enter_tree() -> void:
 	_player_data = BattlefieldPlayerData.new()
 
 func _load_battlefield_data() -> Dictionary:
-	var file = FileAccess.open("res://resources/battlefield_data/%s.json" % Data.selected_battlefield_id, FileAccess.READ)
+	
+	var dir = "%s/stages/%s.json" % [
+		Data.selected_chapter_dir_path,
+		Data.selected_battlefield_id,
+	]
+	var file = FileAccess.open(dir, FileAccess.READ)
 	var battlefield_data: Dictionary = JSON.parse_string(file.get_as_text())
 	file.close()
 	return battlefield_data	

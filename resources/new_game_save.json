@@ -39,6 +39,7 @@
 	"team_setup": false
   },
   "selected_chapter_id": "the_battle_dogs_rising",
+  "selected_chapter_dir_path": "res://resources/stories/0.main_story/0.the_battle_dogs_rising",
   "selected_story_id": "main_story",
   "chapters": {
 	"the_battle_dogs_rising": {

@@ -1,6 +1,6 @@
 extends Control 
 
-const LevelBox: PackedScene = preload("res://scenes/map/level_box/level_box.tscn")
+const LevelBox: PackedScene = preload("res://scenes/maps/base_map/stage_box/stage_box.tscn")
 
 @export var location: String 
 
@@ -15,7 +15,7 @@ func _ready():
 		tutorial_dog.setup(%TeamSetupButton)
 		%GUI.add_child(tutorial_dog)
 	
-	var levels = $Khung/map/AllLevel/Node.get_children()
+	var levels = $Stages.get_children()
 
 	for index in levels.size():
 		var level: Level = levels[index]
@@ -35,11 +35,13 @@ func _ready():
 	%Dog.setup(levels[Data.selected_level], %Tracker)
 	
 	%GoBackButton.pressed.connect(_go_back_to_dog_base)
+	%AttackButton.pressed.connect(_go_to_battlefield)
+	%TeamSetupButton.pressed.connect(_go_to_team_setup)
 	
 	Data.chapter_last_level = get_tree().get_nodes_in_group("levels").size() - 1
 	Data.save()
 
-func _on_nut_tan_cong_pressed() -> void:
+func _go_to_battlefield() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	
 	var dobase_theme := AudioPlayer.get_current_music()
@@ -47,7 +49,7 @@ func _on_nut_tan_cong_pressed() -> void:
 	
 	get_tree().change_scene_to_file("res://scenes/battlefield/battlefield.tscn")
 	
-func _on_nut_doi_hinh_pressed() -> void:
+func _go_to_team_setup() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	get_tree().change_scene_to_file("res://scenes/team_setup/team_setup.tscn")
 

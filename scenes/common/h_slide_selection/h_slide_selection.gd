@@ -105,17 +105,45 @@ var swiping = false
 var swipe_mouse_start
 var swipe_mouse_times = []
 var swipe_mouse_positions = []
+var _is_a_press: bool = false
+var _drag_distance := Vector2.ZERO
+var _skip: int = 0
+
 func _handle_swipe_input(ev: InputEvent) -> void:
 	if swiping == false and not _hovered:
 		return
 	
 	if ev is InputEventMouseButton:
+		if ev.double_click:
+			return
+		
+		if _skip > 0:
+			_skip -= 1
+			return
+		
 		if ev.pressed:
+			_is_a_press = true
 			swiping = true
 			swipe_mouse_start = ev.position
 			swipe_mouse_times = [Time.get_ticks_msec()]
 			swipe_mouse_positions = [swipe_mouse_start]
+			
+			# avoid focusing on item when swiping
+			get_viewport().set_input_as_handled()
 		else:
+			if _is_a_press:
+				_skip = 2
+				var event = InputEventMouseButton.new()
+				event.button_index = MOUSE_BUTTON_LEFT
+				event.position = ev.position
+				event.pressed = true
+				Input.parse_input_event(event)	
+				var event2 = InputEventMouseButton.new()
+				event2.button_index = MOUSE_BUTTON_LEFT
+				event2.position = ev.position
+				event2.pressed = false
+				Input.parse_input_event(event2)	
+			
 			swipe_mouse_times.append(Time.get_ticks_msec())
 			swipe_mouse_positions.append(ev.position)
 			var source = Vector2(%HBoxContainer.position.x, %HBoxContainer.position.y)
@@ -147,6 +175,10 @@ func _handle_swipe_input(ev: InputEvent) -> void:
 		%HBoxContainer.position.x = _x_clamp(%HBoxContainer.position.x)
 		swipe_mouse_times.append(Time.get_ticks_msec())
 		swipe_mouse_positions.append(ev.position)
+		
+		_drag_distance += ev.relative.abs()
+		if _drag_distance.length() > Global.TOUCH_EPSISLON:
+			_is_a_press = false
 		
 func _handle_navigation_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right"):

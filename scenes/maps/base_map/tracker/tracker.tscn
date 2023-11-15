@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://i3waaqjv5m7"]
 
-[ext_resource type="Script" path="res://scenes/map/Tracker.gd" id="1_jqbai"]
+[ext_resource type="Script" path="res://scenes/maps/base_map/tracker/tracker.gd" id="1_jqbai"]
 
 [node name="Tracker" type="Node2D"]
 script = ExtResource("1_jqbai")

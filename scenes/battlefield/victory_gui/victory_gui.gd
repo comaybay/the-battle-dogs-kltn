@@ -37,5 +37,5 @@ func _go_to_dog_base():
 
 func _go_to_ending():
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
-	var ending_id = Data.story_info[Data.selected_story_id][Data.selected_chapter_id]['ending']
+	var ending_id = Data.selected_chapter_id + "_ending"
 	get_tree().change_scene_to_file("res://scenes/endings/%s/%s.tscn" % [ending_id, ending_id])
