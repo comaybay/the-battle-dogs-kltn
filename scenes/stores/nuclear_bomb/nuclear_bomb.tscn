@@ -130,8 +130,7 @@ one_shot = true
 [node name="bomb_launch_down" type="Node2D" parent="Animation"]
 
 [node name="explosion_mushroom" type="Sprite2D" parent="Animation/bomb_launch_down"]
-visible = false
-position = Vector2(586, -496)
+position = Vector2(-49, -546)
 scale = Vector2(2, 2)
 texture = ExtResource("2_fwdmp")
 hframes = 9
@@ -140,7 +139,6 @@ region_rect = Rect2(4, 4, 178, 185)
 
 [node name="bomb" type="Sprite2D" parent="Animation/bomb_launch_down"]
 visible = false
-position = Vector2(628, 30)
 rotation = 3.14159
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("2_lfi6m")
@@ -175,7 +173,6 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(626, 48)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="move" type="AudioStreamPlayer2D" parent="."]

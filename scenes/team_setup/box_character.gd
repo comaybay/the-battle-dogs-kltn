@@ -20,7 +20,7 @@ func setup(item_id: String, type: Type) -> void:
 	elif type == Type.SKILL:
 		$Icon.texture = load("res://resources/images/skills/%s_icon.png" % item_id)
 	else: 
-		$Icon.texture = load("res://resources/images/store/%s_icon.png" % item_id)
+		$Icon.texture = load("res://resources/icons/store/%s_icon.png" % item_id)
 		
 
 func change_item(item_id: String, type: Type) -> void:

@@ -20,7 +20,7 @@ func setup( data: Dictionary, parent: Node) -> void:
 	_item_data = data
 	_parent = parent
 	_item_id = data['ID']
-	$Icon.texture = load("res://resources/images/store/%s_icon.png" % data["ID"])
+	$Icon.texture = load("res://resources/icons/store/%s_icon.png" % data["ID"])
 		
 	update_labels()
 	$Button.pressed.connect(_on_pressed)

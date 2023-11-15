@@ -103,6 +103,7 @@ func loadTeam() -> void:
 		slot.pressed.connect(_on_remove_skill_from_slot.bind(slot))
 	
 	for i in range(3):
+		
 		var slot := store_slots[i] 
 		var store_id = Data.selected_team['store_ids'][i]
 		if store_id == null:
