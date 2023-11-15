@@ -5,4 +5,4 @@
 [node name="ShrineMaidenOfParadiseMap" instance=ExtResource("1_fqnsj")]
 
 [node name="Stage1" parent="Stages" index="0"]
-stage_id = "reimu_1"
+stage_id = "miko_dog"

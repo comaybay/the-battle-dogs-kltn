@@ -5,8 +5,11 @@
 [ext_resource type="Script" path="res://scenes/chapter_selection/story/story.gd" id="2_gyb5i"]
 
 [node name="Story" type="MarginContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 172.0
+grow_horizontal = 2
+size_flags_horizontal = 3
 focus_mode = 2
 theme = ExtResource("1_cjdbe")
 theme_override_constants/margin_top = 120
@@ -19,6 +22,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LabelLarge"
+text = "<STORY TITLE>"
 horizontal_alignment = 1
 autowrap_mode = 3
 

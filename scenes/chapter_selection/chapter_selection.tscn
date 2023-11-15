@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_18dgk"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_evkhq"]
 [ext_resource type="Script" path="res://scenes/chapter_selection/chapter_selection.gd" id="2_1art8"]
-[ext_resource type="Texture2D" uid="uid://li12t8q3hrbi" path="res://resources/battlefield_themes/winter/sky.png" id="2_p8ou1"]
+[ext_resource type="Texture2D" uid="uid://xb7r40nr2rgp" path="res://resources/battlefield_themes/heavenly/sky.png" id="4_lg4m4"]
 [ext_resource type="PackedScene" uid="uid://b2g2at480k1wu" path="res://scenes/chapter_selection/navigation_button/navigation_button.tscn" id="6_j8gfm"]
 [ext_resource type="PackedScene" uid="uid://d0jrn2xo773qv" path="res://scenes/common/buttons/go_back_button/go_back_button.tscn" id="7_qisty"]
 
@@ -31,7 +31,7 @@ offset_bottom = 1752.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.27, 0.27)
-texture = ExtResource("2_p8ou1")
+texture = ExtResource("4_lg4m4")
 expand_mode = 1
 stretch_mode = 1
 

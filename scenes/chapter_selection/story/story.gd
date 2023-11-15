@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func setup(story_dir_path: String, chapter_dir_paths: Array[String]) -> void:
 	_story_id = story_dir_path.get_file().split('.')[1]
-	%StoryLabel.text = tr("@CHARACTER_STORY_%s" % _story_id)
+	%StoryLabel.text = tr("@STORY_%s" % _story_id)
 	
 	var selected_index = Data.save_data['story_selected_chapters'].get(_story_id)
 	%HSlideSelection.setup(
