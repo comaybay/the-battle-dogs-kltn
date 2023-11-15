@@ -35,7 +35,7 @@ func setup(stage_id: String, stage_index: int, prev_stage_node: Stage, next_stag
 func set_selected(selected: bool):
 	if selected:
 		add_theme_stylebox_override("normal", stylebox_override)
-		Data.selected_battlefield_id = _stage_id
+		Data.selected_stage_id = _stage_id
 		Data.selected_stage = _stage_index
 	else:
 		remove_theme_stylebox_override("normal")

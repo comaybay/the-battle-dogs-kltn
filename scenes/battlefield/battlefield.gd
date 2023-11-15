@@ -28,7 +28,7 @@ func _load_battlefield_data() -> Dictionary:
 	var dir = "%s/stages/%s.%s.json" % [
 		Data.selected_chapter_dir_path,
 		Data.selected_stage,
-		Data.selected_battlefield_id,
+		Data.selected_stage_id,
 	]
 	var file = FileAccess.open(dir, FileAccess.READ)
 	var battlefield_data: Dictionary = JSON.parse_string(file.get_as_text())

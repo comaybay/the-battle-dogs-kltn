@@ -55,9 +55,9 @@ var teams: Array:
 	get: return save_data['teams']		
 	set(value): save_data['teams'] = value		
 
-var selected_battlefield_id: String:
-	get: return save_data['selected_battlefield_id']		
-	set(value): save_data['selected_battlefield_id'] = value	
+var selected_stage_id: String:
+	get: return save_data['selected_stage_id']		
+	set(value): save_data['selected_stage_id'] = value	
 
 var sound_fx_volume: int:
 	get: return save_data['settings']['sound_fx']['volume']		
@@ -273,6 +273,10 @@ func _migrate_older_version_data(save_data: Dictionary) -> Dictionary:
 	if save_data.has("selected_level"):
 		save_data["chapters"]["the_battle_dogs_rising"]["selected_stage"] = save_data["selected_level"]
 		save_data.erase("selected_level")
+	
+	if save_data.has("selected_battlefield_id"):
+		save_data["selected_stage_id"] = save_data["selected_battlefield_id"]
+		save_data.erase("selected_battlefield_id")
 		
 	return save_data
 
