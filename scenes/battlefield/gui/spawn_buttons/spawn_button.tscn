@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cc4bqrpdv8f6n"]
 
-[ext_resource type="PackedScene" uid="uid://cto0tiylqerf7" path="res://scenes/buttons/character_button/character_button.tscn" id="1_jeths"]
+[ext_resource type="PackedScene" uid="uid://cto0tiylqerf7" path="res://scenes/common/buttons/rectangular_button/rectangular_button.tscn" id="1_jeths"]
 [ext_resource type="Material" uid="uid://clbdjo2h18v3a" path="res://shaders/invert_color/invert_color.material" id="2_4v5bx"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/spawn_buttons/spawn_button.gd" id="2_icp81"]
 

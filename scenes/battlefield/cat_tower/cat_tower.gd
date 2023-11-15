@@ -132,6 +132,7 @@ func spawn_boss(boss_info: Dictionary) -> void:
 	boss_appeared.emit()
 	
 	var cat: BaseCat = cats[boss_info['name']].instantiate()
+	cat.add_to_group("bosses")
 	cat.is_boss = true
 	cat.global_position = global_position - Vector2(100, 0)
 	cat.ready.connect(

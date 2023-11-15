@@ -108,6 +108,9 @@ func play_music(audio_stream: AudioStream, resume: bool = false, with_transition
 	, CONNECT_ONE_SHOT)
 	
 func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove_when_done: bool = false):
+	if audio_stream == null:
+		return
+	
 	if audio_stream.resource_path == _current_music.resource_path:
 		_current_music = null
 		

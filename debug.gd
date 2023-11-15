@@ -25,12 +25,15 @@ func _input(event: InputEvent) -> void:
 			player_data.fmoney = player_data.get_wallet_capacity()
 	
 	if event.is_action_pressed('ui_debug_save_file'):
-		Data.passed_level = 12
+		Data.passed_stage = 99
 		Data.bone = 999999999
 		Data.save()
 		
 	if event.is_action_pressed('ui_debug_switch_language'):
 		TranslationServer.set_locale("en" if TranslationServer.get_locale() == "vi" else "vi")	
+
+	if event.is_action_pressed('ui_debug_win_battle'):
+		InBattle.get_battlefield().get_cat_tower().zero_health.emit()
 
 func is_debug_mode() -> bool:
 	return _debug_mode

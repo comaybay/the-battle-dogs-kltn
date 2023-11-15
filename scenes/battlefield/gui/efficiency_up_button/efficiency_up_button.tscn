@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dmdc60cjuki5p"]
 
-[ext_resource type="PackedScene" uid="uid://w3ux0r6664nr" path="res://scenes/buttons/cirular_button/circular_button.tscn" id="1_r5ntm"]
+[ext_resource type="PackedScene" uid="uid://w3ux0r6664nr" path="res://scenes/common/buttons/cirular_button/circular_button.tscn" id="1_r5ntm"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/efficiency_up_button/efficiency_up_button.gd" id="2_dduux"]
 [ext_resource type="AudioStream" uid="uid://bjx4lj64ekakc" path="res://resources/sound/battlefield/efficiency_up.mp3" id="3_7gvxd"]
 

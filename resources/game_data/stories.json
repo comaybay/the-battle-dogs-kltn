@@ -1,0 +1,13 @@
+{
+  "main_story": {
+    "the_battle_dogs_rising": {
+      "reward_type": "none"
+    }
+  },
+  "eastern_boundaries": {
+    "chapter_1": {
+      "reward_type": "dog",
+      "reward": "miko_dog"
+    }
+  }
+}

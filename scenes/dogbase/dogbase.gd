@@ -4,6 +4,13 @@ const DOG_BASE_THEME_AUDIO: AudioStream = preload("res://resources/sound/music/d
 var TutorialDogScene: PackedScene = preload("res://scenes/dogbase/dogbase_tutorial_dog/dogbase_tutorial_dog.tscn")
 
 func _ready() -> void:
+	if Data.save_data['chapters']['the_battle_dogs_rising']['completed']:
+		%SelectChapterIcon.position.x = -%ExpeditionButton.size.x - (%SelectChapterIcon.size.x * 0.5)
+	else:
+		%ExpeditionButton.theme_type_variation = ""
+		%ExpeditionButton.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		%SelectChapterIcon.get_parent().queue_free()
+		
 	AudioPlayer.play_music(DOG_BASE_THEME_AUDIO, true, true)
 	
 	var on_go_back_pressed = func():
@@ -27,11 +34,13 @@ func _ready() -> void:
 	if not Data.has_done_battlefield_basics_tutorial:
 		$BenTrai/NutNangCap.disabled = true
 	
+	%ExpeditionButton.pressed.connect(_go_to_map)
 
-
-func _on_nut_vien_chinh_pressed():
+func _go_to_map():
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
-	get_tree().change_scene_to_file("res://scenes/map/map.tscn")
+	get_tree().change_scene_to_file(
+		"res://scenes/maps/%s_map/%s_map.tscn" % [Data.selected_chapter_id, Data.selected_chapter_id]
+	)
 
 func _on_nut_nang_cap_pressed():
 	AudioPlayer.stop_music(DOG_BASE_THEME_AUDIO, true)

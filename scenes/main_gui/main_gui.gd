@@ -15,12 +15,13 @@ func _ready() -> void:
 		)
 		return
 		
-	%TitleLabel.text = tr(%TitleLabel.text)
+	%TitleLabel.text = "%s - %s" % [tr(title), tr("@LOCATION_%s" % Data.selected_chapter_id)]
 	%GoBackButton.pressed.connect(_on_go_back_pressed)
 	%Money.text = str(Data.bone)
-	%DogFoodLabel.text = tr("@DOG_FOOD") + ": %s" % Data.dog_food
+#	%DogFoodLabel.text = tr("@DOG_FOOD") + ": %s" % Data.dog_food
 	#TODO: Dog food changed
 	Data.bone_changed.connect(_on_bone_changed)
+
 func _on_bone_changed(value: int):
 	%Money.text = str(Data.bone)
 	

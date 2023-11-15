@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c72r77wiweut"]
+[gd_scene load_steps=8 format=3 uid="uid://c72r77wiweut"]
 
 [ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_pm7q2"]
+[ext_resource type="Script" path="res://scenes/team_setup/team_setup_main_gui.gd" id="2_i7uuh"]
 [ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="2_mkhds"]
 [ext_resource type="Script" path="res://scenes/team_setup/team_setup.gd" id="3_j8p7c"]
 [ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/button_pressed.mp3" id="4_ncv2l"]
@@ -11,8 +12,9 @@ content_margin_top = 10.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="SelectCharacter" instance=ExtResource("1_pm7q2")]
+script = ExtResource("2_i7uuh")
 title = "@TEAM_SETUP"
-go_back_scene_path = "res://scenes/map/map.tscn"
+go_back_scene_path = "res://scenes/maps/the_battle_dogs_rising_map/the_battle_dogs_rising_map.tscn"
 
 [node name="InfoPanel" type="TextureRect" parent="." index="2"]
 layout_mode = 1

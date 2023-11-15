@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_untcg"]
 [ext_resource type="Texture2D" uid="uid://ngxqvdd76tr7" path="res://scenes/start_menu/main_background_1.png" id="2_56ofs"]
 [ext_resource type="Texture2D" uid="uid://ddhk7pykh4wcb" path="res://scenes/start_menu/main_background_2.png" id="3_jin04"]
-[ext_resource type="Texture2D" uid="uid://3mgk1tr4612p" path="res://scenes/ending/main_background_3.png" id="4_xj58w"]
+[ext_resource type="Texture2D" uid="uid://3mgk1tr4612p" path="res://scenes/endings/the_battle_dogs_rising_ending/main_background_3.png" id="4_xj58w"]
 [ext_resource type="Texture2D" uid="uid://blp51w2h0ek56" path="res://scenes/start_menu/main_background_dog.png" id="5_ox0nk"]
 [ext_resource type="Texture2D" uid="uid://ba7uaub481uor" path="res://scenes/start_menu/game_logo.png" id="6_qfxhr"]
 
@@ -234,10 +234,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -168.0
-offset_top = -113.0
-offset_right = 219.0
-offset_bottom = 254.0
+offset_left = 408.0
+offset_top = 211.0
+offset_right = 795.0
+offset_bottom = 578.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_ox0nk")
@@ -249,10 +249,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -348.0
-offset_top = -324.0
-offset_right = 402.0
-offset_bottom = 66.0
+offset_left = 228.0
+offset_right = 978.0
+offset_bottom = 390.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_qfxhr")

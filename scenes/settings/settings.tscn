@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://u2gfiv64rmb0"]
 
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_33nqq"]
-[ext_resource type="Texture2D" uid="uid://c00aadjfrrxu8" path="res://resources/battlefield_themes/heavenly/sky.png" id="1_lx6qp"]
+[ext_resource type="Texture2D" uid="uid://xb7r40nr2rgp" path="res://resources/battlefield_themes/heavenly/sky.png" id="1_lx6qp"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_g8saj"]
 [ext_resource type="Script" path="res://scenes/settings/settings.gd" id="2_i0rw8"]
 [ext_resource type="PackedScene" uid="uid://6ewhh0xkgi5q" path="res://scenes/settings/main_setttings/main_settings.tscn" id="4_6qm2c"]
-[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="7_jplxd"]
+[ext_resource type="PackedScene" uid="uid://d0jrn2xo773qv" path="res://scenes/common/buttons/go_back_button/go_back_button.tscn" id="5_ov8jg"]
 [ext_resource type="PackedScene" uid="uid://c4n4sr1k86t62" path="res://scenes/settings/key_binding_settings/key_binding_settings.tscn" id="8_wne1d"]
 
 [node name="Settings" type="Control"]
@@ -34,16 +34,14 @@ texture = ExtResource("1_lx6qp")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="GoBackButton" type="Button" parent="."]
+[node name="GoBackButton" parent="." instance=ExtResource("5_ov8jg")]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 212.0
-offset_bottom = 58.0
-focus_mode = 0
-shortcut = ExtResource("7_jplxd")
-text = "@BACK"
+offset_right = 97.0
+offset_bottom = 97.0
+focus_mode = 2
 
 [node name="MainSettings" parent="." instance=ExtResource("4_6qm2c")]
 layout_mode = 1

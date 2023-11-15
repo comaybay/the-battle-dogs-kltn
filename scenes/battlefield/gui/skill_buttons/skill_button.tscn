@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://33bborh4tyop"]
 
-[ext_resource type="PackedScene" uid="uid://cto0tiylqerf7" path="res://scenes/buttons/character_button/character_button.tscn" id="1_tqwcl"]
+[ext_resource type="PackedScene" uid="uid://cto0tiylqerf7" path="res://scenes/common/buttons/rectangular_button/rectangular_button.tscn" id="1_tqwcl"]
 [ext_resource type="Script" path="res://scenes/battlefield/gui/skill_buttons/skill_button.gd" id="2_3smka"]
 
 [sub_resource type="Animation" id="Animation_ty6py"]
