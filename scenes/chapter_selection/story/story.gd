@@ -31,8 +31,8 @@ func _create_chapter_buttons(chapter_dir_paths: Array[String]) -> Array[Selectab
 		chapter_button.chapter_entering.connect(func():
 			if not Data.save_data['chapters'].has(chapter_id):
 				Data.save_data['chapters'][chapter_id] = {
-					'passed_level': -1,
-					'selected_level': -1,
+					'passed_stage': -1,
+					'selected_stage': -1,
 					'completed': false,
 				}
 			

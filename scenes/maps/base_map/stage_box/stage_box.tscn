@@ -11,7 +11,7 @@ offset_bottom = 84.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_sxu73")
-theme_type_variation = &"ButtonLevelBox"
+theme_type_variation = &"ButtonStageBox"
 text = "Unnamed"
 script = ExtResource("2_l3by6")
 

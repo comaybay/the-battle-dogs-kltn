@@ -50,7 +50,7 @@ func setup(items: Array[Selectable], selected_item_index: int, always_listen: bo
 			item.focus_next = right_path
 	)
 	
-	# wait for level boxes name to be loaded in (which will change the size of HBox)
+	# wait for stage boxes name to be loaded in (which will change the size of HBox)
 	%HBoxContainer.sort_children.connect(func():
 		custom_minimum_size.y = items[0].size.y * 1.2
 		%HBoxContainer.position.y = custom_minimum_size.y * 0.2 * 0.5
@@ -90,8 +90,8 @@ func focus_by_item(item: Selectable) -> void:
 func focus(index: int) -> void:
 	focus_by_item(_items[index])
 
-func _get_x_of(level_box: Selectable):
-	var box_position = level_box.get_parent().position + (level_box.size / 2)
+func _get_x_of(stage_box: Selectable):
+	var box_position = stage_box.get_parent().position + (stage_box.size / 2)
 	return -box_position.x + (size.x / 2)
 
 func _input(ev: InputEvent):

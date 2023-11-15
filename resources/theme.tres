@@ -232,42 +232,6 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0.333333, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2d15"]
-content_margin_left = 50.0
-content_margin_top = 25.0
-content_margin_right = 50.0
-content_margin_bottom = 25.0
-bg_color = Color(0.870588, 1, 0.952941, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0.372549, 0.8, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hcij"]
-content_margin_left = 50.0
-content_margin_top = 25.0
-content_margin_right = 50.0
-content_margin_bottom = 25.0
-bg_color = Color(0.870588, 1, 0.952941, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.109804, 0.262745, 0.929412, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kr0t8"]
-content_margin_left = 50.0
-content_margin_top = 25.0
-content_margin_right = 50.0
-content_margin_bottom = 25.0
-bg_color = Color(0.870588, 1, 0.952941, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.8, 0.2, 0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emj83"]
 content_margin_left = 14.0
 content_margin_top = 7.0
@@ -381,6 +345,42 @@ corner_radius_bottom_left = 100
 shadow_color = Color(0.298039, 0.239216, 0.501961, 0)
 shadow_size = 5
 shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2d15"]
+content_margin_left = 50.0
+content_margin_top = 25.0
+content_margin_right = 50.0
+content_margin_bottom = 25.0
+bg_color = Color(0.870588, 1, 0.952941, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.372549, 0.8, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hcij"]
+content_margin_left = 50.0
+content_margin_top = 25.0
+content_margin_right = 50.0
+content_margin_bottom = 25.0
+bg_color = Color(0.870588, 1, 0.952941, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.109804, 0.262745, 0.929412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kr0t8"]
+content_margin_left = 50.0
+content_margin_top = 25.0
+content_margin_right = 50.0
+content_margin_bottom = 25.0
+bg_color = Color(0.870588, 1, 0.952941, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.8, 0.2, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af1xu"]
 content_margin_left = 14.0
@@ -617,16 +617,6 @@ ButtonItem/styles/normal = SubResource("StyleBoxFlat_43174")
 ButtonItem/styles/pressed = SubResource("StyleBoxFlat_gjcxi")
 ButtonLarge/base_type = &"Button"
 ButtonLarge/font_sizes/font_size = 32
-ButtonLevelBox/base_type = &"Button"
-ButtonLevelBox/colors/font_color = Color(0, 0.372549, 0.8, 1)
-ButtonLevelBox/colors/font_disabled_color = Color(0.109804, 0.262745, 0.929412, 1)
-ButtonLevelBox/colors/font_focus_color = Color(0.8, 0.2, 0, 1)
-ButtonLevelBox/colors/font_hover_color = Color(0.109804, 0.262745, 0.929412, 1)
-ButtonLevelBox/colors/font_pressed_color = Color(0.8, 0.2, 0, 1)
-ButtonLevelBox/styles/disabled = SubResource("StyleBoxFlat_p2d15")
-ButtonLevelBox/styles/hover = SubResource("StyleBoxFlat_2hcij")
-ButtonLevelBox/styles/normal = SubResource("StyleBoxFlat_p2d15")
-ButtonLevelBox/styles/pressed = SubResource("StyleBoxFlat_kr0t8")
 ButtonRed/base_type = &"Button"
 ButtonRed/colors/font_color = Color(0.72, 0, 0, 1)
 ButtonRed/colors/font_hover_color = Color(0.88, 0.161333, 0, 1)
@@ -638,6 +628,16 @@ ButtonRound/base_type = &"Button"
 ButtonRound/styles/hover = SubResource("StyleBoxFlat_wtwcr")
 ButtonRound/styles/normal = SubResource("StyleBoxFlat_plhuh")
 ButtonRound/styles/pressed = SubResource("StyleBoxFlat_dfr0c")
+ButtonStageBox/base_type = &"Button"
+ButtonStageBox/colors/font_color = Color(0, 0.372549, 0.8, 1)
+ButtonStageBox/colors/font_disabled_color = Color(0.109804, 0.262745, 0.929412, 1)
+ButtonStageBox/colors/font_focus_color = Color(0.8, 0.2, 0, 1)
+ButtonStageBox/colors/font_hover_color = Color(0.109804, 0.262745, 0.929412, 1)
+ButtonStageBox/colors/font_pressed_color = Color(0.8, 0.2, 0, 1)
+ButtonStageBox/styles/disabled = SubResource("StyleBoxFlat_p2d15")
+ButtonStageBox/styles/hover = SubResource("StyleBoxFlat_2hcij")
+ButtonStageBox/styles/normal = SubResource("StyleBoxFlat_p2d15")
+ButtonStageBox/styles/pressed = SubResource("StyleBoxFlat_kr0t8")
 ButtonToggle/base_type = &"Button"
 ButtonToggle/colors/font_pressed_color = Color(0.890196, 0.415686, 0, 1)
 ButtonToggle/styles/pressed = SubResource("StyleBoxFlat_af1xu")

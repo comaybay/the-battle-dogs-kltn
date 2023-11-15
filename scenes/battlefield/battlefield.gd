@@ -93,7 +93,7 @@ func _show_win_ui():
 	var get_time = int(Time.get_ticks_msec() / 1000)
 	_clean_up()
 	
-	if (Data.use_sw_data == true) and (Data.passed_level == 13) :
+	if (Data.use_sw_data == true) and (Data.passed_stage == 13) :
 		Data.victory_count += 1 
 		SilentWolf.Scores.save_score(Data.save_data["user_name"],Data.victory_count, "victory_count")
 		SilentWolf.sw_save_score_time(Data.save_data["user_name"], get_time,"fastest_time")

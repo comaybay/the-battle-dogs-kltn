@@ -1,6 +1,6 @@
-class_name LevelBox extends Selectable
+class_name StageBox extends Selectable
 
-var level: Level
+var stage: Stage
 var stylebox_override: StyleBoxFlat
 var color_override: Color = 0xcc3300FF
 var _slide_selection: HSlideSelection
@@ -9,10 +9,10 @@ func _ready() -> void:
 	stylebox_override = get_theme_stylebox("pressed").duplicate()
 	pivot_offset = size / 2.0
 	
-func setup(level_node: Level) -> void:	
-	level = level_node
-	text = level.get_level_name()
-	$Flag.visible = level.index <= Data.passed_level
+func setup(stage_node: Stage) -> void:	
+	stage = stage_node
+	text = stage.get_stage_name()
+	$Flag.visible = stage.index <= Data.passed_stage
 	update_flag_position()
 	resized.connect(update_flag_position)
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c5ck4rul7l5o4"]
 
-[ext_resource type="PackedScene" uid="uid://dv351dagw1cbu" path="res://scenes/tutorial_dog/tutorial_dog.tscn" id="1_m3qrw"]
+[ext_resource type="PackedScene" uid="uid://chnwixpec81w0" path="res://scenes/tutorial_dog/tutorial_dog.tscn" id="1_m3qrw"]
 [ext_resource type="Script" path="res://scenes/common/finite_state_machine/FSM.gd" id="2_h614t"]
 [ext_resource type="Script" path="res://scenes/dogbase/dogbase_tutorial_dog/dogbase_state.gd" id="3_uar8o"]
 [ext_resource type="Script" path="res://scenes/dogbase/dogbase_tutorial_dog/dogbase_after_battlefield.gd" id="4_t5b8t"]

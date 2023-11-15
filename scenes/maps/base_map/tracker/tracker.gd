@@ -1,69 +1,69 @@
 class_name Tracker extends Node2D
 
-const LEVEL_SELECTED_AUDIO: AudioStream = preload("res://resources/sound/level_selected.wav")
+const STAGE_SELECTED_AUDIO: AudioStream = preload("res://resources/sound/stage_selected.wav")
 
-signal move_level(target_level: Level)
+signal move_stage(target_stage: Stage)
 
 var mouse_pressed = false
 var last_mouse_pos = Vector2.ZERO
-var current_level: Level
-var passed_level: Level
+var current_stage: Stage
+var passed_stage: Stage
 var is_mouse_entered: bool
-var _level_chain: HSlideSelection
+var _stage_chain: HSlideSelection
 var _first_time_focus: bool = true
 
-func setup(levels: Array[Node], level_chain: HSlideSelection, map: Sprite2D, drag_area: Control):
+func setup(stages: Array[Node], stage_chain: HSlideSelection, map: Sprite2D, drag_area: Control):
 	var map_size := map.get_rect().size
 	$Camera2D.limit_left = 0
 	$Camera2D.limit_right = map_size.x
 	$Camera2D.limit_top = 0
 	$Camera2D.limit_bottom = map_size.y
 	
-	_level_chain = level_chain
-	current_level = levels[Data.selected_level]
-	passed_level = levels[Data.passed_level] if Data.passed_level >= 0 else null  
+	_stage_chain = stage_chain
+	current_stage = stages[Data.selected_stage]
+	passed_stage = stages[Data.passed_stage] if Data.passed_stage >= 0 else null  
 	
 	drag_area.mouse_entered.connect(func(): is_mouse_entered = true)
 	drag_area.mouse_exited.connect(func(): is_mouse_entered = false)
 	
-	level_chain.item_focus.connect(
+	stage_chain.item_focus.connect(
 		func(item): 
-			_move_to_level(item.level, not _first_time_focus)
+			_move_to_stage(item.stage, not _first_time_focus)
 			_first_time_focus = false
 	)
 	
-	for level in levels:
-		level.pressed.connect(
+	for stage in stages:
+		stage.pressed.connect(
 			func():
-				_move_to_level(level, false)
-				_level_chain.focus(level.index)
+				_move_to_stage(stage, false)
+				_stage_chain.focus(stage.index)
 		)
 		
-	for level_box in level_chain.get_items():
-		level_box.pressed.connect(
+	for stage_box in stage_chain.get_items():
+		stage_box.pressed.connect(
 			func():
-				_move_to_level(level_box.level, false)
+				_move_to_stage(stage_box.stage, false)
 		)
 	
-	_move_to_level(current_level, false)
+	_move_to_stage(current_stage, false)
 		
-func _move_to_level(level: Level, play_sound := true):
+func _move_to_stage(stage: Stage, play_sound := true):
 	if play_sound:
-		AudioPlayer.play_sfx(LEVEL_SELECTED_AUDIO)
+		AudioPlayer.play_sfx(STAGE_SELECTED_AUDIO)
 	
-	current_level.set_selected(false)
-	level.set_selected(true)
+	current_stage.set_selected(false)
+	stage.set_selected(true)
 	
-	position = level.position #Di chuyen tracker
-	move_level.emit(level)
-	current_level = level
+	position = stage.position #Di chuyen tracker
+	move_stage.emit(stage)
+	current_stage = stage
 
 func _input(event):
-#	if event.is_action_pressed("ui_left") and current_level.prev_level != null:
-#		_move_to_level(current_level.prev_level)
+#	if event.is_action_pressed("ui_left") and current_stage.prev_stage != null:
+#		_move_to_stage(current_stage.prev_stage)
 #
-#	elif event.is_action_pressed("ui_right") and current_level.next_level != null and Data.passed_level >= 0 and current_level.index <= Data.passed_level:
-#		_move_to_level(current_level.next_level)
+#	elif event.is_action_pressed("ui_right") and current_stage.next_stage != null and Data.passed_stage >= 0 and current_stage.index <= Data.passed_stage:
+#		_move_to_stage(current_stage.next_stage)
 	
 	if not is_mouse_entered and not mouse_pressed:
 		return

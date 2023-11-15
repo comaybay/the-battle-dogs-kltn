@@ -9,7 +9,7 @@
 title = "@DOG_BASE_TITLE"
 
 [node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
-text = "@DOG_BASE_TITLE"
+text = "<DOG_BASE_TITLE>"
 
 [node name="PhanGiua" type="HBoxContainer" parent="Khung/Content" index="0"]
 layout_mode = 1

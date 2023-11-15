@@ -25,7 +25,7 @@ func _input(event: InputEvent) -> void:
 			player_data.fmoney = player_data.get_wallet_capacity()
 	
 	if event.is_action_pressed('ui_debug_save_file'):
-		Data.passed_level = 12
+		Data.passed_stage = 99
 		Data.bone = 999999999
 		Data.save()
 		

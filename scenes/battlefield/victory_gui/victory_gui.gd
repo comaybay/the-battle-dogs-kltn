@@ -18,8 +18,8 @@ func _ready() -> void:
 	
 	tween.tween_method(_tween_bone_number, 0, reward_bone, 2).set_delay(1)
 	
-	Data.passed_level = max(Data.passed_level, Data.selected_level)
-	if Data.passed_level == Data.chapter_last_level:
+	Data.passed_stage = max(Data.passed_stage, Data.selected_stage)
+	if Data.passed_stage >= Data.chapter_last_stage:
 		Data.save_data['chapters'][Data.selected_chapter_id]['completed'] = true
 		return_button.pressed.connect(_go_to_ending)
 	else:

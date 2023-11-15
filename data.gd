@@ -28,9 +28,9 @@ var bone: int:
 		save_data["bone"] = value
 		bone_changed.emit(value)		
 
-var passed_level: int:
-	get: return save_data['chapters'][selected_chapter_id]['passed_level']		
-	set(value): save_data['chapters'][selected_chapter_id]['passed_level'] = value		
+var passed_stage: int:
+	get: return save_data['chapters'][selected_chapter_id]['passed_stage']		
+	set(value): save_data['chapters'][selected_chapter_id]['passed_stage'] = value		
 
 var victory_count: int:
 	get: return save_data['victory_count']
@@ -43,9 +43,9 @@ var online_score: int:
 	get: return save_data['online_score']
 	set(value): save_data['online_score'] = value
 	
-var selected_level: int:
-	get: return save_data['chapters'][Data.selected_chapter_id]['selected_level']		
-	set(value): save_data['chapters'][Data.selected_chapter_id]['selected_level'] = value		
+var selected_stage: int:
+	get: return save_data['chapters'][Data.selected_chapter_id]['selected_stage']		
+	set(value): save_data['chapters'][Data.selected_chapter_id]['selected_stage'] = value		
 
 var selected_team: Dictionary:
 	get: return teams[save_data['selected_team']]		
@@ -155,7 +155,7 @@ var store := Dictionary()
 var passives := Dictionary()
 
 ## this will be generated on entering a map
-var chapter_last_level: int
+var chapter_last_stage: int
 
 ## count everytime player lost in a tutorial 
 var tutorial_lost: int = 0 
@@ -262,13 +262,13 @@ func _compare_and_update_save_file_array(new_game_save_elem: Variant, save_data:
 func _migrate_older_version_data(save_data: Dictionary) -> Dictionary:
 	## version <= 1.8 migration		
 	if save_data.has("passed_level"):
-		save_data["chapters"]["the_battle_dogs_rising"]["passed_level"] = save_data["passed_level"]
+		save_data["chapters"]["the_battle_dogs_rising"]["passed_stage"] = save_data["passed_level"]
 		if save_data["passed_level"] == 12:
 			save_data["chapters"]["the_battle_dogs_rising"]["completed"] = true
 		save_data.erase("passed_level")
 		
 	if save_data.has("selected_level"):
-		save_data["chapters"]["the_battle_dogs_rising"]["selected_level"] = save_data["selected_level"]
+		save_data["chapters"]["the_battle_dogs_rising"]["selected_stage"] = save_data["selected_level"]
 		save_data.erase("selected_level")
 		
 	return save_data

@@ -1,13 +1,13 @@
-class_name Level extends Button
+class_name Stage extends Button
 
 @export var battlefield_id: String 
 
-var _level_name: String
-func get_level_name(): return _level_name  
+var _stage_name: String
+func get_stage_name(): return _stage_name  
 
 ## Acts as a doubly linked-list
-var next_level: Level
-var prev_level: Level
+var next_stage: Stage
+var prev_stage: Stage
 var index: int
 
 var stylebox_override: StyleBoxFlat
@@ -17,24 +17,24 @@ func _ready() -> void:
 	stylebox_override.border_color = Color.hex(0x960000FF)
 	stylebox_override.bg_color = Color.hex(0xEE0000FF)
 	
-func setup(level_name: String, level_index: int,  prev_level_node: Level, next_level_node: Level) -> void:
-	_level_name = level_name
-	$Flag.visible = level_index <= Data.passed_level
+func setup(stage_name: String, stage_index: int,  prev_stage_node: Stage, next_stage_node: Stage) -> void:
+	_stage_name = stage_name
+	$Flag.visible = stage_index <= Data.passed_stage
 	
-	if level_index > Data.passed_level + 1:
+	if stage_index > Data.passed_stage + 1:
 		disabled = true
 		return
 	
-	prev_level = prev_level_node
-	next_level = next_level_node
-	index = level_index
+	prev_stage = prev_stage_node
+	next_stage = next_stage_node
+	index = stage_index
 	pressed.connect(func(): set_selected(true))
 	
 func set_selected(selected: bool):
 	if selected:
 		add_theme_stylebox_override("normal", stylebox_override)
 		Data.selected_battlefield_id = battlefield_id
-		Data.selected_level = index
+		Data.selected_stage = index
 	else:
 		remove_theme_stylebox_override("normal")
 	

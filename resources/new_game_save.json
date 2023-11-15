@@ -9,7 +9,6 @@
   "online_score": 0,
   "passives": [],
   "selected_battlefield_id": "level1",
-  "selected_level": 0,
   "selected_team": 0,
   "settings": {
 	"fullscreen": false,
@@ -43,8 +42,8 @@
   "selected_story_id": "main_story",
   "chapters": {
 	"the_battle_dogs_rising": {
-	  "passed_level": -1,
-	  "selected_level": -1,
+	  "passed_stage": -1,
+	  "selected_stage": -1,
 	  "completed": false
 	}
   },
