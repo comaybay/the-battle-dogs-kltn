@@ -10,6 +10,9 @@ var _prev_theme_settings: String = ""
 var _starting_game: bool = false
 
 func _ready() -> void:
+	## un pause because of some weird bug after end game
+	get_tree().paused = false
+	
 	## if user lost connection to room after game end
 	if SteamUser.get_lobby_owner() == 0:
 		_handle_connection_leave_lobby()
@@ -24,7 +27,7 @@ func _ready() -> void:
 	%CustomBattlefieldSettings.settings_changed.connect(_on_battlefield_settings_changed)
 
 	%RoomNameLabel.text = SteamUser.get_lobby_data("name")
-	%RoomIdLabel.text = "%s: %s" % [tr("@ROOM_ID"), SteamUser.lobby_id]
+	%RoomIdLabel.text = "%s: %s" % [tr("@ROOM_CODE"), SteamUser.lobby_id]
 
 	%GoBackButton.pressed.connect(func():
 		_handle_connection_leave_lobby()
@@ -47,6 +50,7 @@ func _ready() -> void:
 	SteamUser.set_lobby_member_data("received_ready_message", "false")
 
 	if SteamUser.is_lobby_owner():
+		SteamUser.set_lobby_data("game_status", "waiting")
 		SteamUser.set_lobby_member_data("ready", "true")
 		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_room_owner)
 	else:
@@ -108,6 +112,10 @@ func _on_lobby_data_update(success: int, lobby_id: int, member_id: int) -> void:
 		%BG.texture = load("res://resources/battlefield_themes/%s/sky.png" % battlefield_theme) 
 
 	if SteamUser.get_lobby_data("game_status") == "starting" and not _starting_game:
+		# clear all prev messages before start game
+		while SteamUser.read_messages().size() > 0:
+			continue
+		
 		_starting_game = true		
 		# set ready to false so that when game is ended players must re-ready again to start game
 		SteamUser.set_lobby_member_data("ready", "false")
@@ -191,7 +199,6 @@ func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int,
 	
 	# if a player has left the lobby and the player was a lobby owner
 	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_LEFT and _prev_owner_id == change_id:
-		print("%s %s" % [username, tr("@PLAYER_HAS_LEFT")])
 		SteamUser.close_connection(SteamUser.connection_handle)
 		
 		# let new room owner create connection, while others connect to the room
@@ -334,7 +341,7 @@ func _on_network_connection_status_changed_room_member(connection_handle: int, c
 	if old_state_equals_connecting and new_state == Steam.CONNECTION_STATE_CONNECTED:
 		print("MEMBER: connection established.")
 		SteamUser.connection_handle = connection_handle
-		var message := "%s %s" % [tr("@CONNECTED_ESTABLISHED_WITH"), username]
+		var message := "%s %s" % [tr("@CONNECTION_ESTABLISHED_WITH"), username]
 		chat_box.display_message(message, ChatBox.COLOR_P2P_EVENT)
 	
 	# timeout
@@ -355,7 +362,7 @@ func _connect_to_listen_socket():
 	print("CONNECTING TO LISTEN SOCKET")
 	var owner_id := Steam.getLobbyOwner(SteamUser.lobby_id)
 	var owner_username := Steam.getFriendPersonaName(owner_id)
-	var message := "%s %s" % [tr("@CONNECTING_TO"), owner_username]
+	var message := "%s %s" % [tr("@CONNECTING_TO_PLAYER"), owner_username]
 	chat_box.display_message(message, ChatBox.COLOR_P2P_EVENT)
 	
 	Steam.clearIdentity("room_owner")

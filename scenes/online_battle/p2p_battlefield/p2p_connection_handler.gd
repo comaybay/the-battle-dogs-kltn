@@ -1,15 +1,16 @@
 extends Node
 
 var _popup: PopupDialog
+var game_ended: bool = false
 
 # client side variables
 var _reconnecting_connection_handle: int
 var _client_connection_closed_by_server: bool = false
 
 func _init() -> void:
-	var is_owner: bool = SteamUser.is_lobby_owner()
+	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID
 	
-	if is_owner:
+	if is_server:
 		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_server)
 	else:
 		Steam.network_connection_status_changed.connect(_on_network_connection_status_changed_client)
@@ -43,6 +44,10 @@ func _on_network_connection_status_changed_server(connection_handle: int, connec
 		SteamUser.connection_handle = connection_handle
 		$ReconnectTimer.stop()
 		_popup.close()
+		return
+	
+	## only accept connection when game ended and nothing else	
+	if game_ended:
 		return
 	
 	var old_state_equals_connecting: bool = (
@@ -158,13 +163,16 @@ func _client_handle_connection_reestablished(connection_handle: int) -> void:
 	Steam.lobby_joined.connect(_on_lobby_rejoined, CONNECT_ONE_SHOT)
 
 func _on_lobby_rejoined(lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
-	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
+	SteamUser.update_lobby_members()
+		
+	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS or SteamUser.lobby_members.has(SteamUser.STEAM_ID):
 		# check if game has ended
 		var winner := SteamUser.get_lobby_data("winner")
 		print(winner)
 		if winner != "":
 			(InBattle.get_battlefield() as P2PBattlefield).end_game(int(winner))
 	else:
+		Steam.leaveLobby(SteamUser.lobby_id)
 		SteamUser.lobby_id = 0
 		SteamUser.close_connection(SteamUser.connection_handle)
 		_popup.popup("@GAME_LOST_CONNECTION", PopupDialog.Type.INFORMATION)	
@@ -180,7 +188,7 @@ func _client_handle_server_close_connection(connection_handle: int) -> void:
 	Steam.leaveLobby(SteamUser.lobby_id)
 	SteamUser.lobby_id = 0
 	
-	_popup.popup("@OTHER_PLAYER_HAS_LEFT", PopupDialog.Type.INFORMATION)
+	_popup.popup("@OTHER_PLAYER_LEFT", PopupDialog.Type.INFORMATION)
 	await _popup.ok
 	get_tree().paused = false
 	(InBattle.get_battlefield() as P2PBattlefield).end_game(SteamUser.STEAM_ID)
@@ -194,3 +202,12 @@ func _reconnect_to_listen_socket() -> void:
 	Steam.addIdentity("room_owner")
 	Steam.setIdentitySteamID64("room_owner", server_id)
 	Steam.connectP2P("room_owner", 0, [])	
+
+func handle_game_ended() -> void:
+	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID
+	
+	## server still need to handle client connecting requests
+	if is_server:
+		game_ended = true
+	else:
+		queue_free()

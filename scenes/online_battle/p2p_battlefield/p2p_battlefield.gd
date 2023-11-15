@@ -83,11 +83,12 @@ func _ready() -> void:
 		
 func end_game(winner_id: int) -> void:
 	_clean_up()
+	$P2PConnectionHandler.handle_game_ended()
 	
 	var is_room_owner: bool = SteamUser.get_lobby_owner() == SteamUser.STEAM_ID
 	if is_room_owner:
 		SteamUser.set_lobby_data("winner", str(winner_id))
-
+		
 	var game_end: P2PGameEndGUI = GAME_END_SCENE.instantiate()
 	game_end.setup(winner_id)	
 	add_child(game_end)	
@@ -105,9 +106,7 @@ func _clean_up():
 	else:
 		$ClientSide.set_process(false)
 		$ClientSide.queue_free()
-	
-	$P2PConnectionHandler.queue_free()
-	
-	var is_room_owner: bool = SteamUser.get_lobby_owner() == SteamUser.STEAM_ID
-	if is_room_owner:
-		SteamUser.set_lobby_data("game_status", "waiting")
+		
+	# clear all messages
+	while SteamUser.read_messages().size() > 0:
+		continue

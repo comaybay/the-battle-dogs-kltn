@@ -238,7 +238,7 @@ func request_skill(skill_id: String):
 	_this_player_dog_tower.use_skill(skill_id)
 	skill_request_accepted.emit(skill_id)
 	_this_player_used_skills.append(skill_id)
-
+				
 func end_game(winner_id: int) -> void:
 	SteamUser.send_message({ "winner": winner_id }, SteamUser.SendType.RELIABLE)
 	
