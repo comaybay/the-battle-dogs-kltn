@@ -25,8 +25,9 @@ func _enter_tree() -> void:
 
 func _load_battlefield_data() -> Dictionary:
 	
-	var dir = "%s/stages/%s.json" % [
+	var dir = "%s/stages/%s.%s.json" % [
 		Data.selected_chapter_dir_path,
+		Data.selected_stage,
 		Data.selected_battlefield_id,
 	]
 	var file = FileAccess.open(dir, FileAccess.READ)

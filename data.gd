@@ -134,7 +134,7 @@ var selected_chapter_id: String:
 var selected_chapter_dir_path: String:
 	get: return save_data['selected_chapter_dir_path']
 	set(value): save_data['selected_chapter_dir_path'] = value
-
+	
 var selected_story_id: String:
 	get: return save_data['selected_story_id']
 	set(value): save_data['selected_story_id'] = value
@@ -253,6 +253,9 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 func _compare_and_update_save_file_array(new_game_save_elem: Variant, save_data: Array) -> void:
 	for i in range(save_data.size()):
 		var elem = save_data[i]
+		if elem == null:
+			continue
+
 		if typeof(elem) != typeof(new_game_save_elem):
 			save_data[i] = new_game_save_elem
 		

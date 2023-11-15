@@ -2,6 +2,29 @@ extends Control
 
 const STAGE_BOX_SCENE: PackedScene = preload("res://scenes/maps/base_map/stage_box/stage_box.tscn")
 
+var _stage_ids: Array[String] = []
+
+func _init() -> void:
+	_stage_ids = _get_stage_ids()
+	
+func _get_stage_ids() -> Array[String]:
+	var dir := DirAccess.open(Data.selected_chapter_dir_path + "/stages")
+
+	# order asc		
+	var file_names: Array[String] = []
+	file_names.append_array(dir.get_files())
+	file_names.sort_custom(func(a, b):
+		return int(a.split(".")[0]) < int(b.split(".")[0])
+	)
+	
+	var stage_ids: Array[String] = []
+	stage_ids.assign(
+		file_names.map(
+			func(file_name: String): return file_name.split(".")[1]
+		)
+	) 
+	return stage_ids
+	
 func _ready():
 	Data.chapter_last_stage = $Stages.get_children().size() - 1
 	
@@ -23,12 +46,11 @@ func _ready():
 		%GUI.add_child(tutorial_dog)
 	
 	var stages = $Stages.get_children()
-
 	for index in stages.size():
 		var stage: Stage = stages[index]
 		var prev_stage: Stage = stages[index - 1] if index > 0 else null
 		var next_stage: Stage = stages[index + 1] if index < stages.size() - 1 else null 
-		stage.setup(index, prev_stage, next_stage)
+		stage.setup(_stage_ids[index], index, prev_stage, next_stage)
 	
 	var stage_boxes: Array[Selectable] = []
 	for stage in stages.slice(0, Data.passed_stage + 2):

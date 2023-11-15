@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://chnwixpec81w0" path="res://scenes/tutorial_dog/tutorial_dog.tscn" id="1_u0kjf"]
 [ext_resource type="Script" path="res://scenes/common/finite_state_machine/FSM.gd" id="2_2qeav"]
-[ext_resource type="Script" path="res://scenes/maps/base_map/map_tutorial_dog/team_setup_button_state.gd" id="2_8c5jk"]
+[ext_resource type="Script" path="res://scenes/maps/base_map/map_tutorial_dog/map_tutorial_dog.gd" id="2_sj2qr"]
 [ext_resource type="Script" path="res://scenes/maps/base_map/map_tutorial_dog/team_setup_button_state.gd" id="4_dit8i"]
 
 [node name="TutorialDog" instance=ExtResource("1_u0kjf")]
-script = ExtResource("2_8c5jk")
+script = ExtResource("2_sj2qr")
 
 [node name="DogButton" parent="." index="4"]
 visible = true

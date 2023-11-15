@@ -11,7 +11,7 @@ func _init() -> void:
 func load_stories() -> void:
 	var dir_path := "res://resources/stories"
 	var dir := DirAccess.open(dir_path)
-	for story_dir in dir.get_directories():
+	for story_dir in _sort_numerically(dir.get_directories()):
 		var story_dir_path: String = "%s/%s" % [dir_path, story_dir]
 		var story: Story = STORY_SCENE.instantiate()
 		story.setup(story_dir_path, get_chapter_dir_paths(story_dir))
@@ -22,7 +22,8 @@ func get_chapter_dir_paths(story_dir: String) -> Array:
 	var dir := DirAccess.open(dir_path)
 		
 	var chapter_dir_paths: Array[String] = []
-	for dir_name in dir.get_directories():
+	
+	for dir_name in _sort_numerically(dir.get_directories()):
 		chapter_dir_paths.append("%s/%s" % [dir_path, dir_name]) 
 	
 	return chapter_dir_paths
@@ -100,3 +101,13 @@ func _input(event: InputEvent) -> void:
 		
 	elif event.is_action_pressed("ui_up"):
 		_navigate_up()
+
+func _sort_numerically(arr: Array[String]) -> Array[String]:
+	var result: Array[String] = []
+	
+	arr.sort_custom(func(a, b):
+		return int(a.split(".")[0]) < int(b.split(".")[0])
+	)
+	
+	result.assign(arr)
+	return result

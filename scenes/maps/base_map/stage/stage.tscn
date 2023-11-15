@@ -14,7 +14,6 @@ size_flags_horizontal = 4
 focus_mode = 0
 theme = ExtResource("1_1stpr")
 script = ExtResource("2_cl0jj")
-battlefield_id = "doggonamu"
 
 [node name="Flag" type="Sprite2D" parent="."]
 visible = false

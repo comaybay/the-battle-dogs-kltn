@@ -12,7 +12,7 @@ func _ready() -> void:
 func setup(stage_node: Stage) -> void:	
 	stage = stage_node
 	text = stage.get_stage_name()
-	$Flag.visible = stage.index <= Data.passed_stage
+	$Flag.visible = stage.get_stage_index() <= Data.passed_stage
 	update_flag_position()
 	resized.connect(update_flag_position)
 

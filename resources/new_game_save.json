@@ -11,43 +11,43 @@
   "selected_battlefield_id": "level1",
   "selected_team": 0,
   "settings": {
-	"fullscreen": false,
-	"music": { "volume": 60, "mute": false },
-	"sound_fx": { "volume": 50, "mute": false },
-	"language": "",
-	"key_binding_overwrites": {}
+    "fullscreen": false,
+    "music": { "volume": 60, "mute": false },
+    "sound_fx": { "volume": 50, "mute": false },
+    "language": "",
+    "key_binding_overwrites": {}
   },
   "skills": [{ "ID": "fire_ball", "level": 1 }],
   "teams": [
-	{
-	  "dog_ids": ["dog", null, null, null, null, null, null, null, null, null],
-	  "skill_ids": ["fire_ball", null, null],
-	  "store_ids": []
-	}
+    {
+      "dog_ids": ["dog", null, null, null, null, null, null, null, null, null],
+      "skill_ids": ["fire_ball", null, null],
+      "store_ids": []
+    }
   ],
   "tutorial": {
-	"battlefield_basics": false,
-	"battlefield_rush": false,
-	"boss": false,
-	"final_boss": false,
-	"dogbase": false,
-	"dogbase_after_battlefield": false,
-	"map": false,
-	"upgrade": false,
-	"store": false,
-	"team_setup": false
+    "battlefield_basics": false,
+    "battlefield_rush": false,
+    "boss": false,
+    "final_boss": false,
+    "dogbase": false,
+    "dogbase_after_battlefield": false,
+    "map": false,
+    "upgrade": false,
+    "store": false,
+    "team_setup": false
   },
   "selected_chapter_id": "the_battle_dogs_rising",
   "selected_chapter_dir_path": "res://resources/stories/0.main_story/0.the_battle_dogs_rising",
   "selected_story_id": "main_story",
   "chapters": {
-	"the_battle_dogs_rising": {
-	  "passed_stage": -1,
-	  "selected_stage": -1,
-	  "completed": false
-	}
+    "the_battle_dogs_rising": {
+      "passed_stage": -1,
+      "selected_stage": 0,
+      "completed": false
+    }
   },
   "story_selected_chapters": {
-	"main_story": 0
+    "main_story": 0
   }
 }

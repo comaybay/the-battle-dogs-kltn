@@ -40,7 +40,7 @@ func setup(stages: Array[Node], stage_chain: HSlideSelection, map: Sprite2D, dra
 		stage.pressed.connect(
 			func():
 				_move_to_stage(stage, false)
-				_stage_chain.focus(stage.index)
+				_stage_chain.focus(stage.get_stage_index())
 		)
 		
 	for stage_box in stage_chain.get_items():
