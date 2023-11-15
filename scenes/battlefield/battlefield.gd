@@ -24,7 +24,13 @@ func _enter_tree() -> void:
 	_player_data = BattlefieldPlayerData.new()
 
 func _load_battlefield_data() -> Dictionary:
-	var file = FileAccess.open("res://resources/battlefield_data/%s.json" % Data.selected_battlefield_id, FileAccess.READ)
+	
+	var dir = "%s/stages/%s.%s.json" % [
+		Data.selected_chapter_dir_path,
+		Data.selected_stage,
+		Data.selected_stage_id,
+	]
+	var file = FileAccess.open(dir, FileAccess.READ)
 	var battlefield_data: Dictionary = JSON.parse_string(file.get_as_text())
 	file.close()
 	return battlefield_data	
@@ -79,7 +85,6 @@ func _ready() -> void:
 	$CatTower.boss_appeared.connect(_on_boss_appeared)
 	$CatTower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)
 	$DogTower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
-	
 
 func _process(delta: float) -> void:
 	_player_data.update(delta)
@@ -89,7 +94,7 @@ func _show_win_ui():
 	var get_time = int(Time.get_ticks_msec() / 1000)
 	_clean_up()
 	
-	if (Data.use_sw_data == true) and (Data.passed_level == 13) :
+	if (Data.use_sw_data == true) and (Data.passed_stage == 13) :
 		Data.victory_count += 1 
 		SilentWolf.Scores.save_score(Data.save_data["user_name"],Data.victory_count, "victory_count")
 		SilentWolf.sw_save_score_time(Data.save_data["user_name"], get_time,"fastest_time")

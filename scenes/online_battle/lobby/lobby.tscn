@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scenes/online_battle/lobby/lobby.gd" id="2_abk6r"]
 [ext_resource type="Texture2D" uid="uid://xb7r40nr2rgp" path="res://resources/battlefield_themes/heavenly/sky.png" id="3_h7qip"]
 [ext_resource type="PackedScene" uid="uid://7pvca2f5jde1" path="res://scenes/online_battle/lobby/create_room/create_room.tscn" id="3_hwf5s"]
-[ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="5_s0ut5"]
+[ext_resource type="PackedScene" uid="uid://d0jrn2xo773qv" path="res://scenes/common/buttons/go_back_button/go_back_button.tscn" id="5_ywhmu"]
 [ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="6_5cdxx"]
 
 [node name="Panel" type="Control"]
@@ -62,7 +62,7 @@ size_flags_horizontal = 3
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Lobby/MainPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
@@ -73,11 +73,18 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="GoBackButton" type="Button" parent="MarginContainer/Lobby/MainPanel/MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
+[node name="Control" type="Control" parent="MarginContainer/Lobby/MainPanel/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-shortcut = ExtResource("5_s0ut5")
-text = "@BACK"
+
+[node name="GoBackButton" parent="MarginContainer/Lobby/MainPanel/MarginContainer/VBoxContainer/HBoxContainer2/Control" instance=ExtResource("5_ywhmu")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(87, 0)
+layout_mode = 2
+offset_left = -30.0
+offset_top = -32.0
+offset_right = 57.0
+offset_bottom = 55.0
 
 [node name="Label" type="Label" parent="MarginContainer/Lobby/MainPanel/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2

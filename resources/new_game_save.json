@@ -1,17 +1,14 @@
 {
   "bone": 0,
-  "dog_food": 0,
   "date": "2014-11-15T9:09:09",
   "user_name": "",
   "dogs": [{ "ID": "dog", "level": 1 }],
   "store": [],
   "victory_count": 0,
-	"fastest_time": 0,
-	"online_score": 0,
-	"passed_level": -1,
+  "fastest_time": 0,
+  "online_score": 0,
   "passives": [],
-  "selected_battlefield_id": "level1",
-  "selected_level": 0,
+  "selected_stage_id": "level1",
   "selected_team": 0,
   "settings": {
 	"fullscreen": false,
@@ -39,5 +36,18 @@
 	"upgrade": false,
 	"store": false,
 	"team_setup": false
+  },
+  "selected_chapter_id": "the_battle_dogs_rising",
+  "selected_chapter_dir_path": "res://resources/stories/0.main_story/0.the_battle_dogs_rising",
+  "selected_story_id": "main_story",
+  "chapters": {
+	"the_battle_dogs_rising": {
+	  "passed_stage": -1,
+	  "selected_stage": 0,
+	  "completed": false
+	}
+  },
+  "story_selected_chapters": {
+	"main_story": 0
   }
 }

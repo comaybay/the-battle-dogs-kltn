@@ -1,6 +1,6 @@
 class_name DogTower extends BaseDogTower
 
-const WIZARD_DOG_SCENE: PackedScene = preload("res://scenes/battlefield/dog_tower/gandoglf/gandoglf.tscn")
+const WIZARD_DOG_SCENE: PackedScene = preload("res://scenes/battlefield/dog_tower/gandolfg/gandolfg.tscn")
 
 var _player_data: BattlefieldPlayerData
 
