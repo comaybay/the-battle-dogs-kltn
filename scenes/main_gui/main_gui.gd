@@ -15,7 +15,7 @@ func _ready() -> void:
 		)
 		return
 		
-	%TitleLabel.text = "%s - %s" % [tr("@DOG_BASE"), tr("@LOCATION_%s" % Data.selected_chapter_id)]
+	%TitleLabel.text = "%s - %s" % [tr(title), tr("@LOCATION_%s" % Data.selected_chapter_id)]
 	%GoBackButton.pressed.connect(_on_go_back_pressed)
 	%Money.text = str(Data.bone)
 #	%DogFoodLabel.text = tr("@DOG_FOOD") + ": %s" % Data.dog_food

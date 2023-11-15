@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ceqhbfis7gleh" path="res://scenes/dogbase/select_chapter_button/select_chapter_button.tscn" id="3_e126c"]
 
 [node name="DogBase" instance=ExtResource("2_i87ga")]
-title = "@DOG_BASE_TITLE"
+title = "@DOG_BASE"
 
 [node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
-text = "<DOG_BASE_TITLE>"
+text = "@DOG_BASE"
 
 [node name="PhanGiua" type="HBoxContainer" parent="Khung/Content" index="0"]
 layout_mode = 1

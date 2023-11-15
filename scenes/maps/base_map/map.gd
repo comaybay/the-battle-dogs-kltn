@@ -3,12 +3,21 @@ extends Control
 const STAGE_BOX_SCENE: PackedScene = preload("res://scenes/maps/base_map/stage_box/stage_box.tscn")
 
 func _ready():
+	Data.chapter_last_stage = $Stages.get_children().size() - 1
+	
+	# for debuging purposes
+	Data.passed_stage = min(Data.passed_stage, Data.chapter_last_stage)
+	Data.selected_stage =  min(Data.selected_stage, Data.chapter_last_stage)
+	
+	Data.save()
+	
 	%StoryTitle.text = tr("@STORY_%s" % Data.selected_story_id)
 	%ChapterTitle.text = tr("@CHAPTER_%s" % Data.selected_chapter_id)
 	%Location.text = tr("@LOCATION_%s" % Data.selected_chapter_id)
+	%DragArea.size = $MapSprite.get_rect().size
 	
 	if (Data.dogs.size() > 1 or Data.skills.size() > 1) and not Data.has_done_map_tutorial:
-		var TutorialDogScene: PackedScene = load("res://scenes/map/map_tutorial_dog/map_tutorial_dog.tscn")
+		var TutorialDogScene: PackedScene = load("res://scenes/maps/base_map/map_tutorial_dog/map_tutorial_dog.tscn")
 		var tutorial_dog: MapTutorialDog = TutorialDogScene.instantiate()
 		tutorial_dog.setup(%TeamSetupButton)
 		%GUI.add_child(tutorial_dog)
@@ -19,7 +28,7 @@ func _ready():
 		var stage: Stage = stages[index]
 		var prev_stage: Stage = stages[index - 1] if index > 0 else null
 		var next_stage: Stage = stages[index + 1] if index < stages.size() - 1 else null 
-		stage.setup(tr("@STAGE_%s" % (index + 1)), index, prev_stage, next_stage)
+		stage.setup(index, prev_stage, next_stage)
 	
 	var stage_boxes: Array[Selectable] = []
 	for stage in stages.slice(0, Data.passed_stage + 2):
@@ -29,15 +38,12 @@ func _ready():
 		
 	%StageChain.setup(stage_boxes, Data.selected_stage, true)
 	
-	%Tracker.setup(stages, %StageChain, %MapSprite, %TouchArea)	
+	%Tracker.setup(stages, %StageChain, %MapSprite, %DragArea)	
 	%Dog.setup(stages[Data.selected_stage], %Tracker)
 	
 	%GoBackButton.pressed.connect(_go_back_to_dog_base)
 	%AttackButton.pressed.connect(_go_to_battlefield)
 	%TeamSetupButton.pressed.connect(_go_to_team_setup)
-	
-	Data.chapter_last_stage = get_tree().get_nodes_in_group("stages").size() - 1
-	Data.save()
 
 func _go_to_battlefield() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)

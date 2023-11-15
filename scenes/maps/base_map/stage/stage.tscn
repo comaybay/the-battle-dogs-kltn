@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/maps/base_map/stage/stage.gd" id="2_cl0jj"]
 [ext_resource type="Texture2D" uid="uid://nvan3y1v8yvf" path="res://scenes/maps/base_map/stage_box/flag.png" id="3_ykla6"]
 
-[node name="Stage" type="Button" groups=["levels"]]
+[node name="Stage" type="Button"]
 offset_left = -14.0
 offset_top = -14.0
 offset_right = 13.0

@@ -3,7 +3,6 @@ extends Node2D
 @onready var stages = get_children()	
 
 func _draw() -> void:
-	print( Data.passed_stage)
 	for stage in Data.passed_stage:
 		var vitri1 = stages[stage].position + stages[stage].pivot_offset 
 		var vitri2 = stages[stage+1].position + stages[stage+1].pivot_offset 

@@ -11,13 +11,17 @@ var passed_stage: Stage
 var is_mouse_entered: bool
 var _stage_chain: HSlideSelection
 var _first_time_focus: bool = true
+var _map_size: Vector2
+var _half_viewport_size: Vector2
 
 func setup(stages: Array[Node], stage_chain: HSlideSelection, map: Sprite2D, drag_area: Control):
-	var map_size := map.get_rect().size
+	_map_size = map.get_rect().size
+	_half_viewport_size = Global.VIEWPORT_SIZE / 2
 	$Camera2D.limit_left = 0
-	$Camera2D.limit_right = map_size.x
+	$Camera2D.limit_right = _map_size.x
 	$Camera2D.limit_top = 0
-	$Camera2D.limit_bottom = map_size.y
+	$Camera2D.limit_bottom = _map_size.y
+	$Camera2D.global_position = _half_viewport_size
 	
 	_stage_chain = stage_chain
 	current_stage = stages[Data.selected_stage]
@@ -54,17 +58,11 @@ func _move_to_stage(stage: Stage, play_sound := true):
 	current_stage.set_selected(false)
 	stage.set_selected(true)
 	
-	position = stage.position #Di chuyen tracker
+	position = stage.position
 	move_stage.emit(stage)
 	current_stage = stage
 
 func _input(event):
-#	if event.is_action_pressed("ui_left") and current_stage.prev_stage != null:
-#		_move_to_stage(current_stage.prev_stage)
-#
-#	elif event.is_action_pressed("ui_right") and current_stage.next_stage != null and Data.passed_stage >= 0 and current_stage.index <= Data.passed_stage:
-#		_move_to_stage(current_stage.next_stage)
-	
 	if not is_mouse_entered and not mouse_pressed:
 		return
 	
@@ -84,6 +82,8 @@ func _input(event):
 		var delta = last_mouse_pos - event.position
 		position += delta
 		last_mouse_pos = event.position
+		position.x = clamp(position.x, _half_viewport_size.x, _map_size.x - _half_viewport_size.x)
+		position.y = clamp(position.y, _half_viewport_size.y, _map_size.y - _half_viewport_size.y)
 
 func get_camera() -> Camera2D:
 	return $Camera2D 
