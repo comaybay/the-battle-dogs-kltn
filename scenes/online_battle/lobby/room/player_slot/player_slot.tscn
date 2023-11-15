@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scenes/online_battle/lobby/room/player_slot/player_slot.gd" id="2_g8o5r"]
 
 [node name="PlayerSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 100)
 theme = ExtResource("1_wfiyd")
 script = ExtResource("2_g8o5r")
 
@@ -23,6 +24,7 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 text = "@LOADING"
+horizontal_alignment = 1
 
 [node name="ReadyLabel" type="Label" parent="MarginContainer/NotEmpty"]
 unique_name_in_owner = true

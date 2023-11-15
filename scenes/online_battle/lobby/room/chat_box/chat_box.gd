@@ -8,10 +8,10 @@ func _ready() -> void:
 	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
 	Steam.lobby_message.connect(_on_lobby_message)
 	
-	var message := "Room joined (ID: %s)" % SteamUser.lobby_id
+	var message := "%s (ID: %s)" % [tr("@ROOM_JOINED"), SteamUser.lobby_id]
 	
 	if SteamUser.STEAM_ID == Steam.getLobbyOwner(SteamUser.lobby_id):
-		message = "Room created (ID: %s)" % SteamUser.lobby_id
+		message = "%s (ID: %s)" % [tr("@ROOM_CREATED"), SteamUser.lobby_id]
 		
 	display_message(message, COLOR_LOBBY_EVENT, false)
 

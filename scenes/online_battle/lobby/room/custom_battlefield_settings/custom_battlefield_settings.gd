@@ -33,7 +33,7 @@ const MUSIC_CODE_TO_NAME := {
 	"boss_theme3": "ハクギン"
 }
 
-const THEMES := ["green_grass", "fall", "heavenly", "night", "nightmare", "winter"]
+const THEMES := ["green_grass", "fall", "winter", "heavenly", "night", "nightmare"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

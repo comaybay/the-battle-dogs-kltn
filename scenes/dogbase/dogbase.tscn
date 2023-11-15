@@ -58,6 +58,7 @@ offset_top = -4.0
 offset_right = -199.0
 offset_bottom = 83.0
 scale = Vector2(1.1, 1.1)
+tooltip_text = "@EXPLORATION"
 
 [node name="NutNangCap" type="Button" parent="Khung/Content/PhanGiua/BenTrai" index="1"]
 custom_minimum_size = Vector2(200, 60)

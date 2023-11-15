@@ -21,4 +21,4 @@ func update_ui():
 		%ReadyLabel.text = "@OWNER"
 	else:
 		var ready = Steam.getLobbyMemberData(SteamUser.lobby_id, _id, "ready")
-		%ReadyLabel.text = "@READY" if ready == "true" else "NOT_READY" 
+		%ReadyLabel.text = "@READY" if ready == "true" else "@NOT_READY" 

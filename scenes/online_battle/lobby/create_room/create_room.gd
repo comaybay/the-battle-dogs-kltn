@@ -3,6 +3,7 @@ extends PanelContainer
 signal create_room_request(name: String)
 
 func _ready() -> void:
+	%RoomNameLabel.text = tr("@ROOM_NAME") + ":"
 	%RoomNameInput.text_changed.connect(_on_text_changed)
 	%CreateButton.pressed.connect(func(): create_room_request.emit(%RoomNameInput.text))
 	%RoomNameInput.text_submitted.connect(func(text: String):

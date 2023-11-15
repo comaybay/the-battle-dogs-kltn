@@ -81,7 +81,7 @@ text = "<ROOM NAME>"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
-text = "@ROOM_ID: <ROOM ID>"
+text = "@ROOM_CODE: <ROOM ID>"
 
 [node name="CopyButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
