@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://gny6lao42iqp"]
+[gd_scene load_steps=23 format=3 uid="uid://gny6lao42iqp"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_0lsnx"]
 [ext_resource type="Script" path="res://scenes/maps/base_map/map.gd" id="1_0p7qx"]
+[ext_resource type="Shader" path="res://shaders/wiggle/wiggle.gdshader" id="3_5rsmx"]
 [ext_resource type="Texture2D" uid="uid://c44thpk4qy4v3" path="res://scenes/maps/base_map/map.png" id="3_hwhl3"]
-[ext_resource type="Material" uid="uid://dfu5qibrxab0l" path="res://shaders/wiggle/wiggle.tres" id="3_l5g8n"]
 [ext_resource type="PackedScene" uid="uid://i3waaqjv5m7" path="res://scenes/maps/base_map/tracker/tracker.tscn" id="4_un5ok"]
+[ext_resource type="Texture2D" uid="uid://dxic50hwrqqm0" path="res://shaders/wiggle/texture.png" id="4_vlr1h"]
 [ext_resource type="Script" path="res://scenes/maps/base_map/stages.gd" id="5_ta18k"]
 [ext_resource type="Texture2D" uid="uid://bmrxxgd68boqd" path="res://scenes/maps/base_map/land.png" id="6_wblbr"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="7_eb484"]
@@ -13,6 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://d0jrn2xo773qv" path="res://scenes/common/buttons/go_back_button/go_back_button.tscn" id="9_cbb4a"]
 [ext_resource type="Shortcut" uid="uid://moipqlm5cofg" path="res://resources/shortcuts/confirm.tres" id="10_3djod"]
 [ext_resource type="PackedScene" uid="uid://c2u0llmni7n54" path="res://scenes/common/h_slide_selection/h_slide_selection.tscn" id="12_3x1s8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opxfo"]
+shader = ExtResource("3_5rsmx")
+shader_parameter/strength = 3.0
+shader_parameter/uv_scaling = 0.5
+shader_parameter/movement_direction = Vector2(-1, 0)
+shader_parameter/movement_speed = 0.5
+shader_parameter/NOISE_TEXTURE = ExtResource("4_vlr1h")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_de1st"]
 atlas = ExtResource("7_eb484")
@@ -79,7 +88,7 @@ grow_vertical = 2
 
 [node name="MapSprite" type="Sprite2D" parent="MapSprites"]
 unique_name_in_owner = true
-material = ExtResource("3_l5g8n")
+material = SubResource("ShaderMaterial_opxfo")
 texture = ExtResource("3_hwhl3")
 centered = false
 

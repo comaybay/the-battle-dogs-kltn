@@ -14,8 +14,8 @@ var _first_time_focus: bool = true
 var _map_size: Vector2
 var _half_viewport_size: Vector2
 
-func setup(stages: Array[Node], stage_chain: HSlideSelection, map: Sprite2D, drag_area: Control):
-	_map_size = map.get_rect().size
+func setup(stages: Array[Node], stage_chain: HSlideSelection, map_size: Vector2, drag_area: Control):
+	_map_size = map_size
 	_half_viewport_size = Global.VIEWPORT_SIZE / 2
 	$Camera2D.limit_left = 0
 	$Camera2D.limit_right = _map_size.x

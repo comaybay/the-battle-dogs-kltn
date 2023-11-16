@@ -37,7 +37,8 @@ func _ready():
 	%StoryTitle.text = tr("@STORY_%s" % Data.selected_story_id)
 	%ChapterTitle.text = tr("@CHAPTER_%s" % Data.selected_chapter_id)
 	%Location.text = tr("@LOCATION_%s" % Data.selected_chapter_id)
-	%DragArea.size = %MapSprite.get_rect().size
+	var map_size = %MapSprite.get_rect().size * %MapSprite.scale * $MapSprites.scale
+	%DragArea.size = map_size
 	
 	if (Data.dogs.size() > 1 or Data.skills.size() > 1) and not Data.has_done_map_tutorial:
 		var TutorialDogScene: PackedScene = load("res://scenes/maps/base_map/map_tutorial_dog/map_tutorial_dog.tscn")
@@ -60,7 +61,7 @@ func _ready():
 		
 	%StageChain.setup(stage_boxes, Data.selected_stage, true)
 	
-	%Tracker.setup(stages, %StageChain, %MapSprite, %DragArea)	
+	%Tracker.setup(stages, %StageChain, map_size, %DragArea)	
 	%Dog.setup(stages[Data.selected_stage], %Tracker)
 	
 	%GoBackButton.pressed.connect(_go_back_to_dog_base)
