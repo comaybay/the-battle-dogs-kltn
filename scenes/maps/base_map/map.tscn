@@ -1,10 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://gny6lao42iqp"]
+[gd_scene load_steps=21 format=3 uid="uid://gny6lao42iqp"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_0lsnx"]
 [ext_resource type="Script" path="res://scenes/maps/base_map/map.gd" id="1_0p7qx"]
-[ext_resource type="Texture2D" uid="uid://bdq6vfs3hld0n" path="res://scenes/maps/base_map/map_default.png" id="3_51dxf"]
+[ext_resource type="Texture2D" uid="uid://c44thpk4qy4v3" path="res://scenes/maps/base_map/map.png" id="3_hwhl3"]
+[ext_resource type="Material" uid="uid://dfu5qibrxab0l" path="res://shaders/wiggle/wiggle.tres" id="3_l5g8n"]
 [ext_resource type="PackedScene" uid="uid://i3waaqjv5m7" path="res://scenes/maps/base_map/tracker/tracker.tscn" id="4_un5ok"]
 [ext_resource type="Script" path="res://scenes/maps/base_map/stages.gd" id="5_ta18k"]
+[ext_resource type="Texture2D" uid="uid://bmrxxgd68boqd" path="res://scenes/maps/base_map/land.png" id="6_wblbr"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="7_eb484"]
 [ext_resource type="PackedScene" uid="uid://cd5gw7llcsine" path="res://scenes/maps/base_map/stage/stage.tscn" id="8_uximv"]
 [ext_resource type="Script" path="res://scenes/maps/base_map/dog.gd" id="8_vsoej"]
@@ -73,9 +75,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MapSprite" type="Sprite2D" parent="."]
+[node name="MapSprites" type="Node2D" parent="."]
+
+[node name="MapSprite" type="Sprite2D" parent="MapSprites"]
 unique_name_in_owner = true
-texture = ExtResource("3_51dxf")
+material = ExtResource("3_l5g8n")
+texture = ExtResource("3_hwhl3")
+centered = false
+
+[node name="Land" type="Sprite2D" parent="MapSprites"]
+position = Vector2(435, 230)
+texture = ExtResource("6_wblbr")
 centered = false
 
 [node name="Stages" type="Node2D" parent="."]
@@ -87,10 +97,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 636.491
-offset_top = 354.082
-offset_right = 663.491
-offset_bottom = 381.082
+offset_left = 626.0
+offset_top = 360.0
+offset_right = 653.0
+offset_bottom = 387.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -100,7 +110,7 @@ position = Vector2(576, 324)
 
 [node name="Dog" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(651.491, 367.082)
+position = Vector2(41, -20)
 scale = Vector2(0.269345, 0.269345)
 sprite_frames = SubResource("SpriteFrames_e4la2")
 offset = Vector2(-17.6188, -132.407)

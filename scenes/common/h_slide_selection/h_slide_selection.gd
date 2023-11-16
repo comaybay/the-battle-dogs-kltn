@@ -114,6 +114,7 @@ func _handle_swipe_input(ev: InputEvent) -> void:
 		return
 	
 	if ev is InputEventMouseButton:
+		print(ev)
 		if ev.double_click:
 			return
 		
@@ -134,14 +135,14 @@ func _handle_swipe_input(ev: InputEvent) -> void:
 			if _is_a_press:
 				_skip = 2
 				var event = InputEventMouseButton.new()
-				event.button_index = MOUSE_BUTTON_LEFT
-				event.position = ev.position
+				event.button_index = ev.button_index
+				## dont fucking ask why u have to do this, idk either. something to do with black bars
+				event.position = ev.global_position
 				event.pressed = true
 				Input.parse_input_event(event)	
 				var event2 = InputEventMouseButton.new()
-				event2.button_index = MOUSE_BUTTON_LEFT
-				event2.position = ev.position
-				event2.pressed = false
+				event2.button_index = ev.button_index
+				event2.position = ev.global_position
 				Input.parse_input_event(event2)	
 			
 			swipe_mouse_times.append(Time.get_ticks_msec())
