@@ -46,10 +46,12 @@ func loadSkillList() -> void:
 
 func loadStoreList() -> void:
 	for data in Data.store.values():
-		var item := create_item(data['ID'], SelectCharacterBox.Type.STORE)
-		%StoreList.add_child(item)
-		store_id_to_item[data['ID']] = item
-		item.pressed.connect(_on_add_store_to_slot.bind(item))
+		if data['amount'] > 0 :
+			print(data)
+			var item := create_item(data['ID'], SelectCharacterBox.Type.STORE)
+			%StoreList.add_child(item)
+			store_id_to_item[data['ID']] = item
+			item.pressed.connect(_on_add_store_to_slot.bind(item))
 
 func _on_add_character_to_slot(item: SelectCharacterBox):
 	for slot in character_slots:
@@ -103,11 +105,15 @@ func loadTeam() -> void:
 		slot.pressed.connect(_on_remove_skill_from_slot.bind(slot))
 	
 	for i in range(3):
-		
 		var slot := store_slots[i] 
 		var store_id = Data.selected_team['store_ids'][i]
-		if store_id == null:
+#		print(Data.store[store_id] 
+		if store_id == null :
 			slot.clear()
+		elif (Data.store[store_id]['amount'] <1) :
+			print(slot)
+			slot.clear()
+			
 		else:
 			slot.change_item(store_id, SelectCharacterBox.Type.STORE)
 			store_id_to_item[store_id].visible = false
@@ -118,7 +124,6 @@ func _on_remove_character_from_slot(slot: SelectCharacterBox):
 		character_id_to_item[slot.get_item_id()].visible = true
 		slot.clear()
 		save_team_setup()
-		
 	
 func _on_remove_skill_from_slot(slot: SelectCharacterBox):
 	if slot.get_item_type() != SelectCharacterBox.Type.NONE:

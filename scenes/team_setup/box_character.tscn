@@ -20,6 +20,3 @@ scale = Vector2(0.4, 0.4)
 [node name="Border" parent="." index="2"]
 position = Vector2(63.4, 52)
 scale = Vector2(0.4, 0.4)
-
-[node name="AnimationPlayer" parent="." index="3"]
-autoplay = "ready"
