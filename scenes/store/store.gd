@@ -66,19 +66,14 @@ func reupdate_current_ui():
 	%NutNangCap.disabled = selected_item.get_price() > Data.bone or selected_item.get_amount() >= 10 
 
 func _on_nut_nang_cap_pressed():
-	AudioPlayer.play_button_pressed_audio()
-
-
-func _on_nut_mua_pressed():
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	Data.bone -= selected_item.get_price()
 	
 	var item_id := selected_item.get_item_id()
 	
 	if selected_item.get_amount() > 0:
-		AudioPlayer.play_custom_sound(UPGRADE_AUDIO)
+		AudioPlayer.play_sfx(UPGRADE_AUDIO)
 		Data.store[item_id]['amount'] += 1
-	
 	else: 
 		AudioPlayer.play_custom_sound(UNLOCK_AUDIO)
 		var item = {"ID": item_id, "amount": 1}
@@ -86,3 +81,4 @@ func _on_nut_mua_pressed():
 	
 	Data.save()
 	reupdate_current_ui()
+

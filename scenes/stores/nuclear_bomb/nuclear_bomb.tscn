@@ -130,6 +130,7 @@ one_shot = true
 [node name="bomb_launch_down" type="Node2D" parent="Animation"]
 
 [node name="explosion_mushroom" type="Sprite2D" parent="Animation/bomb_launch_down"]
+visible = false
 position = Vector2(-49, -546)
 scale = Vector2(2, 2)
 texture = ExtResource("2_fwdmp")
