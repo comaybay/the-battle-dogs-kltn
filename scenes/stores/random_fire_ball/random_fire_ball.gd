@@ -8,6 +8,7 @@ const BASE_ROWS: int = 1
 var dog_tower 
 var skill_user = Character.Type.DOG
 func setup(_dog_tower: DogTower):
+	Data.store["random_fire_ball"].amount -= 1
 	dog_tower = _dog_tower
 	var battlefield := get_tree().current_scene as BaseBattlefield
 	var destination_x_from: int = -battlefield.TOWER_MARGIN + 100
