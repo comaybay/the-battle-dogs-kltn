@@ -6,11 +6,14 @@ var launch_up = Vector2(0, 0)
 var launch_down = Vector2(0, 0)
 var battlefield
 var use_one = true
-func setup(dog_tower: DogTower):	
+var dog_tower 
+func setup(_dog_tower: DogTower):
+	dog_tower = _dog_tower
 	battlefield = get_tree().current_scene as BaseBattlefield
 	var destination =  (battlefield.get_stage_width() * 2 + battlefield.TOWER_MARGIN * 4)/2
 #	-battlefield.TOWER_MARGIN + battlefield.get_stage_width() - 700 
 #	battlefield.get_stage_width()  + battlefield.TOWER_MARGIN * 5  + 700 
+	
 	var y = dog_tower.global_position.y - 1000 
 	self.global_position = Vector2(1500, -1000)
 	$Animation/bomb.global_position = dog_tower.global_position + Vector2(600, -250)

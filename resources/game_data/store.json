@@ -2,7 +2,16 @@
 	{
 		"ID": "nuclear_bomb",
 		"price": 2000,
-		"spawn_time": 45,
 		"auto_activate": false 
+	},
+	{
+		"ID": "full_money",
+		"price": 2000,
+		"auto_activate": true 
+	},
+	{
+		"ID": "random_fire_ball",
+		"price": 2000,
+		"auto_activate": true 
 	}
 ]
