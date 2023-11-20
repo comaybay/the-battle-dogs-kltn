@@ -58,5 +58,4 @@ frame_progress = 0.992498
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_6uvvi")
-volume_db = -7.0
 bus = &"InBattleFX"

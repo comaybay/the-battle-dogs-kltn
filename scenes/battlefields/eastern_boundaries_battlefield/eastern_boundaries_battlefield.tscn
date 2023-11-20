@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://x54c6o4sajxs"]
+
+[ext_resource type="PackedScene" uid="uid://df6pmsavc8k75" path="res://scenes/battlefields/common/two_towers_battlefield/two_towers_battlefield.tscn" id="1_vlkgp"]
+[ext_resource type="PackedScene" uid="uid://lyrmnwxclfgn" path="res://scenes/battlefields/common/dog_tower/dog_tower.tscn" id="2_63urb"]
+
+[node name="TwoTowerBattlefield" instance=ExtResource("1_vlkgp")]
+
+[node name="DogTower" parent="." index="7" instance=ExtResource("2_63urb")]

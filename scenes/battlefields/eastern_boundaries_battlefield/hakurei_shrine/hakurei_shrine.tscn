@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://jgoappkmvbcd"]
+
+[ext_resource type="PackedScene" uid="uid://q3xac7wpx0wx" path="res://scenes/battlefields/common/cat_tower/cat_tower.tscn" id="1_0ndmj"]
+
+[node name="HakureiShrine" instance=ExtResource("1_0ndmj")]

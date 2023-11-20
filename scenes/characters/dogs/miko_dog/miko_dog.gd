@@ -2,6 +2,8 @@ class_name MikoDog extends BaseDog
 
 const HIT_SFX: AudioStream = preload("res://scenes/characters/dogs/miko_dog/se_damage00.wav") 
 
+var ofuda_damage: int = 10
+
 func _ready() -> void:
 	super._ready()
 	

@@ -2,8 +2,8 @@
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_r60yr"]
 resource_name = "Compressor"
-threshold = -3.5
-ratio = 3.0
+threshold = -2.0
+ratio = 2.0
 
 [resource]
 bus/1/name = &"Music"

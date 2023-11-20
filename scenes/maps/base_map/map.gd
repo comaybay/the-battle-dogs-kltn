@@ -71,10 +71,14 @@ func _ready():
 func _go_to_battlefield() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 	
-	var dobase_theme := AudioPlayer.get_current_music()
-	AudioPlayer.stop_music(dobase_theme, true, true)
+	AudioPlayer.stop_current_music(true, true)
 	
-	get_tree().change_scene_to_file("res://scenes/battlefield/battlefield.tscn")
+	var data := InBattle.load_stage_data()
+	
+	var battlefield_type: String = data.get('battlefield', 'default')
+	get_tree().change_scene_to_file("res://scenes/battlefields/%s_battlefield/%s_battlefield.tscn" % [
+		battlefield_type, battlefield_type
+	])
 	
 func _go_to_team_setup() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)

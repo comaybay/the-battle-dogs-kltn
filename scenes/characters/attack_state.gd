@@ -1,6 +1,8 @@
 @tool
 extends FSMState
 
+const BITE_SFX: AudioStream = preload("res://resources/sound/battlefield/bite.mp3")
+
 @onready var character: Character = owner
 var start_attack := false
 var done_attack := false
@@ -21,9 +23,8 @@ func on_frame_changed() -> void:
 func physics_update(_delta: float) -> void:
 	if start_attack == false:
 		return
-		
-	$AttackSound.pitch_scale = AudioPlayer.get_random_pitch_scale()
-	$AttackSound.play()
+	
+	AudioPlayer.play_in_battle_sfx(BITE_SFX, AudioPlayer.get_random_pitch_scale())
 	
 	# custom attack
 	if character.custom_attack_area != null:

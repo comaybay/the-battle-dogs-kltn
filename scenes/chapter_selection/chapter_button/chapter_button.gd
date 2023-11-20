@@ -3,12 +3,14 @@ class_name ChapterButton extends Selectable
 signal chapter_entering
 
 var _accent_stylebox: StyleBoxFlat
+var _chapter_id: String
 
 func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 	_accent_stylebox = get_theme_stylebox("pressed").duplicate() as StyleBoxFlat
 
 func setup(chapter_id: String, image: Texture2D) -> void:
+	_chapter_id = chapter_id
 	$TextureRect.texture = image
 	$Label.text = tr("@CHAPTER_%s" % chapter_id)
 
@@ -37,12 +39,9 @@ func _gui_input(event: InputEvent) -> void:
 			
 		elif event.double_click and _first_click:
 			set_process_input(false)
-			chapter_entering.emit()
-			
 			handle_selected()
-			await play_enter_chapter_animation()
-			get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
 func handle_selected() -> void:
+	chapter_entering.emit()
 	await play_enter_chapter_animation()
-	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
+	get_tree().change_scene_to_file("res://scenes/intros/%s_intro/%s_intro.tscn" % [_chapter_id, _chapter_id])

@@ -100,10 +100,7 @@ func _on_lobby_data_update(success: int, lobby_id: int, member_id: int) -> void:
 	var music: String = SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_MUSIC)
 	if music != _prev_music_settings:
 		_prev_music_settings = music
-		var prev_music = AudioPlayer.get_current_music()
-		if prev_music != null:
-			AudioPlayer.stop_music(prev_music, true, true)
-		
+		AudioPlayer.stop_current_music(true, true)
 		AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % music))
 		
 	var battlefield_theme: String = SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_THEME)
@@ -235,9 +232,7 @@ func _handle_connection_leave_lobby():
 	SteamUser.lobby_id = 0
 
 func _go_back_to_lobby_scene():	
-	var current_music = AudioPlayer.get_current_music()
-	if current_music != null:
-		AudioPlayer.stop_music(current_music, true, true)
+	AudioPlayer.stop_current_music(true, true)
 	
 	get_tree().change_scene_to_file("res://scenes/online_battle/lobby/lobby.tscn")	
 
@@ -258,9 +253,7 @@ func _go_to_game():
 		}
 	) 
 	
-	var current_music = AudioPlayer.get_current_music()
-	if current_music != null:
-		AudioPlayer.stop_music(current_music, true)
+	AudioPlayer.stop_current_music(true)
 	
 	AudioPlayer.remove_all_music()
 	get_tree().change_scene_to_file("res://scenes/online_battle/p2p_battlefield/p2p_battlefield.tscn")	

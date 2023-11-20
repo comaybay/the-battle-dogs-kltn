@@ -1,19 +1,18 @@
 @tool
 class_name BaseCat extends Character
 
-var is_boss: bool = false
 @export var reward_money: int = 10
-@export var allow_boss_effect: bool = true
+
+func setup(global_position: Vector2, is_boss: bool = false) -> void:
+	super._setup(global_position, is_boss)
 
 func _ready() -> void:
-	super._ready()
-
 	if Engine.is_editor_hint():
+		super._ready()
 		return
 		
 	var battlefield := get_tree().current_scene as Battlefield
 	var power_scale = battlefield.get_cat_power_scale()
 	damage *= power_scale
 	health *= power_scale
-	
-	super._reready()
+	super._ready()

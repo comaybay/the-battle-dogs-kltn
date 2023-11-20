@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsad8f7goqbjv"]
 
-[ext_resource type="PackedScene" uid="uid://e7fcshjccrpt" path="res://scenes/battlefield/gui/spawn_buttons/spawn_buttons.tscn" id="1_k07n0"]
+[ext_resource type="PackedScene" uid="uid://e7fcshjccrpt" path="res://scenes/battlefields/common/base_battlefield/gui/spawn_buttons/spawn_buttons.tscn" id="1_k07n0"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_spawn_buttons/p2p_spawn_button.gd" id="2_extu4"]
 
 [node name="P2PSpawnButtons" instance=ExtResource("1_k07n0")]

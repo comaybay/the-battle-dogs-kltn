@@ -7,60 +7,60 @@
   "reward_bone": 50000,
   "spawn_patterns": [
     {
-      "name": "smol_cat",
-      "duration": 0.25,
+      "id": "smol_cat",
+      "interval": 0.25,
       "delay": 5
     },
     {
-      "name": "smol_cat",
-      "duration": 1,
+      "id": "smol_cat",
+      "interval": 1,
       "delay": 5.05
     },
     {
-      "name": "smol_cat",
-      "duration": 1,
+      "id": "smol_cat",
+      "interval": 1,
       "delay": 5.1
     },
     {
-      "name": "smol_cat",
-      "duration": 1,
+      "id": "smol_cat",
+      "interval": 1,
       "delay": 5.35
     },
     {
-      "name": "smol_cat",
-      "duration": 1,
+      "id": "smol_cat",
+      "interval": 1,
       "delay": 5.6
     },
     {
-      "name": "smol_cat",
-      "duration": 1,
+      "id": "smol_cat",
+      "interval": 1,
       "delay": 5.95
     },
     {
-      "name": "smol_cat",
-      "duration": 0.75,
+      "id": "smol_cat",
+      "interval": 0.75,
       "delay": 35.1
     },
     {
-      "name": "smol_cat",
-      "duration": 0.75,
+      "id": "smol_cat",
+      "interval": 0.75,
       "delay": 35.35
     },
     {
-      "name": "smol_cat",
-      "duration": 0.75,
+      "id": "smol_cat",
+      "interval": 0.75,
       "delay": 35.6
     },
     {
-      "name": "smol_cat",
-      "duration": 0.75,
+      "id": "smol_cat",
+      "interval": 0.75,
       "delay": 35.95
     }
   ],
   "bosses": [
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 2 },
         { "name": "health", "scale": 10 },
@@ -70,7 +70,7 @@
     },
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 2 },
         { "name": "health", "scale": 10 },
@@ -80,7 +80,7 @@
     },
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 2 },
         { "name": "health", "scale": 10 },
@@ -90,7 +90,7 @@
     },
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 2.2 },
         { "name": "health", "scale": 10 },
@@ -100,7 +100,7 @@
     },
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 3 },
         { "name": "health", "scale": 10 },
@@ -110,7 +110,7 @@
     },
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 3.747 },
         { "name": "health", "scale": 10 },
@@ -120,7 +120,7 @@
     },
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 0.1 },
         { "name": "health", "scale": 50 },

@@ -6,14 +6,14 @@
   "reward_bone": 2000,
   "spawn_patterns": [
     {
-      "name": "cat",
-      "duration": 5,
-      "delay": 0
+      "id": "cat",
+      "interval": 5,
+      "delay": 5
     },
     {
-      "name": "cat",
-      "duration": 10,
-      "delay": 30.5
+      "id": "cat",
+      "interval": 10,
+      "delay": 10
     }
   ]
 }

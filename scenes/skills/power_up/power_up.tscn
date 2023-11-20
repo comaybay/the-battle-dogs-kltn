@@ -8,6 +8,5 @@ script = ExtResource("1_x8iv8")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_cxyjq")
-volume_db = -7.0
 autoplay = true
 bus = &"InBattleFX"

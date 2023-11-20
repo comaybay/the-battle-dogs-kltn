@@ -2,7 +2,7 @@ extends Control
 
 const STORY_SCENE: PackedScene = preload("res://scenes/chapter_selection/story/story.tscn")
 
-var _character_story_nodes: Array[Story] = []
+var _stories: Array[Story] = []
 var _selected_story_index: int = 0
 
 func _init() -> void:
@@ -15,7 +15,7 @@ func load_stories() -> void:
 		var story_dir_path: String = "%s/%s" % [dir_path, story_dir]
 		var story: Story = STORY_SCENE.instantiate()
 		story.setup(story_dir_path, get_chapter_dir_paths(story_dir))
-		_character_story_nodes.append(story)
+		_stories.append(story)
 
 func get_chapter_dir_paths(story_dir: String) -> Array:
 	var dir_path := "res://resources/stories/%s" % story_dir
@@ -33,20 +33,28 @@ func _ready() -> void:
 	%NavigationButtonDown.pressed.connect(_navigate_down)
 	%NavigationButtonUp.pressed.connect(_navigate_up)
 	
-	for story in _character_story_nodes:
+	for story in _stories:
 		%StoryContainer.add_child(story)
+		story.chapter_entering.connect(_on_chapter_entering)
 
-	var selected_story = _character_story_nodes.filter(func(story: Story):
+	var selected_story = _stories.filter(func(story: Story):
 		return story.get_story_id() == Data.save_data['selected_story_id']
 	)[0]
 	
-	_selected_story_index = _character_story_nodes.find(selected_story) 
+	_selected_story_index = _stories.find(selected_story) 
 	_update_navigation_ui()
 	
+	await get_tree().process_frame
+	await get_tree().process_frame
 	await get_tree().process_frame
 	
 	selected_story.grab_focus()
 	%Camera2D.global_position.y = selected_story.global_position.y
+
+func _on_chapter_entering() -> void:
+	%NavigationButtonDown.visible = false
+	%NavigationButtonUp.visible = false
+	set_process_input(false)
 
 func _go_to_dogbase() -> void:
 	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
@@ -111,3 +119,6 @@ func _sort_numerically(arr: Array[String]) -> Array[String]:
 	
 	result.assign(arr)
 	return result
+
+func _exit_tree() -> void:
+	AudioPlayer.stop_current_music(true, true)

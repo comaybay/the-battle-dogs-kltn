@@ -4,8 +4,7 @@ var DEFEAT_AUDIO: AudioStream = preload("res://resources/sound/battlefield/defea
 var VICTORY_AUDIO: AudioStream = preload("res://resources/sound/battlefield/victory.mp3")
 
 func setup(winner_id: int) -> void:	
-	var current_music = AudioPlayer.get_current_music()
-	AudioPlayer.stop_music(current_music, true, true)
+	AudioPlayer.stop_current_music(true, true)
 	AudioPlayer.play_music(VICTORY_AUDIO if winner_id == SteamUser.STEAM_ID else DEFEAT_AUDIO)
 	
 	var this_player_is_winner := winner_id == SteamUser.STEAM_ID

@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://da3r4sj0ik6iq"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_uql3m"]
-[ext_resource type="Script" path="res://scenes/battlefield/gui/skill_buttons/skill_buttons.gd" id="2_x7ldg"]
-[ext_resource type="PackedScene" uid="uid://33bborh4tyop" path="res://scenes/battlefield/gui/skill_buttons/skill_button.tscn" id="3_xee6s"]
+[ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/gui/skill_buttons/skill_buttons.gd" id="2_x7ldg"]
+[ext_resource type="PackedScene" uid="uid://33bborh4tyop" path="res://scenes/battlefields/common/base_battlefield/gui/skill_buttons/skill_button.tscn" id="3_xee6s"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_skill_buttons/p2p_skill_button.gd" id="4_ucr8a"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_qf8to"]

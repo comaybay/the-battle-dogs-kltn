@@ -7,29 +7,29 @@
   "power_scale": 1.25,
   "spawn_patterns": [
     {
-      "name": "cat",
-      "duration": 5,
-      "delay": 0
+      "id": "cat",
+      "interval": 5,
+      "delay": 5
     },
     {
-      "name": "leg_cat",
-      "duration": 10,
-      "delay": 10
+      "id": "leg_cat",
+      "interval": 10,
+      "delay": 20
     },
     {
-      "name": "smol_cat",
-      "duration": 2.5,
-      "delay": 15
+      "id": "smol_cat",
+      "interval": 2.5,
+      "delay": 17.5
     },
     {
-      "name": "smol_cat",
-      "duration": 5,
-      "delay": 30
+      "id": "smol_cat",
+      "interval": 5,
+      "delay": 35
     },
     {
-      "name": "leg_cat",
-      "duration": 10,
-      "delay": 55
+      "id": "leg_cat",
+      "interval": 10,
+      "delay": 65
     }
   ]
 }

@@ -10,7 +10,7 @@ var _gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var _damage = 50
 
-func setup(global_position: Vector2, character_type: Character.Type) -> void:
+func setup(global_position: Vector2, dog_level: int, character_type: Character.Type) -> void:
 	self.global_position = global_position
 	velocity = Vector2(SPEED, 0)
 	
@@ -19,14 +19,13 @@ func setup(global_position: Vector2, character_type: Character.Type) -> void:
 		collision_mask = 0b100001
 		$Area2D.collision_mask = 0b10
 	
-	var level := InBattle.get_dog_level("miko_dog")
-	_damage = _damage + (level * 10)
+	_damage = _damage + (dog_level * 10)
 	
 	_bounce_time_left = _bounce_time_left
-	if level >= 3:
+	if dog_level >= 3:
 		_bounce_time_left += 1
 		
-	if level >= 6:
+	if dog_level >= 6:
 		_bounce_time_left += 1
 	
 	$Area2D.body_entered.connect(_on_enenmy_entered)

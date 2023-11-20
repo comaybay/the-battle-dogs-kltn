@@ -62,6 +62,10 @@ var _multipliers: Dictionary = {
 	
 @export var knockbacks: int = 3
 
+const DEFAULT_ATTACK_SFX = preload("res://resources/sound/battlefield/bite.mp3")
+const DEFAULT_DIE_SFX = preload("res://resources/sound/battlefield/death.mp3")
+@export var attack_sfx: AudioStream = DEFAULT_ATTACK_SFX 
+@export var die_sfx: AudioStream = DEFAULT_DIE_SFX
 	
 @onready var n_RayCast2D := $RayCast2D as RayCast2D
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
@@ -82,13 +86,30 @@ var move_direction: int
 var max_health: int
 var next_knockback_health: int
 var collision_rect: Rect2
+var _is_boss: bool
+func is_boss() -> bool: return _is_boss
 
-func setup(global_position: Vector2) -> void:
+## this setup func is used internally by it's subcalsses
+func _setup(global_position: Vector2, is_boss: bool) -> void:
 	self.global_position = global_position
-	_reready()
+	
+	_is_boss = is_boss
+	if is_boss:
+		add_to_group("bosses")
+		
+	await ready
+	self.global_position.y += global_position.y - get_bottom_global_position().y
 
 func _init() -> void:
-	if not Engine.is_editor_hint():
+	if Engine.is_editor_hint():
+		return
+		
+	if not AudioPlayer.has_in_battle_sfx(attack_sfx):
+		AudioPlayer.add_in_battle_sfx(attack_sfx, 20)
+	
+	if not AudioPlayer.has_in_battle_sfx(die_sfx):
+		AudioPlayer.add_in_battle_sfx(die_sfx, 20)
+	
 		# hide away the character until everything is setup
 		position.y = 999999 
 
@@ -99,53 +120,46 @@ func _ready() -> void:
 		$CharacterAnimation.position += Vector2(randi_range(-20, 20), rand_y)
 		## render stuff correctly
 		z_index = rand_y + 20
-		_reready()
+		_update_character()
 		
 	if Engine.is_editor_hint():
+		max_health = health
 		property_list_changed.connect(
 			func():
-				_reready()
+				_update_character()
 				queue_redraw()
 		)
 		
-func _reready():
+func _update_character():
 	# config 
 	max_health = health
 	next_knockback_health = max_health - (max_health / knockbacks)
 	move_direction = (1 if character_type == Type.DOG else -1)
 	
 	# for some reason timer do not take in 0 correctly
-	n_AttackCooldownTimer.wait_time = attack_cooldown
+	$AttackCooldownTimer.wait_time = attack_cooldown
 	
-	n_RayCast2D.target_position.x = attack_range * move_direction
+	$RayCast2D.target_position.x = attack_range * move_direction
 	
 	collision_rect = $CollisionShape2D.shape.get_rect()
 	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
 	n_RayCast2D.position.y = $CollisionShape2D.position.y + (collision_rect.size.y / 2) - 25
 	
 	if character_type == Type.DOG:
+		remove_from_group("cats")	
+		add_to_group("dogs")	
+	
 		n_RayCast2D.position.x += collision_rect.size.x
-		n_RayCast2D.set_collision_mask_value(2, false)
-		n_RayCast2D.set_collision_mask_value(6, false)
-		n_RayCast2D.set_collision_mask_value(3, true)
-		n_RayCast2D.set_collision_mask_value(5, true)
-		
-		set_collision_mask_value(6, false)
-		set_collision_mask_value(5, true)
-		
-		set_collision_layer_value(2, true)
-		set_collision_layer_value(3, false)
+		n_RayCast2D.collision_mask = 0b010100
+		self.collision_mask = 0b010001
+		self.collision_layer = 0b010
 	else:
-		n_RayCast2D.set_collision_mask_value(2, true)
-		n_RayCast2D.set_collision_mask_value(6, true)
-		n_RayCast2D.set_collision_mask_value(3, false)
-		n_RayCast2D.set_collision_mask_value(5, false)
-
-		set_collision_mask_value(6, true)
-		set_collision_mask_value(5, false)
-		
-		set_collision_layer_value(2, false)
-		set_collision_layer_value(3, true)
+		remove_from_group("dogs")	
+		add_to_group("cats")	
+	
+		n_RayCast2D.collision_mask = 0b100010
+		self.collision_mask = 0b100001
+		self.collision_layer = 0b100
 	
 ## get global position of the character's bottom
 func get_bottom_global_position() -> Vector2:
@@ -220,14 +234,14 @@ func set_multiplier(type: MultiplierTypes, multiplier: float) -> void:
 	_multipliers[type] = multiplier
 	
 	if type == MultiplierTypes.ATTACK_SPEED:
-		n_AttackCooldownTimer.wait_time = max(attack_cooldown * multiplier, 0.05)
+		n_AttackCooldownTimer.wait_time = max(attack_cooldown / multiplier, 0.05)
 		$AnimationPlayer.speed_scale = multiplier
 		
 func reset_multipliers() -> void:
 	for type in _multipliers:
 		_multipliers[type] = 1.0
 		
-	n_AttackCooldownTimer.wait_time = attack_cooldown
+	n_AttackCooldownTimer.wait_time = min(attack_cooldown, n_AttackCooldownTimer.wait_time)
 	$AnimationPlayer.speed_scale = 1.0
 
 func is_past_knockback_health() -> bool:

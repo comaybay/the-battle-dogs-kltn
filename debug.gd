@@ -4,6 +4,7 @@ var _debug_mode := false
 
 func _init() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
+	_debug_mode = OS.is_debug_build()
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('ui_debug_mode'):
@@ -32,6 +33,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('ui_debug_switch_language'):
 		TranslationServer.set_locale("en" if TranslationServer.get_locale() == "vi" else "vi")	
 
+	if event.is_action_pressed('ui_debug_kill_cats'):
+		for cat in get_tree().get_nodes_in_group("cats"):
+			cat.take_damage(999999999)
+
 	if event.is_action_pressed('ui_debug_win_battle'):
 		InBattle.get_battlefield().get_cat_tower().zero_health.emit()
 
@@ -39,5 +44,5 @@ func is_debug_mode() -> bool:
 	return _debug_mode
 
 func _ready() -> void:
-	if not OS.is_debug_build():
+	if not is_debug_mode():
 		set_process_input(false)

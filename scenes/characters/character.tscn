@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cvno8d4sb6h0s"]
+[gd_scene load_steps=15 format=3 uid="uid://cvno8d4sb6h0s"]
 
 [ext_resource type="Script" path="res://scenes/characters/character.gd" id="1_taq0m"]
 [ext_resource type="PackedScene" uid="uid://yg61w87455ho" path="res://scenes/common/finite_state_machine/FSM.tscn" id="3_dcvdl"]
 [ext_resource type="Script" path="res://scenes/characters/move_state.gd" id="4_5450c"]
-[ext_resource type="AudioStream" uid="uid://byul4hma3ffpq" path="res://resources/sound/battlefield/bite.mp3" id="5_gaay1"]
 [ext_resource type="Script" path="res://scenes/characters/attack_state.gd" id="5_xi1bt"]
 [ext_resource type="Script" path="res://scenes/characters/knockback_state.gd" id="6_y7l8e"]
 [ext_resource type="Script" path="res://scenes/characters/idle_state.gd" id="6_yu7tv"]
@@ -146,18 +145,11 @@ script = ExtResource("4_5450c")
 [node name="AttackState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("5_xi1bt")
 
-[node name="AttackSound" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState"]
-stream = ExtResource("5_gaay1")
-bus = &"InBattleFX"
-
 [node name="IdleState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("6_yu7tv")
 
 [node name="KnockbackState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("6_y7l8e")
-
-[node name="FallSound" type="AudioStreamPlayer" parent="FiniteStateMachine/KnockbackState"]
-bus = &"InBattleFX"
 
 [node name="DieState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("7_10dt3")

@@ -4,9 +4,9 @@
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_guf6c"]
 [ext_resource type="PackedScene" uid="uid://bsad8f7goqbjv" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_spawn_buttons/p2p_spawn_buttons.tscn" id="2_yp16q"]
 [ext_resource type="PackedScene" uid="uid://da3r4sj0ik6iq" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_skill_buttons/p2p_skill_buttons.tscn" id="4_hksxv"]
-[ext_resource type="PackedScene" uid="uid://dmdc60cjuki5p" path="res://scenes/battlefield/gui/efficiency_up_button/efficiency_up_button.tscn" id="5_ehgkl"]
+[ext_resource type="PackedScene" uid="uid://dmdc60cjuki5p" path="res://scenes/battlefields/common/base_battlefield/gui/efficiency_up_button/efficiency_up_button.tscn" id="5_ehgkl"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/p2p_efficiency_up_button.gd" id="6_5sgev"]
-[ext_resource type="PackedScene" uid="uid://cei0cobk4qs0j" path="res://scenes/battlefield/gui/camera_control_buttons/camera_control_buttons.tscn" id="7_57tuo"]
+[ext_resource type="PackedScene" uid="uid://cei0cobk4qs0j" path="res://scenes/battlefields/common/base_battlefield/gui/camera_control_buttons/camera_control_buttons.tscn" id="7_57tuo"]
 [ext_resource type="PackedScene" uid="uid://dwvv60owbdqf2" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/surrender_button/surrender_button.tscn" id="9_cy2he"]
 [ext_resource type="PackedScene" uid="uid://o5g8frhvrf6b" path="res://scenes/online_battle/p2p_battlefield/p2p_gui/surrender_battle_popup/surrender_battle_popup.tscn" id="9_nnkph"]
 

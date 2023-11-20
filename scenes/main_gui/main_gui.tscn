@@ -52,33 +52,33 @@ layout_direction = 1
 layout_mode = 2
 localize_numeral_system = false
 
-[node name="Title" type="HBoxContainer" parent="Khung/Header"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Header/Title"]
+[node name="MarginContainer" type="MarginContainer" parent="Khung/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
-[node name="PhanGiua" type="HBoxContainer" parent="Khung/Header/Title/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Khung/Header/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="Control" type="Control" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
+[node name="Control" type="Control" parent="Khung/Header/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(87, 0)
 layout_mode = 2
 
-[node name="GoBackButton" parent="Khung/Header/Title/MarginContainer/PhanGiua/Control" instance=ExtResource("5_a24hl")]
+[node name="CanvasLayer" type="CanvasLayer" parent="Khung/Header/MarginContainer/HBoxContainer/Control"]
+
+[node name="GoBackButton" parent="Khung/Header/MarginContainer/HBoxContainer/Control/CanvasLayer" instance=ExtResource("5_a24hl")]
 unique_name_in_owner = true
-layout_mode = 2
-offset_right = 86.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 97.0
+offset_bottom = 97.0
 focus_mode = 2
 
-[node name="TitleLabel" type="Label" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
+[node name="TitleLabel" type="Label" parent="Khung/Header/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -88,18 +88,18 @@ text = "<DOG_BASE_TITLE>"
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Khung/Header/Title/MarginContainer/PhanGiua"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Khung/Header/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Money" type="Label" parent="Khung/Header/Title/MarginContainer/PhanGiua/HBoxContainer"]
+[node name="Money" type="Label" parent="Khung/Header/MarginContainer/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_type_variation = &"LabelLarge"
 text = "15000"
 
-[node name="Sprite2D" type="TextureRect" parent="Khung/Header/Title/MarginContainer/PhanGiua/HBoxContainer"]
+[node name="Sprite2D" type="TextureRect" parent="Khung/Header/MarginContainer/HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 texture = ExtResource("5_gf3n3")

@@ -4,12 +4,9 @@ extends BaseDog
 const BATTER_KNOCKBACK_SCENE: PackedScene = preload("res://scenes/characters/dogs/batter_dog/batter_knockback/batter_knockback.tscn")
 const EXPLOSION_SPAWNER_SCENE: PackedScene = preload("res://scenes/characters/dogs/batter_dog/explosion/explosion_spawner.tscn")
 
-func setup(global_position: Vector2) -> void:
-	super.setup(global_position)
-	_spawn_drum()
-
 func _ready() -> void:
 	super._ready()
+	_spawn_drum()
 	
 	var tween := create_tween()
 	tween.set_loops()
@@ -29,7 +26,7 @@ func _ready() -> void:
 	
 func _spawn_drum() -> void:
 	var knockback = BATTER_KNOCKBACK_SCENE.instantiate()
-	get_tree().current_scene.add_child(knockback)
+	InBattle.get_battlefield().add_child(knockback)
 	knockback.setup(self)
 	
 func _on_state_entered(state_path: String):
@@ -44,4 +41,4 @@ func _on_state_entered(state_path: String):
 func _spawn_expolsion() -> void:
 	var explosion_spawner = EXPLOSION_SPAWNER_SCENE.instantiate()
 	get_tree().current_scene.add_child(explosion_spawner)
-	explosion_spawner.setup(get_bottom_global_position(), damage, character_type)
+	explosion_spawner.setup(get_bottom_global_position(), damage, _dog_level, character_type)

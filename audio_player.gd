@@ -3,9 +3,6 @@ extends Node
 # preloaded audio
 const BUTTON_PRESSED_AUDIO: AudioStream = preload("res://resources/sound/button_pressed.mp3")
 
-const MUSIC_DEFAULT_DB: float = -7.0
-const SFX_DEFAULT_DB: float = 0.0
-
 ## contain players and related data like tween node and playback position 
 var _music_players: Dictionary = {} 
 var _in_battle_sfx_players: Dictionary = {} 
@@ -51,14 +48,12 @@ func _create_music_audio_player(audio: AudioStream) -> AudioStreamPlayer:
 	var music_player := AudioStreamPlayer.new()
 	music_player.stream = audio
 	music_player.bus = "Music"
-	music_player.volume_db = MUSIC_DEFAULT_DB
 	return music_player
 	
 func _create_sfx_audio_player(audio: AudioStream) -> AudioStreamPlayer:
 	var sfx_player = AudioStreamPlayer.new()
 	sfx_player.bus = "SoundFX"
 	sfx_player.stream = audio
-	sfx_player.volume_db = SFX_DEFAULT_DB
 	return sfx_player
 
 func play_sfx(audio_stream: AudioStream, pitch_scale: float = 1.0):
@@ -82,14 +77,13 @@ func play_music(audio_stream: AudioStream, resume: bool = false, with_transition
 	var tween: Tween = music_data['tween']
 	
 	if not with_transition:
-		music_player.volume_db = MUSIC_DEFAULT_DB
 		tween.kill()
 	else:		
 		tween.pause()
 		tween = create_tween()
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(music_player, "volume_db", -7, 0.5)
+		tween.tween_property(music_player, "volume_db", 0, 0.25)
 		music_data['tween'] = tween
 	
 	# music is not fully stopped yet (still being in fade out transition)
@@ -107,7 +101,7 @@ func play_music(audio_stream: AudioStream, resume: bool = false, with_transition
 			remove_music(audio_stream)
 	, CONNECT_ONE_SHOT)
 	
-func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove_when_done: bool = false):
+func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove_when_done: bool = false, stop_duration: float = 0.5):
 	if audio_stream == null:
 		return
 	
@@ -121,22 +115,29 @@ func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove
 	tween.pause()
 	tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property(music_player, "volume_db", -80, 0.5)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(music_player, "volume_db", -80, stop_duration)
 	music_data['tween'] = tween
 	
+	if remove_when_done:
+		_music_players.erase(audio_stream.resource_path)
+		
 	await tween.finished
 	
 	## if is removed
 	if music_player == null:
 		return
 			
-	music_player.stop()	
-	
 	if remove_when_done:
-		remove_music(audio_stream)
+		music_player.stop()	
+		music_player.queue_free()
 	else:
 		music_data['playback_position'] = music_player.get_playback_position()
+		music_player.stop()	
+
+func stop_current_music(with_transition: bool = false, remove_when_done: bool = false, stop_duration: float = 0.5):
+	if get_current_music() != null:
+		stop_music(get_current_music(), with_transition, remove_when_done, stop_duration)
 	
 ## remove music data from memory (this includes playback position and audio player).
 ## only call this method when music is already stop
@@ -156,7 +157,6 @@ func get_random_pitch_scale() -> float:
 func _create_in_battle_sfx() -> AudioStreamPlayer:
 	var sfx_player = AudioStreamPlayer.new()
 	sfx_player.bus = "InBattleFX"
-	sfx_player.volume_db = SFX_DEFAULT_DB
 	return sfx_player
 
 func add_in_battle_sfx(audio_stream: AudioStream, max_polyphony: int = 1) -> void:
@@ -202,3 +202,4 @@ func play_and_remove_in_battle_sfx(audio_stream: AudioStream, pitch_scale: float
 	
 	await sfx_player.finished
 	sfx_player.queue_free()
+	

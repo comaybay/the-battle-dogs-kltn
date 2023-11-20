@@ -2,7 +2,6 @@ extends Control
 
 const ListItem = preload("res://scenes/upgrade/item_box.tscn")
 
-const SHOP_THEME: AudioStream = preload("res://resources/sound/music/shop.mp3")
 const UNLOCK_AUDIO: AudioStream = preload("res://resources/sound/unlock.wav")
 const UPGRADE_AUDIO: AudioStream = preload("res://resources/sound/upgrade.mp3")
 
@@ -20,8 +19,6 @@ var skill_boxes: Array[ItemUpgradeBox]
 var passive_boxes: Array[ItemUpgradeBox]
 
 func _ready():
-	AudioPlayer.play_music(SHOP_THEME, false, false)
-	
 	%NutNangCap.disabled = true
 	%TabContainer.set_tab_title(0, tr("@CHARACTERS"))
 	%TabContainer.set_tab_title(1, tr("@SKILLS"))
@@ -47,9 +44,6 @@ func _ready():
 		canvas.add_child.call_deferred(tutorial_dog)
 		tutorial_dog.tree_exited.connect(func(): canvas.queue_free())
 
-func _exit_tree() -> void:
-	AudioPlayer.stop_music(SHOP_THEME, true)
-		
 func add_items():
 	var type := ItemUpgradeBox.Type
 	
@@ -127,7 +121,7 @@ func _on_nut_nang_cap_pressed():
 		if  type == ItemUpgradeBox.Type.SKILL:
 			Data.save_data["skills"].append(item)
 		elif type == ItemUpgradeBox.Type.CHARACTER:
-			Data.save_data["dogs"].append(item)
+			Data.unlock_dog(item_id)
 		else:
 			Data.save_data["passives"].append(item)
 	

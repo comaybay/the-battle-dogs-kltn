@@ -33,12 +33,16 @@ func _ready() -> void:
 			show_tutorial_preference()
 	)
 	
+	var intro_path: String = "res://scenes/intros/%s_intro/%s_intro.tscn" % [
+		Data.selected_chapter_id, Data.selected_chapter_id
+	]
+	
 	%TutorialYes.pressed.connect(
 		func():
 			%YesSound.play()
 			$AnimationPlayer.play("dog_jump_up")
 			await $AnimationPlayer.animation_finished
-			get_tree().change_scene_to_file("res://scenes/start_menu/Intro.tscn")
+			get_tree().change_scene_to_file(intro_path)
 	)
 	
 	%TutorialNo.pressed.connect(
@@ -47,7 +51,7 @@ func _ready() -> void:
 			choose_skip_tutorial()
 			$AnimationPlayer.play("dog_jump_off")
 			await $AnimationPlayer.animation_finished
-			get_tree().change_scene_to_file("res://scenes/start_menu/Intro.tscn")
+			get_tree().change_scene_to_file(intro_path)
 	)
 
 func set_language_preference(language_code: String):

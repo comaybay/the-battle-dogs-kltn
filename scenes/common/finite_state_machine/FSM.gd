@@ -20,7 +20,8 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 		
-	owner.connect("ready", _on_owner_ready)
+	state = get_node(initial_state)
+	owner.ready.connect(_on_owner_ready, CONNECT_ONE_SHOT)
 
 func get_current_state() -> String:
 	return state.name
@@ -29,15 +30,13 @@ func get_current_state_data() -> Dictionary:
 	return _state_data
 
 func _on_owner_ready():
-	state = get_node(initial_state)
-	
 	for node in get_children():
 		if node.is_FSM_state == true:
 			node.connect("transition", _on_state_transition)
 	
 	state_entering.emit(initial_state, _state_data)
 	update_FSM_process()
-	state.enter({})
+	state.enter(_state_data)
 	state_entered.emit(initial_state)
 
 func change_state(next_state_name: String, data: Dictionary = {}):

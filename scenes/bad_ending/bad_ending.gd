@@ -3,7 +3,7 @@ extends Panel
 
 func _ready() -> void:
 	if not Data.dogs.has("batter_dog"):
-		Data.save_data['dogs'].append({ 'ID': 'batter_dog', 'level': 1 })
+		Data.unlock_dog('batter_dog')
 		Data.teams[0]['dog_ids'][1] = 'batter_dog'
 		Data.save()
 		$AnimationPlayer.animation_finished.connect(_batter_dog_inception)

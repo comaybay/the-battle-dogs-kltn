@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The Battle Dogs"
-run/main_scene="res://scenes/online_battle/lobby/lobby.tscn"
+run/main_scene="res://scenes/intros/the_battle_dogs_rising_intro/the_battle_dogs_rising_intro.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
@@ -219,10 +219,15 @@ ui_debug_win_battle={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194338,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+ui_debug_kill_cats={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194337,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://resources/translations/translations_dogs.en.translation", "res://resources/translations/translations_dogs.vi.translation", "res://resources/translations/translations_common.en.translation", "res://resources/translations/translations_common.vi.translation", "res://resources/translations/translations_skills.en.translation", "res://resources/translations/translations_skills.vi.translation", "res://resources/translations/translations_passives.en.translation", "res://resources/translations/translations_passives.vi.translation", "res://resources/translations/translations_dialogue.en.translation", "res://resources/translations/translations_dialogue.vi.translation", "res://resources/translations/translations_speaker_dog.en.translation", "res://resources/translations/translations_speaker_dog.vi.translation", "res://resources/translations/translations_store.en.translation", "res://resources/translations/translations_store.vi.translation", "res://resources/translations/translations_stages.en.translation", "res://resources/translations/translations_stages.vi.translation")
+locale/translations=PackedStringArray("res://resources/translations/translations_dogs.en.translation", "res://resources/translations/translations_dogs.vi.translation", "res://resources/translations/translations_skills.en.translation", "res://resources/translations/translations_skills.vi.translation", "res://resources/translations/translations_passives.en.translation", "res://resources/translations/translations_passives.vi.translation", "res://resources/translations/translations_dialogue.en.translation", "res://resources/translations/translations_dialogue.vi.translation", "res://resources/translations/translations_speaker_dog.en.translation", "res://resources/translations/translations_speaker_dog.vi.translation", "res://resources/translations/translations_store.en.translation", "res://resources/translations/translations_store.vi.translation", "res://resources/translations/translations_stages.en.translation", "res://resources/translations/translations_stages.vi.translation", "res://resources/translations/translations_common.en.translation", "res://resources/translations/translations_common.vi.translation", "res://resources/translations/translations_dialogue.format.translation")
 
 [layer_names]
 

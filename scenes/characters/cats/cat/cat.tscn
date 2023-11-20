@@ -125,7 +125,3 @@ metadata/_edit_lock_ = true
 
 [node name="FiniteStateMachine" parent="." index="5"]
 metadata/_edit_lock_ = true
-
-[node name="BossKnockback" parent="FiniteStateMachine/KnockbackState" index="1"]
-volume_db = -4.5
-bus = &"SoundFX"

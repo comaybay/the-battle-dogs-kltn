@@ -6,23 +6,22 @@
   "reward_bone": 20000,
   "spawn_patterns": [
     {
-      "name": "cat",
-      "duration": 5,
-      "delay": 0
+      "id": "cat",
+      "interval": 5
     },
     {
-      "name": "leg_cat",
-      "duration": 15,
+      "id": "leg_cat",
+      "interval": 15,
       "delay": 10
     },
     {
-      "name": "smol_cat",
-      "duration": 5,
+      "id": "smol_cat",
+      "interval": 5,
       "delay": 30
     },
     {
-      "name": "smol_cat",
-      "duration": 5,
+      "id": "smol_cat",
+      "interval": 5,
       "delay": 12.5
     }
   ]

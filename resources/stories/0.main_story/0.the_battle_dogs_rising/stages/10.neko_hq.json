@@ -8,30 +8,30 @@
   "power_scale": 2.75,
   "spawn_patterns": [
     {
-      "name": "cat",
-      "duration": 5,
-      "delay": 0
+      "id": "cat",
+      "interval": 5,
+      "delay": 5
     },
     {
-      "name": "leg_cat",
-      "duration": 5,
+      "id": "leg_cat",
+      "interval": 5,
       "delay": 10.5
     },
     {
-      "name": "rolling_cat",
-      "duration": 5,
+      "id": "rolling_cat",
+      "interval": 5,
       "delay": 20
     },
     {
-      "name": "smol_cat",
-      "duration": 0.5,
+      "id": "smol_cat",
+      "interval": 0.5,
       "delay": 40
     }
   ],
   "bosses": [
     {
       "health_at": 9,
-      "name": "cat",
+      "id": "cat",
       "buffs": [
         { "name": "speed", "scale": 1 },
         { "name": "health", "scale": 20 },
@@ -43,7 +43,7 @@
     },
     {
       "health_at": 8,
-      "name": "cat",
+      "id": "cat",
       "buffs": [
         { "name": "speed", "scale": 1.5 },
         { "name": "health", "scale": 25 },
@@ -55,7 +55,7 @@
     },
     {
       "health_at": 7,
-      "name": "cat",
+      "id": "cat",
       "buffs": [
         { "name": "speed", "scale": 2 },
         { "name": "health", "scale": 30 },
@@ -67,7 +67,7 @@
     },
     {
       "health_at": 6,
-      "name": "cat",
+      "id": "cat",
       "buffs": [
         { "name": "speed", "scale": 2.5 },
         { "name": "health", "scale": 35 },
@@ -79,7 +79,7 @@
     },
     {
       "health_at": 5,
-      "name": "cat",
+      "id": "cat",
       "buffs": [
         { "name": "speed", "scale": 3 },
         { "name": "health", "scale": 40 },
@@ -91,7 +91,7 @@
     },
     {
       "health_at": 4,
-      "name": "cat",
+      "id": "cat",
       "buffs": [
         { "name": "speed", "scale": 3.5 },
         { "name": "health", "scale": 60 },
@@ -103,7 +103,7 @@
     },
     {
       "health_at": 3,
-      "name": "cat",
+      "id": "cat",
       "buffs": [
         { "name": "speed", "scale": 4 },
         { "name": "health", "scale": 70 },
@@ -115,7 +115,7 @@
     },
     {
       "health_at": 2,
-      "name": "cat",
+      "id": "cat",
       "buffs": [
         { "name": "speed", "scale": 5 },
         { "name": "health", "scale": 90 },
@@ -127,7 +127,7 @@
     },
     {
       "health_at": 1,
-      "name": "cat",
+      "id": "cat",
       "buffs": [
         { "name": "speed", "scale": 0.2 },
         { "name": "health", "scale": 150 },
@@ -139,7 +139,7 @@
     },
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 1.5 },
         { "name": "health", "scale": 10 },
@@ -151,7 +151,7 @@
     },
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 2 },
         { "name": "health", "scale": 10 },
@@ -163,7 +163,7 @@
     },
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 2.2 },
         { "name": "health", "scale": 10 },

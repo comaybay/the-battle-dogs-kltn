@@ -24,3 +24,9 @@ func is_host_OS_web() -> bool:
 func is_host_OS_web_mobile() -> bool:
 	return OS.has_feature("web_android") or OS.has_feature("web_ios")
 	
+func tr_format(message: StringName) -> String:
+	var locale := TranslationServer.get_locale()
+	TranslationServer.set_locale('format')
+	var format: String = tr(message)
+	TranslationServer.set_locale(locale)
+	return format 

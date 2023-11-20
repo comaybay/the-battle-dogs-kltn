@@ -80,5 +80,5 @@ func _delete_save() -> void:
 	Data.save()
 	Data.load_settings()
 	
-	AudioPlayer.stop_music(AudioPlayer.get_current_music())
+	AudioPlayer.stop_current_music()
 	get_tree().change_scene_to_file("res://scenes/new_game_preferences/new_game_preferences.tscn")

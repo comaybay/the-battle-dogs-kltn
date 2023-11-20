@@ -25,9 +25,6 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_u6a31")
 
-[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
-text = "@UPGRADE"
-
 [node name="Content" parent="Khung" index="1"]
 script = ExtResource("3_jpfx5")
 
@@ -37,36 +34,27 @@ volume_db = 3.851
 pitch_scale = 3.86
 bus = &"SoundFX"
 
-[node name="PhanGiua" type="VBoxContainer" parent="Khung/Content" index="1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 20.0
-theme_override_constants/separation = 15
-
-[node name="TabContainer" type="TabContainer" parent="Khung/Content/PhanGiua" index="0"]
+[node name="TabContainer" type="TabContainer" parent="Khung/Content" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 278.0
 size_flags_vertical = 3
 tab_alignment = 1
 
-[node name="NhanVat" type="ScrollContainer" parent="Khung/Content/PhanGiua/TabContainer" index="1"]
+[node name="NhanVat" type="ScrollContainer" parent="Khung/Content/TabContainer" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("4_iw7cb")
 
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/TabContainer/NhanVat" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/TabContainer/NhanVat" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/TabContainer/NhanVat/MarginContainer" index="0"]
+[node name="GridContainer" type="GridContainer" parent="Khung/Content/TabContainer/NhanVat/MarginContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -74,41 +62,20 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 50
 
-[node name="Skill" type="ScrollContainer" parent="Khung/Content/PhanGiua/TabContainer" index="2"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("4_iw7cb")
-
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/TabContainer/Skill" index="0"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
-
-[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/TabContainer/Skill/MarginContainer" index="0"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 50
-
-[node name="Passives" type="ScrollContainer" parent="Khung/Content/PhanGiua/TabContainer" index="3"]
+[node name="Skill" type="ScrollContainer" parent="Khung/Content/TabContainer" index="2"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("4_iw7cb")
 
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/TabContainer/Passives" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/TabContainer/Skill" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="GridContainer" type="GridContainer" parent="Khung/Content/PhanGiua/TabContainer/Passives/MarginContainer" index="0"]
+[node name="GridContainer" type="GridContainer" parent="Khung/Content/TabContainer/Skill/MarginContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -116,22 +83,46 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 50
 
-[node name="PhanDuoi" type="VBoxContainer" parent="Khung/Content/PhanGiua" index="1"]
+[node name="Passives" type="ScrollContainer" parent="Khung/Content/TabContainer" index="3"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("4_iw7cb")
+
+[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/TabContainer/Passives" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="GridContainer" type="GridContainer" parent="Khung/Content/TabContainer/Passives/MarginContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 50
+
+[node name="PhanDuoi" type="VBoxContainer" parent="Khung/Content" index="2"]
+layout_mode = 2
+offset_top = 293.0
+offset_right = 1152.0
+offset_bottom = 522.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.82
 
-[node name="MarginContainer2" type="MarginContainer" parent="Khung/Content/PhanGiua/PhanDuoi" index="0"]
+[node name="MarginContainer2" type="MarginContainer" parent="Khung/Content/PhanDuoi" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="TieuDe" type="HBoxContainer" parent="Khung/Content/PhanGiua/PhanDuoi/MarginContainer2" index="0"]
+[node name="TieuDe" type="HBoxContainer" parent="Khung/Content/PhanDuoi/MarginContainer2" index="0"]
 layout_mode = 2
 alignment = 1
 
-[node name="InfoLabel" type="Label" parent="Khung/Content/PhanGiua/PhanDuoi/MarginContainer2/TieuDe" index="0"]
+[node name="InfoLabel" type="Label" parent="Khung/Content/PhanDuoi/MarginContainer2/TieuDe" index="0"]
 custom_minimum_size = Vector2(258, 0)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -140,7 +131,7 @@ theme_override_font_sizes/font_size = 32
 text = "@INFORMATION"
 horizontal_alignment = 1
 
-[node name="NutNangCap" type="Button" parent="Khung/Content/PhanGiua/PhanDuoi/MarginContainer2/TieuDe" index="1"]
+[node name="NutNangCap" type="Button" parent="Khung/Content/PhanDuoi/MarginContainer2/TieuDe" index="1"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -148,17 +139,17 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 24
 text = "@UPGRADE"
 
-[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanGiua/PhanDuoi" index="1"]
+[node name="MarginContainer" type="MarginContainer" parent="Khung/Content/PhanDuoi" index="1"]
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 100
 
-[node name="ThongTin" type="VBoxContainer" parent="Khung/Content/PhanGiua/PhanDuoi/MarginContainer" index="0"]
+[node name="ThongTin" type="VBoxContainer" parent="Khung/Content/PhanDuoi/MarginContainer" index="0"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ItemName" type="Label" parent="Khung/Content/PhanGiua/PhanDuoi/MarginContainer/ThongTin" index="0"]
+[node name="ItemName" type="Label" parent="Khung/Content/PhanDuoi/MarginContainer/ThongTin" index="0"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -169,7 +160,7 @@ text = "Tên"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemDescription" type="Label" parent="Khung/Content/PhanGiua/PhanDuoi/MarginContainer/ThongTin" index="1"]
+[node name="ItemDescription" type="Label" parent="Khung/Content/PhanDuoi/MarginContainer/ThongTin" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -182,4 +173,4 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[connection signal="pressed" from="Khung/Content/PhanGiua/PhanDuoi/MarginContainer2/TieuDe/NutNangCap" to="Khung/Content" method="_on_nut_nang_cap_pressed"]
+[connection signal="pressed" from="Khung/Content/PhanDuoi/MarginContainer2/TieuDe/NutNangCap" to="Khung/Content" method="_on_nut_nang_cap_pressed"]

@@ -6,10 +6,10 @@ uid="uid://b3g0mwjptcjey"
 
 [deps]
 
-files=["res://resources/translations/translations_dialogue.vi.translation", "res://resources/translations/translations_dialogue.en.translation"]
+files=["res://resources/translations/translations_dialogue.format.translation", "res://resources/translations/translations_dialogue.vi.translation", "res://resources/translations/translations_dialogue.en.translation"]
 
 source_file="res://resources/translations/translations_dialogue.csv"
-dest_files=["res://resources/translations/translations_dialogue.vi.translation", "res://resources/translations/translations_dialogue.en.translation"]
+dest_files=["res://resources/translations/translations_dialogue.format.translation", "res://resources/translations/translations_dialogue.vi.translation", "res://resources/translations/translations_dialogue.en.translation"]
 
 [params]
 

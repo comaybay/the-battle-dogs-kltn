@@ -31,10 +31,10 @@ func _ready():
 		tutorial_dog.tree_exited.connect(func(): canvas.queue_free())
 	
 func loadCharacterList() -> void:
-	for data in Data.dogs.values():
-		var item := create_item(data['ID'], SelectCharacterBox.Type.CHARACTER)
+	for dog_id in Data.dogs:
+		var item := create_item(dog_id, SelectCharacterBox.Type.CHARACTER)
 		%CharacterList.add_child(item)
-		character_id_to_item[data['ID']] = item
+		character_id_to_item[dog_id] = item
 		item.pressed.connect(_on_add_character_to_slot.bind(item))
 
 func loadSkillList() -> void:

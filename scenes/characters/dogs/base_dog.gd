@@ -6,27 +6,50 @@ class_name BaseDog extends Character
 # Kiem tra xem nhan vat co dang bi dieu khien hay khong
 var is_user_control 
 
+var _dog_level: int
+func get_dog_level() -> int: return _dog_level
+
+var _abilities: Array[String]
+func has_ability(ability: String) -> bool: 
+	if InBattle.in_p2p_battle:
+		return true
+	else:
+		return _abilities.has(ability)
+
 ## p2p variables
 var _sync_data: Dictionary
 
-func setup(global_position: Vector2) -> void:
-	if not Global.is_host_OS_web_mobile() and not InBattle.in_p2p_battle:
+func setup(
+		global_position: Vector2,
+		dog_level: int,
+		abilities: Array[String],
+		character_type: Character.Type = Character.Type.DOG,
+		is_boss: bool = false
+	) -> void:
+		
+	self.character_type = character_type
+	_setup(global_position, is_boss)
+	
+	if not Global.is_host_OS_web_mobile() and not InBattle.in_p2p_battle and character_type != Character.Type.CAT:
 		$Arrow.position =  Vector2(20,0)
 		$Arrow.position.y = -round($CollisionShape2D.shape.extents.y * 2)
 		input_event.connect(_on_input_event)
 		mouse_entered.connect(_on_mouse_entered)
 		mouse_exited.connect(_on_mouse_exited)
 	
-	var battlefield: BaseBattlefield = get_tree().current_scene
-	
-	var level = InBattle.get_dog_level(name_id)
-	var scale = 1 + ((level - 1) * 2.0 / 9.0)
+	_abilities = abilities
+	_dog_level = dog_level
+	var scale := 1.0 + ((dog_level - 1) * 2.0 / 9.0)
 	damage *= scale  
 	health *= scale
+	
+	if character_type == Character.Type.CAT:
+		ready.connect(func():
+			get_character_animation_node().scale.x = -1,
+			CONNECT_ONE_SHOT
+		)
 		
 	is_user_control = false
-	
-	super.setup(global_position)
 	
 	_sync_data = { 
 		"object_type": P2PObjectSync.ObjectType.DOG,

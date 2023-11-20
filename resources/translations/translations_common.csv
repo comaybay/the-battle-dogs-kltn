@@ -91,7 +91,7 @@ keys,vi,en
 @STEAM,Steam,Steam
 @BUY,Mua,Buy
 @QUIT_GAME_STEAM_DISCONNECTED,"Mất kết nối với Steam, vui lòng đăng nhập vào Steam và khởi động lại trò chơi.","Steam disconnected, please login to Steam again and restart the game."
-@LOBBY,Sảnh,Lobby
+@LOBBY,Đánh Online - Sảnh,Online Battle - Lobby
 @REFRESH,Làm mới,Refresh
 @ROOM,Phòng đợi,Room
 @ROOM_NAME,Tên phòng,Room name

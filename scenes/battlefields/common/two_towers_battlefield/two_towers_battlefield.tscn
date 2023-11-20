@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://df6pmsavc8k75"]
+
+[ext_resource type="PackedScene" uid="uid://culho3ivbdqd3" path="res://scenes/battlefields/common/base_battlefield/base_battlefield.tscn" id="1_x30q7"]
+[ext_resource type="Script" path="res://scenes/battlefields/common/two_towers_battlefield/two_towers_battlefield.gd" id="2_qtrbu"]
+
+[node name="TwoTowerBattlefield" node_paths=PackedStringArray("dog_tower", "cat_tower") instance=ExtResource("1_x30q7")]
+script = ExtResource("2_qtrbu")
+dog_tower = NodePath("")
+cat_tower = NodePath("")

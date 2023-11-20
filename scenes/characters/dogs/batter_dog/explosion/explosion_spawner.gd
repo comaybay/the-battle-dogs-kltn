@@ -2,7 +2,7 @@ extends Node
 
 const EXPLOSION_SCENE: PackedScene = preload("res://scenes/characters/dogs/batter_dog/explosion/batter_dog_explosion.tscn") 
 
-func setup(start_global_position: Vector2, batter_damage: int, character_type: Character.Type) -> void:
+func setup(start_global_position: Vector2, batter_damage: int, dog_level: int, character_type: Character.Type) -> void:
 	var explosion_position := start_global_position
 	var destination_x: int
 	if character_type == Character.Type.DOG:
@@ -14,8 +14,7 @@ func setup(start_global_position: Vector2, batter_damage: int, character_type: C
 
 	await get_tree().create_timer(0.3, false).timeout
 	
-	var level: int = InBattle.get_dog_level("batter_dog")
-	var explosion_num = (2 + level) if level < 10 else 999
+	var explosion_num = (2 + dog_level) if dog_level < 10 else 999
 	
 	if character_type == Character.Type.DOG:
 		while explosion_position.x <= destination_x and explosion_num > 0:

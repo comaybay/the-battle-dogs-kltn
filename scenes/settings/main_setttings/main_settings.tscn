@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://6ewhh0xkgi5q"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_jj28c"]
-[ext_resource type="PackedScene" uid="uid://divc2ithyhuj2" path="res://scenes/battlefield/gui/pause_menu/music_button/music_button.tscn" id="2_bwvok"]
+[ext_resource type="PackedScene" uid="uid://divc2ithyhuj2" path="res://scenes/battlefields/common/base_battlefield/gui/pause_menu/music_button/music_button.tscn" id="2_bwvok"]
 [ext_resource type="Script" path="res://scenes/settings/main_setttings/main_settings.gd" id="2_uvc2n"]
-[ext_resource type="PackedScene" uid="uid://g3tb8fv0v5he" path="res://scenes/battlefield/gui/pause_menu/sfx_button/sfx_button.tscn" id="3_47b4y"]
+[ext_resource type="PackedScene" uid="uid://g3tb8fv0v5he" path="res://scenes/battlefields/common/base_battlefield/gui/pause_menu/sfx_button/sfx_button.tscn" id="3_47b4y"]
 [ext_resource type="Script" path="res://scenes/settings/language_option.gd" id="4_tq8gp"]
 [ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="6_emdhs"]
 

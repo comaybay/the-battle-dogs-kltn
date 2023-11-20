@@ -7,20 +7,20 @@
   "reward_bone": 9999,
   "spawn_patterns": [
     {
-      "name": "cat",
-      "duration": 5,
-      "delay": 0
+      "id": "cat",
+      "interval": 5,
+      "delay": 5
     },
     {
-      "name": "leg_cat",
-      "duration": 15,
-      "delay": 10
+      "id": "leg_cat",
+      "interval": 15,
+      "delay": 25
     }
   ],
   "bosses": [
     {
       "health_at": 1,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "health", "scale": 10 },
         { "name": "damage", "scale": 5 },

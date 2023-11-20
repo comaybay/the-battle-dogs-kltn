@@ -35,20 +35,16 @@ func _setup_max_health() -> void:
 func spawn(dog_id: String) -> BaseDog:	
 	var index = _player_data.team_dog_ids.find(dog_id)
 	var dog := _player_data.team_dog_scenes[index].instantiate() as BaseDog
+	var dog_level := InBattle.get_dog_level(dog_id)
 	
 	if direction == Direction.LEFT_TO_RIGHT:
+		dog.setup(global_position + Vector2(100, 0), dog_level, [])
 		InBattle.get_battlefield().add_child(dog)
-		var offset_y = dog.global_position.y - dog.get_bottom_global_position().y - 1
-		dog.setup(global_position + Vector2(100, offset_y))
 	else:
 		# the dog in this case needs to move from right to left so it will act as a "Cat" 
-		dog.character_type = Character.Type.CAT
-		dog.remove_from_group("dogs")	
-		dog.add_to_group("cats")	
-		dog.get_character_animation_node().scale.x = -1
+
+		dog.setup(global_position + Vector2(-100, 0), dog_level, [])
 		InBattle.get_battlefield().add_child(dog)
-		var offset_y = dog.global_position.y - dog.get_bottom_global_position().y - 1
-		dog.setup(global_position + Vector2(-100, offset_y))
 	
 	var reward_money := int(Data.dog_info[dog_id]['spawn_price'] / 4) 
 	if _is_player_tower:

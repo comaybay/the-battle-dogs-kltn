@@ -1,13 +1,31 @@
 {
   "main_story": {
-    "the_battle_dogs_rising": {
-      "reward_type": "none"
-    }
+    "dog_base_theme": "dog_base_theme",
+    "the_battle_dogs_rising": {}
   },
   "eastern_boundaries": {
-    "chapter_1": {
-      "reward_type": "dog",
-      "reward": "miko_dog"
+    "dog_base_theme": "eastern_boundaries_intro",
+    "shrine_maiden_of_paradise": {
+      "miko_dog": {
+        "reward": {
+          "reward_type": "dog",
+          "dog_id": "miko_dog"
+        }
+      },
+      "yin_yang_orb": {
+        "reward": {
+          "reward_type": "ability",
+          "dog_id": "miko_dog",
+          "ability_id": "yin_yang_orb"
+        }
+      },
+      "spell_card_rule": {
+        "reward": {
+          "reward_type": "ability",
+          "dog_id": "miko_dog",
+          "ability_id": "hakurei_danmaku_field"
+        }
+      }
     }
   }
 }

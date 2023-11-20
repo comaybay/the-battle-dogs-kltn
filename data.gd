@@ -139,8 +139,12 @@ var selected_story_id: String:
 	get: return save_data['selected_story_id']
 	set(value): save_data['selected_story_id'] = value
 
-# auto generated data
+var dogs: Dictionary:
+	get: return save_data['dogs']
+	set(value): save_data['dogs'] = value
 
+
+# auto generated data
 # general info
 var dog_info := Dictionary()
 var store_info := Dictionary()
@@ -148,17 +152,22 @@ var skill_info := Dictionary()
 var passive_info := Dictionary()
 var story_info := Dictionary()
 
+var chapter_info: Dictionary:
+	get: return story_info[selected_story_id][selected_chapter_id]
+
 # save data
-var dogs := Dictionary()
 var skills := Dictionary()
 var store := Dictionary()
 var passives := Dictionary()
 
-## this will be generated on entering a map
-var chapter_last_stage: int
+## this will be generated on entering a map.
+## set to 999 for debuging purposes
+var chapter_last_stage: int = 999
 
 ## count everytime player lost in a tutorial 
 var tutorial_lost: int = 0 
+
+var at_start_game_intro: bool = true
 
 func _init() -> void:
 	# if player opens game for the first time
@@ -224,8 +233,9 @@ func _load_game_save() -> Dictionary:
 	if not save_data.has("date"):
 		save_data['date'] = Time.get_datetime_string_from_system()
 	
-	save_data = _compare_and_update_save_file(new_game_save_data, save_data)	
-	save_data = _migrate_older_version_data(save_data)
+	_compare_and_update_save_file(new_game_save_data, save_data)	
+	_migrate_older_version_data(save_data)
+	_compare_and_overwrite_save_data(new_game_save_data, save_data)
 	
 	file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	file.store_line(JSON.stringify(save_data))
@@ -234,13 +244,13 @@ func _load_game_save() -> Dictionary:
 	return save_data
 	
 ## compare and update save data in case if the save data of an older version of the game
-func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Dictionary) -> Dictionary:	
+func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Dictionary) -> void:	
 	for key in new_game_save_data:
 		if not save_data.has(key):
 			save_data[key] = new_game_save_data[key]
 			
-		elif typeof(save_data[key]) != typeof(new_game_save_data[key]):
-			save_data[key] = new_game_save_data[key]
+		if typeof(save_data[key]) != typeof(new_game_save_data[key]):
+			continue
 			
 		elif typeof(save_data[key]) == TYPE_DICTIONARY:
 			_compare_and_update_save_file(new_game_save_data[key], save_data[key])
@@ -248,8 +258,6 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 		elif typeof(save_data[key]) == TYPE_ARRAY and new_game_save_data[key].size() > 0:
 			_compare_and_update_save_file_array(new_game_save_data[key][0], save_data[key])
 
-	return save_data
-			
 func _compare_and_update_save_file_array(new_game_save_elem: Variant, save_data: Array) -> void:
 	for i in range(save_data.size()):
 		var elem = save_data[i]
@@ -262,7 +270,7 @@ func _compare_and_update_save_file_array(new_game_save_elem: Variant, save_data:
 		elif typeof(elem) == TYPE_DICTIONARY:
 			_compare_and_update_save_file(new_game_save_elem, elem)
 
-func _migrate_older_version_data(save_data: Dictionary) -> Dictionary:
+func _migrate_older_version_data(save_data: Dictionary) -> void:
 	## version <= 1.8 migration		
 	if save_data.has("passed_level"):
 		save_data["chapters"]["the_battle_dogs_rising"]["passed_stage"] = save_data["passed_level"]
@@ -278,24 +286,40 @@ func _migrate_older_version_data(save_data: Dictionary) -> Dictionary:
 		save_data["selected_stage_id"] = save_data["selected_battlefield_id"]
 		save_data.erase("selected_battlefield_id")
 		
-	return save_data
+	if typeof(save_data['dogs']) == TYPE_ARRAY:
+		var new_dogs_data := {}
+		for old_dog_data in save_data['dogs']:
+			new_dogs_data[old_dog_data['ID']] = {'level': old_dog_data['level'], 'forms': ['normal'], "abilities": []}
+			
+		save_data['dogs'] = new_dogs_data
+
+func _compare_and_overwrite_save_data(new_game_save_data: Dictionary, save_data: Dictionary) -> void:	
+	for key in new_game_save_data:
+		if typeof(save_data[key]) != typeof(new_game_save_data[key]):
+			save_data[key] = new_game_save_data[key]
+			
+		elif typeof(save_data[key]) == TYPE_DICTIONARY:
+			_compare_and_update_save_file(new_game_save_data[key], save_data[key])
+			
+		elif typeof(save_data[key]) == TYPE_ARRAY and new_game_save_data[key].size() > 0:
+			_compare_and_update_save_file_array(new_game_save_data[key][0], save_data[key])
 
 func _ready() -> void:	
 	## if player opens the game for the first time (game_language is not chose yet)
 	use_sw_data = false
 	if game_language == "":	
-		get_tree().change_scene_to_file.call_deferred("res://scenes/new_game_preferences/new_game_preferences.tscn")
+		get_tree().change_scene_to_file("res://scenes/new_game_preferences/new_game_preferences.tscn")
+	elif not Debug.is_debug_mode():
+		get_tree().change_scene_to_file(
+			"res://scenes/intros/%s_intro/%s_intro.tscn" % [selected_chapter_id, selected_chapter_id]
+		)
 	
 	GlobalControl.set_fullscreen(fullscreen)
 	
 func compute_values():
-	dogs.clear()
 	skills.clear()
 	store.clear()
 	passives.clear()
-	
-	for dog in save_data["dogs"]:
-		dogs[dog["ID"]] = dog
 	
 	for skill in save_data["skills"]:
 		skills[skill["ID"]] = skill
@@ -337,3 +361,5 @@ func _exit_tree():
 	if use_sw_data == true :
 		save_data = old_data
 
+func unlock_dog(dog_id: String) -> void:
+	Data.dogs[dog_id] = { "abilities": [], "forms": ["normal"], "level": 1 }

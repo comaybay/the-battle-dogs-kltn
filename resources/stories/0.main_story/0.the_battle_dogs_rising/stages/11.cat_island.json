@@ -8,35 +8,35 @@
   "power_scale": 3.5,
   "spawn_patterns": [
     {
-      "name": "cat",
-      "duration": 5,
-      "delay": 0
+      "id": "cat",
+      "interval": 5,
+      "delay": 5
     },
     {
-      "name": "leg_cat",
-      "duration": 5,
+      "id": "leg_cat",
+      "interval": 5,
       "delay": 10.5
     },
     {
-      "name": "rolling_cat",
-      "duration": 5,
+      "id": "rolling_cat",
+      "interval": 5,
       "delay": 20
     },
     {
-      "name": "smol_cat",
-      "duration": 0.5,
+      "id": "smol_cat",
+      "interval": 0.5,
       "delay": 40
     },
     {
-      "name": "buff_cat",
-      "duration": 60,
-      "delay": 0
+      "id": "buff_cat",
+      "interval": 60,
+      "delay": 60
     }
   ],
   "bosses": [
     {
       "health_at": 4,
-      "name": "smol_cat",
+      "id": "smol_cat",
       "buffs": [
         { "name": "speed", "scale": 2.3 },
         { "name": "health", "scale": 15 },
@@ -49,7 +49,7 @@
     },
     {
       "health_at": 3,
-      "name": "rolling_cat",
+      "id": "rolling_cat",
       "buffs": [
         { "name": "speed", "scale": 0.5 },
         { "name": "health", "scale": 20 },
@@ -61,7 +61,7 @@
     },
     {
       "health_at": 2,
-      "name": "leg_cat",
+      "id": "leg_cat",
       "buffs": [
         { "name": "speed", "scale": 2 },
         { "name": "health", "scale": 30 },
@@ -72,7 +72,7 @@
     },
     {
       "health_at": 1,
-      "name": "buff_cat",
+      "id": "buff_cat",
       "buffs": [
         { "name": "health", "scale": 10 },
         { "name": "damage", "scale": 1.5 },

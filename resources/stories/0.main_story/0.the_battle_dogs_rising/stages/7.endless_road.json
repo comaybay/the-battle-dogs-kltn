@@ -7,43 +7,41 @@
   "power_scale": 1.5,
   "spawn_patterns": [
     {
-      "name": "smol_cat",
-      "duration": 2.5,
-      "delay": 0
+      "id": "smol_cat",
+      "interval": 2.5
     },
     {
-      "name": "rolling_cat",
-      "duration": 5,
-      "delay": 0
+      "id": "rolling_cat",
+      "interval": 5
     },
     {
-      "name": "cat",
-      "duration": 10,
+      "id": "cat",
+      "interval": 10,
       "delay": 5
     },
     {
-      "name": "leg_cat",
-      "duration": 15,
+      "id": "leg_cat",
+      "interval": 15,
       "delay": 10
     },
     {
-      "name": "smol_cat",
-      "duration": 7,
+      "id": "smol_cat",
+      "interval": 7,
       "delay": 15
     },
     {
-      "name": "smol_cat",
-      "duration": 2.5,
+      "id": "smol_cat",
+      "interval": 2.5,
       "delay": 30
     },
     {
-      "name": "cat",
-      "duration": 10,
+      "id": "cat",
+      "interval": 10,
       "delay": 40.5
     },
     {
-      "name": "leg_cat",
-      "duration": 15,
+      "id": "leg_cat",
+      "interval": 15,
       "delay": 55
     }
   ]

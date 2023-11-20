@@ -4,11 +4,10 @@ extends FSMState
 const OFUDA_SCENE: PackedScene = preload("res://scenes/characters/dogs/miko_dog/ofuda/ofuda.tscn")
 const YIN_YANG_ORB_SCENE: PackedScene = preload("res://scenes/characters/dogs/miko_dog/yin_yang_orb/yin_yang_orb.tscn")
 
-@onready var character: Character = owner
+@onready var miko_dog: MikoDog = owner
 
 var battlefield: BaseBattlefield
 var attack_count: int = 0
-var BASE_OFUDA_DAMAGE: int = 10
 
 var _twwen: Tween
 var _original_position: Vector2
@@ -23,35 +22,35 @@ func enter(data: Dictionary) -> void:
 	var interuppted = _interuppted
 	var has_been_interrupted := func() -> bool: return interuppted[0]
 	
-	var fly_up_vector := Vector2(500  * character.move_direction, -1000)
-	var fly_position = character.get_center_global_position() + fly_up_vector
+	var fly_up_vector := Vector2(500  * miko_dog.move_direction, -1000)
+	var fly_position = miko_dog.get_center_global_position() + fly_up_vector
 	
 	battlefield = InBattle.get_battlefield()
-	character.n_AnimationPlayer.play("fly")
+	miko_dog.n_AnimationPlayer.play("fly")
 	
 	var target_position: Vector2 = data['attack_point']
 	var direction: Vector2 = (target_position - fly_position).normalized()
 	$Patterns.rotation = direction.angle()
 	
-	_original_position = character.position
+	_original_position = miko_dog.position
 	_twwen = create_tween()
 	
 	_twwen.set_parallel(true)
 	_twwen.set_trans(Tween.TRANS_SINE)
 	_twwen.set_ease(Tween.EASE_IN_OUT)
-	_twwen.tween_property(character, "position", fly_up_vector, 1).as_relative()
+	_twwen.tween_property(miko_dog, "position", fly_up_vector, 1).as_relative()
 	
 	_twwen.set_trans(Tween.TRANS_SINE)
 	_twwen.set_ease(Tween.EASE_OUT)
-	_twwen.tween_property(character, "rotation", deg_to_rad(15), 1)
+	_twwen.tween_property(miko_dog, "rotation", deg_to_rad(15), 1)
 	
 	await _twwen.finished
 	if has_been_interrupted.call(): return
 	
 	$ChargingUpSound.play()
 	
-	character.n_AnimationPlayer.play("pre_attack")
-	character.n_AnimationPlayer.queue("attack")
+	miko_dog.n_AnimationPlayer.play("pre_attack")
+	miko_dog.n_AnimationPlayer.queue("attack")
 
 	await get_tree().create_timer(1.1, false).timeout
 	if has_been_interrupted.call(): return
@@ -63,32 +62,33 @@ func enter(data: Dictionary) -> void:
 	_twwen.set_parallel(true)
 	_twwen.set_trans(Tween.TRANS_SINE)
 	_twwen.set_ease(Tween.EASE_IN_OUT)
-	_twwen.tween_property(character, "position", _original_position, 1)
+	_twwen.tween_property(miko_dog, "position", _original_position, 1)
 	
 	_twwen.set_trans(Tween.TRANS_SINE)
 	_twwen.set_ease(Tween.EASE_OUT)
-	_twwen.tween_property(character, "rotation", 0, 0.5)
+	_twwen.tween_property(miko_dog, "rotation", 0, 0.5)
 	
-	character.n_AnimationPlayer.play_backwards("pre_attack")
-	character.n_AnimationPlayer.queue("fly")
+	miko_dog.n_AnimationPlayer.play_backwards("pre_attack")
+	miko_dog.n_AnimationPlayer.queue("fly")
 	
 	await _twwen.finished
 	if has_been_interrupted.call(): return
 		
-	character.n_AttackCooldownTimer.start()
+	miko_dog.n_AttackCooldownTimer.start()
 	transition.emit("IdleState")
 	
 func _attack(direction: Vector2) -> void:	
 	var total_wait_time: int = 1
-	var level := InBattle.get_dog_level("miko_dog")
-	var straight_bullets_num = 10 + (level * 2) 
+	var dog_level := (miko_dog as BaseDog).get_dog_level()
+	var straight_bullets_num = 10 + (dog_level * 2) 
 	const MAIN_PATTERN_SPEED: float = 2000
 	
-	_spawn_yin_yang_orb()
+	if miko_dog.has_ability('yin_yang_orb'):
+		_spawn_yin_yang_orb(dog_level)
 	
 	_pattern_straight_line(direction, MAIN_PATTERN_SPEED, straight_bullets_num, Ofuda.OfudaColor.RED)
 	
-	if level >= 2:
+	if dog_level >= 2:
 		_pattern_straight_line(
 			direction.rotated(deg_to_rad(15)), MAIN_PATTERN_SPEED, straight_bullets_num, Ofuda.OfudaColor.RED
 		)
@@ -96,7 +96,7 @@ func _attack(direction: Vector2) -> void:
 			direction.rotated(deg_to_rad(-15)), MAIN_PATTERN_SPEED, straight_bullets_num, Ofuda.OfudaColor.RED
 		)
 		
-	if level >= 3:
+	if dog_level >= 3:
 		const SPEED: int = 1000
 		const ROTATION: int = 20
 		_pattern_straight_line(
@@ -106,9 +106,9 @@ func _attack(direction: Vector2) -> void:
 			direction.rotated(deg_to_rad(-10)), SPEED, straight_bullets_num, Ofuda.OfudaColor.GRAY, ROTATION
 		)
 		
-	if level >= 5:
-		var bullet_num: int = 25 + (5 * (level - 5)) 
-		var loop: int = level - 4
+	if dog_level >= 5:
+		var bullet_num: int = 25 + (5 * (dog_level - 5)) 
+		var loop: int = dog_level - 4
 		const DURATION: float = 0.25
 		const ROTATION: int = 10
 		const SPEED: int = 1000
@@ -116,9 +116,9 @@ func _attack(direction: Vector2) -> void:
 		_pattern_path(%Path2, DURATION, bullet_num, loop, -ROTATION, SPEED, $OfudaSound1)
 		total_wait_time += DURATION * loop
 	
-	if level >= 8:
-		var bullet_num: int = 50 + (25 * (level - 8))
-		var loop: int = level - 7
+	if dog_level >= 8:
+		var bullet_num: int = 50 + (25 * (dog_level - 8))
+		var loop: int = dog_level - 7
 		const DURATION: float = 0.5
 		const ROTATION: float = 135
 		const SPEED: int = 2000
@@ -136,7 +136,7 @@ func _attack(direction: Vector2) -> void:
 		direction.rotated(deg_to_rad(-7.5)), MAIN_PATTERN_SPEED, straight_bullets_num, Ofuda.OfudaColor.GRAY
 	)
 	
-	if level >= 4:
+	if dog_level >= 4:
 		const ROTATION: int = 45
 		const SPEED: int = 2500
 		_pattern_straight_line(
@@ -148,25 +148,25 @@ func _attack(direction: Vector2) -> void:
 	
 	await wait_timer.timeout
 	
-	if level >= 9:
-		_spawn_yin_yang_orb()
+	if miko_dog.has_ability('yin_yang_orb') and dog_level >= 9:
+		_spawn_yin_yang_orb(dog_level)
 		
-func _spawn_yin_yang_orb() -> void:
+func _spawn_yin_yang_orb(dog_level: int) -> void:
 	var yin_yang_orb: YinYangOrb = YIN_YANG_ORB_SCENE.instantiate()
-	yin_yang_orb.setup(character.get_center_global_position(), character.character_type)
+	yin_yang_orb.setup(miko_dog.get_center_global_position(), dog_level, miko_dog.character_type)
 	battlefield.add_child(yin_yang_orb)
 		
 func _pattern_straight_line(
 	direction: Vector2, speed: float, bullet_num: int, ofuda_color: Ofuda.OfudaColor, rotation: float = 0
 ) -> void:
 	$OfudaSound2.play()
-	var center_pos := character.get_center_global_position()
+	var center_pos := miko_dog.get_center_global_position()
 	var speed_reduction_unit: float = speed / (bullet_num * 1.5) 
 	for i in range(bullet_num):
 		var ofuda: Ofuda = OFUDA_SCENE.instantiate()
 		var ofuda_speed = speed - (i * speed_reduction_unit)
 		var velocity: Vector2 = direction * ofuda_speed 
-		ofuda.setup(center_pos, velocity, BASE_OFUDA_DAMAGE, ofuda_color, character.character_type)
+		ofuda.setup(center_pos, velocity, miko_dog.ofuda_damage, ofuda_color, miko_dog.character_type)
 		if not is_equal_approx(rotation, 0):
 			ofuda.set_rotation_speed(rotation, 2)
 		battlefield.add_child(ofuda)
@@ -191,7 +191,7 @@ func _pattern_path(
 	}
 
 func update(delta) -> void:
-	$Patterns.global_position = character.get_center_global_position()
+	$Patterns.global_position = miko_dog.get_center_global_position()
 	
 	if _pattern_paths.is_empty():
 		return
@@ -216,13 +216,13 @@ func update(delta) -> void:
 	
 func _spawn_bullet_on_path(_pattern_data: Dictionary) -> void:
 	var path_follow := _pattern_data['path_follow'] as PathFollow2D
-	var center_global_pos := character.get_center_global_position()
+	var center_global_pos := miko_dog.get_center_global_position()
 	var velocity = Vector2(1, 0) * _pattern_data['speed']
 	velocity = velocity.rotated((path_follow.global_position - center_global_pos).angle())
 	
 	var ofuda: Ofuda = OFUDA_SCENE.instantiate()
 	ofuda.setup(
-		center_global_pos, velocity, BASE_OFUDA_DAMAGE, _pattern_data['ofuda_color'], character.character_type
+		center_global_pos, velocity, miko_dog.ofuda_damage, _pattern_data['ofuda_color'], miko_dog.character_type
 	)
 	ofuda.set_rotation_speed(_pattern_data['rotation'], 2)
 	battlefield.add_child(ofuda)
@@ -244,4 +244,4 @@ func exit():
 	_interuppted[0] = true
 	_pattern_paths.clear()	
 	_twwen.kill()
-	character.rotation = 0
+	miko_dog.rotation = 0

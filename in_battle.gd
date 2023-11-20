@@ -65,10 +65,31 @@ func get_dog_level(dog_id: String) -> int:
 	
 	return int(SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_POWER_LEVEL))
 
+func get_dog_abilities(dog_id: String) -> Array[String]:
+	var abilities: Array[String] = []
+	
+	if not in_p2p_battle:
+		abilities.assign(Data.dogs[dog_id]['abilities'])
+
+	## in p2p battle, dogs have learned all abilities
+	return abilities
+	
 func get_passive_level(passive_id: String) -> int:
 	if in_p2p_battle:
 		push_error("Error: get_passive_level(passive_id: String) not implemented")
 		return 0
 	
 	return get_player_data().get_passive_level(passive_id) 
+
+## load data from stage file
+func load_stage_data() -> Dictionary:
+	var dir = "%s/stages/%s.%s.json" % [
+		Data.selected_chapter_dir_path,
+		Data.selected_stage,
+		Data.selected_stage_id,
+	]
+	var file = FileAccess.open(dir, FileAccess.READ)
+	var battlefield_data: Dictionary = JSON.parse_string(file.get_as_text())
+	file.close()
 	
+	return battlefield_data

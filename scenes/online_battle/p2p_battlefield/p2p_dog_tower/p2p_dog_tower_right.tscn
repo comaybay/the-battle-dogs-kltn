@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower.gd" id="1_kwtn8"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_hl0vn"]
-[ext_resource type="Texture2D" uid="uid://bggfc25qoy2lu" path="res://resources/battlefield_themes/green_grass/dog_tower.png" id="3_fx2tp"]
+[ext_resource type="Texture2D" uid="uid://30y660mghnsm" path="res://resources/battlefield_themes/green_grass/dog_tower.png" id="3_fx2tp"]
 [ext_resource type="AudioStream" uid="uid://dqw6af3cwm06x" path="res://resources/sound/battlefield/spawn.wav" id="4_pp7nx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8inmh"]

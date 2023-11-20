@@ -97,8 +97,10 @@ func _get_x_of(stage_box: Selectable):
 func _input(ev: InputEvent):
 	if _always_listen and not _selected_item.has_focus():
 		_handle_navigation_input(ev)
+	
+	if _always_listen or _selected_item.has_focus():
+		_handle_selection_input(ev)	
 		
-	_handle_selection_input(ev)	
 	_handle_swipe_input(ev)
 
 var swiping = false
@@ -114,7 +116,6 @@ func _handle_swipe_input(ev: InputEvent) -> void:
 		return
 	
 	if ev is InputEventMouseButton:
-		print(ev)
 		if ev.double_click:
 			return
 		

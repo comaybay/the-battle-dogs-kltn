@@ -140,7 +140,6 @@ autowrap_mode = 3
 [node name="Music" type="AudioStreamPlayer" parent="." index="5"]
 process_mode = 3
 stream = ExtResource("4_mniuu")
-volume_db = -7.0
 autoplay = true
 bus = &"Music"
 

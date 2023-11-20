@@ -2,6 +2,8 @@ class_name Story extends MarginContainer
 
 const CHAPTER_BUTTON: PackedScene = preload("res://scenes/chapter_selection/chapter_button/chapter_button.tscn")
 
+signal chapter_entering
+
 var _story_id: String
 func get_story_id() -> String: return _story_id
 
@@ -29,10 +31,11 @@ func _create_chapter_buttons(chapter_dir_paths: Array[String]) -> Array[Selectab
 		var chapter_button: ChapterButton = CHAPTER_BUTTON.instantiate()
 		chapter_button.setup(chapter_id, load(chapter_image_path))
 		chapter_button.chapter_entering.connect(func():
+			chapter_entering.emit()
 			if not Data.save_data['chapters'].has(chapter_id):
 				Data.save_data['chapters'][chapter_id] = {
 					'passed_stage': -1,
-					'selected_stage': -1,
+					'selected_stage': 0,
 					'completed': false,
 				}
 			

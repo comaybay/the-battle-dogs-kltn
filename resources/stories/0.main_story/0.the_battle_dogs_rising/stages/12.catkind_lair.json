@@ -8,60 +8,61 @@
   "power_scale": 2.5,
   "spawn_patterns": [
     {
-      "name": "cat",
-      "duration": 5,
-      "delay": 0
+      "id": "cat",
+      "interval": 5,
+      "delay": 5
     },
     {
-      "name": "leg_cat",
-      "duration": 20,
+      "id": "leg_cat",
+      "interval": 20,
       "delay": 10
     },
     {
-      "name": "rolling_cat",
-      "duration": 20,
+      "id": "rolling_cat",
+      "interval": 20,
       "delay": 22.5
     },
     {
-      "name": "smol_cat",
-      "duration": 5,
+      "id": "smol_cat",
+      "interval": 5,
       "delay": 2.5
     },
     {
-      "name": "buff_cat",
-      "duration": 120,
+      "id": "buff_cat",
+      "interval": 120,
       "delay": 60
     },
     {
-      "name": "cat",
-      "duration": 5,
+      "id": "cat",
+      "interval": 5,
       "delay": 60
     },
     {
-      "name": "leg_cat",
-      "duration": 20,
+      "id": "leg_cat",
+      "interval": 20,
       "delay": 70
     },
     {
-      "name": "rolling_cat",
-      "duration": 20,
+      "id": "rolling_cat",
+      "interval": 20,
       "delay": 82.5
     },
     {
-      "name": "smol_cat",
-      "duration": 5,
+      "id": "smol_cat",
+      "interval": 5,
       "delay": 62.5
     },
     {
-      "name": "buff_cat",
-      "duration": 120,
+      "id": "buff_cat",
+      "interval": 120,
       "delay": 120
     }
   ],
   "bosses": [
     {
       "health_at": 99999,
-      "name": "ramiel_cat",
+      "id": "ramiel_cat",
+      "effect": "none",
       "buffs": [
         {
           "name": "reward_money",
