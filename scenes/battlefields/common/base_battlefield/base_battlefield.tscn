@@ -23,9 +23,9 @@ stretch_mode = 1
 
 [node name="Land" parent="." instance=ExtResource("4_o40hx")]
 
-[node name="Gui" parent="." instance=ExtResource("5_ipovo")]
-
 [node name="store_gui" parent="." instance=ExtResource("6_i0mnv")]
+
+[node name="Gui" parent="." instance=ExtResource("5_ipovo")]
 
 [node name="EffectSpace" type="Node2D" parent="."]
 z_index = 40
