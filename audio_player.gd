@@ -114,8 +114,8 @@ func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove
 	
 	tween.pause()
 	tween = create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_CIRC)
+	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(music_player, "volume_db", -80, stop_duration)
 	music_data['tween'] = tween
 	
@@ -161,10 +161,11 @@ func _create_in_battle_sfx() -> AudioStreamPlayer:
 
 func add_in_battle_sfx(audio_stream: AudioStream, max_polyphony: int = 1) -> void:
 	if has_in_battle_sfx(audio_stream):
-		push_error("ERROR: audio player for this audio stream already exists")
-		breakpoint
+		var sfx_player: AudioStreamPlayer = _in_battle_sfx_players[audio_stream.resource_path]
+		sfx_player.max_polyphony = max_polyphony
+		return
 		
-	var sfx_player = _create_in_battle_sfx()
+	var sfx_player := _create_in_battle_sfx()
 	sfx_player.stream = audio_stream
 	sfx_player.max_polyphony = max_polyphony
 	add_child(sfx_player)
