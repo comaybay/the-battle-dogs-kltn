@@ -1,132 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmu0dxoyu6hfu"]
+[gd_scene load_steps=4 format=3 uid="uid://bmu0dxoyu6hfu"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_tr38i"]
-[ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="2_vp45s"]
+[ext_resource type="Script" path="res://scenes/stores/titan_dog/titan_dog.gd" id="2_hyw7l"]
 
-[sub_resource type="Animation" id="Animation_gwlt8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterAnimation/Character:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_8csog"]
-resource_name = "attack"
-length = 0.666683
-step = 0.166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterAnimation/Character:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [9, 10, 11, 12]
-}
-
-[sub_resource type="Animation" id="Animation_g7218"]
-resource_name = "idle"
-length = 0.500017
-loop_mode = 1
-step = 0.166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterAnimation/Character:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-
-[sub_resource type="Animation" id="Animation_18yy2"]
-resource_name = "knockback"
-length = 0.500017
-loop_mode = 1
-step = 0.166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterAnimation/Character:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.166767, 0.333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [3, 4, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_t17j0"]
-resource_name = "move"
-length = 0.666685
-loop_mode = 1
-step = 0.166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterAnimation/Character:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [6, 7, 8, 7]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rymvr"]
-_data = {
-"RESET": SubResource("Animation_gwlt8"),
-"attack": SubResource("Animation_8csog"),
-"idle": SubResource("Animation_g7218"),
-"knockback": SubResource("Animation_18yy2"),
-"move": SubResource("Animation_t17j0")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oa1yv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0hp4"]
 resource_local_to_scene = true
-size = Vector2(192, 223.5)
+size = Vector2(192, 178)
 
-[node name="Titan_Dog" instance=ExtResource("1_tr38i")]
-position = Vector2(2, 1)
-name_id = "titan_dog"
-
-[node name="Character" parent="CharacterAnimation" index="0"]
-position = Vector2(-21, -34.5)
-texture = ExtResource("2_vp45s")
-hframes = 7
-vframes = 2
-
-[node name="AnimationPlayer" parent="." index="2"]
-libraries = {
-"": SubResource("AnimationLibrary_rymvr")
-}
+[node name="BaseDog" instance=ExtResource("1_tr38i")]
+script = ExtResource("2_hyw7l")
 
 [node name="CollisionShape2D" parent="." index="3"]
-visibility_layer = 2
-position = Vector2(-1, -25.25)
-shape = SubResource("RectangleShape2D_oa1yv")
-
-[node name="RayCast2D" parent="." index="4"]
-position = Vector2(95, 61.5)
-
-[node name="Arrow" parent="." index="6"]
-offset_left = 20.0
-offset_top = -216.0
-offset_right = 740.0
-offset_bottom = 190.0
+shape = SubResource("RectangleShape2D_f0hp4")
