@@ -259,6 +259,9 @@ func _compare_and_update_save_file(new_game_save_data: Dictionary, save_data: Di
 			_compare_and_update_save_file_array(new_game_save_data[key][0], save_data[key])
 
 func _compare_and_update_save_file_array(new_game_save_elem: Variant, save_data: Array) -> void:
+	if new_game_save_elem == null:
+		return 
+		
 	for i in range(save_data.size()):
 		var elem = save_data[i]
 		if elem == null:

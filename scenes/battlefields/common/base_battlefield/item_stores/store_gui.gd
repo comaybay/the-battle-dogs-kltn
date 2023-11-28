@@ -10,5 +10,5 @@ func setup(dog_tower: DogTower, player_data: BaseBattlefieldPlayerData):
 			var index = player_data.team_store_ids.find(item)
 			var store := player_data.team_store_scenes[index].instantiate()
 			get_tree().current_scene.add_child(store)
-			store.setup(dog_tower)
+			store.store_setup(dog_tower,player_data)
 
