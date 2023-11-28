@@ -13,5 +13,10 @@
 		"ID": "random_fire_ball",
 		"price": 2000,
 		"auto_activate": true 
+	},
+	{
+		"ID": "titan_dog",
+		"price": 2000,
+		"auto_activate": true 
 	}
 ]

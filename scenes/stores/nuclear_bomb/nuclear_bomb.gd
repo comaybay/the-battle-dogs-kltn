@@ -7,7 +7,7 @@ var launch_down = Vector2(0, 0)
 var battlefield
 var use_one = true
 var dog_tower 
-func setup(_dog_tower: DogTower):
+func store_setup(_dog_tower: DogTower,  player_data: BaseBattlefieldPlayerData):
 	dog_tower = _dog_tower
 	battlefield = get_tree().current_scene as BaseBattlefield
 	var destination =  (battlefield.get_stage_width() * 2 + battlefield.TOWER_MARGIN * 4)/2

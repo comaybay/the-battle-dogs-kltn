@@ -7,7 +7,7 @@ const Y_STEP: int = 800
 const BASE_ROWS: int = 1
 var dog_tower 
 var skill_user = Character.Type.DOG
-func setup(_dog_tower: DogTower):
+func store_setup(_dog_tower: DogTower,  player_data: BaseBattlefieldPlayerData):
 	Data.store["random_fire_ball"].amount -= 1
 	dog_tower = _dog_tower
 	var battlefield := get_tree().current_scene as BaseBattlefield
