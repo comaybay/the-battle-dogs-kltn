@@ -7,6 +7,7 @@ class_name TitanDog extends Character
 var level 
 
 func store_setup(dog_tower: DogTower, player_data: BaseBattlefieldPlayerData):
+	Data.store["titan_dog"].amount -= 1
 	level = Data.selected_stage 
 	setup(dog_tower.global_position + Vector2(500,0),1)
 
