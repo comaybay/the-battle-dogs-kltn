@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bkytbva50vqdg"]
+[gd_scene load_steps=15 format=3 uid="uid://bkytbva50vqdg"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_wgfpp"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/batter_dog/batter_dog.gd" id="2_vko5u"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://duitro513iirt" path="res://scenes/characters/dogs/batter_dog/batter_dog_bat_big.png" id="5_lmxqp"]
 [ext_resource type="Texture2D" uid="uid://bavya4yl2jw6v" path="res://scenes/characters/dogs/batter_dog/batter_dog_bat_small.png" id="6_uvs62"]
 [ext_resource type="AudioStream" uid="uid://bq1tyckji7vkr" path="res://scenes/characters/dogs/batter_dog/bat_drag.mp3" id="7_r48ac"]
-[ext_resource type="AudioStream" uid="uid://clofbsmuyxoth" path="res://scenes/characters/dogs/batter_dog/bat_hit.mp3" id="8_h2ih3"]
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -807,9 +806,6 @@ unique_name_in_owner = true
 stream = ExtResource("7_r48ac")
 volume_db = 6.0
 bus = &"InBattleFX"
-
-[node name="AttackSound" parent="FiniteStateMachine/AttackState" index="0"]
-stream = ExtResource("8_h2ih3")
 
 [node name="Arrow" parent="." index="6"]
 offset_left = 0.0

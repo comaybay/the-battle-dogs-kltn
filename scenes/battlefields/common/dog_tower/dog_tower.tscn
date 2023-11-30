@@ -64,6 +64,7 @@ collision_mask = 0
 script = ExtResource("1_ywct4")
 
 [node name="HealthLabel" type="Label" parent="."]
+z_index = 999
 offset_left = -811.0
 offset_top = 60.0
 offset_right = 851.0
@@ -92,5 +93,9 @@ position = Vector2(62, -183)
 gizmo_extents = 54.5
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g44t7")
+bus = &"InBattleFX"
+
+[node name="SpawnSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_g44t7")
 bus = &"InBattleFX"

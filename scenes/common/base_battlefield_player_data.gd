@@ -43,7 +43,7 @@ func update(delta: float):
 
 func increase_efficiency_level() -> void:
 	_efficiency_level += 1
-	_wallet *= 2
+	_wallet *= 1.5
 	_efficiency_upgrade_price *= 2
 
 func _init() -> void:

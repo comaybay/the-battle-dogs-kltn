@@ -1,20 +1,20 @@
 [gd_scene load_steps=10 format=3 uid="uid://bgylpgef3843m"]
 
-[ext_resource type="Script" path="res://scenes/battlefields/common/dog_tower/gandolfg/bullet.gd" id="1_2peel"]
-[ext_resource type="Texture2D" uid="uid://ccr41m6f4iikc" path="res://scenes/battlefields/common/dog_tower/gandolfg/bullet.png" id="2_kk4ya"]
-[ext_resource type="AudioStream" uid="uid://dhvcfxros1ly7" path="res://scenes/battlefields/common/dog_tower/gandolfg/electric_ball.mp3" id="3_pqnkt"]
-[ext_resource type="AudioStream" uid="uid://c2gpilc6x2usf" path="res://scenes/battlefields/common/dog_tower/gandolfg/electric_ball_hit.mp3" id="4_2ljp4"]
+[ext_resource type="Script" path="res://scenes/battlefields/common/dog_tower/gandolfg/gandolfg_bullet.gd" id="1_jgidq"]
+[ext_resource type="Texture2D" uid="uid://ccr41m6f4iikc" path="res://scenes/battlefields/common/dog_tower/gandolfg/bullet.png" id="2_r0d5v"]
+[ext_resource type="AudioStream" uid="uid://dhvcfxros1ly7" path="res://scenes/battlefields/common/dog_tower/gandolfg/electric_ball.mp3" id="3_23lmw"]
+[ext_resource type="AudioStream" uid="uid://c2gpilc6x2usf" path="res://scenes/battlefields/common/dog_tower/gandolfg/electric_ball_hit.mp3" id="4_1sjnb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1rg3w"]
-atlas = ExtResource("2_kk4ya")
+atlas = ExtResource("2_r0d5v")
 region = Rect2(0, 0, 126, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_obx13"]
-atlas = ExtResource("2_kk4ya")
+atlas = ExtResource("2_r0d5v")
 region = Rect2(0, 120, 126, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6jrv7"]
-atlas = ExtResource("2_kk4ya")
+atlas = ExtResource("2_r0d5v")
 region = Rect2(0, 240, 126, 120)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gp0al"]
@@ -37,10 +37,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ru2nq"]
 radius = 47.1699
 
-[node name="bullet" type="Area2D"]
+[node name="GandolfgBullet" type="Area2D"]
 collision_layer = 0
 collision_mask = 5
-script = ExtResource("1_2peel")
+script = ExtResource("1_jgidq")
 
 [node name="Bullet" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gp0al")
@@ -51,9 +51,9 @@ frame_progress = 0.246008
 shape = SubResource("CircleShape2D_ru2nq")
 
 [node name="SpellCastAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_pqnkt")
+stream = ExtResource("3_23lmw")
 bus = &"InBattleFX"
 
 [node name="HitAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_2ljp4")
+stream = ExtResource("4_1sjnb")
 bus = &"InBattleFX"

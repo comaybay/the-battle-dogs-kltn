@@ -75,7 +75,7 @@ func _go_to_battlefield() -> void:
 	
 	var data := InBattle.load_stage_data()
 	
-	var battlefield_type: String = data.get('battlefield', 'default')
+	var battlefield_type: String = data.get('battlefield', 'basic')
 	get_tree().change_scene_to_file("res://scenes/battlefields/%s_battlefield/%s_battlefield.tscn" % [
 		battlefield_type, battlefield_type
 	])

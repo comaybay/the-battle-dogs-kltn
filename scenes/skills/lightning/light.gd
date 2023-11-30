@@ -59,11 +59,18 @@ func _on_enemy_entered(enemy: Character):
 		enemy.set_multiplier(Character.MultiplierTypes.ATTACK_SPEED, _multiplier)	
 		enemy.set_multiplier(Character.MultiplierTypes.SPEED, _multiplier)	
 		
-		get_tree().create_timer(_duration, false).timeout.connect(
-			func(): enemy.reset_multipliers(),
-			CONNECT_ONE_SHOT
-		)
-	
+		var timer = Timer.new()
+		timer.wait_time = _duration
+		timer.one_shot = true
+		
+		timer.timeout.connect(func():
+			enemy.reset_multipliers()
+			timer.queue_free()
+		, CONNECT_ONE_SHOT)
+		
+		enemy.add_child(timer)
+		timer.start()
+		
 func die():
 	set_physics_process(false)
 	$AnimationPlayer.play("die")

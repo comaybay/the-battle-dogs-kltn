@@ -15,7 +15,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	AudioPlayer.play_music(music)
-	$SkipButton.pressed.connect(_on_finished, CONNECT_ONE_SHOT)
+	$SkipButton.pressed.connect(handle_finished, CONNECT_ONE_SHOT)
 	
 	var tween = create_tween()
 	tween.tween_property(%TransitionRect, 'color:a8', 0, 2)
@@ -78,7 +78,7 @@ func _show_intro_text() -> void:
 			_labels[i].visible = false
 			_labels[i].theme_type_variation = ''
 			
-func _on_finished() -> void:
+func handle_finished() -> void:
 	%TransitionRect.visible = true
 	%TransitionRect.color = 0x00000000
 	

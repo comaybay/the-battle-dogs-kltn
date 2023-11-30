@@ -25,7 +25,7 @@ func physics_update(_delta: float) -> void:
 	if character.custom_attack_area != null:
 		for target in character.custom_attack_area.get_overlapping_bodies():
 			target.take_damage(character.damage)
-			InBattle.add_hit_effect(target.effect_global_position)
+			InBattle.add_hit_effect(target.get_effect_global_position())
 	
 	# single target
 	elif character.attack_area_range <= 0:
@@ -33,7 +33,7 @@ func physics_update(_delta: float) -> void:
 		var target := character.n_RayCast2D.get_collider()
 		if target != null:
 			target.take_damage(character.damage)
-			InBattle.add_hit_effect(target.effect_global_position)
+			InBattle.add_hit_effect(target.get_effect_global_position())
 
 	# area attack
 	else:
@@ -58,7 +58,7 @@ func physics_update(_delta: float) -> void:
 		# target can be a character or a tower tower
 		for result in results:
 			result.collider.take_damage(character.damage)
-			InBattle.add_hit_effect(result.collider.effect_global_position)
+			InBattle.add_hit_effect(result.collider.get_effect_global_position())
 
 	start_attack = false
 	done_attack = true

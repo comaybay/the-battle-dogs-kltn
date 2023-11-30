@@ -1,14 +1,17 @@
 extends Node
 
 var _debug_mode := false 
+var _draw_debug := false 
 
 func _init() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
 	_debug_mode = OS.is_debug_build()
+	if not _debug_mode:
+		set_process_input(false)
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed('ui_debug_mode'):
-		_debug_mode = !_debug_mode
+	if event.is_action_pressed('ui_draw_debug'):
+		_draw_debug = !_draw_debug
 		
 		for node in get_tree().get_nodes_in_group('characters'):
 			node.queue_redraw()
@@ -43,6 +46,5 @@ func _input(event: InputEvent) -> void:
 func is_debug_mode() -> bool:
 	return _debug_mode
 
-func _ready() -> void:
-	if not is_debug_mode():
-		set_process_input(false)
+func is_draw_debug() -> bool:
+	return _draw_debug

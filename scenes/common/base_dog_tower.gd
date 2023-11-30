@@ -7,8 +7,8 @@ var health: int
 var max_health: int
 
 ## position where effect for the tower should take place 
-var effect_global_position: Vector2:
-	get: return $Marker2D.global_position
+func get_effect_global_position() -> Vector2:
+	return $Marker2D.global_position
 
 func spawn(dog_id: String) -> BaseDog:
 	push_error("ERROR: spawn(dog_id: String) not implemented")

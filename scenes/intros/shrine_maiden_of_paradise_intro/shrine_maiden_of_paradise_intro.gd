@@ -15,3 +15,5 @@ func _handle_text_ending(text_number: int, is_last_text: bool) -> void:
 	
 	elif is_last_text:
 		$AnimationPlayer.play("to_chapter_title")
+		await get_tree().create_timer(60.0, false).timeout
+		handle_finished()

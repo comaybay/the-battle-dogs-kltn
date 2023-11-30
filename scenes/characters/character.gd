@@ -77,8 +77,8 @@ func get_character_animation_node() -> Node2D:
 
 ## A general position where effect for a character should take place (example: hit effect). 
 ## Use this when unsure where the effect should be at
-var effect_global_position: Vector2:
-	get: return n_RayCast2D.global_position
+func get_effect_global_position() -> Vector2:
+	return n_RayCast2D.global_position
 
 ## Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -176,7 +176,7 @@ func get_center_position() -> Vector2:
 	return $CollisionShape2D.position
 	
 func _draw() -> void:
-	if Engine.is_editor_hint() or Debug.is_debug_mode():
+	if Engine.is_editor_hint() or Debug.is_draw_debug():
 		# draw attack range at the feet of the character
 		var c_shape_bottom = (collision_rect.size.y / 2) + $CollisionShape2D.position.y
 		var start_point = Vector2(n_RayCast2D.position.x, c_shape_bottom)
@@ -195,7 +195,7 @@ func _draw() -> void:
 		var character_size := n_Sprite2D.get_rect().size
 		draw_multiline_string(default_font, Vector2(0, n_Sprite2D.position.y - (character_size.y / 2) - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
 
-	if not Engine.is_editor_hint() and Debug.is_debug_mode():
+	if not Engine.is_editor_hint() and Debug.is_draw_debug():
 		var rect: Rect2 = $CollisionShape2D.shape.get_rect()
 		rect.position += $CollisionShape2D.position
 		draw_rect(rect, Color.RED, false)

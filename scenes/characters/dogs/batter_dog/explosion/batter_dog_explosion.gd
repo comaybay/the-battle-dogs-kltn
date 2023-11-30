@@ -29,7 +29,7 @@ func setup(global_position: Vector2, attack_damage: int, character_type: Charact
 	$AnimationPlayer.animation_finished.connect(func(_anim): queue_free())
 
 func _on_enemy_entered(enemy: Character) -> void:
-	InBattle.add_hit_effect(enemy.effect_global_position)
+	InBattle.add_hit_effect(enemy.get_effect_global_position())
 	
 	if not InBattle.in_request_mode:
 		enemy.knockback(KNOCKBACK_SCALE)

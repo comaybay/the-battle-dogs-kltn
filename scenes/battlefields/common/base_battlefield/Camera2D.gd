@@ -39,6 +39,9 @@ func setup(camera_control_buttons: CameraControlButtons, stage_width_with_margin
 
 func _process(delta: float) -> void:
 	position = get_screen_center_position()
+#	position.x = clamp(position.x, (limit_left + half_viewport_size.x) / zoom.x, (limit_right - half_viewport_size.x) / zoom.x)
+#	position.y = clamp(position.y, (limit_top + half_viewport_size.y) / zoom.y, (limit_bottom - half_viewport_size.y) / zoom.y)
+	
 	# stop flick velocity if camera has reach it's limit position
 	if (
 		not is_equal_approx(position.x, _last_pos_x) 
@@ -69,6 +72,8 @@ func _process(delta: float) -> void:
 			handle_zoom(zoom_dir, delta)
 			
 		_zoom_value_before_pinch = zoom
+		
+	force_update_scroll()
 
 ## https://ask.godotengine.org/25983/camera2d-zoom-position-towards-the-mouse
 ## with modifications

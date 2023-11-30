@@ -1,6 +1,5 @@
 shader_type canvas_item;
 render_mode unshaded;
-
 uniform bool Smooth = true;
 uniform vec2 frame_size = vec2(0, 0);
 uniform vec2 frame_coords = vec2(0, 0);

@@ -19,19 +19,15 @@ var bosses_queue: Array
 var alive_boss_count: int = 0
 
 ## position where effect for the tower should take place 
-var effect_global_position: Vector2:
-	get: return $Marker2D.global_position
+func get_effect_global_position() -> Vector2:
+	return $EffectMarker.global_position
 
 var _battlefield_data: Dictionary
-
-func _get_spawn_global_position() -> Vector2:
-	return global_position + Vector2(-100, 0)
 
 func _ready() -> void:
 	var battlefield := get_tree().current_scene as Battlefield
 	_battlefield_data = battlefield.get_battlefield_data()
 	
-	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/cat_tower.png" % battlefield.get_theme())
 	max_health = _battlefield_data['cat_tower_health']
 	health = max_health
 	update_health_label()
@@ -153,7 +149,7 @@ func spawn(cat_id: String, data: Dictionary = {}) -> BaseCat:
 	if _battlefield_data.has('special_instruction'):
 		cat.ready.connect(_apply_special_instruction.bind(cat))
 		
-	var spawn_pos := _get_spawn_global_position() 
+	var spawn_pos: Vector2 = $SpawnMarker.global_position
 	if cat is BaseCat:
 		cat.setup(spawn_pos)
 	elif cat is BaseDog:
@@ -170,7 +166,7 @@ func spawn_boss(data: Dictionary) -> void:
 	
 	var cat: Character = cats[data['id']].instantiate()
 
-	var spawn_pos := _get_spawn_global_position() 
+	var spawn_pos: Vector2 = $SpawnMarker.global_position
 	if cat is BaseCat:
 		cat.setup(spawn_pos, true) 
 	elif cat is BaseDog:
@@ -197,20 +193,11 @@ func spawn_boss(data: Dictionary) -> void:
 			if prop_scale:
 				cat.set(prop_name, cat.get(prop_name) * prop_scale)
 	
-	var tree := get_tree()
-		
-	tree.current_scene.add_child(cat)
+	InBattle.get_battlefield().add_child(cat)
 	alive_boss_count += 1
 	cat.tree_exited.connect(func(): alive_boss_count -= 1)
 	
-	var effect_space: Node2D = get_tree().current_scene.get_node("EffectSpace")
-	
-	var effect := EnergyExpand.instantiate()
-	effect.setup(effect_global_position, "on_emitter")
-	tree.current_scene.get_node("EffectSpace").add_child(effect)
-	
-	for dog in tree.get_nodes_in_group("dogs"):
-		dog.knockback(2.5)
+	knockback_dogs()
 
 func _add_boss_shader(cat: Character) -> void:
 	var shader = BOSS_SHADER.duplicate()
@@ -223,3 +210,13 @@ func _add_boss_shader(cat: Character) -> void:
 func _apply_special_instruction(cat: Character):
 	if _battlefield_data['special_instruction'] == "invert_color":
 		cat.n_Sprite2D.material = load("res://shaders/invert_color/invert_color.material")
+
+func knockback_dogs(knockback_scale: float = 2.5) -> void:
+	var effect_space: Node2D = get_tree().current_scene.get_node("EffectSpace")
+	var effect := EnergyExpand.instantiate()
+	
+	effect.setup(get_effect_global_position(), "on_emitter")
+	InBattle.get_battlefield().get_effect_space().add_child(effect)
+	
+	for dog in get_tree().get_nodes_in_group("dogs"):
+		dog.knockback(knockback_scale)

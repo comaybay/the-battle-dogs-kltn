@@ -4,6 +4,9 @@ const WIZARD_DOG_SCENE: PackedScene = preload("res://scenes/battlefields/common/
 
 var _player_data: BattlefieldPlayerData
 
+func get_sprite_node() -> Sprite2D:
+	return $Sprite2D
+
 func _ready() -> void:
 	if InBattle.get_passive_level('gandolfg') > 0:
 		var gandolfg: Gandolfg = WIZARD_DOG_SCENE.instantiate()
@@ -15,7 +18,6 @@ func _ready() -> void:
 	
 	var battlefield := InBattle.get_battlefield()
 	_player_data = battlefield.get_player_data()
-	$Sprite2D.texture = load("res://resources/battlefield_themes/%s/dog_tower.png" % battlefield.get_theme())
 	
 	zero_health.emit(_kill_all_dogs, CONNECT_ONE_SHOT)	
 	

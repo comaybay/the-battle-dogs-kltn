@@ -4,7 +4,7 @@ const ATTACK_FRAME: int = 8
 const BASE_ATTACK_RANGE: int = 1500
 const BASE_ATTACK_COOLDOWN: int = 13
 
-const BULLET_SCENE: PackedScene = preload("res://scenes/battlefields/common/dog_tower/gandolfg/bullet.tscn")
+const BULLET_SCENE: PackedScene = preload("res://scenes/battlefields/common/dog_tower/gandolfg/gandolfg_bullet.tscn")
 var _ennemies: Dictionary = {}  
 
 var _closest_enemy: Character

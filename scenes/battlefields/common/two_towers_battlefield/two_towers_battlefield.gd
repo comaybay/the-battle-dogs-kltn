@@ -15,6 +15,7 @@ var _battlefield_data: Dictionary
 
 @export var dog_tower: BaseDogTower
 @export var cat_tower: CatTower
+@export var land: Land
 
 func _init() -> void:
 	super._init()
@@ -34,8 +35,6 @@ func get_stage_width() -> int: return _battlefield_data['stage_width']
 
 func get_player_data() -> BaseBattlefieldPlayerData: return _player_data
 
-func get_theme() -> String: return _battlefield_data['theme']
-
 func get_dog_tower() -> DogTower:
 	return dog_tower
 	
@@ -47,6 +46,10 @@ func get_cat_power_scale() -> float:
 	return scale if scale != null else 1
 
 func _ready() -> void:
+	assert(dog_tower != null, "ERROR: dog tower not assigned in Battlefield")
+	assert(cat_tower != null, "ERROR: cat tower not assigned in Battlefield")
+	assert(land != null, "ERROR: land not assigned in Battlefield")
+	
 	time_batlle = 0
 	if (
 		not Data.has_done_battlefield_basics_tutorial 
@@ -55,11 +58,11 @@ func _ready() -> void:
 		or not Data.has_done_battlefield_rush
 	):
 		_tutorial_dog = TutorialDogScene.instantiate()
-		_tutorial_dog.setup($CatTower, $DogTower, $Camera2D, $Gui)
+		_tutorial_dog.setup(cat_tower, dog_tower, $Camera2D, $Gui)
 		$Gui.add_child(_tutorial_dog)
 	
-	$Gui.setup($DogTower, _player_data)
-	$store_gui.setup($DogTower, _player_data)
+	$Gui.setup(dog_tower, _player_data)
+	$store_gui.setup(dog_tower, _player_data)
 	var stage_width := get_stage_width()
 	var stage_width_with_margin := stage_width + (TOWER_MARGIN * 2)
 	
@@ -70,16 +73,15 @@ func _ready() -> void:
 	if _battlefield_data.get('boss_music') != null:
 		_boss_music = load("res://resources/sound/music/%s.mp3" % _battlefield_data['boss_music'])
 	
-	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % _battlefield_data['theme'])
 	$Sky.position = Vector2(0, -$Sky.size.y)
 	$Sky.size.x = stage_width_with_margin
 	
-	$DogTower.position.x = TOWER_MARGIN
-	$CatTower.position.x = stage_width_with_margin - TOWER_MARGIN;
+	dog_tower.position.x = TOWER_MARGIN
+	cat_tower.position.x = stage_width_with_margin - TOWER_MARGIN;
 
-	$CatTower.boss_appeared.connect(_on_boss_appeared)
-	$CatTower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)
-	$DogTower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
+	dog_tower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
+	cat_tower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)
+	cat_tower.boss_appeared.connect(_on_boss_appeared)
 
 func _process(delta: float) -> void:
 	_player_data.update(delta)
