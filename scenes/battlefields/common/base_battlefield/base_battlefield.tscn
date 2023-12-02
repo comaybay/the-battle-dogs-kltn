@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/sky.gd" id="4_paltt"]
 [ext_resource type="PackedScene" uid="uid://dmhx2wpadmcol" path="res://scenes/battlefields/common/base_battlefield/gui/gui.tscn" id="5_ipovo"]
 [ext_resource type="PackedScene" uid="uid://dtepcyc438je4" path="res://scenes/battlefields/common/base_battlefield/item_stores/store_gui.tscn" id="6_i0mnv"]
+[ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/danmaku_space.gd" id="7_i4hue"]
 [ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/Camera2D.gd" id="7_wb28v"]
 
 [node name="BaseBattlefield" type="Node2D"]
@@ -34,3 +35,7 @@ script = ExtResource("7_wb28v")
 
 [node name="TimeBattle" type="Timer" parent="."]
 autostart = true
+
+[node name="DanmakuSpace" type="Node" parent="."]
+script = ExtResource("7_i4hue")
+bullet_types_amount = 0
