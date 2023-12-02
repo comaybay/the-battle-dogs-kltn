@@ -11,11 +11,13 @@ BasicBulletKit = "res://addons/native_bullets/icons/icon_bullet_kit.svg"
 DynamicBulletKit = "res://addons/native_bullets/icons/icon_bullet_kit.svg"
 FollowingBulletKit = "res://addons/native_bullets/icons/icon_bullet_kit.svg"
 FollowingDynamicBulletKit = "res://addons/native_bullets/icons/icon_bullet_kit.svg"
+DanmakuBulletKit = "res://addons/native_bullets/icons/icon_bullet_kit.svg"
 
 Bullet = "res://addons/native_bullets/icons/icon_bullet_properties.svg"
 DynamicBullet = "res://addons/native_bullets/icons/icon_bullet_properties.svg"
 FollowingBullet = "res://addons/native_bullets/icons/icon_bullet_properties.svg"
 FollowingDynamicBullet = "res://addons/native_bullets/icons/icon_bullet_properties.svg"
+DanmakuBullet = "res://addons/native_bullets/icons/icon_bullet_properties.svg"
 
 [libraries]
 
