@@ -30,3 +30,15 @@ func tr_format(message: StringName) -> String:
 	var format: String = tr(message)
 	TranslationServer.set_locale(locale)
 	return format 
+
+var _timers: Dictionary = {}	
+## wait a certain amount using a shared timers system. the returned timer is pausable by the scene tree
+func wait(wait_time: float) -> Signal:
+	var id := Vector2(Time.get_ticks_msec(), wait_time)
+
+	if not _timers.has(id):
+		var timer := get_tree().create_timer(wait_time, false)
+		_timers[id] = get_tree().create_timer(wait_time, false)
+		timer.timeout.connect(func(): _timers.erase(id), CONNECT_ONE_SHOT)
+
+	return _timers[id].timeout
