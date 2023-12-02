@@ -5,7 +5,7 @@ const OUTER_PADDING = 2000
 
 func _ready() -> void:
 	var battlefield := InBattle.get_battlefield()
-	var stage_width_with_margin = battlefield.get_stage_width() + (BaseBattlefield.TOWER_MARGIN * 2)
+	var stage_width_with_margin = battlefield.get_stage_width()
 	
 	var shape_extents_x = (stage_width_with_margin + OUTER_PADDING * 2) / 2
 	$CollisionShape2D.shape.extents.x = shape_extents_x
@@ -14,3 +14,7 @@ func _ready() -> void:
 
 func get_size() -> Vector2:
 	return $TextureRect.size
+
+## returns the global bottom y position of land
+func get_land_bottom_y() -> float:
+	return $TextureRect.position.y + $TextureRect.size.y

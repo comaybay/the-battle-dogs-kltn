@@ -18,19 +18,19 @@ var _zoom_value_before_pinch: Vector2 = Vector2.ZERO
 
 var _mouse_pos: Vector2
 
-func setup(camera_control_buttons: CameraControlButtons, stage_width_with_margin: int, stage_height: int):
+func setup(camera_control_buttons: CameraControlButtons, stage_rect: Rect2):
 	_camera_control_buttons = camera_control_buttons
 	_camera_control_buttons.dragged.connect(_handle_screen_drag)
 
 	viewport_size = Global.VIEWPORT_SIZE
 	half_viewport_size =  viewport_size / 2
 
-	limit_left = 0
-	limit_right = stage_width_with_margin
-	limit_bottom = LAND_HEIGHT
-	limit_top = -stage_height
+	limit_left = stage_rect.position.x
+	limit_right = stage_rect.position.x + stage_rect.size.x
+	limit_top = stage_rect.position.y
+	limit_bottom = stage_rect.position.y + stage_rect.size.y
 	
-	var min_zoom_scale:float = max(float(viewport_size.x) / stage_width_with_margin, 0.25) 
+	var min_zoom_scale:float = max(float(viewport_size.x) / stage_rect.size.x, 0.25) 
 	min_zoom = Vector2(min_zoom_scale, min_zoom_scale) 
 	var initial_zoom_scale = max(0.375, min_zoom_scale) 
 	zoom = Vector2(initial_zoom_scale, initial_zoom_scale)

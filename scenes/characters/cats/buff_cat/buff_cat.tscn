@@ -1,7 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmuvom1n8b8aw"]
+[gd_scene load_steps=11 format=3 uid="uid://dmuvom1n8b8aw"]
 
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_umb7d"]
 [ext_resource type="Texture2D" uid="uid://bpn5qyo7s5cfs" path="res://scenes/characters/cats/buff_cat/buff_cat.png" id="2_ase53"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uk3fr"]
+resource_local_to_scene = true
+size = Vector2(192, 178)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -113,7 +117,10 @@ health = 2000
 damage = 150
 knockbacks = 5
 
-[node name="AttackCooldownTimer" parent="." index="0"]
+[node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
+shape = SubResource("RectangleShape2D_uk3fr")
+
+[node name="AttackCooldownTimer" parent="." index="1"]
 wait_time = 4.0
 
 [node name="Character" parent="CharacterAnimation" index="0"]
@@ -121,15 +128,11 @@ position = Vector2(-80, -381)
 texture = ExtResource("2_ase53")
 hframes = 3
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_5a1bo")
 }
 
-[node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(0, -302)
-shape = SubResource("RectangleShape2D_8so8p")
-
-[node name="RayCast2D" parent="." index="4"]
+[node name="RayCast2D" parent="." index="5"]
 position = Vector2(-138, -9.5)
 target_position = Vector2(-150, 0)

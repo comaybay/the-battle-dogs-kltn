@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://culho3ivbdqd3"]
+[gd_scene load_steps=9 format=3 uid="uid://culho3ivbdqd3"]
 
 [ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/base_battlefield.gd" id="1_ymnkr"]
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="2_wjudx"]
 [ext_resource type="Texture2D" uid="uid://dl847jxlc5jay" path="res://resources/battlefield_themes/green_grass/sky.png" id="3_mn6xr"]
+[ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/sky.gd" id="4_paltt"]
 [ext_resource type="PackedScene" uid="uid://dmhx2wpadmcol" path="res://scenes/battlefields/common/base_battlefield/gui/gui.tscn" id="5_ipovo"]
 [ext_resource type="PackedScene" uid="uid://dtepcyc438je4" path="res://scenes/battlefields/common/base_battlefield/item_stores/store_gui.tscn" id="6_i0mnv"]
 [ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/Camera2D.gd" id="7_wb28v"]
@@ -19,6 +20,7 @@ offset_bottom = 1384.0
 size_flags_horizontal = 4
 texture = ExtResource("3_mn6xr")
 stretch_mode = 1
+script = ExtResource("4_paltt")
 
 [node name="store_gui" parent="." instance=ExtResource("6_i0mnv")]
 

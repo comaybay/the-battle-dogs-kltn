@@ -2,6 +2,7 @@ class_name MikoDog extends BaseDog
 
 const HIT_SFX: AudioStream = preload("res://scenes/characters/dogs/miko_dog/se_damage00.wav") 
 
+## this value might change if miko dog is a cat
 var ofuda_damage: int = 10
 
 func _ready() -> void:

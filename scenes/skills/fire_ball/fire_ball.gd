@@ -9,12 +9,12 @@ const BASE_ROWS: int = 1
 func setup(skill_user: Character.Type):
 	var battlefield := get_tree().current_scene as BaseBattlefield
 	var destination_x_from: int = -battlefield.TOWER_MARGIN + 100
-	var destination_x_to: int = battlefield.get_stage_width() - 800
+	var destination_x_to: int = battlefield.get_stage_width() - battlefield.TOWER_MARGIN * 2 - 800 
 	
 	if skill_user == Character.Type.CAT:
 		var old_dest_x_from: int = destination_x_from
-		destination_x_from = battlefield.get_stage_width() + battlefield.TOWER_MARGIN * 2 - destination_x_to
-		destination_x_to = battlefield.get_stage_width() + battlefield.TOWER_MARGIN * 2 - old_dest_x_from
+		destination_x_from = battlefield.get_stage_width() - destination_x_to
+		destination_x_to = battlefield.get_stage_width() - old_dest_x_from
 		
 	var y = -battlefield.get_stage_height() - Y_STEP
 	

@@ -18,6 +18,7 @@ func enter(data: Dictionary) -> void:
 	knockback_vel = Vector2(200, -250) * data['scale']
 	character.n_AnimationPlayer.play("knockback")
 
+	character.n_DanmakuHitbox.set_deferred("monitoring", false)
 	if character.character_type == Character.Type.DOG:
 		character.set_collision_layer_value(2, false)
 	else:
@@ -29,6 +30,7 @@ func enter(data: Dictionary) -> void:
 
 # called when the state is deactivated
 func exit() -> void:
+	character.n_DanmakuHitbox.set_deferred("monitoring", true)
 	if character.character_type == Character.Type.DOG:
 		character.set_collision_layer_value(2, true)
 	else: 

@@ -71,6 +71,7 @@ const DEFAULT_DIE_SFX = preload("res://resources/sound/battlefield/death.mp3")
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
 @onready var n_Sprite2D := $CharacterAnimation/Character as Sprite2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
+@onready var n_DanmakuHitbox := %DanmakuHitbox as Area2D
 
 func get_character_animation_node() -> Node2D:
 	return $CharacterAnimation
@@ -120,7 +121,9 @@ func _ready() -> void:
 		$CharacterAnimation.position += Vector2(randi_range(-20, 20), rand_y)
 		## render stuff correctly
 		z_index = rand_y + 20
+		
 		_update_character()
+		%DanmakuHitbox.area_shape_entered.connect(_on_danmaku_bullet_entered)
 		
 	if Engine.is_editor_hint():
 		max_health = health
@@ -136,6 +139,11 @@ func _update_character():
 	next_knockback_health = max_health - (max_health / knockbacks)
 	move_direction = (1 if character_type == Type.DOG else -1)
 	
+	# danmaku shape is the same as collision shape
+	var danmaku_shape := %DanmakuHitbox/CollisionShape2D
+	danmaku_shape.shape.size = $CollisionShape2D.shape.size
+	danmaku_shape.position = $CollisionShape2D.position
+		
 	# for some reason timer do not take in 0 correctly
 	$AttackCooldownTimer.wait_time = attack_cooldown
 	
@@ -200,18 +208,6 @@ func _draw() -> void:
 		rect.position += $CollisionShape2D.position
 		draw_rect(rect, Color.RED, false)
 
-func _get_configuration_warnings() -> PackedStringArray:
-	var warnings: Array[String] = []
-	
-	for anim_name in ['idle', 'knockback', 'move', 'attack']:
-		if not n_AnimationPlayer.has_animation(anim_name):	
-			warnings.append("Character is missing '%s' animation" % anim_name)
-				
-	if n_Sprite2D.texture == null:
-		warnings.append("Sprite2D node requires a sprite sheet, this is used to display the character.")
-	
-	return warnings
-	
 func take_damage(ammount: int) -> void:
 	health -= ammount * _multipliers[MultiplierTypes.DAMAGE_TAKEN]
 	if is_past_knockback_health():
@@ -264,3 +260,14 @@ func kill():
 
 func get_FSM() -> FSM:
 	return $FiniteStateMachine
+
+func _on_danmaku_bullet_entered(area_rid: RID, _area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	if not Bullets.is_bullet_existing(area_rid, area_shape_index):
+		return
+		
+	var bullet_id = Bullets.get_bullet_from_shape(area_rid, area_shape_index)
+
+	var controller = Bullets.get_bullet_property(bullet_id, "data") as DanmakuBulletController 
+	
+	if controller.character_type != character_type: 
+		controller.body_enter.emit(self)

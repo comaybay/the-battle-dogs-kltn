@@ -5,5 +5,5 @@ func _ready() -> void:
 	
 	$Reflection.setup(land)
 	$Tori.setup(_battlefield_data['tori_position'], _battlefield_data['tori_health'], _battlefield_data['tori_growl'])
-	cat_tower.position.x = get_stage_width() + TOWER_MARGIN * 3;
+	cat_tower.position.x = get_stage_width() + TOWER_MARGIN;
 	cat_tower.setup($Tori)

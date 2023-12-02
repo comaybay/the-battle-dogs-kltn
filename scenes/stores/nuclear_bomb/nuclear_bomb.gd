@@ -10,7 +10,7 @@ var dog_tower
 func store_setup(_dog_tower: DogTower,  player_data: BaseBattlefieldPlayerData):
 	dog_tower = _dog_tower
 	battlefield = get_tree().current_scene as BaseBattlefield
-	var destination =  (battlefield.get_stage_width() * 2 + battlefield.TOWER_MARGIN * 4)/2
+	var destination =  (battlefield.get_stage_width() * 2)/2
 #	-battlefield.TOWER_MARGIN + battlefield.get_stage_width() - 700 
 #	battlefield.get_stage_width()  + battlefield.TOWER_MARGIN * 5  + 700 
 	

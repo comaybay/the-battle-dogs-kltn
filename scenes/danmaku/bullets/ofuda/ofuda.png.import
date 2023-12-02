@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjx5s87dwrgxs"
-path="res://.godot/imported/ofuda.png-3cf28b355cede413614dd921aef5ab25.ctex"
+path="res://.godot/imported/ofuda.png-44c312017be31af7200b8185f3ea8655.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/characters/dogs/miko_dog/ofuda/ofuda.png"
-dest_files=["res://.godot/imported/ofuda.png-3cf28b355cede413614dd921aef5ab25.ctex"]
+source_file="res://scenes/danmaku/bullets/ofuda/ofuda.png"
+dest_files=["res://.godot/imported/ofuda.png-44c312017be31af7200b8185f3ea8655.ctex"]
 
 [params]
 
