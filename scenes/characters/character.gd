@@ -9,6 +9,8 @@ enum Type { DOG, CAT }
 
 ## Multiplier will affect the character's resulting output (such as damage inflicted, movement speed, etc) 
 enum MultiplierTypes { DAMAGE, DAMAGE_TAKEN, SPEED, ATTACK_SPEED }
+## Set Multiplier behaviours
+enum SetBehaviour { OVERWRITE, TAKE_HIGHER, TAKE_LOWER}
 var _multipliers: Dictionary = {
 	MultiplierTypes.DAMAGE: 1.0,
 	MultiplierTypes.DAMAGE_TAKEN: 1.0,
@@ -29,8 +31,12 @@ var _multipliers: Dictionary = {
 ## if not null, will be use for attack collision detection
 ## and will ignore the "attack range" and "attack area range" properties when attacking
 ## (attack range is still used for detecting when to stop moving)
-@export var custom_attack_area: Area2D = null
-
+@export var custom_attack_area: Area2D = null:
+	set(val):
+		custom_attack_area = val
+		notify_property_list_changed()  
+		queue_redraw()
+		
 @export var attack_range: int = 40:
 	set(val):
 		attack_range = val
@@ -89,6 +95,10 @@ var next_knockback_health: int
 var collision_rect: Rect2
 var _is_boss: bool
 func is_boss() -> bool: return _is_boss
+
+func _validate_property(property: Dictionary):
+	if property.name in ["attack_sprite", "attack_frame"] and custom_attack_area != null:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 ## this setup func is used internally by it's subcalsses
 func _setup(global_position: Vector2, is_boss: bool) -> void:
@@ -227,19 +237,46 @@ func take_damage(ammount: int) -> void:
 ## This can be use to increase/decrease dog power such as damage, speed, etc. [/br]
 ## multiplier: this multipler will affect the base value of the character,
 ## set to 1 to reset property value back to normal 
-func set_multiplier(type: MultiplierTypes, multiplier: float) -> void:
-	_multipliers[type] = multiplier
+func set_multiplier(type: MultiplierTypes, multiplier: float, behaviour: SetBehaviour) -> void:
+	if (
+		(behaviour == SetBehaviour.TAKE_HIGHER and multiplier < _multipliers[type])
+		or (behaviour == SetBehaviour.TAKE_LOWER and multiplier > _multipliers[type])
+	): return
 	
 	if type == MultiplierTypes.ATTACK_SPEED:
+		if name == "RamielCat":
+			print("====SET MUKTIPLOER")
+			print(n_AttackCooldownTimer.time_left)
+			print(multiplier)
+			print("====")
+		
+		if not n_AttackCooldownTimer.is_stopped():
+			n_AttackCooldownTimer.start(n_AttackCooldownTimer.time_left * _multipliers[type])
+			n_AttackCooldownTimer.start(max(n_AttackCooldownTimer.time_left / multiplier, 0.05))
+			_multipliers[type] = multiplier
+		
 		n_AttackCooldownTimer.wait_time = max(attack_cooldown / multiplier, 0.05)
 		$AnimationPlayer.speed_scale = multiplier
 		
 func reset_multipliers() -> void:
+	if name == "RamielCat":
+		print(n_AttackCooldownTimer.time_left)
+
+	if not n_AttackCooldownTimer.is_stopped():
+		var attack_speed_multiplier: float = _multipliers[MultiplierTypes.ATTACK_SPEED]
+		n_AttackCooldownTimer.start(n_AttackCooldownTimer.time_left * attack_speed_multiplier)
+
+	if name == "RamielCat":
+		print(n_AttackCooldownTimer.time_left)
+		print(n_AttackCooldownTimer.wait_time)
+		print("----")
+
+
+	n_AttackCooldownTimer.wait_time = attack_cooldown
+	$AnimationPlayer.speed_scale = 1.0
+	
 	for type in _multipliers:
 		_multipliers[type] = 1.0
-		
-	n_AttackCooldownTimer.wait_time = min(attack_cooldown, n_AttackCooldownTimer.wait_time)
-	$AnimationPlayer.speed_scale = 1.0
 
 func is_past_knockback_health() -> bool:
 	return health <= next_knockback_health

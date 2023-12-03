@@ -56,8 +56,10 @@ func _on_enemy_entered(enemy: Character):
 		
 	if not InBattle.in_request_mode:
 		enemy.take_damage(_damage)
-		enemy.set_multiplier(Character.MultiplierTypes.ATTACK_SPEED, _multiplier)	
-		enemy.set_multiplier(Character.MultiplierTypes.SPEED, _multiplier)	
+		const SB := Character.SetBehaviour
+		const TYPE := Character.MultiplierTypes
+		enemy.set_multiplier(TYPE.ATTACK_SPEED, _multiplier, SB.TAKE_LOWER)	
+		enemy.set_multiplier(TYPE.SPEED, _multiplier, SB.TAKE_LOWER)	
 		
 		var timer = Timer.new()
 		timer.wait_time = _duration
