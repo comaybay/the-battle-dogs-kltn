@@ -10,9 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://bk7sil83fyfkh" path="res://scenes/characters/dogs/miko_dog/se_ch02.wav" id="7_bafi3"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/knockback_state.gd" id="8_o0snc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_00bcl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv36t"]
 resource_local_to_scene = true
-size = Vector2(192, 178)
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -167,7 +167,8 @@ attack_cooldown = 20.0
 health = 200
 damage = 0
 
-
+[node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
+shape = SubResource("RectangleShape2D_iv36t")
 
 [node name="AttackCooldownTimer" parent="." index="1"]
 wait_time = 20.0

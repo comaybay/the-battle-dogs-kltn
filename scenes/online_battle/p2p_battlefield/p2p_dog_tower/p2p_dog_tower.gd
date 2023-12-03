@@ -59,6 +59,9 @@ func spawn(dog_id: String) -> BaseDog:
 			func(): _player_data.fmoney += reward_money, CONNECT_ONE_SHOT
 		)		
 		
+	_player_data.dogs_count[dog_id] += 1
+	dog.tree_exiting.connect(func(): _player_data.dogs_count[dog_id] -= 1)
+		
 	dog_spawn.emit(dog)
 	return dog
 

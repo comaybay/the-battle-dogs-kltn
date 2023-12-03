@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_umb7d"]
 [ext_resource type="Texture2D" uid="uid://bpn5qyo7s5cfs" path="res://scenes/characters/cats/buff_cat/buff_cat.png" id="2_ase53"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uk3fr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qdvm"]
 resource_local_to_scene = true
-size = Vector2(192, 178)
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -102,9 +102,9 @@ _data = {
 "move": SubResource("Animation_t17j0")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8so8p"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g1xue"]
 resource_local_to_scene = true
-size = Vector2(276, 635)
+size = Vector2(294, 621)
 
 [node name="BuffCat" instance=ExtResource("1_umb7d")]
 reward_money = 300
@@ -118,7 +118,8 @@ damage = 150
 knockbacks = 5
 
 [node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
-shape = SubResource("RectangleShape2D_uk3fr")
+position = Vector2(0, -268)
+shape = SubResource("RectangleShape2D_6qdvm")
 
 [node name="AttackCooldownTimer" parent="." index="1"]
 wait_time = 4.0
@@ -133,6 +134,10 @@ libraries = {
 "": SubResource("AnimationLibrary_5a1bo")
 }
 
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(0, -296.5)
+shape = SubResource("RectangleShape2D_g1xue")
+
 [node name="RayCast2D" parent="." index="5"]
-position = Vector2(-138, -9.5)
+position = Vector2(-147, -11)
 target_position = Vector2(-150, 0)

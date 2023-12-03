@@ -123,7 +123,13 @@ func _ready() -> void:
 		z_index = rand_y + 20
 		
 		_update_character()
+		
+		# danmaku shape is the same as collision shape
+		var danmaku_shape := %DanmakuHitbox/CollisionShape2D
+		danmaku_shape.shape.size = $CollisionShape2D.shape.size
+		danmaku_shape.position = $CollisionShape2D.position
 		%DanmakuHitbox.area_shape_entered.connect(_on_danmaku_bullet_entered)
+		
 		
 	if Engine.is_editor_hint():
 		max_health = health
@@ -138,11 +144,6 @@ func _update_character():
 	max_health = health
 	next_knockback_health = max_health - (max_health / knockbacks)
 	move_direction = (1 if character_type == Type.DOG else -1)
-	
-	# danmaku shape is the same as collision shape
-	var danmaku_shape := %DanmakuHitbox/CollisionShape2D
-	danmaku_shape.shape.size = $CollisionShape2D.shape.size
-	danmaku_shape.position = $CollisionShape2D.position
 		
 	# for some reason timer do not take in 0 correctly
 	$AttackCooldownTimer.wait_time = attack_cooldown

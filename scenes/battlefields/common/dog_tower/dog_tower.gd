@@ -46,6 +46,10 @@ func spawn(dog_id: String) -> BaseDog:
 	
 	get_tree().current_scene.add_child(dog)
 	
+	if Data.dog_info[dog_id].get('spawn_limit', 0) > 0:
+		_player_data.dogs_count[dog_id] += 1
+		dog.tree_exiting.connect(func(): _player_data.dogs_count[dog_id] -= 1)
+	
 	dog_spawn.emit(dog)
 	return dog
 

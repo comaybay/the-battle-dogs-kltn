@@ -13,6 +13,10 @@ func _init() -> void:
 	for id in team_store_ids:
 		team_store_scenes.append(null if id == null else load("res://scenes/stores/%s/%s.tscn" % [id, id]))
 	
+	for dog_id in team_dog_ids:
+		if dog_id != null:
+			dogs_count[dog_id] = 0
+	
 	fmoney = 0
 	_wallet = int(BASE_WALLET_CAPACITY * (1 + _get_level_or_zero(Data.passives.get('wallet_capacity')) * 0.5))
 	_money_rate = BASE_MONEY_RATE * (1 + _get_level_or_zero(Data.passives.get('money_efficiency')) * 0.1)

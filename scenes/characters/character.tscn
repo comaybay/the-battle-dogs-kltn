@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cvno8d4sb6h0s"]
+[gd_scene load_steps=16 format=3 uid="uid://cvno8d4sb6h0s"]
 
 [ext_resource type="Script" path="res://scenes/characters/character.gd" id="1_taq0m"]
 [ext_resource type="PackedScene" uid="uid://yg61w87455ho" path="res://scenes/common/finite_state_machine/FSM.tscn" id="3_dcvdl"]
@@ -8,9 +8,9 @@
 [ext_resource type="Script" path="res://scenes/characters/idle_state.gd" id="6_yu7tv"]
 [ext_resource type="Script" path="res://scenes/characters/Die.gd" id="7_10dt3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_40amy"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ncfb"]
 resource_local_to_scene = true
-size = Vector2(192, 178)
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -107,6 +107,10 @@ _data = {
 "move": SubResource("Animation_t17j0")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40amy"]
+resource_local_to_scene = true
+size = Vector2(192, 178)
+
 [node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("attack_sprite") groups=["characters"]]
 collision_layer = 0
 collision_mask = 9
@@ -120,7 +124,7 @@ collision_mask = 8
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DanmakuHitbox"]
-shape = SubResource("RectangleShape2D_40amy")
+shape = SubResource("RectangleShape2D_1ncfb")
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 wait_time = 2.0

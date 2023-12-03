@@ -2,7 +2,7 @@ class_name SpawnButton extends Button
 
 var dog_id: String
 var spawn_price: int
-var spawn_type: String
+var spawn_limit: int
 var spawn_time: float
 var spawn_input_action: String
 
@@ -19,7 +19,7 @@ func can_afford_dog():
 func can_spawn():
 	var result := can_afford_dog() and is_spawn_ready() and is_active
 	
-	if spawn_type == 'once' and _player_data.spawn_once_dogs.get(dog_id) != null:
+	if spawn_limit > 0 and _player_data.dogs_count[dog_id] >= spawn_limit:
 		result = false
 		
 	return result
@@ -30,7 +30,7 @@ func setup(dog_id: String, input_action: String, is_active: bool, dog_tower: Bas
 	_dog_tower = dog_tower
 	_player_data = player_data
 	spawn_input_action = input_action
-	spawn_type = Data.dog_info[dog_id]['spawn_type'] 	
+	spawn_limit = Data.dog_info[dog_id].get('spawn_limit', 0) 	
 		
 	$Icon.texture = load("res://resources/icons/%s_icon.png" % dog_id)
 
@@ -68,10 +68,6 @@ func spawn_dog() -> BaseDog:
 	_player_data.fmoney -= spawn_price
 	var dog := _dog_tower.spawn(dog_id)
 	
-	if spawn_type == "once":
-		_player_data.spawn_once_dogs[dog_id] = dog
-		dog.tree_exiting.connect(func(): _player_data.spawn_once_dogs[dog_id] = null)
-
 	_start_recharge_ui()
 	
 	return dog

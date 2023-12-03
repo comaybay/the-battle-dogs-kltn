@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://tq62ii2wpilb"]
+[gd_scene load_steps=10 format=3 uid="uid://tq62ii2wpilb"]
 
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_nq2vy"]
 [ext_resource type="Texture2D" uid="uid://dkwyha3po5kge" path="res://scenes/characters/cats/rolling_cat/rolling_cat.png" id="2_jrv4s"]
@@ -173,22 +173,22 @@ health = 350
 damage = 30
 knockbacks = 5
 
-[node name="AttackCooldownTimer" parent="." index="0"]
+[node name="AttackCooldownTimer" parent="." index="1"]
 wait_time = 3.0
-
-[node name="AnimationPlayer" parent="." index="2"]
-libraries = {
-"": SubResource("AnimationLibrary_elntn")
-}
 
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(0, -11)
 texture = ExtResource("2_jrv4s")
 hframes = 4
 vframes = 4
-[node name="CollisionShape2D" parent="." index="3"]
+
+[node name="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_elntn")
+}
+
+[node name="CollisionShape2D" parent="." index="4"]
 shape = SubResource("RectangleShape2D_c3bis")
 
-[node name="RayCast2D" parent="." index="4"]
-position = Vector2(-96, 64)
+[node name="RayCast2D" parent="." index="5"]
 target_position = Vector2(-80, 0)
