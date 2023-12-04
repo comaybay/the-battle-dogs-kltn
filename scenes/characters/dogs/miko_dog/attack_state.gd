@@ -18,8 +18,6 @@ var _current_frame: int
 func _has_interupted(frame) -> bool: return frame != _current_frame
 
 func _init() -> void:
-	super._init()
-		
 	danmaku_space = InBattle.get_battlefield().get_danmaku_space()
 		
 # called when the state is activated
