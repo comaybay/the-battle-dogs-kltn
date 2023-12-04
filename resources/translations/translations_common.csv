@@ -1,5 +1,6 @@
 keys,vi,en
 @START_GAME,BẮT ĐẦU,START GAME
+@ONLINE_BATTLE,Đánh Online,Online Battle
 @CONFIRM,Đồng ý,Confirm
 @CANCEL,Hủy bỏ,Cancel
 @SETTINGS,Cài Đặt,Settings
@@ -91,7 +92,7 @@ keys,vi,en
 @STEAM,Steam,Steam
 @BUY,Mua,Buy
 @QUIT_GAME_STEAM_DISCONNECTED,"Mất kết nối với Steam, vui lòng đăng nhập vào Steam và khởi động lại trò chơi.","Steam disconnected, please login to Steam again and restart the game."
-@LOBBY,Đánh Online - Sảnh,Online Battle - Lobby
+@LOBBY,Đánh Online - Sảnh,Room Listing - Lobby
 @REFRESH,Làm mới,Refresh
 @ROOM,Phòng đợi,Room
 @ROOM_NAME,Tên phòng,Room name

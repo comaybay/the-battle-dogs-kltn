@@ -88,7 +88,7 @@ offset_bottom = 55.0
 
 [node name="Label" type="Label" parent="MarginContainer/Lobby/MainPanel/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "@ROOM_LISTING"
+text = "@LOBBY"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Lobby/MainPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -162,7 +162,8 @@ text = "@AUTO_MATCHMAKING"
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="Label" type="Label" parent="MarginContainer/Lobby/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+[node name="JoinWithCodeLabel" type="Label" parent="MarginContainer/Lobby/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "@JOIN_WITH_CODE:"
 
