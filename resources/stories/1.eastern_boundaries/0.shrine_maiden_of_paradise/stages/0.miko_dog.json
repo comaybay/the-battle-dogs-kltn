@@ -52,10 +52,12 @@
       "health_at": 30000,
       "id": "miko_dog",
       "dog_level": 10,
-      "dog_abilities": [],
+      "dog_abilities": ["yin_yang_orb"],
       "buffs": [
+        { "name": "ofuda_damage", "scale": 4 },
         { "name": "reward_money", "scale": 3 },
-        { "name": "health", "scale": 10 }
+        { "name": "health", "scale": 15 },
+        { "name": "knockbacks", "scale": 2 }
       ]
     }
   ]

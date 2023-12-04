@@ -35,7 +35,7 @@ func _ready() -> void:
 		canvas.tree_exited.connect(func(): canvas.queue_free())
 	
 	if not Data.has_done_battlefield_basics_tutorial:
-		$BenTrai/NutNangCap.disabled = true
+		%UpgradeButton.disabled = true
 	
 	%ExpeditionButton.pressed.connect(_go_to_map)
 	%UpgradeButton.pressed.connect(_go_to_upgrade)

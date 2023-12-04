@@ -8,11 +8,18 @@ func get_p2p_networking() -> BattlefieldP2PNetworking: return _p2p_networking
 var _stage_width: int
 func get_stage_width() -> int: return _stage_width + TOWER_MARGIN * 2
 
+func get_stage_height() -> int: 
+	return $Land.get_land_bottom_y() - $Sky.position.y
+
+func get_stage_rect() -> Rect2:
+	return Rect2(0, $Sky.position.y, get_stage_width(), get_stage_height())
+
 var _opponent_player_data: P2PBattlefieldPlayerData
 var _this_player_data: P2PBattlefieldPlayerData
 func get_this_player_data() -> P2PBattlefieldPlayerData: return _this_player_data
 
 func get_player_data() -> BaseBattlefieldPlayerData: return _this_player_data
+func get_opponent_data() -> P2PBattlefieldPlayerData: return _opponent_player_data
 
 func get_theme() -> String: return SteamUser.get_lobby_data("theme")
 
@@ -47,8 +54,6 @@ func _ready() -> void:
 	AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % SteamUser.get_lobby_data("music")))
 	
 	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % SteamUser.get_lobby_data("theme"))
-	$Sky.position = Vector2(0, -$Sky.size.y)
-	$Sky.size.x = get_stage_width()
 	
 	_player_dog_tower = $P2PDogTowerLeft as P2PDogTower
 	_opponent_dog_tower = $P2PDogTowerRight as P2PDogTower

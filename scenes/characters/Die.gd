@@ -1,4 +1,3 @@
-@tool
 extends FSMState
 
 const FlyingSoul: PackedScene = preload("res://scenes/effects/flying_soul/flying_soul.tscn")

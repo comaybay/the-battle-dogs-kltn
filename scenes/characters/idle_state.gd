@@ -1,4 +1,3 @@
-@tool
 extends FSMState
 
 @onready var character: Character = owner
@@ -29,3 +28,9 @@ func exit() -> void:
 func update(_delta: float) -> void:
 	if character.n_RayCast2D.get_collider() == null:
 		transition.emit("MoveState")
+		
+func physics_update(delta: float) -> void:
+	if not character.is_on_floor():
+		character.velocity.y += character.gravity * delta
+	else:
+		character.velocity.y = 0

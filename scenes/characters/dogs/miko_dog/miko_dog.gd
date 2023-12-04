@@ -14,7 +14,7 @@ func _ready() -> void:
 	get_FSM().state_entering.connect(_on_state_entering)
 	
 func _on_state_entering(state_name: String, data: Dictionary) -> void:
-	if state_name != "AttackState":
+	if InBattle.in_request_mode or state_name != "AttackState":
 		return
 
 	var enemies = get_tree().get_nodes_in_group(

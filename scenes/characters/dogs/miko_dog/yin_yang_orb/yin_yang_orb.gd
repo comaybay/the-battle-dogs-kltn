@@ -2,7 +2,6 @@ class_name YinYangOrb extends CharacterBody2D
 
 const EXIT_AUDIO: AudioStream = preload("res://scenes/characters/dogs/miko_dog/yin_yang_orb/se_don00.wav")
 
-const SPEED: float = 300
 const BOUNCE_SPEED: float = 1000
 var _bounce_time_left: int = 1
 
@@ -10,12 +9,12 @@ var _gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var _damage = 50
 
-func setup(global_position: Vector2, dog_level: int, character_type: Character.Type) -> void:
+func setup(global_position: Vector2, dog_level: int, character_type: Character.Type, velocity: Vector2) -> void:
 	self.global_position = global_position
-	velocity = Vector2(SPEED, 0)
+	self.velocity = velocity
 	
 	if character_type == Character.Type.CAT:
-		velocity.x = -velocity.x
+		self.velocity.x = -abs(velocity.x)
 		collision_mask = 0b100001
 		$Area2D.collision_mask = 0b10
 	

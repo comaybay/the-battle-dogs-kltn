@@ -18,10 +18,6 @@ func get_stage_rect() -> Rect2:
 func get_player_data() -> BaseBattlefieldPlayerData:
 	push_error("ERROR: get_player_data() NOT IMPLEMENTED")
 	return null	
-	
-func get_theme() -> String:
-	push_error("ERROR: get_theme() NOT IMPLEMENTED")
-	return ""
 
 ## The effect space, this is where all the effects should be placed.
 ## stuff that are placed here will always be in front of the characters
@@ -34,7 +30,7 @@ func get_danmaku_space() -> DanmakuSpace:
 
 func _init() -> void:
 	const BITE_SFX: AudioStream = preload("res://resources/sound/battlefield/bite.mp3")
-	AudioPlayer.add_in_battle_sfx(BITE_SFX, 20)
+	AudioPlayer.add_in_battle_sfx(BITE_SFX, 10)
 
 func _clean_up():
 	# set back to 1 in case user change game speed

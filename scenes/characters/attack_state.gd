@@ -1,47 +1,61 @@
-@tool
 extends FSMState
 
 const BITE_SFX: AudioStream = preload("res://resources/sound/battlefield/bite.mp3")
 
 @onready var character: Character = owner
-var start_attack := false
-var done_attack := false
+
+## indicate attack has started (custom area attack need to set this value when start attacking)
+@export var start_attack := false
+
+## indicate attack has been done (custom area attack need to set this value when done attacking)
+@export var done_attack := false
+
+var cutom_area_affected: Dictionary = {}
 
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
-	character.attack_sprite.frame_changed.connect(on_frame_changed)
+	if character.custom_attack_area == null: 
+		character.attack_sprite.frame_changed.connect(_check_attack_has_start)
+	
 	character.n_AnimationPlayer.animation_finished.connect(on_animation_finished)
 	character.n_AnimationPlayer.play("attack")
 	
 	if character.custom_attack_area != null:
+		character.custom_attack_area.monitoring = true
 		character.custom_attack_area.collision_mask = character.n_RayCast2D.collision_mask
 
-func on_frame_changed() -> void:
+## handling non-custom area attack start 
+func _check_attack_has_start() -> void:
 	if done_attack == false && character.attack_sprite.frame >= character.attack_frame:
 		start_attack = true
 
 func physics_update(_delta: float) -> void:
-	if start_attack == false:
+	if start_attack == false or character.damage == 0:
 		return
 	
 	AudioPlayer.play_in_battle_sfx(BITE_SFX, AudioPlayer.get_random_pitch_scale())
-	
 	var random_effect_offset = Vector2(randi_range(-20, 20), randi_range(-20, 20))
 	
-	# custom attack
+	# if using custom attack
 	if character.custom_attack_area != null:
 		for target in character.custom_attack_area.get_overlapping_bodies():
-			target.take_damage(character.damage)
-			InBattle.add_hit_effect(target.get_effect_global_position() + random_effect_offset)
-	
+			if not cutom_area_affected.has(target):
+				target.take_damage(character.damage)
+				InBattle.add_hit_effect(target.get_effect_global_position() + random_effect_offset)
+			cutom_area_affected[target] = true
+		return
+		
 	# single target
-	elif character.attack_area_range <= 0:
+	if character.attack_area_range <= 0:
 		# target can be a dog or a dog tower
 		var target := character.n_RayCast2D.get_collider()
 		if target != null:
 			target.take_damage(character.damage)
 			InBattle.add_hit_effect(target.get_effect_global_position() + random_effect_offset)
-
+		
+		start_attack = false
+		done_attack = true
+		
 	# area attack
 	else:
 		var space_state := character.get_world_2d().direct_space_state
@@ -63,8 +77,8 @@ func physics_update(_delta: float) -> void:
 			result.collider.take_damage(character.damage)
 			InBattle.add_hit_effect(result.collider.get_effect_global_position() + random_effect_offset)
 
-	start_attack = false
-	done_attack = true
+		start_attack = false
+		done_attack = true
 
 func on_animation_finished(_name):	
 	character.n_AttackCooldownTimer.start()
@@ -72,9 +86,11 @@ func on_animation_finished(_name):
 		
 # called when the state is deactivated
 func exit() -> void:
+	cutom_area_affected.clear()
 	start_attack = false
 	done_attack = false
-	character.attack_sprite.frame_changed.disconnect(on_frame_changed) 
 	character.n_AnimationPlayer.animation_finished.disconnect(on_animation_finished)
-
-
+	if character.custom_attack_area == null: 
+		character.attack_sprite.frame_changed.disconnect(_check_attack_has_start) 
+	else:
+		character.custom_attack_area.monitoring = false 

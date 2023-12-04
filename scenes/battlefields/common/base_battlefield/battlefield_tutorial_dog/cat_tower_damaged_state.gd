@@ -1,4 +1,3 @@
-@tool
 extends FSMState
 
 @onready var tutorial_dog: BattlefieldTutorialDog = owner

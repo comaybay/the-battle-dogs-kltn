@@ -244,12 +244,6 @@ func set_multiplier(type: MultiplierTypes, multiplier: float, behaviour: SetBeha
 	): return
 	
 	if type == MultiplierTypes.ATTACK_SPEED:
-		if name == "RamielCat":
-			print("====SET MUKTIPLOER")
-			print(n_AttackCooldownTimer.time_left)
-			print(multiplier)
-			print("====")
-		
 		if not n_AttackCooldownTimer.is_stopped():
 			n_AttackCooldownTimer.start(n_AttackCooldownTimer.time_left * _multipliers[type])
 			n_AttackCooldownTimer.start(max(n_AttackCooldownTimer.time_left / multiplier, 0.05))
@@ -259,18 +253,9 @@ func set_multiplier(type: MultiplierTypes, multiplier: float, behaviour: SetBeha
 		$AnimationPlayer.speed_scale = multiplier
 		
 func reset_multipliers() -> void:
-	if name == "RamielCat":
-		print(n_AttackCooldownTimer.time_left)
-
 	if not n_AttackCooldownTimer.is_stopped():
 		var attack_speed_multiplier: float = _multipliers[MultiplierTypes.ATTACK_SPEED]
 		n_AttackCooldownTimer.start(n_AttackCooldownTimer.time_left * attack_speed_multiplier)
-
-	if name == "RamielCat":
-		print(n_AttackCooldownTimer.time_left)
-		print(n_AttackCooldownTimer.wait_time)
-		print("----")
-
 
 	n_AttackCooldownTimer.wait_time = attack_cooldown
 	$AnimationPlayer.speed_scale = 1.0

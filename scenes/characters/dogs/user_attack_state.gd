@@ -1,4 +1,3 @@
-@tool
 extends FSMState
 @onready var character: Character = owner
 var start_attack := false

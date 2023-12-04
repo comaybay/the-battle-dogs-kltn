@@ -1,4 +1,3 @@
-@tool
 extends FSMState
 
 const OFUDA_RED: DanmakuBulletKit = preload("res://scenes/danmaku/bullets/ofuda/ofuda_red.tres")
@@ -90,7 +89,7 @@ func _attack(direction: Vector2, this_frame: int) -> void:
 	const MAIN_PATTERN_SPEED: float = 2000
 	
 	if miko_dog.has_ability('yin_yang_orb'):
-		_spawn_yin_yang_orb(dog_level)
+		_spawn_yin_yang_orb(dog_level, Vector2(300, 0))
 	
 	_pattern_straight_line(direction, MAIN_PATTERN_SPEED, straight_bullets_num, OFUDA_RED)
 	
@@ -179,16 +178,18 @@ func _attack(direction: Vector2, this_frame: int) -> void:
 		if _has_interupted(this_frame): return
 	
 	if miko_dog.has_ability('yin_yang_orb') and dog_level >= 9:
-		_spawn_yin_yang_orb(dog_level)
+		Global.wait(0.25).connect(func():
+			_spawn_yin_yang_orb(dog_level, Vector2(320, -800))
+		)
 		
-func _spawn_yin_yang_orb(dog_level: int) -> void:
+func _spawn_yin_yang_orb(dog_level: int, velocity: Vector2) -> void:
 	var yin_yang_orb: YinYangOrb = YIN_YANG_ORB_SCENE.instantiate()
-	yin_yang_orb.setup(miko_dog.get_center_global_position(), dog_level, miko_dog.character_type)
+	yin_yang_orb.setup(miko_dog.get_center_global_position(), dog_level, miko_dog.character_type, velocity)
 	battlefield.add_child(yin_yang_orb)
 		
 func _pattern_straight_line(
 	direction: Vector2, speed: float, bullet_num: int,
-	ofuda_kit: DanmakuBulletKit, rotation: float = 0
+	ofuda_kit: DanmakuBulletKit, rotation: float = 0, back_accel: float = 0
 ) -> void:
 	$OfudaSound2.play()
 	var center_pos := miko_dog.get_center_global_position()
@@ -202,6 +203,7 @@ func _pattern_straight_line(
 			ofuda.velocity = velocity
 			ofuda.position = center_pos
 			ofuda.rotation_speed = rotation
+			ofuda.acceleration = velocity.normalized() * -back_accel
 			await Global.wait(2.0)
 			ofuda.rotation_speed = 0
 		)
@@ -256,6 +258,7 @@ func _spawn_bullet_on_path(_pattern_data: Dictionary) -> void:
 	var center_global_pos := miko_dog.get_center_global_position()
 	var velocity = Vector2(1, 0) * _pattern_data['speed']
 	var progress_unit: float = _pattern_data['progress_ration_unit'] 
+	var current_loop = _pattern_data['loop']
 	
 	velocity = velocity.rotated((path_follow.global_position - center_global_pos).angle())
 	
@@ -270,6 +273,10 @@ func _spawn_bullet_on_path(_pattern_data: Dictionary) -> void:
 			ofuda.physic_process(passed_delta)
 		await Global.wait(2.0 - passed_delta)
 		ofuda.rotation_speed = 0
+		
+		if current_loop % 2: 
+			ofuda.acceleration = -velocity
+		
 	)
 	
 	_pattern_data['ofuda'] = (

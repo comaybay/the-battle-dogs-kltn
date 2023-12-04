@@ -1,4 +1,3 @@
-@tool
 extends FSMState
 
 @onready var character: Character = owner
@@ -15,7 +14,9 @@ func exit() -> void:
 func physics_update(delta: float) -> void:
 	if not character.is_on_floor():
 		character.velocity.y += character.gravity * delta
-	
+	else:
+		character.velocity.y = 0
+		
 	# kiem tra va cham
 	var collider = character.n_RayCast2D.get_collider()
 	if collider == null: #ko va cham

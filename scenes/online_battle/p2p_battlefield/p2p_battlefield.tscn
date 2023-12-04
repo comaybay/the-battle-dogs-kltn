@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b0ihidn3ggmh5"]
+[gd_scene load_steps=17 format=3 uid="uid://b0ihidn3ggmh5"]
 
 [ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_3ebhf"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_battlefield.gd" id="1_i8anq"]
@@ -12,8 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://dl847jxlc5jay" path="res://resources/battlefield_themes/green_grass/sky.png" id="6_acvgk"]
 [ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/Camera2D.gd" id="6_cy4w7"]
 [ext_resource type="PackedScene" uid="uid://inelp1r1r34q" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower_right.tscn" id="6_v6ew7"]
+[ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/sky.gd" id="7_aolxo"]
 [ext_resource type="AudioStream" uid="uid://dm1ge42cv7vy7" path="res://resources/sound/battlefield/boss_drum.mp3" id="7_t23ci"]
 [ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="11_ovxua"]
+[ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_danmaku_space.gd" id="16_54x44"]
 
 [node name="P2PBattlefield" type="Node2D"]
 process_mode = 1
@@ -45,6 +47,7 @@ offset_bottom = 1384.0
 size_flags_horizontal = 4
 texture = ExtResource("6_acvgk")
 stretch_mode = 1
+script = ExtResource("7_aolxo")
 
 [node name="Land" parent="." instance=ExtResource("3_p4hqa")]
 
@@ -72,3 +75,11 @@ bus = &"InBattleFX"
 
 [node name="Popup" parent="CanvasLayer" instance=ExtResource("11_ovxua")]
 unique_name_in_owner = true
+
+[node name="DanmakuSpace" type="Node" parent="."]
+script = ExtResource("16_54x44")
+current = null
+bullet_kits = null
+pools_sizes = null
+parents_hints = null
+z_indices = null

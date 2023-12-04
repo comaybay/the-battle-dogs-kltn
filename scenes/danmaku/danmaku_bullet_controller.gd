@@ -34,6 +34,12 @@ var velocity: Vector2:
 	set(value): 
 		if is_bullet_valid(): 
 			Bullets.set_bullet_property(_native_bullet_id, "velocity", value)
+			
+var acceleration: Vector2:
+	get: return Bullets.get_bullet_property(_native_bullet_id, "acceleration")
+	set(value):
+		if is_bullet_valid(): 
+			Bullets.set_bullet_property(_native_bullet_id, "acceleration", value)
 
 ## degrees per second
 var rotation_speed: float:

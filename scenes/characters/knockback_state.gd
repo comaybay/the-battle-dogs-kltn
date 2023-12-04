@@ -1,4 +1,3 @@
-@tool
 class_name CharacterKnockbackState extends FSMState
 
 const BOSS_KNOCKBACK_SOUND: AudioStream = preload("res://resources/sound/battlefield/boss_knockback_cry.mp3")

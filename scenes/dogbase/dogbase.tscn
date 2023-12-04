@@ -11,7 +11,7 @@ title = "@DOG_BASE"
 [node name="Content" parent="Khung" index="1"]
 script = ExtResource("1_18sea")
 
-[node name="BenTrai" type="VBoxContainer" parent="Khung/Content" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Khung/Content" index="0"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 1
 anchors_preset = 4
@@ -25,13 +25,13 @@ size_flags_vertical = 4
 theme_override_constants/separation = 15
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Khung/Content/BenTrai" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Khung/Content/VBoxContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_constants/separation = 0
 
-[node name="ExpeditionButton" type="Button" parent="Khung/Content/BenTrai/HBoxContainer" index="0"]
+[node name="ExpeditionButton" type="Button" parent="Khung/Content/VBoxContainer/HBoxContainer" index="0"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
@@ -41,13 +41,13 @@ theme_type_variation = &"ButtonExpedition"
 text = "@EXPEDITION"
 alignment = 0
 
-[node name="Control" type="Control" parent="Khung/Content/BenTrai/HBoxContainer" index="1"]
+[node name="Control" type="Control" parent="Khung/Content/VBoxContainer/HBoxContainer" index="1"]
 z_index = 1
 custom_minimum_size = Vector2(0, 87)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="SelectChapterIcon" parent="Khung/Content/BenTrai/HBoxContainer/Control" index="0" instance=ExtResource("3_e126c")]
+[node name="SelectChapterIcon" parent="Khung/Content/VBoxContainer/HBoxContainer/Control" index="0" instance=ExtResource("3_e126c")]
 unique_name_in_owner = true
 layout_mode = 2
 offset_left = -286.0
@@ -57,7 +57,7 @@ offset_bottom = 83.0
 scale = Vector2(1.1, 1.1)
 tooltip_text = "@EXPLORATION"
 
-[node name="UpgradeButton" type="Button" parent="Khung/Content/BenTrai" index="1"]
+[node name="UpgradeButton" type="Button" parent="Khung/Content/VBoxContainer" index="1"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
@@ -65,7 +65,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "@UPGRADE"
 
-[node name="StoreButton" type="Button" parent="Khung/Content/BenTrai" index="2"]
+[node name="StoreButton" type="Button" parent="Khung/Content/VBoxContainer" index="2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
@@ -73,7 +73,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "@STORE"
 
-[node name="RankingButton" type="Button" parent="Khung/Content/BenTrai" index="3"]
+[node name="RankingButton" type="Button" parent="Khung/Content/VBoxContainer" index="3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
