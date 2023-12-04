@@ -57,7 +57,7 @@ func _add_cats_bullet_pool_sizes(pool_sizes: Dictionary) -> void:
 		
 	for enemy_bullets in enemy_bullets_arr:
 		for bullet_id in enemy_bullets:
-			pool_sizes[bullet_id] += enemy_bullets[bullet_id]
+			pool_sizes[bullet_id] = pool_sizes.get(bullet_id, 0) + enemy_bullets[bullet_id]
 			
 func _setup_bullets(pool_sizes: Dictionary):
 	for bullet_id in pool_sizes:
