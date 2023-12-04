@@ -44,12 +44,14 @@ func _ready():
 		canvas.add_child.call_deferred(tutorial_dog)
 		tutorial_dog.tree_exited.connect(func(): canvas.queue_free())
 
+
+const DEFAULT_DOGS = ["dog", "waffle_dog", "sword_dog", "angel_dog", "sniper_dog"]
 func add_items():
 	var type := ItemUpgradeBox.Type
 	
 	for data in Data.dog_info.values():	
-		# only show upgrade box of a dog if it is unlockable or if player already has the dog
-		if data['obtain_type'] != 'unlockable' and not Data.dogs.has(data['ID']):
+		# only show upgrade box of a dog if it is unlockable by default or if player already has the dog
+		if not DEFAULT_DOGS.has(data['ID']) and not Data.dogs.has(data['ID']):
 			continue 
 				
 		var dog_item_box := createItemBox(type.CHARACTER, data, %NhanVat/MarginContainer/GridContainer)

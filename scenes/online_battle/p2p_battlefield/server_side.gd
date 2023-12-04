@@ -168,9 +168,9 @@ func _handling_client_spawn(input: int):
 		var spawn_price: int = Data.dog_info[dog_id]['spawn_price']
 		var can_afford: bool = _opponent_data.get_money_int() >= spawn_price
 		
-		var spawn_type: String = Data.dog_info[dog_id]['spawn_type']
+		var spawn_limit: int = Data.dog_info[dog_id].get("spawn_limit", 0)
 		var can_spawn := true
-		if spawn_type == "once" and _opponent_data.spawn_once_dogs.get(dog_id) != null:
+		if  spawn_limit > 0 and _opponent_data.dogs_count[dog_id] >= spawn_limit:
 			can_spawn = false
 			
 		if can_afford and can_spawn:
@@ -178,10 +178,6 @@ func _handling_client_spawn(input: int):
 			_opponent_data.fmoney -= spawn_price
 			var dog: BaseDog = _opponent_dog_tower.spawn(dog_id)	
 			timer.start()
-			
-			if spawn_type == "once":
-				_opponent_data.spawn_once_dogs[dog_id] = dog
-				dog.tree_exiting.connect(func(): _opponent_data.spawn_once_dogs[dog_id] = null)
 			
 func _handling_client_skill(input: int):	
 	for i in range(3):
@@ -228,9 +224,6 @@ func request_spawn(dog_id: String):
 	_this_player_data.fmoney -= spawn_price
 	
 	var dog = _this_player_dog_tower.spawn(dog_id)
-	if Data.dog_info[dog_id]['spawn_type'] == "once":
-		_this_player_data.spawn_once_dogs[dog_id] = dog
-		dog.tree_exiting.connect(func(): _this_player_data.spawn_once_dogs[dog_id] = null)
 	
 	spawn_request_accepted.emit(dog_id)
 		

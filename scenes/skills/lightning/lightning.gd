@@ -11,7 +11,7 @@ func setup(skill_user: Character.Type) -> void:
 	var direction: int = 1 if skill_user == Character.Type.DOG else -1 
 	
 	var left_x = battlefield.TOWER_MARGIN
-	var right_x = battlefield.get_stage_width() + battlefield.TOWER_MARGIN
+	var right_x = battlefield.get_stage_width() - battlefield.TOWER_MARGIN
 	for i in range(level):
 		drop_lightnings(left_x, right_x, direction, skill_user)
 		var should_offset: int = 1 if (i % 2 == 0) else -1

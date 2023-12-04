@@ -5,26 +5,32 @@ const TOWER_MARGIN: int = 700
 
 func get_stage_width() -> int:
 	push_error("ERROR: get_stage_width() NOT IMPLEMENTED")
-	return 1
+	return 0
 
-func get_stage_height() -> int: return $Sky.size.y
+func get_stage_height() -> int: 
+	push_error("ERROR: get_stage_height() NOT IMPLEMENTED")
+	return 0
 
+func get_stage_rect() -> Rect2:
+	push_error("ERROR: get_stage_rect() NOT IMPLEMENTED")
+	return Rect2()
+	
 func get_player_data() -> BaseBattlefieldPlayerData:
 	push_error("ERROR: get_player_data() NOT IMPLEMENTED")
 	return null	
-
-func get_theme() -> String:
-	push_error("ERROR: get_theme() NOT IMPLEMENTED")
-	return ""
 
 ## The effect space, this is where all the effects should be placed.
 ## stuff that are placed here will always be in front of the characters
 func get_effect_space() -> Node2D:
 	return $EffectSpace
 
+## the danmaku space, used to spawn bullets.
+func get_danmaku_space() -> DanmakuSpace:
+	return $DanmakuSpace
+
 func _init() -> void:
 	const BITE_SFX: AudioStream = preload("res://resources/sound/battlefield/bite.mp3")
-	AudioPlayer.add_in_battle_sfx(BITE_SFX, 20)
+	AudioPlayer.add_in_battle_sfx(BITE_SFX, 10)
 
 func _clean_up():
 	# set back to 1 in case user change game speed

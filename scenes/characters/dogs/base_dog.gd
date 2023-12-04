@@ -136,7 +136,7 @@ func p2p_sync(sync_data: Dictionary) -> void:
 	
 	var multipliers = sync_data['multipliers']
 	for type in multipliers:
-		set_multiplier(type, multipliers[type])
+		set_multiplier(type, multipliers[type], SetBehaviour.OVERWRITE)
 	
 	var fsm_sync_data = sync_data['FSM']
 	var fsm = get_FSM()

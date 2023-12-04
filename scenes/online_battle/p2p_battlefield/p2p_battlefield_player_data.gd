@@ -19,6 +19,10 @@ func _init(member_id: int) -> void:
 	for id in team_skill_ids:
 		team_skill_scenes.append(null if id == null else load("res://scenes/skills/%s/%s.tscn" % [id, id]))
 	
+	for dog_id in team_dog_ids:
+		if dog_id != null:
+			dogs_count[dog_id] = 0
+	
 	fmoney = 0
 	
 	var efficiency_level := int(SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_MONEY_EFFICIENCY_LEVEL))

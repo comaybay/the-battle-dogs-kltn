@@ -16,10 +16,12 @@ func setup(skill_user: Character.Type) -> void:
 	)
 		
 	for character in characters:
-		character.set_multiplier(character.MultiplierTypes.SPEED, power_scale)
-		character.set_multiplier(character.MultiplierTypes.DAMAGE, power_scale)
-		character.set_multiplier(character.MultiplierTypes.ATTACK_SPEED, power_scale)
-		character.set_multiplier(character.MultiplierTypes.DAMAGE_TAKEN, 1 / power_scale)
+		const SB := Character.SetBehaviour
+		const TYPE := Character.MultiplierTypes
+		character.set_multiplier(TYPE.SPEED, power_scale, SB.TAKE_HIGHER)
+		character.set_multiplier(TYPE.DAMAGE, power_scale, SB.TAKE_HIGHER)
+		character.set_multiplier(TYPE.ATTACK_SPEED, power_scale, SB.TAKE_HIGHER)
+		character.set_multiplier(TYPE.DAMAGE_TAKEN, 1 / power_scale, SB.TAKE_LOWER)
 		
 		var effect_on_character: Node2D = UpSprite.instantiate()
 		effect_space.add_child(effect_on_character) 

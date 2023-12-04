@@ -1,4 +1,3 @@
-@tool
 class_name CharacterKnockbackState extends FSMState
 
 const BOSS_KNOCKBACK_SOUND: AudioStream = preload("res://resources/sound/battlefield/boss_knockback_cry.mp3")
@@ -18,6 +17,7 @@ func enter(data: Dictionary) -> void:
 	knockback_vel = Vector2(200, -250) * data['scale']
 	character.n_AnimationPlayer.play("knockback")
 
+	character.n_DanmakuHitbox.set_deferred("monitoring", false)
 	if character.character_type == Character.Type.DOG:
 		character.set_collision_layer_value(2, false)
 	else:
@@ -29,6 +29,7 @@ func enter(data: Dictionary) -> void:
 
 # called when the state is deactivated
 func exit() -> void:
+	character.n_DanmakuHitbox.set_deferred("monitoring", true)
 	if character.character_type == Character.Type.DOG:
 		character.set_collision_layer_value(2, true)
 	else: 

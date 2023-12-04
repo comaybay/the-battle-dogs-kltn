@@ -36,7 +36,7 @@ func add_hit_effect(global_position: Vector2) -> FXHit:
 	return fx_hit
 
 func get_battlefield() -> BaseBattlefield:
-	return get_tree().current_scene as BaseBattlefield
+	return get_tree().current_scene
 
 func get_player_data() -> BaseBattlefieldPlayerData:
 	return get_battlefield().get_player_data()

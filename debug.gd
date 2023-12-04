@@ -1,4 +1,4 @@
-extends Node
+extends CanvasLayer
 
 var _debug_mode := false 
 var _draw_debug := false 
@@ -6,6 +6,7 @@ var _draw_debug := false
 func _init() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
 	_debug_mode = OS.is_debug_build()
+	
 	if not _debug_mode:
 		set_process_input(false)
 	

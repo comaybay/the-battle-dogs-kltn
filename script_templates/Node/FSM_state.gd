@@ -1,4 +1,3 @@
-@tool
 extends FSMState
 
 # called when the state is activated

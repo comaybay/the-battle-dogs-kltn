@@ -11,7 +11,7 @@ signal state_entering (state_name: String, state_data: Dictionary)
 ## notify when entered a state
 signal state_entered (state_name: String)
 
-@export var initial_state: NodePath = ""
+@export_node_path("FSMState") var initial_state: NodePath = ""
 
 var state: FSMState
 var _state_data: Dictionary = {}
@@ -85,9 +85,5 @@ func _get_configuration_warnings() -> PackedStringArray:
 		
 	elif initial_state.is_empty():
 		warnings.append("Please select the Initial State")
-	
-	for child in children:
-		if child.get("is_FSM_state") == null:
-			warnings.append("FSM node's children must extends from FSMState script class or has a 'is_FSM_state' property set to 'false' to be ignored by FSM node")
 	
 	return warnings

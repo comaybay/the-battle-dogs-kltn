@@ -29,6 +29,7 @@ SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 Global="*res://global.gd"
 SteamUser="*res://steam_user.gd"
 InBattle="*res://in_battle.gd"
+Bullets="*res://addons/native_bullets/bullets.tscn"
 
 [debug]
 
@@ -38,6 +39,10 @@ gdscript/warnings/integer_division=0
 [display]
 
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/native_bullets/plugin.cfg")
 
 [filesystem]
 
@@ -237,7 +242,7 @@ locale/translations=PackedStringArray("res://resources/translations/translations
 2d_physics/layer_1="walls"
 2d_physics/layer_2="dogs"
 2d_physics/layer_3="enemies"
-2d_physics/layer_4="character_ranges"
+2d_physics/layer_4="danmaku_bullets"
 2d_physics/layer_5="cat_tower"
 2d_physics/layer_6="dog_tower"
 2d_physics/layer_7="skills"

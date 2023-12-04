@@ -31,7 +31,13 @@ func _enter_tree() -> void:
 	_battlefield_data = InBattle.load_stage_data()
 	_player_data = BattlefieldPlayerData.new()
 
-func get_stage_width() -> int: return _battlefield_data['stage_width']
+func get_stage_width() -> int: return _battlefield_data['stage_width'] + TOWER_MARGIN * 2
+
+func get_stage_height() -> int: 
+	return land.get_land_bottom_y() - $Sky.position.y
+	
+func get_stage_rect() -> Rect2:
+	return Rect2(0, $Sky.position.y, get_stage_width(), get_stage_height())
 
 func get_player_data() -> BaseBattlefieldPlayerData: return _player_data
 
@@ -63,21 +69,16 @@ func _ready() -> void:
 	
 	$Gui.setup(dog_tower, _player_data)
 	$store_gui.setup(dog_tower, _player_data)
-	var stage_width := get_stage_width()
-	var stage_width_with_margin := stage_width + (TOWER_MARGIN * 2)
 	
-	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons, stage_width_with_margin, get_stage_height())
+	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons, get_stage_rect())
 	
 	AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % _battlefield_data['music']))
 	
 	if _battlefield_data.get('boss_music') != null:
 		_boss_music = load("res://resources/sound/music/%s.mp3" % _battlefield_data['boss_music'])
-	
-	$Sky.position = Vector2(0, -$Sky.size.y)
-	$Sky.size.x = stage_width_with_margin
-	
+		
 	dog_tower.position.x = TOWER_MARGIN
-	cat_tower.position.x = stage_width_with_margin - TOWER_MARGIN;
+	cat_tower.position.x = get_stage_width() - TOWER_MARGIN;
 
 	dog_tower.zero_health.connect(_show_defeat_ui, CONNECT_ONE_SHOT)
 	cat_tower.zero_health.connect(_show_win_ui, CONNECT_ONE_SHOT)

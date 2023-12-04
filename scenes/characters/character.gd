@@ -9,6 +9,8 @@ enum Type { DOG, CAT }
 
 ## Multiplier will affect the character's resulting output (such as damage inflicted, movement speed, etc) 
 enum MultiplierTypes { DAMAGE, DAMAGE_TAKEN, SPEED, ATTACK_SPEED }
+## Set Multiplier behaviours
+enum SetBehaviour { OVERWRITE, TAKE_HIGHER, TAKE_LOWER}
 var _multipliers: Dictionary = {
 	MultiplierTypes.DAMAGE: 1.0,
 	MultiplierTypes.DAMAGE_TAKEN: 1.0,
@@ -29,8 +31,12 @@ var _multipliers: Dictionary = {
 ## if not null, will be use for attack collision detection
 ## and will ignore the "attack range" and "attack area range" properties when attacking
 ## (attack range is still used for detecting when to stop moving)
-@export var custom_attack_area: Area2D = null
-
+@export var custom_attack_area: Area2D = null:
+	set(val):
+		custom_attack_area = val
+		notify_property_list_changed()  
+		queue_redraw()
+		
 @export var attack_range: int = 40:
 	set(val):
 		attack_range = val
@@ -71,6 +77,7 @@ const DEFAULT_DIE_SFX = preload("res://resources/sound/battlefield/death.mp3")
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
 @onready var n_Sprite2D := $CharacterAnimation/Character as Sprite2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
+@onready var n_DanmakuHitbox := %DanmakuHitbox as Area2D
 
 func get_character_animation_node() -> Node2D:
 	return $CharacterAnimation
@@ -88,6 +95,10 @@ var next_knockback_health: int
 var collision_rect: Rect2
 var _is_boss: bool
 func is_boss() -> bool: return _is_boss
+
+func _validate_property(property: Dictionary):
+	if property.name in ["attack_sprite", "attack_frame"] and custom_attack_area != null:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 ## this setup func is used internally by it's subcalsses
 func _setup(global_position: Vector2, is_boss: bool) -> void:
@@ -120,7 +131,15 @@ func _ready() -> void:
 		$CharacterAnimation.position += Vector2(randi_range(-20, 20), rand_y)
 		## render stuff correctly
 		z_index = rand_y + 20
+		
 		_update_character()
+		
+		# danmaku shape is the same as collision shape
+		var danmaku_shape := %DanmakuHitbox/CollisionShape2D
+		danmaku_shape.shape.size = $CollisionShape2D.shape.size
+		danmaku_shape.position = $CollisionShape2D.position
+		%DanmakuHitbox.area_shape_entered.connect(_on_danmaku_bullet_entered)
+		
 		
 	if Engine.is_editor_hint():
 		max_health = health
@@ -135,7 +154,7 @@ func _update_character():
 	max_health = health
 	next_knockback_health = max_health - (max_health / knockbacks)
 	move_direction = (1 if character_type == Type.DOG else -1)
-	
+		
 	# for some reason timer do not take in 0 correctly
 	$AttackCooldownTimer.wait_time = attack_cooldown
 	
@@ -200,18 +219,6 @@ func _draw() -> void:
 		rect.position += $CollisionShape2D.position
 		draw_rect(rect, Color.RED, false)
 
-func _get_configuration_warnings() -> PackedStringArray:
-	var warnings: Array[String] = []
-	
-	for anim_name in ['idle', 'knockback', 'move', 'attack']:
-		if not n_AnimationPlayer.has_animation(anim_name):	
-			warnings.append("Character is missing '%s' animation" % anim_name)
-				
-	if n_Sprite2D.texture == null:
-		warnings.append("Sprite2D node requires a sprite sheet, this is used to display the character.")
-	
-	return warnings
-	
 func take_damage(ammount: int) -> void:
 	health -= ammount * _multipliers[MultiplierTypes.DAMAGE_TAKEN]
 	if is_past_knockback_health():
@@ -230,19 +237,31 @@ func take_damage(ammount: int) -> void:
 ## This can be use to increase/decrease dog power such as damage, speed, etc. [/br]
 ## multiplier: this multipler will affect the base value of the character,
 ## set to 1 to reset property value back to normal 
-func set_multiplier(type: MultiplierTypes, multiplier: float) -> void:
-	_multipliers[type] = multiplier
+func set_multiplier(type: MultiplierTypes, multiplier: float, behaviour: SetBehaviour) -> void:
+	if (
+		(behaviour == SetBehaviour.TAKE_HIGHER and multiplier < _multipliers[type])
+		or (behaviour == SetBehaviour.TAKE_LOWER and multiplier > _multipliers[type])
+	): return
 	
 	if type == MultiplierTypes.ATTACK_SPEED:
+		if not n_AttackCooldownTimer.is_stopped():
+			n_AttackCooldownTimer.start(n_AttackCooldownTimer.time_left * _multipliers[type])
+			n_AttackCooldownTimer.start(max(n_AttackCooldownTimer.time_left / multiplier, 0.05))
+			_multipliers[type] = multiplier
+		
 		n_AttackCooldownTimer.wait_time = max(attack_cooldown / multiplier, 0.05)
 		$AnimationPlayer.speed_scale = multiplier
 		
 func reset_multipliers() -> void:
+	if not n_AttackCooldownTimer.is_stopped():
+		var attack_speed_multiplier: float = _multipliers[MultiplierTypes.ATTACK_SPEED]
+		n_AttackCooldownTimer.start(n_AttackCooldownTimer.time_left * attack_speed_multiplier)
+
+	n_AttackCooldownTimer.wait_time = attack_cooldown
+	$AnimationPlayer.speed_scale = 1.0
+	
 	for type in _multipliers:
 		_multipliers[type] = 1.0
-		
-	n_AttackCooldownTimer.wait_time = min(attack_cooldown, n_AttackCooldownTimer.wait_time)
-	$AnimationPlayer.speed_scale = 1.0
 
 func is_past_knockback_health() -> bool:
 	return health <= next_knockback_health
@@ -264,3 +283,14 @@ func kill():
 
 func get_FSM() -> FSM:
 	return $FiniteStateMachine
+
+func _on_danmaku_bullet_entered(area_rid: RID, _area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	if not Bullets.is_bullet_existing(area_rid, area_shape_index):
+		return
+		
+	var bullet_id = Bullets.get_bullet_from_shape(area_rid, area_shape_index)
+
+	var controller = Bullets.get_bullet_property(bullet_id, "data") as DanmakuBulletController 
+	
+	if controller.character_type != character_type: 
+		controller.body_enter.emit(self)

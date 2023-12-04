@@ -7,7 +7,7 @@ func setup(start_global_position: Vector2, batter_damage: int, dog_level: int, c
 	var destination_x: int
 	if character_type == Character.Type.DOG:
 		explosion_position.x += 200
-		destination_x = InBattle.get_battlefield().get_stage_width() + BaseBattlefield.TOWER_MARGIN * 2.5
+		destination_x = InBattle.get_battlefield().get_stage_width() + BaseBattlefield.TOWER_MARGIN * 0.5
 	else:
 		explosion_position.x -= 200
 		destination_x = -BaseBattlefield.TOWER_MARGIN * 0.5

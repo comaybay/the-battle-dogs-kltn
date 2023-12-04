@@ -5,17 +5,17 @@ const BASE_WALLET_CAPACITY = 100
 const BASE_EFFICIENCY_UPGRADE_PRICE = 40
 const BASE_MONEY_RATE = 15
 
-var team_dog_ids: Array
-var team_dog_scenes: Array[PackedScene]
+var team_dog_ids: Array = []
+var team_dog_scenes: Array[PackedScene] = []
 
-var team_skill_ids: Array
-var team_skill_scenes: Array[PackedScene]
+var team_skill_ids: Array = []
+var team_skill_scenes: Array[PackedScene] = []
 
-var team_store_ids: Array
-var team_store_scenes: Array[PackedScene]
+var team_store_ids: Array = []
+var team_store_scenes: Array[PackedScene] = []
 
-## contains dogs that is of "once" spawn type, use this to determined if a dog of this type should be allow to spawn 
-var spawn_once_dogs: Dictionary
+## counting the player's dogs in the battlefield 
+var dogs_count: Dictionary = {}
 
 var fmoney: float = 0:
 	set(value): fmoney = clamp(value, 0, _wallet) 

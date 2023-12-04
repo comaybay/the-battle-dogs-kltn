@@ -6,13 +6,20 @@ var _p2p_networking: BattlefieldP2PNetworking
 func get_p2p_networking() -> BattlefieldP2PNetworking: return _p2p_networking
 
 var _stage_width: int
-func get_stage_width() -> int: return _stage_width
+func get_stage_width() -> int: return _stage_width + TOWER_MARGIN * 2
+
+func get_stage_height() -> int: 
+	return $Land.get_land_bottom_y() - $Sky.position.y
+
+func get_stage_rect() -> Rect2:
+	return Rect2(0, $Sky.position.y, get_stage_width(), get_stage_height())
 
 var _opponent_player_data: P2PBattlefieldPlayerData
 var _this_player_data: P2PBattlefieldPlayerData
 func get_this_player_data() -> P2PBattlefieldPlayerData: return _this_player_data
 
 func get_player_data() -> BaseBattlefieldPlayerData: return _this_player_data
+func get_opponent_data() -> P2PBattlefieldPlayerData: return _opponent_player_data
 
 func get_theme() -> String: return SteamUser.get_lobby_data("theme")
 
@@ -42,15 +49,11 @@ func _enter_tree() -> void:
 			_opponent_player_data = P2PBattlefieldPlayerData.new(member_id)
 
 func _ready() -> void:
-	var stage_width_with_margin = _stage_width + (TOWER_MARGIN * 2)
-	
 	$P2PConnectionHandler.setup(%Popup)
-	$Camera2D.setup(($Gui as P2PBattleGUI).camera_control_buttons, stage_width_with_margin, get_stage_height())
+	$Camera2D.setup(($Gui as P2PBattleGUI).camera_control_buttons, get_stage_rect())
 	AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % SteamUser.get_lobby_data("music")))
 	
 	$Sky.texture = load("res://resources/battlefield_themes/%s/sky.png" % SteamUser.get_lobby_data("theme"))
-	$Sky.position = Vector2(0, -$Sky.size.y)
-	$Sky.size.x = stage_width_with_margin
 	
 	_player_dog_tower = $P2PDogTowerLeft as P2PDogTower
 	_opponent_dog_tower = $P2PDogTowerRight as P2PDogTower
@@ -64,7 +67,7 @@ func _ready() -> void:
 		$Camera2D.position = Vector2(_stage_width, -half_viewport_size.y)
 	
 	$P2PDogTowerLeft.position.x = TOWER_MARGIN
-	$P2PDogTowerRight.position.x = stage_width_with_margin - TOWER_MARGIN
+	$P2PDogTowerRight.position.x =  get_stage_width() - TOWER_MARGIN
 	
 	var is_server: bool = SteamUser.players[0]['steam_id'] == SteamUser.STEAM_ID
 	if is_server:

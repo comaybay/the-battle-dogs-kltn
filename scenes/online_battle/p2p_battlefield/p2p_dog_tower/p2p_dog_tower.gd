@@ -38,12 +38,11 @@ func spawn(dog_id: String) -> BaseDog:
 	var dog_level := InBattle.get_dog_level(dog_id)
 	
 	if direction == Direction.LEFT_TO_RIGHT:
-		dog.setup(global_position + Vector2(100, 0), dog_level, [])
+		dog.setup(global_position + Vector2(100, 0), dog_level, [], Character.Type.DOG)
 		InBattle.get_battlefield().add_child(dog)
 	else:
 		# the dog in this case needs to move from right to left so it will act as a "Cat" 
-
-		dog.setup(global_position + Vector2(-100, 0), dog_level, [])
+		dog.setup(global_position + Vector2(-100, 0), dog_level, [], Character.Type.CAT)
 		InBattle.get_battlefield().add_child(dog)
 	
 	var reward_money := int(Data.dog_info[dog_id]['spawn_price'] / 4) 
@@ -58,6 +57,9 @@ func spawn(dog_id: String) -> BaseDog:
 		dog.zero_health.connect(
 			func(): _player_data.fmoney += reward_money, CONNECT_ONE_SHOT
 		)		
+		
+	_player_data.dogs_count[dog_id] += 1
+	dog.tree_exiting.connect(func(): _player_data.dogs_count[dog_id] -= 1)
 		
 	dog_spawn.emit(dog)
 	return dog
