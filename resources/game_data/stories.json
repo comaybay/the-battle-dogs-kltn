@@ -27,5 +27,8 @@
         }
       }
     }
+  },
+  "talent_recruitment": {
+    "dog_base_theme": "dog_base_theme"
   }
 }

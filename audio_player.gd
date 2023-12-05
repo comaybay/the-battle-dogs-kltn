@@ -112,28 +112,24 @@ func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove
 	var music_player: AudioStreamPlayer = music_data['player']
 	var tween: Tween = music_data['tween']
 	
-	tween.pause()
-	tween = create_tween()
-	tween.set_trans(Tween.TRANS_CIRC)
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property(music_player, "volume_db", -80, stop_duration)
-	music_data['tween'] = tween
-	
-	if remove_when_done:
-		_music_players.erase(audio_stream.resource_path)
-		
-	await tween.finished
-	
-	## if is removed
-	if music_player == null:
-		return
+	if not with_transition:
+		tween.kill()
+	else:		
+		tween.pause()
+		tween = create_tween()
+		tween.set_trans(Tween.TRANS_CIRC)
+		tween.set_ease(Tween.EASE_IN)
+		tween.tween_property(music_player, "volume_db", -80, stop_duration)
+		music_data['tween'] = tween
+				
+		await tween.finished
 			
 	if remove_when_done:
 		music_player.stop()	
-		music_player.queue_free()
+		remove_music(audio_stream)
 	else:
-		music_data['playback_position'] = music_player.get_playback_position()
 		music_player.stop()	
+		music_data['playback_position'] = music_player.get_playback_position()
 
 func stop_current_music(with_transition: bool = false, remove_when_done: bool = false, stop_duration: float = 0.5):
 	if get_current_music() != null:
@@ -142,8 +138,9 @@ func stop_current_music(with_transition: bool = false, remove_when_done: bool = 
 ## remove music data from memory (this includes playback position and audio player).
 ## only call this method when music is already stop
 func remove_music(audio_stream: AudioStream) -> void:
-	_music_players[audio_stream.resource_path]['player'].queue_free()
-	_music_players.erase(audio_stream.resource_path)
+	if _music_players.get(audio_stream.resource_path) != null:
+		_music_players[audio_stream.resource_path]['player'].queue_free()
+		_music_players.erase(audio_stream.resource_path)
 
 func remove_all_music() -> void:
 	for music_data in _music_players.values():

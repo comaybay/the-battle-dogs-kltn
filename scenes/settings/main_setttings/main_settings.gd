@@ -76,6 +76,7 @@ func _delete_save() -> void:
 	Data.save_data['settings']['key_binding_overwrites'] = keybinding_settings
 	Data.fullscreen = fullscreen
 	Data.game_language = game_langauge
+	Data.at_start_game_intro = true
 	
 	Data.save()
 	Data.load_settings()

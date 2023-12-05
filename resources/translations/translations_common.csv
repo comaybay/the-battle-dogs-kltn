@@ -25,7 +25,7 @@ keys,vi,en
 @INFORMATION,Thông tin,Information
 @PAUSE,Tạm dừng,Pause
 @EXIT_BATTLE,Thoát trận đấu,Espace battle
-@EXIT_TO_MAIN_MENU,Về màn mình chính,Exit to main menu
+@EXIT_TO_MAIN_MENU,Về màn hình chính,Exit to main menu
 @VICTORY,Chiến Thắng!,Victory!
 @DEFEAT,Thất bại...,Defeat...
 @BACK_TO_DOG_BASE,Về căn cứ,Back to Dog Base
@@ -147,7 +147,7 @@ keys,vi,en
 @THEME,Nền,Theme
 @THEME_green_grass,Cỏ xanh,Green grass
 @THEME_fall,Mùa thu,Fall
-@THEME_heavenly,Thiên đàn,Heavenly
+@THEME_heavenly,Thiên Đàng,Heavenly
 @THEME_night,Đêm,Night
 @THEME_nightmare,Ác mộng,Nightmare
 @THEME_winter,Mùa đông,Winter

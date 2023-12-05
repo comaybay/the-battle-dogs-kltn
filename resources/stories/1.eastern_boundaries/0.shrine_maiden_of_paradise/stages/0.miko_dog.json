@@ -4,7 +4,7 @@
   "boss_music": "miko_dog_theme",
   "stage_width": 9000,
   "tori_position": 4000,
-  "tori_health": 1,
+  "tori_health": 50000,
   "tori_growl": 9,
   "cat_tower_health": 30000,
   "reward_bone": 100000,

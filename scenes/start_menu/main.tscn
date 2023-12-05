@@ -313,10 +313,10 @@ focus_mode = 0
 text = "@QUIT"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "ready"
 libraries = {
 "": SubResource("AnimationLibrary_xuivp")
 }
-autoplay = "ready"
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 mode = 1

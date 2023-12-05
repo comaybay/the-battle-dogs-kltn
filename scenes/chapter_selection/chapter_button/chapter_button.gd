@@ -44,4 +44,10 @@ func _gui_input(event: InputEvent) -> void:
 func handle_selected() -> void:
 	chapter_entering.emit()
 	await play_enter_chapter_animation()
-	get_tree().change_scene_to_file("res://scenes/intros/%s_intro/%s_intro.tscn" % [_chapter_id, _chapter_id])
+	var path := "res://scenes/intros/%s_intro/%s_intro.tscn" % [_chapter_id, _chapter_id]
+	
+	if FileAccess.file_exists(path):
+		get_tree().change_scene_to_file(path)
+	else:
+		# no intro for this chapter, go to Dog base instead
+		get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")

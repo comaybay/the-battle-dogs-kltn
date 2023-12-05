@@ -31,7 +31,7 @@ func _tween_bone_number(value: int):
 	bone_label.text = str(value)
 
 func _setup_return_button() -> void:
-	if Data.passed_stage >= Data.chapter_last_stage:
+	if Data.selected_stage >= Data.chapter_last_stage and:
 		Data.save_data['chapters'][Data.selected_chapter_id]['completed'] = true
 		return_button.pressed.connect(_go_to_ending)
 	else:
@@ -43,8 +43,14 @@ func _go_to_dog_base() -> void:
 
 func _go_to_ending() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
-	var ending_id = Data.selected_chapter_id + "_ending"
-	get_tree().change_scene_to_file("res://scenes/endings/%s/%s.tscn" % [ending_id, ending_id])
+	var ending_id := Data.selected_chapter_id + "_ending"
+	var ending_path := "res://scenes/endings/%s/%s.tscn" % [ending_id, ending_id]
+
+	if FileAccess.file_exists(ending_path):
+		get_tree().change_scene_to_file(ending_path)
+	else:
+		# no ending for this chapter, go to Dog base instead
+		get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
 
 func _handle_stage_reward(reward_info: Dictionary) -> void:
 	var dog_id = reward_info['dog_id']
