@@ -7,9 +7,9 @@
 [ext_resource type="Script" path="res://scenes/characters/dogs/user_attack_state.gd" id="4_ioj3n"]
 [ext_resource type="AudioStream" uid="uid://byul4hma3ffpq" path="res://resources/sound/battlefield/bite.mp3" id="5_ot2k0"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dltay"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uktwc"]
 resource_local_to_scene = true
-size = Vector2(192, 178)
+size = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6m5t"]
 resource_local_to_scene = true
@@ -21,6 +21,9 @@ collision_mask = 17
 input_pickable = true
 script = ExtResource("2_krygw")
 name_id = ""
+
+[node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
+shape = SubResource("RectangleShape2D_uktwc")
 
 [node name="CollisionShape2D" parent="." index="4"]
 light_mask = 2

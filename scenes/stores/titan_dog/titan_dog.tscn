@@ -1,10 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmu0dxoyu6hfu"]
+[gd_scene load_steps=15 format=3 uid="uid://bmu0dxoyu6hfu"]
 
 [ext_resource type="Script" path="res://scenes/stores/titan_dog/titan_dog.gd" id="2_hyw7l"]
 [ext_resource type="Texture2D" uid="uid://cbpf7qaaatvee" path="res://scenes/stores/titan_dog/titan_dog.png" id="3_m7cvs"]
 [ext_resource type="PackedScene" uid="uid://yg61w87455ho" path="res://scenes/common/finite_state_machine/FSM.tscn" id="3_yn7ow"]
 [ext_resource type="Script" path="res://scenes/stores/titan_dog/MoveState.gd" id="4_7wf1n"]
+[ext_resource type="Texture2D" uid="uid://whf5eqdonrk0" path="res://resources/icons/pngwing.com.png" id="6_dp2pm"]
 [ext_resource type="Script" path="res://scenes/characters/Die.gd" id="8_17gyd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7xt6"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -111,9 +116,18 @@ collision_mask = 17
 input_pickable = true
 script = ExtResource("2_hyw7l")
 name_id = "titan_dog"
-speed = 400
+speed = 20
 attack_sprite = NodePath("CharacterAnimation/Character")
 health = 10000
+
+[node name="DanmakuHitbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DanmakuHitbox"]
+shape = SubResource("RectangleShape2D_b7xt6")
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -154,6 +168,22 @@ one_shot = true
 
 [node name="DieState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("8_17gyd")
+
+[node name="Arrow" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = 21.0
+offset_top = -184.0
+offset_right = 741.0
+offset_bottom = 222.0
+rotation = 1.5708
+scale = Vector2(0.1, 0.1)
+size_flags_horizontal = 4
+size_flags_vertical = 6
+nine_patch_stretch = true
+texture_under = ExtResource("6_dp2pm")
+texture_progress = ExtResource("6_dp2pm")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(1, 1, 0, 1)
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
 [connection signal="timeout" from="FiniteStateMachine/MoveState/TimeToDie" to="FiniteStateMachine/MoveState" method="_on_time_to_die_timeout"]

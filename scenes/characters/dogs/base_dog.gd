@@ -85,6 +85,7 @@ func set_control() :
 	if is_user_control == false : # player can control dog
 		var dogs: Array[Node] = get_tree().get_nodes_in_group("dogs")
 		for dog in dogs:
+			print(dog)
 			$Arrow.tint_under = Color.RED
 			dog.is_user_control = false			
 			dog.get_node("Arrow").hide()		
@@ -93,7 +94,7 @@ func set_control() :
 		$Arrow.show()		
 		$FiniteStateMachine.change_state("UserMoveState")
 		
-	else : # set dog to auto fight
+	elif is_user_control == true  : # set dog to auto fight
 		$Arrow.hide()
 		is_user_control = false
 		$FiniteStateMachine.change_state("MoveState")

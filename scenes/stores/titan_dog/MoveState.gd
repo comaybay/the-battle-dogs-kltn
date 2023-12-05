@@ -23,7 +23,6 @@ func physics_update(delta: float) -> void:
 		
 	else:# va cham				
 		if (collider is CatTower) and (wait_to_die == false):
-			print("tiasdjkas")
 			wait_to_die = true
 			start_die()
 		

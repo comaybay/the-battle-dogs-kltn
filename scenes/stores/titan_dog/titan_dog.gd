@@ -3,7 +3,7 @@ class_name TitanDog extends Character
 
 # id used to retrive save infomation of a dog character
 @export var name_id: String 
-
+var is_user_control = 0
 var level 
 
 func store_setup(dog_tower: DogTower, player_data: BaseBattlefieldPlayerData):
