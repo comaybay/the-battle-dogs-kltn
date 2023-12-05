@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ddhk7pykh4wcb" path="res://scenes/start_menu/main_background_2.png" id="3_jin04"]
 [ext_resource type="Texture2D" uid="uid://3mgk1tr4612p" path="res://scenes/endings/the_battle_dogs_rising_ending/main_background_3.png" id="4_xj58w"]
 [ext_resource type="Texture2D" uid="uid://blp51w2h0ek56" path="res://scenes/start_menu/main_background_dog.png" id="5_ox0nk"]
-[ext_resource type="Texture2D" uid="uid://ba7uaub481uor" path="res://scenes/start_menu/game_logo.png" id="6_qfxhr"]
+[ext_resource type="Texture2D" uid="uid://ba7uaub481uor" path="res://resources/images/game_logo.png" id="6_qfxhr"]
 
 [sub_resource type="Animation" id="Animation_8vrgj"]
 length = 0.001
@@ -286,7 +286,7 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
-text = "@ONLINE_PLAY"
+text = "@ONLINE_BATTLE"
 
 [node name="SettingsButton" type="Button" parent="Khung/PhanCuoi"]
 unique_name_in_owner = true
@@ -313,10 +313,10 @@ focus_mode = 0
 text = "@QUIT"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "ready"
 libraries = {
 "": SubResource("AnimationLibrary_xuivp")
 }
+autoplay = "ready"
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 mode = 1

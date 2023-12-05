@@ -115,10 +115,10 @@ texture = ExtResource("2_mcogl")
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "fade in"
 libraries = {
 "": SubResource("AnimationLibrary_debot")
 }
+autoplay = "fade in"
 
 [node name="SkipButton" type="Button" parent="."]
 offset_left = 976.0
@@ -154,10 +154,10 @@ theme = ExtResource("3_e68rc")
 color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayerText" type="AnimationPlayer" parent="."]
-autoplay = "scroll_text"
 libraries = {
 "": SubResource("AnimationLibrary_ikum5")
 }
+autoplay = "scroll_text"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_cq25v")
