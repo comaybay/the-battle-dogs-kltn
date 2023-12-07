@@ -34,3 +34,4 @@ func physics_update(delta: float) -> void:
 		character.velocity.y += character.gravity * delta
 	else:
 		character.velocity.y = 0
+	character.move_and_slide()

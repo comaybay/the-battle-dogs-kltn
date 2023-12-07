@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://cg888vut0itgh"]
 
-[ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_4jo4h"]
+[ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/sky/sky.material" id="1_4jo4h"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_ng0f1"]
 [ext_resource type="Script" path="res://scenes/credits/credits.gd" id="2_oon5g"]
-[ext_resource type="Texture2D" uid="uid://c00aadjfrrxu8" path="res://resources/battlefield_themes/heavenly/sky.png" id="3_hlg0i"]
+[ext_resource type="Texture2D" uid="uid://xb7r40nr2rgp" path="res://resources/battlefield_themes/heavenly/sky.png" id="3_hlg0i"]
 [ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="4_q8e3c"]
 
 [node name="Credits" type="Control"]

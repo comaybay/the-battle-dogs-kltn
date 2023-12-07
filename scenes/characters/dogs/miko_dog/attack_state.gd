@@ -124,7 +124,7 @@ func _attack(direction: Vector2, this_frame: int) -> void:
 		var bullet_num: int = 4 * dog_level
 		var loop: int = dog_level - 4
 		const DURATION: float = 0.25
-		const ROTATION: int = 10
+		const ROTATION: int = deg_to_rad(10)
 		const SPEED: int = 1000
 		_pattern_path(%Path1, DURATION, bullet_num, loop, ROTATION, SPEED, $OfudaSound1)
 		_pattern_path(%Path2, DURATION, bullet_num, loop, -ROTATION, SPEED, $OfudaSound1)
@@ -134,7 +134,7 @@ func _attack(direction: Vector2, this_frame: int) -> void:
 		var bullet_num: int = 25 + (25 * (dog_level - 7))
 		var loop: int = dog_level - 7
 		const DURATION: float = 0.5
-		const ROTATION: float = 135
+		const ROTATION: float = deg_to_rad(135)
 		const SPEED: int = 2000
 		_pattern_path(%Path3, DURATION, bullet_num, loop, -ROTATION, SPEED, $OfudaSound3)
 		_pattern_path(%Path4, DURATION, bullet_num, loop, ROTATION, SPEED, $OfudaSound3)
@@ -200,9 +200,10 @@ func _pattern_straight_line(
 			var velocity: Vector2 = direction * ofuda_speed 
 			ofuda.velocity = velocity
 			ofuda.position = center_pos
-			ofuda.rotation_speed = rotation
+			ofuda.rotation_speed = deg_to_rad(rotation)
 			ofuda.acceleration = velocity.normalized() * -back_accel
 			await Global.wait(2.0)
+			if ofuda.is_destroyed(): return
 			ofuda.rotation_speed = 0
 		)
 
@@ -270,6 +271,7 @@ func _spawn_bullet_on_path(_pattern_data: Dictionary) -> void:
 		if not is_equal_approx(passed_delta, 0):
 			ofuda.physic_process(passed_delta)
 		await Global.wait(2.0 - passed_delta)
+		if ofuda.is_destroyed(): return
 		ofuda.rotation_speed = 0
 		
 		if current_loop % 2: 

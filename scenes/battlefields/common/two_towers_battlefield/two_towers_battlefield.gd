@@ -11,7 +11,7 @@ var BOSS_DRUM: AudioStream = preload("res://resources/sound/battlefield/boss_dru
 var _boss_music: AudioStream
 var _player_data: BattlefieldPlayerData
 var time_batlle : float
-var _battlefield_data: Dictionary
+var _stage_data: Dictionary
 
 @export var dog_tower: BaseDogTower
 @export var cat_tower: CatTower
@@ -21,17 +21,17 @@ func _init() -> void:
 	super._init()
 
 ## get battlefield data from .json file
-func get_battlefield_data() -> Dictionary: return _battlefield_data
+func get_stage_data() -> Dictionary: return _stage_data
 	
 var _tutorial_dog: BattlefieldTutorialDog = null
 
 func _enter_tree() -> void:
 	InBattle.in_p2p_battle = false
 	InBattle.in_request_mode = false
-	_battlefield_data = InBattle.load_stage_data()
+	_stage_data = InBattle.load_stage_data()
 	_player_data = BattlefieldPlayerData.new()
 
-func get_stage_width() -> int: return _battlefield_data['stage_width'] + TOWER_MARGIN * 2
+func get_stage_width() -> int: return _stage_data['stage_width'] + TOWER_MARGIN * 2
 
 func get_stage_height() -> int: 
 	return land.get_land_bottom_y() - $Sky.position.y
@@ -48,8 +48,7 @@ func get_cat_tower() -> CatTower:
 	return cat_tower
 
 func get_cat_power_scale() -> float:
-	var scale = _battlefield_data.get('power_scale')
-	return scale if scale != null else 1
+	return _stage_data.get('power_scale', 1.0)
 
 func _ready() -> void:
 	assert(dog_tower != null, "ERROR: dog tower not assigned in Battlefield")
@@ -72,10 +71,10 @@ func _ready() -> void:
 	
 	$Camera2D.setup(($Gui as BattleGUI).camera_control_buttons, get_stage_rect())
 	
-	AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % _battlefield_data['music']))
+	AudioPlayer.play_music(load("res://resources/sound/music/%s.mp3" % _stage_data['music']))
 	
-	if _battlefield_data.get('boss_music') != null:
-		_boss_music = load("res://resources/sound/music/%s.mp3" % _battlefield_data['boss_music'])
+	if _stage_data.get('boss_music') != null:
+		_boss_music = load("res://resources/sound/music/%s.mp3" % _stage_data['boss_music'])
 		
 	dog_tower.position.x = TOWER_MARGIN
 	cat_tower.position.x = get_stage_width() - TOWER_MARGIN;

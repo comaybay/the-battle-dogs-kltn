@@ -22,18 +22,17 @@ var alive_boss_count: int = 0
 func get_effect_global_position() -> Vector2:
 	return $EffectMarker.global_position
 
-var _battlefield_data: Dictionary
+var _stage_data: Dictionary
 
 func _ready() -> void:
-	var battlefield := get_tree().current_scene as Battlefield
-	_battlefield_data = battlefield.get_battlefield_data()
+	_stage_data = InBattle.get_stage_data()
 	
-	max_health = _battlefield_data['cat_tower_health']
+	max_health = _stage_data['cat_tower_health']
 	health = max_health
 	update_health_label()
 	
-	var spawn_patterns: Array = _battlefield_data['spawn_patterns']
-	var bosses: Array = _battlefield_data['bosses'] if _battlefield_data.has('bosses') else []
+	var spawn_patterns: Array = _stage_data['spawn_patterns']
+	var bosses: Array = _stage_data['bosses'] if _stage_data.has('bosses') else []
 	
 	var spawn_cat_ids := spawn_patterns.map(func(s): return s['id'])
 	var boss_cat_ids := bosses.map(func(s): return s['id'])
@@ -146,7 +145,7 @@ func take_damage(damage: int) -> void:
 func spawn(cat_id: String, data: Dictionary = {}) -> BaseCat:
 	var cat: Character = cats[cat_id].instantiate()
 	
-	if _battlefield_data.has('special_instruction'):
+	if _stage_data.has('special_instruction'):
 		cat.ready.connect(_apply_special_instruction.bind(cat))
 		
 	var spawn_pos: Vector2 = $SpawnMarker.global_position
@@ -208,7 +207,7 @@ func _add_boss_shader(cat: Character) -> void:
 	) 
 
 func _apply_special_instruction(cat: Character):
-	if _battlefield_data['special_instruction'] == "invert_color":
+	if _stage_data['special_instruction'] == "invert_color":
 		cat.n_Sprite2D.material = load("res://shaders/invert_color/invert_color.material")
 
 func knockback_dogs(knockback_scale: float = 2.5) -> void:

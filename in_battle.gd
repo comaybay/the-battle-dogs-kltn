@@ -37,6 +37,16 @@ func add_hit_effect(global_position: Vector2) -> FXHit:
 
 func get_battlefield() -> BaseBattlefield:
 	return get_tree().current_scene
+	
+## this will not work in p2p battle
+func get_stage_data() -> Dictionary:
+	return (get_battlefield() as Battlefield).get_stage_data()
+
+func get_danmaku_space() -> DanmakuSpace:
+	return get_battlefield().get_danmaku_space()
+
+func get_effect_space() -> Node2D:
+	return get_battlefield().get_effect_space()
 
 func get_player_data() -> BaseBattlefieldPlayerData:
 	return get_battlefield().get_player_data()

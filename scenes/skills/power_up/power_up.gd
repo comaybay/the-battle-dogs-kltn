@@ -21,7 +21,7 @@ func setup(skill_user: Character.Type) -> void:
 		character.set_multiplier(TYPE.SPEED, power_scale, SB.TAKE_HIGHER)
 		character.set_multiplier(TYPE.DAMAGE, power_scale, SB.TAKE_HIGHER)
 		character.set_multiplier(TYPE.ATTACK_SPEED, power_scale, SB.TAKE_HIGHER)
-		character.set_multiplier(TYPE.DAMAGE_TAKEN, 1 / power_scale, SB.TAKE_LOWER)
+		character.set_multiplier(TYPE.DAMAGE_TAKEN, 1.0 / power_scale, SB.TAKE_LOWER)
 		
 		var effect_on_character: Node2D = UpSprite.instantiate()
 		effect_space.add_child(effect_on_character) 

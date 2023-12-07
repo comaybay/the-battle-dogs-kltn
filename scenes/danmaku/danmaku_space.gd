@@ -1,5 +1,6 @@
 @tool
 class_name DanmakuSpace extends BulletsEnvironment
+## a space for bullets to be spawn
 
 const DANMAKU_OUTER_MARGIN: int = 1000
 const MAX_POOL_SIZE = 7000
@@ -36,8 +37,7 @@ func _config_danmaku_space(_node: BulletsEnvironment) -> void:
 	_setup_bullets(pool_sizes)
 	
 func _add_cats_bullet_pool_sizes(pool_sizes: Dictionary) -> void:
-	var battlefield := InBattle.get_battlefield() as BaseBattlefield
-	var data: Dictionary = battlefield.get_battlefield_data()
+	var data: Dictionary = InBattle.get_stage_data()
 	var enemy_bullets_arr: Array[Dictionary] = []
 	enemy_bullets_arr.append_array(data["spawn_patterns"].filter(
 		func(pattern): 
@@ -83,8 +83,6 @@ func _get_dogs_bullet_pool_sizes(dog_ids: Array[String]) -> Dictionary:
 
 ## register bullet so that they can be used in battle
 func register_bullet(bullet: DanmakuBulletKit, pool_size: int = 3000) -> void:
-	assert(not bullet_kits.has(bullet), "ERROR: bullet is already registered.")
-		
 	ready.connect(func():
 		var stage_rect := InBattle.get_battlefield().get_stage_rect()
 		stage_rect.position -= Vector2(DANMAKU_OUTER_MARGIN, DANMAKU_OUTER_MARGIN)
@@ -95,17 +93,31 @@ func register_bullet(bullet: DanmakuBulletKit, pool_size: int = 3000) -> void:
 		CONNECT_ONE_SHOT
 	)
 	
-	var index: int = _get("bullet_types_amount") 
-	_set("bullet_types_amount", index + 1)
+	if not AudioPlayer.has_in_battle_sfx(bullet.hit_sfx):
+		AudioPlayer.add_in_battle_sfx(bullet.hit_sfx, 10)
+	
+	var index := bullet_kits.find(bullet)
+	
+	if index == -1:
+		index = _get("bullet_types_amount") 
+		_set("bullet_types_amount", index + 1)
+		
+		## pool size min value is 1, so overwrite it first 
+		pools_sizes[index] = min(pool_size, MAX_POOL_SIZE)
+	else:
+		## add to existing pool size
+		pools_sizes[index] = min(pools_sizes[index] + pool_size, MAX_POOL_SIZE) 
 	
 	bullet_kits[index] = bullet
-	pools_sizes[index] = min(pool_size, MAX_POOL_SIZE) 
 	z_indices[index] = 50
 
 ## spawn bullet, returns the bullet controller, remember to check if bullet spawned successfully using the controller
-func spawn(bullet: DanmakuBulletKit, character_type: Character.Type) -> DanmakuBulletController:
+func spawn(
+		bullet: DanmakuBulletKit, 
+		character_type: Character.Type,
+		controller: DanmakuBulletController = DanmakuBulletController.new()
+	) -> DanmakuBulletController:
 	var id = Bullets.obtain_bullet(bullet)
-	var controller := DanmakuBulletController.new()
 	controller.setup(bullet, id, character_type)
 	return controller
 	
@@ -115,11 +127,6 @@ func has_bullet(bullet: DanmakuBulletKit) -> bool:
 func get_pool_size(bullet: DanmakuBulletKit) -> int:
 	return Bullets.get_pool_size(bullet)
 	
-## increase or decrease pool size of bullet, result value will always be >= 1
-func adjust_pool_size(bullet: DanmakuBulletKit, size: int) -> void:
-	var index := pools_sizes.find(bullet)
-	pools_sizes[index] = max(1, Bullets.get_pool_size(bullet) + size)
-
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
@@ -132,12 +139,13 @@ func _process(_delta: float) -> void:
 	_debug_label.text = "shared_timers: %s\n" % Global._shared_timers.size()
 	
 	_debug_label.text += "Total bullets %s/%s\n" % [
-		Bullets.get_total_active_bullets(), Bullets.get_total_available_bullets()
+		Bullets.get_total_active_bullets(), 
+		Bullets.get_total_active_bullets() + Bullets.get_total_available_bullets()
 	] 
 	
 	for kit in bullet_kits:
 		_debug_label.text += "%s: %s/%s\n" % [
 			kit.resource_path.get_file(), 
 			Bullets.get_active_bullets(kit),
-			Bullets.get_available_bullets(kit)
+			Bullets.get_active_bullets(kit) + Bullets.get_available_bullets(kit)
 	]

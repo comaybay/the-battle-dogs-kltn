@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://b0ihidn3ggmh5"]
 
-[ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_3ebhf"]
+[ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/sky/sky.material" id="1_3ebhf"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_battlefield.gd" id="1_i8anq"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/server_side.gd" id="2_54xfd"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/client_side.gd" id="2_4858x"]

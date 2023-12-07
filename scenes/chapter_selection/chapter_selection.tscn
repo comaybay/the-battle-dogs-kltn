@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://crluqfyv7dbna"]
 
-[ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/horizontal_scroll/horizontal_scroll.material" id="1_18dgk"]
+[ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/sky/sky.material" id="1_18dgk"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_evkhq"]
 [ext_resource type="Script" path="res://scenes/chapter_selection/chapter_selection.gd" id="2_1art8"]
 [ext_resource type="Texture2D" uid="uid://xb7r40nr2rgp" path="res://resources/battlefield_themes/heavenly/sky.png" id="4_lg4m4"]

@@ -1,6 +1,7 @@
 class_name YinYangOrb extends CharacterBody2D
 
 const EXIT_AUDIO: AudioStream = preload("res://scenes/characters/dogs/miko_dog/yin_yang_orb/se_don00.wav")
+const HIT_SFX: AudioStream = preload("res://scenes/characters/dogs/miko_dog/se_damage00.wav") 
 
 const BOUNCE_SPEED: float = 1000
 var _bounce_time_left: int = 1
@@ -74,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		tween.tween_property(self, "scale", Vector2(1.25, 1), 0.1)
 		tween.tween_property(self, "scale", Vector2(1, 1), 0.1)	
 	else:
-		AudioPlayer.play_in_battle_sfx(MikoDog.HIT_SFX)
+		AudioPlayer.play_in_battle_sfx(HIT_SFX)
 		
 		# is tower
 		collider.take_damage(_damage)

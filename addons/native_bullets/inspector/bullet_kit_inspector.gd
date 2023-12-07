@@ -27,10 +27,8 @@ func _parse_property(object, type, path, hint, hint_text, usage, wide):
 		return true
 	elif path == "collision_layer" and not object.collisions_enabled:
 		return true
-	elif path == "collision_mask" and not object.collisions_enabled:
-		return true
-	elif path == "active_rect" and object.use_viewport_as_active_rect:
-		return true
+#	elif path == "collision_mask" and not object.collisions_enabled:
+#		return true
 	elif path == "rotate":
 		pass
 	return false

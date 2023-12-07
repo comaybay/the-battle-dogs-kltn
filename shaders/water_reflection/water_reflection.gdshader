@@ -16,8 +16,8 @@ void fragment() {
 	float uv_height = SCREEN_PIXEL_SIZE.y / TEXTURE_PIXEL_SIZE.y;
 	vec2 reflected_screen_uv = vec2(SCREEN_UV.x, SCREEN_UV.y - uv_height * UV.y * scale.y * y_zoom * 2.0);	
 	
-	vec4 reflection = texture(SCREEN_TEXTURE, reflected_screen_uv);
+	vec4 reflection = texture(SCREEN_TEXTURE, reflected_screen_uv); 
 	
-	COLOR.rgb = mix(reflection.rgb, water_color.rgb, clamp(water_color.a - UV.y, 0.0, 1.0));
-	COLOR.a = smoothstep(0.0, 0.1, waves);
+	COLOR = mix(reflection, water_color, clamp(water_color.a - UV.y, 0.0, 1.0));
+	COLOR.a *= smoothstep(0.0, 0.1, waves);
 }

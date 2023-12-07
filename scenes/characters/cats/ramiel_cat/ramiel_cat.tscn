@@ -412,6 +412,7 @@ size = Vector2(584, 1590)
 size = Vector2(1983.55, 651)
 
 [node name="RamielCat" node_paths=PackedStringArray("custom_attack_area") instance=ExtResource("1_8y4hw")]
+modulate = Color(1.25, 1.25, 1.25, 1)
 position = Vector2(0, -210)
 reward_money = 1000
 speed = 40

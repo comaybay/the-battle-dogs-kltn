@@ -1,4 +1,3 @@
-@tool
 extends CanvasGroup
 
 func _process(delta: float) -> void:

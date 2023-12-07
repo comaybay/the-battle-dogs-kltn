@@ -5,12 +5,12 @@ extends CanvasLayer
 
 func _ready() -> void:	
 	var battlefield = get_tree().current_scene as Battlefield
-	var battlefield_data = battlefield.get_battlefield_data()
+	var _stage_data = battlefield.get_stage_data()
 	
 	$AnimationPlayer.play("default")
 	var tween = create_tween()
 	
-	var reward_bone: int = battlefield_data['reward_bone']
+	var reward_bone: int = _stage_data['reward_bone']
 	
 	var level = InBattle.get_passive_level('bone_reward_up')
 	reward_bone = reward_bone + (reward_bone * 0.1 * level)
@@ -31,7 +31,7 @@ func _tween_bone_number(value: int):
 	bone_label.text = str(value)
 
 func _setup_return_button() -> void:
-	if Data.selected_stage >= Data.chapter_last_stage :
+	if Data.selected_stage >= Data.chapter_last_stage:
 		Data.save_data['chapters'][Data.selected_chapter_id]['completed'] = true
 		return_button.pressed.connect(_go_to_ending)
 	else:

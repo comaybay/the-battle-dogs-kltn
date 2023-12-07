@@ -1,6 +1,5 @@
+@tool
 class_name MikoDog extends BaseDog
-
-const HIT_SFX: AudioStream = preload("res://scenes/characters/dogs/miko_dog/se_damage00.wav") 
 
 ## this value might change if miko dog is a cat
 var ofuda_damage: int = 10
@@ -8,8 +7,7 @@ var ofuda_damage: int = 10
 func _ready() -> void:
 	super._ready()
 	
-	if not AudioPlayer.has_in_battle_sfx(HIT_SFX):
-		AudioPlayer.add_in_battle_sfx(HIT_SFX, 20)
+
 	
 	get_FSM().state_entering.connect(_on_state_entering)
 	

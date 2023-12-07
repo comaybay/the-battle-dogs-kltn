@@ -247,10 +247,11 @@ func set_multiplier(type: MultiplierTypes, multiplier: float, behaviour: SetBeha
 		if not n_AttackCooldownTimer.is_stopped():
 			n_AttackCooldownTimer.start(n_AttackCooldownTimer.time_left * _multipliers[type])
 			n_AttackCooldownTimer.start(max(n_AttackCooldownTimer.time_left / multiplier, 0.05))
-			_multipliers[type] = multiplier
 		
 		n_AttackCooldownTimer.wait_time = max(attack_cooldown / multiplier, 0.05)
 		$AnimationPlayer.speed_scale = multiplier
+		
+	_multipliers[type] = multiplier
 		
 func reset_multipliers() -> void:
 	if not n_AttackCooldownTimer.is_stopped():

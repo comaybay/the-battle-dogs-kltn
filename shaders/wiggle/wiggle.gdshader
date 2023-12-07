@@ -11,7 +11,6 @@ const float SPEED_DOWN_SCALE = 0.01;
 
 void fragment() {
 	vec2 uv = UV;
-	vec4 screen_texture = texture(TEXTURE, uv);
 	vec2 movement_factor = movement_direction * movement_speed * TIME * SPEED_DOWN_SCALE;
 	float noise_value = texture(NOISE_TEXTURE, uv*uv_scaling + movement_factor).r - 0.5;
 	uv += noise_value * TEXTURE_PIXEL_SIZE * strength;
