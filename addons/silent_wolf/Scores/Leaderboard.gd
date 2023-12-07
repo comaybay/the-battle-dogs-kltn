@@ -4,7 +4,9 @@ extends Control
 const ScoreItem = preload("ScoreItem.tscn")
 const SWLogger = preload("res://addons/silent_wolf/utils/SWLogger.gd")
 
-var list_index = 0
+var list_index1 = 0
+var list_index2 = 0
+var list_index0 = 0
 # Replace the leaderboard name if you're not using the default leaderboard
 var ld_name = "main"
 var max_scores = 10
@@ -18,7 +20,7 @@ func _ready():
 	$VBoxContainer/Control/TabContainer.set_tab_title(1, tr("@FASTESTTIME"))	
 	$VBoxContainer/Control/TabContainer.set_tab_title(2, tr("@VICTORYCOUNT"))	
 	
-#	SilentWolf.Scores.save_score(Steam.getPersonaName(), 64, "fastest_time")
+	#SilentWolf.sw_save_score_time("yyyanhkhoa", 30,"fastest_time")
 	# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
 	add_loading_scores_message()
 	sw_high_scores = await SilentWolf.Scores.get_scores(0,"high_scores").sw_get_scores_complete
@@ -49,7 +51,6 @@ func render_board(scores : Array ,numb : int, local_scores: int, time: bool = fa
 	var list_score = scores
 	if time == false :
 		for score in list_score.slice(0,numb):
-			print("score1 : ",score)
 			add_item(score.player_name, score.score,local_scores)			
 	else : #add time scores
 		list_score.reverse()
@@ -59,24 +60,26 @@ func render_board(scores : Array ,numb : int, local_scores: int, time: bool = fa
 #Show ranking
 func add_item(player_name: String, score_value: int, tab: int) -> void:
 	var item = ScoreItem.instantiate()
-	list_index += 1
-	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
 	item.get_node("Score").text = str(score_value)
-	item.offset_top = list_index * 100
 	if tab == 0 :
+		list_index0 += 1
+		item.get_node("PlayerName").text = str(list_index0) + str(". ") + player_name
+		item.offset_top = list_index0 * 100
 		$VBoxContainer/Control/TabContainer/HighScores/MarginContainer/ScoreItemContainer.add_child(item)
 	elif tab == 2:
+		list_index2 += 1
+		item.get_node("PlayerName").text = str(list_index2) + str(". ") + player_name
+		item.offset_top = list_index2 * 100
 		$"VBoxContainer/Control/TabContainer/VictoryCount/MarginContainer/ScoreItemContainer".add_child(item)
 
 func add_time_item(player_name: String, score_value: int) -> void:
 	var item = ScoreItem.instantiate()
-	list_index += 1
-	item.get_node("PlayerName").text = str(list_index) + str(". ") + player_name
+	list_index1+= 1
+	item.get_node("PlayerName").text = str(list_index1) + str(". ") + player_name
 	item.get_node("Score").text =str(int(score_value/60),":",(score_value-(int(score_value/60) * 60)))
-	item.offset_top = list_index * 100
+	item.offset_top = list_index1 * 100
 	$"VBoxContainer/Control/TabContainer/FastestTime/MarginContainer/ScoreItemContainer".add_child(item)
-		
-
+	
 func add_no_scores_message() -> void:
 	var item = $VBoxContainer/Control/MessageContainer/TextMessage
 	item.text = "No scores yet!"

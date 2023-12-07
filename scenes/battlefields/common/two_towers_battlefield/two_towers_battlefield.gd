@@ -91,12 +91,16 @@ func _show_win_ui():
 	$TimeBattle.stop()
 	var get_time = int(Time.get_ticks_msec() / 1000)
 	_clean_up()
-	
+	# need fix
 	if (Data.use_sw_data == true) and (Data.passed_stage == 13) :
 		Data.victory_count += 1 
-		SilentWolf.Scores.save_score(Data.save_data["user_name"],Data.victory_count, "victory_count")
+		SilentWolf.sw_save_high_scores(Data.save_data["user_name"], "victory_count",1)
 		SilentWolf.sw_save_score_time(Data.save_data["user_name"], get_time,"fastest_time")
-
+		Data.save()
+	# high_scores
+	#if :
+		#SilentWolf.sw_save_high_scores(Data.save_data["user_name"], "high_scores",5)
+		
 	AudioPlayer.stop_current_music(true, true)
 	AudioPlayer.play_music(VICTORY_AUDIO)
 	add_child(VictoryGUI.instantiate())	

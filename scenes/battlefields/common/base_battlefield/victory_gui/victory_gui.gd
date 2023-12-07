@@ -31,7 +31,7 @@ func _tween_bone_number(value: int):
 	bone_label.text = str(value)
 
 func _setup_return_button() -> void:
-	if Data.selected_stage >= Data.chapter_last_stage and:
+	if Data.selected_stage >= Data.chapter_last_stage :
 		Data.save_data['chapters'][Data.selected_chapter_id]['completed'] = true
 		return_button.pressed.connect(_go_to_ending)
 	else:
