@@ -47,7 +47,7 @@ func update_labels():
 	else:
 		%Price.text = "MAX"
 		%BoneIcon.hide()
-		$Background.modulate = Color(100, 100, 100)
+		$Background.modulate = Color(1.25, 1.25, 1.25)
 	
 func _on_pressed():
 	_parent.sendInfo(self)
