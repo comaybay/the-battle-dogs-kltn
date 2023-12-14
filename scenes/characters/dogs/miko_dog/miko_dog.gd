@@ -1,14 +1,11 @@
 @tool
 class_name MikoDog extends BaseDog
 
-## this value might change if miko dog is a cat
-var ofuda_damage: int = 10
+## this value could be different if miko dog is a Cat (enemy Dog)
+var ofuda_damage: float = 10
 
 func _ready() -> void:
 	super._ready()
-	
-
-	
 	get_FSM().state_entering.connect(_on_state_entering)
 	
 func _on_state_entering(state_name: String, data: Dictionary) -> void:

@@ -1,8 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtrli6n4ntgpu"]
+[gd_scene load_steps=12 format=3 uid="uid://dtrli6n4ntgpu"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_v1h8r"]
 [ext_resource type="Texture2D" uid="uid://dwfb47wuf0mu" path="res://scenes/characters/dogs/angel_dog/angel_dog.png" id="2_8gfbr"]
 [ext_resource type="Texture2D" uid="uid://xypbk5ytpenf" path="res://scenes/characters/dogs/angel_dog/cross_explosion.png" id="3_1iwqc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2jv3i"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -297,6 +301,7 @@ size = Vector2(192, 699)
 
 [node name="AngelDog" node_paths=PackedStringArray("attack_sprite") instance=ExtResource("1_v1h8r")]
 name_id = "angel_dog"
+attack_type = 1
 speed = 140
 attack_range = 450
 attack_area_range = 120
@@ -305,7 +310,10 @@ attack_sprite = NodePath("CharacterAnimation/CrossExplosion")
 attack_frame = 3
 damage = 100
 
-[node name="AttackCooldownTimer" parent="." index="0"]
+[node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
+shape = SubResource("RectangleShape2D_2jv3i")
+
+[node name="AttackCooldownTimer" parent="." index="1"]
 wait_time = 4.0
 
 [node name="Character" parent="CharacterAnimation" index="0"]
@@ -322,16 +330,16 @@ texture = ExtResource("3_1iwqc")
 hframes = 3
 vframes = 4
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_y1xwg")
 }
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="4"]
 position = Vector2(0, -260.5)
 shape = SubResource("RectangleShape2D_nlnr2")
 
-[node name="RayCast2D" parent="." index="4"]
+[node name="RayCast2D" parent="." index="5"]
 target_position = Vector2(450, 0)
 
 [node name="Arrow" parent="." index="6"]

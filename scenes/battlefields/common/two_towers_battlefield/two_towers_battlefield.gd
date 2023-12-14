@@ -15,17 +15,10 @@ var _stage_data: Dictionary
 
 @export var dog_tower: BaseDogTower
 @export var cat_tower: CatTower
-@export var land: Land
+var _tutorial_dog: BattlefieldTutorialDog = null
 
 func _init() -> void:
 	super._init()
-
-## get battlefield data from .json file
-func get_stage_data() -> Dictionary: return _stage_data
-	
-var _tutorial_dog: BattlefieldTutorialDog = null
-
-func _enter_tree() -> void:
 	InBattle.in_p2p_battle = false
 	InBattle.in_request_mode = false
 	_stage_data = InBattle.load_stage_data()
@@ -34,10 +27,10 @@ func _enter_tree() -> void:
 func get_stage_width() -> int: return _stage_data['stage_width'] + TOWER_MARGIN * 2
 
 func get_stage_height() -> int: 
-	return land.get_land_bottom_y() - $Sky.position.y
+	return land.get_land_bottom_y() - sky.position.y
 	
 func get_stage_rect() -> Rect2:
-	return Rect2(0, $Sky.position.y, get_stage_width(), get_stage_height())
+	return Rect2(0, sky.position.y, get_stage_width(), get_stage_height())
 
 func get_player_data() -> BaseBattlefieldPlayerData: return _player_data
 

@@ -2,6 +2,7 @@ extends CanvasLayer
 
 var _debug_mode := false 
 var _draw_debug := false 
+var _debug_label: Label
 
 func _init() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
@@ -9,6 +10,20 @@ func _init() -> void:
 	
 	if not _debug_mode:
 		set_process_input(false)
+		
+	if _debug_mode:
+		var canvas := CanvasLayer.new()
+		canvas.layer = 9
+		_debug_label = Label.new()
+		_debug_label.position = Vector2(180, 180)
+		_debug_label.add_theme_font_size_override("font_size", 20)
+		_debug_label.add_theme_color_override("font_outline_color", Color.DARK_GREEN)
+		_debug_label.add_theme_constant_override("outline_size", 6)
+		canvas.add_child(_debug_label)
+		add_child(canvas)
+		set_process(true)
+	else:
+		set_process(false)
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed('ui_draw_debug'):
@@ -43,6 +58,32 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_pressed('ui_debug_win_battle'):
 		InBattle.get_battlefield().get_cat_tower().zero_health.emit()
+	
+func _process(delta: float) -> void:
+	_debug_label.text = ""   
+	
+	if not Debug.is_draw_debug():
+		return
+		
+	_debug_label.text = "FPS: %s\n" % Engine.get_frames_per_second()    
+	
+	_debug_label.text += "shared_timers: %s\n" % Global._shared_timers.size()
+	
+	_debug_label.text += "Total bullets %s/%s\n" % [
+		Bullets.get_total_active_bullets(), 
+		Bullets.get_total_active_bullets() + Bullets.get_total_available_bullets()
+	] 
+	
+	if not InBattle.get_battlefield() is BaseBattlefield:
+		return
+		
+	var danamku_space := InBattle.get_danmaku_space()
+	for kit in danamku_space.bullet_kits:
+		_debug_label.text += "%s: %s/%s\n" % [
+			kit.resource_name, 
+			Bullets.get_active_bullets(kit),
+			Bullets.get_active_bullets(kit) + Bullets.get_available_bullets(kit)
+	]
 
 func is_debug_mode() -> bool:
 	return _debug_mode

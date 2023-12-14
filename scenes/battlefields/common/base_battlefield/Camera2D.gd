@@ -32,15 +32,12 @@ func setup(camera_control_buttons: CameraControlButtons, stage_rect: Rect2):
 	
 	var min_zoom_scale:float = max(float(viewport_size.x) / stage_rect.size.x, float(viewport_size.y) / stage_rect.size.y) 
 	min_zoom = Vector2(min_zoom_scale, min_zoom_scale) 
-	var initial_zoom_scale = max(0.375, min_zoom_scale) 
-	zoom = Vector2(initial_zoom_scale, initial_zoom_scale)
+	zoom = Vector2(min_zoom_scale, min_zoom_scale)
 	
 	position = Vector2(0, -half_viewport_size.y)
 
 func _process(delta: float) -> void:
 	position = get_screen_center_position()
-#	position.x = clamp(position.x, (limit_left + half_viewport_size.x) / zoom.x, (limit_right - half_viewport_size.x) / zoom.x)
-#	position.y = clamp(position.y, (limit_top + half_viewport_size.y) / zoom.y, (limit_bottom - half_viewport_size.y) / zoom.y)
 	
 	# stop flick velocity if camera has reach it's limit position
 	if (

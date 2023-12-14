@@ -2,14 +2,75 @@
   "battlefield": "shrine_maiden",
   "music": "battlefield_theme1",
   "boss_music": "miko_dog_theme",
-  "stage_width": 9000,
-  "tori_position": 4000,
-  "tori_health": 50000,
-  "tori_growl": 9,
-  "cat_tower_health": 30000,
   "reward_bone": 100000,
+  "stage_width": 9000,
+  "cat_tower_health": 30000,
+  "tori": {
+    "position": 4000,
+    "health": 50000,
+    "growls": 9,
+    "instant_spawns": {
+      "fairy_cat": 5
+    }
+  },
   "power_scale": 2.5,
+  "instant_spawns": [
+    {
+      "id": "cat",
+      "position": 3300,
+      "props": { "speed": { "value": 200 }, "health": { "scale": 20 } }
+    },
+    {
+      "id": "leg_cat",
+      "position": 3500,
+      "props": {
+        "health": { "scale": 5 },
+        "damage": { "value": 0.25 },
+        "attack_cooldown": { "value": 0 }
+      }
+    },
+    {
+      "id": "leg_cat",
+      "position": 3900,
+      "props": {
+        "health": { "scale": 5 },
+        "damage": { "value": 0.25 },
+        "attack_range": { "scale": 0.5 },
+        "attack_cooldown": { "value": 1 }
+      }
+    },
+    {
+      "id": "buff_cat",
+      "position": 4300,
+      "props": {
+        "speed": { "value": 200 },
+        "health": { "scale": 2 }
+      }
+    },
+    {
+      "id": "leg_cat",
+      "position": 4700,
+      "props": { "health": { "scale": 5 }, "attack_range": { "scale": 3 }, "attack_cooldown": { "value": 2 } }
+    },
+    {
+      "id": "leg_cat",
+      "position": 5100,
+      "props": { "health": { "scale": 5 }, "attack_range": { "scale": 4 }, "attack_cooldown": { "value": 3 } }
+    },
+    {
+      "id": "cat",
+      "position": 5300,
+      "props": { "speed": { "value": 200 } },
+      "health": { "scale": 20 }
+    }
+  ],
   "spawn_patterns": [
+    {
+      "id": "fairy_cat",
+      "interval": 30,
+      "delay": 180,
+      "limit": 5
+    },
     {
       "id": "smol_cat",
       "interval": 2.5,
@@ -53,12 +114,12 @@
       "id": "miko_dog",
       "dog_level": 10,
       "dog_abilities": ["yin_yang_orb"],
-      "buffs": [
-        { "name": "ofuda_damage", "scale": 4 },
-        { "name": "reward_money", "scale": 3 },
-        { "name": "health", "scale": 15 },
-        { "name": "knockbacks", "scale": 2 }
-      ]
+      "props": {
+        "ofuda_damage": { "scale": 4 },
+        "reward_money": { "scale": 3 },
+        "health": { "scale": 15 },
+        "knockbacks": { "scale": 2 }
+      }
     }
   ]
 }

@@ -147,6 +147,8 @@ var dogs: Dictionary:
 # auto generated data
 # general info
 var dog_info := Dictionary()
+var cat_info := Dictionary()
+var character_info := Dictionary()
 var store_info := Dictionary()
 var skill_info := Dictionary()
 var passive_info := Dictionary()
@@ -183,6 +185,14 @@ func _init() -> void:
 	for info in dog_info_arr:
 		dog_info[info['ID']] = info
 	file.close()
+	
+	file = FileAccess.open("res://resources/game_data/cats.json", FileAccess.READ)
+	cat_info = JSON.parse_string(file.get_as_text())
+	file.close()
+	
+	character_info = {}
+	character_info.merge(dog_info)
+	character_info.merge(cat_info)
 	
 	file = FileAccess.open("res://resources/game_data/skill.json", FileAccess.READ)
 	var skill_info_arr = JSON.parse_string(file.get_as_text())

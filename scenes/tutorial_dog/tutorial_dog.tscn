@@ -786,10 +786,10 @@ shortcut_in_tooltip = false
 flat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "dog"
 libraries = {
 "": SubResource("AnimationLibrary_anvn6")
 }
+autoplay = "dog"
 
 [node name="IntroSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_73jpn")

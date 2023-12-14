@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkytbva50vqdg"]
+[gd_scene load_steps=16 format=3 uid="uid://bkytbva50vqdg"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_wgfpp"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/batter_dog/batter_dog.gd" id="2_vko5u"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://duitro513iirt" path="res://scenes/characters/dogs/batter_dog/batter_dog_bat_big.png" id="5_lmxqp"]
 [ext_resource type="Texture2D" uid="uid://bavya4yl2jw6v" path="res://scenes/characters/dogs/batter_dog/batter_dog_bat_small.png" id="6_uvs62"]
 [ext_resource type="AudioStream" uid="uid://bq1tyckji7vkr" path="res://scenes/characters/dogs/batter_dog/bat_drag.mp3" id="7_r48ac"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h83br"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -748,6 +752,7 @@ z_index = 40
 position = Vector2(2, 1)
 script = ExtResource("2_vko5u")
 name_id = "batter_dog"
+attack_type = 4
 attack_range = 570
 attack_area_range = 200
 attack_cooldown = 35.0
@@ -757,8 +762,11 @@ health = 2000
 damage = 999
 knockbacks = 1
 
-[node name="AttackCooldownTimer" parent="." index="0"]
-wait_time = 40.0
+[node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
+shape = SubResource("RectangleShape2D_h83br")
+
+[node name="AttackCooldownTimer" parent="." index="1"]
+wait_time = 35.0
 
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(-21, -34.5)
@@ -788,27 +796,27 @@ rotation = -0.193891
 texture = ExtResource("6_uvs62")
 vframes = 3
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_rymvr")
 }
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="4"]
 position = Vector2(-12, 11)
 shape = SubResource("RectangleShape2D_oa1yv")
 
-[node name="RayCast2D" parent="." index="4"]
+[node name="RayCast2D" parent="." index="5"]
 position = Vector2(84, 75)
 target_position = Vector2(570, 0)
-
-[node name="MoveSound" type="AudioStreamPlayer" parent="FiniteStateMachine/MoveState" index="0"]
-unique_name_in_owner = true
-stream = ExtResource("7_r48ac")
-volume_db = 6.0
-bus = &"InBattleFX"
 
 [node name="Arrow" parent="." index="6"]
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 720.0
 offset_bottom = 406.0
+
+[node name="MoveSound" type="AudioStreamPlayer" parent="FiniteStateMachine/MoveState" index="0"]
+unique_name_in_owner = true
+stream = ExtResource("7_r48ac")
+volume_db = 6.0
+bus = &"InBattleFX"

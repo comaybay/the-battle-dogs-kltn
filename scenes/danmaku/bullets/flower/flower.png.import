@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8ugr8et0de8w"
-path="res://.godot/imported/pngwing.com.png-b0f84e031986aeef67aae839ecc1ade6.ctex"
+uid="uid://bd8a0npstv6hn"
+path="res://.godot/imported/flower.png-9f8fe6495fe269c85004a745a6f827d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/characters/dogs/sword_dog/pngwing.com.png"
-dest_files=["res://.godot/imported/pngwing.com.png-b0f84e031986aeef67aae839ecc1ade6.ctex"]
+source_file="res://scenes/danmaku/bullets/flower/flower.png"
+dest_files=["res://.godot/imported/flower.png-9f8fe6495fe269c85004a745a6f827d2.ctex"]
 
 [params]
 

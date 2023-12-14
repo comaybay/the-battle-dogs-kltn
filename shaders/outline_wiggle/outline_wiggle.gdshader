@@ -11,10 +11,12 @@ uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_n
 uniform float max_line_width = 30.0;
 uniform float min_line_width = 5.0;
 uniform float intensity = 1.0;
+uniform float fracture = 1.0;
 uniform float block_size = 17.0;
 uniform float speed = 1;
 uniform float line_blur = 0.125;
 uniform float seed = 0;
+uniform float brightness = 1.0;
 uniform vec4 line_color: source_color;
 
 const float pi = 3.1415;
@@ -40,7 +42,7 @@ float getLineWidth(vec2 p, float s) {
 	p /= block_size * 0.001;
 	float w = 0.0;
 	for (int i = 0; i < 3; i++) {
-		w = mix(w, noise(p, s), intensity);
+		w = mix(w, noise(p, s), fracture);
 	}
 	
 	return mix(max_line_width, min_line_width, w);
@@ -80,7 +82,7 @@ void fragment() {
 	}
 
 	vec2 scaledDist = SCREEN_PIXEL_SIZE;
-	scaledDist *= getLineWidth((UV / TEXTURE_PIXEL_SIZE), seed) * zoom;
+	scaledDist *= getLineWidth((UV / TEXTURE_PIXEL_SIZE), seed) * zoom * intensity;
 	float w = getClosestDistance(screen_texture, SCREEN_UV, scaledDist);
 	
 	if (max_line_width > 0.0 && w > 0.0 && c.a < 1.0) {
@@ -88,9 +90,9 @@ void fragment() {
 		COLOR *= new_color;
 		
 		COLOR.a *= smoothstep(0, line_blur, 1.0 - w);
+		COLOR.a *= brightness;
 	}
 	else {
 		COLOR *= c;
 	}
-	
 }

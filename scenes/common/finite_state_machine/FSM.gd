@@ -23,15 +23,21 @@ func _ready():
 	state = get_node(initial_state)
 	owner.ready.connect(_on_owner_ready, CONNECT_ONE_SHOT)
 
-func get_current_state() -> String:
+func get_current_state_name() -> String:
 	return state.name
+	
+func get_current_state() -> FSMState:
+	return state
+	
+func has_state(state_name: String) -> bool:
+	return has_node(state_name)
 	
 func get_current_state_data() -> Dictionary:
 	return _state_data
 
 func _on_owner_ready():
 	for node in get_children():
-		if node.is_FSM_state == true:
+		if node is FSMState:
 			node.connect("transition", _on_state_transition)
 	
 	state_entering.emit(initial_state, _state_data)
@@ -40,7 +46,7 @@ func _on_owner_ready():
 	state_entered.emit(initial_state)
 
 func change_state(next_state_name: String, data: Dictionary = {}):
-	if next_state_name == get_current_state():
+	if next_state_name == get_current_state_name():
 		return
 	
 	_state_data = data
@@ -48,6 +54,7 @@ func change_state(next_state_name: String, data: Dictionary = {}):
 	if state.has_method("exit"):
 		state.exit()
 	
+	assert(has_state(next_state_name), "ERROR: state %s do not exist" % next_state_name) 
 	state = get_node(next_state_name)
 	
 	state_entering.emit(next_state_name, _state_data)

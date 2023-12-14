@@ -1,7 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://tq62ii2wpilb"]
+[gd_scene load_steps=11 format=3 uid="uid://tq62ii2wpilb"]
 
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_nq2vy"]
 [ext_resource type="Texture2D" uid="uid://dkwyha3po5kge" path="res://scenes/characters/cats/rolling_cat/rolling_cat.png" id="2_jrv4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ldr1"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -164,6 +168,7 @@ size = Vector2(192, 178)
 
 [node name="RollingCat" instance=ExtResource("1_nq2vy")]
 reward_money = 50
+attack_type = 1
 speed = 160
 attack_range = 80
 attack_area_range = 20
@@ -172,6 +177,9 @@ attack_frame = 14
 health = 350
 damage = 30
 knockbacks = 5
+
+[node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
+shape = SubResource("RectangleShape2D_5ldr1")
 
 [node name="AttackCooldownTimer" parent="." index="1"]
 wait_time = 3.0

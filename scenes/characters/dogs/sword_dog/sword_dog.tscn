@@ -1,7 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxqh31o16u528"]
+[gd_scene load_steps=11 format=3 uid="uid://dxqh31o16u528"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_ivu0g"]
 [ext_resource type="Texture2D" uid="uid://dtolw2l0a45sl" path="res://scenes/characters/dogs/sword_dog/sword_dog.png" id="2_8ghqg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3thmi"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -112,7 +116,10 @@ attack_cooldown = 0.05
 health = 400
 knockbacks = 5
 
-[node name="AttackCooldownTimer" parent="." index="0"]
+[node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
+shape = SubResource("RectangleShape2D_3thmi")
+
+[node name="AttackCooldownTimer" parent="." index="1"]
 wait_time = 0.05
 
 [node name="Character" parent="CharacterAnimation" index="0"]
@@ -121,16 +128,16 @@ texture = ExtResource("2_8ghqg")
 hframes = 1
 vframes = 17
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_qvwfi")
 }
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="4"]
 position = Vector2(-1, -23.25)
 shape = SubResource("RectangleShape2D_oa1yv")
 
-[node name="RayCast2D" parent="." index="4"]
+[node name="RayCast2D" parent="." index="5"]
 position = Vector2(95, 61.5)
 target_position = Vector2(90, 0)
 

@@ -13,24 +13,25 @@ var _player_data: BaseBattlefieldPlayerData
 func is_spawn_ready() -> bool:
 	return $SpawnTimer.is_stopped()
 
-func can_afford_dog():
+func can_afford_dog() -> bool:
 	return _player_data.get_money_int() >= spawn_price
 
-func can_spawn():
-	var result := can_afford_dog() and is_spawn_ready() and is_active
+func can_spawn() -> bool:
+	if dog_id.is_empty():
+		return false
 	
 	if spawn_limit > 0 and _player_data.dogs_count[dog_id] >= spawn_limit:
-		result = false
+		return false
 		
-	return result
+	return can_afford_dog() and is_spawn_ready() and is_active
 
 func setup(dog_id: String, input_action: String, is_active: bool, dog_tower: BaseDogTower, player_data: BaseBattlefieldPlayerData) -> void:
 	self.dog_id = dog_id 
-	set_active(is_active)
 	_dog_tower = dog_tower
 	_player_data = player_data
 	spawn_input_action = input_action
 	spawn_limit = Data.dog_info[dog_id].get('spawn_limit', 0) 	
+	set_active(is_active)
 		
 	$Icon.texture = load("res://resources/icons/%s_icon.png" % dog_id)
 
@@ -50,7 +51,7 @@ func setup(dog_id: String, input_action: String, is_active: bool, dog_tower: Bas
 func set_active(active: bool) -> void:
 	is_active = active
 	$MoneyLabel.visible = active
-	self.disabled = !active
+	disabled = not can_spawn()
 	
 func _ready() -> void:
 	$MoneyLabel.text = ""

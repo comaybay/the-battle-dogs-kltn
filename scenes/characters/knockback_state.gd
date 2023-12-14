@@ -1,19 +1,11 @@
 class_name CharacterKnockbackState extends FSMState
 
-const BOSS_KNOCKBACK_SOUND: AudioStream = preload("res://resources/sound/battlefield/boss_knockback_cry.mp3")
-
 @onready var character: Character = owner
 var knockback_countdown: int
 var knockback_vel: Vector2
 
 # called when the state is activated
 func enter(data: Dictionary) -> void:
-	if character.health <= 0:
-		if character.is_boss():
-			AudioPlayer.play_and_remove_in_battle_sfx(BOSS_KNOCKBACK_SOUND)
-		else:
-			AudioPlayer.play_and_remove_in_battle_sfx(character.die_sfx)
-
 	knockback_vel = Vector2(200, -250) * data['scale']
 	character.n_AnimationPlayer.play("knockback")
 

@@ -415,6 +415,7 @@ size = Vector2(1983.55, 651)
 modulate = Color(1.25, 1.25, 1.25, 1)
 position = Vector2(0, -210)
 reward_money = 1000
+attack_type = 2
 speed = 40
 custom_attack_area = NodePath("CustomAttackArea")
 attack_range = 1450

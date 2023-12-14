@@ -108,6 +108,7 @@ size = Vector2(294, 621)
 
 [node name="BuffCat" instance=ExtResource("1_umb7d")]
 reward_money = 300
+attack_type = 1
 speed = 70
 attack_range = 150
 attack_area_range = 150

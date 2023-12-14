@@ -39,7 +39,7 @@
   {
     "ID": "miko_dog",
     "price": 50000,
-    "spawn_limit": 3,
+    "spawn_limit": 2,
     "spawn_time": 90,
     "spawn_price": 2000,
     "danmaku_bullets": {

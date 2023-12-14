@@ -4,8 +4,7 @@ extends CanvasLayer
 @onready var return_button = $Control/Panel/Button 
 
 func _ready() -> void:	
-	var battlefield = get_tree().current_scene as Battlefield
-	var _stage_data = battlefield.get_stage_data()
+	var _stage_data = InBattle.get_stage_data()
 	
 	$AnimationPlayer.play("default")
 	var tween = create_tween()
@@ -39,7 +38,7 @@ func _setup_return_button() -> void:
 
 func _go_to_dog_base() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
-	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
+	get_tree().change_scene_to_file.call_deferred("res://scenes/dogbase/dogbase.tscn")
 
 func _go_to_ending() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
@@ -47,10 +46,10 @@ func _go_to_ending() -> void:
 	var ending_path := "res://scenes/endings/%s/%s.tscn" % [ending_id, ending_id]
 
 	if FileAccess.file_exists(ending_path):
-		get_tree().change_scene_to_file(ending_path)
+		get_tree().change_scene_to_file.call_deferred(ending_path)
 	else:
 		# no ending for this chapter, go to Dog base instead
-		get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
+		get_tree().change_scene_to_file.call_deferred("res://scenes/dogbase/dogbase.tscn")
 
 func _handle_stage_reward(reward_info: Dictionary) -> void:
 	var dog_id = reward_info['dog_id']

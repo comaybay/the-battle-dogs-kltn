@@ -13,15 +13,17 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nnu5d"]
 shader = ExtResource("3_er36e")
-shader_parameter/zoom = 0.594604
+shader_parameter/zoom = 0.5
 shader_parameter/max_line_width = 20.0
 shader_parameter/min_line_width = 1.0
-shader_parameter/intensity = 1.0
+shader_parameter/intensity = 2.815
+shader_parameter/fracture = 1.0
 shader_parameter/block_size = 20.0
 shader_parameter/speed = 1.0
 shader_parameter/line_blur = 0.125
 shader_parameter/seed = 0.0
-shader_parameter/line_color = Color(1, 0.25098, 0.388235, 1)
+shader_parameter/brightness = 3.0
+shader_parameter/line_color = Color(0.941176, 0.109804, 0.0666667, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlqyi"]
 size = Vector2(304, 1505)
@@ -577,10 +579,9 @@ libraries = {
 "": SubResource("AnimationLibrary_qra5t")
 }
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(63, -171)
-gizmo_extents = 54.5
-
 [node name="FaceMarker" type="Marker2D" parent="."]
 position = Vector2(-84, -1257)
 gizmo_extents = 54.5
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(56, -170)

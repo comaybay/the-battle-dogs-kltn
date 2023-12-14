@@ -111,7 +111,7 @@ func get_p2p_sync_data() -> Dictionary:
 	_sync_data["health"] = health
 	_sync_data["multipliers"] = _multipliers
 	_sync_data["FSM"] = {
-		'state': get_FSM().get_current_state(),
+		'state': get_FSM().get_current_state_name(),
 		'data': get_FSM().get_current_state_data()
 	}
 	

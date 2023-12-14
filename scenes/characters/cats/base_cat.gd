@@ -12,7 +12,10 @@ func _ready() -> void:
 		return
 		
 	var battlefield := get_tree().current_scene as Battlefield
-	var power_scale = battlefield.get_cat_power_scale()
-	damage *= power_scale
-	health *= power_scale
+	## for debuging purposes
+	if battlefield != null:
+		var power_scale = battlefield.get_cat_power_scale()
+		damage *= power_scale
+		health *= power_scale
+	
 	super._ready()

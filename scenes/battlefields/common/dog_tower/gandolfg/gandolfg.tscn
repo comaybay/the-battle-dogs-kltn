@@ -157,8 +157,8 @@ _data = {
 "idle": SubResource("Animation_wtc5b")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_putxp"]
-size = Vector2(2000, 1000)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ytgc4"]
+radius = 425.568
 
 [node name="Gandolfg" type="Node2D"]
 script = ExtResource("1_m75x0")
@@ -194,15 +194,17 @@ unique_name_in_owner = true
 position = Vector2(2, -250)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_hnd72")
 }
+autoplay = "idle"
 
 [node name="AttackArea" type="Area2D" parent="."]
 position = Vector2(0, -86.5)
 collision_layer = 0
 collision_mask = 4
+metadata/_edit_lock_ = true
 
 [node name="AttackCollisionShape" type="CollisionShape2D" parent="AttackArea"]
-shape = SubResource("RectangleShape2D_putxp")
+shape = SubResource("CircleShape2D_ytgc4")
+metadata/_edit_lock_ = true

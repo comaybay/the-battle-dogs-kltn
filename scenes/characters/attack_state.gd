@@ -36,17 +36,14 @@ func physics_update(_delta: float) -> void:
 	AudioPlayer.play_in_battle_sfx(BITE_SFX, AudioPlayer.get_random_pitch_scale())
 	var random_effect_offset = Vector2(randi_range(-20, 20), randi_range(-20, 20))
 	
-	# if using custom attack
-	if character.custom_attack_area != null:
+	if character.attack_type == Character.AttackType.CUSTOM_AREA:
 		for target in character.custom_attack_area.get_overlapping_bodies():
 			if not cutom_area_affected.has(target):
 				target.take_damage(character.damage)
 				InBattle.add_hit_effect(target.get_effect_global_position() + random_effect_offset)
 			cutom_area_affected[target] = true
-		return
 		
-	# single target
-	if character.attack_area_range <= 0:
+	elif character.attack_type == Character.AttackType.SINGLE:
 		# target can be a dog or a dog tower
 		var target := character.n_RayCast2D.get_collider()
 		if target != null:
@@ -56,8 +53,7 @@ func physics_update(_delta: float) -> void:
 		start_attack = false
 		done_attack = true
 		
-	# area attack
-	else:
+	elif character.attack_type == Character.AttackType.AREA:
 		var space_state := character.get_world_2d().direct_space_state
 		# use global coordinates, not local to node
 		var shape_id := PhysicsServer2D.rectangle_shape_create()

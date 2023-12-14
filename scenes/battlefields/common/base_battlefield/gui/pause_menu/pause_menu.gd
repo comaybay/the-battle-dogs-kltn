@@ -23,12 +23,12 @@ func _on_close_menu() -> void:
 func _on_escape_battle() -> void:
 	Engine.time_scale = 1
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
-	get_tree().change_scene_to_file("res://scenes/dogbase/dogbase.tscn")
+	get_tree().change_scene_to_file.call_deferred("res://scenes/dogbase/dogbase.tscn")
 	
 func _on_to_main_menu() -> void:
 	Engine.time_scale = 1
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
-	get_tree().change_scene_to_file("res://scenes/start_menu/main.tscn")
+	get_tree().change_scene_to_file.call_deferred("res://scenes/start_menu/main.tscn")
 
 func _exit_tree() -> void:
 	get_tree().paused = false

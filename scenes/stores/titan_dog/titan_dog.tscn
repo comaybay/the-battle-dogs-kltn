@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://yg61w87455ho" path="res://scenes/common/finite_state_machine/FSM.tscn" id="3_yn7ow"]
 [ext_resource type="Script" path="res://scenes/stores/titan_dog/MoveState.gd" id="4_7wf1n"]
 [ext_resource type="Texture2D" uid="uid://whf5eqdonrk0" path="res://resources/icons/pngwing.com.png" id="6_dp2pm"]
-[ext_resource type="Script" path="res://scenes/characters/Die.gd" id="8_17gyd"]
+[ext_resource type="Script" path="res://scenes/characters/die_state.gd" id="8_17gyd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7xt6"]
 resource_local_to_scene = true

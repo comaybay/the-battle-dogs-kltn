@@ -1,10 +1,11 @@
 extends FSMState
 
-const OFUDA_RED: DanmakuBulletKit = preload("res://scenes/danmaku/bullets/ofuda/ofuda_red.tres")
-const OFUDA_GRAY: DanmakuBulletKit = preload("res://scenes/danmaku/bullets/ofuda/ofuda_gray.tres")
 const YIN_YANG_ORB_SCENE: PackedScene = preload("res://scenes/characters/dogs/miko_dog/yin_yang_orb/yin_yang_orb.tscn")
 
 @onready var miko_dog: MikoDog = owner
+
+var ofuda_red := Danmaku.get_bullet_kit(BulletKits.OFUDA, BulletKits.BulletColor.RED)	
+var ofuda_gray := Danmaku.get_bullet_kit(BulletKits.OFUDA, BulletKits.BulletColor.GRAY)	
 
 var battlefield: BaseBattlefield
 var danmaku_space: DanmakuSpace
@@ -88,15 +89,15 @@ func _attack(direction: Vector2, this_frame: int) -> void:
 	
 	if miko_dog.has_ability('yin_yang_orb'):
 		_spawn_yin_yang_orb(dog_level, Vector2(300, 0))
-	
-	_pattern_straight_line(direction, MAIN_PATTERN_SPEED, straight_bullets_num, OFUDA_RED)
+
+	_pattern_straight_line(direction, MAIN_PATTERN_SPEED, straight_bullets_num, ofuda_red)
 	
 	if dog_level >= 2:
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(5)), MAIN_PATTERN_SPEED, straight_bullets_num, OFUDA_GRAY
+			direction.rotated(deg_to_rad(5)), MAIN_PATTERN_SPEED, straight_bullets_num, ofuda_gray
 		)
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(-5)), MAIN_PATTERN_SPEED, straight_bullets_num, OFUDA_GRAY
+			direction.rotated(deg_to_rad(-5)), MAIN_PATTERN_SPEED, straight_bullets_num, ofuda_gray
 		)
 		
 	if dog_level >= 3:
@@ -104,20 +105,20 @@ func _attack(direction: Vector2, this_frame: int) -> void:
 		if _has_interupted(this_frame): return
 		
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(15)), MAIN_PATTERN_SPEED, straight_bullets_num / 2, OFUDA_RED
+			direction.rotated(deg_to_rad(15)), MAIN_PATTERN_SPEED, straight_bullets_num / 2, ofuda_red
 		)
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(-15)), MAIN_PATTERN_SPEED, straight_bullets_num / 2, OFUDA_RED
+			direction.rotated(deg_to_rad(-15)), MAIN_PATTERN_SPEED, straight_bullets_num / 2, ofuda_red
 		)
 		
 	if dog_level >= 4:
 		const SPEED: int = 1000
 		const ROTATION: int = 20
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(10)), SPEED, straight_bullets_num, OFUDA_GRAY, -ROTATION
+			direction.rotated(deg_to_rad(10)), SPEED, straight_bullets_num, ofuda_gray, -ROTATION
 		)
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(-10)), SPEED, straight_bullets_num, OFUDA_GRAY, ROTATION
+			direction.rotated(deg_to_rad(-10)), SPEED, straight_bullets_num, ofuda_gray, ROTATION
 		)
 		
 	if miko_dog.has_ability('circular_ofudas'):
@@ -144,31 +145,31 @@ func _attack(direction: Vector2, this_frame: int) -> void:
 	await Global.wait(0.5)
 	if _has_interupted(this_frame): return
 
-	_pattern_straight_line(direction, MAIN_PATTERN_SPEED, straight_bullets_num, OFUDA_RED)
+	_pattern_straight_line(direction, MAIN_PATTERN_SPEED, straight_bullets_num, ofuda_red)
 	
 	_pattern_straight_line(
-		direction.rotated(deg_to_rad(7.5)), MAIN_PATTERN_SPEED, straight_bullets_num / 2, OFUDA_GRAY
+		direction.rotated(deg_to_rad(7.5)), MAIN_PATTERN_SPEED, straight_bullets_num / 2, ofuda_gray
 	)
 	_pattern_straight_line(
-		direction.rotated(deg_to_rad(-7.5)), MAIN_PATTERN_SPEED, straight_bullets_num / 2, OFUDA_GRAY
+		direction.rotated(deg_to_rad(-7.5)), MAIN_PATTERN_SPEED, straight_bullets_num / 2, ofuda_gray
 	)
 	
 	if dog_level >= 3:
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(15)), MAIN_PATTERN_SPEED, straight_bullets_num / 3, OFUDA_RED
+			direction.rotated(deg_to_rad(15)), MAIN_PATTERN_SPEED, straight_bullets_num / 3, ofuda_red
 		)
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(-15)), MAIN_PATTERN_SPEED, straight_bullets_num / 3, OFUDA_RED
+			direction.rotated(deg_to_rad(-15)), MAIN_PATTERN_SPEED, straight_bullets_num / 3, ofuda_red
 		)
 	
 	if dog_level >= 4:
 		const ROTATION: int = 45
 		const SPEED: int = 2500
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(20)), SPEED, straight_bullets_num, OFUDA_RED, -ROTATION
+			direction.rotated(deg_to_rad(20)), SPEED, straight_bullets_num, ofuda_red, -ROTATION
 		)
 		_pattern_straight_line(
-			direction.rotated(deg_to_rad(-20)), SPEED, straight_bullets_num, OFUDA_RED, ROTATION
+			direction.rotated(deg_to_rad(-20)), SPEED, straight_bullets_num, ofuda_red, ROTATION
 		)
 	
 	if wait_timer.time_left > 0:
@@ -193,18 +194,18 @@ func _pattern_straight_line(
 	var center_pos := miko_dog.get_center_global_position()
 	var speed_reduction_unit: float = speed / (bullet_num * 1.5) 
 	for i in range(bullet_num):
-		var ofuda = danmaku_space.spawn(ofuda_kit, miko_dog.character_type)
+		var ofuda = danmaku_space.spawn(ofuda_kit, miko_dog)
 		ofuda.start(func():
 			ofuda.damage = miko_dog.ofuda_damage
 			var ofuda_speed = speed - (i * speed_reduction_unit)
 			var velocity: Vector2 = direction * ofuda_speed 
 			ofuda.velocity = velocity
 			ofuda.position = center_pos
-			ofuda.rotation_speed = deg_to_rad(rotation)
+			ofuda.velocity_rotation_speed = deg_to_rad(rotation)
 			ofuda.acceleration = velocity.normalized() * -back_accel
 			await Global.wait(2.0)
 			if ofuda.is_destroyed(): return
-			ofuda.rotation_speed = 0
+			ofuda.velocity_rotation_speed = 0
 		)
 
 var _pattern_paths: Dictionary = {}
@@ -223,7 +224,7 @@ func _pattern_path(
 		'loop': loop,
 		'rotation': rotation,
 		'speed': speed,
-		'ofuda': OFUDA_GRAY,
+		'ofuda': ofuda_gray,
 		'audio_player': audio_player,
 		'finished': false
 	}
@@ -261,18 +262,18 @@ func _spawn_bullet_on_path(_pattern_data: Dictionary) -> void:
 	
 	velocity = velocity.rotated((path_follow.global_position - center_global_pos).angle())
 	
-	var ofuda := danmaku_space.spawn(_pattern_data['ofuda'], miko_dog.character_type)
+	var ofuda := danmaku_space.spawn(_pattern_data['ofuda'], miko_dog)
 	ofuda.start( func():
 		ofuda.damage = miko_dog.ofuda_damage
 		ofuda.position = center_global_pos
 		ofuda.velocity = velocity
-		ofuda.rotation_speed = _pattern_data['rotation'] * sign(progress_unit)
+		ofuda.velocity_rotation_speed = _pattern_data['rotation'] * sign(progress_unit)
 		var passed_delta: float = _pattern_data['sum_delta']
 		if not is_equal_approx(passed_delta, 0):
 			ofuda.physic_process(passed_delta)
 		await Global.wait(2.0 - passed_delta)
 		if ofuda.is_destroyed(): return
-		ofuda.rotation_speed = 0
+		ofuda.velocity_rotation_speed = 0
 		
 		if current_loop % 2: 
 			ofuda.acceleration = -velocity
@@ -280,7 +281,7 @@ func _spawn_bullet_on_path(_pattern_data: Dictionary) -> void:
 	)
 	
 	_pattern_data['ofuda'] = (
-		OFUDA_RED if _pattern_data['ofuda'] == OFUDA_GRAY else OFUDA_GRAY
+		ofuda_red if _pattern_data['ofuda'] == ofuda_gray else ofuda_gray
 	)
 	
 	var dest_progress: float = 1.0 if progress_unit > 0 else 0.0
@@ -296,3 +297,7 @@ func exit():
 	_pattern_paths.clear()	
 	_twwen.kill()
 	miko_dog.rotation = 0
+	
+	## restart timer if attack interuppted
+	if miko_dog.n_AttackCooldownTimer.is_stopped():
+		miko_dog.n_AttackCooldownTimer.start()

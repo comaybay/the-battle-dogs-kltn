@@ -15,7 +15,7 @@ frequency = 0.0466
 fractal_gain = -0.455
 domain_warp_enabled = true
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v7lyu"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_477bh"]
 seamless = true
 noise = SubResource("FastNoiseLite_3og61")
 
@@ -25,7 +25,7 @@ frequency = 0.0121
 fractal_gain = -0.1
 domain_warp_enabled = true
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dpi25"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f32ow"]
 seamless = true
 noise = SubResource("FastNoiseLite_rdvek")
 
@@ -37,8 +37,8 @@ shader_parameter/noise_wiggle = 70.0
 shader_parameter/intensity = 0.08
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/speed_scale = 0.025
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_v7lyu")
-shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_dpi25")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_477bh")
+shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_f32ow")
 
 [sub_resource type="Environment" id="Environment_xp4xy"]
 background_mode = 3

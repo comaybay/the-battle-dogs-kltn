@@ -17,7 +17,7 @@ func setup(target: Character):
 	add_to_group("cat_flying_souls")
 	var battlefield = get_tree().current_scene as BaseBattlefield
 	
-	if battlefield is Battlefield and battlefield.get_stage_data().get('special_instruction') == "invert_color":
+	if battlefield is Battlefield and InBattle.get_stage_data().get('special_instruction') == "invert_color":
 		$AnimatedSprite.material = load("res://shaders/invert_color/invert_color.material")
 		
 func _ready() -> void:

@@ -1,0 +1,13 @@
+{
+  "cat": {},
+  "leg_cat": {},
+  "smol_cat": {},
+  "rolling_cat": {},
+  "buff_cat": {},
+  "ramiel_cat": {},
+  "fairy_cat": {
+    "danmaku_bullets": {
+      "flower": 20
+    }
+  }
+}

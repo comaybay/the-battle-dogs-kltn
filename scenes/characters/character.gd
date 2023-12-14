@@ -1,11 +1,24 @@
 @tool
-extends CharacterBody2D
-class_name Character
+class_name Character extends CharacterBody2D
+
+const DEFAULT_ATTACK_SFX = preload("res://resources/sound/battlefield/bite.mp3")
+const DEFAULT_DIE_SFX = preload("res://resources/sound/battlefield/death.mp3")
+const BOSS_DIE_SFX: AudioStream = preload("res://resources/sound/battlefield/boss_knockback_cry.mp3")
+
+## keep raycast off the ground a bit to avoid miss detection
+const RAYCAST_OFFSET_Y: int = 25
 
 signal knockbacked
 signal zero_health
 
 enum Type { DOG, CAT }
+enum UnitType { GROUND, AIR }
+
+## single / area: using the default attack system [br]
+## custom area: using custom area2d as attack area [br]
+## unique: unique attack (do not use any default attack system [br]
+## area unique: using default area attack system + attack that is unique to the character 
+enum AttackType { SINGLE, AREA, CUSTOM_AREA, UNIQUE, AREA_UNIQUE }
 
 ## Multiplier will affect the character's resulting output (such as damage inflicted, movement speed, etc) 
 enum MultiplierTypes { DAMAGE, DAMAGE_TAKEN, SPEED, ATTACK_SPEED }
@@ -18,12 +31,20 @@ var _multipliers: Dictionary = {
 	MultiplierTypes.ATTACK_SPEED: 1.0
 }
 
-## 0 for dog, 1 for cat
 @export var character_type: Type = Type.DOG:
 	set(val):
 		character_type = val
 		notify_property_list_changed()  
-		queue_redraw()
+
+@export var unit_type: UnitType = UnitType.GROUND:
+	set(val):
+		unit_type = val
+		notify_property_list_changed()  
+
+@export var attack_type: AttackType = AttackType.SINGLE:
+	set(val):
+		attack_type = val
+		notify_property_list_changed()  
 		
 @export var speed: int = 120:
 	get: return speed * _multipliers[MultiplierTypes.SPEED]
@@ -35,20 +56,17 @@ var _multipliers: Dictionary = {
 	set(val):
 		custom_attack_area = val
 		notify_property_list_changed()  
-		queue_redraw()
 		
 @export var attack_range: int = 40:
 	set(val):
 		attack_range = val
 		notify_property_list_changed()  
-		queue_redraw()
 
 ## 0 for single target
 @export var attack_area_range: int = 0: 
 	set(val):
 		attack_area_range = val
 		notify_property_list_changed()  
-		queue_redraw()
 		
 ## in seconds
 @export var attack_cooldown: float = 2: # toc do danh
@@ -68,14 +86,13 @@ var _multipliers: Dictionary = {
 	
 @export var knockbacks: int = 3
 
-const DEFAULT_ATTACK_SFX = preload("res://resources/sound/battlefield/bite.mp3")
-const DEFAULT_DIE_SFX = preload("res://resources/sound/battlefield/death.mp3")
 @export var attack_sfx: AudioStream = DEFAULT_ATTACK_SFX 
 @export var die_sfx: AudioStream = DEFAULT_DIE_SFX
 	
 @onready var n_RayCast2D := $RayCast2D as RayCast2D
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
 @onready var n_Sprite2D := $CharacterAnimation/Character as Sprite2D
+@onready var n_CharacterAnimation := $CharacterAnimation as Node2D
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
 @onready var n_DanmakuHitbox := %DanmakuHitbox as Area2D
 
@@ -97,7 +114,16 @@ var _is_boss: bool
 func is_boss() -> bool: return _is_boss
 
 func _validate_property(property: Dictionary):
-	if property.name in ["attack_sprite", "attack_frame"] and custom_attack_area != null:
+	if property.name in ["custom_attack_area"] and attack_type != AttackType.CUSTOM_AREA:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	
+	if property.name in ["attack_area_range"] and not (attack_type in [AttackType.AREA, AttackType.AREA_UNIQUE]) :
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	
+	if property.name in ["attack_sprite", "attack_frame"] and not (attack_type in [AttackType.SINGLE, AttackType.AREA]):
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+		
+	if property.name in ["attack_sprite", "attack_frame", "custom_attack_area", "attack_type"] and unit_type == UnitType.AIR:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 ## this setup func is used internally by it's subcalsses
@@ -109,7 +135,8 @@ func _setup(global_position: Vector2, is_boss: bool) -> void:
 		add_to_group("bosses")
 		
 	await ready
-	self.global_position.y += global_position.y - get_bottom_global_position().y
+	self.global_position.y += get_bottom_global_position().y
+	visible = true
 
 func _init() -> void:
 	if Engine.is_editor_hint():
@@ -120,17 +147,22 @@ func _init() -> void:
 	
 	if not AudioPlayer.has_in_battle_sfx(die_sfx):
 		AudioPlayer.add_in_battle_sfx(die_sfx, 20)
-	
-		# hide away the character until everything is setup
-		position.y = 999999 
+		
+	visible = false
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		## add random sprite offset for better visibility when characters are stacked on eachother
+		# add random sprite offset for better visibility when characters are stacked on eachother
+		# for ground unit, z-index will be around 0 - 40
+		# for air unit, the z-index will be around 50 - 90
+		# the range from 41 - 49 will be for foreground and stuff
 		var rand_y: int = randi_range(-20, 20)
 		$CharacterAnimation.position += Vector2(randi_range(-20, 20), rand_y)
 		## render stuff correctly
 		z_index = rand_y + 20
+		
+		if unit_type == UnitType.AIR:
+			z_index += 50
 		
 		_update_character()
 		
@@ -143,6 +175,7 @@ func _ready() -> void:
 		
 	if Engine.is_editor_hint():
 		max_health = health
+		_update_character()
 		property_list_changed.connect(
 			func():
 				_update_character()
@@ -154,21 +187,33 @@ func _update_character():
 	max_health = health
 	next_knockback_health = max_health - (max_health / knockbacks)
 	move_direction = (1 if character_type == Type.DOG else -1)
+	if unit_type == UnitType.AIR:
+		gravity *= 2
+		if attack_type != AttackType.UNIQUE:
+			attack_type = AttackType.UNIQUE
 		
 	# for some reason timer do not take in 0 correctly
-	$AttackCooldownTimer.wait_time = attack_cooldown
-	
-	$RayCast2D.target_position.x = attack_range * move_direction
+	$AttackCooldownTimer.wait_time = max(attack_cooldown, 0.05)
 	
 	collision_rect = $CollisionShape2D.shape.get_rect()
-	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
-	n_RayCast2D.position.y = $CollisionShape2D.position.y + (collision_rect.size.y / 2) - 25
 	
+	n_RayCast2D.target_position.x = attack_range * move_direction
+	
+	n_RayCast2D.position.x = $CollisionShape2D.position.x + collision_rect.position.x
+	if character_type == Type.DOG:
+		n_RayCast2D.position.x += collision_rect.size.x
+
+	if unit_type == UnitType.AIR:
+		var air_attack_range = (collision_rect.size.x + attack_range * 2)
+		n_RayCast2D.target_position.x = air_attack_range * move_direction
+		n_RayCast2D.position.x = $CollisionShape2D.position.x - air_attack_range * 0.5 * move_direction 
+	
+	n_RayCast2D.global_position.y = get_bottom_global_position().y - RAYCAST_OFFSET_Y
+		
 	if character_type == Type.DOG:
 		remove_from_group("cats")	
 		add_to_group("dogs")	
 	
-		n_RayCast2D.position.x += collision_rect.size.x
 		n_RayCast2D.collision_mask = 0b010100
 		self.collision_mask = 0b010001
 		self.collision_layer = 0b010
@@ -179,6 +224,10 @@ func _update_character():
 		n_RayCast2D.collision_mask = 0b100010
 		self.collision_mask = 0b100001
 		self.collision_layer = 0b100
+	
+	if unit_type == UnitType.AIR:
+		## air unit will not collide with dog or cat tower 
+		self.collision_mask &= 001111
 	
 ## get global position of the character's bottom
 func get_bottom_global_position() -> Vector2:
@@ -199,18 +248,19 @@ func _draw() -> void:
 		# draw attack range at the feet of the character
 		var c_shape_bottom = (collision_rect.size.y / 2) + $CollisionShape2D.position.y
 		var start_point = Vector2(n_RayCast2D.position.x, c_shape_bottom)
-		var attack_point = Vector2(n_RayCast2D.position.x + attack_range * move_direction, c_shape_bottom)
+		var attack_point = Vector2(n_RayCast2D.position.x + n_RayCast2D.target_position.x, c_shape_bottom)
 		draw_dashed_line(start_point, attack_point, Color.YELLOW, 5, 10)	
 		
-		var is_single_target := attack_area_range <= 0
-		var half_attack_range_vec := Vector2(3, 0) if is_single_target else Vector2(attack_area_range / 2.0, 0) 
-		var down_vec = Vector2(0, 10)
-		var attack_area_color := Color.DEEP_SKY_BLUE if is_single_target else Color.LAWN_GREEN
-		draw_line(attack_point - half_attack_range_vec + down_vec, attack_point + half_attack_range_vec + down_vec, attack_area_color, 5)		
-		
+		if attack_type in [AttackType.SINGLE, AttackType.AREA]: 
+			var is_single_target = attack_type == AttackType.SINGLE
+			var half_attack_range_vec := Vector2(3, 0) if is_single_target else Vector2(attack_area_range / 2.0, 0) 
+			var down_vec = Vector2(0, 10)
+			var attack_area_color := Color.DEEP_SKY_BLUE if is_single_target else Color.LAWN_GREEN
+			draw_line(attack_point - half_attack_range_vec + down_vec, attack_point + half_attack_range_vec + down_vec, attack_area_color, 5)		
+			
 		var default_font := ThemeDB.fallback_font
 		var default_font_size := 42
-		var debug_string := "Attack type: %s" % ("single target" if is_single_target else "area attack") + "\n%s/%s" % [health, max_health] 
+		var debug_string := "Attack type: %s" % [AttackType.keys()[attack_type]] + "\n%s/%s" % [health, max_health] 
 		var character_size := n_Sprite2D.get_rect().size
 		draw_multiline_string(default_font, Vector2(0, n_Sprite2D.position.y - (character_size.y / 2) - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
 
@@ -225,13 +275,21 @@ func take_damage(ammount: int) -> void:
 		if health > 0:
 			update_next_knockback_health()
 		else:
+			AudioPlayer.play_and_remove_in_battle_sfx(BOSS_DIE_SFX if is_boss() else die_sfx)
 			zero_health.emit()
 		
-		n_AttackCooldownTimer.stop()	
+		## avoid stopping the timer because it wont emit timeout signal, which might be listening by others  
+		var wait_time = n_AttackCooldownTimer.wait_time
+		n_AttackCooldownTimer.start(0)	
+		n_AttackCooldownTimer.wait_time = wait_time
+		
 		knockback()
 	
 	if Debug.is_debug_mode():
 		queue_redraw()
+
+func get_multiplier(type: MultiplierTypes) -> float:
+	return _multipliers[type]
 
 ## Set multiplier for a property [/br]
 ## This can be use to increase/decrease dog power such as damage, speed, etc. [/br]
@@ -272,6 +330,9 @@ func update_next_knockback_health() -> void:
 		next_knockback_health = max(0, next_knockback_health - (max_health / knockbacks))
 
 func knockback(scale: float = 1):
+	if not $FiniteStateMachine.has_state("KnockbackState"):
+		return
+	
 	if health <= 0:
 		# override scale when character is about to die
 		scale = max(1.25, scale)
@@ -280,7 +341,8 @@ func knockback(scale: float = 1):
 	knockbacked.emit()
 	
 func kill():
-	$FiniteStateMachine.change_state("DieState")	
+	if $FiniteStateMachine.has_state("DieState"):
+		$FiniteStateMachine.change_state("DieState")	
 
 func get_FSM() -> FSM:
 	return $FiniteStateMachine

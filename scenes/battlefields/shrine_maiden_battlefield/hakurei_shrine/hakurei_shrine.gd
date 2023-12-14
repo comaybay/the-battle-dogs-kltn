@@ -7,7 +7,7 @@ var dest_x_position: float
 var falling: bool = false
 
 func setup(tori: Tori) -> void:
-	dest_x_position = tori.position.x + 1000; 
+	dest_x_position = tori.position.x + 1500; 
 	tori.zero_health.connect(_on_zero_health, CONNECT_ONE_SHOT)
 	
 func _ready() -> void:

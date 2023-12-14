@@ -36,11 +36,26 @@ func add_hit_effect(global_position: Vector2) -> FXHit:
 	return fx_hit
 
 func get_battlefield() -> BaseBattlefield:
-	return get_tree().current_scene
+	return get_tree().current_scene if get_tree() != null else null
 	
+var _stage_data: Dictionary
 ## this will not work in p2p battle
 func get_stage_data() -> Dictionary:
-	return (get_battlefield() as Battlefield).get_stage_data()
+	return _stage_data
+	
+## load data from stage file
+func load_stage_data() -> Dictionary:
+	var dir = "%s/stages/%s.%s.json" % [
+		Data.selected_chapter_dir_path,
+		Data.selected_stage,
+		Data.selected_stage_id,
+	]
+	var file = FileAccess.open(dir, FileAccess.READ)
+	var stage_data: Dictionary = JSON.parse_string(file.get_as_text())
+	file.close()
+		
+	_stage_data = stage_data
+	return stage_data
 
 func get_danmaku_space() -> DanmakuSpace:
 	return get_battlefield().get_danmaku_space()
@@ -91,15 +106,3 @@ func get_passive_level(passive_id: String) -> int:
 	
 	return get_player_data().get_passive_level(passive_id) 
 
-## load data from stage file
-func load_stage_data() -> Dictionary:
-	var dir = "%s/stages/%s.%s.json" % [
-		Data.selected_chapter_dir_path,
-		Data.selected_stage,
-		Data.selected_stage_id,
-	]
-	var file = FileAccess.open(dir, FileAccess.READ)
-	var battlefield_data: Dictionary = JSON.parse_string(file.get_as_text())
-	file.close()
-	
-	return battlefield_data

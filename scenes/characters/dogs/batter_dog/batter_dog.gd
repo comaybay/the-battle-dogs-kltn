@@ -6,6 +6,9 @@ const EXPLOSION_SPAWNER_SCENE: PackedScene = preload("res://scenes/characters/do
 
 func _ready() -> void:
 	super._ready()
+	if Engine.is_editor_hint():
+		return
+	
 	_spawn_drum()
 	
 	var tween := create_tween()

@@ -5,12 +5,12 @@ const OUTER_PADDING = 2000
 
 func _ready() -> void:
 	var battlefield := InBattle.get_battlefield()
-	var stage_width_with_margin = battlefield.get_stage_width()
+	var stage_width = battlefield.get_stage_width()
 	
-	var shape_extents_x = (stage_width_with_margin + OUTER_PADDING * 2) / 2
+	var shape_extents_x = (stage_width + OUTER_PADDING * 2) / 2
 	$CollisionShape2D.shape.extents.x = shape_extents_x
-	$CollisionShape2D.position.x = stage_width_with_margin / 2
-	$TextureRect.size.x = stage_width_with_margin 
+	$CollisionShape2D.position.x = stage_width / 2
+	$TextureRect.size.x = stage_width 
 
 func get_size() -> Vector2:
 	return $TextureRect.size

@@ -1,7 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbx365yymmgo5"]
+[gd_scene load_steps=11 format=3 uid="uid://dbx365yymmgo5"]
 
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_2c8s7"]
 [ext_resource type="Texture2D" uid="uid://dk2qbrhlr0fcu" path="res://scenes/characters/cats/cat/cat.png" id="1_lqadi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ls4eq"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -106,22 +110,25 @@ z_index = 21
 reward_money = 10
 health = 80
 
+[node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
+shape = SubResource("RectangleShape2D_ls4eq")
+
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(3, -25)
 texture = ExtResource("1_lqadi")
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_4tq8l")
 }
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="4"]
 position = Vector2(1, -18.5)
 shape = SubResource("RectangleShape2D_eryft")
 
-[node name="RayCast2D" parent="." index="4"]
+[node name="RayCast2D" parent="." index="5"]
 position = Vector2(-95, 63)
 metadata/_edit_lock_ = true
 
-[node name="FiniteStateMachine" parent="." index="5"]
+[node name="FiniteStateMachine" parent="." index="6"]
 metadata/_edit_lock_ = true

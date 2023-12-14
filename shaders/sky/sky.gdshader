@@ -1,12 +1,12 @@
 shader_type canvas_item;
 
-uniform float sky_wiggle = 5;
+uniform float sky_wiggle = 10;
 
 uniform sampler2D noise_texture: repeat_enable;
 uniform sampler2D noise_texture_2: repeat_enable;
-uniform float noise_speed_scale = 0.005;
-uniform float noise_wiggle = 10;
-uniform float intensity = 0.2;
+uniform float noise_speed_scale = 0.075;
+uniform float noise_wiggle = 70;
+uniform float intensity = 0.08;
 
 uniform vec4 modulate: source_color = vec4(1.0);
 uniform float speed_scale = 0.025;
