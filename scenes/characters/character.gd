@@ -135,18 +135,12 @@ func _setup(global_position: Vector2, is_boss: bool) -> void:
 		add_to_group("bosses")
 		
 	await ready
-	self.global_position.y += get_bottom_global_position().y
+	self.global_position.y = global_position.y + (self.global_position.y - get_bottom_global_position().y)
 	visible = true
 
 func _init() -> void:
 	if Engine.is_editor_hint():
 		return
-		
-	if not AudioPlayer.has_in_battle_sfx(attack_sfx):
-		AudioPlayer.add_in_battle_sfx(attack_sfx, 20)
-	
-	if not AudioPlayer.has_in_battle_sfx(die_sfx):
-		AudioPlayer.add_in_battle_sfx(die_sfx, 20)
 		
 	visible = false
 
@@ -275,7 +269,7 @@ func take_damage(ammount: int) -> void:
 		if health > 0:
 			update_next_knockback_health()
 		else:
-			AudioPlayer.play_and_remove_in_battle_sfx(BOSS_DIE_SFX if is_boss() else die_sfx)
+			AudioPlayer.play_in_battle_sfx(BOSS_DIE_SFX if is_boss() else die_sfx)
 			zero_health.emit()
 		
 		## avoid stopping the timer because it wont emit timeout signal, which might be listening by others  

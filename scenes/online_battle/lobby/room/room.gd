@@ -95,8 +95,6 @@ func _on_lobby_data_update(success: int, lobby_id: int, member_id: int) -> void:
 	if success == 0 or member_id != lobby_id:
 		return
 	
-	_update_lobby_ui()	
-		
 	var music: String = SteamUser.get_lobby_data(CustomBattlefieldSettings.TYPE_MUSIC)
 	if music != _prev_music_settings:
 		_prev_music_settings = music
@@ -121,6 +119,8 @@ func _on_lobby_data_update(success: int, lobby_id: int, member_id: int) -> void:
 		chat_box.display_message(tr("@STARTING_GAME"), ChatBox.COLOR_P2P_EVENT)
 		await get_tree().process_frame
 		_go_to_game()
+		
+	_update_lobby_ui()	
 
 func _update_lobby_ui() -> void:
 	var owner_id: int = SteamUser.get_lobby_owner()
@@ -171,16 +171,18 @@ func _can_start_game() -> bool:
 	return not (member_not_connected or member_not_ready or team_setup_not_loaded)
 
 func update_custom_battlefield_settings():
+	print("UPADTE")
 	# updpate the settings set by the room owner
 	for type in CustomBattlefieldSettings.TYPES:
 		var value: String = SteamUser.get_lobby_data(type)
+		print(value)
 		if value == "":
 			continue
 		
 		if type == CustomBattlefieldSettings.TYPE_MUSIC or type == CustomBattlefieldSettings.TYPE_THEME:
-			%CustomBattlefieldSettings.set_settings(type, SteamUser.get_lobby_data(type))
+			%CustomBattlefieldSettings.set_settings(type, value)
 		else:
-			%CustomBattlefieldSettings.set_settings(type, int(SteamUser.get_lobby_data(type)))
+			%CustomBattlefieldSettings.set_settings(type, int(value))
 
 func _on_lobby_chat_update(lobby_id: int, change_id: int, making_change_id: int, chat_state: int) -> void:
 	SteamUser.update_lobby_members()
