@@ -20,8 +20,7 @@ func _ready():
 	$VBoxContainer/Control/TabContainer.set_tab_title(1, tr("@FASTESTTIME"))	
 	$VBoxContainer/Control/TabContainer.set_tab_title(2, tr("@VICTORYCOUNT"))	
 	
-	#SilentWolf.sw_save_score_time("yyyanhkhoa", 30,"fastest_time")
-	# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
+		# use a signal to notify when the high scores have been returned, and show a "loading" animation until it's the case...
 	add_loading_scores_message()
 	sw_high_scores = await SilentWolf.Scores.get_scores(0,"high_scores").sw_get_scores_complete
 	sw_fastest_time = await SilentWolf.Scores.get_scores(0,"fastest_time").sw_get_scores_complete
