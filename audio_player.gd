@@ -105,10 +105,11 @@ func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove
 	if audio_stream == null:
 		return
 	
-	if audio_stream.resource_path == _current_music.resource_path:
+	var audio_resource_path := audio_stream.resource_path
+	if audio_resource_path == _current_music.resource_path:
 		_current_music = null
 		
-	var music_data: Dictionary = _music_players[audio_stream.resource_path]
+	var music_data: Dictionary = _music_players[audio_resource_path]
 	var music_player: AudioStreamPlayer = music_data['player']
 	var tween: Tween = music_data['tween']
 	
@@ -123,7 +124,11 @@ func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove
 		music_data['tween'] = tween
 				
 		await tween.finished
-			
+	
+	## if music player has been erased (via using remove_all_music)
+	if not _music_players.has(audio_resource_path):
+		return
+		
 	if remove_when_done:
 		music_player.stop()	
 		remove_music(audio_stream)
