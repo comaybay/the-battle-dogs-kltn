@@ -9,7 +9,7 @@ var _credits: Credits = null
 
 func _ready():
 	AudioPlayer.play_music(MAIN_THEME_AUDIO)
-	
+	get_tree().set_auto_accept_quit(false)
 	if SteamUser.IS_USING_STEAM and SteamUser.is_logged_on():
 		%OnlinePlayButton.disabled = false
 		%OnlinePlayButton.pressed.connect(_go_to_lobby)
@@ -25,7 +25,7 @@ func _ready():
 	
 	if Global.is_host_OS_web():
 		%QuitButton.visible = false
-	else:
+	else:		
 		%QuitButton.pressed.connect(_quit_game)
 	
 	Data.select_data.connect(show_select_data_box)
@@ -43,6 +43,10 @@ func _on_nut_bat_dau_pressed():
 
 func _quit_game():
 	AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
+	if Data.use_sw_data == true :
+			Data.save_data = Data.old_data
+			SilentWolf.Players.save_player_data(Data.save_data.user_name, Data.save_data)
+	await get_tree().create_timer(1).timeout 
 	get_tree().quit()
 
 func _go_to_credits():

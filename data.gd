@@ -348,8 +348,7 @@ func save():
 	var file = FileAccess.open("user://save.json", FileAccess.WRITE) 
 	file.store_line(JSON.stringify(save_data))
 	file.close()
-	if use_sw_data == true :
-		SilentWolf.Players.save_player_data(save_data.user_name, save_data)
+	
 	compute_values()
 
 func load_settings():
@@ -370,9 +369,15 @@ func load_settings():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, event)	
 	
-func _exit_tree():
-	if use_sw_data == true :
-		save_data = old_data
+func _notification(what) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if use_sw_data == true :
+			save_data = old_data
+			SilentWolf.Players.save_player_data(save_data.user_name, save_data)
+		await get_tree().create_timer(1).timeout 
+		print("exit game")
+		get_tree().quit()
+	
 
 func unlock_dog(dog_id: String) -> void:
 	Data.dogs[dog_id] = { "abilities": [], "forms": ["normal"], "level": 1 }
