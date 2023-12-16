@@ -250,7 +250,10 @@ func check_sw_ready():
 func sw_save_high_scores(player_name: String, ldboard_name: String='main', plus: int = 0):
 	var sw_result = await SilentWolf.Scores.get_scores_by_player(player_name, 10, ldboard_name).sw_get_player_scores_complete
 	var sw_score = sw_result.scores
-	await SilentWolf.Scores.save_score(player_name, sw_score[0]["score"] + plus , ldboard_name)
+	if sw_score == []:
+		await SilentWolf.Scores.save_score(player_name, plus , ldboard_name)
+	else:
+		await SilentWolf.Scores.save_score(player_name, sw_score[0]["score"] + plus , ldboard_name)
 
 func sw_save_score_time(player_name: String,score:int, ldboard_name: String='main'):	
 	var sw_result = await SilentWolf.Scores.get_scores_by_player(player_name, 10, ldboard_name).sw_get_player_scores_complete
