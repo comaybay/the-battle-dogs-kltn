@@ -13,6 +13,16 @@ func setup(winner_id: int) -> void:
 	%Player1Name.text = SteamUser.players[0]['username']
 	%Player2Name.text = SteamUser.players[1]['username']
 	
+	var server_id = SteamUser.players[0]['steam_id']
+	
+	if server_id == SteamUser.STEAM_ID:
+		if winner_id == SteamUser.players[0]['steam_id']:
+			SilentWolf.sw_save_high_scores(SteamUser.players[0]['username'], "high_scores",5)
+			SilentWolf.sw_save_high_scores(SteamUser.players[1]['username'], "high_scores",-5)
+		else:
+			SilentWolf.sw_save_high_scores(SteamUser.players[0]['username'], "high_scores",-5)
+			SilentWolf.sw_save_high_scores(SteamUser.players[1]['username'], "high_scores",5)
+
 	if winner_id == SteamUser.players[0]['steam_id']:
 		_setup_victory_status_text(%Player1Status, true)
 		_setup_victory_status_text(%Player2Status, false)

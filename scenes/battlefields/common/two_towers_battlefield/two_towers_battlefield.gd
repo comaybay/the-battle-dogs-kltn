@@ -89,10 +89,7 @@ func _show_win_ui():
 		SilentWolf.sw_save_high_scores(Data.save_data["user_name"], "victory_count",1)
 		SilentWolf.sw_save_score_time(Data.save_data["user_name"], get_time,"fastest_time")
 		Data.save()
-	# high_scores
-	#if :
-		#SilentWolf.sw_save_high_scores(Data.save_data["user_name"], "high_scores",5)
-		
+	
 	AudioPlayer.stop_current_music(true, true)
 	AudioPlayer.play_music(VICTORY_AUDIO)
 	add_child(VictoryGUI.instantiate())	
