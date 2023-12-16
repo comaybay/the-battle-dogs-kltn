@@ -126,7 +126,7 @@ func stop_music(audio_stream: AudioStream, with_transition: bool = false, remove
 		await tween.finished
 	
 	## if music player has been erased (via using remove_all_music)
-	if not _music_players.has(audio_resource_path):
+	if not is_instance_valid(music_player):
 		return
 		
 	if remove_when_done:
@@ -176,10 +176,13 @@ func add_in_battle_sfx(audio_stream: AudioStream, max_polyphony: int = 1) -> voi
 
 func has_in_battle_sfx(audio_stream: AudioStream) -> bool:
 	return _in_battle_sfx_players.has(audio_stream.resource_path)
-	
-## Play an in battle sfx, this is good when the sfx is play multiple times quickly. [br]
-## Require to add a sfx player to scene via the add_in_battle_sfx() function before using this method.
+
+## If sfx is not added, auto add the sfx with max_polyphony = 10 [br]
+## to set custom max_polyphony, use the add_in_battle_sfx function
 func play_in_battle_sfx(audio_stream: AudioStream, pitch_scale: float = 1.0) -> void:
+	if not _in_battle_sfx_players.has(audio_stream.resource_path):
+		add_in_battle_sfx(audio_stream, 10)
+	
 	var sfx_player: AudioStreamPlayer = _in_battle_sfx_players[audio_stream.resource_path]
 	sfx_player.pitch_scale = pitch_scale
 	sfx_player.play()
@@ -194,15 +197,3 @@ func remove_all_in_battle_sfx() -> void:
 		audio_player.queue_free()
 		
 	_in_battle_sfx_players.clear()
-
-## Play a in battle sfx and then discard it, good for one time only sfx
-func play_and_remove_in_battle_sfx(audio_stream: AudioStream, pitch_scale: float = 1.0) -> void:
-	var sfx_player := _create_in_battle_sfx()
-	sfx_player.stream = audio_stream
-	sfx_player.pitch_scale = pitch_scale
-	add_child(sfx_player)
-	sfx_player.play()
-	
-	await sfx_player.finished
-	sfx_player.queue_free()
-	
