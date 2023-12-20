@@ -1,4 +1,4 @@
-extends AirUnitAttackState
+extends BaseAirUnitAttackState
 
 @onready var sunflower_cat: SunflowerFairyCat = owner
 @onready var danamku_space := InBattle.get_danmaku_space() as DanmakuSpace
@@ -25,19 +25,19 @@ func enter(data: Dictionary) -> void:
 				bullet.velocity_rotation_speed = deg_to_rad(90) * (2 * (index % 2) - 1)
 				bullet.velocity = Vector2(2000, 0).rotated(angle)
 				bullet.position = %BulletSpawnMarker.global_position + bullet.velocity * recover_delta
+				bullet.physic_process(recover_delta)
 				
 				await Global.wait(0.9)
 				if bullet.is_destroyed(): return
 				bullet.velocity_rotation_speed = 0
 			)
 		)
-	
+		
 		_wait_token = Global.wait_cancelable(0.1 - recover_delta) as WaitToken
-		recover_delta = await _wait_token.wait()
+		recover_delta = await _wait_token.timer.timeout
 		if _wait_token.is_canceled(): 
 			return
 		
-	print("===")
 	transition.emit("IdleState")
 
 func exit() -> void:

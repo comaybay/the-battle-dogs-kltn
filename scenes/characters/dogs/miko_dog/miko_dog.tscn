@@ -189,7 +189,7 @@ position = Vector2(1.5, -24)
 shape = SubResource("RectangleShape2D_60v3l")
 
 [node name="RayCast2D" parent="." index="5"]
-position = Vector2(99, 64)
+position = Vector2(99, -1)
 target_position = Vector2(800, 0)
 
 [node name="AttackState" parent="FiniteStateMachine" index="1"]

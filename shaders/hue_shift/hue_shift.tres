@@ -1,7 +1,3 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://0rn0smb64yve"]
-
-[ext_resource type="Shader" path="res://shaders/hue_shift/hue_shift.gdshader" id="1_t8mns"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://0rn0smb64yve"]
 
 [resource]
-shader = ExtResource("1_t8mns")
-shader_parameter/Shift_Hue = 0.0

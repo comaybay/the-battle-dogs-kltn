@@ -177,7 +177,7 @@ autoplay = "move"
 shape = SubResource("RectangleShape2D_0ancf")
 
 [node name="RayCast2D" parent="." index="5"]
-position = Vector2(1088, 56)
+position = Vector2(1088, -9)
 target_position = Vector2(-2176, 0)
 
 [node name="Path2D" parent="FiniteStateMachine/MoveState" index="0"]
