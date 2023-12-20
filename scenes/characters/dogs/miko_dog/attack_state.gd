@@ -177,10 +177,10 @@ func _attack(direction: Vector2, this_frame: int) -> void:
 		if _has_interupted(this_frame): return
 	
 	if miko_dog.has_ability('yin_yang_orb') and dog_level >= 9:
-		Global.wait(0.25).connect(func():
-			_spawn_yin_yang_orb(dog_level, Vector2(320, -800))
-		)
-		
+		await Global.wait(0.25)
+		if _has_interupted(this_frame): return
+		_spawn_yin_yang_orb(dog_level, Vector2(320, -800))
+	
 func _spawn_yin_yang_orb(dog_level: int, velocity: Vector2) -> void:
 	var yin_yang_orb: YinYangOrb = YIN_YANG_ORB_SCENE.instantiate()
 	yin_yang_orb.setup(miko_dog.get_center_global_position(), dog_level, miko_dog.character_type, velocity)

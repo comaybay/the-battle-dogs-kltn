@@ -36,19 +36,21 @@ func enter(data: Dictionary) -> void:
 	_duration = curve.get_baked_length() / cat.speed
 	_initial_multiplier = cat.get_multiplier(Character.MultiplierTypes.SPEED)
 	
-func update(delta: float) -> void:
-	%PathFollow2D.progress_ratio = interpolate_movement(delta)
+func physics_update(delta: float) -> void:
+	var finished := interpolate_movement(delta)
 	
+	if finished:
+		transition.emit("IdleState")	
+
+func interpolate_movement(delta: float) -> bool:
+	## cases where the fairy cat's movement speed changes mid way due to being manipulated by external forces e.g: player skills 
+	_passed_delta += delta * (cat.get_multiplier(Character.MultiplierTypes.SPEED) / _initial_multiplier)
+	%PathFollow2D.progress_ratio = Tween.interpolate_value(0.0, 1.0, min(_passed_delta, _duration), _duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+
 	var new_scale_x: int = sign(cat.global_position.x - %PathFollow2D.global_position.x)
 	if new_scale_x != 0:
 		cat.get_character_animation_node().scale.x = new_scale_x
 		
 	cat.global_position = %PathFollow2D.global_position 
 	
-	if is_equal_approx(%PathFollow2D.progress_ratio, 1.0):
-		transition.emit("IdleState")	
-
-func interpolate_movement(delta: float) -> float:
-	## cases where the fairy cat's movement speed changes mid way due to being manipulated by external forces e.g: player skills 
-	_passed_delta += delta * (cat.get_multiplier(Character.MultiplierTypes.SPEED) / _initial_multiplier)
-	return Tween.interpolate_value(0.0, 1.0, min(_passed_delta, _duration), _duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	return is_equal_approx(%PathFollow2D.progress_ratio, 1.0)

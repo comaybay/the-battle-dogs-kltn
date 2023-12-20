@@ -14,13 +14,14 @@ func pattern_cirle(origin: Vector2, radius: float) -> DanmakuPatternCircle:
 	patterns.append(pattern)
 	return pattern 
 
-func _process(delta: float) -> void:
-	for pattern: DanmakuPattern in patterns:
-		if pattern.get_reference_count() <= 2 and not pattern.is_starting():
-			patterns.erase(pattern)
-			
+func _physics_process(delta: float) -> void:
+	## iterate backwards to avoid 
+	for i in range(patterns.size() - 1, -1, -1):
+		var pattern: DanmakuPattern = patterns[i]
 		if pattern.is_starting():
 			pattern._process(delta)
+		elif pattern.get_reference_count() <= 2 && pattern.finished.get_connections().is_empty():
+			patterns.erase(pattern)
 
 func get_bullet_kit(bullet_kit_resource_path: String, color: BulletKits.BulletColor = BulletKits.BulletColor.UNIQUE) -> DanmakuBulletKit:
 	return bullet_kits.get_kit(bullet_kit_resource_path, color)	

@@ -18,7 +18,7 @@ func enter(data: Dictionary) -> void:
 		var battlefield := InBattle.get_battlefield() as BaseBattlefield
 		var stage_rect := battlefield.get_stage_rect()
 		
-		var rand_y = randf_range(-cat.movement_radius, stage_rect.position.y + cat.movement_radius)
+		var rand_y = randf_range(stage_rect.position.y + cat.movement_radius, -cat.movement_radius - 300)
 		if closest_dog != null:
 			cat.target_position = Vector2(closest_dog.global_position.x, rand_y)
 		else:
@@ -52,19 +52,13 @@ func enter(data: Dictionary) -> void:
 	_duration = curve.get_baked_length() / cat.speed
 	_initial_multiplier = cat.get_multiplier(Character.MultiplierTypes.SPEED)
 	
-func update(delta: float) -> void:
-	%PathFollow2D.progress_ratio = interpolate_movement(delta)
+func physics_update(delta: float) -> void:
+	var finished := interpolate_movement(delta)
 	
-	var new_scale_x: int = sign(cat.global_position.x - %PathFollow2D.global_position.x)
-	if new_scale_x != 0:
-		cat.get_character_animation_node().scale.x = new_scale_x
-	
-	cat.global_position = %PathFollow2D.global_position 
-	
-	if is_equal_approx(%PathFollow2D.progress_ratio, 1.0):
+	if finished:
 		transition.emit("MoveState")
 
-func interpolate_movement(delta: float) -> float:
+func interpolate_movement(delta: float) -> bool:
 	## cases where the cat's movement speed changes mid way due to being manipulated by external forces e.g: player skills 
 	var d := delta * (cat.get_multiplier(Character.MultiplierTypes.SPEED) / _initial_multiplier)
 	
@@ -74,4 +68,12 @@ func interpolate_movement(delta: float) -> float:
 	
 	_passed_delta += d
 		
-	return Tween.interpolate_value(0.0, 1.0, min(_passed_delta, _duration), _duration, Tween.TRANS_SINE, Tween.EASE_OUT)
+	%PathFollow2D.progress_ratio = Tween.interpolate_value(0.0, 1.0, min(_passed_delta, _duration), _duration, Tween.TRANS_SINE, Tween.EASE_OUT)
+	
+	var new_scale_x: int = sign(cat.global_position.x - %PathFollow2D.global_position.x)
+	if new_scale_x != 0:
+		cat.get_character_animation_node().scale.x = new_scale_x
+	
+	cat.global_position = %PathFollow2D.global_position 
+	
+	return is_equal_approx(%PathFollow2D.progress_ratio, 1.0)

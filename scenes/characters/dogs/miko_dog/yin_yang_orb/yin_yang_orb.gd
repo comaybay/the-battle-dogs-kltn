@@ -84,7 +84,7 @@ func _physics_process(delta: float) -> void:
 		_destroy()
 
 func _destroy():
-	AudioPlayer.play_and_remove_in_battle_sfx(EXIT_AUDIO)
+	AudioPlayer.play_in_battle_sfx(EXIT_AUDIO)
 	set_physics_process(false)
 
 	var tween = create_tween()

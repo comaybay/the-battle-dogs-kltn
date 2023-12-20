@@ -239,17 +239,17 @@ loop = false
 
 [node name="OfudaSound1" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="1"]
 stream = ExtResource("4_udrmo")
-max_polyphony = 20
+max_polyphony = 10
 bus = &"InBattleFX"
 
 [node name="OfudaSound2" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="2"]
 stream = ExtResource("5_83q5h")
-max_polyphony = 20
+max_polyphony = 10
 bus = &"InBattleFX"
 
 [node name="OfudaSound3" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="3"]
 stream = ExtResource("6_0ny5k")
-max_polyphony = 20
+max_polyphony = 10
 bus = &"InBattleFX"
 
 [node name="ChargingUpSound" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="4"]

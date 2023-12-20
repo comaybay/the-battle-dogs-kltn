@@ -10,7 +10,7 @@ func _enter_tree() -> void:
 	)
 
 func _ready() -> void:
-	super._ready()
+	super()
 	cat_tower.position.x = get_stage_width() + TOWER_MARGIN;
 	cat_tower.setup($Tori)
 	

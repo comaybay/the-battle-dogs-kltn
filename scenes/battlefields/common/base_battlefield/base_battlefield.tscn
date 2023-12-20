@@ -29,7 +29,7 @@ domain_warp_enabled = true
 seamless = true
 noise = SubResource("FastNoiseLite_rdvek")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_andvq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fw6ad"]
 shader = ExtResource("2_o4s8m")
 shader_parameter/sky_wiggle = 10.0
 shader_parameter/noise_speed_scale = 0.075
@@ -50,7 +50,7 @@ glow_blend_mode = 0
 script = ExtResource("1_ymnkr")
 
 [node name="Sky" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_andvq")
+material = SubResource("ShaderMaterial_fw6ad")
 offset_left = -760.0
 offset_top = -1064.0
 offset_right = 2312.0

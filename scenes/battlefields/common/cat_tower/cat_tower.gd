@@ -76,13 +76,27 @@ func _spawn_instate_spawn_cats(instant_spawns: Array) -> void:
 	for spawn_data in instant_spawns:	
 		var cat_id: String = spawn_data['id']
 		spawn(cat_id, spawn_data, func(cat: Character):
+			var rand_x = randf_range(battlefield.TOWER_MARGIN, battlefield.get_stage_width()) + 1000
+			
+			# position can be a number (for position.x) or an array (for position.x and position.y)
+			var data_pos = spawn_data.get('position', rand_x)
+			var pos: Vector2 
+			if typeof(data_pos) == TYPE_ARRAY:
+				pos = Vector2(data_pos[0], data_pos[1])
+			else:
+				pos = Vector2(data_pos, 0)
+			
 			if cat is AirUnitCat:
 				cat.change_target_overtime = false
 				var stage_rect := battlefield.get_stage_rect()
-				cat.global_position.y = randf_range(-cat.movement_radius, stage_rect.position.y + cat.movement_radius)
+				cat.global_position = pos
+				if typeof(data_pos) != TYPE_ARRAY:
+					var rand_y = randf_range(stage_rect.position.y + cat.movement_radius, -cat.movement_radius - 300)
+					cat.global_position.y = rand_y
+				
 			else:
-				cat.global_position.y = 0
-				cat.global_position.x = spawn_data.get('position', randf_range(battlefield.TOWER_MARGIN, battlefield.get_stage_width())) + 1000
+				cat.global_position = pos
+				
 		)
 
 func _setup_spawn_pattern(pattern: Dictionary) -> void:

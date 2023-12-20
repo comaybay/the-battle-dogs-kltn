@@ -19,7 +19,7 @@ func _ready() -> void:
 	var battlefield := InBattle.get_battlefield()
 	_player_data = battlefield.get_player_data()
 	
-	zero_health.emit(_kill_all_dogs, CONNECT_ONE_SHOT)	
+	zero_health.connect(_kill_all_dogs, CONNECT_ONE_SHOT)	
 	
 	_setup_max_health()
 	

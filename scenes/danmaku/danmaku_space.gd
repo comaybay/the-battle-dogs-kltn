@@ -107,9 +107,6 @@ func register_bullet(bullet_kit_id: String, color: BulletKits.BulletColor, pool_
 		CONNECT_ONE_SHOT
 	)
 	
-	if not AudioPlayer.has_in_battle_sfx(bullet_kit.hit_sfx):
-		AudioPlayer.add_in_battle_sfx(bullet_kit.hit_sfx, 10)
-	
 	var index := bullet_kits.find(bullet_kit)
 	
 	if index == -1:
@@ -150,10 +147,24 @@ func _on_owner_dead(bullet_owner: Character) -> void:
 		return
 	
 	for controller: DanmakuBulletController in _bullet_controller_refs[bullet_owner]:
-		controller._handle_owner_dead()
+		if controller.is_valid():
+			controller._handle_owner_dead()
 	
 	_bullet_controller_refs.erase(bullet_owner)
 
+func destroy_bullets_of(bullet_owner: Character) -> void:
+	if not _bullet_controller_refs.has(bullet_owner):
+		return
+	
+	for controller: DanmakuBulletController in _bullet_controller_refs[bullet_owner]:
+		if controller.is_valid():
+			controller.destroy()
+	
+	_bullet_controller_refs[bullet_owner].clear()
+
+func get_bullets_of(bullet_owner: Character) -> Array[DanmakuBulletController]:
+	return _bullet_controller_refs.get(bullet_owner, []) 
+ 
 ## similar to spawn() but bullet is spawned without owner
 func spawn_no_owner(
 		bullet: DanmakuBulletKit, 

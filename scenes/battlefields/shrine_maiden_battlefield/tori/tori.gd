@@ -32,7 +32,7 @@ func setup(position_x: float, health: int, growl_num: int, instant_spawns: Dicti
 			var cat := cat_scene.instantiate() as BaseCat
 			
 			if cat is AirUnitCat:
-				var rand_offset := Vector2(randf_range(-1000, 1000), randf_range(-300, 300))
+				var rand_offset := Vector2(300, 0).rotated(randf() * PI * 2) 
 				cat.change_target_overtime = false 
 				cat.setup($FaceMarker.global_position + rand_offset, false)
 				cat.target_position = cat.global_position

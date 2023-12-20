@@ -6,5 +6,5 @@ func enter(data: Dictionary) -> void:
 	super.enter(data)
 	
 	if character.health <= 0:
-		AudioPlayer.play_and_remove_in_battle_sfx(PICHUUUN_SOUND)
+		AudioPlayer.play_in_battle_sfx(PICHUUUN_SOUND)
 		
