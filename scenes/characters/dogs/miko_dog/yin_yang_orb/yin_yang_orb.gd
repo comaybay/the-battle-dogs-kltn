@@ -2,6 +2,7 @@ class_name YinYangOrb extends CharacterBody2D
 
 const EXIT_AUDIO: AudioStream = preload("res://scenes/characters/dogs/miko_dog/yin_yang_orb/se_don00.wav")
 const HIT_SFX: AudioStream = preload("res://scenes/characters/dogs/miko_dog/se_damage00.wav") 
+const BOUNCE_SFX: AudioStream = preload("res://scenes/characters/dogs/miko_dog/yin_yang_orb/se_chargeup.wav") 
 
 const BOUNCE_SPEED: float = 1000
 var _bounce_time_left: int = 1
@@ -31,6 +32,7 @@ func setup(global_position: Vector2, dog_level: int, character_type: Character.T
 	$Area2D.body_entered.connect(_on_enenmy_entered)
 	
 func _ready() -> void:
+	AudioPlayer.play_in_battle_sfx(BOUNCE_SFX)
 	var tween := create_tween()
 	tween.set_loops()
 	tween.tween_property($AnimatedSprite2D, "rotation", deg_to_rad(360), 4).from_current()
@@ -63,7 +65,7 @@ func _physics_process(delta: float) -> void:
 			_destroy()
 			return
 		
-		$BounceAudio.play()
+		AudioPlayer.play_in_battle_sfx(BOUNCE_SFX)
 		_bounce_time_left -= 1
 		
 		var remainder_delta: float = collision.get_remainder().x / _prev_velocity.x

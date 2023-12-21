@@ -120,7 +120,7 @@ func _on_boss_appeared() -> void:
 	var current_music = AudioPlayer.get_current_music()
 	if _boss_music != null and current_music != _boss_music:
 		AudioPlayer.stop_music(current_music, false, true)
-		await AudioPlayer.play_in_battle_sfx(BOSS_DRUM)
+		await AudioPlayer.play_in_battle_sfx_once(BOSS_DRUM, 1.0, true)
 		AudioPlayer.play_music(_boss_music)
 	else:
-		AudioPlayer.play_in_battle_sfx(BOSS_DRUM)
+		AudioPlayer.play_in_battle_sfx_once(BOSS_DRUM, 1.0, true)

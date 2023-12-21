@@ -7,8 +7,9 @@ signal boss_appeared
 
 const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
 const BOSS_SHADER: ShaderMaterial = preload("res://shaders/outline_glow/outline_glow.material")
-const MAX_RANDOM_DELAY: float = 2.5
+const BOSS_DIE_SFX: AudioStream = preload("res://resources/sound/battlefield/boss_knockback_cry.mp3")
 
+const MAX_RANDOM_DELAY: float = 2.5
 var health: int
 var max_health: int
 var cats: Dictionary
@@ -235,6 +236,9 @@ func spawn_boss(data: Dictionary) -> void:
 	_set_cat_props(cat, data.get('props', {}))
 	_set_cat_buffs(cat, data.get('buffs', []))
 	
+	if cat.before_death_sfx == null:
+		cat.before_death_sfx = BOSS_DIE_SFX
+		
 	InBattle.get_battlefield().add_child(cat)
 	alive_boss_count += 1
 	cat.tree_exited.connect(func(): alive_boss_count -= 1)

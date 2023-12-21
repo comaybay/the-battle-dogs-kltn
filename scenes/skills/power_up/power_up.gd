@@ -1,10 +1,13 @@
 extends BaseSkill
 
 const UpSprite: PackedScene = preload("res://scenes/skills/power_up/sprite.tscn")
+const POWER_UP_SFX: AudioStream = preload("res://resources/sound/Skill/power_up.mp3")
 
 const DURATION: float = 5
 
 func setup(skill_user: Character.Type) -> void:
+	AudioPlayer.play_in_battle_sfx_once(POWER_UP_SFX)
+
 	var level := InBattle.get_skill_level('power_up', skill_user)
 	var power_scale: float = 1 + (0.1 * level)
 	
@@ -33,8 +36,6 @@ func setup(skill_user: Character.Type) -> void:
 		if character != null: # if character not dead
 			character.reset_multipliers()
 	
-	if $AudioStreamPlayer.playing:
-		await $AudioStreamPlayer.finished
 	
 	queue_free()
 

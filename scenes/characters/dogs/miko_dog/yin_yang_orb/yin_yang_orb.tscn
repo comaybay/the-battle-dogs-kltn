@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://437p87lci6ul"]
+[gd_scene load_steps=8 format=3 uid="uid://437p87lci6ul"]
 
 [ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/yin_yang_orb/yin_yang_orb.gd" id="1_q61y2"]
 [ext_resource type="Texture2D" uid="uid://8d7alkpl7axw" path="res://scenes/characters/dogs/miko_dog/yin_yang_orb/yin_yang_orb.png" id="1_uctku"]
-[ext_resource type="AudioStream" uid="uid://bj61mgpnvv42a" path="res://scenes/characters/dogs/miko_dog/yin_yang_orb/se_chargeup.wav" id="3_hcfs3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cjrmv"]
 atlas = ExtResource("1_uctku")
@@ -54,8 +53,3 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_fx253")
-
-[node name="BounceAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_hcfs3")
-autoplay = true
-bus = &"InBattleFX"

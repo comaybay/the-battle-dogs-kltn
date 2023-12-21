@@ -1,6 +1,10 @@
 extends FSMState
 
 const YIN_YANG_ORB_SCENE: PackedScene = preload("res://scenes/characters/dogs/miko_dog/yin_yang_orb/yin_yang_orb.tscn")
+const OFUDA_SOUND_1: AudioStream = preload("res://scenes/characters/dogs/miko_dog/se_tan00.wav")
+const OFUDA_SOUND_2: AudioStream = preload("res://scenes/characters/dogs/miko_dog/se_tan01.wav")
+const OFUDA_SOUND_3: AudioStream = preload("res://scenes/characters/dogs/miko_dog/se_tan02.wav")
+const CHARGINUP_SOUND: AudioStream = preload("res://scenes/characters/dogs/miko_dog/se_ch02.wav")
 
 @onready var miko_dog: MikoDog = owner
 
@@ -49,7 +53,7 @@ func enter(data: Dictionary) -> void:
 	await _twwen.finished
 	if _cancellation_token.is_canceled(): return
 	
-	$ChargingUpSound.play()
+	AudioPlayer.play_in_battle_sfx(CHARGINUP_SOUND)
 	
 	miko_dog.n_AnimationPlayer.play("pre_attack")
 	miko_dog.n_AnimationPlayer.queue("attack")
@@ -126,8 +130,8 @@ func _attack(direction: Vector2) -> void:
 		const DURATION: float = 0.25
 		const ROTATION: int = deg_to_rad(10)
 		const SPEED: int = 1000
-		_pattern_path(%Path1, DURATION, bullet_num, loop, ROTATION, SPEED, $OfudaSound1)
-		_pattern_path(%Path2, DURATION, bullet_num, loop, -ROTATION, SPEED, $OfudaSound1)
+		_pattern_path(%Path1, DURATION, bullet_num, loop, ROTATION, SPEED, OFUDA_SOUND_1)
+		_pattern_path(%Path2, DURATION, bullet_num, loop, -ROTATION, SPEED, OFUDA_SOUND_1)
 		total_wait_time += DURATION * loop
 	
 	if dog_level >= 7 and miko_dog.has_ability('circular_ofudas'):
@@ -136,8 +140,8 @@ func _attack(direction: Vector2) -> void:
 		const DURATION: float = 0.5
 		const ROTATION: float = deg_to_rad(135)
 		const SPEED: int = 2000
-		_pattern_path(%Path3, DURATION, bullet_num, loop, -ROTATION, SPEED, $OfudaSound3)
-		_pattern_path(%Path4, DURATION, bullet_num, loop, ROTATION, SPEED, $OfudaSound3)
+		_pattern_path(%Path3, DURATION, bullet_num, loop, -ROTATION, SPEED, OFUDA_SOUND_3)
+		_pattern_path(%Path4, DURATION, bullet_num, loop, ROTATION, SPEED, OFUDA_SOUND_3)
 		total_wait_time += DURATION * loop
 	
 	var wait_timer := get_tree().create_timer(total_wait_time, false)
@@ -189,7 +193,7 @@ func _pattern_straight_line(
 	direction: Vector2, speed: float, bullet_num: int,
 	ofuda_kit: DanmakuBulletKit, rotation: float = 0, back_accel: float = 0
 ) -> void:
-	$OfudaSound2.play()
+	AudioPlayer.play_in_battle_sfx(OFUDA_SOUND_2)
 	var center_pos := miko_dog.get_center_global_position()
 	var speed_reduction_unit: float = speed / (bullet_num * 1.5) 
 	for i in range(bullet_num):
@@ -209,7 +213,7 @@ func _pattern_straight_line(
 
 var _pattern_paths: Dictionary = {}
 func _pattern_path(
-	path: Path2D, duration: float, bullet_num: int, loop: int, rotation: float, speed: float, audio_player: AudioStreamPlayer
+	path: Path2D, duration: float, bullet_num: int, loop: int, rotation: float, speed: float, sfx: AudioStream
 ) -> void:
 	var path_follow := path.get_node("PathFollow2D") as PathFollow2D
 	path_follow.progress = 0.0
@@ -224,7 +228,7 @@ func _pattern_path(
 		'rotation': rotation,
 		'speed': speed,
 		'ofuda': ofuda_gray,
-		'audio_player': audio_player,
+		'sfx': sfx,
 		'finished': false
 	}
 
@@ -250,7 +254,7 @@ func physics_update(delta) -> void:
 			const SFX_INTERVAL = 0.09
 			if _pattern_data['sum_delta_sfx'] >= SFX_INTERVAL:
 				_pattern_data['sum_delta_sfx'] = 0
-				_pattern_data['audio_player'].play()
+				AudioPlayer.play_in_battle_sfx(_pattern_data['sfx'])
 	
 func _spawn_bullet_on_path(_pattern_data: Dictionary) -> void:
 	var path_follow := _pattern_data['path_follow'] as PathFollow2D

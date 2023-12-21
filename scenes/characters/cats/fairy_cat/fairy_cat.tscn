@@ -149,7 +149,7 @@ point_count = 3
 script = ExtResource("2_jge1o")
 reward_money = 50
 knockbacks = 5
-attack_sfx = ExtResource("3_xygka")
+attack_hit_sfx = ExtResource("3_xygka")
 
 [node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
 shape = SubResource("RectangleShape2D_0kdy4")

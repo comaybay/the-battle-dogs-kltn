@@ -1,5 +1,8 @@
 class_name GandolfgBullet extends Area2D
 
+const SPELL_CAST_AUDIO: AudioStream = preload("res://scenes/battlefields/common/dog_tower/gandolfg/electric_ball.mp3")
+const HIT_AUDIO: AudioStream = preload("res://scenes/battlefields/common/dog_tower/gandolfg/electric_ball_hit.mp3")
+
 const BASE_DAMAGE = 50
 const SPEED = 700
 var _stop_following: bool = false
@@ -20,8 +23,7 @@ func setup(global_position: Vector2, target: Character) :
 	_target = target  
 	self.global_position = global_position 
 	
-	$SpellCastAudio.pitch_scale = AudioPlayer.get_random_pitch_scale()
-	$SpellCastAudio.play()
+	AudioPlayer.play_in_battle_sfx(SPELL_CAST_AUDIO, AudioPlayer.get_random_pitch_scale())
 	_calculate_direction()
 	
 	# Khong thay doi vi tri vien dan nua neu meo da chet hoac dang bi vap nga
@@ -56,7 +58,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	
 	_collided = true
-	$HitAudio.play()
+	AudioPlayer.play_in_battle_sfx(HIT_AUDIO, AudioPlayer.get_random_pitch_scale())
 	
 	set_physics_process(false)
 	
@@ -67,8 +69,5 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	await tween.finished
 	$CollisionShape2D.disabled = true
-	
-	if $HitAudio.playing:
-		await $HitAudio.finished
 	
 	queue_free()

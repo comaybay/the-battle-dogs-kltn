@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/Camera2D.gd" id="6_cy4w7"]
 [ext_resource type="PackedScene" uid="uid://inelp1r1r34q" path="res://scenes/online_battle/p2p_battlefield/p2p_dog_tower/p2p_dog_tower_right.tscn" id="6_v6ew7"]
 [ext_resource type="Script" path="res://scenes/battlefields/common/base_battlefield/sky.gd" id="7_aolxo"]
-[ext_resource type="AudioStream" uid="uid://dm1ge42cv7vy7" path="res://resources/sound/battlefield/boss_drum.mp3" id="7_t23ci"]
+[ext_resource type="AudioStream" uid="uid://dm1ge42cv7vy7" path="res://resources/sound/battlefield/boss_drum.wav" id="7_t23ci"]
 [ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="11_ovxua"]
 [ext_resource type="Script" path="res://scenes/online_battle/p2p_battlefield/p2p_danmaku_space.gd" id="16_54x44"]
 

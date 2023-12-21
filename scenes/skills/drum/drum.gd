@@ -1,6 +1,7 @@
 extends BaseSkill
 
 const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
+const DRUM_AUDIO: AudioStream = preload("res://resources/sound/Skill/drum.wav")
 
 var knockback_scale: float = 0.5
 
@@ -42,8 +43,7 @@ func setup(skill_user: Character.Type) -> void:
 		var effect_on_target: Node2D = EnergyExpand.instantiate()
 		effect_space.add_child(effect_on_target) 
 		effect_on_target.setup(target.get_center_global_position(), "on_subject")
-	
-	$DrumSound.play()
-	await $DrumSound.finished
+
+	AudioPlayer.play_in_battle_sfx_once(DRUM_AUDIO, 1.0, true)	
 	queue_free()
 

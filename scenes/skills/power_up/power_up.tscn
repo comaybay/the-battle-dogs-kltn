@@ -1,12 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmpplna2dglx7"]
+[gd_scene load_steps=2 format=3 uid="uid://cmpplna2dglx7"]
 
 [ext_resource type="Script" path="res://scenes/skills/power_up/power_up.gd" id="1_x8iv8"]
-[ext_resource type="AudioStream" uid="uid://bsialladw4udf" path="res://resources/sound/Skill/power_up.mp3" id="2_cxyjq"]
 
 [node name="power_up" type="Node2D"]
 script = ExtResource("1_x8iv8")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_cxyjq")
-autoplay = true
-bus = &"InBattleFX"

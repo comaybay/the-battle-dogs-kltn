@@ -25,7 +25,7 @@ func _spawn_bullet(_pos: Vector2, angle: float, _rdelta: float, index: int) -> v
 	var bullet := danamku_space.spawn(flower_kit, fairy_cat)
 	bullet.start(func():
 		if index % 3 == 0:
-			AudioPlayer.play_in_battle_sfx(fairy_cat.attack_sfx)
+			AudioPlayer.play_in_battle_sfx(fairy_cat.attack_hit_sfx)
 		
 		bullet.damage = fairy_cat.damage
 		bullet.position = %BulletSpawnMarker.global_position 

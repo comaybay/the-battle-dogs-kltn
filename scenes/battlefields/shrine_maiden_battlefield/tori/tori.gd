@@ -2,6 +2,7 @@ class_name Tori extends StaticBody2D
 
 const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
 const SkyInvert: PackedScene = preload("res://scenes/effects/sky_invert/sky_invert.tscn")
+const SKY_INVERT_AUDIO: AudioStream = preload("res://resources/sound/battlefield/sky_invert.mp3")
 
 signal zero_health
 
@@ -76,6 +77,8 @@ func take_damage(damage: int) -> void:
 		invert_sky()
 
 func invert_sky() -> void:
+	AudioPlayer.play_in_battle_sfx_once(SKY_INVERT_AUDIO, 1.0, true)
+	
 	var sky_invert: FXSkyInvert = SkyInvert.instantiate()
 	var battlefield := InBattle.get_battlefield()
 	sky_invert.sky_movement_scale = 5

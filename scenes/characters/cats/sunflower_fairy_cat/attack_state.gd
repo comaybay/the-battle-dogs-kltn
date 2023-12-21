@@ -14,7 +14,7 @@ func enter(data: Dictionary) -> void:
 	var recover_delta: float = 0.0
 	var timer_delta: float = 0.0
 	for i in range(10):
-		AudioPlayer.play_in_battle_sfx(sunflower_cat.attack_sfx)
+		AudioPlayer.play_in_battle_sfx(sunflower_cat.attack_hit_sfx)
 		
 		pattern.start(0, func (_pos: Vector2, angle: float, _rdelta: float, index: int) -> void:
 			var color := BulletKits.BulletColor.ORANGE if i % 2 else BulletKits.BulletColor.YELLOW

@@ -21,7 +21,6 @@ func setup(target: Character):
 		$AnimatedSprite.material = load("res://shaders/invert_color/invert_color.material")
 		
 func _ready() -> void:
-	$Sound.play()
 	$AnimatedSprite.play("default")
 	base_position = position
 	

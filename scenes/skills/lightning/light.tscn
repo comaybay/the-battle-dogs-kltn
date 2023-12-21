@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8qd2ufnklca7"]
+[gd_scene load_steps=8 format=3 uid="uid://b8qd2ufnklca7"]
 
 [ext_resource type="Script" path="res://scenes/skills/lightning/light.gd" id="1_f5oi1"]
 [ext_resource type="Texture2D" uid="uid://cjeyw3i40mav6" path="res://resources/images/skills/lightning.png" id="2_h0qfj"]
-[ext_resource type="AudioStream" uid="uid://ckt0xwxej40lw" path="res://resources/sound/Skill/sét đánh.mp3" id="3_0t4sd"]
 
 [sub_resource type="Animation" id="Animation_k3r0e"]
 length = 0.6
@@ -73,10 +72,10 @@ metadata/_edit_horizontal_guides_ = []
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
-autoplay = "move"
 libraries = {
 "": SubResource("AnimationLibrary_fl247")
 }
+autoplay = "move"
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 one_shot = true
@@ -99,9 +98,3 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterDetector"]
 position = Vector2(-0.212959, -319)
 shape = SubResource("RectangleShape2D_oa1yv")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_0t4sd")
-volume_db = -9.0
-autoplay = true
-bus = &"SoundFX"

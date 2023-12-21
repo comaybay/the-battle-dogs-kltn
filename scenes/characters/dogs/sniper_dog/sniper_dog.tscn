@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://b2lwyl0fu7ayt"]
+[gd_scene load_steps=17 format=3 uid="uid://b2lwyl0fu7ayt"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_qnr0p"]
+[ext_resource type="AudioStream" uid="uid://d1qiagfxbr16" path="res://resources/sound/battlefield/sniper_shot.mp3" id="2_0sj0c"]
 [ext_resource type="Texture2D" uid="uid://dsanqteu4fv2s" path="res://scenes/characters/cats/sniper_cat.png" id="2_wgnt7"]
 [ext_resource type="Texture2D" uid="uid://dy12wxohny1x6" path="res://scenes/characters/dogs/sniper_dog/fire_fx.png" id="3_wd3t6"]
 [ext_resource type="Texture2D" uid="uid://kstfevv07gtr" path="res://scenes/characters/dogs/sniper_dog/ground_hit_fx.png" id="4_2umbi"]
@@ -196,6 +197,18 @@ tracks/14/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("FiniteStateMachine/AttackState:play_attack_sfx")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_8csog"]
 resource_name = "attack"
@@ -381,6 +394,18 @@ tracks/14/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("FiniteStateMachine/AttackState:play_attack_sfx")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.958334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_g7218"]
 resource_name = "idle"
@@ -556,12 +581,17 @@ attack_cooldown = 20.0
 attack_frame = 10
 health = 900
 damage = 400
+attack_hit_sfx = null
+attack_sfx = ExtResource("2_0sj0c")
 
 [node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
 shape = SubResource("RectangleShape2D_nce3d")
 
 [node name="AttackCooldownTimer" parent="." index="1"]
 wait_time = 20.0
+
+[node name="CharacterAnimation" parent="." index="2"]
+metadata/_edit_lock_ = true
 
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(-21, -498.5)
@@ -603,6 +633,7 @@ position = Vector2(480, -639)
 rotation = -0.259771
 scale = Vector2(0.281763, 0.5)
 texture = ExtResource("6_ogsgu")
+metadata/_edit_lock_ = true
 
 [node name="CustomAttackArea" type="Area2D" parent="." index="3"]
 position = Vector2(1244.1, -282.553)
@@ -628,7 +659,7 @@ shape = SubResource("RectangleShape2D_oa1yv")
 metadata/_edit_lock_ = true
 
 [node name="RayCast2D" parent="." index="6"]
-position = Vector2(261, 62)
+position = Vector2(261, -3)
 target_position = Vector2(1650, 0)
 
 [node name="Arrow" parent="." index="7"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://drtciyu1luh42"]
+[gd_scene load_steps=9 format=3 uid="uid://drtciyu1luh42"]
 
 [ext_resource type="Texture2D" uid="uid://c6ixpknj1dk18" path="res://scenes/effects/flying_soul/soul.png" id="1_ylb7h"]
 [ext_resource type="Script" path="res://scenes/effects/flying_soul/flying_soul.gd" id="2_4b7rr"]
-[ext_resource type="AudioStream" uid="uid://c5oa2va3srkmg" path="res://resources/sound/battlefield/death.mp3" id="3_6uvvi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wuq5o"]
 atlas = ExtResource("1_ylb7h")
@@ -55,7 +54,3 @@ script = ExtResource("2_4b7rr")
 position = Vector2(-42.053, 0)
 sprite_frames = SubResource("SpriteFrames_e1yit")
 frame_progress = 0.992498
-
-[node name="Sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_6uvvi")
-bus = &"InBattleFX"

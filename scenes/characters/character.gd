@@ -1,9 +1,8 @@
 @tool
 class_name Character extends CharacterBody2D
 
-const DEFAULT_ATTACK_SFX = preload("res://resources/sound/battlefield/bite.mp3")
+const DEFAULT_ATTACK_HIT_SFX = preload("res://resources/sound/battlefield/bite.mp3")
 const DEFAULT_DIE_SFX = preload("res://resources/sound/battlefield/death.mp3")
-const BOSS_DIE_SFX: AudioStream = preload("res://resources/sound/battlefield/boss_knockback_cry.mp3")
 
 ## keep raycast off the ground a bit to avoid miss detection
 const RAYCAST_OFFSET_Y: int = 90
@@ -86,7 +85,10 @@ var _multipliers: Dictionary = {
 	
 @export var knockbacks: int = 3
 
-@export var attack_sfx: AudioStream = DEFAULT_ATTACK_SFX 
+@export var attack_hit_sfx: AudioStream = DEFAULT_ATTACK_HIT_SFX 
+@export var attack_sfx: AudioStream
+
+@export var before_death_sfx: AudioStream
 @export var die_sfx: AudioStream = DEFAULT_DIE_SFX
 	
 @onready var n_RayCast2D := $RayCast2D as RayCast2D
@@ -274,7 +276,8 @@ func take_damage(ammount: int) -> void:
 		if health > 0:
 			update_next_knockback_health()
 		else:
-			AudioPlayer.play_in_battle_sfx(BOSS_DIE_SFX if is_boss() else die_sfx)
+			if before_death_sfx != null:
+				AudioPlayer.play_in_battle_sfx(before_death_sfx)
 			zero_health.emit()
 		
 		## avoid stopping the timer because it wont emit timeout signal, which might be listening by others  

@@ -87,7 +87,7 @@ attack_range = 2000
 attack_cooldown = 10.0
 health = 700
 knockbacks = 1
-attack_sfx = ExtResource("3_wqln7")
+attack_hit_sfx = ExtResource("3_wqln7")
 
 [node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
 shape = SubResource("RectangleShape2D_q37wh")
