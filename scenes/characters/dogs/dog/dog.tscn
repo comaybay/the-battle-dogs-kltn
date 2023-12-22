@@ -130,7 +130,7 @@ position = Vector2(-1, -25.25)
 shape = SubResource("RectangleShape2D_oa1yv")
 
 [node name="RayCast2D" parent="." index="5"]
-position = Vector2(95, 61.5)
+position = Vector2(95, -3.5)
 
 [node name="Arrow" parent="." index="6"]
 offset_left = 20.0

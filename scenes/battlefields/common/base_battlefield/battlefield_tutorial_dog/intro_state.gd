@@ -36,9 +36,7 @@ func enter(data: Dictionary) -> void:
 		dog_tower.zero_health.connect(_to_defeat_state)
 		return
 		
-	tutorial_dog.hide()
 	await get_tree().create_timer(2.0, false).timeout
-	tutorial_dog.show()
 	
 	gui = tutorial_dog.get_battlefield_gui()
 	tutorial_dog.dialogue_line_changed.connect(_on_next_line)

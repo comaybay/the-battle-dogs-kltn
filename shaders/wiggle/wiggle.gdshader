@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode unshaded;
 // https://godotshaders.com/shader/noise-offset-wiggle/
 // with modifications
 

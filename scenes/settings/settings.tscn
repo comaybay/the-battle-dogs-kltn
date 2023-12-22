@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://u2gfiv64rmb0"]
 
-[ext_resource type="Material" uid="uid://dhtv2icxbag82" path="res://shaders/sky/sky.material" id="1_33nqq"]
+[ext_resource type="Material" uid="uid://csnkk5ulllaxk" path="res://shaders/sky/sky.material" id="1_33nqq"]
 [ext_resource type="Texture2D" uid="uid://xb7r40nr2rgp" path="res://resources/battlefield_themes/heavenly/sky.png" id="1_lx6qp"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="2_g8saj"]
 [ext_resource type="Script" path="res://scenes/settings/settings.gd" id="2_i0rw8"]

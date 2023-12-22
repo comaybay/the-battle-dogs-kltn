@@ -1,197 +1,147 @@
-[gd_scene load_steps=15 format=3 uid="uid://chnwixpec81w0"]
+[gd_scene load_steps=17 format=3 uid="uid://chnwixpec81w0"]
 
 [ext_resource type="Script" path="res://scenes/tutorial_dog/tutorial_dog.gd" id="1_7chvr"]
+[ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_gn0jl"]
 [ext_resource type="Texture2D" uid="uid://bmievkerp5est" path="res://scenes/dogbase/speech_bubble_pointer.png" id="2_xxg2k"]
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="3_2wddw"]
+[ext_resource type="PackedScene" uid="uid://cyx2xpe6fy6th" path="res://scenes/common/dynamic_label/dynamic_label.tscn" id="3_xaugv"]
 [ext_resource type="AudioStream" uid="uid://dicvdbgq0uhn3" path="res://resources/sound/tutorial_dog.wav" id="5_73jpn"]
 [ext_resource type="Shortcut" uid="uid://moipqlm5cofg" path="res://resources/shortcuts/confirm.tres" id="5_r1sbf"]
 [ext_resource type="AudioStream" uid="uid://c4ac3kwv7lwkh" path="res://resources/sound/tutorial_dog_end.wav" id="6_85irf"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ui5b"]
-content_margin_left = 40.0
-content_margin_top = 25.0
-content_margin_right = 40.0
-content_margin_bottom = 25.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
 
 [sub_resource type="Animation" id="Animation_xqhmm"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpeakerDog:frame")
+tracks/0/path = NodePath("SpeakerDog:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0]
+"values": [Vector2(967, 539)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SpeakerDog:position")
+tracks/1/path = NodePath("SpeakerDog:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(967, 539)]
+"values": [3.14159]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SpeakerDog:visible")
+tracks/2/path = NodePath("Panel:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SpeakerDog:rotation")
+tracks/3/path = NodePath("SpeakerDog:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [3.14159]
+"update": 1,
+"values": [0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Panel:visible")
+tracks/4/path = NodePath("DialogueLabel:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SpeakerDog:visible")
+tracks/5/path = NodePath("SpeakerDog:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(1.25, -1.25)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SpeakerDog:frame")
+tracks/6/path = NodePath("SpeechBubblePointer:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"update": 0,
+"values": [Vector2(-78, 473)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("DialogueLabel:visible")
+tracks/7/path = NodePath("DialogueLabel:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(-444, 382)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("SpeakerDog:scale")
+tracks/8/path = NodePath("BubblePointerMarker:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1.25, -1.25)]
+"values": [Vector2(836, 452)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("SpeechBubblePointer:scale")
+tracks/9/path = NodePath(".:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.518295, 0.518295)]
+"update": 1,
+"values": [true]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("SpeechBubblePointer:position")
+tracks/10/path = NodePath("SpeechBubblePointer:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-117, 476)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("DialogueLabel:position")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-444, 382)]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("DogButton:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(48, 420)]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath(".:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_qc8ic"]
@@ -210,6 +160,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_calfn"]
+resource_name = "hide"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_7xir0"]
@@ -243,7 +209,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SpeechBubblePointer:visible")
+tracks/2/path = NodePath("Panel:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -255,7 +221,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Panel:visible")
+tracks/3/path = NodePath("SpeakerDog:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -267,95 +233,71 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SpeakerDog:visible")
+tracks/4/path = NodePath("SpeakerDog:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("DialogueLabel:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("SpeakerDog:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.1998, 0.5661, 0.6993),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-1.25, -1.25), Vector2(-1.25, -1.25), Vector2(-1.25, -1.25), Vector2(-1.25, -1.25)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SpeakerDog/DogButton:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.7992),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BubblePointerMarker:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [342.0]
+}
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("SpeechBubblePointer:scale")
+tracks/7/path = NodePath(".:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-0.518, 0.518)]
+"update": 1,
+"values": [true]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("SpeechBubblePointer:position:x")
+tracks/8/path = NodePath("SpeechBubblePointer:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.7992),
+"times": PackedFloat32Array(0, 0.799999),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [-363.0, 393.0]
+"values": [false, true]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("DialogueLabel:position:x")
+tracks/9/path = NodePath("DialogueLabel:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.7992),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [-428.0, 328.0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("DogButton:position")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.7992),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(-343, 416), Vector2(48, 420)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("DogButton:visible")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.7992),
+"times": PackedFloat32Array(0, 0.799999),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -392,7 +334,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SpeechBubblePointer:visible")
+tracks/2/path = NodePath("Panel:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -404,7 +346,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Panel:visible")
+tracks/3/path = NodePath("SpeakerDog:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -416,95 +358,71 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SpeakerDog:visible")
+tracks/4/path = NodePath("SpeakerDog:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(1.25, -1.25)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("DialogueLabel:visible")
+tracks/5/path = NodePath("SpeakerDog/DogButton:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.7992),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SpeakerDog:scale")
+tracks/6/path = NodePath("BubblePointerMarker:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1.25, -1.25)]
+"values": [825.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("DialogueLabel:position:x")
+tracks/7/path = NodePath(".:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.7992),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [-471.0, 465.0]
+"values": [true]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("SpeechBubblePointer:position:x")
+tracks/8/path = NodePath("SpeechBubblePointer:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.7992),
+"times": PackedFloat32Array(0, 0.799999),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [-144.0, 792.0]
+"values": [false, true]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("SpeechBubblePointer:scale")
+tracks/9/path = NodePath("DialogueLabel:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.518295, 0.518295)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("DogButton:position")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.7992),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(-343, 416), Vector2(813, 418)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("DogButton:visible")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.7992),
+"times": PackedFloat32Array(0, 0.799999),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -586,30 +504,6 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("DogButton:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-343, 416)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("DogButton:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.433333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
 
 [sub_resource type="Animation" id="Animation_nbiwe"]
 resource_name = "jump_out_right_side"
@@ -687,35 +581,12 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("DogButton:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-343, 416)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("DogButton:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_anvn6"]
 _data = {
 "RESET": SubResource("Animation_xqhmm"),
 "dog_idle": SubResource("Animation_qc8ic"),
+"hide": SubResource("Animation_calfn"),
 "jump_in_left_side": SubResource("Animation_7xir0"),
 "jump_in_right_side": SubResource("Animation_ms1fa"),
 "jump_out_left_side": SubResource("Animation_ed5uy"),
@@ -723,13 +594,13 @@ _data = {
 }
 
 [node name="TutorialDog" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_gn0jl")
 script = ExtResource("1_7chvr")
 
 [node name="Panel" type="Panel" parent="."]
@@ -742,29 +613,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"PanelDimBackground"
 
-[node name="DialogueLabel" type="Label" parent="."]
+[node name="DialogueLabel" parent="." instance=ExtResource("3_xaugv")]
 layout_mode = 0
 offset_left = -444.0
 offset_top = 382.0
-offset_right = -74.0
-offset_bottom = 463.0
-mouse_filter = 1
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_1ui5b")
-text = "Speech Bubble"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
+offset_right = -32.0
+offset_bottom = 460.0
+text = "[center]Speech Bubble[/center]"
 
 [node name="SpeechBubblePointer" type="Sprite2D" parent="."]
-position = Vector2(-117, 476)
+position = Vector2(-78, 473)
 scale = Vector2(0.518295, 0.518295)
 texture = ExtResource("2_xxg2k")
 
 [node name="SpeakerDog" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(2, 2, 2, 1)
 position = Vector2(967, 539)
 rotation = 3.14159
@@ -773,13 +635,17 @@ texture = ExtResource("3_2wddw")
 hframes = 7
 vframes = 2
 
-[node name="DogButton" type="Button" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 48.0
-offset_top = 420.0
-offset_right = 350.0
-offset_bottom = 701.999
+[node name="DogButton" type="Button" parent="SpeakerDog"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -129.0
+offset_top = -105.0
+offset_right = -129.0
+offset_bottom = -131.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
 shortcut = ExtResource("5_r1sbf")
 shortcut_in_tooltip = false
@@ -789,7 +655,7 @@ flat = true
 libraries = {
 "": SubResource("AnimationLibrary_anvn6")
 }
-autoplay = "dog"
+autoplay = "hide"
 
 [node name="IntroSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_73jpn")
@@ -798,3 +664,6 @@ bus = &"SoundFX"
 [node name="OutroSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_85irf")
 bus = &"SoundFX"
+
+[node name="BubblePointerMarker" type="Marker2D" parent="."]
+position = Vector2(836, 452)
