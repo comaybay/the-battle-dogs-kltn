@@ -14,11 +14,13 @@ func _on_dog_spawn(dog: BaseDog):
 	camera.allow_user_input_camera_movement(false)
 	
 	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.tween_property(camera, "position", dog.position, 1)
+	tween.set_trans(Tween.TRANS_SINE).set_parallel()
+	tween.tween_method(func(value: float):
+		camera.global_position = dog.global_position
+		camera.zoom = Vector2(value, value)
+		, camera.zoom.x, 0.6, 3.5)
 	
 	await tween.finished
-	await get_tree().create_timer(0.5).timeout
 	tutorial_dog.start_dialogue("TUTORIAL_DOG_SPAWN", tutorial_dog.PLACEMENT.RIGHT)
 	tutorial_dog.dialogue_line_changed.connect(_on_next_line)
 	tutorial_dog.dialogue_ended.connect(_on_diaglogue_ended, CONNECT_ONE_SHOT)
@@ -64,7 +66,12 @@ var actions: Array[Dictionary] = [
 	},
 ]
 
+var _exit_func: Callable
 func _on_next_line(index: int) -> void:
+	if _exit_func.is_valid():
+		_exit_func.call()
+		_exit_func = Callable()
+	
 	if action_index == actions.size():
 		actions[action_index - 1]["exit"].call()
 		tutorial_dog.dialogue_line_changed.disconnect(_on_next_line) 
@@ -72,11 +79,9 @@ func _on_next_line(index: int) -> void:
 		
 	if index != actions[action_index]["index"]:
 		return
-	
-	if action_index > 0:
-		actions[action_index - 1]["exit"].call()
-	
+
 	actions[action_index]["enter"].call()
+	_exit_func = actions[action_index]["exit"]
 	action_index += 1
 		
 func _on_diaglogue_ended():

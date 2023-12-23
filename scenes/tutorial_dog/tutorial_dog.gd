@@ -109,7 +109,7 @@ func pause_dialogue() -> void:
 func _dialogue_next_line() -> void:
 	_dialogue_index += 1
 	var dialogue_text := tr("@%s_%s" % [_dialogue_code, _dialogue_index])
-	$DialogueLabel.text = "[center]%s[/center]" % dialogue_text
+	$DialogueLabel.text = "[center][typo]%s[/typo][/center]" % dialogue_text
 	_update_bubble()	
 	dialogue_line_changed.emit(_dialogue_index)
 

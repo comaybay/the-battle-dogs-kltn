@@ -13,7 +13,7 @@ func enter(data: Dictionary) -> void:
 	dog_tower = tutorial_dog.get_dog_tower()
 	
 	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_trans(Tween.TRANS_SINE).set_parallel()
 
 	tween.tween_property(camera, "position", cat_tower.position, 1.5)
 	

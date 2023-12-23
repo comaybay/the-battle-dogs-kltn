@@ -7,8 +7,11 @@ var wait: float = 0.0
 var jump_count: int = 0
 
 func _process_custom_fx(char_fx: CharFXTransform) -> bool:
+	if (is_zero_approx(char_fx.elapsed_time)):
+		wait = 0.0
+		jump_count = 0
 	
-	if wait > char_fx.elapsed_time:
+	elif wait > char_fx.elapsed_time:
 		return true
 		
 	var offset := sin((char_fx.elapsed_time - wait) * 12.0) * 0.5

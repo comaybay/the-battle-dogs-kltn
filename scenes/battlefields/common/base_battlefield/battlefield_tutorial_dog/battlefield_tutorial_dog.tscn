@@ -16,7 +16,7 @@
 [node name="TutorialDog" instance=ExtResource("1_lowhj")]
 script = ExtResource("2_ccgfy")
 
-  [node name="FSM" type="Node" parent="." index="5"]
+[node name="FSM" type="Node" parent="." index="5"]
 script = ExtResource("3_wr6g6")
 initial_state = NodePath("IntroState")
 
