@@ -1,6 +1,7 @@
 shader_type canvas_item;
+render_mode unshaded;
 
-uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, repeat_disable, filter_nearest;
 uniform vec2 scale;
 uniform float y_zoom;
 
@@ -18,6 +19,6 @@ void fragment() {
 	
 	vec4 reflection = texture(SCREEN_TEXTURE, reflected_screen_uv); 
 	
-	COLOR = mix(reflection, water_color, clamp(water_color.a - UV.y, 0.0, 1.0));
-	COLOR.a *= smoothstep(0.0, 0.1, waves);
+	vec4 r_color = mix(reflection, water_color, clamp(water_color.a - UV.y, 0.0, 1.0));
+	COLOR = mix(texture(SCREEN_TEXTURE, SCREEN_UV), r_color, smoothstep(0.0, 0.1, waves) );
 }

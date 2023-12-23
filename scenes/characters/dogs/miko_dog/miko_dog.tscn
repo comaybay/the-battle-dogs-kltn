@@ -1,13 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://chsa5iqbxcilm"]
+[gd_scene load_steps=17 format=3 uid="uid://chsa5iqbxcilm"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_t2ynb"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/miko_dog.gd" id="2_8rpp5"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/attack_state.gd" id="2_i3nlb"]
 [ext_resource type="Texture2D" uid="uid://cpmqxhpuoenyj" path="res://scenes/characters/dogs/miko_dog/miko_dog.png" id="2_i8u76"]
-[ext_resource type="AudioStream" uid="uid://c5wnv78ernv77" path="res://scenes/characters/dogs/miko_dog/se_tan00.wav" id="4_udrmo"]
-[ext_resource type="AudioStream" uid="uid://6jusk35smec4" path="res://scenes/characters/dogs/miko_dog/se_tan01.wav" id="5_83q5h"]
-[ext_resource type="AudioStream" uid="uid://b5pkrxqvtjino" path="res://scenes/characters/dogs/miko_dog/se_tan02.wav" id="6_0ny5k"]
-[ext_resource type="AudioStream" uid="uid://bk7sil83fyfkh" path="res://scenes/characters/dogs/miko_dog/se_ch02.wav" id="7_bafi3"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/knockback_state.gd" id="8_o0snc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iv36t"]
@@ -189,7 +185,7 @@ position = Vector2(1.5, -24)
 shape = SubResource("RectangleShape2D_60v3l")
 
 [node name="RayCast2D" parent="." index="5"]
-position = Vector2(99, 64)
+position = Vector2(99, -1)
 target_position = Vector2(800, 0)
 
 [node name="AttackState" parent="FiniteStateMachine" index="1"]
@@ -236,25 +232,6 @@ curve = SubResource("Curve2D_68g0e")
 position = Vector2(27, 245)
 rotation = -0.139966
 loop = false
-
-[node name="OfudaSound1" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="1"]
-stream = ExtResource("4_udrmo")
-max_polyphony = 20
-bus = &"InBattleFX"
-
-[node name="OfudaSound2" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="2"]
-stream = ExtResource("5_83q5h")
-max_polyphony = 20
-bus = &"InBattleFX"
-
-[node name="OfudaSound3" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="3"]
-stream = ExtResource("6_0ny5k")
-max_polyphony = 20
-bus = &"InBattleFX"
-
-[node name="ChargingUpSound" type="AudioStreamPlayer" parent="FiniteStateMachine/AttackState" index="4"]
-stream = ExtResource("7_bafi3")
-bus = &"InBattleFX"
 
 [node name="KnockbackState" parent="FiniteStateMachine" index="3"]
 script = ExtResource("8_o0snc")

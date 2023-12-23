@@ -67,7 +67,9 @@ func _process(delta: float) -> void:
 		
 	_debug_label.text = "FPS: %s\n" % Engine.get_frames_per_second()    
 	
-	_debug_label.text += "shared_timers: %s\n" % Global._shared_timers.size()
+	_debug_label.text += "shared_timers: %s/%s\n" % [
+		Global._shared_timers.size(), (Global._shared_timers.size() + Global._unused_timers.size())
+	]
 	
 	_debug_label.text += "Total bullets %s/%s\n" % [
 		Bullets.get_total_active_bullets(), 

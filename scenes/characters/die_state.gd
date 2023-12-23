@@ -5,6 +5,7 @@ const FlyingSoul: PackedScene = preload("res://scenes/effects/flying_soul/flying
 
 # called when the state is activated
 func enter(_data: Dictionary) -> void:
+	AudioPlayer.play_in_battle_sfx(character.die_sfx)
 	character.queue_free() 
 	
 	var soul_fx: Node = FlyingSoul.instantiate()

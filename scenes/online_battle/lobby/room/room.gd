@@ -171,11 +171,9 @@ func _can_start_game() -> bool:
 	return not (member_not_connected or member_not_ready or team_setup_not_loaded)
 
 func update_custom_battlefield_settings():
-	print("UPADTE")
 	# updpate the settings set by the room owner
 	for type in CustomBattlefieldSettings.TYPES:
 		var value: String = SteamUser.get_lobby_data(type)
-		print(value)
 		if value == "":
 			continue
 		

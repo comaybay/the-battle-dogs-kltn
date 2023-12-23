@@ -66,8 +66,8 @@ func set_message(message: String) -> void:
 		%PopupPanel.size.x = MAX_POPUP_PANEL_WIDTH
 		%PopupMessage.text = message
 	
-	%PopupPanel.anchors_preset = PRESET_CENTER
-
+	%PopupPanel.position = Global.VIEWPORT_SIZE * 0.5 - %PopupPanel.size * 0.5
+	
 func popup_process(method: Callable, popup_type: Type) -> void:
 	popup(method.call(), popup_type)
 	

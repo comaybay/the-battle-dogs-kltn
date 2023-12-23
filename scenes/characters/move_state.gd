@@ -23,6 +23,7 @@ func physics_update(delta: float) -> void:
 		character.velocity.x = character.speed * character.move_direction 
 		
 	else:# va cham
+		character.velocity.x = 0
 		if character.n_AnimationPlayer.current_animation != "attack":
 			character.velocity = Vector2.ZERO
 			

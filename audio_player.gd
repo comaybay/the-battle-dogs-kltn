@@ -7,6 +7,7 @@ const BUTTON_PRESSED_AUDIO: AudioStream = preload("res://resources/sound/button_
 var _music_players: Dictionary = {} 
 var _in_battle_sfx_players: Dictionary = {} 
 var _current_music: AudioStream
+
 ## get currently playing music
 func get_current_music() -> AudioStream: return _current_music
 
@@ -156,18 +157,39 @@ func remove_all_music() -> void:
 func get_random_pitch_scale() -> float:
 	return randf_range(0.85, 1.15)
 
-func _create_in_battle_sfx() -> AudioStreamPlayer:
+func _create_in_battle_sfx(bus_name: String, no_compressor: bool = false) -> AudioStreamPlayer:
 	var sfx_player = AudioStreamPlayer.new()
-	sfx_player.bus = "InBattleFX"
+	
+	if no_compressor:
+		sfx_player.bus = "InBattleFX"
+	else:
+		sfx_player.bus = bus_name
+		var index := AudioServer.bus_count
+		AudioServer.add_bus(index)
+		AudioServer.set_bus_name(index, bus_name)
+		var compressor = AudioEffectCompressor.new()
+		compressor.ratio = 1.5;
+		compressor.gain = 2.0;
+		compressor.threshold = -16.0;
+		compressor.attack_us = 0.0;
+		AudioServer.add_bus_effect(index, compressor)
+		AudioServer.set_bus_send(index, "InBattleFX")
+		
+		sfx_player.tree_exited.connect(func(): 
+			var bus_index = AudioServer.get_bus_index(bus_name)
+			AudioServer.remove_bus(bus_index)
+		)
+		
+	
 	return sfx_player
 
-func add_in_battle_sfx(audio_stream: AudioStream, max_polyphony: int = 1) -> void:
+func add_in_battle_sfx(audio_stream: AudioStream, max_polyphony: int = 1, no_compressor: bool = false) -> void:
 	if has_in_battle_sfx(audio_stream):
 		var sfx_player: AudioStreamPlayer = _in_battle_sfx_players[audio_stream.resource_path]
 		sfx_player.max_polyphony = max_polyphony
 		return
 		
-	var sfx_player := _create_in_battle_sfx()
+	var sfx_player := _create_in_battle_sfx(audio_stream.resource_path, no_compressor)
 	sfx_player.stream = audio_stream
 	sfx_player.max_polyphony = max_polyphony
 	add_child(sfx_player)
@@ -179,13 +201,24 @@ func has_in_battle_sfx(audio_stream: AudioStream) -> bool:
 
 ## If sfx is not added, auto add the sfx with max_polyphony = 10 [br]
 ## to set custom max_polyphony, use the add_in_battle_sfx function
-func play_in_battle_sfx(audio_stream: AudioStream, pitch_scale: float = 1.0) -> void:
+func play_in_battle_sfx(audio_stream: AudioStream, pitch_scale: float = 1.0, no_compressor: bool = false) -> void:
 	if not _in_battle_sfx_players.has(audio_stream.resource_path):
-		add_in_battle_sfx(audio_stream, 10)
+		add_in_battle_sfx(audio_stream, 10, no_compressor)
 	
 	var sfx_player: AudioStreamPlayer = _in_battle_sfx_players[audio_stream.resource_path]
 	sfx_player.pitch_scale = pitch_scale
 	sfx_player.play()
+
+## play and then remove sfx instead of storing it for later uses. use this for one-time sfx [br]
+## no_compressor to avoid using the compressor effect, which may make the sfx sounds louder
+func play_in_battle_sfx_once(audio_stream: AudioStream, pitch_scale: float = 1.0, no_compressor: bool = false) -> void:
+	var sfx_player := _create_in_battle_sfx(audio_stream.resource_path, no_compressor)
+	sfx_player.stream = audio_stream
+	add_child(sfx_player)
+	sfx_player.play()
+	
+	await sfx_player.finished
+	sfx_player.queue_free()
 
 ## Remove sfx when it is no longer needed
 func remove_in_battle_sfx(audio_stream: AudioStream) -> void:

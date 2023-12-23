@@ -94,6 +94,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p6yas"]
+resource_local_to_scene = true
 _data = {
 "RESET": SubResource("Animation_gwlt8"),
 "attack": SubResource("Animation_8csog"),
@@ -141,7 +142,7 @@ libraries = {
 shape = SubResource("RectangleShape2D_40amy")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(96, 64)
+position = Vector2(96, -1)
 target_position = Vector2(40, 0)
 collision_mask = 20
 

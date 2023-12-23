@@ -85,12 +85,16 @@ func _on_theme_selected(index: int) -> void:
 func set_settings(type: String, value: Variant) -> void:
 	if type == TYPE_STAGE_WIDTH:
 		%StageWidthSlider.set_value_no_signal(value)
+		%StageWidthValue.text = str(value)
 	elif type == TYPE_DOG_TOWER_HEALTH:
 		%TowerHealthSlider.set_value_no_signal(value)
+		%TowerHealthValue.text = str(value)
 	elif type == TYPE_MONEY_EFFICIENCY_LEVEL:
 		%MoneyEfficiencySlider.set_value_no_signal(value)
+		%MoneyEfficiencyValue.text = str(value)
 	elif type == TYPE_POWER_LEVEL:
 		%PowerSlider.set_value_no_signal(value)
+		%PowerValue.text = str(value)
 	elif type == TYPE_MUSIC:
 		var index: int = MUSIC_CODE_TO_NAME.keys().find(value)
 		%MusicOptions.select(index)

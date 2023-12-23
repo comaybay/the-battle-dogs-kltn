@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const LIGHTNING_AUDIO: AudioStream = preload("res://resources/sound/Skill/lightning.mp3")
+
 const SPEED_Y: int = 8000
 const BASE_DAMAGE: int = 10
 const BASE_MULTIPLIER: float = 0.9
@@ -14,6 +16,7 @@ var _sync_data: Dictionary
 
 func _ready() -> void:
 	set_physics_process(false)
+	AudioPlayer.play_in_battle_sfx(LIGHTNING_AUDIO)
 
 func setup(global_position: Vector2, skill_user: Character.Type):
 	_sync_data = {

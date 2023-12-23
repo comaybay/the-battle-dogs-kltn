@@ -25,6 +25,12 @@ func get_player_data() -> BaseBattlefieldPlayerData:
 func get_land() -> Land:
 	return land
 	
+func get_sky() -> BattlefieldSky:
+	return sky
+	
+func get_camera() -> Camera2D:
+	return $Camera2D
+
 ## The effect space, this is where all the effects should be placed.
 ## stuff that are placed here will always be in front of the characters
 func get_effect_space() -> Node2D:
@@ -33,10 +39,6 @@ func get_effect_space() -> Node2D:
 ## the danmaku space, used to spawn bullets.
 func get_danmaku_space() -> DanmakuSpace:
 	return $DanmakuSpace
-
-func _init() -> void:
-	const BITE_SFX: AudioStream = preload("res://resources/sound/battlefield/bite.mp3")
-	AudioPlayer.add_in_battle_sfx(BITE_SFX, 10)
 
 func _clean_up():
 	# set back to 1 in case user change game speed

@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgylpgef3843m"]
+[gd_scene load_steps=8 format=3 uid="uid://bgylpgef3843m"]
 
 [ext_resource type="Script" path="res://scenes/battlefields/common/dog_tower/gandolfg/gandolfg_bullet.gd" id="1_jgidq"]
 [ext_resource type="Texture2D" uid="uid://ccr41m6f4iikc" path="res://scenes/battlefields/common/dog_tower/gandolfg/bullet.png" id="2_r0d5v"]
-[ext_resource type="AudioStream" uid="uid://dhvcfxros1ly7" path="res://scenes/battlefields/common/dog_tower/gandolfg/electric_ball.mp3" id="3_23lmw"]
-[ext_resource type="AudioStream" uid="uid://c2gpilc6x2usf" path="res://scenes/battlefields/common/dog_tower/gandolfg/electric_ball_hit.mp3" id="4_1sjnb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1rg3w"]
 atlas = ExtResource("2_r0d5v")
@@ -49,11 +47,3 @@ frame_progress = 0.246008
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ru2nq")
-
-[node name="SpellCastAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_23lmw")
-bus = &"InBattleFX"
-
-[node name="HitAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_1sjnb")
-bus = &"InBattleFX"

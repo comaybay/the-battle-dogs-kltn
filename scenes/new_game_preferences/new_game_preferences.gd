@@ -39,6 +39,8 @@ func _ready() -> void:
 	
 	%TutorialYes.pressed.connect(
 		func():
+			%TutorialYes.mouse_filter = MOUSE_FILTER_IGNORE		
+			%TutorialNo.mouse_filter = MOUSE_FILTER_IGNORE		
 			%YesSound.play()
 			$AnimationPlayer.play("dog_jump_up")
 			await $AnimationPlayer.animation_finished
@@ -47,6 +49,8 @@ func _ready() -> void:
 	
 	%TutorialNo.pressed.connect(
 		func():
+			%TutorialYes.mouse_filter = MOUSE_FILTER_IGNORE		
+			%TutorialNo.mouse_filter = MOUSE_FILTER_IGNORE		
 			AudioPlayer.play_sfx(AudioPlayer.BUTTON_PRESSED_AUDIO)
 			choose_skip_tutorial()
 			$AnimationPlayer.play("dog_jump_off")

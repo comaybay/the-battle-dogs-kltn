@@ -1,12 +1,11 @@
 @tool
 class_name Character extends CharacterBody2D
 
-const DEFAULT_ATTACK_SFX = preload("res://resources/sound/battlefield/bite.mp3")
+const DEFAULT_ATTACK_HIT_SFX = preload("res://resources/sound/battlefield/bite.mp3")
 const DEFAULT_DIE_SFX = preload("res://resources/sound/battlefield/death.mp3")
-const BOSS_DIE_SFX: AudioStream = preload("res://resources/sound/battlefield/boss_knockback_cry.mp3")
 
 ## keep raycast off the ground a bit to avoid miss detection
-const RAYCAST_OFFSET_Y: int = 25
+const RAYCAST_OFFSET_Y: int = 90
 
 signal knockbacked
 signal zero_health
@@ -86,7 +85,10 @@ var _multipliers: Dictionary = {
 	
 @export var knockbacks: int = 3
 
-@export var attack_sfx: AudioStream = DEFAULT_ATTACK_SFX 
+@export var attack_hit_sfx: AudioStream = DEFAULT_ATTACK_HIT_SFX 
+@export var attack_sfx: AudioStream
+
+@export var before_death_sfx: AudioStream
 @export var die_sfx: AudioStream = DEFAULT_DIE_SFX
 	
 @onready var n_RayCast2D := $RayCast2D as RayCast2D
@@ -102,7 +104,12 @@ func get_character_animation_node() -> Node2D:
 ## A general position where effect for a character should take place (example: hit effect). 
 ## Use this when unsure where the effect should be at
 func get_effect_global_position() -> Vector2:
-	return n_RayCast2D.global_position
+	var pos := get_bottom_global_position();
+	pos.y -= RAYCAST_OFFSET_Y 
+	pos.x += collision_rect.position.x
+	if character_type == Type.DOG:
+		pos.x += collision_rect.size.x
+	return pos;
 
 ## Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -135,7 +142,7 @@ func _setup(global_position: Vector2, is_boss: bool) -> void:
 		add_to_group("bosses")
 		
 	await ready
-	self.global_position.y = global_position.y + (self.global_position.y - get_bottom_global_position().y)
+	self.global_position.y += (self.global_position.y - get_bottom_global_position().y)
 	visible = true
 
 func _init() -> void:
@@ -269,12 +276,13 @@ func take_damage(ammount: int) -> void:
 		if health > 0:
 			update_next_knockback_health()
 		else:
-			AudioPlayer.play_in_battle_sfx(BOSS_DIE_SFX if is_boss() else die_sfx)
+			if before_death_sfx != null:
+				AudioPlayer.play_in_battle_sfx(before_death_sfx)
 			zero_health.emit()
 		
 		## avoid stopping the timer because it wont emit timeout signal, which might be listening by others  
 		var wait_time = n_AttackCooldownTimer.wait_time
-		n_AttackCooldownTimer.start(0)	
+		n_AttackCooldownTimer.start(0.05)	
 		n_AttackCooldownTimer.wait_time = wait_time
 		
 		knockback()

@@ -130,7 +130,7 @@ monitorable = false
 shape = SubResource("RectangleShape2D_b7xt6")
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
 
 [node name="CharacterAnimation" type="Node2D" parent="."]
@@ -152,8 +152,8 @@ position = Vector2(2, 29)
 shape = SubResource("RectangleShape2D_f0hp4")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-3, 189)
-target_position = Vector2(478, 5)
+position = Vector2(366, 280)
+target_position = Vector2(40, 5)
 collision_mask = 20
 
 [node name="FiniteStateMachine" parent="." instance=ExtResource("3_yn7ow")]

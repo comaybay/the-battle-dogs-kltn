@@ -1,16 +1,11 @@
-class_name WaitToken extends RefCounted
+class_name WaitToken extends CancellationToken
 
-var timer: SceneTreeTimer
-var _canceled: bool = false
+var timer: DeltaTimer
 
-func _init(timer: SceneTreeTimer) -> void:
+func _init(timer: DeltaTimer) -> void:
 	self.timer = timer
 
-func wait() -> void: 
-	if timer.time_left >= 0:
-		await timer.timeout
+## returns the timeout signal
+func wait() -> Signal: 
+	return timer.timeout
 
-func is_canceled() -> bool: return _canceled
-	
-func cancel() -> void:
-	_canceled = true

@@ -1,6 +1,8 @@
 class_name Tori extends StaticBody2D
 
 const EnergyExpand: PackedScene = preload("res://scenes/effects/energy_expand/energy_expand.tscn")
+const SkyInvert: PackedScene = preload("res://scenes/effects/sky_invert/sky_invert.tscn")
+const SKY_INVERT_AUDIO: AudioStream = preload("res://resources/sound/battlefield/sky_invert.mp3")
 
 signal zero_health
 
@@ -32,7 +34,7 @@ func setup(position_x: float, health: int, growl_num: int, instant_spawns: Dicti
 			var cat := cat_scene.instantiate() as BaseCat
 			
 			if cat is AirUnitCat:
-				var rand_offset := Vector2(randf_range(-1000, 1000), randf_range(-300, 300))
+				var rand_offset := Vector2(300, 0).rotated(randf() * PI * 2) 
 				cat.change_target_overtime = false 
 				cat.setup($FaceMarker.global_position + rand_offset, false)
 				cat.target_position = cat.global_position
@@ -47,13 +49,15 @@ func setup(position_x: float, health: int, growl_num: int, instant_spawns: Dicti
 			
 	for bullet_color in _bullet_colors:
 		danmaku_space.register_bullet(BulletKits.BULLET_1, bullet_color, 200)
-	
+		
 func take_damage(damage: int) -> void:
 	if health <= 0:
 		return
 	
 	if not InBattle.in_request_mode:
 		health = max(health - damage, 0) 
+		
+	update_health_label()
 	
 	if health > 0:
 		if next_growl_health != 0 and health <= next_growl_health:
@@ -63,13 +67,27 @@ func take_damage(damage: int) -> void:
 			growl()
 		else:	
 			$AnimationPlayer.play("shake")
+			
+			
 	else:
 		$AnimationPlayer.play("destroy")
 		zero_health.emit()
 		collision_layer = 0
 		$HealthLabel.visible = false
+		invert_sky()
 
-	update_health_label()
+func invert_sky() -> void:
+	AudioPlayer.play_in_battle_sfx_once(SKY_INVERT_AUDIO, 1.0, true)
+	
+	var sky_invert: FXSkyInvert = SkyInvert.instantiate()
+	var battlefield := InBattle.get_battlefield()
+	sky_invert.sky_movement_scale = 5
+	sky_invert.invert = 0.555
+	sky_invert.add = 0x008d00ff
+	sky_invert.difference = 0x7d7565ff
+	sky_invert.hue_shift = -0.38
+	sky_invert.setup(battlefield.get_camera(), battlefield.get_sky(), $FaceMarker.global_position)
+	InBattle.get_battlefield().add_child(sky_invert)	
 
 func update_health_label() -> void:
 	$HealthLabel.text = "%s/%s HP" % [health, max_health]

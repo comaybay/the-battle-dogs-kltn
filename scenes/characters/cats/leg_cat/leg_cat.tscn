@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2oyci65r7dp5"]
+[gd_scene load_steps=12 format=3 uid="uid://c2oyci65r7dp5"]
 
 [ext_resource type="PackedScene" uid="uid://dpgr6rk41h8du" path="res://scenes/characters/cats/base_cat.tscn" id="1_vncuy"]
+[ext_resource type="AudioStream" uid="uid://c8a4fy4c8tj4e" path="res://resources/sound/battlefield/kick.mp3" id="2_5sypu"]
 [ext_resource type="Texture2D" uid="uid://cqfjhykmeb15v" path="res://scenes/characters/cats/leg_cat/leg_cat.png" id="2_lg6d2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glgq8"]
@@ -103,6 +104,7 @@ attack_area_range = 50
 attack_cooldown = 10.0
 health = 200
 damage = 80
+attack_hit_sfx = ExtResource("2_5sypu")
 
 [node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
 shape = SubResource("RectangleShape2D_glgq8")
@@ -128,7 +130,7 @@ position = Vector2(0, -241)
 shape = SubResource("RectangleShape2D_b8yx7")
 
 [node name="RayCast2D" parent="." index="5"]
-position = Vector2(-96, 26)
+position = Vector2(-96, -39)
 target_position = Vector2(-300, 0)
 metadata/_edit_lock_ = true
 

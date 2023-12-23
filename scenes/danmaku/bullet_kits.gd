@@ -2,6 +2,7 @@ class_name BulletKits extends RefCounted
 
 # kit with full color variantions
 const BULLET_1: String = "bullet1"
+const BULLET_ROUND_1: String = "bullet_round1"
 
 # kit with partial color variations
 const OFUDA: String = "ofuda"

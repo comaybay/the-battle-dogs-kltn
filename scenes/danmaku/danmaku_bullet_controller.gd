@@ -79,7 +79,8 @@ func start(callable: Callable) -> void:
 
 ## use this to manually process the bullet		
 func physic_process(delta: float) -> void:
-	Bullets.physics_process_bullet(_native_bullet_id, delta)
+	if not is_zero_approx(delta):
+		Bullets.physics_process_bullet(_native_bullet_id, delta)
 
 func _handle_body_entered(body: Node2D):
 	body.take_damage(damage)
@@ -89,5 +90,9 @@ func _handle_body_entered(body: Node2D):
 
 ## this will be called by DanmakuSpace when the owner of the bullet is dead 
 func _handle_owner_dead() -> void:
+	destroy()
+	
+## destroy the bullet on the spot
+func destroy():
 	InBattle.add_hit_effect(position)
-	Bullets.call_deferred("release_bullet", _native_bullet_id)
+	Bullets.call_deferred("release_bullet", _native_bullet_id)	

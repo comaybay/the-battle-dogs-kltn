@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://ckt5ltgoij5x8"]
+[gd_scene load_steps=14 format=3 uid="uid://ckt5ltgoij5x8"]
 
 [ext_resource type="PackedScene" uid="uid://14rtm3qx0p7g" path="res://scenes/characters/cats/air_unit_cat.tscn" id="1_j47xo"]
 [ext_resource type="Script" path="res://scenes/characters/cats/fairy_cat/fairy_cat.gd" id="2_jge1o"]
 [ext_resource type="Texture2D" uid="uid://cbioupy06x8se" path="res://scenes/characters/cats/fairy_cat/fairy_cat.png" id="2_qqjbc"]
+[ext_resource type="AudioStream" uid="uid://qvhrfh8if80y" path="res://resources/sound/battlefield/se_kira02.wav" id="3_xygka"]
 [ext_resource type="Script" path="res://scenes/characters/cats/fairy_cat/attack_state.gd" id="4_m00p2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0kdy4"]
@@ -147,17 +148,11 @@ point_count = 3
 [node name="FairyCat" instance=ExtResource("1_j47xo")]
 script = ExtResource("2_jge1o")
 reward_money = 50
-speed = 400
-attack_range = 1000
-attack_cooldown = 8.0
-health = 350
 knockbacks = 5
+attack_hit_sfx = ExtResource("3_xygka")
 
 [node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
 shape = SubResource("RectangleShape2D_0kdy4")
-
-[node name="AttackCooldownTimer" parent="." index="1"]
-wait_time = 8.0
 
 [node name="CharacterAnimation" parent="." index="2"]
 position = Vector2(0, 28.4523)
@@ -166,6 +161,7 @@ position = Vector2(0, 28.4523)
 position = Vector2(-10, -43.4523)
 texture = ExtResource("2_qqjbc")
 hframes = 1
+vframes = 7
 
 [node name="BulletSpawnMarker" type="Marker2D" parent="CharacterAnimation" index="1"]
 unique_name_in_owner = true
@@ -181,7 +177,7 @@ autoplay = "move"
 shape = SubResource("RectangleShape2D_0ancf")
 
 [node name="RayCast2D" parent="." index="5"]
-position = Vector2(1088, 56)
+position = Vector2(1088, -9)
 target_position = Vector2(-2176, 0)
 
 [node name="Path2D" parent="FiniteStateMachine/MoveState" index="0"]

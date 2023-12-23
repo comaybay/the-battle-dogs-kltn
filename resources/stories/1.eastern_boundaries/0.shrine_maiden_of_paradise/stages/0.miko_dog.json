@@ -10,11 +10,16 @@
     "health": 50000,
     "growls": 9,
     "instant_spawns": {
-      "fairy_cat": 5
+      "fairy_cat": 5,
+      "sunflower_fairy_cat": 1
     }
   },
   "power_scale": 2.5,
   "instant_spawns": [
+    {
+      "id": "sunflower_fairy_cat",
+      "position": [3000, -1500]
+    },
     {
       "id": "cat",
       "position": 3300,
