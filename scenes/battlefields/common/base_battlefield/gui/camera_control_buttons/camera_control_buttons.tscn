@@ -271,10 +271,10 @@ vframes = 5
 frame = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MoveLeft"]
-autoplay = "off"
 libraries = {
 "": SubResource("AnimationLibrary_3fxg3")
 }
+autoplay = "off"
 
 [node name="MoveRight" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(26, 32)
@@ -289,10 +289,10 @@ hframes = 5
 vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight"]
-autoplay = "off"
 libraries = {
 "": SubResource("AnimationLibrary_tsv7a")
 }
+autoplay = "off"
 
 [node name="ZoomOut" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(32, 32)
@@ -308,10 +308,10 @@ vframes = 5
 frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ZoomOut"]
-autoplay = "off"
 libraries = {
 "": SubResource("AnimationLibrary_3iyas")
 }
+autoplay = "off"
 
 [node name="ZoomIn" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(32, 32)
@@ -327,10 +327,10 @@ vframes = 5
 frame = 18
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ZoomIn"]
-autoplay = "off"
 libraries = {
 "": SubResource("AnimationLibrary_hhd5p")
 }
+autoplay = "off"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
