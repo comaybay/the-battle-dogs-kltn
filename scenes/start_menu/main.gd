@@ -103,6 +103,7 @@ func _on_confirmation_dialog_canceled():
 	Data.save_data = sw_result.player_data
 	Data.silentwolf_data = sw_result.player_data
 	Data.use_sw_data = true
+	Data.save()
 	SteamUser.sw_dangky.emit()
 
 
