@@ -80,6 +80,7 @@ func dang_nhap_sw():
 	Data.silentwolf_data = sw_result.player_data
 	if Data.old_data.user_name == "" :
 		Data.save_data.user_name = STEAM_USERNAME
+		Data.select_data.emit()
 	if Data.silentwolf_data.user_name == Data.save_data.user_name:
 		var date1 = Time.get_unix_time_from_datetime_string(Data.save_data.date)
 		var date2 = Time.get_unix_time_from_datetime_string(Data.silentwolf_data.date)

@@ -234,10 +234,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 408.0
-offset_top = 211.0
-offset_right = 795.0
-offset_bottom = 578.0
+offset_left = -168.0
+offset_top = -113.0
+offset_right = 219.0
+offset_bottom = 254.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_ox0nk")
@@ -249,9 +249,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 228.0
-offset_right = 978.0
-offset_bottom = 390.0
+offset_left = -348.0
+offset_top = -324.0
+offset_right = 402.0
+offset_bottom = 66.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_qfxhr")
@@ -329,5 +330,5 @@ dialog_autowrap = true
 cancel_button_text = "@STEAM"
 
 [connection signal="pressed" from="Khung/PhanCuoi/NutBatDau" to="." method="_on_nut_bat_dau_pressed"]
-[connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_player"]
-[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_computer"]
+[connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
