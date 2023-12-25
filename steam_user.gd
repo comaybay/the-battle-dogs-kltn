@@ -40,7 +40,6 @@ func _ready() -> void:
 	var INIT: Dictionary = Steam.steamInit(false)
 	print("Did Steam initialize?: "+str(INIT))	
 	IS_USING_STEAM = Steam.loggedOn()
-	Data.old_data = Data.save_data
 	Data.silentwolf_data = Data.save_data
 	
 	if IS_USING_STEAM: #have account
@@ -78,9 +77,9 @@ func dang_ky_sw():
 func dang_nhap_sw():
 	var sw_result = await SilentWolf.Players.get_player_data(STEAM_USERNAME).sw_get_player_data_complete
 	Data.silentwolf_data = sw_result.player_data
-	if Data.old_data.user_name == "" :
+	if Data.save_data.user_name == "" :
 		Data.save_data.user_name = STEAM_USERNAME
-		Data.select_data.emit()
+		Data.select_data = true
 	if Data.silentwolf_data.user_name == Data.save_data.user_name:
 		var date1 = Time.get_unix_time_from_datetime_string(Data.save_data.date)
 		var date2 = Time.get_unix_time_from_datetime_string(Data.silentwolf_data.date)
@@ -90,7 +89,7 @@ func dang_nhap_sw():
 			Data.silentwolf_data = Data.save_data
 		Data.use_sw_data = true
 	else :
-		Data.select_data.emit()
+		Data.select_data = true
 
 func _on_registration_complete(sw_result: Dictionary) -> void:
 	if sw_result.success:

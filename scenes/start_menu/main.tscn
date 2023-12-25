@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1bdbelxbqc86"]
+[gd_scene load_steps=12 format=3 uid="uid://b1bdbelxbqc86"]
 
 [ext_resource type="Script" path="res://scenes/start_menu/main.gd" id="1_gee0v"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_untcg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://3mgk1tr4612p" path="res://scenes/endings/the_battle_dogs_rising_ending/main_background_3.png" id="4_xj58w"]
 [ext_resource type="Texture2D" uid="uid://blp51w2h0ek56" path="res://scenes/start_menu/main_background_dog.png" id="5_ox0nk"]
 [ext_resource type="Texture2D" uid="uid://ba7uaub481uor" path="res://resources/images/game_logo.png" id="6_qfxhr"]
+[ext_resource type="PackedScene" uid="uid://cniblhu062ir" path="res://scenes/popup/popup.tscn" id="8_qb1qb"]
 
 [sub_resource type="Animation" id="Animation_8vrgj"]
 length = 0.001
@@ -328,6 +329,9 @@ ok_button_text = "@COMPUTER"
 dialog_text = "@SELECT_PLAYER_DATA?"
 dialog_autowrap = true
 cancel_button_text = "@STEAM"
+
+[node name="Popup" parent="." instance=ExtResource("8_qb1qb")]
+layout_mode = 1
 
 [connection signal="pressed" from="Khung/PhanCuoi/NutBatDau" to="." method="_on_nut_bat_dau_pressed"]
 [connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]

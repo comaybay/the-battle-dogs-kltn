@@ -12,7 +12,7 @@ func _ready():
 		await $Popup.ok
 		get_tree().change_scene_to_file("res://scenes/start_menu/main.tscn")
 	
-	%JoinWithCodeLabel.text = tr("%s:" % "@JOIN_WITH_CODE")
+	%JoinWithCodeLabel.text = "%s:" % tr("@JOIN_WITH_CODE")
 	
 	AudioPlayer.play_music(MAIN_THEME_AUDIO, true, true)
 	Steam.lobby_created.connect(_on_lobby_created)

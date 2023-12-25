@@ -6,6 +6,7 @@ const CreditsScene: PackedScene = preload("res://scenes/credits/credits.tscn")
 
 var _settings: Settings = null
 var _credits: Credits = null
+@onready var popup: = $Popup as PopupDialog
 
 func _ready():
 	AudioPlayer.play_music(MAIN_THEME_AUDIO)
@@ -28,7 +29,10 @@ func _ready():
 	else:		
 		%QuitButton.pressed.connect(_quit_game)
 	
-	Data.select_data.connect(show_select_data_box)
+func _process(delta: float) -> void:
+	if Data.select_data == true:
+		show_select_data_box()	
+		set_process(false)
 
 func show_select_data_box():
 	if Data.data_notifi == true:		
@@ -99,18 +103,22 @@ func _go_to_lobby():
 
 
 func _on_confirmation_dialog_canceled():
+	popup.popup(tr("@LOADING"), PopupDialog.Type.PROGRESS)
 	var sw_result = await SilentWolf.Players.get_player_data(Data.silentwolf_data.user_name).sw_get_player_data_complete
 	Data.save_data = sw_result.player_data
 	Data.silentwolf_data = sw_result.player_data
 	Data.use_sw_data = true
 	Data.save()
 	SteamUser.sw_dangky.emit()
+	popup.close()
 
 
 func _on_confirmation_dialog_confirmed():
+	popup.popup(tr("@LOADING"), PopupDialog.Type.PROGRESS)
 	var sw_result = await SilentWolf.Players.get_player_data(Data.silentwolf_data.user_name).sw_get_player_data_complete
 	var user_name = Data.silentwolf_data["user_name"]
 	Data.silentwolf_data = Data.save_data
 	await SilentWolf.Players.save_player_data(user_name, Data.silentwolf_data)
 	Data.save()
 	SteamUser.sw_dangky.emit()
+	popup.close()

@@ -5,9 +5,8 @@ signal music_volume_changed(value: int)
 signal sound_fx_volume_changed(value: int)
 signal mute_music_changed(mute: bool)
 signal mute_sound_fx_changed(mute: bool)
-signal select_data
+var select_data: bool = false
 
-var old_data: Dictionary
 var save_data: Dictionary
 var silentwolf_data : Dictionary
 var use_sw_data : bool
@@ -177,7 +176,6 @@ func _init() -> void:
 		save_data = _create_new_game_save()
 	else:
 		save_data = _load_game_save()
-	old_data = save_data
 	load_settings()
 
 	var file := FileAccess.open("res://resources/game_data/character.json", FileAccess.READ)
@@ -372,7 +370,6 @@ func load_settings():
 func _notification(what) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if use_sw_data == true :
-			save_data = old_data
 			SilentWolf.Players.save_player_data(save_data.user_name, save_data)
 		await get_tree().create_timer(1).timeout 
 		print("exit game")
