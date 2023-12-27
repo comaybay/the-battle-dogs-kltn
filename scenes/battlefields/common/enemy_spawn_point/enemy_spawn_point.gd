@@ -223,7 +223,12 @@ func _set_cat_buffs(cat: Character, buffs: Array) -> void:
 				cat.set(prop_name, cat.get(prop_name) * prop_scale)
 
 func _add_boss_shader(cat: Character) -> void:
-	cat.get_character_animation_node().material = BOSS_SHADER
+	var animtion_node := cat.get_character_animation_node()
+	var canvas_group := CanvasGroup.new() 
+	canvas_group.name = animtion_node.name
+	animtion_node.replace_by(canvas_group)
+	
+	canvas_group.material = BOSS_SHADER
 	
 func _process(delta: float) -> void:
 	if alive_boss_count > 0:

@@ -99,6 +99,7 @@ var _multipliers: Dictionary = {
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
 @onready var n_DanmakuHitbox := %DanmakuHitbox as Area2D
 
+## this might returns a CanvasGroup node depending if the character uses a boss shader
 func get_character_animation_node() -> Node2D:
 	return $CharacterAnimation
 
