@@ -194,9 +194,12 @@ func _update_character():
 	next_knockback_health = max_health - (max_health / knockbacks)
 	move_direction = (1 if character_type == Type.DOG else -1)
 	if unit_type == UnitType.AIR:
+		add_to_group("air_unit")	
 		gravity *= 2
 		if attack_type != AttackType.UNIQUE:
 			attack_type = AttackType.UNIQUE
+	else:
+		remove_from_group("air_unit")	
 		
 	# for some reason timer do not take in 0 correctly
 	$AttackCooldownTimer.wait_time = max(attack_cooldown, 0.05)
@@ -219,7 +222,7 @@ func _update_character():
 	if character_type == Type.DOG:
 		remove_from_group("cats")	
 		add_to_group("dogs")	
-	
+		
 		n_RayCast2D.collision_mask = 0b010100
 		self.collision_mask = 0b010001
 		self.collision_layer = 0b010
@@ -233,7 +236,8 @@ func _update_character():
 	
 	if unit_type == UnitType.AIR:
 		## air unit will not collide with dog or cat tower 
-		self.collision_mask &= 001111
+		self.collision_mask &= ~(0b110000)
+		self.collision_layer |= 0b1000000
 	
 ## get global position of the character's bottom
 func get_bottom_global_position() -> Vector2:

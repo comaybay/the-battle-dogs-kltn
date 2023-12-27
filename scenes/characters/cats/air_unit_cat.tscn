@@ -84,6 +84,7 @@ _data = {
 point_count = 3
 
 [node name="AirUnitCat" instance=ExtResource("1_smhkw")]
+collision_layer = 68
 collision_mask = 1
 script = ExtResource("2_qlc7d")
 movement_radius = 500
@@ -114,7 +115,7 @@ libraries = {
 shape = SubResource("RectangleShape2D_bxma6")
 
 [node name="RayCast2D" parent="." index="5"]
-position = Vector2(1096, 64)
+position = Vector2(1096, -1)
 target_position = Vector2(-2192, 0)
 
 [node name="FiniteStateMachine" parent="." index="6"]

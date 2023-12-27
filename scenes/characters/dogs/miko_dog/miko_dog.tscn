@@ -1,14 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://chsa5iqbxcilm"]
+[gd_scene load_steps=20 format=3 uid="uid://chsa5iqbxcilm"]
 
 [ext_resource type="PackedScene" uid="uid://5joq03mk4kv3" path="res://scenes/characters/dogs/base_dog.tscn" id="1_t2ynb"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/miko_dog.gd" id="2_8rpp5"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/attack_state.gd" id="2_i3nlb"]
 [ext_resource type="Texture2D" uid="uid://cpmqxhpuoenyj" path="res://scenes/characters/dogs/miko_dog/miko_dog.png" id="2_i8u76"]
+[ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/move_state.gd" id="4_x3uvc"]
+[ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/idle_state.gd" id="6_hcflj"]
 [ext_resource type="Script" path="res://scenes/characters/dogs/miko_dog/knockback_state.gd" id="8_o0snc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iv36t"]
 resource_local_to_scene = true
 size = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lu32d"]
+size = Vector2(800, 20)
 
 [sub_resource type="Animation" id="Animation_gwlt8"]
 length = 0.001
@@ -167,7 +172,17 @@ damage = 0
 [node name="CollisionShape2D" parent="DanmakuHitbox" index="0"]
 shape = SubResource("RectangleShape2D_iv36t")
 
-[node name="AttackCooldownTimer" parent="." index="1"]
+[node name="AirUnitDetector" type="Area2D" parent="." index="1"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirUnitDetector" index="0"]
+position = Vector2(499, -1)
+shape = SubResource("RectangleShape2D_lu32d")
+
+[node name="AttackCooldownTimer" parent="." index="2"]
 wait_time = 20.0
 
 [node name="Character" parent="CharacterAnimation" index="0"]
@@ -175,18 +190,21 @@ position = Vector2(-41, -60)
 texture = ExtResource("2_i8u76")
 vframes = 9
 
-[node name="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" parent="." index="4"]
 libraries = {
 "": SubResource("AnimationLibrary_21x6l")
 }
 
-[node name="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D" parent="." index="5"]
 position = Vector2(1.5, -24)
 shape = SubResource("RectangleShape2D_60v3l")
 
-[node name="RayCast2D" parent="." index="5"]
+[node name="RayCast2D" parent="." index="6"]
 position = Vector2(99, -1)
 target_position = Vector2(800, 0)
+
+[node name="MoveState" parent="FiniteStateMachine" index="0"]
+script = ExtResource("4_x3uvc")
 
 [node name="AttackState" parent="FiniteStateMachine" index="1"]
 script = ExtResource("2_i3nlb")
@@ -232,6 +250,9 @@ curve = SubResource("Curve2D_68g0e")
 position = Vector2(27, 245)
 rotation = -0.139966
 loop = false
+
+[node name="IdleState" parent="FiniteStateMachine" index="2"]
+script = ExtResource("6_hcflj")
 
 [node name="KnockbackState" parent="FiniteStateMachine" index="3"]
 script = ExtResource("8_o0snc")

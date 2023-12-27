@@ -51,7 +51,7 @@ func setup(
 
 	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel()
 	tween.tween_method(func(value: float): _shader.set_shader_parameter('circle_size', value),
-		0.0, BASE_DURATION * circle_scale, 0.7 * circle_scale
+		0.0, 1.05 * circle_scale, BASE_DURATION * circle_scale
 	)
 	
 	if not is_zero_approx(hue_shift):

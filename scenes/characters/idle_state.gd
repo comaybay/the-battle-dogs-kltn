@@ -1,4 +1,4 @@
-extends FSMState
+class_name CharacterIdleState extends FSMState
 
 @onready var character: Character = owner
 
@@ -14,7 +14,7 @@ func enter(_data: Dictionary) -> void:
 		
 func handle_stop_idle() -> void:
 	var collider = character.n_RayCast2D.get_collider() 
-	if collider != null and not InBattle.in_request_mode:
+	if not InBattle.in_request_mode and collider != null:
 		transition.emit("AttackState", {'target': collider })
 	else:
 		transition.emit("MoveState")
@@ -24,14 +24,13 @@ func exit() -> void:
 	if character.n_AttackCooldownTimer.timeout.is_connected(handle_stop_idle):
 		character.n_AttackCooldownTimer.timeout.disconnect(handle_stop_idle) 
 		
-# called every frame when the state is active
-func update(_delta: float) -> void:
+func physics_update(delta: float) -> void:
 	if character.n_RayCast2D.get_collider() == null:
 		transition.emit("MoveState")
-		
-func physics_update(delta: float) -> void:
+	
 	if not character.is_on_floor():
 		character.velocity.y += character.gravity * delta
+		character.move_and_slide()
 	else:
 		character.velocity.y = 0
-	character.move_and_slide()
+	

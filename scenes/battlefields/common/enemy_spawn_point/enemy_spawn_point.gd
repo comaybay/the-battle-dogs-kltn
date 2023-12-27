@@ -229,6 +229,7 @@ func _add_boss_shader(cat: Character) -> void:
 	animtion_node.replace_by(canvas_group)
 	
 	canvas_group.material = BOSS_SHADER
+	cat._update_character()
 	
 func _process(delta: float) -> void:
 	if alive_boss_count > 0:

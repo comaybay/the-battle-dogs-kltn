@@ -21,6 +21,8 @@ var _packed_scenes = {
 	SCENE_FX_ENERGY_EXPAND: preload(SCENE_FX_ENERGY_EXPAND),
 }
 
+var _fx_hit_pool := FxHitPool.new()
+
 ## get packed scene from cache, will load packed scene and returns it if it does not cache it yet
 func get_packed_scene(scene_path: String) -> PackedScene:
 	if not _packed_scenes.has(scene_path):
@@ -30,9 +32,9 @@ func get_packed_scene(scene_path: String) -> PackedScene:
 		
 ## add a hit effect to the battlefield
 func add_hit_effect(global_position: Vector2) -> FXHit:	
-	var fx_hit := InBattle.get_packed_scene(InBattle.SCENE_FX_HIT).instantiate() as FXHit
-	get_tree().current_scene.get_node("EffectSpace").add_child(fx_hit)
-	fx_hit.global_position = global_position
+	var fx_hit := _fx_hit_pool.get_hit_effect()
+	fx_hit.setup(global_position)
+	get_battlefield().get_effect_space().add_child(fx_hit)
 	return fx_hit
 
 func get_battlefield() -> BaseBattlefield:
@@ -105,4 +107,3 @@ func get_passive_level(passive_id: String) -> int:
 		return 0
 	
 	return get_player_data().get_passive_level(passive_id) 
-

@@ -246,7 +246,7 @@ locale/translations=PackedStringArray("res://resources/translations/translations
 2d_physics/layer_4="danmaku_bullets"
 2d_physics/layer_5="cat_tower"
 2d_physics/layer_6="dog_tower"
-2d_physics/layer_7="skills"
+2d_physics/layer_7="air_unit"
 
 [physics]
 

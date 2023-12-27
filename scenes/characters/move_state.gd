@@ -1,4 +1,4 @@
-extends FSMState
+class_name CharacterMoveState extends FSMState
 
 @onready var character: Character = owner
 
@@ -6,10 +6,6 @@ extends FSMState
 func enter(_data: Dictionary) -> void:
 	character.get_node("AnimationPlayer").play("move")
 
-# called when the state is deactivated
-func exit() -> void:
-	pass 
-		
 # called every frame when the state is active
 func physics_update(delta: float) -> void:
 	if not character.is_on_floor():

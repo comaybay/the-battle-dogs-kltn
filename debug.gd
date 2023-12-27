@@ -65,19 +65,26 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	_debug_label.text = "FPS: %s\n" % Engine.get_frames_per_second()    
 	
+	var timer_pool := Global._delta_timer_pool as DeltaTimerPool
 	_debug_label.text += "shared_timers: %s/%s\n" % [
-		Global._shared_timers.size(), (Global._shared_timers.size() + Global._unused_timers.size())
+		timer_pool._shared_timers.size(), (timer_pool._shared_timers.size() + timer_pool._unused_timers.size())
 	]
 	
 	if not InBattle.get_battlefield() is BaseBattlefield:
 		return
 	
-	_debug_label.text += "Total bullets %s/%s\n" % [
+	_debug_label.text += "Total Bullets %s/%s\n" % [
 		Bullets.get_total_active_bullets(), 
 		Bullets.get_total_active_bullets() + Bullets.get_total_available_bullets()
 	] 
 		
 	_debug_label.text += "Characters: %s\n" % get_tree().get_nodes_in_group("characters").size()
+	
+	var fx_hit_pool := InBattle._fx_hit_pool as FxHitPool 
+	_debug_label.text += "Hit Fxs: %s/%s\n" % [
+		fx_hit_pool._fx_hits.size(), 
+		fx_hit_pool._fx_hits.size() + fx_hit_pool._unused_fx_hits.size()
+	]
 		
 	var danamku_space := InBattle.get_danmaku_space()
 	for kit in danamku_space.bullet_kits:
