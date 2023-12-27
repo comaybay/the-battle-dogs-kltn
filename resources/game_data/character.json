@@ -43,8 +43,8 @@
     "spawn_time": 90,
     "spawn_price": 2000,
     "danmaku_bullets": {
-      "ofuda:gray": 700,
-      "ofuda:red": 700
+      "ofuda:red": 700,
+      "ofuda:gray": 700
     }
   }
 ]

@@ -57,7 +57,7 @@ func _input(event: InputEvent) -> void:
 			cat.take_damage(999999999)
 
 	if event.is_action_pressed('ui_debug_win_battle'):
-		InBattle.get_battlefield().get_cat_tower().zero_health.emit()
+		InBattle.get_battlefield()._win()
 	
 func _process(delta: float) -> void:
 	_debug_label.text = ""   

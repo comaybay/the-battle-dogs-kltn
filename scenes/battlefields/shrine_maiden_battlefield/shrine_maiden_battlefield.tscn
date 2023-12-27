@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://dilhyhh5l8d0j"]
 
-[ext_resource type="PackedScene" uid="uid://df6pmsavc8k75" path="res://scenes/battlefields/common/two_towers_battlefield/two_towers_battlefield.tscn" id="1_wnhqi"]
+[ext_resource type="PackedScene" uid="uid://culho3ivbdqd3" path="res://scenes/battlefields/common/base_battlefield/base_battlefield.tscn" id="1_wnhqi"]
 [ext_resource type="Script" path="res://scenes/battlefields/shrine_maiden_battlefield/shrine_maiden_battlefield.gd" id="2_hompa"]
-[ext_resource type="PackedScene" uid="uid://d2x7bp0oc88jh" path="res://scenes/battlefields/shrine_maiden_battlefield/land_water/land_water.tscn" id="2_neb5b"]
-[ext_resource type="Texture2D" uid="uid://byjq7pl8g55fe" path="res://scenes/battlefields/shrine_maiden_battlefield/dog_tower_land.png" id="3_5rm1g"]
+[ext_resource type="PackedScene" uid="uid://d2x7bp0oc88jh" path="res://scenes/battlefields/common/land_water/land_water.tscn" id="2_neb5b"]
+[ext_resource type="Texture2D" uid="uid://byjq7pl8g55fe" path="res://resources/images/battlefield/dog_tower_land.png" id="3_5rm1g"]
 [ext_resource type="Shader" path="res://shaders/sky/sky.gdshader" id="3_sungo"]
 [ext_resource type="PackedScene" uid="uid://lyrmnwxclfgn" path="res://scenes/battlefields/common/dog_tower/dog_tower.tscn" id="4_4mlb0"]
 [ext_resource type="PackedScene" uid="uid://jgoappkmvbcd" path="res://scenes/battlefields/shrine_maiden_battlefield/hakurei_shrine/hakurei_shrine.tscn" id="4_6wp4w"]
@@ -43,37 +43,37 @@ shader_parameter/speed_scale = 0.025
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_477bh")
 shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_f32ow")
 
-[node name="ShrineMaidenBattlefield" node_paths=PackedStringArray("dog_tower", "cat_tower", "land") instance=ExtResource("1_wnhqi")]
+[node name="ShrineMaidenBattlefield" node_paths=PackedStringArray("cat_tower", "dog_tower", "land") instance=ExtResource("1_wnhqi")]
 script = ExtResource("2_hompa")
-dog_tower = NodePath("DogTower")
 cat_tower = NodePath("HakureiShrine")
+dog_tower = NodePath("DogTower")
 land = NodePath("LandWater")
 
-[node name="Sky" parent="." index="0"]
+[node name="Sky" parent="." index="1"]
 z_index = -1
 material = SubResource("ShaderMaterial_andvq")
 
-[node name="LandWater" parent="." index="1" instance=ExtResource("2_neb5b")]
+[node name="LandWater" parent="." index="2" instance=ExtResource("2_neb5b")]
 z_index = -1
 
-[node name="DogTowerLand" type="Sprite2D" parent="." index="2"]
+[node name="DogTowerLand" type="Sprite2D" parent="." index="3"]
 position = Vector2(714, 163)
 texture = ExtResource("3_5rm1g")
 
-[node name="DogTower" parent="." index="3" instance=ExtResource("4_4mlb0")]
+[node name="DogTower" parent="." index="4" instance=ExtResource("4_4mlb0")]
 position = Vector2(895, 0)
 
-[node name="HakureiShrine" parent="." index="4" instance=ExtResource("4_6wp4w")]
+[node name="HakureiShrine" parent="." index="5" instance=ExtResource("4_6wp4w")]
 position = Vector2(4097, -1138)
 
-[node name="Tori" parent="." index="5" instance=ExtResource("7_q2m0b")]
+[node name="Tori" parent="." index="6" instance=ExtResource("7_q2m0b")]
 position = Vector2(2594, 0)
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="." index="6"]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." index="7"]
 z_index = 100
 copy_mode = 2
 
-[node name="Reflection" type="Sprite2D" parent="." index="7"]
+[node name="Reflection" type="Sprite2D" parent="." index="8"]
 unique_name_in_owner = true
 z_index = 100
 material = ExtResource("6_jh57v")
@@ -83,5 +83,5 @@ texture = ExtResource("7_n3ed8")
 centered = false
 script = ExtResource("6_enbdi")
 
-[node name="EffectSpace" parent="." index="10"]
+[node name="EffectSpace" parent="." index="11"]
 z_index = 99

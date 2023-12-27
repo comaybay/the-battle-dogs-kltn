@@ -107,7 +107,13 @@ func setup(
 	await tween.finished
 	tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 15.0)
-	tween.tween_callback(func(): queue_free())
+	tween.tween_callback(func(): 
+		z_index = sky_invert_shader.z_index
+		modulate.a = 1.0
+		sky_invert_shader.visible = false
+		sky_invert_shader.queue_free()
+		InBattle.get_battlefield().move_child(self, sky.get_index())
+	)
 
 func _process(delta: float) -> void:
 	global_position = _camera.get_screen_center_position() - pivot_offset

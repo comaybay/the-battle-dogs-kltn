@@ -31,6 +31,7 @@ func _ready():
 	
 func _process(delta: float) -> void:
 	if Data.select_data == true:
+		Data.select_data = false
 		show_select_data_box()	
 		set_process(false)
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6d02nl6p5kdq"
-path="res://.godot/imported/water.png-af9fd6495667b8f2917030193458c9ab.ctex"
+uid="uid://dsanqteu4fv2s"
+path="res://.godot/imported/sniper_dog.png-44c2881d165bd43573e440b8aa50b484.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/battlefields/shrine_maiden_battlefield/land_water/water.png"
-dest_files=["res://.godot/imported/water.png-af9fd6495667b8f2917030193458c9ab.ctex"]
+source_file="res://scenes/characters/dogs/sniper_dog/sniper_dog.png"
+dest_files=["res://.godot/imported/sniper_dog.png-44c2881d165bd43573e440b8aa50b484.ctex"]
 
 [params]
 

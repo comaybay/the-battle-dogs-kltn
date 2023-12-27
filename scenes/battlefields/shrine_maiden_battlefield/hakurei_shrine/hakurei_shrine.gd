@@ -1,5 +1,6 @@
 extends CatTower
 
+
 const FALL_ACCELERATION := Vector2(-35, 1000)
 var velocity := Vector2(-15, 0) 
 var tween: Tween

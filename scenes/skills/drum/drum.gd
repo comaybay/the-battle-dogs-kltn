@@ -19,17 +19,14 @@ func setup(skill_user: Character.Type) -> void:
 	
 	if not InBattle.in_p2p_battle:
 		var bf := battlefield as Battlefield
-		var global_pos = (
-			bf.get_dog_tower().global_position if skill_user_is_dog
-			else bf.get_cat_tower().global_position
-		) 
+		var global_pos = bf.get_dog_tower().get_effect_global_position()
 		effect.setup(global_pos, "on_emitter")
 	
 	else:
 		var bf := battlefield as P2PBattlefield
 		var global_pos = (
-			bf.get_dog_tower_left().global_position if skill_user_is_dog
-			else bf.get_dog_tower_right().global_position
+			bf.get_dog_tower_left().get_effect_global_position() if skill_user_is_dog
+			else bf.get_dog_tower_right().get_effect_global_position()
 		)
 		effect.setup(global_pos, "on_emitter")
 		

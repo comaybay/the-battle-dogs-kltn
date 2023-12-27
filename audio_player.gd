@@ -27,13 +27,11 @@ func _ready() -> void:
 	)
 	Data.mute_music_changed.connect(
 		func(mute: bool): 
-			var value: float = 0 if mute else Data.music_volume 
-			AudioServer.set_bus_volume_db(music_idx, linear_to_db(value / 100.0))
+			AudioServer.set_bus_mute(music_idx, mute)
 	)
 	Data.mute_sound_fx_changed.connect(
 		func(mute: bool): 
-			var value: float = 0 if mute else Data.sound_fx_volume
-			AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(value / 100.0))
+			AudioServer.set_bus_mute(sound_fx_idx, mute)
 	)
 
 func _create_music_player_data(audio: AudioStream) -> Dictionary:

@@ -35,12 +35,12 @@ var _shared_timers: Dictionary = {}
 var _unused_timers: Array[DeltaTimer] = []
 ## wait a certain amount using a shared timers system. the returned timer is pausable by the scene tree [br]
 ## the signal also contains recover_delta parameter (delta time passed since signal is emited)
-func wait(wait_time: float) -> Signal:
-	return _add_shared_timer(wait_time).timeout
+func wait(wait_time: float, recover_dela: float = 0.0) -> Signal:
+	return _add_shared_timer(wait_time - recover_dela / Engine.time_scale).timeout
 
 ## wait a certain amount using a shared timers system. the returned timer is pausable by the scene tree
-func wait_cancelable(wait_time: float) -> WaitToken:
-	var timer := _add_shared_timer(wait_time)
+func wait_cancelable(wait_time: float, recover_dela: float = 0.0) -> WaitToken:
+	var timer := _add_shared_timer(wait_time - recover_dela / Engine.time_scale)
 	var token := WaitToken.new(timer)
 	return token
 

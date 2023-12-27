@@ -1,4 +1,4 @@
-class_name ShrineMaidenBattlefield extends Battlefield
+extends TwoTowersBattlefield
 
 func _enter_tree() -> void:
 	var tori_data: Dictionary = _stage_data['tori']

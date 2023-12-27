@@ -32,10 +32,8 @@ func setup(skill_user: Character.Type) -> void:
 		
 	await get_tree().create_timer(DURATION, false).timeout
 	
-	for character in characters:
-		if character != null: # if character not dead
-			character.reset_multipliers()
-	
+	for character: Character in characters.filter(func(character): return is_instance_valid(character)):
+		character.reset_multipliers()
 	
 	queue_free()
 

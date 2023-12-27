@@ -7,7 +7,7 @@
   "cat_tower_health": 30000,
   "tori": {
     "position": 4000,
-    "health": 50000,
+    "health": 1,
     "growls": 9,
     "instant_spawns": {
       "fairy_cat": 5,
@@ -22,12 +22,12 @@
     },
     {
       "id": "cat",
-      "position": 3300,
+      "position": 9300,
       "props": { "speed": { "value": 200 }, "health": { "scale": 20 } }
     },
     {
       "id": "leg_cat",
-      "position": 3500,
+      "position": 9500,
       "props": {
         "health": { "scale": 5 },
         "damage": { "value": 0.25 },
@@ -36,7 +36,7 @@
     },
     {
       "id": "leg_cat",
-      "position": 3900,
+      "position": 9900,
       "props": {
         "health": { "scale": 5 },
         "damage": { "value": 0.25 },
@@ -46,7 +46,7 @@
     },
     {
       "id": "buff_cat",
-      "position": 4300,
+      "position": 10300,
       "props": {
         "speed": { "value": 200 },
         "health": { "scale": 2 }
@@ -54,17 +54,17 @@
     },
     {
       "id": "leg_cat",
-      "position": 4700,
+      "position": 10700,
       "props": { "health": { "scale": 5 }, "attack_range": { "scale": 3 }, "attack_cooldown": { "value": 2 } }
     },
     {
       "id": "leg_cat",
-      "position": 5100,
+      "position": 11100,
       "props": { "health": { "scale": 5 }, "attack_range": { "scale": 4 }, "attack_cooldown": { "value": 3 } }
     },
     {
       "id": "cat",
-      "position": 5300,
+      "position": 11300,
       "props": { "speed": { "value": 200 } },
       "health": { "scale": 20 }
     }
@@ -118,7 +118,7 @@
       "health_at": 30000,
       "id": "miko_dog",
       "dog_level": 10,
-      "dog_abilities": ["yin_yang_orb"],
+      "dog_abilities": ["yin_yang_orb", "circular_ofudas"],
       "props": {
         "ofuda_damage": { "scale": 4 },
         "reward_money": { "scale": 3 },

@@ -1,8 +1,9 @@
 @tool
 class_name Character extends CharacterBody2D
 
-const DEFAULT_ATTACK_HIT_SFX = preload("res://resources/sound/battlefield/bite.mp3")
-const DEFAULT_DIE_SFX = preload("res://resources/sound/battlefield/death.mp3")
+const DEFAULT_ATTACK_HIT_SFX: AudioStream = preload("res://resources/sound/battlefield/bite.mp3")
+const DEFAULT_DIE_SFX: AudioStream = preload("res://resources/sound/battlefield/death.mp3")
+const DEFAULT_BOSS_DIE_SFX: AudioStream = preload("res://resources/sound/battlefield/boss_knockback_cry.mp3")
 
 ## keep raycast off the ground a bit to avoid miss detection
 const RAYCAST_OFFSET_Y: int = 90
@@ -164,6 +165,9 @@ func _ready() -> void:
 		
 		if unit_type == UnitType.AIR:
 			z_index += 50
+			
+		if is_boss() and before_death_sfx == null:
+			before_death_sfx = DEFAULT_BOSS_DIE_SFX
 		
 		_update_character()
 		

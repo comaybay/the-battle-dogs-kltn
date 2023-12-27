@@ -12,7 +12,6 @@ func enter(data: Dictionary) -> void:
 	var pattern := Danmaku.pattern_cirle(sunflower_cat.get_center_global_position(), 0) as DanmakuPatternCircle
 	pattern.bullet_num = 20
 	var recover_delta: float = 0.0
-	var timer_delta: float = 0.0
 	for i in range(10):
 		AudioPlayer.play_in_battle_sfx(sunflower_cat.attack_hit_sfx)
 		
@@ -33,7 +32,7 @@ func enter(data: Dictionary) -> void:
 			)
 		)
 		
-		_wait_token = Global.wait_cancelable(0.1 - recover_delta) as WaitToken
+		_wait_token = Global.wait_cancelable(0.1, recover_delta) as WaitToken
 		recover_delta = await _wait_token.timer.timeout
 		if _wait_token.is_canceled(): 
 			return

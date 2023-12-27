@@ -126,7 +126,7 @@ shape = SubResource("RectangleShape2D_1ncfb")
 wait_time = 2.0
 one_shot = true
 
-[node name="CharacterAnimation" type="Node2D" parent="."]
+[node name="CharacterAnimation" type="CanvasGroup" parent="."]
 
 [node name="Character" type="Sprite2D" parent="CharacterAnimation"]
 hframes = 2

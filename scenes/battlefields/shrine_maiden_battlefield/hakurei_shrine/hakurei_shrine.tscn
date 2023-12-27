@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://jgoappkmvbcd"]
+[gd_scene load_steps=15 format=3 uid="uid://jgoappkmvbcd"]
 
 [ext_resource type="Texture2D" uid="uid://cgm6u7ft1edte" path="res://scenes/battlefields/shrine_maiden_battlefield/hakurei_shrine/hakurei_shrine.png" id="2_6e4pn"]
 [ext_resource type="Script" path="res://scenes/battlefields/shrine_maiden_battlefield/hakurei_shrine/hakurei_shrine.gd" id="2_coipq"]
 [ext_resource type="PackedScene" uid="uid://m0w33om2jt3l" path="res://shaders/outline_wiggle/outline_wiggle.tscn" id="3_qmj7v"]
 [ext_resource type="Shader" path="res://shaders/outline_wiggle/outline_wiggle.gdshader" id="3_vack2"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="4_yki8q"]
+[ext_resource type="PackedScene" uid="uid://byix3iwgirpdb" path="res://scenes/battlefields/common/enemy_spawn_point/enemy_spawn_point.tscn" id="6_kfgk5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cqgsp"]
 shader = ExtResource("3_vack2")
@@ -162,9 +163,10 @@ font_size = 52
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)
 
-[node name="HakureiShrine" type="StaticBody2D"]
+[node name="HakureiShrine" type="StaticBody2D" node_paths=PackedStringArray("spawn_point")]
 collision_layer = 16
 script = ExtResource("2_coipq")
+spawn_point = NodePath("EnemySpawnPoint")
 
 [node name="OutlineWiggle" parent="." instance=ExtResource("3_qmj7v")]
 material = SubResource("ShaderMaterial_cqgsp")
@@ -188,7 +190,7 @@ libraries = {
 position = Vector2(-217, -243.5)
 gizmo_extents = 54.5
 
-[node name="SpawnMarker" type="Marker2D" parent="."]
+[node name="EnemySpawnPoint" parent="." instance=ExtResource("6_kfgk5")]
 position = Vector2(-142, -158.5)
 
 [node name="HealthLabel" type="Label" parent="."]

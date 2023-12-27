@@ -1,4 +1,5 @@
 class_name BaseBattlefield extends Node2D
+## The base battlefield that is used by both the p2p battlfield and the single player battlefield
 
 @export var land: Land
 @onready var sky: BattlefieldSky = $Sky
@@ -40,14 +41,19 @@ func get_effect_space() -> Node2D:
 func get_danmaku_space() -> DanmakuSpace:
 	return $DanmakuSpace
 
+func _ready() -> void:
+	assert(land != null, "ERROR: land not assigned in Battlefield")
+
 func _clean_up():
 	# set back to 1 in case user change game speed
 	Engine.time_scale = 1
 	$Camera2D.allow_user_input_camera_movement(false)
 	
 	$Gui.queue_free()
-	var inbattle_sfx_idx: int = AudioServer.get_bus_index("InBattleFX")
-	AudioServer.set_bus_mute(inbattle_sfx_idx, true)	
+	
+	if not Data.mute_sound_fx:
+		var inbattle_sfx_idx: int = AudioServer.get_bus_index("InBattleFX")
+		AudioServer.set_bus_mute(inbattle_sfx_idx, true)	
 
 func _exit_tree() -> void:
 	# in case game is paused (for example by quitting the battle from pause menu) 
@@ -56,5 +62,6 @@ func _exit_tree() -> void:
 
 	AudioPlayer.remove_all_in_battle_sfx()
 	
-	var inbattle_sfx_idx: int = AudioServer.get_bus_index("InBattleFX")
-	AudioServer.set_bus_mute(inbattle_sfx_idx, false)	
+	if not Data.mute_sound_fx:
+		var inbattle_sfx_idx: int = AudioServer.get_bus_index("InBattleFX")
+		AudioServer.set_bus_mute(inbattle_sfx_idx, false)	

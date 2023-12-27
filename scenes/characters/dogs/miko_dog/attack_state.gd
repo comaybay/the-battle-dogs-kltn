@@ -58,7 +58,7 @@ func enter(data: Dictionary) -> void:
 	miko_dog.n_AnimationPlayer.play("pre_attack")
 	miko_dog.n_AnimationPlayer.queue("attack")
 
-	await get_tree().create_timer(1.1, false).timeout
+	await Global.wait(1.1)
 	if _cancellation_token.is_canceled(): return
 	
 	_attacked = true
@@ -227,7 +227,7 @@ func _pattern_path(
 		'loop': loop,
 		'rotation': rotation,
 		'speed': speed,
-		'ofuda': ofuda_gray,
+		'ofuda': ofuda_red,
 		'sfx': sfx,
 		'finished': false
 	}
@@ -273,7 +273,7 @@ func _spawn_bullet_on_path(_pattern_data: Dictionary) -> void:
 		ofuda.velocity_rotation_speed = _pattern_data['rotation'] * sign(progress_unit)
 		var passed_delta: float = _pattern_data['sum_delta']
 		ofuda.physic_process(passed_delta)
-		await Global.wait(2.0 - passed_delta)
+		await Global.wait(2.0, passed_delta)
 		if ofuda.is_destroyed(): return
 		
 		ofuda.velocity_rotation_speed = 0
@@ -302,5 +302,5 @@ func exit():
 	miko_dog.rotation = 0
 	
 	## restart timer if attack interuppted
-	if _attack:
+	if _attacked:
 		miko_dog.n_AttackCooldownTimer.start()
