@@ -107,3 +107,6 @@ func get_passive_level(passive_id: String) -> int:
 		return 0
 	
 	return get_player_data().get_passive_level(passive_id) 
+
+func clean_up() -> void:
+	_fx_hit_pool.clear()

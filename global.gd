@@ -65,4 +65,5 @@ func find_closest(node: Node2D, others: Array) -> Node2D:
 			
 	return closest
 	
-
+func clear_timers() -> void:
+	_delta_timer_pool.clear()

@@ -48,7 +48,6 @@ func _clean_up():
 	# set back to 1 in case user change game speed
 	Engine.time_scale = 1
 	$Camera2D.allow_user_input_camera_movement(false)
-	
 	$Gui.queue_free()
 	
 	if not Data.mute_sound_fx:
@@ -65,3 +64,6 @@ func _exit_tree() -> void:
 	if not Data.mute_sound_fx:
 		var inbattle_sfx_idx: int = AudioServer.get_bus_index("InBattleFX")
 		AudioServer.set_bus_mute(inbattle_sfx_idx, false)	
+	
+	InBattle.clean_up()
+	Global.clear_timers()

@@ -49,7 +49,7 @@ func interpolate_movement(delta: float) -> bool:
 
 	var new_scale_x: int = sign(cat.global_position.x - %PathFollow2D.global_position.x)
 	if new_scale_x != 0:
-		cat.get_character_animation_node().scale.x = new_scale_x
+		cat.n_CharacterAnimation.scale.x = new_scale_x
 		
 	cat.global_position = %PathFollow2D.global_position 
 	

@@ -95,13 +95,12 @@ var _multipliers: Dictionary = {
 @onready var n_RayCast2D := $RayCast2D as RayCast2D
 @onready var n_AnimationPlayer := $AnimationPlayer as AnimationPlayer
 @onready var n_Sprite2D := $CharacterAnimation/Character as Sprite2D
+
+## this might be a CanvasGroup node depending if the character uses a boss shader
 @onready var n_CharacterAnimation := $CharacterAnimation as Node2D
+
 @onready var n_AttackCooldownTimer := $AttackCooldownTimer as Timer
 @onready var n_DanmakuHitbox := %DanmakuHitbox as Area2D
-
-## this might returns a CanvasGroup node depending if the character uses a boss shader
-func get_character_animation_node() -> Node2D:
-	return $CharacterAnimation
 
 ## A general position where effect for a character should take place (example: hit effect). 
 ## Use this when unsure where the effect should be at

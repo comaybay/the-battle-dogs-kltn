@@ -45,7 +45,7 @@ func setup(
 	
 	if character_type == Character.Type.CAT:
 		ready.connect(func():
-			get_character_animation_node().scale.x = -1,
+			n_CharacterAnimation.scale.x = -1,
 			CONNECT_ONE_SHOT
 		)
 		

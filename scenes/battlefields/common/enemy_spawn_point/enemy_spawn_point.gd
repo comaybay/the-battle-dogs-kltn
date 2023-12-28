@@ -178,13 +178,10 @@ func spawn_boss(data: Dictionary) -> void:
 		var dog_level: int = data.get('dog_level', 1)
 		var dog_abilities: Array[String] = []
 		dog_abilities.assign(data.get('dog_abilities', []))
-		cat.setup(global_position, dog_level, dog_abilities, true)
+		cat.setup(global_position, dog_level, dog_abilities, Character.Type.CAT, true)
 		
-	cat.ready.connect(
-		func(): 
-			if data.get('effect') != 'none':
-				_add_boss_shader(cat)
-	, CONNECT_ONE_SHOT)
+	if data.get('effect') != 'none':
+		_add_boss_shader(cat)
 	
 	_set_cat_props(cat, data.get('props', {}))
 	_set_cat_buffs(cat, data.get('buffs', []))
@@ -223,13 +220,15 @@ func _set_cat_buffs(cat: Character, buffs: Array) -> void:
 				cat.set(prop_name, cat.get(prop_name) * prop_scale)
 
 func _add_boss_shader(cat: Character) -> void:
-	var animtion_node := cat.get_character_animation_node()
+	await cat.ready
+	var old_animtion_node := cat.n_CharacterAnimation
 	var canvas_group := CanvasGroup.new() 
-	canvas_group.name = animtion_node.name
-	animtion_node.replace_by(canvas_group)
-	
+	canvas_group.name = old_animtion_node.name
+	canvas_group.scale = old_animtion_node.scale
 	canvas_group.material = BOSS_SHADER
-	cat._update_character()
+	old_animtion_node.replace_by(canvas_group)
+	
+	cat.n_CharacterAnimation = canvas_group
 	
 func _process(delta: float) -> void:
 	if alive_boss_count > 0:

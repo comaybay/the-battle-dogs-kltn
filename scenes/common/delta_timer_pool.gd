@@ -39,3 +39,7 @@ func _physics_process(delta: float) -> void:
 		_shared_timers.erase(id)
 		
 	_timer_ids_to_be_unused.clear()
+
+func clear() -> void:
+	_unused_timers.clear()
+	_timer_ids_to_be_unused.clear()
