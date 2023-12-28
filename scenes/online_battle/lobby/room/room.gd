@@ -37,6 +37,7 @@ func _ready() -> void:
 	%CopyButton.pressed.connect(func(): DisplayServer.clipboard_set(str(SteamUser.lobby_id)))
 	%ReadyButton.pressed.connect(_on_toggle_ready)
 	%StartButton.pressed.connect(_send_start_message)
+	%TeamSetupButton.pressed.connect(func(): %TeamSetup.show())
 	
 	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
 	Steam.lobby_data_update.connect(_on_lobby_data_update)
@@ -90,6 +91,7 @@ func _on_battlefield_settings_changed(type: String, value: Variant) -> void:
 func _on_toggle_ready() -> void:
 	var is_ready := SteamUser.get_member_data(SteamUser.STEAM_ID, "ready") == "true"
 	SteamUser.set_lobby_member_data("ready", "false" if is_ready else "true")
+	%TeamSetupButton.disabled = true 
 
 func _on_lobby_data_update(success: int, lobby_id: int, member_id: int) -> void:
 	if success == 0 or member_id != lobby_id:
@@ -149,6 +151,7 @@ func _update_lobby_ui() -> void:
 		var is_ready := SteamUser.get_member_data(SteamUser.STEAM_ID, "ready") == "true"
 		%ReadyButton.text = "@UNREADY" if is_ready else "@READY"  
 		%GoBackButton.disabled = is_ready
+		%TeamSetupButton.disabled = is_ready
 		
 	update_custom_battlefield_settings()
 

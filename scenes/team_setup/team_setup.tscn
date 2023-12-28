@@ -28,9 +28,6 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_mkhds")
 
-[node name="TitleLabel" parent="Khung/Header/Title/MarginContainer/PhanGiua" index="1"]
-text = "@TEAM_SETUP"
-
 [node name="Content" parent="Khung" index="1"]
 script = ExtResource("3_j8p7c")
 
