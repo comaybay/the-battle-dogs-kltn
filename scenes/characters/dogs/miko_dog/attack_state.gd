@@ -272,7 +272,7 @@ func _spawn_bullet_on_path(_pattern_data: Dictionary) -> void:
 		ofuda.velocity = velocity
 		ofuda.velocity_rotation_speed = _pattern_data['rotation'] * sign(progress_unit)
 		var passed_delta: float = _pattern_data['sum_delta']
-		ofuda.physic_process(passed_delta)
+		ofuda.process(passed_delta)
 		await Global.wait(2.0, passed_delta)
 		if ofuda.is_destroyed(): return
 		
@@ -302,5 +302,5 @@ func exit():
 	miko_dog.rotation = 0
 	
 	## restart timer if attack interuppted
-	if _attacked:
+	if _attacked and miko_dog.n_AttackCooldownTimer.is_stopped():
 		miko_dog.n_AttackCooldownTimer.start()

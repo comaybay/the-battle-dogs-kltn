@@ -78,9 +78,9 @@ func start(callable: Callable) -> void:
 		await callable.call()
 
 ## use this to manually process the bullet		
-func physic_process(delta: float) -> void:
+func process(delta: float) -> void:
 	if not is_zero_approx(delta):
-		Bullets.physics_process_bullet(_native_bullet_id, delta)
+		Bullets.process_bullet(_native_bullet_id, delta)
 
 func _handle_body_entered(body: Node2D):
 	body.take_damage(damage)

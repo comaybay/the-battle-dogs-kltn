@@ -123,7 +123,7 @@ func _on_pattern_callback(position: Vector2, angle: float, passed_delta: float, 
 		bullet.rotation = angle
 		bullet.velocity = Vector2(900 - 20 * index, 0).rotated(angle)
 		bullet.velocity_rotation_speed = deg_to_rad(100 * (2 * int(index % 2) - 1))
-		bullet.physic_process(passed_delta);
+		bullet.process(passed_delta);
 		
 		var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		tween.tween_property(bullet, "velocity_scale", 0.0, 2.0)

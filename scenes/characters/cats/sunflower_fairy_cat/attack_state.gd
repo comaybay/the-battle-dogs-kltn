@@ -24,7 +24,7 @@ func enter(data: Dictionary) -> void:
 				bullet.velocity_rotation_speed = deg_to_rad(90) * (2 * (index % 2) - 1)
 				bullet.velocity = Vector2(2000, 0).rotated(angle)
 				bullet.position = %BulletSpawnMarker.global_position + bullet.velocity * recover_delta
-				bullet.physic_process(recover_delta)
+				bullet.process(recover_delta)
 				
 				await Global.wait(0.9)
 				if bullet.is_destroyed(): return
