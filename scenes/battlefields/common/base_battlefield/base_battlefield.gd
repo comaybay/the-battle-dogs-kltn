@@ -3,6 +3,7 @@ class_name BaseBattlefield extends Node2D
 
 @export var land: Land
 @onready var sky: BattlefieldSky = $Sky
+@onready var camera: Camera2D = $Camera2D
 
 ## margin for position.x of cat tower and dog tower
 const TOWER_MARGIN: int = 700
@@ -67,3 +68,4 @@ func _exit_tree() -> void:
 	
 	InBattle.clean_up()
 	Global.clear_timers()
+

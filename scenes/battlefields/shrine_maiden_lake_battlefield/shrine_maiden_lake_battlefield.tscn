@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://lyrmnwxclfgn" path="res://scenes/battlefields/common/dog_tower/dog_tower.tscn" id="3_qhoft"]
 [ext_resource type="Material" uid="uid://dh4v3vpys04rn" path="res://shaders/water_reflection/water_reflection.tres" id="4_fefo3"]
 [ext_resource type="Texture2D" uid="uid://f7ttqqnis37x" path="res://resources/images/godot.svg" id="5_0q6ab"]
-[ext_resource type="PackedScene" path="res://scenes/battlefields/common/enemy_spawn_point/enemy_spawn_point.tscn" id="5_ct65l"]
+[ext_resource type="PackedScene" uid="uid://byix3iwgirpdb" path="res://scenes/battlefields/common/enemy_spawn_point/enemy_spawn_point.tscn" id="5_ct65l"]
 [ext_resource type="Script" path="res://scenes/battlefields/common/water_reflection/reflection.gd" id="6_auswr"]
 
 [node name="ShrineMaidenLakeBattlefield" node_paths=PackedStringArray("enemy_spawn_point", "dog_tower", "land") instance=ExtResource("1_keue1")]

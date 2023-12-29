@@ -59,9 +59,10 @@ func _process(delta: float) -> void:
 	
 func _win():
 	_kill_all_cats()
+	_clean_up()
+	
 	$TimeBattle.stop()
 	var get_time = int(Time.get_ticks_msec() / 1000)
-	_clean_up()
 	# need fix
 	if (Data.use_sw_data == true) and (Data.passed_stage == 13) :
 		Data.victory_count += 1 
@@ -72,7 +73,7 @@ func _win():
 	AudioPlayer.stop_current_music(true, true)
 	AudioPlayer.play_music(VICTORY_AUDIO)
 	add_child(VictoryGUI.instantiate())	
-
+	
 func _kill_all_cats() -> void:
 	for cat in get_tree().get_nodes_in_group("cats"):
 		cat.kill()

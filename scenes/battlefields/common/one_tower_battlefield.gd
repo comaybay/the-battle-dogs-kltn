@@ -22,3 +22,12 @@ func _physics_process(delta: float) -> void:
 func _win() -> void:
 	super()
 	enemy_spawn_point.queue_free()
+	
+	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(camera, "position:x", get_stage_width() - Global.VIEWPORT_SIZE.x * 0.5 / camera.zoom.x, 2.0)
+
+func _defeat() -> void:
+	super()
+	
+	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(camera, "position:x", Global.VIEWPORT_SIZE.x * 0.5 / camera.zoom.x, 1.0)
