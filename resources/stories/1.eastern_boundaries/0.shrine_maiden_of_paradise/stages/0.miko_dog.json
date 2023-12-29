@@ -7,7 +7,7 @@
   "cat_tower_health": 30000,
   "tori": {
     "position": 4000,
-    "health": 1,
+    "health": 50000,
     "growls": 9,
     "instant_spawns": {
       "fairy_cat": 5,

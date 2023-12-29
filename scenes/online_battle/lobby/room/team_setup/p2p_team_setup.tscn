@@ -1,20 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://c72r77wiweut"]
+[gd_scene load_steps=8 format=3 uid="uid://ddv5saf6lai73"]
 
-[ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_pm7q2"]
-[ext_resource type="Script" path="res://scenes/team_setup/team_setup_main_gui.gd" id="2_i7uuh"]
-[ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="2_mkhds"]
-[ext_resource type="Script" path="res://scenes/team_setup/team_setup.gd" id="3_j8p7c"]
-[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/button_pressed.mp3" id="4_ncv2l"]
-[ext_resource type="PackedScene" uid="uid://dg431mihiquab" path="res://scenes/team_setup/box_character.tscn" id="5_yh2ni"]
+[ext_resource type="PackedScene" uid="uid://da1jal8d6xyt3" path="res://scenes/main_gui/main_gui.tscn" id="1_xcqq7"]
+[ext_resource type="Script" path="res://scenes/online_battle/lobby/room/team_setup/p2p_team_setup.gd" id="2_rc4hm"]
+[ext_resource type="Script" path="res://scenes/online_battle/lobby/room/team_setup/p2p_team_setup_main_gui.gd" id="2_t4inq"]
+[ext_resource type="Texture2D" uid="uid://c8ukq54wldvui" path="res://resources/images/dog_base/info_panel.png" id="3_dcbx3"]
+[ext_resource type="AudioStream" uid="uid://daj283a7jod3n" path="res://resources/sound/button_pressed.mp3" id="5_nwefi"]
+[ext_resource type="PackedScene" uid="uid://dg431mihiquab" path="res://scenes/team_setup/box_character.tscn" id="6_6utw1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqn1s"]
 content_margin_top = 10.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="SelectCharacter" instance=ExtResource("1_pm7q2")]
-script = ExtResource("2_i7uuh")
+[node name="SelectCharacter" instance=ExtResource("1_xcqq7")]
+script = ExtResource("2_t4inq")
 title = "@TEAM_SETUP"
-go_back_scene_path = "res://scenes/maps/the_battle_dogs_rising_map/the_battle_dogs_rising_map.tscn"
+go_back_scene_path = null
 
 [node name="InfoPanel" type="TextureRect" parent="." index="2"]
 layout_mode = 1
@@ -26,17 +26,17 @@ offset_top = -309.0
 offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("2_mkhds")
+texture = ExtResource("3_dcbx3")
 
 [node name="TitleLabel" parent="Khung/Header/MarginContainer/HBoxContainer" index="1"]
 text = "@TEAM_SETUP"
 
 [node name="Content" parent="Khung" index="1"]
-script = ExtResource("3_j8p7c")
+script = ExtResource("2_rc4hm")
 
 [node name="Luu" type="AudioStreamPlayer2D" parent="Khung/Content" index="0"]
 position = Vector2(0, -63)
-stream = ExtResource("4_ncv2l")
+stream = ExtResource("5_nwefi")
 volume_db = 14.998
 bus = &"SoundFX"
 
@@ -73,34 +73,34 @@ size_flags_vertical = 4
 theme_override_constants/h_separation = 10
 columns = 5
 
-[node name="CharacterButton" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="0" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="0" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="CharacterButton2" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="1" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton2" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="1" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="CharacterButton3" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="2" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton3" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="2" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="CharacterButton4" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="3" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton4" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="3" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="CharacterButton5" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="4" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton5" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="4" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="CharacterButton6" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="5" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton6" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="5" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="CharacterButton7" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="6" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton7" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="6" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="CharacterButton8" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="7" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton8" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="7" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="CharacterButton9" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="8" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton9" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="8" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="CharacterButton10" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="9" instance=ExtResource("5_yh2ni")]
+[node name="CharacterButton10" parent="Khung/Content/Khung/PhanTren/TabContainer/Đội hình/CharacterSlots" index="9" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
 [node name="Skill" type="HBoxContainer" parent="Khung/Content/Khung/PhanTren/TabContainer" index="2"]
@@ -117,36 +117,13 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 5
 
-[node name="SkillButton" parent="Khung/Content/Khung/PhanTren/TabContainer/Skill/SkillSlots" index="0" instance=ExtResource("5_yh2ni")]
+[node name="SkillButton" parent="Khung/Content/Khung/PhanTren/TabContainer/Skill/SkillSlots" index="0" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="SkillButton2" parent="Khung/Content/Khung/PhanTren/TabContainer/Skill/SkillSlots" index="1" instance=ExtResource("5_yh2ni")]
+[node name="SkillButton2" parent="Khung/Content/Khung/PhanTren/TabContainer/Skill/SkillSlots" index="1" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
-[node name="SkillButton3" parent="Khung/Content/Khung/PhanTren/TabContainer/Skill/SkillSlots" index="2" instance=ExtResource("5_yh2ni")]
-layout_mode = 2
-
-[node name="Store" type="HBoxContainer" parent="Khung/Content/Khung/PhanTren/TabContainer" index="3"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="StoreSlots" type="GridContainer" parent="Khung/Content/Khung/PhanTren/TabContainer/Store" index="0"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 5
-
-[node name="StoreButton" parent="Khung/Content/Khung/PhanTren/TabContainer/Store/StoreSlots" index="0" instance=ExtResource("5_yh2ni")]
-layout_mode = 2
-
-[node name="StoreButton2" parent="Khung/Content/Khung/PhanTren/TabContainer/Store/StoreSlots" index="1" instance=ExtResource("5_yh2ni")]
-layout_mode = 2
-
-[node name="StoreButton3" parent="Khung/Content/Khung/PhanTren/TabContainer/Store/StoreSlots" index="2" instance=ExtResource("5_yh2ni")]
+[node name="SkillButton3" parent="Khung/Content/Khung/PhanTren/TabContainer/Skill/SkillSlots" index="2" instance=ExtResource("6_6utw1")]
 layout_mode = 2
 
 [node name="PhanDuoi" type="VBoxContainer" parent="Khung/Content/Khung" index="1"]

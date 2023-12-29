@@ -375,6 +375,5 @@ func _notification(what) -> void:
 		print("exit game")
 		get_tree().quit()
 	
-
 func unlock_dog(dog_id: String) -> void:
 	Data.dogs[dog_id] = { "abilities": [], "forms": ["normal"], "level": 1 }

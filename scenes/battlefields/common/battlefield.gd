@@ -62,12 +62,6 @@ func _win():
 	$TimeBattle.stop()
 	var get_time = int(Time.get_ticks_msec() / 1000)
 	_clean_up()
-	# need fix
-	if (Data.use_sw_data == true) and (Data.passed_stage == 13) :
-		Data.victory_count += 1 
-		SilentWolf.sw_save_high_scores(Data.save_data["user_name"], "victory_count",1)
-		SilentWolf.sw_save_score_time(Data.save_data["user_name"], get_time,"fastest_time")
-		Data.save()
 	
 	AudioPlayer.stop_current_music(true, true)
 	AudioPlayer.play_music(VICTORY_AUDIO)

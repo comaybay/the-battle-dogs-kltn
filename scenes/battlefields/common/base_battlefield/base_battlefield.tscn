@@ -70,9 +70,6 @@ script = ExtResource("4_paltt")
 [node name="EffectSpace" type="Node2D" parent="."]
 z_index = 40
 
-[node name="TimeBattle" type="Timer" parent="."]
-autostart = true
-
 [node name="DanmakuSpace" type="Node" parent="."]
 script = ExtResource("8_gd46w")
 bullet_types_amount = 0

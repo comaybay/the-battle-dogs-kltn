@@ -330,7 +330,6 @@ dialog_autowrap = true
 cancel_button_text = "@STEAM"
 
 [node name="Popup" parent="." instance=ExtResource("8_qb1qb")]
-layout_mode = 1
 
 [connection signal="pressed" from="Khung/PhanCuoi/NutBatDau" to="." method="_on_nut_bat_dau_pressed"]
 [connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]

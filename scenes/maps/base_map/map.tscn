@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://gny6lao42iqp"]
+[gd_scene load_steps=24 format=3 uid="uid://gny6lao42iqp"]
 
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_0lsnx"]
 [ext_resource type="Script" path="res://scenes/maps/base_map/map.gd" id="1_0p7qx"]
@@ -64,6 +64,18 @@ action = &"ui_setup_team"
 
 [sub_resource type="Shortcut" id="Shortcut_0cnn8"]
 events = [SubResource("InputEventAction_p45xq")]
+
+[sub_resource type="Environment" id="Environment_kqeu4"]
+background_mode = 3
+glow_enabled = true
+fog_light_color = Color(0.976471, 0, 0.572549, 1)
+fog_light_energy = 6.71
+fog_sun_scatter = 2.35
+fog_density = 0.2445
+fog_height = 271.67
+fog_height_density = 0.027
+adjustment_brightness = 8.0
+adjustment_contrast = 8.0
 
 [node name="Map" type="Control"]
 layout_mode = 3
@@ -215,3 +227,6 @@ unique_name_in_owner = true
 offset_top = 93.0
 offset_right = 1152.0
 offset_bottom = 197.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kqeu4")

@@ -1,4 +1,4 @@
-class_name PopupDialog extends Control
+class_name PopupDialog extends CanvasLayer
 
 signal ok
 signal confirm

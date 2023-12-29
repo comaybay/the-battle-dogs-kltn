@@ -5,30 +5,22 @@
 [ext_resource type="Shortcut" uid="uid://moipqlm5cofg" path="res://resources/shortcuts/confirm.tres" id="3_2i100"]
 [ext_resource type="Shortcut" uid="uid://krf4dorlu4cx" path="res://resources/shortcuts/cancel.tres" id="4_tx8jb"]
 
-[node name="Popup" type="Control"]
+[node name="Popup" type="CanvasLayer"]
 process_mode = 3
 visible = false
-layout_mode = 3
+script = ExtResource("2_epsj8")
+
+[node name="Overlay" type="Panel" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_xd5ya")
-script = ExtResource("2_epsj8")
-
-[node name="Overlay" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_type_variation = &"PanelDimBackground"
 
 [node name="PopupPanel" type="PanelContainer" parent="."]
 unique_name_in_owner = true
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -40,6 +32,7 @@ offset_right = 134.0
 offset_bottom = 81.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_xd5ya")
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupPanel"]
 layout_mode = 2

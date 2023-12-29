@@ -1,4 +1,3 @@
-@tool
 extends Control
 
 const ScoreItem = preload("ScoreItem.tscn")

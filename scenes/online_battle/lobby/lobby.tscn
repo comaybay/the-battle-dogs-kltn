@@ -185,5 +185,3 @@ text = "@JOIN"
 
 [node name="Popup" parent="." instance=ExtResource("6_5cdxx")]
 unique_name_in_owner = true
-layout_mode = 1
-focus_mode = 2

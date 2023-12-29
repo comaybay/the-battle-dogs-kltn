@@ -17,6 +17,7 @@ func _win() -> void:
 	tween.tween_property(camera, "position:x", position_x, 2.0)
 
 func _defeat() -> void:
+	super()
+
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	
 	tween.tween_property(camera, "position:x", Global.VIEWPORT_SIZE.x * 0.5 / camera.zoom.x, 2.0)

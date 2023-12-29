@@ -6,8 +6,11 @@
 [sub_resource type="Theme" id="Theme_4jgio"]
 
 [node name="DogBase" instance=ExtResource("1_5yqxn")]
-title = "@DOG_BASE_TITLE"
+title = "@RANKING"
 go_back_scene_path = "res://scenes/dogbase/dogbase.tscn"
+
+[node name="TitleLabel" parent="Khung/Header/MarginContainer/HBoxContainer" index="1"]
+text = "@RANKING"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Khung" index="1"]
 layout_mode = 2

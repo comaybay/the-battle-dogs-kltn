@@ -12,7 +12,6 @@ var BOSS_DRUM: AudioStream = preload("res://resources/sound/battlefield/boss_dru
 
 var _boss_music: AudioStream
 var _player_data: BattlefieldPlayerData
-var time_batlle : float
 var _stage_data: Dictionary
 
 func _init() -> void:
@@ -39,7 +38,6 @@ func get_cat_power_scale() -> float:
 
 func _ready() -> void:
 	super()
-	time_batlle = 0
 	
 	$Gui.setup(dog_tower, _player_data)
 	$store_gui.setup(dog_tower, _player_data)
@@ -60,15 +58,6 @@ func _process(delta: float) -> void:
 func _win():
 	_kill_all_cats()
 	_clean_up()
-	
-	$TimeBattle.stop()
-	var get_time = int(Time.get_ticks_msec() / 1000)
-	# need fix
-	if (Data.use_sw_data == true) and (Data.passed_stage == 13) :
-		Data.victory_count += 1 
-		SilentWolf.sw_save_high_scores(Data.save_data["user_name"], "victory_count",1)
-		SilentWolf.sw_save_score_time(Data.save_data["user_name"], get_time,"fastest_time")
-		Data.save()
 	
 	AudioPlayer.stop_current_music(true, true)
 	AudioPlayer.play_music(VICTORY_AUDIO)
