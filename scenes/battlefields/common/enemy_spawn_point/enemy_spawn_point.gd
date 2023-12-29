@@ -225,6 +225,7 @@ func _add_boss_shader(cat: Character) -> void:
 	var canvas_group := CanvasGroup.new() 
 	canvas_group.name = old_animtion_node.name
 	canvas_group.scale = old_animtion_node.scale
+	canvas_group.modulate = old_animtion_node.modulate
 	canvas_group.material = BOSS_SHADER
 	old_animtion_node.replace_by(canvas_group)
 	

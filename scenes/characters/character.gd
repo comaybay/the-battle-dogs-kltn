@@ -144,13 +144,10 @@ func _setup(global_position: Vector2, is_boss: bool) -> void:
 		
 	await ready
 	self.global_position.y += (self.global_position.y - get_bottom_global_position().y)
-	visible = true
 
 func _init() -> void:
 	if Engine.is_editor_hint():
 		return
-		
-	visible = false
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():

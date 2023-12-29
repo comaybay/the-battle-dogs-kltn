@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dy7ll3eyrb858"]
+[gd_scene load_steps=15 format=3 uid="uid://dy7ll3eyrb858"]
 
 [ext_resource type="PackedScene" uid="uid://gny6lao42iqp" path="res://scenes/maps/base_map/map.tscn" id="1_12sle"]
 [ext_resource type="Texture2D" uid="uid://biajc8khvq2s2" path="res://scenes/maps/the_battle_dogs_rising_map/map.png" id="2_h32yx"]
@@ -8,13 +8,21 @@
 [ext_resource type="Texture2D" uid="uid://dxic50hwrqqm0" path="res://shaders/wiggle/texture.png" id="4_beniq"]
 [ext_resource type="Texture2D" uid="uid://wenwn0804tgk" path="res://scenes/maps/the_battle_dogs_rising_map/swirl.png" id="5_wglw5"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o4yeh"]
+noise_type = 0
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1mj1l"]
+seamless = true
+noise = SubResource("FastNoiseLite_o4yeh")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sy1dg"]
 shader = ExtResource("3_ats2s")
 shader_parameter/strength = 10.0
 shader_parameter/uv_scaling = 1.0
 shader_parameter/movement_direction = Vector2(-1, 0.5)
 shader_parameter/movement_speed = 0.5
-shader_parameter/NOISE_TEXTURE = ExtResource("4_beniq")
+shader_parameter/NOISE_TEXTURE = SubResource("NoiseTexture2D_1mj1l")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tc61o"]
 shader = ExtResource("3_ats2s")
@@ -80,10 +88,10 @@ position = Vector2(0, 0)
 texture = ExtResource("3_8ls5w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MapSprites" index="3"]
-autoplay = "swirl"
 libraries = {
 "": SubResource("AnimationLibrary_sbgww")
 }
+autoplay = "swirl"
 
 [node name="Stage1" parent="Stages" index="0"]
 offset_left = 812.0

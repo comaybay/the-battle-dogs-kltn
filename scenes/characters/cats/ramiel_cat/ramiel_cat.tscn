@@ -437,7 +437,6 @@ size = Vector2(584, 1590)
 size = Vector2(1983.55, 651)
 
 [node name="RamielCat" node_paths=PackedStringArray("custom_attack_area") instance=ExtResource("1_8y4hw")]
-modulate = Color(1.25, 1.25, 1.25, 1)
 position = Vector2(0, -210)
 reward_money = 1000
 attack_type = 2
@@ -457,6 +456,9 @@ shape = SubResource("RectangleShape2D_dfgoi")
 
 [node name="AttackCooldownTimer" parent="." index="1"]
 wait_time = 60.0
+
+[node name="CharacterAnimation" parent="." index="2"]
+modulate = Color(1.15, 1.15, 1.15, 1)
 
 [node name="Character" parent="CharacterAnimation" index="0"]
 position = Vector2(0, -670)

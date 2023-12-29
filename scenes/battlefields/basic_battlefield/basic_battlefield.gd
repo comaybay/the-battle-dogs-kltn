@@ -27,5 +27,6 @@ func _clean_up() -> void:
 ## move the tutorial dog outside of gui
 func _move_tutorial_dog():
 	var canvas_layer: = CanvasLayer.new()
+	canvas_layer.layer = 2
 	add_child(canvas_layer)
 	_tutorial_dog.reparent(canvas_layer)
