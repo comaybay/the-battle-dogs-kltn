@@ -265,10 +265,16 @@ func _draw() -> void:
 			draw_line(attack_point - half_attack_range_vec + down_vec, attack_point + half_attack_range_vec + down_vec, attack_area_color, 5)		
 			
 		var default_font := ThemeDB.fallback_font
-		var default_font_size := 42
-		var debug_string := "Attack type: %s" % [AttackType.keys()[attack_type]] + "\n%s/%s" % [health, max_health] 
-		var character_size := n_Sprite2D.get_rect().size
-		draw_multiline_string(default_font, Vector2(0, n_Sprite2D.position.y - (character_size.y / 2) - 50), debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
+		var default_font_size := 38
+		var debug_string: String = "Attack type: %s" % AttackType.keys()[attack_type]
+		debug_string += "\nHP: %s/%s" % [health, max_health] 
+		debug_string += "\nSpeed: %s" % speed
+		if attack_type != AttackType.UNIQUE:
+			debug_string += "\nAttack Damage: %s" % damage
+		debug_string += "\nCooldown: %s seconds" % attack_cooldown
+		debug_string += "\nKnockbacks: %s" % knockbacks
+		var debug_string_pos := Vector2(0, collision_rect.position.y + $CollisionShape2D.position.y - 280)
+		draw_multiline_string(default_font, debug_string_pos, debug_string, HORIZONTAL_ALIGNMENT_LEFT, -1, default_font_size)
 
 	if not Engine.is_editor_hint() and Debug.is_draw_debug():
 		var rect: Rect2 = $CollisionShape2D.shape.get_rect()
