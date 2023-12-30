@@ -53,10 +53,17 @@ var acceleration: Vector2:
 
 ## rads per second
 var velocity_rotation_speed: float:
+	get: return _get_prop_or_default("velocity_rotation_speed", 0.0)
+	set(value):
+		if is_valid():
+			Bullets.set_bullet_property(_native_bullet_id, "velocity_rotation_speed", value)
+
+var rotation_speed: float:
 	get: return _get_prop_or_default("rotation_speed", 0.0)
 	set(value):
 		if is_valid():
 			Bullets.set_bullet_property(_native_bullet_id, "rotation_speed", value)
+
 	
 func _get_prop_or_default(property: String, default: Variant) -> Variant:
 	return Bullets.get_bullet_property(_native_bullet_id, property) if is_valid() else default

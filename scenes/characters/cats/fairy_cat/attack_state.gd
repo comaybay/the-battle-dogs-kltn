@@ -32,8 +32,7 @@ func _spawn_bullet(_pos: Vector2, angle: float, _rdelta: float, index: int) -> v
 		bullet.velocity_scale = 0.1
 		bullet.velocity_rotation_speed = 0
 		
-		var loop_tween = create_tween().set_loops()
-		loop_tween.tween_property(bullet, "rotation", PI * 2, randf_range(1, 3))
+		bullet.rotation_speed = PI * 2 * randf_range(1.0 / 3.0, 1.0)
 		
 		var tween = create_tween().set_loops().set_parallel().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		bullet.velocity = Vector2(500, 0).rotated(angle)
@@ -47,7 +46,7 @@ func _spawn_bullet(_pos: Vector2, angle: float, _rdelta: float, index: int) -> v
 		if bullet.is_destroyed(): return
 		
 		tween.kill()
-		loop_tween.kill()
+		bullet.rotation_speed = 0
 		tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tween.tween_property(bullet, "rotation", PI, 0.5).as_relative()
 		tween.tween_property(bullet, "velocity_scale", 0.1, 1.5)
