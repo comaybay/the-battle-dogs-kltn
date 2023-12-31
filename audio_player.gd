@@ -16,7 +16,7 @@ func _ready() -> void:
 		
 	var sound_fx_idx = AudioServer.get_bus_index("SoundFX")
 	var music_idx = AudioServer.get_bus_index("Music")
-	AudioServer.playback_speed_scale
+	
 	Data.sound_fx_volume_changed.connect(
 		func(value: float): 
 			AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(value / 100.0))
