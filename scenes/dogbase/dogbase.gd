@@ -36,6 +36,7 @@ func _ready() -> void:
 	
 	if not Data.has_done_battlefield_basics_tutorial:
 		%UpgradeButton.disabled = true
+		%StoreButton.disabled = true
 	
 	%ExpeditionButton.pressed.connect(_go_to_map)
 	%UpgradeButton.pressed.connect(_go_to_upgrade)
