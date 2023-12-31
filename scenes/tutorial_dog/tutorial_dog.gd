@@ -19,12 +19,18 @@ enum PLACEMENT { LEFT, RIGHT }
 
 @onready var bubble_pointer_offset: Vector2 = ($DialogueLabel.position + $DialogueLabel.size) - $SpeechBubblePointer.position  
 @onready var original_label_y: float = $DialogueLabel.position.y
+@onready var dialogue_label := $DialogueLabel as DynamicLabel
 
 var _dialogue_index: int = 0;
 var _dialogue_code: String = ""
 var _placement: PLACEMENT
+var _typo_effect_finsihed = false
 
 func _handle_next_line() -> void:
+	if not dialogue_label.typo_effect.finished:
+		dialogue_label.typo_effect.finished = true
+		return
+	
 	if _has_next_dialogue_line():
 		AudioPlayer.play_sfx(BARK_SOUND, randf_range(1, 1.2))
 		_dialogue_next_line()
@@ -32,7 +38,7 @@ func _handle_next_line() -> void:
 		end_dialogue()
 
 func _ready() -> void:
-	$DialogueLabel.gui_input.connect(func(event):
+	dialogue_label.gui_input.connect(func(event):
 		if event is InputEventMouseButton && event.pressed && event.button_index == MOUSE_BUTTON_LEFT:
 			_handle_next_line()
 	)
@@ -43,18 +49,18 @@ func _ready() -> void:
 
 ## Update bubble pointer position relative to DialogueLabel
 func _update_bubble():
-	$DialogueLabel.size.x = 10000
-	$DialogueLabel.size.x = min($DialogueLabel.get_content_width(), MAX_DIALOGUE_CONTENT_SIZE_X) + 100
+	dialogue_label.size.x = 10000
+	dialogue_label.size.x = min(dialogue_label.get_content_width(), MAX_DIALOGUE_CONTENT_SIZE_X) + 100
 	
-	var min_size: Vector2 = $DialogueLabel.get_minimum_size()
-	$DialogueLabel.size.y = min_size.y
+	var min_size: Vector2 = dialogue_label.get_minimum_size()
+	dialogue_label.size.y = min_size.y
 	$SpeechBubblePointer.position = $BubblePointerMarker.position
 	
 	if _placement == PLACEMENT.RIGHT:
-		$DialogueLabel.position = $SpeechBubblePointer.position - $DialogueLabel.size + bubble_pointer_offset
+		dialogue_label.position = $SpeechBubblePointer.position - dialogue_label.size + bubble_pointer_offset
 		$SpeechBubblePointer.scale.x = abs($SpeechBubblePointer.scale.x)
 	else:
-		$DialogueLabel.position = $SpeechBubblePointer.position - Vector2(0, $DialogueLabel.size.y) + Vector2(-bubble_pointer_offset.x, bubble_pointer_offset.y)
+		dialogue_label.position = $SpeechBubblePointer.position - Vector2(0, dialogue_label.size.y) + Vector2(-bubble_pointer_offset.x, bubble_pointer_offset.y)
 		$SpeechBubblePointer.scale.x = -abs($SpeechBubblePointer.scale.x)
 
 ## This will pop up the tutorial dog, and start the dialouge
@@ -109,7 +115,7 @@ func pause_dialogue() -> void:
 func _dialogue_next_line() -> void:
 	_dialogue_index += 1
 	var dialogue_text := tr("@%s_%s" % [_dialogue_code, _dialogue_index])
-	$DialogueLabel.text = "[center][typo]%s[/typo][/center]" % dialogue_text
+	$DialogueLabel.text = "[typo]%s[/typo]" % dialogue_text
 	_update_bubble()	
 	dialogue_line_changed.emit(_dialogue_index)
 

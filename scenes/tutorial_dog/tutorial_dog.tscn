@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://chnwixpec81w0"]
+[gd_scene load_steps=20 format=3 uid="uid://chnwixpec81w0"]
 
 [ext_resource type="Script" path="res://scenes/tutorial_dog/tutorial_dog.gd" id="1_7chvr"]
 [ext_resource type="Theme" uid="uid://b8ikq1gvmxsgp" path="res://resources/theme.tres" id="1_gn0jl"]
@@ -6,8 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://dtvyuuaxygrsr" path="res://scenes/characters/dogs/dog/dog.png" id="3_2wddw"]
 [ext_resource type="PackedScene" uid="uid://cyx2xpe6fy6th" path="res://scenes/common/dynamic_label/dynamic_label.tscn" id="3_xaugv"]
 [ext_resource type="AudioStream" uid="uid://dicvdbgq0uhn3" path="res://resources/sound/tutorial_dog.wav" id="5_73jpn"]
-[ext_resource type="Shortcut" uid="uid://moipqlm5cofg" path="res://resources/shortcuts/confirm.tres" id="5_r1sbf"]
 [ext_resource type="AudioStream" uid="uid://c4ac3kwv7lwkh" path="res://resources/sound/tutorial_dog_end.wav" id="6_85irf"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ehdw2"]
+action = &"ui_confirm"
+
+[sub_resource type="InputEventAction" id="InputEventAction_r72o6"]
+action = &"ui_confirm_default"
+
+[sub_resource type="InputEventAction" id="InputEventAction_34vng"]
+action = &"ui_switch_time_scale"
+
+[sub_resource type="Shortcut" id="Shortcut_getf4"]
+events = [SubResource("InputEventAction_ehdw2"), SubResource("InputEventAction_r72o6"), SubResource("InputEventAction_34vng")]
 
 [sub_resource type="Animation" id="Animation_xqhmm"]
 length = 0.001
@@ -647,7 +658,7 @@ offset_bottom = -131.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
-shortcut = ExtResource("5_r1sbf")
+shortcut = SubResource("Shortcut_getf4")
 shortcut_in_tooltip = false
 flat = true
 

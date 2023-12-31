@@ -11,7 +11,6 @@ func _ready() -> void:
 	$CollisionShape2D.shape.extents.x = shape_extents_x
 	$CollisionShape2D.position.x = stage_width / 2
 	$TextureRect.size.x = stage_width 
-	print($TextureRect)
 
 func get_size() -> Vector2:
 	return $TextureRect.size
