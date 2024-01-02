@@ -43,7 +43,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/native_bullets/plugin.cfg")
+enabled=PackedStringArray("res://addons/native_bullets/plugin.cfg", "res://addons/silent_wolf/plugin.cfg")
 
 [filesystem]
 
