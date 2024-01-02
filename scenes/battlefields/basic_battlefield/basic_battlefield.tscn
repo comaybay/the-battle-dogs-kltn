@@ -16,15 +16,15 @@ cat_tower = NodePath("CatTower")
 dog_tower = NodePath("DogTower")
 land = NodePath("Land")
 
-[node name="Sky" parent="." index="1"]
+[node name="Sky" parent="." index="3"]
 script = ExtResource("3_2sntm")
 
-[node name="Land" parent="." index="2" instance=ExtResource("2_t0jud")]
+[node name="Land" parent="." index="4" instance=ExtResource("2_t0jud")]
 script = ExtResource("4_wx0qe")
 
-[node name="DogTower" parent="." index="3" instance=ExtResource("4_pwf8e")]
+[node name="DogTower" parent="." index="5" instance=ExtResource("4_pwf8e")]
 script = ExtResource("6_y74j3")
 
-[node name="CatTower" parent="." index="4" instance=ExtResource("5_fl851")]
+[node name="CatTower" parent="." index="6" instance=ExtResource("5_fl851")]
 position = Vector2(1003, 0)
 script = ExtResource("8_65u8u")
