@@ -144,6 +144,7 @@ func _update_lobby_ui() -> void:
 		%StartButton.show()
 		%GoBackButton.disabled = false
 		%StartButton.disabled = not _can_start_game()
+		%TeamSetupButton.disabled = false
 	else:
 		%ReadyButton.show()
 		%StartButton.hide()
