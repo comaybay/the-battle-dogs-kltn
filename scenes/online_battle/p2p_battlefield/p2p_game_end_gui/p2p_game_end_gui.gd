@@ -17,10 +17,10 @@ func setup(winner_id: int) -> void:
 	
 	if server_id == SteamUser.STEAM_ID:
 		if winner_id == SteamUser.players[0]['steam_id']:
-			SilentWolf.sw_save_high_scores(SteamUser.players[0]['username'], "high_scores",5)
+			await SilentWolf.sw_save_high_scores(SteamUser.players[0]['username'], "high_scores",5)
 			SilentWolf.sw_save_high_scores(SteamUser.players[1]['username'], "high_scores",-5)
 		else:
-			SilentWolf.sw_save_high_scores(SteamUser.players[0]['username'], "high_scores",-5)
+			await SilentWolf.sw_save_high_scores(SteamUser.players[0]['username'], "high_scores",-5)
 			SilentWolf.sw_save_high_scores(SteamUser.players[1]['username'], "high_scores",5)
 
 	if winner_id == SteamUser.players[0]['steam_id']:
