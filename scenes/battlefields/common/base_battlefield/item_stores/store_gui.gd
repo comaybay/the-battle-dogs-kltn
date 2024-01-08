@@ -5,7 +5,7 @@ func setup(dog_tower: DogTower, player_data: BaseBattlefieldPlayerData):
 	var store_ids: Array = player_data.team_store_ids
 	
 	for item in store_ids:
-		if (item != null) :
+		if item != null and Data.store.has(item) and Data.store[item]['amount'] > 0:
 #			and (Data.store_info[item]["auto_activate"] == true)
 			var index = player_data.team_store_ids.find(item)
 			var store := player_data.team_store_scenes[index].instantiate()

@@ -76,8 +76,11 @@ func _on_nut_nang_cap_pressed():
 		Data.store[item_id]['amount'] += 1
 	else: 
 		AudioPlayer.play_sfx(UNLOCK_AUDIO)
-		var item = {"ID": item_id, "amount": 1}
-		Data.save_data["store"].append(item)
+		if Data.store.has(item_id):
+			Data.store[item_id]['amount'] += 1
+		else:		
+			var item = {"ID": item_id, "amount": 1}
+			Data.save_data["store"].append(item)
 	
 	Data.save()
 	reupdate_current_ui()
