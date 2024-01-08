@@ -10,7 +10,7 @@ func _ready() -> void:
 	pressed.connect(_on_upgrade_pressed)
 	
 	var index = _player_data.team_store_ids.find("full_money")
-	if (index != -1):
+	if Data.store.has('full_money') and Data.store['full_money']['amount'] > 0:
 		upgrade_max_level()
 	
 
