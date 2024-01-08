@@ -122,7 +122,4 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="DogFoodLabel" parent="Khung/Footer/TieuDe/ThucAnChoCho/MarginContainer" index="0"]
-visible = true
-
 [connection signal="tab_changed" from="Khung/Content/VBoxContainer/Control/TabContainer" to="Khung/Content" method="_on_tab_container_tab_changed"]
