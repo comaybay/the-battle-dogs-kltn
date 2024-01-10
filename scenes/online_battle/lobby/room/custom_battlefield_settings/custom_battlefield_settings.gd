@@ -52,8 +52,10 @@ func _ready() -> void:
 	%ThemeName.text = tr("@THEME_%s" % DEFAULT_THEME)
 	
 	var song_names := MUSIC_CODE_TO_NAME.values()
+	var music_order: int = 1
 	for music_code in MUSIC_CODE_TO_NAME:
-		%MusicOptions.add_item(MUSIC_CODE_TO_NAME[music_code])
+		%MusicOptions.add_item("%s - %s" % [music_order, MUSIC_CODE_TO_NAME[music_code]])
+		music_order += 1
 	
 	for theme in THEMES:
 		%ThemeOptions.add_item(tr("@THEME_%s" % theme))
