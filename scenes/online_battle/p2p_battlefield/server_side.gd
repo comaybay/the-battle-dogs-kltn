@@ -1,6 +1,6 @@
 extends BattlefieldP2PNetworking
 
-const UPDATE_INTERVAL: float = 1/30
+const UPDATE_INTERVAL: float = 1.0 / 25.0
 const MAX_TEAM_SIZE: int = 10
 const MAX_SKILL_SIZE: int = 3
 
@@ -45,7 +45,7 @@ func setup(
 			continue
 			
 		var timer: = Timer.new()
-		timer.wait_time = Data.dog_info[dog_id]['spawn_time']
+		timer.wait_time = max(Data.dog_info[dog_id]['spawn_time'], 0.05)
 		timer.one_shot = true		
 		_opponent_timers.append(timer)
 		add_child(timer)
@@ -79,13 +79,6 @@ func _process(delta: float):
 	_opponent_data.update(delta)
 	
 	_apply_client_messages()
-	
-	# input are send every frame
-	if _this_player_data.input_mask != 0:
-		SteamUser.send_message({
-			'opponent_input_mask': _this_player_data.input_mask,
-		}, SteamUser.SendType.RELIABLE)
-		_this_player_data.input_mask = 0
 	
 	# authoritative message are in a fixed interval (tick)
 	_delta_passed += delta
