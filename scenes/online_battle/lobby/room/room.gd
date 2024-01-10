@@ -37,7 +37,16 @@ func _ready() -> void:
 	%CopyButton.pressed.connect(func(): DisplayServer.clipboard_set(str(SteamUser.lobby_id)))
 	%ReadyButton.pressed.connect(_on_toggle_ready)
 	%StartButton.pressed.connect(_send_start_message)
-	%TeamSetupButton.pressed.connect(func(): %TeamSetup.show())
+	
+	%TeamSetupButton.pressed.connect(func(): 
+		%TeamSetup.show()
+		SteamUser.set_lobby_member_data("team_setup", "")	
+	)
+	
+	%TeamSetup.visibility_changed.connect(func():
+		if not %TeamSetup.visible:
+			SteamUser.set_lobby_member_data("team_setup", JSON.stringify(Data.save_data['p2p_team']))	
+	)
 	
 	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
 	Steam.lobby_data_update.connect(_on_lobby_data_update)
@@ -64,7 +73,7 @@ func _ready() -> void:
 	_update_lobby_ui()
 
 func _new_room_setup() -> void:
-	SteamUser.set_lobby_member_data("team_setup", JSON.stringify(Data.teams[0]))	
+	SteamUser.set_lobby_member_data("team_setup", JSON.stringify(Data.save_data['p2p_team']))	
 	
 	if SteamUser.is_lobby_owner():
 		_create_listen_socket()
