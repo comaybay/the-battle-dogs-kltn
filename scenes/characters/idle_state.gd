@@ -14,10 +14,10 @@ func enter(_data: Dictionary) -> void:
 		
 func handle_stop_idle() -> void:
 	var collider = character.n_RayCast2D.get_collider() 
-	if not InBattle.in_request_mode and collider != null:
-		transition.emit("AttackState", {'target': collider })
-	else:
+	if collider == null:
 		transition.emit("MoveState")
+	elif not InBattle.in_request_mode:
+		transition.emit("AttackState", {'target': collider })
 
 # called when the state is deactivated
 func exit() -> void:

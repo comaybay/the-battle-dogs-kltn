@@ -188,7 +188,7 @@ func send_post_request(http_node, request_url, payload):
 			headers.append("x-sw-act-dig: " + hashed)
 			break
 	var use_ssl = true
-	if !http_node.is_inside_tree():
+	while !http_node.is_inside_tree():
 		await get_tree().create_timer(0.01).timeout
 	var query = JSON.stringify(payload)
 	SWLogger.debug("Method: POST")
