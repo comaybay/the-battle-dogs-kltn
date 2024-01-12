@@ -33,7 +33,9 @@ func take_damage(ammount: int) -> void:
 	super.take_damage(ammount)
 	if health <= 0:
 		$FiniteStateMachine.change_state("DieState")
-		AudioPlayer.remove_in_battle_sfx(RUMBLING_SFX)
+
+func _exit_tree():
+	AudioPlayer.remove_in_battle_sfx(RUMBLING_SFX)
 	
 func knockback(scale: float = 1):
 	pass
