@@ -36,7 +36,7 @@ script = ExtResource("4_4ppfx")
 
 [node name="ReconnectTimer" type="Timer" parent="P2PConnectionHandler"]
 process_mode = 3
-wait_time = 60.0
+wait_time = 30.0
 one_shot = true
 
 [node name="Sky" type="TextureRect" parent="."]
@@ -76,6 +76,7 @@ bus = &"InBattleFX"
 
 [node name="Popup" parent="CanvasLayer" instance=ExtResource("11_ovxua")]
 unique_name_in_owner = true
+layer = 2
 
 [node name="DanmakuSpace" type="Node" parent="."]
 script = ExtResource("16_54x44")

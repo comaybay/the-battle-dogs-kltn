@@ -28,14 +28,14 @@ func _ready():
 		tutorial_dog.tree_exited.connect(func(): canvas.queue_free())
 	
 func loadCharacterList() -> void:
-	for dog_id in Data.dogs:
+	for dog_id in Data.dog_info:
 		var item := create_item(dog_id, SelectCharacterBox.Type.CHARACTER)
 		%CharacterList.add_child(item)
 		character_id_to_item[dog_id] = item
 		item.pressed.connect(_on_add_character_to_slot.bind(item))
 
 func loadSkillList() -> void:
-	for data in Data.skills.values():
+	for data in Data.skill_info.values():
 		var item := create_item(data['ID'], SelectCharacterBox.Type.SKILL)
 		%SkillList.add_child(item)
 		skill_id_to_item[data['ID']] = item
@@ -65,7 +65,7 @@ func create_item(item_id: String, type: SelectCharacterBox.Type) -> SelectCharac
 func loadTeam() -> void:
 	for i in range(10):
 		var slot := character_slots[i] 
-		var character_id = Data.selected_team['dog_ids'][i]
+		var character_id = Data.save_data['p2p_team']['dog_ids'][i]
 		if character_id == null:
 			slot.clear()
 		else:
@@ -76,7 +76,7 @@ func loadTeam() -> void:
 	
 	for i in range(3):
 		var slot := skill_slots[i] 
-		var skill_id = Data.selected_team['skill_ids'][i]
+		var skill_id = Data.save_data['p2p_team']['skill_ids'][i]
 		if skill_id == null:
 			slot.clear()
 		else:
@@ -104,8 +104,8 @@ func _on_remove_store_from_slot(slot: SelectCharacterBox):
 		save_team_setup()
 	
 func save_team_setup():	
-	Data.selected_team['dog_ids'] = character_slots.map(func(item: SelectCharacterBox): return item.get_item_id())
-	Data.selected_team['skill_ids'] = skill_slots.map(func(item: SelectCharacterBox): return item.get_item_id())
+	Data.save_data['p2p_team']['dog_ids'] = character_slots.map(func(item: SelectCharacterBox): return item.get_item_id())
+	Data.save_data['p2p_team']['skill_ids'] = skill_slots.map(func(item: SelectCharacterBox): return item.get_item_id())
 	Data.save()
 
 func move(a) :
