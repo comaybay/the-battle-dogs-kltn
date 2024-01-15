@@ -358,7 +358,7 @@ func load_settings():
 	AudioServer.set_bus_volume_db(sound_fx_idx, linear_to_db(sound_fx_volume / 100.0))
 	AudioServer.set_bus_mute(sound_fx_idx, mute_sound_fx)
 	AudioServer.set_bus_volume_db(music_idx, linear_to_db(music_volume / 100.0))
-	AudioServer.set_bus_mute(music_idx, mute_sound_fx)
+	AudioServer.set_bus_mute(music_idx, mute_music)
 	
 	var key_overwrites: Dictionary = save_data['settings']['key_binding_overwrites']
 	
