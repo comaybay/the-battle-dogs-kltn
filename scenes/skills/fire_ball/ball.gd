@@ -51,10 +51,12 @@ func die():
 
 func get_p2p_sync_data() -> Dictionary:
 	_sync_data["position"] = global_position 
+	_sync_data["velocity"] = velocity 
 	return _sync_data
 	
 func p2p_setup(sync_data: Dictionary) -> void:
-	setup(sync_data['position'], sync_data['skill_user']) 
+	setup(sync_data['position'], sync_data['skill_user'])
+	velocity = sync_data["velocity"]
 	
 func p2p_sync(sync_data: Dictionary) -> void:
 	global_position = sync_data['position']
